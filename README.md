@@ -1,0 +1,9 @@
+# portfolio
+
+Portfolio (JP / EN / VI): Thai Tran Hoang Nha | B2B Sales, IT Communication, HR & Training
+
+Nội dung theo CV mới `Rirekisho_ThaiTranHoangNha.pdf` (履歴書兼職務経歴書, 2026), nhúng trong trang ở mục #cv.
+
+https://hoangnha1989.github.io/portfolio/
+
+Kiểm tra: `node tests/check-cv-rirekisho.mjs`, `node tests/check-sales-trip-photos.mjs`, `node tests/browser-cv.mjs` (cần Chrome).
