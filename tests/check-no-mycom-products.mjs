@@ -20,7 +20,8 @@ for (const k of ['NH3/CO2冷凍パッケージ', '自然冷媒の冷凍ユニッ
   ok(!html.includes(`"${k}":[`), `còn khoá dịch thừa "${k}"`);
 // Phần còn lại của Sales vẫn giữ: section #sales-flow, câu nguồn, ảnh MYCOM KOREA (ảnh công tác, không phải sản phẩm)
 ok(/id="sales-flow"/.test(html), 'mất section #sales-flow');
-ok(html.includes('出典：社内メールの予定表と送受信メール'), 'mất câu nguồn cuối #sales-flow');
+// Task f46s: câu "出典：社内メール..." là chữ meta lộ nguồn nội bộ, đã bỏ theo yêu cầu; giữ thẻ quy trình cuối
+ok(html.includes('<h3>定例報告</h3>'), 'mất thẻ quy trình cuối "定例報告" của #sales-flow');
 ok(html.includes('assets/sales/trip-mycom-korea.jpg'), 'mất ảnh công tác MYCOM KOREA (không thuộc phạm vi xoá)');
 
 if (fails.length) { console.error(`FAIL (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
