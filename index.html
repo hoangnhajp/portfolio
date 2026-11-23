@@ -146,6 +146,16 @@ p{margin:0}
 .tl .yr{font:700 12px 'Space Grotesk',sans-serif;letter-spacing:.06em;color:#6d5bd0}
 .tl h3{margin:3px 0 2px}
 .tl .role{font:700 12px 'Noto Sans JP',sans-serif;color:#0f5a8c;margin-bottom:6px}
+/* Sales 02: dòng sự kiện công tác (task v4un): 1 hàng ngang cuộn được, mỗi mục 1 ảnh + 1 dòng, không năm */
+.evrow{list-style:none;margin:8px 0 0;padding:2px 2px 10px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory}
+.evrow li{flex:0 0 210px;scroll-snap-align:start;position:relative;padding-top:20px}
+.evrow li::before{content:'';position:absolute;left:0;right:-14px;top:6px;height:2px;background:#d6cff0}
+.evrow li:last-child::before{right:0}
+.evrow li::after{content:'';position:absolute;left:0;top:0;width:14px;height:14px;box-sizing:border-box;border-radius:50%;background:#fff;border:3px solid #6d5bd0}
+.evrow .ev-n{position:absolute;left:22px;top:0;font:700 11px/14px 'Space Grotesk',sans-serif;letter-spacing:.06em;color:#6d5bd0;background:#fff;padding:0 5px}
+.evrow img{display:block;width:100%;height:140px;object-fit:cover;border-radius:10px}
+.evrow .ev-t{margin:7px 0 0;font-size:12.5px;line-height:1.45}
+@media print{.evrow{flex-wrap:wrap;overflow:visible;gap:8px;padding-bottom:0}.evrow li{flex:0 0 calc(20% - 7px);break-inside:avoid;padding-top:0}.evrow li::before,.evrow li::after,.evrow .ev-n{display:none}.evrow img{height:78px}.evrow .ev-t{margin-top:3px;font-size:10px;line-height:1.3}}
 /* Career: 1 ô lớn = 1 công ty; vị trí luân chuyển nội bộ lồng bên trong, nối bằng đường dọc */
 .tl .pos{list-style:none;margin:10px 0 0;padding:0 0 0 22px;position:relative;display:flex;flex-direction:column;gap:8px}
 .tl .pos::before{content:'';position:absolute;left:5px;top:12px;bottom:12px;width:2px;background:#d9d2f5}
@@ -585,7 +595,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <section class="pg" data-chap="I" data-num="02" id="profile">
   <p class="eb rv">Profile <b>／ プロフィール</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja"><i>タイ チャン ホアン ニャ</i></span><span data-l="en"><i>Thai Tran Hoang Nha</i></span><span data-l="vi"><i>Thái Trần Hoàng Nhã</i></span></h2>
-  <span class="kw-en rv" style="--d:80ms"><span data-l="ja">法人営業 ／ 営業マネージャー ／ ITコミュニケーター ／ 人事部長</span><span data-l="en">B2B sales ／ Sales manager ／ IT communicator ／ Head of HR</span><span data-l="vi">Kinh doanh B2B ／ Quản lý kinh doanh ／ IT communicator ／ Trưởng phòng Nhân sự</span></span>
+  <span class="kw-en rv" style="--d:80ms"><span data-l="ja">法人営業、営業管理、ITコミュニケーション、人事を経験してきました</span><span data-l="en">I have worked across B2B sales, sales management, IT communication and HR</span><span data-l="vi">Tôi đã làm kinh doanh B2B, quản lý kinh doanh, IT communication và nhân sự</span></span>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
 
   <div class="rv" style="--d:140ms;display:grid;grid-template-columns:200px 1fr;gap:22px">
@@ -663,8 +673,8 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <section class="pg" data-chap="V" data-num="03" id="projects">
   <div class="deco dots" style="right:48px;top:52px"></div>
   <p class="eb rv">Projects <b>／ Portfolio</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">経歴と実績を、<br /><i>1枚のボード</i>に。</span><span data-l="en">Career and work,<br /><i>on one board</i>.</span><span data-l="vi">Kinh nghiệm và dự án,<br /><i>trên một bảng</i>.</span></h2>
-  <p class="kw-sub rv" style="--d:80ms"><span data-l="ja">職歴、スキル、AIの取り組みをカードにまとめました。カードから詳しいページに移動できます。</span><span data-l="en">My roles, skills and AI work as cards. Each card opens its detailed page.</span><span data-l="vi">Các vị trí, kỹ năng và dự án AI được trình bày thành thẻ. Bấm vào thẻ để xem trang chi tiết.</span></p>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">担当した仕事を、<br /><i>一枚にまとめました。</i></span><span data-l="en">A quick look at<br /><i>the work I have done</i>.</span><span data-l="vi">Mời anh/chị xem qua<br /><i>những công việc tôi đã làm</i>.</span></h2>
+  <p class="kw-sub rv" style="--d:80ms"><span data-l="ja">これまでの担当業務をカードにまとめました。気になる仕事があれば、各ページで詳しくご覧ください。</span><span data-l="en">I have grouped my work into cards. Open any one to see more about that part of my experience.</span><span data-l="vi">Tôi sắp xếp các công việc thành từng thẻ. Anh/chị có thể mở thẻ để xem rõ hơn phần kinh nghiệm mình quan tâm.</span></p>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
 
   <div class="pj rv" style="--d:140ms">
@@ -728,7 +738,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
       <span class="pj-top"><em>Task</em><span data-l="ja">営業の記録</span><span data-l="en">Sales records</span><span data-l="vi">Hồ sơ kinh doanh</span></span>
       <b class="pj-co">Task: Sales</b>
       <span class="pj-role">MAYEKAWA VIETNAM<span data-l="ja">、営業部</span><span data-l="en">, Sales department</span><span data-l="vi">, phòng Kinh doanh</span></span>
-      <span class="pj-pt"><span data-l="ja">現場を回り、数字で営業を追う。</span><span data-l="en">Out in the field, tracking sales by the numbers.</span><span data-l="vi">Đi thị trường, theo dõi sales bằng số liệu.</span></span>
+      <span class="pj-pt"><span data-l="ja">顧客を訪ね、商談の進み具合を数字で確かめてきました。</span><span data-l="en">I visited clients and used clear figures to follow each opportunity.</span><span data-l="vi">Tôi gặp khách và theo dõi từng cơ hội kinh doanh bằng số liệu.</span></span>
       <span class="pj-tags"><span data-l="ja"><i>出張と顧客訪問</i><i>報告と会議</i><i>KPIの管理</i></span><span data-l="en"><i>Trips and client visits</i><i>Reports and meetings</i><i>Managing KPIs</i></span><span data-l="vi"><i>Công tác và gặp khách</i><i>Báo cáo và họp</i><i>Quản lý KPI</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
@@ -741,15 +751,15 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <section class="pg" data-chap="II" data-num="04" id="numbers">
   <div class="deco rings" style="left:-300px;right:auto;top:-260px;bottom:auto"><div class="r1"></div><div class="r2"></div><div class="r3"></div></div>
   <p class="eb rv">In Numbers <b>／ 数字で見るキャリア</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">経験を、<br /><i>数字で</i>お見せします。</span><span data-l="en">My experience,<br /><i>in numbers</i>.</span><span data-l="vi">Kinh nghiệm,<br /><i>qua con số</i>.</span></h2>
-  <p class="kw-sub rv" style="--d:100ms"><span data-l="ja">数字はすべて履歴書兼職務経歴書の記載どおりです。生産性の数値は、4年前と比べた自己推計です。</span><span data-l="en">All figures come from my CV. Productivity figures are my own estimate compared with four years ago.</span><span data-l="vi">Mọi con số lấy đúng từ CV. Số liệu năng suất là tôi tự ước tính so với 4 năm trước.</span></p>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">これまでの経験を、<br /><i>数字で振り返ります。</i></span><span data-l="en">My experience,<br /><i>in numbers</i>.</span><span data-l="vi">Một vài con số để anh/chị hình dung<br /><i>công việc tôi đã làm</i>.</span></h2>
+  <p class="kw-sub rv" style="--d:100ms"><span data-l="ja">数字は履歴書兼職務経歴書に記載した内容です。生産性の変化は、4年前と比べた私自身の推計です。</span><span data-l="en">These figures are from my CV. I estimated the productivity change by comparing my work with four years earlier.</span><span data-l="vi">Các con số này lấy từ CV. Phần năng suất là ước tính của tôi khi so với công việc cách đây 4 năm.</span></p>
   <div class="kwbar rv" style="--d:130ms"><span></span></div>
 
   <div class="g3 rv grow" style="--d:160ms">
     <div class="card"><p class="num gr">11<small><span data-l="ja">年</span><span data-l="en">yrs</span><span data-l="vi">năm</span></small></p><p class="num-l"><span data-l="ja">日系企業3社での勤務（2015年から約11年間）</span><span data-l="en">At three Japanese companies (about 11 years from 2015)</span><span data-l="vi">Làm tại 3 công ty Nhật (khoảng 11 năm từ 2015)</span></p></div>
     <div class="card"><p class="num gr">27</p><p class="num-l"><span data-l="ja">営業マネージャー時代の支店の人数（約27名）</span><span data-l="en">People in the branch when I was sales manager (about 27)</span><span data-l="vi">Số người ở chi nhánh khi tôi làm quản lý kinh doanh (khoảng 27)</span></p></div>
     <div class="card"><p class="num gr">5～6<small><span data-l="ja">名</span><span data-l="en">ppl</span><span data-l="vi">người</span></small></p><p class="num-l"><span data-l="ja">営業マネージャーとして管理した部下</span><span data-l="en">Direct reports as sales manager</span><span data-l="vi">Cấp dưới trực tiếp khi làm quản lý kinh doanh</span></p></div>
-    <div class="card"><p class="num gr">1→5<small><span data-l="ja">名</span><span data-l="en">ppl</span><span data-l="vi">người</span></small></p><p class="num-l"><span data-l="ja">人事を1名体制から5名のチームに拡大</span><span data-l="en">Grew HR from one person to a team of five</span><span data-l="vi">Mở rộng nhân sự từ 1 người lên đội 5 người</span></p></div>
+    <div class="card"><p class="num gr">1→5<small><span data-l="ja">名</span><span data-l="en">ppl</span><span data-l="vi">người</span></small></p><p class="num-l"><span data-l="ja">人事を1名体制から5名のチームに拡大しました</span><span data-l="en">I grew HR from one person to a team of five</span><span data-l="vi">Tôi mở rộng đội ngũ Nhân sự từ 1 người lên 5 người</span></p></div>
     <div class="card"><p class="num gr">2～3<small><span data-l="ja">名</span><span data-l="en">ppl</span><span data-l="vi">người</span></small></p><p class="num-l"><span data-l="ja">MAYEKAWA VIETNAMで管理した営業担当</span><span data-l="en">Sales staff managed at MAYEKAWA VIETNAM</span><span data-l="vi">Nhân viên kinh doanh quản lý tại MAYEKAWA VIETNAM</span></p></div>
     <div class="card"><p class="num gr">6<small><span data-l="ja">か月～1年</span><span data-l="en">mo to 1 yr</span><span data-l="vi">tháng đến 1 năm</span></small></p><p class="num-l"><span data-l="ja">定期レビューを経て更新を担当した契約の期間</span><span data-l="en">Length of the client contracts I renewed after regular reviews</span><span data-l="vi">Thời hạn hợp đồng tôi phụ trách gia hạn sau các buổi review</span></p></div>
     <div class="card"><p class="num gr">2<small><span data-l="ja">名</span><span data-l="en">ppl</span><span data-l="vi">người</span></small></p><p class="num-l"><span data-l="ja">未経験から育成した採用担当</span><span data-l="en">Recruiters trained from zero experience</span><span data-l="vi">Nhân viên tuyển dụng đào tạo từ chưa có kinh nghiệm</span></p></div>
@@ -774,14 +784,14 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 
   <div class="g2 rv grow sk7" style="--d:140ms">
     <div class="card"><p class="num" style="font-size:26px;color:#c14343">01</p>
-      <div data-l="ja"><h3>法人顧客対応</h3><p>課題のヒアリング、解決策の提案、定期フォロー、契約更新、クレーム対応。日本、欧州、アジアの顧客との会議、価格と条件の交渉</p></div>
-      <div data-l="en"><h3>B2B client work</h3><p>Hearing client issues, proposing solutions, regular follow-up, contract renewals and complaint handling. Meetings with clients in Japan, Europe and Asia; negotiating prices and terms</p></div>
-      <div data-l="vi"><h3>Làm việc với khách doanh nghiệp</h3><p>Lắng nghe vấn đề, đề xuất giải pháp, theo dõi định kỳ, gia hạn hợp đồng, xử lý khiếu nại. Họp với khách Nhật, châu Âu, châu Á; đàm phán giá và điều kiện</p></div>
+      <div data-l="ja"><h3>法人顧客対応</h3><p>顧客の話を聞いて提案し、契約後も状況を確認。日本、欧州、アジアの顧客と会議や条件交渉をしてきました</p></div>
+      <div data-l="en"><h3>B2B client work</h3><p>I listen to client needs, make proposals and follow up through renewals or complaints. I have also met clients in Japan, Europe and Asia to discuss prices and terms</p></div>
+      <div data-l="vi"><h3>Làm việc với khách doanh nghiệp</h3><p>Tôi tìm hiểu nhu cầu, đề xuất giải pháp và theo sát đến khi gia hạn hoặc xử lý khiếu nại. Tôi cũng họp, trao đổi giá và điều kiện với khách ở Nhật, châu Âu và châu Á</p></div>
     </div>
     <div class="card"><p class="num" style="font-size:26px;color:#0f5a8c">02</p>
-      <div data-l="ja"><h3>ITプロジェクト</h3><p>仕様の翻訳と伝達、動作確認、UAT、不具合対応の管理。AIによる履歴書解析、求人マッチングシステムの開発を主導</p></div>
-      <div data-l="en"><h3>IT projects</h3><p>Translating and passing on specifications, functional checks, UAT and managing bug fixes. Led the development of an AI CV-parsing and job-matching system</p></div>
-      <div data-l="vi"><h3>Dự án IT</h3><p>Dịch và truyền đạt đặc tả, kiểm tra chức năng, UAT, quản lý xử lý lỗi. Chủ trì phát triển hệ thống AI phân tích CV và so khớp tin tuyển dụng</p></div>
+      <div data-l="ja"><h3>ITプロジェクト</h3><p>仕様を翻訳して開発側へ伝え、動作確認やUAT、不具合修正まで追いました。AIを使った履歴書解析、求人マッチングシステムの開発も主導しました</p></div>
+      <div data-l="en"><h3>IT projects</h3><p>I translated specifications for developers, checked functionality, supported UAT and followed bugs through to fixes. I also led an AI CV-parsing and job-matching system project</p></div>
+      <div data-l="vi"><h3>Dự án IT</h3><p>Tôi chuyển đặc tả cho đội phát triển, kiểm tra chức năng, hỗ trợ UAT và theo dõi lỗi đến khi xử lý xong. Tôi cũng chủ trì dự án hệ thống AI phân tích CV và so khớp việc làm</p></div>
     </div>
     <div class="card"><p class="num" style="font-size:26px;color:#3b2f86">03</p>
       <div data-l="ja"><h3>資料作成、研修</h3><p>技術資料、説明マニュアル、研修資料、日英の採用業務手順書を作成。営業チーム、採用担当、社員への研修と指導</p></div>
@@ -816,7 +826,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <!-- ═══════ 06 学歴、職歴 ═══════ -->
 <section class="pg" data-chap="III" data-num="06" id="career">
   <p class="eb rv">Career <b>／ 学歴、職歴</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日系企業3社で約11年、<br /><i>法人営業とIT、人事</i>を担当。</span><span data-l="en">About 11 years at three Japanese companies:<br /><i>B2B sales, IT and HR</i>.</span><span data-l="vi">Khoảng 11 năm tại 3 công ty Nhật:<br /><i>kinh doanh B2B, IT và nhân sự</i>.</span></h2>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日系企業3社で経験してきた、<br /><i>営業、IT、人事の仕事</i>をまとめました。</span><span data-l="en">Across three Japanese companies,<br /><i>I have worked in sales, IT and HR</i>.</span><span data-l="vi">Trong khoảng 11 năm qua, tôi đã làm<br /><i>kinh doanh, IT và nhân sự tại 3 công ty Nhật</i>.</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
 
   <div class="tl rv" style="--d:140ms">
@@ -825,9 +835,9 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
       <h3>MAYEKAWA VIETNAM CO., LTD.（MYCOM）</h3>
       <ol class="pos"><li>
         <p class="role"><span data-l="ja">営業部 アシスタントマネージャー 兼 人事部長</span><span data-l="en">Assistant manager, Sales department, and head of HR</span><span data-l="vi">Trợ lý trưởng phòng Kinh doanh kiêm trưởng phòng Nhân sự</span></p>
-        <p data-l="ja">日系の産業用冷凍機、コンプレッサーメーカーのベトナム現地法人。日本人社長を補佐し、営業担当2～3名を管理。人事は1名体制から5名のチームに拡大。2026年6月、一身上の都合により退社。</p>
-        <p data-l="en">Vietnam subsidiary of a Japanese maker of industrial refrigeration and compressors. Supported the Japanese president and managed 2 to 3 sales staff; grew HR from one person to a team of five. Left in June 2026 for personal reasons.</p>
-        <p data-l="vi">Pháp nhân tại Việt Nam của nhà sản xuất máy lạnh công nghiệp, máy nén Nhật Bản. Hỗ trợ Tổng giám đốc người Nhật, quản lý 2 đến 3 nhân viên kinh doanh; mở rộng nhân sự từ 1 người lên đội 5 người. Nghỉ việc 06/2026 vì lý do cá nhân.</p>
+        <p data-l="ja">日系の産業用冷凍機、コンプレッサーメーカーのベトナム法人で勤務しました。日本人社長を補佐し、営業担当2～3名を管理。人事を1名体制から5名のチームに拡大しました。2026年6月に退社しました。</p>
+        <p data-l="en">I worked for the Vietnam subsidiary of a Japanese industrial refrigeration and compressor maker. I supported the Japanese president, managed 2 to 3 sales staff and grew HR from one person to a team of five. I left in June 2026 for personal reasons.</p>
+        <p data-l="vi">Tôi làm tại pháp nhân Việt Nam của một nhà sản xuất thiết bị lạnh công nghiệp và máy nén Nhật Bản. Tôi hỗ trợ Tổng giám đốc người Nhật, quản lý 2 đến 3 nhân viên kinh doanh và mở rộng đội ngũ Nhân sự từ 1 người lên 5 người. Tôi nghỉ việc vào 06/2026 vì lý do cá nhân.</p>
       </li></ol>
     </div>
     <div class="co card">
@@ -838,15 +848,15 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
           <p class="yr"><span data-l="ja">2019年2月 ～ 2022年2月</span><span data-l="en">Feb 2019 – Feb 2022</span><span data-l="vi">02/2019 – 02/2022</span></p>
           <p class="role"><span data-l="ja">ベトナム支店 営業マネージャー</span><span data-l="en">Sales manager, Vietnam branch</span><span data-l="vi">Quản lý kinh doanh, chi nhánh Việt Nam</span></p>
           <p data-l="ja">支店約27名（営業4～5名、ITコミュニケーター2名、開発約20名）。部下5～6名。</p>
-          <p data-l="en">Branch of about 27 (4 to 5 sales, 2 IT communicators, about 20 developers); 5 to 6 direct reports.</p>
-          <p data-l="vi">Chi nhánh khoảng 27 người (4 đến 5 kinh doanh, 2 IT communicator, khoảng 20 lập trình viên); 5 đến 6 cấp dưới.</p>
+          <p data-l="en">The branch had about 27 people, including 4 to 5 in sales, 2 IT communicators and about 20 developers. I managed 5 to 6 direct reports.</p>
+          <p data-l="vi">Chi nhánh có khoảng 27 người, gồm 4 đến 5 nhân viên kinh doanh, 2 IT communicator và khoảng 20 lập trình viên. Tôi quản lý 5 đến 6 nhân viên trực tiếp.</p>
         </li>
         <li>
           <p class="yr"><span data-l="ja">2017年8月 ～ 2019年2月</span><span data-l="en">Aug 2017 – Feb 2019</span><span data-l="vi">08/2017 – 02/2019</span></p>
           <p class="role"><span data-l="ja">ITコミュニケーター</span><span data-l="en">IT communicator</span><span data-l="vi">IT communicator</span></p>
-          <p data-l="ja">日本の顧客とベトナム人エンジニアチームの橋渡しを担当。</p>
-          <p data-l="en">Bridged Japanese clients and the Vietnamese engineering team.</p>
-          <p data-l="vi">Làm cầu nối giữa khách hàng Nhật và đội kỹ sư Việt Nam.</p>
+          <p data-l="ja">日本の顧客とベトナム人エンジニアの間に立ち、要件の伝達や調整を担当しました。</p>
+          <p data-l="en">I helped Japanese clients and Vietnamese engineers understand each other and agree on requirements.</p>
+          <p data-l="vi">Tôi giúp khách hàng Nhật và đội kỹ sư Việt Nam hiểu nhau, thống nhất yêu cầu công việc.</p>
         </li>
       </ol>
     </div>
@@ -873,7 +883,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <section data-even class="pg" data-chap="IV" data-num="07" id="w-mycom">
   <div class="deco rings"><div class="r1"></div><div class="r2"></div><div class="r3"></div></div>
   <p class="eb rv">Career 01 <b>／ MAYEKAWA VIETNAM</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">顧客の課題を聞き、<br /><i>納品後まで</i>支える。</span><span data-l="en">Hearing client issues,<br /><i>supporting them after delivery</i>.</span><span data-l="vi">Lắng nghe vấn đề của khách,<br /><i>đồng hành cả sau giao hàng</i>.</span></h2>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">設備を提案するところから、<br /><i>導入後の相談まで</i>担当しました。</span><span data-l="en">I helped clients choose equipment<br /><i>and stayed involved after delivery</i>.</span><span data-l="vi">Tôi cùng khách chọn thiết bị<br /><i>và tiếp tục hỗ trợ sau khi bàn giao</i>.</span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">営業部 アシスタントマネージャー 兼 人事部長（2022年2月 ～ 2026年6月）</span><span data-l="en">Assistant manager, Sales, and head of HR (Feb 2022 – Jun 2026)</span><span data-l="vi">Trợ lý trưởng phòng Kinh doanh kiêm trưởng phòng Nhân sự (02/2022 – 06/2026)</span></span>
   <div class="kwbar rv" style="--d:110ms"><span></span></div>
 
@@ -881,59 +891,59 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <div><span>Business</span><b><span data-l="ja">産業用冷凍機、コンプレッサー</span><span data-l="en">Industrial refrigeration, compressors</span><span data-l="vi">Máy lạnh công nghiệp, máy nén</span></b></div>
     <div><span>Report</span><b><span data-l="ja">日本人社長を補佐</span><span data-l="en">Supported the Japanese president</span><span data-l="vi">Hỗ trợ Tổng giám đốc người Nhật</span></b></div>
     <div><span>Sales</span><b><span data-l="ja">営業担当2～3名を管理</span><span data-l="en">Managed 2 to 3 sales staff</span><span data-l="vi">Quản lý 2 đến 3 nhân viên</span></b></div>
-    <div><span>HR</span><b><span data-l="ja">1名 → 5名のチーム</span><span data-l="en">1 person → team of 5</span><span data-l="vi">1 người → đội 5 người</span></b></div>
+    <div><span>HR</span><b><span data-l="ja">私が1名から5名に拡大した人事チーム</span><span data-l="en">HR team I grew from 1 to 5</span><span data-l="vi">Đội Nhân sự tôi mở rộng từ 1 lên 5 người</span></b></div>
   </div>
 
   <div class="card rv" style="--d:180ms">
     <span class="lbl">Sales ／ <span data-l="ja">営業部門：法人顧客への提案、導入後のフォロー</span><span data-l="en">Sales: proposals to business clients and follow-up after installation</span><span data-l="vi">Kinh doanh: đề xuất cho khách doanh nghiệp, theo dõi sau lắp đặt</span></span>
     <div class="lines" data-l="ja">
-      <p>顧客を訪問して課題をヒアリングし、技術者と構成を検討して設備を提案</p>
-      <p>見積書、提案書、比較表を作成し、顧客へのプレゼンテーションを実施</p>
-      <p>AIで10～20ページの技術資料を要約し、顧客と社内向けの短いプレゼン資料を作成</p>
-      <p>技術資料、説明マニュアルを作成し、技術職以外の営業も製品を説明できる体制を整備</p>
-      <p>価格と条件の交渉から、納品後の保証、技術トラブル、クレーム対応まで担当</p>
-      <p>納品時の問題を顧客、工場、技術者、日本本社と調整し、週次会議で報告</p>
-      <p>タイ、韓国、マレーシアでのASEAN会議で、ベトナムの営業状況を英語で報告</p>
+      <p>顧客の課題を伺い、技術者と構成を検討して、条件に合う設備を提案しました</p>
+      <p>見積書や比較表を用意し、選択肢と提案内容を顧客に説明しました</p>
+      <p>AIで10～20ページの技術資料を要約し、顧客や社内が要点をつかめる資料にまとめました</p>
+      <p>技術資料と説明マニュアルを整え、営業担当が製品を自分の言葉で説明できるようにしました</p>
+      <p>価格や契約条件を交渉し、納品後の保証、技術トラブル、クレームにも対応しました</p>
+      <p>納品時の問題は顧客、工場、技術者、日本本社と調整し、週次会議で状況を共有しました</p>
+      <p>タイ、韓国、マレーシアで開かれたASEAN会議で、ベトナムの営業状況を英語で報告しました</p>
     </div>
     <div class="lines" data-l="en">
-      <p>Visited clients to hear their issues, worked out configurations with engineers and proposed equipment</p>
-      <p>Prepared quotations, proposals and comparison tables, and presented them to clients</p>
-      <p>Used AI to summarise 10 to 20 page technical documents into short presentations for clients and colleagues</p>
-      <p>Wrote technical documents and manuals so non-technical sales staff could explain the products too</p>
-      <p>Handled everything from price and terms negotiation to warranty, technical trouble and complaints after delivery</p>
-      <p>Coordinated delivery issues with clients, the factory, engineers and the head office in Japan, and reported them in weekly meetings</p>
-      <p>Reported Vietnam's sales situation in English at ASEAN meetings in Thailand, Korea and Malaysia</p>
+      <p>I listened to each client’s needs, worked through configurations with our engineers and recommended suitable equipment</p>
+      <p>I prepared quotations and comparison tables so clients could weigh their options</p>
+      <p>I used AI to turn 10 to 20 page technical documents into concise presentations for clients and colleagues</p>
+      <p>I wrote clear product guides so sales colleagues without a technical background could explain the equipment</p>
+      <p>I negotiated prices and terms, then handled warranty questions, technical issues and complaints after delivery</p>
+      <p>I coordinated the client, factory, engineers and Japan head office when delivery issues came up, and shared updates at weekly meetings</p>
+      <p>I gave updates on Vietnam sales in English at ASEAN meetings in Thailand, Korea and Malaysia</p>
     </div>
     <div class="lines" data-l="vi">
-      <p>Gặp khách để lắng nghe vấn đề, cùng kỹ sư xem xét cấu hình và đề xuất thiết bị</p>
-      <p>Lập báo giá, bản đề xuất, bảng so sánh và thuyết trình cho khách</p>
-      <p>Dùng AI tóm tắt tài liệu kỹ thuật 10 đến 20 trang thành bài trình bày ngắn cho khách và nội bộ</p>
-      <p>Soạn tài liệu kỹ thuật, hướng dẫn để nhân viên kinh doanh không chuyên kỹ thuật cũng giới thiệu được sản phẩm</p>
-      <p>Phụ trách từ đàm phán giá, điều kiện đến bảo hành, sự cố kỹ thuật, khiếu nại sau giao hàng</p>
-      <p>Điều phối vấn đề khi giao hàng với khách, nhà máy, kỹ sư, trụ sở Nhật và báo cáo trong họp tuần</p>
-      <p>Báo cáo tình hình kinh doanh Việt Nam bằng tiếng Anh tại các cuộc họp ASEAN ở Thái Lan, Hàn Quốc, Malaysia</p>
+      <p>Tôi tìm hiểu nhu cầu của khách, cùng kỹ sư chốt cấu hình rồi đề xuất thiết bị phù hợp</p>
+      <p>Tôi chuẩn bị báo giá, bảng so sánh để khách dễ cân nhắc các phương án</p>
+      <p>Tôi dùng AI rút gọn tài liệu kỹ thuật 10 đến 20 trang thành nội dung dễ trình bày cho khách và đồng nghiệp</p>
+      <p>Tôi soạn tài liệu dễ hiểu để đồng nghiệp kinh doanh không chuyên kỹ thuật vẫn giới thiệu được sản phẩm</p>
+      <p>Tôi đàm phán giá và điều kiện, rồi tiếp tục hỗ trợ bảo hành, xử lý sự cố kỹ thuật và khiếu nại sau bàn giao</p>
+      <p>Tôi phối hợp với khách, nhà máy, kỹ sư và trụ sở Nhật khi phát sinh vấn đề lúc giao hàng, rồi cập nhật trong họp tuần</p>
+      <p>Tôi trình bày bằng tiếng Anh về tình hình kinh doanh Việt Nam tại các cuộc họp ASEAN ở Thái Lan, Hàn Quốc và Malaysia</p>
     </div>
   </div>
 
   <div class="card rv" style="--d:220ms">
     <span class="lbl">HR ／ <span data-l="ja">人事、総務部門：社内研修、仕組みづくり</span><span data-l="en">HR and general affairs: training and building systems</span><span data-l="vi">Nhân sự, hành chính: đào tạo nội bộ, xây dựng cách làm</span></span>
     <div class="lines" data-l="ja">
-      <p>ChatGPT、AIエージェントの使い方をチームに指導し、報告書作成と集計を効率化</p>
-      <p>AIで経理、人事データを照合し、差異や誤りを特定</p>
-      <p>日越の考え方の違いを踏まえて研修資料を作成し、報連相、交渉、数値報告を指導</p>
-      <p>採用担当2名を未経験から育成し、日本語、英語の業務手順書、評価シートを作成</p>
+      <p>ChatGPTやAIエージェントの使い方をチームに教え、報告書作成や集計を効率化しました</p>
+      <p>AIを使って経理、人事データを照合し、差異や入力ミスを見つけました</p>
+        <p>日越の考え方の違いを踏まえて研修資料を作成し、報連相、交渉、数値報告を指導しました</p>
+      <p>採用担当2名を未経験から育成し、日本語と英語の手順書、評価シートを整えました</p>
     </div>
     <div class="lines" data-l="en">
-      <p>Taught the team to use ChatGPT and AI agents, making report writing and data tallying faster</p>
-      <p>Used AI to cross-check accounting and HR data and find gaps and errors</p>
-      <p>Wrote training materials based on Japanese and Vietnamese ways of thinking, and coached horenso, negotiation and reporting with numbers</p>
-      <p>Trained 2 recruiters from zero experience, and wrote work procedures and evaluation sheets in Japanese and English</p>
+      <p>I showed the team how to use ChatGPT and AI agents, which sped up report writing and data summaries</p>
+      <p>I used AI to compare accounting and HR records and find discrepancies and errors</p>
+      <p>I wrote training materials based on Japanese and Vietnamese ways of thinking, and coached horenso, negotiation and reporting with numbers</p>
+      <p>I trained two recruiters with no prior experience and prepared their procedures and evaluation sheets in Japanese and English</p>
     </div>
     <div class="lines" data-l="vi">
-      <p>Hướng dẫn đội dùng ChatGPT, AI agent, giúp lập báo cáo và tổng hợp số liệu nhanh hơn</p>
-      <p>Dùng AI đối chiếu dữ liệu kế toán, nhân sự để tìm chênh lệch và sai sót</p>
-      <p>Soạn tài liệu đào tạo dựa trên khác biệt tư duy Nhật Việt, hướng dẫn Horenso, đàm phán, báo cáo bằng số liệu</p>
-      <p>Đào tạo 2 nhân viên tuyển dụng từ chưa có kinh nghiệm, soạn quy trình làm việc và phiếu đánh giá tiếng Nhật, tiếng Anh</p>
+      <p>Tôi hướng dẫn đội dùng ChatGPT và AI agent để lập báo cáo, tổng hợp số liệu nhanh hơn</p>
+      <p>Tôi dùng AI đối chiếu dữ liệu kế toán và nhân sự để tìm ra chênh lệch và sai sót</p>
+      <p>Tôi soạn tài liệu đào tạo dựa trên khác biệt tư duy Nhật Việt, hướng dẫn Horenso, đàm phán, báo cáo bằng số liệu</p>
+      <p>Tôi đào tạo 2 nhân viên tuyển dụng từ chưa có kinh nghiệm, đồng thời soạn quy trình và phiếu đánh giá bằng tiếng Nhật, tiếng Anh</p>
     </div>
   </div>
 
@@ -958,23 +968,23 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <div class="card">
       <span class="lbl">Clients ／ <span data-l="ja">法人顧客対応、IT案件の提案</span><span data-l="en">Business clients and IT proposals</span><span data-l="vi">Khách doanh nghiệp, đề xuất dự án IT</span></span>
       <div class="lines" data-l="ja">
-        <p>顧客を訪問してIT案件のニーズを聞き取り、必要な人材やITソリューションを提案</p>
-        <p>ITエンジニアチームと連携し、顧客の案件要件を技術面から確認</p>
-        <p>顧客、エンジニアと定期レビュー会議を行い、6か月～1年契約の更新を担当</p>
-        <p>欧州企業のCEOと英語で会議を行い、契約条件を交渉</p>
-        <p>新規法人顧客をリサーチして開拓し、テレセールスチームを管理してアポイントを獲得</p>
+        <p>顧客と話し、IT案件の要件に合う人材やソリューションを提案しました</p>
+        <p>ITエンジニアチームと連携し、顧客の案件要件を技術面から確認しました</p>
+        <p>顧客、エンジニアとの定期レビューで課題を確認し、6か月～1年契約の更新を担当しました</p>
+        <p>欧州企業のCEOと英語で会議を行い、契約条件を交渉しました</p>
+        <p>新規法人顧客をリサーチして開拓し、テレセールスチームを管理してアポイントを獲得しました</p>
       </div>
       <div class="lines" data-l="en">
-        <p>Visited clients to hear their IT project needs and proposed the right people or IT solutions</p>
+        <p>I discussed project needs with clients and proposed people or IT solutions that fit</p>
         <p>Worked with the engineering team to check client requirements from the technical side</p>
-        <p>Held regular review meetings with clients and engineers, and handled renewals of 6 to 12 month contracts</p>
+        <p>I used regular client and engineer reviews to address open issues and renew 6 to 12 month contracts</p>
         <p>Met the CEO of a European company in English and negotiated contract terms</p>
-        <p>Researched and won new business clients, managing a telesales team to book appointments</p>
+        <p>I researched and won new business clients, managing a telesales team to book appointments</p>
       </div>
       <div class="lines" data-l="vi">
-        <p>Gặp khách để nắm nhu cầu dự án IT, đề xuất nhân sự hoặc giải pháp IT phù hợp</p>
+        <p>Tôi trao đổi với khách để hiểu yêu cầu dự án, rồi đề xuất nhân sự hoặc giải pháp IT phù hợp</p>
         <p>Phối hợp đội kỹ sư IT để xác nhận yêu cầu dự án của khách về mặt kỹ thuật</p>
-        <p>Họp review định kỳ với khách và kỹ sư, phụ trách gia hạn hợp đồng 6 tháng đến 1 năm</p>
+        <p>Qua các buổi rà soát cùng khách và kỹ sư, tôi theo sát vấn đề để phụ trách gia hạn hợp đồng 6 tháng đến 1 năm</p>
         <p>Họp bằng tiếng Anh với CEO công ty châu Âu, đàm phán điều kiện hợp đồng</p>
         <p>Nghiên cứu, tìm khách doanh nghiệp mới, quản lý đội telesales để lấy lịch hẹn</p>
       </div>
@@ -982,25 +992,25 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <div class="card">
       <span class="lbl">Team ／ <span data-l="ja">資料作成、チーム運営</span><span data-l="en">Documents and running the team</span><span data-l="vi">Soạn tài liệu, vận hành đội</span></span>
       <div class="lines" data-l="ja">
-        <p>営業プロセスと支店の管理体制をゼロから構築</p>
-        <p>プレゼン資料、営業資料、日英越3か国語の会社案内を作成</p>
-        <p>営業チーム向けに営業手法、提案方法の研修資料を作成し、指導</p>
-        <p>役割、KPI、評価制度で営業チームを管理し、本社社長へ日次、週次、月次で報告</p>
-        <p>KPI低下時は活動データから原因を分析し、目標を再設定して数値を回復</p>
+        <p>営業プロセスと支店の管理体制をゼロから構築しました</p>
+        <p>プレゼン資料、営業資料、日英越3か国語の会社案内を作成しました</p>
+        <p>営業チーム向けに営業手法、提案方法の研修資料を作成し、指導しました</p>
+        <p>役割、KPI、評価制度で営業チームを管理し、本社社長へ日次、週次、月次で報告しました</p>
+        <p>KPIが下がった時は活動データを見直し、目標を調整して改善につなげました</p>
       </div>
       <div class="lines" data-l="en">
-        <p>Built the sales process and the branch management system from scratch</p>
-        <p>Made presentations, sales materials and a company profile in Japanese, English and Vietnamese</p>
-        <p>Wrote training materials on sales methods and proposals, and coached the sales team</p>
-        <p>Managed the team with roles, KPIs and an evaluation system; reported daily, weekly and monthly to the president at head office</p>
-        <p>When KPIs dropped, analysed activity data for the cause, reset targets and brought the numbers back</p>
+        <p>I built the sales process and the branch management system from scratch</p>
+        <p>I made presentations, sales materials and a company profile in Japanese, English and Vietnamese</p>
+        <p>I wrote training materials on sales methods and proposals, and coached the sales team</p>
+        <p>I managed the team with roles, KPIs and an evaluation system; I reported daily, weekly and monthly to the president at head office</p>
+        <p>I reviewed activity data and reset targets when KPIs fell, helping bring performance back up</p>
       </div>
       <div class="lines" data-l="vi">
-        <p>Xây dựng từ đầu quy trình kinh doanh và hệ thống quản lý chi nhánh</p>
-        <p>Soạn bài trình bày, tài liệu bán hàng, hồ sơ công ty 3 thứ tiếng Nhật, Anh, Việt</p>
-        <p>Soạn tài liệu đào tạo phương pháp bán hàng, cách đề xuất và hướng dẫn đội kinh doanh</p>
-        <p>Quản lý đội bằng vai trò, KPI, chế độ đánh giá; báo cáo Tổng giám đốc trụ sở hằng ngày, tuần, tháng</p>
-        <p>Khi KPI giảm, phân tích dữ liệu hoạt động tìm nguyên nhân, đặt lại mục tiêu và đưa số liệu trở lại</p>
+        <p>Tôi xây dựng từ đầu quy trình kinh doanh và hệ thống quản lý chi nhánh</p>
+        <p>Tôi soạn bài trình bày, tài liệu bán hàng, hồ sơ công ty 3 thứ tiếng Nhật, Anh, Việt</p>
+        <p>Tôi soạn tài liệu đào tạo phương pháp bán hàng, cách đề xuất và hướng dẫn đội kinh doanh</p>
+        <p>Tôi quản lý đội bằng vai trò, KPI, chế độ đánh giá; báo cáo Tổng giám đốc trụ sở hằng ngày, tuần, tháng</p>
+        <p>Tôi xem lại dữ liệu hoạt động, điều chỉnh mục tiêu khi KPI giảm và đưa kết quả cải thiện trở lại</p>
       </div>
     </div>
   </div>
@@ -1026,22 +1036,22 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <div class="card rv" style="--d:180ms">
     <span class="lbl">Bridge ／ <span data-l="ja">顧客と開発チームの橋渡し</span><span data-l="en">Bridging clients and the development team</span><span data-l="vi">Cầu nối khách hàng và đội phát triển</span></span>
     <div class="lines" data-l="ja">
-      <p>日本の顧客、上司とベトナム人エンジニアの会議で通訳し、双方の調整役を担当</p>
-      <p>仕様書、設計書、メールを日英越の3言語に翻訳し、要件を開発チームに伝達</p>
-      <p>動作確認とUATを実施し、不具合はエンジニアと原因を調べて修正まで管理</p>
-      <p>ITエンジニアチームのタスク、進捗、品質を管理し、日本人上司に定期報告</p>
+      <p>日本の顧客や上司とベトナム人エンジニアの会議で通訳し、認識をそろえました</p>
+      <p>仕様書、設計書、メールを3言語で翻訳し、開発チームに要件を伝えました</p>
+      <p>動作確認とUATを実施し、不具合はエンジニアと原因を調べて修正まで管理しました</p>
+      <p>ITエンジニアチームのタスク、進捗、品質を管理し、日本人上司に定期報告しました</p>
     </div>
     <div class="lines" data-l="en">
-      <p>Interpreted in meetings between Japanese clients or managers and Vietnamese engineers, coordinating both sides</p>
-      <p>Translated specifications, design documents and emails between Japanese, English and Vietnamese, and passed requirements to the development team</p>
-      <p>Ran functional checks and UAT; for bugs, found the cause with engineers and managed them through to the fix</p>
-      <p>Managed the engineering team's tasks, progress and quality, with regular reports to my Japanese manager</p>
+      <p>I interpreted meetings between Japanese clients or managers and Vietnamese engineers so both sides stayed aligned</p>
+      <p>I translated specifications, design documents and emails across Japanese, English and Vietnamese, then clarified requirements with developers</p>
+      <p>I ran functional checks and UAT; for bugs, I found the cause with engineers and managed them through to the fix</p>
+      <p>I managed the engineering team's tasks, progress and quality, with regular reports to my Japanese manager</p>
     </div>
     <div class="lines" data-l="vi">
-      <p>Phiên dịch trong các cuộc họp giữa khách hàng, cấp trên người Nhật và kỹ sư Việt Nam, điều phối hai bên</p>
-      <p>Dịch đặc tả, tài liệu thiết kế, email qua lại 3 thứ tiếng Nhật, Anh, Việt và truyền đạt yêu cầu cho đội phát triển</p>
-      <p>Kiểm tra chức năng và UAT; với lỗi, cùng kỹ sư tìm nguyên nhân và quản lý đến khi sửa xong</p>
-      <p>Quản lý công việc, tiến độ, chất lượng của đội kỹ sư IT, báo cáo định kỳ cho cấp trên người Nhật</p>
+      <p>Tôi phiên dịch các buổi họp giữa khách, cấp trên người Nhật và kỹ sư Việt Nam để hai bên hiểu đúng yêu cầu</p>
+      <p>Tôi dịch đặc tả, tài liệu thiết kế và email giữa ba ngôn ngữ, rồi làm rõ yêu cầu với đội phát triển</p>
+      <p>Tôi kiểm tra chức năng và UAT; khi có lỗi, tôi cùng kỹ sư tìm nguyên nhân và theo dõi đến khi sửa xong</p>
+      <p>Tôi quản lý công việc, tiến độ, chất lượng của đội kỹ sư IT và báo cáo định kỳ cho cấp trên người Nhật</p>
     </div>
   </div>
 
@@ -1061,22 +1071,22 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <p class="role" style="margin:4px 0 8px"><b><span data-l="ja">部品部 売上管理担当</span><span data-l="en">Sales administration, Parts department</span><span data-l="vi">Quản lý doanh số, phòng Phụ tùng</span></b>　<span data-l="ja">日本人上司に報告／部品部の売上管理と代理店対応を担当</span><span data-l="en">Reporting to a Japanese manager; parts sales administration and dealer support</span><span data-l="vi">Báo cáo cấp trên người Nhật; quản lý doanh số phụ tùng, làm việc với đại lý</span></p>
     <span class="lbl"><span data-l="ja">売上管理、代理店対応、通訳</span><span data-l="en">Sales administration, dealers, interpreting</span><span data-l="vi">Quản lý doanh số, đại lý, phiên dịch</span></span>
     <div class="lines" data-l="ja">
-      <p>部品部の売上を管理し、売上レポートを作成して日本人上司に報告</p>
-      <p>代理店を訪問して部品の不具合、故障の状況を調査し、日本人上司に報告</p>
-      <p>部品、販売、マーケティング部門との会議内容をまとめ、議事録を作成</p>
-      <p>会議や代理店訪問での日越通訳、社内文書の翻訳を担当</p>
+      <p>部品部の売上を追い、レポートにまとめて日本人上司へ報告しました</p>
+      <p>代理店を訪問して部品の不具合や故障を確認し、日本人上司に状況を伝えました</p>
+      <p>部品、販売、マーケティング部門との会議内容をまとめ、議事録を作成しました</p>
+      <p>会議や代理店訪問で日越通訳をし、社内文書を翻訳しました</p>
     </div>
     <div class="lines" data-l="en">
-      <p>Managed parts sales and wrote sales reports for my Japanese manager</p>
-      <p>Visited dealers to look into parts defects and failures, and reported to my Japanese manager</p>
-      <p>Summarised meetings with the parts, sales and marketing departments and wrote the minutes</p>
-      <p>Interpreted Japanese and Vietnamese in meetings and dealer visits, and translated internal documents</p>
+      <p>I tracked parts sales and prepared clear reports for my Japanese manager</p>
+      <p>I visited dealers to understand parts defects and failures, then updated my Japanese manager</p>
+      <p>I summarised meetings with the parts, sales and marketing departments and wrote the minutes</p>
+      <p>I interpreted Japanese and Vietnamese in meetings and dealer visits, and translated internal documents</p>
     </div>
     <div class="lines" data-l="vi">
-      <p>Quản lý doanh số phòng Phụ tùng, lập báo cáo doanh số gửi cấp trên người Nhật</p>
-      <p>Đến đại lý tìm hiểu tình trạng lỗi, hỏng của phụ tùng và báo cáo cấp trên người Nhật</p>
-      <p>Tổng hợp nội dung họp với các phòng Phụ tùng, Bán hàng, Marketing và viết biên bản</p>
-      <p>Phiên dịch Nhật Việt trong họp và khi đến đại lý, dịch tài liệu nội bộ</p>
+      <p>Tôi theo dõi doanh số phụ tùng và chuẩn bị báo cáo cho cấp trên người Nhật</p>
+      <p>Tôi đến đại lý tìm hiểu lỗi hỏng của phụ tùng rồi báo lại cấp trên người Nhật</p>
+      <p>Tôi tổng hợp nội dung họp với các phòng Phụ tùng, Bán hàng, Marketing và viết biên bản</p>
+      <p>Tôi phiên dịch Nhật Việt trong họp và khi đến đại lý, đồng thời dịch tài liệu nội bộ</p>
     </div>
   </div>
 
@@ -1084,9 +1094,9 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <span class="lbl"><span data-l="ja">2011年9月 ～ 2015年6月</span><span data-l="en">Sep 2011 – Jun 2015</span><span data-l="vi">09/2011 – 06/2015</span></span>
     <h3>LienViet Post Bank</h3>
     <p class="role" style="margin:4px 0 8px"><b><span data-l="ja">国際決済部 国際決済担当</span><span data-l="en">International payments officer</span><span data-l="vi">Chuyên viên thanh toán quốc tế</span></b></p>
-    <div class="lines" data-l="ja"><p>法人顧客（製造、農業、商社）に決済条件と必要書類を説明し、輸出入決済を担当</p></div>
-    <div class="lines" data-l="en"><p>Explained payment terms and required documents to business clients (manufacturing, agriculture, trading) and handled import and export payments</p></div>
-    <div class="lines" data-l="vi"><p>Giải thích điều kiện thanh toán và hồ sơ cần thiết cho khách doanh nghiệp (sản xuất, nông nghiệp, thương mại), xử lý thanh toán xuất nhập khẩu</p></div>
+    <div class="lines" data-l="ja"><p>法人顧客（製造、農業、商社）に決済条件と必要書類を説明し、輸出入決済を担当しました</p></div>
+    <div class="lines" data-l="en"><p>I explained payment terms and required documents to business clients (manufacturing, agriculture, trading) and handled import and export payments</p></div>
+    <div class="lines" data-l="vi"><p>Tôi giải thích điều kiện thanh toán và hồ sơ cần thiết cho khách doanh nghiệp (sản xuất, nông nghiệp, thương mại), đồng thời xử lý thanh toán xuất nhập khẩu</p></div>
   </div>
 
   <div class="card rv" style="--d:220ms;background:linear-gradient(150deg,#f6f3ff,#eef8ff);border-color:#dcd4f3">
@@ -1113,22 +1123,22 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <div class="card rv" style="--d:180ms">
     <span class="lbl">PC、AI Skills ／ <span data-l="ja">PC、AIスキル</span><span data-l="en">PC and AI skills</span><span data-l="vi">Tin học và AI</span></span>
     <div class="aitab" data-l="ja">
-      <div><b>Excel、PowerPoint</b><p>数値管理、レポート、提案資料、プレゼン資料、研修資料の作成</p></div>
-      <div><b>AIシステム</b><p>AIを使ったCV解析、JDマッチングシステムの設計と開発を主導。要件、業務フロー、評価基準を設計し、AIの判定は担当者が確認してから反映</p></div>
-      <div><b>ChatGPT、Claude</b><p>数十～数百ページの資料や動画の要約、数値の収集と分析、問題の原因整理。議事録の作成、チームの業務時間、タスク、進捗の管理。会計、人事、営業の業務知識の学習。4年前と比べて情報整理の時間を80～90%削減し、生産性は約3～4倍に向上</p></div>
-      <div><b>Sesame</b><p>日本語、英語の会話練習</p></div>
+      <div><b>Excel、PowerPoint</b><p>数値管理やレポート、提案、プレゼン、研修の資料を作成しました</p></div>
+      <div><b>AIシステム</b><p>AIを使ったCV解析、JDマッチングシステムの設計と開発を主導しました。要件、業務フロー、評価基準を設計し、担当者がAIの判定を確認してから反映しています</p></div>
+      <div><b>ChatGPT、Claude</b><p>数十～数百ページの資料や動画を要約し、数値を集めて分析し、問題の原因を整理しました。議事録を作成し、チームの業務時間、タスク、進捗を管理しました。会計、人事、営業の業務知識も学び、4年前と比べて情報整理の時間を80～90%削減し、生産性を約3～4倍に高めました</p></div>
+      <div><b>Sesame</b><p>Sesameを使って日本語と英語の会話を練習しています</p></div>
     </div>
     <div class="aitab" data-l="en">
-      <div><b>Excel, PowerPoint</b><p>Number tracking, reports, proposals, presentations and training materials</p></div>
-      <div><b>AI system</b><p>Led the design and development of an AI CV-parsing and JD-matching system. Defined the requirements, workflow and scoring criteria; a person checks every AI decision before it is used</p></div>
-      <div><b>ChatGPT, Claude</b><p>Summarising documents and videos of tens to hundreds of pages, collecting and analysing numbers, sorting out root causes. Meeting minutes and tracking the team's hours, tasks and progress. Learning accounting, HR and sales know-how. Time spent organising information is down 80 to 90% vs four years ago; productivity is up about 3 to 4 times</p></div>
-      <div><b>Sesame</b><p>Japanese and English conversation practice</p></div>
+      <div><b>Excel, PowerPoint</b><p>I use Excel and PowerPoint to track numbers and prepare reports, proposals, presentations and training materials</p></div>
+      <div><b>AI system</b><p>I led the design and development of an AI CV-parsing and JD-matching system. I defined the requirements, workflow and scoring criteria; a person checks every AI decision before it is used</p></div>
+      <div><b>ChatGPT, Claude</b><p>I summarise documents and videos of tens to hundreds of pages, collect and analyse numbers, and sort out root causes. I create meeting minutes and track the team's hours, tasks and progress. I also learn accounting, HR and sales know-how. Compared with four years ago, I spend 80 to 90% less time organising information, and productivity is up about 3 to 4 times</p></div>
+      <div><b>Sesame</b><p>I practise Japanese and English conversation with Sesame</p></div>
     </div>
     <div class="aitab" data-l="vi">
-      <div><b>Excel, PowerPoint</b><p>Quản lý số liệu, báo cáo, tài liệu đề xuất, thuyết trình, đào tạo</p></div>
-      <div><b>Hệ thống AI</b><p>Chủ trì thiết kế và phát triển hệ thống AI phân tích CV, so khớp JD. Thiết kế yêu cầu, quy trình, tiêu chí đánh giá; kết quả AI được người phụ trách kiểm tra trước khi áp dụng</p></div>
-      <div><b>ChatGPT, Claude</b><p>Tóm tắt tài liệu, video hàng chục đến hàng trăm trang; thu thập, phân tích số liệu; tìm nguyên nhân vấn đề. Viết biên bản họp, quản lý giờ làm, công việc, tiến độ của đội. Học kiến thức kế toán, nhân sự, kinh doanh. So với 4 năm trước, thời gian xử lý thông tin giảm 80 đến 90%, năng suất tăng khoảng 3 đến 4 lần</p></div>
-      <div><b>Sesame</b><p>Luyện hội thoại tiếng Nhật, tiếng Anh</p></div>
+      <div><b>Excel, PowerPoint</b><p>Tôi dùng Excel và PowerPoint để theo dõi số liệu, làm báo cáo, tài liệu đề xuất, thuyết trình và đào tạo</p></div>
+      <div><b>Hệ thống AI</b><p>Tôi chủ trì thiết kế và phát triển hệ thống AI phân tích CV, so khớp JD. Tôi thiết kế yêu cầu, quy trình, tiêu chí đánh giá; người phụ trách kiểm tra kết quả AI trước khi áp dụng</p></div>
+      <div><b>ChatGPT, Claude</b><p>Tôi tóm tắt tài liệu, video dài hàng chục đến hàng trăm trang; thu thập, phân tích số liệu và tìm nguyên nhân vấn đề. Tôi viết biên bản họp, quản lý giờ làm, công việc, tiến độ của đội và học thêm kiến thức kế toán, nhân sự, kinh doanh. So với 4 năm trước, tôi giảm 80 đến 90% thời gian xử lý thông tin và nâng năng suất khoảng 3 đến 4 lần</p></div>
+      <div><b>Sesame</b><p>Tôi luyện hội thoại tiếng Nhật và tiếng Anh với Sesame</p></div>
     </div>
   </div>
 
@@ -1148,8 +1158,8 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <section class="pg" data-even data-chap="IV" data-num="12" id="aiops">
   <div class="deco halo" style="right:-180px;top:-160px;background:radial-gradient(circle,rgba(109,91,208,.20),transparent 65%)"></div>
   <p class="eb rv">AI Management <b>／ AIで進めるチームの業務管理</b></p>
-  <h2 class="kw rv" style="--d:60ms">仕事の流れを決め、<br /><i>数字で見える化</i>する。</h2>
-  <p class="kw-sub rv" style="--d:100ms">MAYEKAWA VIETNAMでは、チームの業務時間、タスク、進捗を、標準化した工程と毎日の数字で管理していました。分析はClaudeで行い、毎日のミーティングで確認しました。</p>
+  <h2 class="kw rv" style="--d:60ms">私は仕事の流れを整え、<br /><i>進み具合を数字で確かめました。</i></h2>
+  <p class="kw-sub rv" style="--d:100ms">MAYEKAWA VIETNAMでは、私がチームの業務時間、タスク、進捗を標準化した工程と毎日の数字で管理していました。Claudeで数字を分析し、毎日のミーティングでチームと確認しました。</p>
   <div class="kwbar rv" style="--d:130ms"><span></span></div>
 
   <div class="cyc rv" style="--d:160ms">
@@ -1183,8 +1193,8 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <!-- ═══════ 13 AI業務管理：ダッシュボード ═══════ -->
 <section class="pg" data-chap="IV" data-num="13" id="aidash">
   <p class="eb rv">AI Dashboard <b>／ Claudeによる分析（例）</b></p>
-  <h2 class="kw rv" style="--d:60ms">どこで止まっているかを、<br /><i>毎朝ひと目で</i>。</h2>
-  <p class="kw-sub rv" style="--d:100ms">メンバーの日次報告をClaudeが集計し、工程ごとの時間、完了率（着手したタスクのうち完了した割合）、停滞タスクをまとめます。</p>
+  <h2 class="kw rv" style="--d:60ms">私は日報から、<br /><i>毎朝の停滞を確認しました。</i></h2>
+  <p class="kw-sub rv" style="--d:100ms">日次報告をClaudeで集計し、工程別の時間、完了率（着手分のうち完了した割合）、停滞中の作業を確認しました。</p>
   <div class="kwbar rv" style="--d:130ms"><span></span></div>
 
   <div class="kpi rv" style="--d:160ms">
@@ -1222,27 +1232,27 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <!-- ═══════ 14 自己PR ═══════ -->
 <section class="pg" data-chap="I" data-num="14" id="pr">
   <p class="eb rv">Self PR <b>／ 自己PR</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">私の<i>3つの強み</i></span><span data-l="en">My <i>three strengths</i></span><span data-l="vi"><i>3 điểm mạnh</i> của tôi</span></h2>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">採用担当の方にお伝えしたい<i>3つの強み</i></span><span data-l="en">Three strengths I would bring to your team</span><span data-l="vi">3 điểm mạnh tôi muốn chia sẻ với nhà tuyển dụng</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
 
   <div style="display:flex;flex-direction:column;gap:14px;flex:1">
     <div class="card rv" style="--d:140ms;display:grid;grid-template-columns:64px 1fr;gap:14px;flex:1;align-items:center">
       <p class="num" style="color:#0f5a8c">01</p>
-      <div data-l="ja"><h3>日本の仕事の進め方を理解し、日本人とベトナム人をつなぐ力</h3><p>2015年から日本人経営者のもとで働き、報連相の徹底、数字を使った分かりやすい報告、原因分析に基づく筋道を立てた説明を身につけました。日本人とベトナム人の考え方の違いをまとめた研修資料を作り、社員に報連相や交渉、数値報告の方法を教えてきました。</p></div>
+      <div data-l="ja"><h3>日本の仕事の進め方を理解し、日本人とベトナム人をつなぐ力</h3><p>2015年から日本人経営者と働く中で、報連相の徹底、数字を使った分かりやすい報告、原因分析に基づく筋道を立てた説明を身につけました。日本人とベトナム人の考え方の違いをまとめた研修資料を作り、社員に報連相や交渉、数値報告の方法を教えてきました。</p></div>
       <div data-l="en"><h3>Understanding how Japanese companies work, and connecting Japanese and Vietnamese people</h3><p>Working under Japanese executives since 2015, I learned consistent horenso, clear reports with numbers, and logical explanations based on cause analysis. I made training materials on the differences between Japanese and Vietnamese ways of thinking, and taught staff how to do horenso, negotiate and report with numbers.</p></div>
       <div data-l="vi"><h3>Hiểu cách làm việc của Nhật, kết nối người Nhật và người Việt</h3><p>Làm việc dưới lãnh đạo người Nhật từ năm 2015, tôi rèn được Horenso nghiêm túc, báo cáo dễ hiểu bằng số liệu, giải thích mạch lạc dựa trên phân tích nguyên nhân. Tôi soạn tài liệu đào tạo về khác biệt tư duy giữa người Nhật và người Việt, hướng dẫn nhân viên cách Horenso, đàm phán và báo cáo bằng số liệu.</p></div>
     </div>
     <div class="card rv" style="--d:180ms;display:grid;grid-template-columns:64px 1fr;gap:14px;flex:1;align-items:center">
       <p class="num" style="color:#c14343">02</p>
-      <div data-l="ja"><h3>顧客の課題を聞き取り、社内と連携して解決まで進める力</h3><p>MAYEKAWA VIETNAMでは顧客を訪問して課題を伺い、技術者と構成を検討して提案しました。納品時の問題は社内外と調整して解決し、保証や技術トラブルにも対応しました。JILNESTAでは顧客、エンジニアとの定期レビュー会議で課題を確認し、契約の更新につなげました。</p></div>
-      <div data-l="en"><h3>Hearing client issues and working with colleagues through to a solution</h3><p>At MAYEKAWA VIETNAM I visited clients to hear their issues, worked out configurations with engineers and made proposals. I solved delivery issues together with people inside and outside the company, and handled warranty and technical trouble too. At JILNESTA I checked issues in regular review meetings with clients and engineers, which led to contract renewals.</p></div>
-      <div data-l="vi"><h3>Lắng nghe vấn đề của khách, phối hợp nội bộ đến khi giải quyết xong</h3><p>Tại MAYEKAWA VIETNAM, tôi đến gặp khách để nghe vấn đề, cùng kỹ sư xem xét cấu hình rồi đề xuất. Vấn đề khi giao hàng được tôi điều phối trong và ngoài công ty để giải quyết, kể cả bảo hành và sự cố kỹ thuật. Tại JILNESTA, tôi nắm vấn đề qua các buổi review định kỳ với khách và kỹ sư, từ đó dẫn tới gia hạn hợp đồng.</p></div>
+      <div data-l="ja"><h3>顧客の課題を聞き取り、社内と連携して解決まで進める力</h3><p>MAYEKAWA VIETNAMでは、顧客の課題を聞いて技術者と提案を組み立て、納品後の問題にも対応しました。JILNESTAでは顧客とエンジニアの定期レビューを続け、課題の解決と契約更新につなげました。</p></div>
+      <div data-l="en"><h3>Hearing client issues and working with colleagues through to a solution</h3><p>At MAYEKAWA VIETNAM, I listened to clients, shaped proposals with engineers and stayed involved when issues came up after delivery. At JILNESTA, regular reviews with clients and engineers helped me resolve open issues and renew contracts.</p></div>
+      <div data-l="vi"><h3>Lắng nghe vấn đề của khách, phối hợp nội bộ đến khi giải quyết xong</h3><p>Tại MAYEKAWA VIETNAM, tôi lắng nghe khách, cùng kỹ sư xây dựng phương án và tiếp tục xử lý vấn đề sau khi bàn giao. Ở JILNESTA, các buổi rà soát định kỳ với khách và kỹ sư giúp tôi giải quyết vướng mắc, tiến tới gia hạn hợp đồng.</p></div>
     </div>
     <div class="card rv" style="--d:220ms;display:grid;grid-template-columns:64px 1fr;gap:14px;flex:1;align-items:center">
       <p class="num" style="color:#0f8f83">03</p>
-      <div data-l="ja"><h3>分かりやすい資料を作り、人に教えて定着させる力</h3><p>技術職以外の営業でも提案内容を説明できるよう、技術資料と説明マニュアルを作成しました。営業チームには研修資料を作って提案方法を指導しました。人事部ではChatGPTやAIエージェントの使い方をチームに教え、報告書作成と集計の時間を減らしました。</p></div>
-      <div data-l="en"><h3>Making clear materials, teaching people, and making it stick</h3><p>I wrote technical documents and manuals so non-technical sales staff could explain proposals too. I made training materials for the sales team and coached them on proposals. In HR I taught the team to use ChatGPT and AI agents, cutting the time spent on reports and tallying.</p></div>
-      <div data-l="vi"><h3>Soạn tài liệu dễ hiểu, hướng dẫn người khác và giúp họ làm được lâu dài</h3><p>Tôi soạn tài liệu kỹ thuật và hướng dẫn để nhân viên kinh doanh không chuyên kỹ thuật cũng giải thích được nội dung đề xuất. Với đội kinh doanh, tôi làm tài liệu đào tạo và hướng dẫn cách đề xuất. Ở phòng Nhân sự, tôi dạy đội dùng ChatGPT, AI agent, giảm thời gian lập báo cáo và tổng hợp.</p></div>
+      <div data-l="ja"><h3>分かりやすい資料を作り、人に教えて定着させる力</h3><p>営業担当が技術的な内容を説明できる資料やマニュアルを作り、提案方法もチームに伝えてきました。人事部ではChatGPTやAIエージェントの使い方を教え、報告書作成や集計にかかる時間を減らしました。</p></div>
+      <div data-l="en"><h3>Making clear materials, teaching people, and making it stick</h3><p>I created guides that helped sales colleagues explain technical proposals, then coached the team on how to present them. In HR, I taught colleagues to use ChatGPT and AI agents to spend less time writing reports and summarising data.</p></div>
+      <div data-l="vi"><h3>Soạn tài liệu dễ hiểu, hướng dẫn người khác và giúp họ làm được lâu dài</h3><p>Tôi làm tài liệu để đồng nghiệp kinh doanh dễ giải thích nội dung kỹ thuật, đồng thời hướng dẫn cách trình bày phương án. Ở phòng Nhân sự, tôi hướng dẫn đội dùng ChatGPT và AI agent để giảm thời gian làm báo cáo, tổng hợp số liệu.</p></div>
     </div>
   </div>
 
@@ -1253,7 +1263,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <section class="pg" data-chap="III" data-num="15" id="cv">
   <p class="eb rv">CV <b>／ 履歴書兼職務経歴書</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">履歴書兼職務経歴書<br /><i>（PDF、3ページ）</i></span><span data-l="en">My CV<br /><i>(PDF, 3 pages, Japanese)</i></span><span data-l="vi">CV của tôi<br /><i>(PDF, 3 trang, tiếng Nhật)</i></span></h2>
-  <p class="kw-sub rv" style="--d:100ms"><span data-l="ja">このポートフォリオの内容は、すべてこの履歴書兼職務経歴書に基づいています。</span><span data-l="en">Everything in this portfolio is based on this CV (rirekisho and career history, in Japanese).</span><span data-l="vi">Toàn bộ nội dung portfolio này dựa trên CV (sơ yếu lý lịch và quá trình công tác, tiếng Nhật) dưới đây.</span></p>
+  <p class="kw-sub rv" style="--d:100ms"><span data-l="ja">このポートフォリオでは、履歴書兼職務経歴書に記載した経験を、実際の仕事の例とあわせて紹介しています。</span><span data-l="en">This portfolio draws on my Japanese CV and adds examples of how I approached the work.</span><span data-l="vi">Portfolio này dựa trên CV tiếng Nhật của tôi và bổ sung ví dụ về cách tôi thực hiện công việc.</span></p>
   <div class="kwbar rv" style="--d:130ms"><span></span></div>
   <div class="cv-act rv" style="--d:160ms">
     <a class="cv-btn" href="Rirekisho_ThaiTranHoangNha.pdf" target="_blank" rel="noopener"><span data-l="ja">新しいタブで開く</span><span data-l="en">Open in a new tab</span><span data-l="vi">Mở trong tab mới</span></a>
@@ -1270,7 +1280,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <div class="deco halo" style="left:-180px;bottom:-160px"></div>
   <div class="deco rings"><div class="r1"></div><div class="r2"></div><div class="r3"></div></div>
   <p class="eb rv">Contact <b>／ 連絡先</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">最後まで<br /><i>ご覧いただき</i>、<br />ありがとうございました。</span><span data-l="en">Thank you<br /><i>for reading</i><br />to the end.</span><span data-l="vi">Cảm ơn bạn<br /><i>đã xem</i><br />đến cuối.</span></h2>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">ここまでお読みいただき、<br /><i>ありがとうございます。</i></span><span data-l="en">Thank you for taking<br /><i>a few minutes to read</i><br />about my work.</span><span data-l="vi">Cảm ơn anh/chị đã dành thời gian<br /><i>tìm hiểu về công việc của tôi.</i></span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
 
   <div class="card rv" style="--d:140ms">
@@ -1296,7 +1306,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <main class="wrap" data-view="sales" hidden>
 <section class="pg" data-chap="II" id="sales-top">
   <span class="eb rv">TASK　<b>SALES &amp; SALES MANAGEMENT</b></span>
-  <h2 class="kw rv" style="--d:60ms">現場を回り、<br /><i>数字で営業を追う</i>。</h2>
+  <h2 class="kw rv" style="--d:60ms">私は顧客を訪ね、<br /><i>商談の進み具合を数字で確かめました。</i></h2>
   <span class="kw-en rv" style="--d:100ms">Sales &amp; Sales Management</span>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">MAYEKAWA VIETNAM（MYCOM、産業用冷凍機）での営業の記録です。2022年2月から2026年6月まで、営業部のアシスタントマネージャー（人事部長を兼務）を務めました。社内メールの予定表と送受信メール、営業部の評価シート、職務記述書、出張規程に残っている仕事と仕組みだけをまとめています。顧客名、価格、契約、売上の数字は載せていません。</p>
@@ -1309,9 +1319,9 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 </section>
 <section class="pg" data-chap="III" id="sales-trips">
   <span class="eb rv">01　<b>TRIPS &amp; VISITS</b></span>
-  <h2 class="kw rv" style="--d:60ms"><i>出張と顧客訪問</i>の<br />記録</h2>
+  <h2 class="kw rv" style="--d:60ms">私が担当した<br /><i>顧客訪問と出張をまとめました。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms">予定表に残っている商談、顧客訪問、出張です。訪問先は業種と地域だけを書いています。</p>
+  <p class="kw-sub rv" style="--d:140ms">予定表に残る商談や訪問を見返し、訪問先は業種と地域だけに絞ってまとめました。</p>
   <div class="tl rv" style="--d:180ms;margin-top:18px">
     <div class="card">
       <p class="yr">2022年7月 ～ 8月</p>
@@ -1344,34 +1354,35 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 </section>
 <section class="pg" data-chap="V" id="sales-pr">
   <span class="eb rv">02　<b>PRESENTATIONS &amp; MEETINGS</b></span>
-  <h2 class="kw rv" style="--d:60ms">英語で発表し、<br /><i>各国の同僚と話す</i>。</h2>
+  <h2 class="kw rv" style="--d:60ms">ASEAN会議で英語で発表し、<br /><i>各国の同僚と意見交換しました。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms">MAYEKAWAタイでのASEAN社員総会（2024年6月10～11日）での発表、展示会PROPAK ASIA 2024（バンコク、6月12～15日）、ベトナムでの顧客訪問の写真です。説明文には顧客名と数字を書いていません。</p>
+  <p class="kw-sub rv" style="--d:140ms">2024年6月10～11日のMAYEKAWA ASEAN社員総会での発表、6月12～15日のPROPAK ASIA 2024（バンコク）、ベトナムでの顧客訪問を写真で紹介します。顧客名と売上数字は伏せています。</p>
   <div class="meta rv" style="--d:180ms;margin-top:14px">
     <div><span>Presentation</span><b>英語の資料で、ASEAN各国の社員に発表</b></div>
     <div><span>Meetings</span><b>各国の同僚との会議と交流</b></div>
     <div><span>Expo</span><b>PROPAK ASIA 2024（バンコク）</b></div>
     <div><span>Visits</span><b>顧客との打ち合わせと物流倉庫の視察</b></div>
   </div>
-  <div class="card rv" style="--d:220ms;margin-top:14px"><span class="lbl">Photos</span><h3>発表と会議の写真</h3>
-    <div style="margin-top:6px;display:grid;grid-template-columns:repeat(auto-fit,minmax(max(190px,30%),1fr));gap:10px">
-      <figure style="margin:0"><img src="assets/sales/trip-asean-presenting.jpg" alt="ASEAN社員総会で英語の資料を使って発表" data-alt-vi="Thuyết trình bằng tài liệu tiếng Anh tại Hội nghị nhân viên ASEAN" data-alt-en="Presenting with English slides at the ASEAN staff assembly" loading="lazy" width="1200" height="676" style="width:100%;height:150px;object-fit:cover;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Presentation</b>　<span>ASEAN社員総会で発表</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/trip-asean-presenting-video.jpg" alt="ASEAN社員総会でベトナム市場を動画で紹介" data-alt-vi="Giới thiệu thị trường Việt Nam bằng video tại Hội nghị nhân viên ASEAN" data-alt-en="Introducing the Vietnam market with a video at the ASEAN staff assembly" loading="lazy" width="900" height="1200" style="width:100%;height:150px;object-fit:cover;object-position:50% 30%;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Presentation</b>　<span>ベトナム市場を動画で紹介</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/trip-asean-presenting-hall.jpg" alt="ASEAN各国の社員が集まる会場での発表" data-alt-vi="Thuyết trình trước nhân viên các nước ASEAN" data-alt-en="Presenting to staff from across ASEAN" loading="lazy" width="1200" height="676" style="width:100%;height:150px;object-fit:cover;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Presentation</b>　<span>会場全体への発表</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/trip-asean-title.jpg" alt="MAYEKAWAタイで開かれたASEAN社員総会の会場" data-alt-vi="Hội nghị nhân viên ASEAN tại MAYEKAWA Thái Lan" data-alt-en="ASEAN staff assembly venue at MAYEKAWA Thailand" loading="lazy" width="1200" height="900" style="width:100%;height:150px;object-fit:cover;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Assembly</b>　<span>ASEAN社員総会（タイ、2024年6月）</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/trip-asean-group.jpg" alt="ASEAN社員総会の参加者との集合写真" data-alt-vi="Ảnh chung với người tham dự Hội nghị nhân viên ASEAN" data-alt-en="Group photo with ASEAN staff assembly participants" loading="lazy" width="1200" height="676" style="width:100%;height:150px;object-fit:cover;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Team</b>　<span>ASEAN各国の参加者と集合写真</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/trip-asean-colleagues.jpg" alt="ASEAN社員総会の会場で同僚と" data-alt-vi="Cùng đồng nghiệp tại Hội nghị nhân viên ASEAN" data-alt-en="With colleagues at the ASEAN staff assembly" loading="lazy" width="1200" height="900" style="width:100%;height:150px;object-fit:cover;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Meeting</b>　<span>総会の会場で同僚と</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/trip-propak-asia-2024.jpg" alt="PROPAK ASIA 2024（バンコク）の会場入口で" data-alt-vi="Tại cổng triển lãm PROPAK ASIA 2024 (Bangkok)" data-alt-en="At the entrance of PROPAK ASIA 2024 (Bangkok)" loading="lazy" width="1200" height="900" style="width:100%;height:150px;object-fit:cover;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Expo</b>　<span>PROPAK ASIA 2024（バンコク）</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/trip-logistics-longan.jpg" alt="ロンアン省の物流倉庫の視察" data-alt-vi="Khảo sát kho logistics ở Long An" data-alt-en="Logistics warehouse visit in Long An" loading="lazy" width="1200" height="900" style="width:100%;height:150px;object-fit:cover;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Visit</b>　<span>ロンアン省の物流倉庫を視察</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/trip-client-meeting.jpg" alt="顧客との打ち合わせ" data-alt-vi="Họp với khách hàng" data-alt-en="Client meeting" loading="lazy" width="1200" height="900" style="width:100%;height:150px;object-fit:cover;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Meeting</b>　<span>顧客との打ち合わせ</span></figcaption></figure>
-    </div>
+  <div class="card rv" style="--d:220ms;margin-top:14px"><span class="lbl">Events</span><h3>出張とビジネスイベント</h3>
+    <ol class="evrow">
+      <li><span class="ev-n">01</span><img src="assets/sales/trip-asean-title.jpg" alt="MAYEKAWAタイで開かれたASEAN社員総会の会場" data-alt-vi="Hội nghị nhân viên ASEAN tại MAYEKAWA Thái Lan" data-alt-en="ASEAN staff assembly venue at MAYEKAWA Thailand" loading="lazy" width="1200" height="900" /><p class="ev-t">MAYEKAWAタイでのASEAN社員総会に参加しました</p></li>
+      <li><span class="ev-n">02</span><img src="assets/sales/trip-asean-presenting.jpg" alt="ASEAN社員総会で英語の資料を使って発表" data-alt-vi="Thuyết trình bằng tài liệu tiếng Anh tại Hội nghị nhân viên ASEAN" data-alt-en="Presenting with English slides at the ASEAN staff assembly" loading="lazy" width="1200" height="676" /><p class="ev-t">英語でベトナム市場について発表しました</p></li>
+      <li><span class="ev-n">03</span><img src="assets/sales/trip-asean-vietnam-projects.jpg" alt="ベトナムでのMAYEKAWAの代表的な納入事例のスライド" data-alt-vi="Slide các dự án tiêu biểu của MAYEKAWA tại Việt Nam" data-alt-en="Slide on key MAYEKAWA projects in Vietnam" loading="lazy" width="1200" height="676" /><p class="ev-t">ベトナムでの代表的な納入事例を紹介しました</p></li>
+      <li><span class="ev-n">04</span><img src="assets/sales/trip-asean-presenting-hall.jpg" alt="ASEAN各国の社員が集まる会場での発表" data-alt-vi="Thuyết trình trước nhân viên các nước ASEAN" data-alt-en="Presenting to staff from across ASEAN" loading="lazy" width="1200" height="676" /><p class="ev-t">ASEAN各国の社員の前で発表しました</p></li>
+      <li><span class="ev-n">05</span><img src="assets/sales/trip-asean-group.jpg" alt="ASEAN社員総会の参加者との集合写真" data-alt-vi="Ảnh chung với người tham dự Hội nghị nhân viên ASEAN" data-alt-en="Group photo with ASEAN staff assembly participants" loading="lazy" width="1200" height="676" /><p class="ev-t">各国の参加者と交流しました</p></li>
+      <li><span class="ev-n">06</span><img src="assets/sales/trip-asean-colleagues.jpg" alt="ASEAN社員総会の会場で同僚と" data-alt-vi="Cùng đồng nghiệp tại Hội nghị nhân viên ASEAN" data-alt-en="With colleagues at the ASEAN staff assembly" loading="lazy" width="1200" height="900" /><p class="ev-t">総会の会場で同僚と意見交換しました</p></li>
+      <li><span class="ev-n">07</span><img src="assets/sales/trip-propak-asia-2024.jpg" alt="展示会PROPAK ASIA（バンコク）の会場入口で" data-alt-vi="Tại cổng triển lãm PROPAK ASIA (Bangkok)" data-alt-en="At the entrance of the PROPAK ASIA trade show (Bangkok)" loading="lazy" width="1200" height="900" /><p class="ev-t">展示会PROPAK ASIA（バンコク）を視察しました</p></li>
+      <li><span class="ev-n">08</span><img src="assets/sales/trip-viv-asia.jpg" alt="展示会VIV ASIA（バンコク）の会場で" data-alt-vi="Tại triển lãm VIV ASIA (Bangkok)" data-alt-en="At the VIV ASIA trade show (Bangkok)" loading="lazy" width="811" height="537" /><p class="ev-t">展示会VIV ASIA（バンコク）を視察しました</p></li>
+      <li><span class="ev-n">09</span><img src="assets/sales/trip-mycom-korea.jpg" alt="MYCOM KOREA（韓国拠点）を訪問" data-alt-vi="Thăm MYCOM KOREA (chi nhánh Hàn Quốc)" data-alt-en="Visit to MYCOM KOREA (Korea branch)" loading="lazy" width="1200" height="900" /><p class="ev-t">MYCOM KOREA（韓国拠点）を訪問しました</p></li>
+      <li><span class="ev-n">10</span><img src="assets/sales/trip-logistics-longan.jpg" alt="ロンアン省の物流倉庫の視察" data-alt-vi="Kho logistics ở Long An" data-alt-en="Logistics warehouse visit in Long An" loading="lazy" width="1200" height="900" /><p class="ev-t">ロンアン省の物流倉庫を視察しました</p></li>
+    </ol>
   </div>
 </section>
 <section class="pg" data-chap="IV" id="sales-reports">
   <span class="eb rv">03　<b>REPORTS &amp; MEETINGS</b></span>
-  <h2 class="kw rv" style="--d:60ms">報告と会議で、<br /><i>見込みと納期</i>を合わせる。</h2>
+  <h2 class="kw rv" style="--d:60ms">私は報告と会議で、<br /><i>商談の見込みと納期を確認していました。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms">営業部の報告の仕組みと、参加した会議です。</p>
+  <p class="kw-sub rv" style="--d:140ms">営業部で参加した会議と、私が担当した報告の流れをまとめました。</p>
   <div class="g3 rv" style="--d:180ms">
     <div class="card"><span class="lbl">Weekly ／ 日本語</span><h3>日本の工場との週次CRM会議</h3><p>CRMに入力した見込み台数などを日本の工場と共有し、納期を調整してきた会議。2023年2月～2024年2月に約30回、主に木曜日にオンラインで開かれ、招待を受けていた</p></div>
     <div class="card"><span class="lbl">CRM</span><h3>CRMの入力を確認する会議</h3><p>2023年3月、日本側とCRMの使い方と入力の状況を確認する会議に招待された</p></div>
@@ -1383,9 +1394,9 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 </section>
 <section class="pg" data-chap="I" id="sales-kpi">
   <span class="eb rv">04　<b>KPI</b></span>
-  <h2 class="kw rv" style="--d:60ms">見積と訪問を、<br /><i>数えられる形</i>にする。</h2>
+  <h2 class="kw rv" style="--d:60ms">私は見積と訪問回数を記録し、<br /><i>営業活動を数字で見える形にしました。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms">営業を担当していた時期に作った仕組みと、営業担当の評価項目です。</p>
+  <p class="kw-sub rv" style="--d:140ms">営業担当時代に私が整えた記録方法と、評価項目をまとめました。</p>
   <div class="g2 rv" style="--d:160ms">
     <div class="card"><span class="lbl">Built ／ 営業の担当時期</span><h3>見積と訪問を集計する仕組み</h3><div class="lines">
       <p>見積書を入力するファイルを設計して運用</p>
@@ -1398,9 +1409,9 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 </section>
 <section class="pg" data-chap="II" id="sales-flow">
   <span class="eb rv">05　<b>FLOW</b></span>
-  <h2 class="kw rv" style="--d:60ms">引き合いから納期まで、<br /><i>順番に追う</i>。</h2>
+  <h2 class="kw rv" style="--d:60ms">私は問い合わせから納期まで、<br /><i>順を追って対応しました。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms">記録に残っている仕事を、顧客対応の順に並べました。</p>
+  <p class="kw-sub rv" style="--d:140ms">記録に残る業務を、顧客対応の流れに沿って並べました。</p>
   <div class="g3 rv" style="--d:180ms">
     <div class="card"><span class="fl4-n">01</span><h3>引き合いを受ける</h3><p>顧客の仕様書（RFQ）を受け取り、要件を項目ごとに確かめる</p></div>
     <div class="card"><span class="fl4-n">02</span><h3>訪問を計画する</h3><p>省ごとに訪問先と先方の担当者を決め、予定表に登録</p></div>
@@ -1463,7 +1474,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   "報告と会議":["Báo cáo và họp", "Reports and meetings"],
   "KPIの管理":["Quản lý KPI", "Managing KPIs"],
   "仕事の流れ":["Quy trình làm việc", "Workflow"],
-  "現場を回り、数字で営業を追う。":["Đi thị trường,<br /><i>theo dõi sales bằng số liệu</i>.", "Out in the field,<br /><i>tracking sales by the numbers</i>."],
+  "顧客を訪ね、商談の進み具合を数字で確かめてきました。":["Đi thị trường,<br /><i>theo dõi sales bằng số liệu</i>.", "Out in the field,<br /><i>tracking sales by the numbers</i>."],
   "MAYEKAWA VIETNAM（MYCOM、産業用冷凍機）での営業の記録です。2022年2月から2026年6月まで、営業部のアシスタントマネージャー（人事部長を兼務）を務めました。社内メールの予定表と送受信メール、営業部の評価シート、職務記述書、出張規程に残っている仕事と仕組みだけをまとめています。顧客名、価格、契約、売上の数字は載せていません。":["Ghi lại công việc sales của tôi tại MAYEKAWA VIETNAM (MYCOM, máy lạnh công nghiệp). Từ 02/2022 đến 06/2026 tôi là Phó phòng Kinh doanh (Assistant Manager), kiêm Trưởng phòng Nhân sự. Nội dung chỉ gồm những việc và cách làm còn lưu trong lịch, thư gửi và nhận của email công ty, phiếu đánh giá phòng Kinh doanh, bản mô tả công việc và quy định công tác. Không đưa tên khách hàng, giá, hợp đồng hay số doanh thu.", "A record of my sales work at MAYEKAWA VIETNAM (MYCOM, industrial refrigeration). From February 2022 to June 2026 I was assistant manager of the sales department, and also head of HR. Only work and systems found in my company email calendar, sent and received mail, the sales evaluation sheet, job descriptions and the business trip rules are included. No client names, prices, contracts or sales figures are shown."],
   "メコンデルタ5省、13社の訪問予定":["Lịch gặp 13 công ty ở 5 tỉnh miền Tây", "Visit schedule: 13 companies in 5 Mekong Delta provinces"],
   "日本の工場と週次のCRM会議":["Họp CRM hằng tuần với nhà máy Nhật", "Weekly CRM meetings with the factory in Japan"],
@@ -1550,19 +1561,30 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   "発表と会議":["Thuyết trình và họp", "Presentations and meetings"],
   "英語で発表し、各国の同僚と話す。":["Thuyết trình bằng tiếng Anh,<br /><i>trao đổi với đồng nghiệp nhiều nước</i>.", "Presenting in English,<br /><i>working with colleagues across ASEAN</i>."],
   "MAYEKAWAタイでのASEAN社員総会（2024年6月10～11日）での発表、展示会PROPAK ASIA 2024（バンコク、6月12～15日）、ベトナムでの顧客訪問の写真です。説明文には顧客名と数字を書いていません。":["Ảnh thuyết trình tại Hội nghị nhân viên ASEAN ở MAYEKAWA Thái Lan (10 đến 11/06/2024), triển lãm PROPAK ASIA 2024 (Bangkok, 12 đến 15/06) và các buổi gặp khách ở Việt Nam. Phần chữ không ghi tên khách hàng và số liệu.", "Photos of my presentation at the ASEAN staff assembly at MAYEKAWA Thailand (10 to 11 June 2024), the PROPAK ASIA 2024 trade fair (Bangkok, 12 to 15 June) and client visits in Vietnam. The text gives no client names or figures."],
-  "英語の資料で、ASEAN各国の社員に発表":["Thuyết trình bằng tài liệu tiếng Anh cho nhân viên các nước ASEAN", "Presented with English slides to staff from across ASEAN"],
-  "各国の同僚との会議と交流":["Họp và giao lưu với đồng nghiệp nhiều nước", "Meetings and exchanges with colleagues from many countries"],
-  "顧客との打ち合わせと物流倉庫の視察":["Họp với khách hàng và khảo sát kho logistics", "Client meetings and a logistics warehouse visit"],
+  "英語の資料で、ASEAN各国の社員に発表":["Tôi trình bày bằng slide tiếng Anh tại Hội nghị ASEAN", "I presented in English to ASEAN staff"],
+  "各国の同僚との会議と交流":["Họp, giao lưu với đồng nghiệp ASEAN", "Meetings with ASEAN colleagues"],
+  "顧客との打ち合わせと物流倉庫の視察":["Gặp khách, khảo sát kho logistics", "Client meetings and warehouse visit"],
   "発表と会議の写真":["Ảnh thuyết trình và hội họp", "Presentation and meeting photos"],
-  "ASEAN社員総会で発表":["Thuyết trình tại Hội nghị nhân viên ASEAN", "Presenting at the ASEAN staff assembly"],
-  "ベトナム市場を動画で紹介":["Giới thiệu thị trường Việt Nam bằng video", "Introducing the Vietnam market with a video"],
-  "会場全体への発表":["Thuyết trình trước toàn hội trường", "Presenting to the full hall"],
+  "ASEAN社員総会で発表":["Thuyết trình tại Hội nghị ASEAN", "Presenting at the ASEAN assembly"],
+  "ベトナム市場を動画で紹介":["Video về thị trường Việt Nam", "Vietnam market video"],
+  "会場全体への発表":["Phát biểu trước hội trường", "Presenting to the full hall"],
   "ASEAN社員総会（タイ、2024年6月）":["Hội nghị nhân viên ASEAN (Thái Lan, 06/2024)", "ASEAN staff assembly (Thailand, June 2024)"],
   "ASEAN各国の参加者と集合写真":["Ảnh chung với đồng nghiệp các nước ASEAN", "Group photo with colleagues from across ASEAN"],
-  "総会の会場で同僚と":["Cùng đồng nghiệp tại hội nghị", "With colleagues at the assembly"],
+  "総会の会場で同僚と":["Cùng đồng nghiệp", "With colleagues"],
   "PROPAK ASIA 2024（バンコク）":["Triển lãm PROPAK ASIA 2024 (Bangkok)", "PROPAK ASIA 2024 trade fair (Bangkok)"],
-  "ロンアン省の物流倉庫を視察":["Khảo sát kho logistics ở Long An", "Logistics warehouse visit in Long An"],
+  "ロンアン省の物流倉庫を視察":["Kho logistics ở Long An", "Logistics warehouse visit in Long An"],
   "顧客との打ち合わせ":["Họp với khách hàng", "Client meeting"],
+  "出張とビジネスイベント":["Công tác và sự kiện kinh doanh", "Business trips and events"],
+  "MAYEKAWAタイでのASEAN社員総会に参加しました":["Tôi dự Hội nghị nhân viên ASEAN tại MAYEKAWA Thái Lan.", "I joined the ASEAN staff assembly at MAYEKAWA Thailand."],
+  "英語でベトナム市場について発表しました":["Tôi thuyết trình bằng tiếng Anh về thị trường Việt Nam.", "I presented on the Vietnam market in English."],
+  "ベトナムでの代表的な納入事例を紹介しました":["Tôi giới thiệu các dự án tiêu biểu của MAYEKAWA tại Việt Nam.", "I introduced key MAYEKAWA projects in Vietnam."],
+  "ASEAN各国の社員の前で発表しました":["Tôi trình bày trước nhân viên các nước ASEAN.", "I spoke to staff from across ASEAN."],
+  "各国の参加者と交流しました":["Tôi giao lưu với đồng nghiệp các nước ASEAN.", "I connected with colleagues from across ASEAN."],
+  "総会の会場で同僚と意見交換しました":["Tôi trao đổi ý kiến với đồng nghiệp tại hội nghị.", "I exchanged views with colleagues at the assembly."],
+  "展示会PROPAK ASIA（バンコク）を視察しました":["Tôi tham quan triển lãm PROPAK ASIA tại Bangkok.", "I visited the PROPAK ASIA trade show in Bangkok."],
+  "展示会VIV ASIA（バンコク）を視察しました":["Tôi tham quan triển lãm VIV ASIA tại Bangkok.", "I visited the VIV ASIA trade show in Bangkok."],
+  "MYCOM KOREA（韓国拠点）を訪問しました":["Tôi đến thăm MYCOM KOREA (chi nhánh Hàn Quốc).", "I visited MYCOM KOREA, the Korea branch."],
+  "ロンアン省の物流倉庫を視察しました":["Tôi khảo sát kho logistics ở Long An.", "I toured a logistics warehouse in Long An."],
   "写真：MAYEKAWAの製品資料（顧客向けカレンダー用の製品写真）":["Ảnh: tài liệu sản phẩm của MAYEKAWA (ảnh sản phẩm dùng cho lịch tặng khách)", "Photos: MAYEKAWA product materials (product photos from the client gift calendar)"],
   "出典：社内メールの予定表と送受信メール（2022～2024年）、営業部の評価シート（2023年）、組織図と職務記述書（2023年7月）、出張規程（2024年1月）":["Nguồn: lịch, thư gửi và nhận trong email công ty (2022 đến 2024), phiếu đánh giá phòng Kinh doanh (2023), sơ đồ tổ chức và mô tả công việc (07/2023), quy định công tác (01/2024)", "Sources: company email calendar, sent and received mail (2022 to 2024), sales evaluation sheet (2023), org chart and job descriptions (Jul 2023), business trip rules (Jan 2024)"]
   };
@@ -1578,6 +1600,96 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 (function(){
   var SH={"資料収集": ["Thu thập", "Collect"], "技術部門への確認": ["Xác nhận KT", "Eng. check"], "技術面の質問": ["Hỏi kỹ thuật", "Tech Q&A"], "修正、調整": ["Chỉnh sửa", "Revise"], "ダブルチェック": ["Kiểm tra lại", "Double-check"], "提出": ["Nộp", "Submit"], "報告": ["Báo cáo", "Report"], "ボトルネック": ["Điểm nghẽn", "Bottleneck"]};
   var D={"タイ チャン ホアン ニャ": ["Thái Trần Hoàng Nhã", ""], "人事部長（5名）": ["Trưởng phòng Nhân sự (5 người)", "HR Manager (team of 5)"], "Profile ／ プロフィール": ["Profile ／ Hồ sơ", "Profile"], "In Numbers ／ 数字で見るキャリア": ["In Numbers ／ Sự nghiệp qua con số", "In Numbers ／ Career in numbers"], "人事部長": ["Trưởng phòng Nhân sự", "HR Manager"], "顧客訪問": ["Thăm khách hàng", "Customer visits"], "日本語": ["Tiếng Nhật", "Japanese"], "日本語、英語の会話練習": ["Luyện hội thoại tiếng Nhật, tiếng Anh", "Japanese and English conversation practice"], "AI Management ／ AIで進めるチームの業務管理": ["AI Management <b>／ Quản lý công việc của team bằng AI</b>", "<b>Managing team work with AI</b>"], "仕事の流れを決め、数字で見える化する。": ["Đặt ra quy trình,<br /><i>trực quan hóa bằng số liệu</i>.", "Define the workflow,<br /><i>make it visible with numbers</i>."], "工程の標準化": ["Chuẩn hóa quy trình", "Standardising the process"], "各メンバーが自分の業務を最初から最後まで書き出し、「完了」の定義を決定": ["Mỗi thành viên tự viết ra công việc của mình từ đầu đến cuối và định nghĩa thế nào là “hoàn thành”", "Each member writes out their work from start to finish and defines what “done” means"], "日次報告": ["Báo cáo hằng ngày", "Daily report"], "作業時間、タスク数、各タスクの進捗を毎日報告": ["Báo cáo mỗi ngày giờ làm, số task, tiến độ từng task", "Report working hours, number of tasks and the progress of each task every day"], "Claudeで分析": ["Phân tích bằng Claude", "Analysis with Claude"], "工程ごとの時間、完了率、停滞しているタスクと日数を算出": ["Tính thời gian từng bước, tỷ lệ hoàn thành, task bị kẹt và số ngày kẹt", "Calculate time per step, completion rate, stuck tasks and days stuck"], "毎日の確認": ["Xác nhận hằng ngày", "Daily check"], "ミーティングで進捗と状態を確認し、次の行動を決定": ["Trong họp, xác nhận tiến độ và trạng thái, quyết định bước tiếp theo", "Confirm progress and status in the meeting and decide next actions"], "↻ 毎日くり返し、工程そのものも見直す": ["Lặp lại mỗi ngày, rà soát cả chính quy trình", "Repeat daily and review the process itself"], "Example ／ 例：営業プレゼン資料の作成": ["Example <b>／ Ví dụ: làm slide thuyết trình kinh doanh</b>", "<b>Example: preparing a sales presentation</b>"], "資料収集": ["Thu thập hồ sơ", "Collect materials"], "技術部門への確認": ["Xác nhận với phòng kỹ thuật", "Confirm with engineering"], "技術面の質問": ["Hỏi về kỹ thuật", "Technical questions"], "修正、調整": ["Chỉnh sửa, điều chỉnh", "Revise and adjust"], "ダブルチェック": ["Kiểm tra lại (double check)", "Double-check"], "Daily Report ／ 日次報告のフォーマット（例）": ["Daily Report <b>／ Mẫu báo cáo ngày (ví dụ)</b>", "<b>Daily report format (example)</b>"], "作業時間": ["Giờ làm", "Working hours"], "タスク数": ["Số task", "Tasks"], "進行中のタスクと工程": ["Task đang làm và bước hiện tại", "Task in progress and current step"], "見積書の作成 4／7 修正、調整": ["Làm báo giá, bước 4/7 chỉnh sửa, điều chỉnh", "Quotation, step 4/7 revise and adjust"], "見積書の作成 5／7 ダブルチェック": ["Làm báo giá, bước 5/7 double check", "Quotation, step 5/7 double-check"], "営業プレゼン資料 2／7 技術部門への確認": ["Slide thuyết trình kinh doanh, bước 2/7 xác nhận với phòng kỹ thuật", "Sales presentation, step 2/7 confirm with engineering"], "AI Dashboard ／ Claudeによる分析（例）": ["AI Dashboard <b>／ Phân tích bằng Claude (ví dụ)</b>", "<b>Analysis by Claude (example)</b>"], "どこで止まっているかを、毎朝ひと目で。": ["Kẹt ở đâu,<br /><i>mỗi sáng nhìn là biết</i>.", "Where work is stuck,<br /><i>clear every morning</i>."], "本日の完了タスク": ["Task hoàn thành hôm nay", "Tasks completed today"], "完了率": ["Tỷ lệ hoàn thành", "Completion rate"], "停滞タスク": ["Task bị kẹt", "Stuck tasks"], "最長の停滞日数": ["Số ngày kẹt lâu nhất", "Longest stuck time (days)"], "Chart 1 ／ 工程別の平均所要時間": ["Chart 1 <b>／ Biểu đồ 1: thời gian trung bình theo từng bước</b>", "<b>Chart 1: average time per step</b>"], "例：営業プレゼン資料（1件あたり）": ["Ví dụ: slide thuyết trình kinh doanh (mỗi bộ)", "Example: sales presentation (per deck)"], "ボトルネック": ["Điểm nghẽn", "Bottleneck"], "Chart 2 ／ 担当者別の完了率": ["Chart 2 <b>／ Biểu đồ 2: tỷ lệ hoàn thành theo người phụ trách</b>", "<b>Chart 2: completion rate by person</b>"], "今週、着手タスクのうち完了した割合（%）。点線はチーム平均 81%": ["Tuần này, tỷ lệ task đã xong trên task đã bắt đầu (%). Đường chấm là trung bình team 81%", "This week, share of started tasks that were finished (%). Dotted line: team average 81%"], "Chart 3 ／ チームの完了率の推移": ["Chart 3 <b>／ Biểu đồ 3: xu hướng tỷ lệ hoàn thành của team</b>", "<b>Chart 3: team completion rate trend</b>"], "2週間、日別（%）": ["2 tuần, theo ngày (%)", "Two weeks, by day (%)"], "1週目": ["Tuần 1", "Week 1"], "2週目（工程の見直し後）": ["Tuần 2 (sau khi điều chỉnh quy trình)", "Week 2 (after the process review)"], "Stuck ／ 停滞しているタスク（朝のミーティングで確認）": ["Stuck <b>／ Task đang bị kẹt (xác nhận trong họp sáng)</b>", "<b>Stuck tasks (checked in the morning meeting)</b>"], "!要対応": ["Cần xử lý ngay", "Action needed"], "※ グラフと表の数値は、仕組みを説明するためのサンプルです。": ["Số liệu trong biểu đồ và bảng là số mẫu để minh họa cơ chế.", "Figures in the charts and tables are samples that illustrate the system."], "Self PR ／ 自己PR": ["Self PR ／ Giới thiệu bản thân", "Self PR"], "Contact ／ 連絡先": ["Contact ／ Liên hệ", "Contact"], "5～6名": ["5–6<small> người</small>", "5–6<small> staff</small>"], "80～90%": ["80–90<small>%</small>", "80–90<small>%</small>"], "3～4倍": ["3–4<small> lần</small>", "3–4<small>x</small>"], "23／27件": ["23<small>/27</small>", "23<small>/27</small>"], "3件": ["3<small> task</small>", "3<small> tasks</small>"], "3日": ["3<small> ngày</small>", "3<small> days</small>"], "2日": ["2 ngày", "2 days"], "1日": ["1 ngày", "1 day"], "6件": ["6", "6"], "5件": ["5", "5"], "4件": ["4", "4"], "2件": ["2", "2"], "担当": ["Phụ trách", "Owner"], "完了": ["Xong", "Done"], "提出": ["Nộp", "Submit"], "報告": ["Báo cáo", "Report"], "語学": ["Ngoại ngữ", "Languages"], "営業": ["Kinh doanh", "Sales"], "韓国": ["Hàn Quốc", "South Korea"], "タイ": ["Thái Lan", "Thailand"], "月": ["T2", "Mon"], "火": ["T3", "Tue"], "水": ["T4", "Wed"], "木": ["T5", "Thu"], "金": ["T6", "Fri"], "要対応": ["Cần xử lý", "Action needed"], "注意": ["Chú ý", "Watch"], "確認": ["Theo dõi", "Check"], "担当 D": ["Phụ trách D", "Owner D"], "担当 C": ["Phụ trách C", "Owner C"], "営業プレゼン資料": ["Slide thuyết trình kinh doanh", "Sales presentation"], "見積書の作成": ["Làm báo giá", "Quotation"], "顧客リストの更新": ["Cập nhật danh sách khách hàng", "Customer list update"], "完了の定義": ["Định nghĩa hoàn thành", "Definition of done"], "技術部門の確認を終えた資料をダブルチェックし、提出して上司に報告した時点で「完了」とする。途中の工程で止まっていれば「進行中」として日数を数える。": ["Tài liệu đã được phòng kỹ thuật xác nhận, double check, nộp và báo cáo cấp trên thì mới tính là “hoàn thành”. Nếu dừng ở bước giữa thì tính là “đang làm” và đếm số ngày.", "The deck is “done” only when it has been confirmed by engineering, double-checked, submitted and reported to the manager. If it stops at a middle step, it is “in progress” and the days are counted."], "プロフィール": ["Hồ sơ", "Profile"], "数字で見る": ["Con số", "In numbers"], "キャリア": ["Sự nghiệp", "Career"], "自己PR": ["Tự giới thiệu", "Self PR"], "連絡先": ["Liên hệ", "Contact"], "Contents ／ 目次": ["Contents ／ Mục lục", "Contents"], "Skills ／ 活かせる経験、知識、スキル": ["Skills ／ Kinh nghiệm, kiến thức, kỹ năng", "Skills ／ Experience, knowledge and skills"], "Career ／ 学歴、職歴": ["Career ／ Học vấn, quá trình làm việc", "Career ／ Education and work history"], "Skills ／ 語学、PC、AIスキル": ["Skills ／ Ngoại ngữ, tin học, AI", "Skills ／ Languages, PC and AI"], "CV ／ 履歴書兼職務経歴書": ["CV ／ Sơ yếu lý lịch và quá trình công tác", "CV ／ Rirekisho and career history"], "MAYEKAWA VIETNAMでは、チームの業務時間、タスク、進捗を、標準化した工程と毎日の数字で管理していました。分析はClaudeで行い、毎日のミーティングで確認しました。": ["Tại MAYEKAWA VIETNAM, tôi quản lý giờ làm, công việc và tiến độ của đội bằng quy trình đã chuẩn hóa và số liệu mỗi ngày. Phân tích bằng Claude, xác nhận trong họp hằng ngày.", "At MAYEKAWA VIETNAM I managed the team's working hours, tasks and progress through standardised processes and daily figures. Claude did the analysis and we confirmed it in a daily meeting."], "メンバーの日次報告をClaudeが集計し、工程ごとの時間、完了率（着手したタスクのうち完了した割合）、停滞タスクをまとめます。": ["Claude tổng hợp báo cáo ngày của các thành viên, ra thời gian từng bước, tỷ lệ hoàn thành (số task xong trên số task đã bắt đầu) và các task bị kẹt.", "Claude combines the members' daily reports into time per step, completion rate (tasks finished out of tasks started) and stuck tasks."]}, UI={"ja": {"menu": "目次", "close": "閉じる", "title": "タイ チャン ホアン ニャ ポートフォリオ"}, "vi": {"menu": "Mục lục", "close": "Đóng", "title": "Thái Trần Hoàng Nhã | Portfolio"}, "en": {"menu": "Menu", "close": "Close", "title": "Thai Tran Hoang Nha | Portfolio"}};
+  var D={"タイ チャン ホアン ニャ": ["Thái Trần Hoàng Nhã", ""], "人事部長（5名）": ["Trưởng phòng Nhân sự (5 người)", "HR Manager (team of 5)"], "Profile ／ プロフィール": ["Profile ／ Hồ sơ", "Profile"], "In Numbers ／ 数字で見るキャリア": ["In Numbers ／ Sự nghiệp qua con số", "In Numbers ／ Career in numbers"], "人事部長": ["Trưởng phòng Nhân sự", "HR Manager"], "顧客訪問": ["Thăm khách hàng", "Customer visits"], "日本語": ["Tiếng Nhật", "Japanese"], "日本語、英語の会話練習": ["Luyện hội thoại tiếng Nhật, tiếng Anh", "Japanese and English conversation practice"], "AI Management ／ AIで進めるチームの業務管理": ["AI Management <b>／ Quản lý công việc của team bằng AI</b>", "<b>Managing team work with AI</b>"], "仕事の流れを決め、数字で見える化する。": ["Đặt ra quy trình,<br /><i>trực quan hóa bằng số liệu</i>.", "Define the workflow,<br /><i>make it visible with numbers</i>."], "工程の標準化": ["Chuẩn hóa quy trình", "Standardising the process"], "各メンバーが自分の業務を最初から最後まで書き出し、「完了」の定義を決定": ["Mỗi thành viên tự viết ra công việc của mình từ đầu đến cuối và định nghĩa thế nào là “hoàn thành”", "Each member writes out their work from start to finish and defines what “done” means"], "日次報告": ["Báo cáo hằng ngày", "Daily report"], "作業時間、タスク数、各タスクの進捗を毎日報告": ["Báo cáo mỗi ngày giờ làm, số task, tiến độ từng task", "Report working hours, number of tasks and the progress of each task every day"], "Claudeで分析": ["Phân tích bằng Claude", "Analysis with Claude"], "工程ごとの時間、完了率、停滞しているタスクと日数を算出": ["Tính thời gian từng bước, tỷ lệ hoàn thành, task bị kẹt và số ngày kẹt", "Calculate time per step, completion rate, stuck tasks and days stuck"], "毎日の確認": ["Xác nhận hằng ngày", "Daily check"], "ミーティングで進捗と状態を確認し、次の行動を決定": ["Trong họp, xác nhận tiến độ và trạng thái, quyết định bước tiếp theo", "Confirm progress and status in the meeting and decide next actions"], "↻ 毎日くり返し、工程そのものも見直す": ["Lặp lại mỗi ngày, rà soát cả chính quy trình", "Repeat daily and review the process itself"], "Example ／ 例：営業プレゼン資料の作成": ["Example <b>／ Ví dụ: làm slide thuyết trình kinh doanh</b>", "<b>Example: preparing a sales presentation</b>"], "資料収集": ["Thu thập hồ sơ", "Collect materials"], "技術部門への確認": ["Xác nhận với phòng kỹ thuật", "Confirm with engineering"], "技術面の質問": ["Hỏi về kỹ thuật", "Technical questions"], "修正、調整": ["Chỉnh sửa, điều chỉnh", "Revise and adjust"], "ダブルチェック": ["Kiểm tra lại (double check)", "Double-check"], "Daily Report ／ 日次報告のフォーマット（例）": ["Daily Report <b>／ Mẫu báo cáo ngày (ví dụ)</b>", "<b>Daily report format (example)</b>"], "作業時間": ["Giờ làm", "Working hours"], "タスク数": ["Số task", "Tasks"], "進行中のタスクと工程": ["Task đang làm và bước hiện tại", "Task in progress and current step"], "見積書の作成 4／7 修正、調整": ["Làm báo giá, bước 4/7 chỉnh sửa, điều chỉnh", "Quotation, step 4/7 revise and adjust"], "見積書の作成 5／7 ダブルチェック": ["Làm báo giá, bước 5/7 double check", "Quotation, step 5/7 double-check"], "営業プレゼン資料 2／7 技術部門への確認": ["Slide thuyết trình kinh doanh, bước 2/7 xác nhận với phòng kỹ thuật", "Sales presentation, step 2/7 confirm with engineering"], "AI Dashboard ／ Claudeによる分析（例）": ["AI Dashboard <b>／ Phân tích bằng Claude (ví dụ)</b>", "<b>Analysis by Claude (example)</b>"], "どこで止まっているかを、毎朝ひと目で。": ["Kẹt ở đâu,<br /><i>mỗi sáng nhìn là biết</i>.", "Where work is stuck,<br /><i>clear every morning</i>."], "本日の完了タスク": ["Task hoàn thành hôm nay", "Tasks completed today"], "完了率": ["Tỷ lệ hoàn thành", "Completion rate"], "停滞タスク": ["Task bị kẹt", "Stuck tasks"], "最長の停滞日数": ["Số ngày kẹt lâu nhất", "Longest stuck time (days)"], "Chart 1 ／ 工程別の平均所要時間": ["Chart 1 <b>／ Biểu đồ 1: thời gian trung bình theo từng bước</b>", "<b>Chart 1: average time per step</b>"], "例：営業プレゼン資料（1件あたり）": ["Ví dụ: slide thuyết trình kinh doanh (mỗi bộ)", "Example: sales presentation (per deck)"], "ボトルネック": ["Điểm nghẽn", "Bottleneck"], "Chart 2 ／ 担当者別の完了率": ["Chart 2 <b>／ Biểu đồ 2: tỷ lệ hoàn thành theo người phụ trách</b>", "<b>Chart 2: completion rate by person</b>"], "今週、着手タスクのうち完了した割合（%）。点線はチーム平均 81%": ["Tuần này, tỷ lệ task đã xong trên task đã bắt đầu (%). Đường chấm là trung bình team 81%", "This week, share of started tasks that were finished (%). Dotted line: team average 81%"], "Chart 3 ／ チームの完了率の推移": ["Chart 3 <b>／ Biểu đồ 3: xu hướng tỷ lệ hoàn thành của team</b>", "<b>Chart 3: team completion rate trend</b>"], "2週間、日別（%）": ["2 tuần, theo ngày (%)", "Two weeks, by day (%)"], "1週目": ["Tuần 1", "Week 1"], "2週目（工程の見直し後）": ["Tuần 2 (sau khi điều chỉnh quy trình)", "Week 2 (after the process review)"], "Stuck ／ 停滞しているタスク（朝のミーティングで確認）": ["Stuck <b>／ Task đang bị kẹt (xác nhận trong họp sáng)</b>", "<b>Stuck tasks (checked in the morning meeting)</b>"], "!要対応": ["Cần xử lý ngay", "Action needed"], "※ グラフと表の数値は、仕組みを説明するためのサンプルです。": ["Số liệu trong biểu đồ và bảng là số mẫu để minh họa cơ chế.", "Figures in the charts and tables are samples that illustrate the system."], "Self PR ／ 自己PR": ["Self PR ／ Giới thiệu bản thân", "Self PR"], "Contact ／ 連絡先": ["Contact ／ Liên hệ", "Contact"], "5～6名": ["5–6<small> người</small>", "5–6<small> staff</small>"], "80～90%": ["80–90<small>%</small>", "80–90<small>%</small>"], "3～4倍": ["3–4<small> lần</small>", "3–4<small>x</small>"], "23／27件": ["23<small>/27</small>", "23<small>/27</small>"], "3件": ["3<small> task</small>", "3<small> tasks</small>"], "3日": ["3<small> ngày</small>", "3<small> days</small>"], "2日": ["2 ngày", "2 days"], "1日": ["1 ngày", "1 day"], "6件": ["6", "6"], "5件": ["5", "5"], "4件": ["4", "4"], "2件": ["2", "2"], "担当": ["Phụ trách", "Owner"], "完了": ["Xong", "Done"], "提出": ["Nộp", "Submit"], "報告": ["Báo cáo", "Report"], "語学": ["Ngoại ngữ", "Languages"], "営業": ["Kinh doanh", "Sales"], "韓国": ["Hàn Quốc", "South Korea"], "タイ": ["Thái Lan", "Thailand"], "月": ["T2", "Mon"], "火": ["T3", "Tue"], "水": ["T4", "Wed"], "木": ["T5", "Thu"], "金": ["T6", "Fri"], "要対応": ["Cần xử lý", "Action needed"], "注意": ["Chú ý", "Watch"], "確認": ["Theo dõi", "Check"], "担当 D": ["Phụ trách D", "Owner D"], "担当 C": ["Phụ trách C", "Owner C"], "営業プレゼン資料": ["Slide thuyết trình kinh doanh", "Sales presentation"], "見積書の作成": ["Làm báo giá", "Quotation"], "顧客リストの更新": ["Cập nhật danh sách khách hàng", "Customer list update"], "完了の定義": ["Định nghĩa hoàn thành", "Definition of done"], "技術部門の確認を終えた資料をダブルチェックし、提出して上司に報告した時点で「完了」とする。途中の工程で止まっていれば「進行中」として日数を数える。": ["Tài liệu đã được phòng kỹ thuật xác nhận, double check, nộp và báo cáo cấp trên thì mới tính là “hoàn thành”. Nếu dừng ở bước giữa thì tính là “đang làm” và đếm số ngày.", "The deck is “done” only when it has been confirmed by engineering, double-checked, submitted and reported to the manager. If it stops at a middle step, it is “in progress” and the days are counted."], "プロフィール": ["Hồ sơ", "Profile"], "数字で見る": ["Con số", "In numbers"], "キャリア": ["Sự nghiệp", "Career"], "自己PR": ["Tự giới thiệu", "Self PR"], "連絡先": ["Liên hệ", "Contact"], "Contents ／ 目次": ["Contents ／ Mục lục", "Contents"], "Skills ／ 活かせる経験、知識、スキル": ["Skills ／ Kinh nghiệm, kiến thức, kỹ năng", "Skills ／ Experience, knowledge and skills"], "Career ／ 学歴、職歴": ["Career ／ Học vấn, quá trình làm việc", "Career ／ Education and work history"], "Skills ／ 語学、PC、AIスキル": ["Skills ／ Ngoại ngữ, tin học, AI", "Skills ／ Languages, PC and AI"], "CV ／ 履歴書兼職務経歴書": ["CV ／ Sơ yếu lý lịch và quá trình công tác", "CV ／ Rirekisho and career history"], "MAYEKAWA VIETNAMでは、チームの業務時間、タスク、進捗を、標準化した工程と毎日の数字で管理していました。分析はClaudeで行い、毎日のミーティングで確認しました。": ["Tại MAYEKAWA VIETNAM, tôi quản lý giờ làm, công việc và tiến độ của đội bằng quy trình đã chuẩn hóa và số liệu mỗi ngày. Phân tích bằng Claude, xác nhận trong họp hằng ngày.", "At MAYEKAWA VIETNAM I managed the team's working hours, tasks and progress through standardised processes and daily figures. Claude did the analysis and we confirmed it in a daily meeting."], "メンバーの日次報告をClaudeが集計し、工程ごとの時間、完了率（着手したタスクのうち完了した割合）、停滞タスクをまとめます。": ["Claude tổng hợp báo cáo ngày của các thành viên, ra thời gian từng bước, tỷ lệ hoàn thành (số task xong trên số task đã bắt đầu) và các task bị kẹt.", "Claude combines the members' daily reports into time per step, completion rate (tasks finished out of tasks started) and stuck tasks."]}, UI={"ja": {"menu": "目次", "close": "閉じる", "title": "タイ チャン ホアン ニャ ポートフォリオ"}, "vi": {"menu": "Mục lục", "close": "Đóng", "title": "Thái Trần Hoàng Nhã | Portfolio"}, "en": {"menu": "Menu", "close": "Close", "title": "Thai Tran Hoang Nha | Portfolio"}};
+  Object.assign(D,{
+    "顧客を訪ね、商談の進み具合を数字で確かめる。":["Tôi gặp khách và theo dõi tiến độ từng cơ hội bằng số liệu.","I visit clients and track each opportunity with clear figures."],
+    "現場を回り、数字で営業を追う。":["Tôi gặp khách và theo dõi tiến độ từng cơ hội bằng số liệu.","I visit clients and track each opportunity with clear figures."],
+    "出張と顧客訪問の記録":["Ghi chép về công tác và gặp khách","A record of trips and client visits"],
+    "出張と顧客訪問":["Công tác và gặp khách","Trips and client visits"],
+    "発表と会議":["Thuyết trình và họp","Presentations and meetings"],
+    "報告と会議":["Báo cáo và họp","Reports and meetings"],
+    "KPIの管理":["Theo dõi KPI","Tracking KPIs"],
+    "仕事の流れ":["Quy trình công việc","How I handled the work"],
+    "見積と訪問を、数えられる形にする。":["Tôi đưa báo giá và lượt gặp khách vào hệ thống theo dõi.","I put quotations and client visits into a trackable system."],
+    "引き合いから納期まで、順番に追う。":["Tôi theo sát từng bước từ yêu cầu đến lịch giao hàng.","I followed each step from enquiry to delivery date."],
+    "英語で発表し、各国の同僚と話す。":["Tôi trình bày bằng tiếng Anh và trao đổi với đồng nghiệp các nước.","I presented in English and spoke with colleagues across the region."],
+    "MAYEKAWA VIETNAM（MYCOM、産業用冷凍機）での営業の記録です。2022年2月から2026年6月まで、営業部のアシスタントマネージャー（人事部長を兼務）を務めました。社内メールの予定表と送受信メール、営業部の評価シート、職務記述書、出張規程に残っている仕事と仕組みだけをまとめています。顧客名、価格、契約、売上の数字は載せていません。":["Đây là ghi chép công việc kinh doanh của tôi tại MAYEKAWA VIETNAM (MYCOM, thiết bị lạnh công nghiệp), nơi tôi làm trợ lý quản lý Kinh doanh kiêm trưởng phòng Nhân sự từ 02/2022 đến 06/2026. Tôi chỉ trình bày công việc thể hiện trong lịch, email nội bộ, phiếu đánh giá, mô tả công việc và quy định công tác. Tôi không đưa tên khách, giá, hợp đồng hay số liệu doanh thu.","This section records my sales work at MAYEKAWA VIETNAM (MYCOM, industrial refrigeration), where I was assistant manager of Sales and head of HR from February 2022 to June 2026. I have drawn only on work documented in internal calendars, emails, evaluation sheets, job descriptions and travel rules. Client names, prices, contracts and sales figures are omitted."],
+    "予定表に残っている商談、顧客訪問、出張です。訪問先は業種と地域だけを書いています。":["Lịch và email ghi lại các buổi trao đổi, lần gặp khách và chuyến công tác. Tôi chỉ nêu ngành nghề và khu vực.","These meetings, client visits and trips appear in my calendar and emails. I identify destinations by industry and region only."],
+    "報告と会議で、見込みと納期を合わせる。":["Qua báo cáo và họp, tôi cập nhật cơ hội bán hàng và lịch giao.","I used reports and meetings to keep opportunities and delivery dates aligned."],
+    "営業部の報告の仕組みと、参加した会議です。":["Tôi đã tham gia các cuộc họp này và theo sát cách đội Kinh doanh báo cáo.","I joined these meetings and followed the Sales team's reporting routines."],
+    "営業を担当していた時期に作った仕組みと、営業担当の評価項目です。":["Tôi xây dựng cách theo dõi này khi phụ trách kinh doanh; bên dưới là các tiêu chí đánh giá nhân viên.","I built this tracking process while working in sales. The criteria below were used to evaluate sales staff."],
+    "記録に残っている仕事を、顧客対応の順に並べました。":["Tôi sắp xếp các công việc có ghi nhận theo trình tự xử lý yêu cầu của khách.","I have arranged documented tasks in the order I handled a client enquiry."],
+    "見積書を入力するファイルを設計して運用":["Tôi thiết kế và sử dụng file nhập báo giá","I designed and used a file to log quotations"],
+    "訪問ごとの回数を細かく集計できる仕組みをつくった":["Tôi tạo cách ghi nhận và tổng hợp từng lượt gặp khách","I set up a way to record and count each client visit"],
+    "見積書を入力ファイルに残し、訪問回数と一緒に集計":["Ghi báo giá vào file và tổng hợp cùng số lượt gặp khách","Log quotations and count them alongside client visits"],
+    "見込み台数をCRMに入れ、日本の工場との週次会議で納期を調整":["Cập nhật sản lượng dự kiến vào CRM, rồi thống nhất lịch giao trong họp tuần với nhà máy Nhật","I entered forecast quantities in CRM and aligned delivery dates with the Japan factory in weekly meetings"],
+    "週次の予定と結果、出張報告を上司へ提出":["Gửi kế hoạch, kết quả hằng tuần và báo cáo công tác cho cấp trên","I sent weekly plans, results and trip reports to my manager"],
+    "MYCOMの主な製品":["Một số sản phẩm chính của MYCOM","Some of MYCOM's main products"],
+    "出張の写真":["Ảnh trong các chuyến công tác","Photos from my work trips"],
+    "発表と会議の写真":["Ảnh thuyết trình và họp","Photos from presentations and meetings"],
+    "日本の工場との週次CRM会議":["Cuộc họp CRM hằng tuần với nhà máy Nhật","Weekly CRM meeting with the Japan factory"],
+    "CRMに入力した見込み台数などを日本の工場と共有し、納期を調整してきた会議。2023年2月～2024年2月に約30回、主に木曜日にオンラインで開かれ、招待を受けていた":["Tại cuộc họp này, tôi cùng nhà máy Nhật xem sản lượng dự kiến trên CRM và điều chỉnh lịch giao. Từ 02/2023 đến 02/2024 có khoảng 30 cuộc họp online, chủ yếu vào thứ Năm; tôi được mời tham dự.","These meetings covered CRM forecasts and delivery dates with the Japan factory. I was invited to about 30 online meetings, mostly on Thursdays, from February 2023 to February 2024."],
+    "出張の申請と出張報告":["Xin duyệt và báo cáo công tác","Trip approval and reporting"],
+    "出張前に上司の承認を受け、戻ってから3営業日以内に精算書と出張報告を出す（2024年1月の出張規程）":["Theo quy định công tác tháng 01/2024, tôi xin duyệt trước khi đi và nộp chứng từ cùng báo cáo trong vòng 3 ngày làm việc sau khi về.","Under the January 2024 travel rules, I requested approval before a trip and submitted expenses and a report within three business days of returning."],
+    "3拠点の朝会と全社の朝の発表":["Họp sáng tại 3 địa điểm và phần trình bày toàn công ty","Morning meetings across three sites and a company-wide update"],
+    "見積と訪問を集計する仕組み":["Cách tổng hợp báo giá và lượt gặp khách","A way to track quotations and client visits"],
+    "営業担当の評価項目":["Tiêu chí đánh giá nhân viên kinh doanh","Sales staff evaluation criteria"],
+    "引き合いを受ける":["Tiếp nhận yêu cầu","Receive an enquiry"],
+    "訪問を計画する":["Lên kế hoạch gặp khách","Plan client visits"],
+    "出張を申請する":["Xin duyệt công tác","Request trip approval"],
+    "見積を記録する":["Ghi nhận báo giá","Log quotations"],
+    "見込みを共有する":["Chia sẻ dự báo","Share the forecast"],
+    "報告する":["Báo cáo","Report"],
+    "製品資料：MAYEKAWAの製品資料（顧客向けカレンダー用の製品写真）":["Ảnh: tài liệu sản phẩm MAYEKAWA dùng cho lịch gửi khách","Images: MAYEKAWA product material prepared for a customer calendar"],
+    "写真：MAYEKAWAの製品資料（顧客向けカレンダー用の製品写真）":["Ảnh: tài liệu sản phẩm MAYEKAWA dùng cho lịch gửi khách","Images: MAYEKAWA product material prepared for a customer calendar"]
+    ,"メコンデルタ5省、13社の訪問予定":["Lịch dự kiến thăm 13 công ty tại 5 tỉnh Đồng bằng sông Cửu Long","Planned visits to 13 companies across five Mekong Delta provinces"]
+    ,"日本の工場と週次のCRM会議":["Họp CRM hằng tuần với nhà máy Nhật","Weekly CRM meetings with the Japan factory"]
+    ,"見積件数と訪問回数を集計":["Tổng hợp số báo giá và lượt gặp khách","Tracking quotations and client visits"]
+    ,"週次報告と出張報告":["Báo cáo tuần và báo cáo công tác","Weekly updates and trip reports"]
+    ,"2022年7月 ～ 8月":["Tháng 7 đến tháng 8/2022","July to August 2022"]
+    ,"2022年8月":["Tháng 8/2022","August 2022"]
+    ,"2023年9月":["Tháng 9/2023","September 2023"]
+    ,"飲料工場のNH3圧縮機の引き合い":["Yêu cầu về máy nén NH3 của nhà máy đồ uống","NH3 compressor enquiry from a beverage factory"]
+    ,"顧客の仕様書（RFQ）の要件を確かめるオンライン会議と、その後の技術打ち合わせに招待された":["Tôi được mời họp online làm rõ RFQ, rồi trao đổi kỹ thuật.","I was invited to clarify the RFQ online, then join a technical discussion."]
+    ,"タイ拠点のフリーザーセミナー":["Hội thảo về máy cấp đông tại cơ sở Thái Lan","Freezer seminar hosted by the Thailand office"]
+    ,"タイのMYCOM拠点による、タイ製の新しいフリーザーと需要についての2日間のセミナーの案内を、社長から直接受けた":["Tổng giám đốc mời tôi dự hội thảo hai ngày của MYCOM Thái Lan về máy cấp đông mới sản xuất tại Thái Lan và nhu cầu thị trường.","The president invited me to a two-day MYCOM Thailand seminar on a new locally made freezer and market demand."]
+    ,"メコンデルタの水産加工会社への訪問予定":["Lịch dự kiến thăm các công ty chế biến thủy sản ở Đồng bằng sông Cửu Long","Planned visits to seafood processors in the Mekong Delta"]
+    ,"水産加工会社を中心に、5省、13社への訪問予定を自分で作成":["Tôi tự lên lịch thăm 13 công ty ở 5 tỉnh, chủ yếu là cơ sở chế biến thủy sản.","I planned visits to 13 companies in five provinces, mainly seafood processors."]
+    ,"会社ごとに先方の担当者を確かめ、1件ずつ予定表に登録":["Tôi xác nhận đầu mối từng công ty và ghi hẹn vào lịch.","I confirmed each contact and added the visit to my calendar."]
+    ,"ASEAN社員総会で発表":["Thuyết trình tại hội nghị nhân viên ASEAN","Presenting at the ASEAN assembly"]
+    ,"ベトナム市場を動画で紹介":["Giới thiệu thị trường Việt Nam qua video","Introducing the Vietnam market in a video"]
+    ,"会場全体への発表":["Phát biểu trước hội trường","Addressing the assembly"]
+    ,"ASEAN社員総会（タイ、2024年6月）":["Hội nghị ASEAN, Thái Lan (06/2024)","ASEAN assembly, Thailand (June 2024)"]
+    ,"ASEAN各国の参加者と集合写真":["Ảnh cùng người dự ASEAN","Group photo at the ASEAN assembly"]
+    ,"総会の会場で同僚と":["Cùng đồng nghiệp","With colleagues"]
+    ,"PROPAK ASIA 2024（バンコク）":["PROPAK ASIA 2024 tại Bangkok","PROPAK ASIA 2024 in Bangkok"]
+    ,"ロンアン省の物流倉庫を視察":["Kho logistics ở Long An","Long An logistics warehouse"]
+    ,"顧客との打ち合わせ":["Gặp khách hàng","Client meeting"]
+    ,"NH3/CO2冷凍パッケージ":["Cụm lạnh NH3/CO2","NH3/CO2 refrigeration package"]
+    ,"自然冷媒の冷凍ユニット":["Cụm lạnh dùng môi chất tự nhiên","Natural refrigerant unit"]
+    ,"圧縮機ユニット":["Cụm máy nén","Compressor unit"]
+    ,"IQFフリーザー":["Máy cấp đông IQF","IQF freezer"]
+    ,"スパイラルフリーザー":["Máy cấp đông xoắn ốc","Spiral freezer"]
+    ,"ヒートポンプ":["Bơm nhiệt","Heat pump"]
+    ,"出典：社内メールの予定表と送受信メール（2022～2024年）、営業部の評価シート（2023年）、組織図と職務記述書（2023年7月）、出張規程（2024年1月）":["Nguồn: lịch và email nội bộ (2022–2024), phiếu đánh giá Kinh doanh (2023), sơ đồ tổ chức và mô tả công việc (07/2023), quy định công tác (01/2024).","Sources: internal calendars and emails (2022–2024), Sales evaluation sheet (2023), organisation chart and job description (July 2023), and travel rules (January 2024)."]
+  });
+  Object.assign(D,{
+    "私は仕事の流れを整え、進み具合を数字で確かめました。":["Tôi sắp xếp quy trình và theo dõi tiến độ bằng số liệu.","I organised the workflow and tracked progress with clear figures."],
+    "MAYEKAWA VIETNAMでは、私がチームの業務時間、タスク、進捗を標準化した工程と毎日の数字で管理していました。Claudeで数字を分析し、毎日のミーティングでチームと確認しました。":["Tại MAYEKAWA VIETNAM, tôi quản lý thời gian, công việc và tiến độ của đội theo quy trình chuẩn hóa, dựa trên số liệu hằng ngày. Tôi dùng Claude phân tích số liệu và cùng đội rà soát trong cuộc họp mỗi ngày.","At MAYEKAWA VIETNAM, I managed the team's hours, tasks and progress through standardised workflows and daily figures. I used Claude to analyse the numbers and reviewed them with the team each day."],
+    "私は日報から、毎朝の停滞を確認しました。":["Tôi xem báo cáo ngày, kiểm tra việc chậm mỗi sáng.","I checked reports each morning for stalled work."],
+    "日次報告をClaudeで集計し、工程別の時間、完了率（着手分のうち完了した割合）、停滞中の作業を確認しました。":["Tôi dùng Claude rà báo cáo ngày, xem thời gian từng bước, tỷ lệ hoàn thành và việc đình trệ.","I used Claude to check daily reports for step times, completion rate and stalled tasks."],
+    "私は顧客を訪ね、商談の進み具合を数字で確かめました。":["Tôi gặp khách và theo dõi tiến độ từng cơ hội bằng số liệu.","I visited clients and tracked each opportunity with clear figures."],
+    "私が担当した顧客訪問と出張をまとめました。":["Tôi ghi lại các chuyến công tác, lần gặp khách đã phụ trách.","I handled these client visits and trips."],
+    "予定表に残る商談や訪問を見返し、訪問先は業種と地域だけに絞ってまとめました。":["Tôi rà lịch, chỉ nêu ngành nghề và khu vực điểm đến.","I reviewed my calendar, listing destinations by industry and region."],
+    "ASEAN会議で英語で発表し、各国の同僚と意見交換しました。":["Tôi trình bày bằng tiếng Anh, trao đổi với đồng nghiệp ASEAN.","I presented in English and exchanged views with ASEAN colleagues."],
+    "2024年6月10～11日のMAYEKAWA ASEAN社員総会での発表、6月12～15日のPROPAK ASIA 2024（バンコク）、ベトナムでの顧客訪問を写真で紹介します。顧客名と売上数字は伏せています。":["Tôi dự Hội nghị nhân viên ASEAN của MAYEKAWA (10–11/06/2024), PROPAK ASIA 2024 ở Bangkok (12–15/06) và gặp khách tại Việt Nam. Tôi không nêu tên khách hay doanh thu.","I presented at MAYEKAWA's ASEAN staff assembly (June 10–11, 2024), attended PROPAK ASIA 2024 in Bangkok (June 12–15), and visited clients in Vietnam. Client names and sales figures are omitted."],
+    "私は報告と会議で、商談の見込みと納期を確認していました。":["Qua báo cáo và cuộc họp, tôi theo dõi cơ hội bán hàng và lịch giao.","I used reports and meetings to track opportunities and delivery dates."],
+    "営業部で参加した会議と、私が担当した報告の流れをまとめました。":["Tôi tổng hợp các cuộc họp mình tham gia và cách đội Kinh doanh báo cáo.","I have summarised the meetings I attended and the Sales team's reporting routines."],
+    "私は見積と訪問回数を記録し、営業活動を数字で見える形にしました。":["Tôi ghi nhận báo giá và lượt gặp khách để theo dõi hoạt động kinh doanh bằng số liệu.","I recorded quotations and client visits to make sales activity measurable."],
+    "営業担当時代に私が整えた記録方法と、評価項目をまとめました。": ["Tôi tổng hợp cách ghi nhận đã xây dựng khi phụ trách kinh doanh và các tiêu chí đánh giá nhân viên.","I set up this tracking method while in sales; the card also shows the staff evaluation criteria."],
+    "私は問い合わせから納期まで、順を追って対応しました。":["Tôi theo sát từng bước từ khi nhận yêu cầu đến lúc thống nhất lịch giao.","I followed each step from the initial enquiry through to the delivery date."],
+    "記録に残る業務を、顧客対応の流れに沿って並べました。":["Tôi sắp xếp các công việc có ghi nhận theo trình tự xử lý yêu cầu của khách.","I arranged documented tasks in the order I handled a client enquiry."]
+  });
   Object.keys(window.__D2||{}).forEach(function(k){D[k]=window.__D2[k]});
   var roots=[].slice.call(document.querySelectorAll('main')).concat([document.getElementById('sb'),document.getElementById('top')]);
   var norm=function(s){return s.replace(/\s+/g,' ').trim()};

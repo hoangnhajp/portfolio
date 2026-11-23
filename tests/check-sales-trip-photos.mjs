@@ -27,10 +27,33 @@ const jpegSize = (buf) => {
 // Mỗi section: danh sách ảnh bắt buộc (task to7p thêm trang 02 Thuyết trình & Họp)
 const SECTIONS = {
   'sales-trips': ['assets/sales/trip-cold-storage-visit.jpg', 'assets/sales/trip-mycom-korea.jpg'],
-  'sales-pr': ['assets/sales/trip-asean-presenting.jpg', 'assets/sales/trip-asean-presenting-video.jpg', 'assets/sales/trip-asean-presenting-hall.jpg',
-    'assets/sales/trip-asean-title.jpg', 'assets/sales/trip-asean-group.jpg', 'assets/sales/trip-asean-colleagues.jpg',
-    'assets/sales/trip-propak-asia-2024.jpg', 'assets/sales/trip-logistics-longan.jpg', 'assets/sales/trip-client-meeting.jpg'],
+  // task v4un: dòng sự kiện công tác 10 ảnh người vận hành gửi (6..15.jpg), mỗi ảnh 1 dòng, không năm
+  'sales-pr': ['assets/sales/trip-asean-title.jpg', 'assets/sales/trip-asean-presenting.jpg', 'assets/sales/trip-asean-vietnam-projects.jpg',
+    'assets/sales/trip-asean-presenting-hall.jpg', 'assets/sales/trip-asean-group.jpg', 'assets/sales/trip-asean-colleagues.jpg',
+    'assets/sales/trip-propak-asia-2024.jpg', 'assets/sales/trip-viv-asia.jpg', 'assets/sales/trip-mycom-korea.jpg', 'assets/sales/trip-logistics-longan.jpg'],
 };
+// Dòng sự kiện: đúng 10 mục theo thứ tự trên, mỗi mục 1 ảnh + 1 dòng chú thích, chú thích và alt không có năm
+{
+  const sec = (sales.match(/<section class="pg" data-chap="\w+" id="sales-pr">([\s\S]*?)<\/section>/) || [])[1] || '';
+  const row = (sec.match(/<ol class="evrow"[^>]*>([\s\S]*?)<\/ol>/) || [])[1] || '';
+  ok(row, '#sales-pr chưa có dòng sự kiện <ol class="evrow">');
+  const items = [...row.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)].map((m) => m[1]);
+  ok(items.length === 10, `dòng sự kiện có ${items.length} mục, cần 10`);
+  const order = items.map((it) => (it.match(/src="([^"]+)"/) || [])[1]).join(',');
+  ok(order === SECTIONS['sales-pr'].join(','), `thứ tự ảnh dòng sự kiện sai: ${order}`);
+  for (const it of items) {
+    ok((it.match(/<img\b/g) || []).length === 1, 'mỗi mục cần đúng 1 ảnh');
+    const caps = [...it.matchAll(/<p class="ev-t">([^<]+)<\/p>/g)].map((m) => m[1]);
+    ok(caps.length === 1, 'mỗi mục cần đúng 1 dòng chú thích <p class="ev-t">');
+    const alts = [...it.matchAll(/(?:alt|data-alt-vi|data-alt-en)="([^"]*)"/g)].map((m) => m[1]);
+    for (const t of [...caps, ...alts]) ok(!/(19|20)\d\d|年|\/20\d\d/.test(t), `dòng sự kiện còn năm: "${t}"`);
+    for (const c of caps) ok(html.includes(`"${c}":[`), `chú thích "${c}" chưa có bản dịch vi/en`);
+    // Bộ dịch thay innerHTML của phần tử ngoài cùng có chữ trùng khoá: chữ của <li> trùng chú thích => mất ảnh ở VI/EN
+    const liText = it.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    ok(!caps.includes(liText), `mục "${liText}": chữ của <li> trùng khoá dịch, đổi ngôn ngữ sẽ xoá ảnh`);
+  }
+  ok(!/<img\b/.test(sec.replace(/<ol class="evrow"[\s\S]*?<\/ol>/, '')), '#sales-pr còn ảnh ngoài dòng sự kiện (lưới ảnh cũ)');
+}
 const navSales = (html.match(/<nav class="sb-nav" data-for="sales"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
 const navNums = [...navSales.matchAll(/data-sec="([\w-]+)"><em>(\w+)<\/em>/g)].map((m) => `${m[1]}:${m[2]}`).join(' ');
 ok(navNums === 'sales-top:TOP sales-trips:01 sales-pr:02 sales-reports:03 sales-kpi:04 sales-flow:05', `mục lục Sales sai thứ tự / số: ${navNums}`);
@@ -55,12 +78,14 @@ for (const [id, WANT] of Object.entries(SECTIONS)) {
     ok(w > 0 && w <= 1600 && h <= 1600, `${src}: kích thước ${w}x${h} vượt 1600px`);
     ok(+attr('width') === w && +attr('height') === h, `${src}: width/height ${attr('width')}x${attr('height')} khác file ${w}x${h}`);
   }
-  // Chú thích ảnh có bản dịch vi/en trong từ điển
-  const caps = [...sec.matchAll(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/g)].flatMap((m) => [...m[1].matchAll(/<span>([^<]+)<\/span>/g)].map((x) => x[1]));
-  ok(caps.length >= WANT.length, `${id}: chú thích ảnh có ${caps.length}, cần >= ${WANT.length}`);
-  for (const c of caps) ok(html.includes(`"${c}":[`), `chú thích "${c}" chưa có bản dịch vi/en`);
+  // Chú thích ảnh có bản dịch vi/en trong từ điển (#sales-pr kiểm riêng ở dòng sự kiện phía trên)
+  if (id !== 'sales-pr') {
+    const caps = [...sec.matchAll(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/g)].flatMap((m) => [...m[1].matchAll(/<span>([^<]+)<\/span>/g)].map((x) => x[1]));
+    ok(caps.length >= WANT.length, `${id}: chú thích ảnh có ${caps.length}, cần >= ${WANT.length}`);
+    for (const c of caps) ok(html.includes(`"${c}":[`), `chú thích "${c}" chưa có bản dịch vi/en`);
+  }
 
   total += WANT.length;
 }
 if (fails.length) { console.error(`FAIL (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-sales-trip-photos: ${total} ảnh công tác trong #sales-trips + #sales-pr, mục lục 01-05, đã tối ưu, đủ alt + dịch`);
+console.log(`PASS check-sales-trip-photos: ${total} ảnh công tác trong #sales-trips + #sales-pr (dòng sự kiện 10 mục, 1 dòng, không năm), mục lục 01-05, đã tối ưu, đủ alt + dịch`);
