@@ -430,6 +430,26 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   #sales-flow .card>div[style*="grid"]{grid-template-columns:repeat(6,1fr)!important}
   #sales-flow figure img{height:84px!important}
   #aidash .card{padding-top:10px;padding-bottom:10px}}
+/* 03 Projects board: lưới thẻ dự án / portfolio (task 62qd) */
+.pj{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.pj-c{position:relative;display:flex;flex-direction:column;gap:5px;padding:14px 16px 12px;background:#fff;border:1px solid #ece8f3;border-radius:14px;
+  text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 10px 26px -22px rgba(59,47,134,.5);transition:transform .2s,box-shadow .2s,border-color .2s}
+.pj-c::before{content:'';position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,#3b2f86,#26B3F4)}
+.pj-c:nth-child(4n+2)::before{background:linear-gradient(90deg,#0f8f83,#1FB6A6)}
+.pj-c:nth-child(4n+3)::before{background:linear-gradient(90deg,#c14343,#F68209)}
+.pj-c:nth-child(4n)::before{background:linear-gradient(90deg,#0f5a8c,#26B3F4)}
+.pj-c:hover{transform:translateY(-3px);border-color:#d6cff0;box-shadow:0 18px 34px -22px rgba(59,47,134,.6)}
+.pj-top{display:flex;align-items:center;gap:8px;font:700 10px 'Manrope',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a83a0}
+.pj-top em{font:700 10.5px 'Space Grotesk',sans-serif;font-style:normal;letter-spacing:.04em;color:#fff;background:linear-gradient(90deg,#3b2f86,#6d5bd0);border-radius:999px;padding:2px 8px}
+.pj-co{font:700 16px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;color:#16141d}
+.pj-role{font:600 11.4px/1.5 'Noto Sans JP',sans-serif;color:#5b5568}
+.pj-pt{font:700 12.6px/1.55 'Noto Sans JP',sans-serif;color:#3b2f86}
+.pj-tags>span{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.pj-tags i{font:600 10.4px/1.3 'Noto Sans JP',sans-serif;font-style:normal;padding:4px 9px;border-radius:999px;background:#f3f0fa;border:1px solid #e5e0f1;color:#4a3f8f}
+.pj-go{margin-top:auto;padding-top:4px;font:800 9.5px 'Manrope',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#6d5bd0}
+@media screen and (min-width:1200px){.pj{grid-template-columns:repeat(4,1fr);gap:16px}.pj-c{padding:18px 18px 14px}}
+@media screen and (max-width:900px){.pj{grid-template-columns:1fr}}
+@media print{.pj{gap:10px;margin-top:14px}.pj-c{box-shadow:none;break-inside:avoid;padding:11px 14px 10px;gap:4px}.pj-go{display:none}}
 </style>
 </head>
 <body>
@@ -453,19 +473,20 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
       <a href="#cover" data-sec="cover"><em>TOP</em><span data-l="ja">トップ</span><span data-l="en">Top</span><span data-l="vi">Trang đầu</span></a>
       <a href="#toc" data-sec="toc"><em>01</em><span data-l="ja">目次</span><span data-l="en">Contents</span><span data-l="vi">Mục lục</span></a>
       <a href="#profile" data-sec="profile"><em>02</em><span data-l="ja">プロフィール</span><span data-l="en">Profile</span><span data-l="vi">Hồ sơ</span></a>
-      <a href="#numbers" data-sec="numbers"><em>03</em><span data-l="ja">数字で見る</span><span data-l="en">In numbers</span><span data-l="vi">Con số</span></a>
-      <a href="#skillmap" data-sec="skillmap"><em>04</em><span data-l="ja">7つのスキル</span><span data-l="en">Seven skills</span><span data-l="vi">7 kỹ năng</span></a>
-      <a href="#career" data-sec="career"><em>05</em><span data-l="ja">学歴、職歴</span><span data-l="en">Career</span><span data-l="vi">Quá trình</span></a>
-      <a href="#w-mycom" data-sec="w-mycom"><em>06</em><span data-l="ja">MAYEKAWA</span><span data-l="en">MAYEKAWA</span><span data-l="vi">MAYEKAWA</span></a>
-      <a href="#w-jil" data-sec="w-jil"><em>07</em><span data-l="ja">JILNESTA 営業</span><span data-l="en">JILNESTA sales</span><span data-l="vi">JILNESTA kinh doanh</span></a>
-      <a href="#w-it" data-sec="w-it"><em>08</em><span data-l="ja">JILNESTA IT</span><span data-l="en">JILNESTA IT</span><span data-l="vi">JILNESTA IT</span></a>
-      <a href="#w-early" data-sec="w-early"><em>09</em><span data-l="ja">Isuzu、銀行</span><span data-l="en">Isuzu, bank</span><span data-l="vi">Isuzu, ngân hàng</span></a>
-      <a href="#pcai" data-sec="pcai"><em>10</em><span data-l="ja">語学、PC、AI</span><span data-l="en">Languages, PC, AI</span><span data-l="vi">Ngoại ngữ, tin học, AI</span></a>
-      <a href="#aiops" data-sec="aiops"><em>11</em><span data-l="ja">AI業務管理</span><span data-l="en">AI management</span><span data-l="vi">Quản lý bằng AI</span></a>
-      <a href="#aidash" data-sec="aidash"><em>12</em><span data-l="ja">AIダッシュボード</span><span data-l="en">AI dashboard</span><span data-l="vi">Dashboard AI</span></a>
-      <a href="#pr" data-sec="pr"><em>13</em><span data-l="ja">自己PR</span><span data-l="en">Self PR</span><span data-l="vi">Giới thiệu bản thân</span></a>
-      <a href="#cv" data-sec="cv"><em>14</em><span data-l="ja">履歴書（PDF）</span><span data-l="en">CV (PDF)</span><span data-l="vi">CV (PDF)</span></a>
-      <a href="#contact" data-sec="contact"><em>15</em><span data-l="ja">連絡先</span><span data-l="en">Contact</span><span data-l="vi">Liên hệ</span></a>
+      <a href="#projects" data-sec="projects"><em>03</em><span data-l="ja">プロジェクト</span><span data-l="en">Projects</span><span data-l="vi">Dự án</span></a>
+      <a href="#numbers" data-sec="numbers"><em>04</em><span data-l="ja">数字で見る</span><span data-l="en">In numbers</span><span data-l="vi">Con số</span></a>
+      <a href="#skillmap" data-sec="skillmap"><em>05</em><span data-l="ja">7つのスキル</span><span data-l="en">Seven skills</span><span data-l="vi">7 kỹ năng</span></a>
+      <a href="#career" data-sec="career"><em>06</em><span data-l="ja">学歴、職歴</span><span data-l="en">Career</span><span data-l="vi">Quá trình</span></a>
+      <a href="#w-mycom" data-sec="w-mycom"><em>07</em><span data-l="ja">MAYEKAWA</span><span data-l="en">MAYEKAWA</span><span data-l="vi">MAYEKAWA</span></a>
+      <a href="#w-jil" data-sec="w-jil"><em>08</em><span data-l="ja">JILNESTA 営業</span><span data-l="en">JILNESTA sales</span><span data-l="vi">JILNESTA kinh doanh</span></a>
+      <a href="#w-it" data-sec="w-it"><em>09</em><span data-l="ja">JILNESTA IT</span><span data-l="en">JILNESTA IT</span><span data-l="vi">JILNESTA IT</span></a>
+      <a href="#w-early" data-sec="w-early"><em>10</em><span data-l="ja">Isuzu、銀行</span><span data-l="en">Isuzu, bank</span><span data-l="vi">Isuzu, ngân hàng</span></a>
+      <a href="#pcai" data-sec="pcai"><em>11</em><span data-l="ja">語学、PC、AI</span><span data-l="en">Languages, PC, AI</span><span data-l="vi">Ngoại ngữ, tin học, AI</span></a>
+      <a href="#aiops" data-sec="aiops"><em>12</em><span data-l="ja">AI業務管理</span><span data-l="en">AI management</span><span data-l="vi">Quản lý bằng AI</span></a>
+      <a href="#aidash" data-sec="aidash"><em>13</em><span data-l="ja">AIダッシュボード</span><span data-l="en">AI dashboard</span><span data-l="vi">Dashboard AI</span></a>
+      <a href="#pr" data-sec="pr"><em>14</em><span data-l="ja">自己PR</span><span data-l="en">Self PR</span><span data-l="vi">Giới thiệu bản thân</span></a>
+      <a href="#cv" data-sec="cv"><em>15</em><span data-l="ja">履歴書（PDF）</span><span data-l="en">CV (PDF)</span><span data-l="vi">CV (PDF)</span></a>
+      <a href="#contact" data-sec="contact"><em>16</em><span data-l="ja">連絡先</span><span data-l="en">Contact</span><span data-l="vi">Liên hệ</span></a>
     </nav>
     <nav class="sb-nav" data-for="sales" hidden>
       <a href="#sales-top" data-sec="sales-top"><em>TOP</em><span>概要</span></a>
@@ -540,28 +561,30 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 
   <nav class="toc rv grow" style="--d:160ms">
     <a href="#profile"><em>02</em><b><span data-l="ja">プロフィールと職務要約</span><span data-l="en">Profile and summary</span><span data-l="vi">Hồ sơ và tóm tắt</span></b><span>Profile</span></a>
-    <a href="#numbers"><em>03</em><b><span data-l="ja">数字で見るキャリア</span><span data-l="en">Career in numbers</span><span data-l="vi">Sự nghiệp qua con số</span></b><span>In Numbers</span></a>
-    <a href="#skillmap"><em>04</em><b><span data-l="ja">活かせる経験、知識、スキル</span><span data-l="en">Experience and skills I bring</span><span data-l="vi">Kinh nghiệm và kỹ năng</span></b><span>Skills</span></a>
-    <a href="#career"><em>05</em><b><span data-l="ja">学歴、職歴</span><span data-l="en">Education and career</span><span data-l="vi">Học vấn và quá trình làm việc</span></b><span>Career</span></a>
-    <a href="#w-mycom"><em>06</em><b>MAYEKAWA VIETNAM</b><span><span data-l="ja">営業、人事</span><span data-l="en">Sales, HR</span><span data-l="vi">Kinh doanh, Nhân sự</span></span></a>
-    <a href="#w-jil"><em>07</em><b>JILNESTA</b><span><span data-l="ja">営業マネージャー</span><span data-l="en">Sales manager</span><span data-l="vi">Quản lý kinh doanh</span></span></a>
-    <a href="#w-it"><em>08</em><b>JILNESTA</b><span><span data-l="ja">ITコミュニケーター</span><span data-l="en">IT communicator</span><span data-l="vi">IT communicator</span></span></a>
-    <a href="#w-early"><em>09</em><b>Isuzu Vietnam ／ LienViet Post Bank</b><span><span data-l="ja">初期の経歴</span><span data-l="en">Early career</span><span data-l="vi">Giai đoạn đầu</span></span></a>
-    <a href="#pcai"><em>10</em><b><span data-l="ja">語学、PC、AIスキル</span><span data-l="en">Languages, PC and AI skills</span><span data-l="vi">Ngoại ngữ, tin học, AI</span></b><span>Skills</span></a>
-    <a href="#aiops"><em>11</em><b><span data-l="ja">AIで進めるチームの業務管理</span><span data-l="en">Team management with AI</span><span data-l="vi">Quản lý công việc nhóm bằng AI</span></b><span>AI Management</span></a>
-    <a href="#aidash"><em>12</em><b><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b><span>AI Dashboard</span></a>
-    <a href="#pr"><em>13</em><b><span data-l="ja">自己PR　3つの強み</span><span data-l="en">Self PR: three strengths</span><span data-l="vi">Giới thiệu bản thân: 3 điểm mạnh</span></b><span>Self PR</span></a>
-    <a href="#cv"><em>14</em><b><span data-l="ja">履歴書兼職務経歴書（PDF）</span><span data-l="en">CV (PDF, Japanese)</span><span data-l="vi">CV (PDF, tiếng Nhật)</span></b><span>CV</span></a>
-    <a href="#contact"><em>15</em><b><span data-l="ja">連絡先</span><span data-l="en">Contact</span><span data-l="vi">Liên hệ</span></b><span>Contact</span></a>
+    <a href="#projects"><em>03</em><b><span data-l="ja">プロジェクトとポートフォリオ</span><span data-l="en">Projects and portfolio</span><span data-l="vi">Dự án và portfolio</span></b><span>Projects</span></a>
+    <a href="#numbers"><em>04</em><b><span data-l="ja">数字で見るキャリア</span><span data-l="en">Career in numbers</span><span data-l="vi">Sự nghiệp qua con số</span></b><span>In Numbers</span></a>
+    <a href="#skillmap"><em>05</em><b><span data-l="ja">活かせる経験、知識、スキル</span><span data-l="en">Experience and skills I bring</span><span data-l="vi">Kinh nghiệm và kỹ năng</span></b><span>Skills</span></a>
+    <a href="#career"><em>06</em><b><span data-l="ja">学歴、職歴</span><span data-l="en">Education and career</span><span data-l="vi">Học vấn và quá trình làm việc</span></b><span>Career</span></a>
+    <a href="#w-mycom"><em>07</em><b>MAYEKAWA VIETNAM</b><span><span data-l="ja">営業、人事</span><span data-l="en">Sales, HR</span><span data-l="vi">Kinh doanh, Nhân sự</span></span></a>
+    <a href="#w-jil"><em>08</em><b>JILNESTA</b><span><span data-l="ja">営業マネージャー</span><span data-l="en">Sales manager</span><span data-l="vi">Quản lý kinh doanh</span></span></a>
+    <a href="#w-it"><em>09</em><b>JILNESTA</b><span><span data-l="ja">ITコミュニケーター</span><span data-l="en">IT communicator</span><span data-l="vi">IT communicator</span></span></a>
+    <a href="#w-early"><em>10</em><b>Isuzu Vietnam ／ LienViet Post Bank</b><span><span data-l="ja">初期の経歴</span><span data-l="en">Early career</span><span data-l="vi">Giai đoạn đầu</span></span></a>
+    <a href="#pcai"><em>11</em><b><span data-l="ja">語学、PC、AIスキル</span><span data-l="en">Languages, PC and AI skills</span><span data-l="vi">Ngoại ngữ, tin học, AI</span></b><span>Skills</span></a>
+    <a href="#aiops"><em>12</em><b><span data-l="ja">AIで進めるチームの業務管理</span><span data-l="en">Team management with AI</span><span data-l="vi">Quản lý công việc nhóm bằng AI</span></b><span>AI Management</span></a>
+    <a href="#aidash"><em>13</em><b><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b><span>AI Dashboard</span></a>
+    <a href="#pr"><em>14</em><b><span data-l="ja">自己PR　3つの強み</span><span data-l="en">Self PR: three strengths</span><span data-l="vi">Giới thiệu bản thân: 3 điểm mạnh</span></b><span>Self PR</span></a>
+    <a href="#cv"><em>15</em><b><span data-l="ja">履歴書兼職務経歴書（PDF）</span><span data-l="en">CV (PDF, Japanese)</span><span data-l="vi">CV (PDF, tiếng Nhật)</span></b><span>CV</span></a>
+    <a href="#contact"><em>16</em><b><span data-l="ja">連絡先</span><span data-l="en">Contact</span><span data-l="vi">Liên hệ</span></b><span>Contact</span></a>
   </nav>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>01 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>01 ／ 16</p></div>
 </section>
 
 <!-- ═══════ 02 プロフィール ═══════ -->
 <section class="pg" data-chap="I" data-num="02" id="profile">
   <p class="eb rv">Profile <b>／ プロフィール</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">はじめまして、<br /><i>タイ チャン ホアン ニャ</i>です。</span><span data-l="en">Hello, I am<br /><i>Thai Tran Hoang Nha</i>.</span><span data-l="vi">Xin chào, tôi là<br /><i>Thái Trần Hoàng Nhã</i>.</span></h2>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja"><i>タイ チャン ホアン ニャ</i></span><span data-l="en"><i>Thai Tran Hoang Nha</i></span><span data-l="vi"><i>Thái Trần Hoàng Nhã</i></span></h2>
+  <span class="kw-en rv" style="--d:80ms"><span data-l="ja">法人営業 ／ 営業マネージャー ／ ITコミュニケーター ／ 人事部長</span><span data-l="en">B2B sales ／ Sales manager ／ IT communicator ／ Head of HR</span><span data-l="vi">Kinh doanh B2B ／ Quản lý kinh doanh ／ IT communicator ／ Trưởng phòng Nhân sự</span></span>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
 
   <div class="rv" style="--d:140ms;display:grid;grid-template-columns:200px 1fr;gap:22px">
@@ -632,11 +655,89 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>02 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>02 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 03 数字で見る ═══════ -->
-<section class="pg" data-chap="II" data-num="03" id="numbers">
+<!-- 03 Projects board: bảng dự án / portfolio, mỗi thẻ dẫn tới trang chi tiết -->
+<section class="pg" data-chap="V" data-num="03" id="projects">
+  <div class="deco dots" style="right:48px;top:52px"></div>
+  <p class="eb rv">Projects <b>／ Portfolio</b></p>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">経歴と実績を、<br /><i>1枚のボード</i>に。</span><span data-l="en">Career and work,<br /><i>on one board</i>.</span><span data-l="vi">Kinh nghiệm và dự án,<br /><i>trên một bảng</i>.</span></h2>
+  <p class="kw-sub rv" style="--d:80ms"><span data-l="ja">職歴、スキル、AIの取り組みをカードにまとめました。カードから詳しいページに移動できます。</span><span data-l="en">My roles, skills and AI work as cards. Each card opens its detailed page.</span><span data-l="vi">Các vị trí, kỹ năng và dự án AI được trình bày thành thẻ. Bấm vào thẻ để xem trang chi tiết.</span></p>
+  <div class="kwbar rv" style="--d:100ms"><span></span></div>
+
+  <div class="pj rv" style="--d:140ms">
+    <a class="pj-c" href="#w-mycom">
+      <span class="pj-top"><em>07</em><span data-l="ja">2022年2月 ～ 2026年6月</span><span data-l="en">Feb 2022 – Jun 2026</span><span data-l="vi">02/2022 – 06/2026</span></span>
+      <b class="pj-co">MAYEKAWA VIETNAM</b>
+      <span class="pj-role"><span data-l="ja">営業部 アシスタントマネージャー 兼 人事部長</span><span data-l="en">Assistant manager, Sales, and head of HR</span><span data-l="vi">Trợ lý trưởng phòng Kinh doanh kiêm trưởng phòng Nhân sự</span></span>
+      <span class="pj-pt"><span data-l="ja">顧客の課題を聞き、納品後まで支える。</span><span data-l="en">Hearing client issues, supporting them after delivery.</span><span data-l="vi">Lắng nghe vấn đề của khách, đồng hành cả sau giao hàng.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>人事 1→5名</i><i>営業担当 2～3名</i><i>ASEAN会議 3か国</i></span><span data-l="en"><i>HR team 1→5</i><i>2 to 3 sales staff</i><i>ASEAN meetings, 3 countries</i></span><span data-l="vi"><i>Nhân sự 1→5 người</i><i>2 đến 3 nhân viên kinh doanh</i><i>Họp ASEAN 3 nước</i></span></span>
+      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
+    </a>
+    <a class="pj-c" href="#w-jil">
+      <span class="pj-top"><em>08</em><span data-l="ja">2019年2月 ～ 2022年2月</span><span data-l="en">Feb 2019 – Feb 2022</span><span data-l="vi">02/2019 – 02/2022</span></span>
+      <b class="pj-co">JILNESTA, Inc.</b>
+      <span class="pj-role"><span data-l="ja">ベトナム支店 営業マネージャー</span><span data-l="en">Sales manager, Vietnam branch</span><span data-l="vi">Quản lý kinh doanh, chi nhánh Việt Nam</span></span>
+      <span class="pj-pt"><span data-l="ja">定期レビューで、契約の更新につなげる。</span><span data-l="en">Regular reviews that lead to contract renewals.</span><span data-l="vi">Review định kỳ, dẫn tới gia hạn hợp đồng.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>支店 約27名</i><i>部下 5～6名</i><i>契約 6か月～1年</i></span><span data-l="en"><i>Branch of about 27</i><i>5 to 6 reports</i><i>Contracts of 6 months to 1 year</i></span><span data-l="vi"><i>Chi nhánh khoảng 27 người</i><i>5 đến 6 cấp dưới</i><i>Hợp đồng 6 tháng đến 1 năm</i></span></span>
+      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
+    </a>
+    <a class="pj-c" href="#w-it">
+      <span class="pj-top"><em>09</em><span data-l="ja">2017年8月 ～ 2019年2月</span><span data-l="en">Aug 2017 – Feb 2019</span><span data-l="vi">08/2017 – 02/2019</span></span>
+      <b class="pj-co">JILNESTA, Inc.</b>
+      <span class="pj-role"><span data-l="ja">ITコミュニケーター</span><span data-l="en">IT communicator</span><span data-l="vi">IT communicator</span></span>
+      <span class="pj-pt"><span data-l="ja">日本の顧客とベトナム人エンジニアをつなぐ。</span><span data-l="en">Connecting Japanese clients and Vietnamese engineers.</span><span data-l="vi">Kết nối khách hàng Nhật và kỹ sư Việt Nam.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>要件の伝達</i><i>UAT</i><i>不具合対応</i></span><span data-l="en"><i>Requirement handover</i><i>UAT</i><i>Bug fixing</i></span><span data-l="vi"><i>Truyền đạt yêu cầu</i><i>UAT</i><i>Xử lý lỗi</i></span></span>
+      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
+    </a>
+    <a class="pj-c" href="#w-early">
+      <span class="pj-top"><em>10</em><span data-l="ja">2011年9月 ～ 2017年8月</span><span data-l="en">Sep 2011 – Aug 2017</span><span data-l="vi">09/2011 – 08/2017</span></span>
+      <b class="pj-co">Isuzu Vietnam ／ LienViet Post Bank</b>
+      <span class="pj-role"><span data-l="ja">売上管理、代理店対応、通訳 ／ 国際決済担当</span><span data-l="en">Sales administration, dealers, interpreting ／ International payments officer</span><span data-l="vi">Quản lý doanh số, đại lý, phiên dịch ／ Chuyên viên thanh toán quốc tế</span></span>
+      <span class="pj-pt"><span data-l="ja">数字と現場を、日本人上司に報告する。</span><span data-l="en">Numbers and the field, reported to Japanese managers.</span><span data-l="vi">Số liệu và thực tế, báo cáo cho cấp trên người Nhật.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>自動車</i><i>銀行</i><i>日本人上司に報告</i></span><span data-l="en"><i>Automotive</i><i>Banking</i><i>Reporting to Japanese managers</i></span><span data-l="vi"><i>Ô tô</i><i>Ngân hàng</i><i>Báo cáo cấp trên người Nhật</i></span></span>
+      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
+    </a>
+    <a class="pj-c" href="#pcai">
+      <span class="pj-top"><em>11</em><span data-l="ja">スキル</span><span data-l="en">Skills</span><span data-l="vi">Kỹ năng</span></span>
+      <b class="pj-co"><span data-l="ja">語学、PC、AI</span><span data-l="en">Languages, PC, AI</span><span data-l="vi">Ngoại ngữ, tin học, AI</span></b>
+      <span class="pj-role"><span data-l="ja">日本語、英語、ベトナム語で業務に対応</span><span data-l="en">Work in Japanese, English and Vietnamese</span><span data-l="vi">Làm việc bằng tiếng Nhật, Anh, Việt</span></span>
+      <span class="pj-pt"><span data-l="ja">3つの言語とAIで、仕事のスピードを上げる。</span><span data-l="en">Three languages and AI to speed up the work.</span><span data-l="vi">3 ngôn ngữ và AI để tăng tốc công việc.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>JLPT N2</i><i>TOEIC 680点</i><i>情報整理の時間 80～90%減</i></span><span data-l="en"><i>JLPT N2</i><i>TOEIC 680</i><i>80 to 90% less time organising information</i></span><span data-l="vi"><i>JLPT N2</i><i>TOEIC 680</i><i>Giảm 80 đến 90% thời gian xử lý thông tin</i></span></span>
+      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
+    </a>
+    <a class="pj-c" href="#aiops">
+      <span class="pj-top"><em>12</em><span data-l="ja">AIの取り組み</span><span data-l="en">AI project</span><span data-l="vi">Dự án AI</span></span>
+      <b class="pj-co"><span data-l="ja">AIで進めるチームの業務管理</span><span data-l="en">Team management with AI</span><span data-l="vi">Quản lý công việc nhóm bằng AI</span></b>
+      <span class="pj-role">MAYEKAWA VIETNAM<span data-l="ja">、営業チーム</span><span data-l="en">, sales team</span><span data-l="vi">, đội kinh doanh</span></span>
+      <span class="pj-pt"><span data-l="ja">仕事の流れを決め、数字で見える化する。</span><span data-l="en">Define the workflow, make it visible with numbers.</span><span data-l="vi">Đặt ra quy trình, trực quan hóa bằng số liệu.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>工程の標準化</i><i>日次報告</i><i>Claudeで分析</i></span><span data-l="en"><i>Standardising the process</i><i>Daily report</i><i>Analysis with Claude</i></span><span data-l="vi"><i>Chuẩn hóa quy trình</i><i>Báo cáo hằng ngày</i><i>Phân tích bằng Claude</i></span></span>
+      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
+    </a>
+    <a class="pj-c" href="#aidash">
+      <span class="pj-top"><em>13</em><span data-l="ja">AIの取り組み</span><span data-l="en">AI project</span><span data-l="vi">Dự án AI</span></span>
+      <b class="pj-co"><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b>
+      <span class="pj-role"><span data-l="ja">日次報告をClaudeが集計</span><span data-l="en">Claude combines the daily reports</span><span data-l="vi">Claude tổng hợp báo cáo ngày</span></span>
+      <span class="pj-pt"><span data-l="ja">どこで止まっているかを、毎朝ひと目で。</span><span data-l="en">Where work is stuck, clear every morning.</span><span data-l="vi">Kẹt ở đâu, mỗi sáng nhìn là biết.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>完了率</i><i>停滞タスク</i><i>ボトルネック</i></span><span data-l="en"><i>Completion rate</i><i>Stuck tasks</i><i>Bottleneck</i></span><span data-l="vi"><i>Tỷ lệ hoàn thành</i><i>Task bị kẹt</i><i>Điểm nghẽn</i></span></span>
+      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
+    </a>
+    <a class="pj-c" href="#sales-top">
+      <span class="pj-top"><em>Task</em><span data-l="ja">営業の記録</span><span data-l="en">Sales records</span><span data-l="vi">Hồ sơ kinh doanh</span></span>
+      <b class="pj-co">Task: Sales</b>
+      <span class="pj-role">MAYEKAWA VIETNAM<span data-l="ja">、営業部</span><span data-l="en">, Sales department</span><span data-l="vi">, phòng Kinh doanh</span></span>
+      <span class="pj-pt"><span data-l="ja">現場を回り、数字で営業を追う。</span><span data-l="en">Out in the field, tracking sales by the numbers.</span><span data-l="vi">Đi thị trường, theo dõi sales bằng số liệu.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>出張と顧客訪問</i><i>報告と会議</i><i>KPIの管理</i></span><span data-l="en"><i>Trips and client visits</i><i>Reports and meetings</i><i>Managing KPIs</i></span><span data-l="vi"><i>Công tác và gặp khách</i><i>Báo cáo và họp</i><i>Quản lý KPI</i></span></span>
+      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
+    </a>
+  </div>
+
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>03 ／ 16</p></div>
+</section>
+
+<!-- ═══════ 04 数字で見る ═══════ -->
+<section class="pg" data-chap="II" data-num="04" id="numbers">
   <div class="deco rings" style="left:-300px;right:auto;top:-260px;bottom:auto"><div class="r1"></div><div class="r2"></div><div class="r3"></div></div>
   <p class="eb rv">In Numbers <b>／ 数字で見るキャリア</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">経験を、<br /><i>数字で</i>お見せします。</span><span data-l="en">My experience,<br /><i>in numbers</i>.</span><span data-l="vi">Kinh nghiệm,<br /><i>qua con số</i>.</span></h2>
@@ -660,11 +761,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <div><p class="num gr">3～4<small><span data-l="ja">倍</span><span data-l="en">x</span><span data-l="vi">lần</span></small></p><p class="num-l"><span data-l="ja">生産性。以前は3～4名で行っていた業務を1名で処理</span><span data-l="en">Productivity: one person now handles work that used to take 3 to 4</span><span data-l="vi">Năng suất: 1 người làm phần việc trước đây cần 3 đến 4 người</span></p></div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>03 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>04 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 04 スキル ═══════ -->
-<section class="pg" data-chap="II" data-num="04" id="skillmap">
+<!-- ═══════ 05 スキル ═══════ -->
+<section class="pg" data-chap="II" data-num="05" id="skillmap">
   <div class="deco dots" style="right:40px;top:46px"></div>
   <p class="eb rv">Skills <b>／ 活かせる経験、知識、スキル</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">私の<i>7つのスキル</i></span><span data-l="en">My <i>seven skills</i></span><span data-l="vi"><i>7 kỹ năng</i> của tôi</span></h2>
@@ -708,11 +809,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>04 ／ 15</p></div>
+  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>05 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 05 学歴、職歴 ═══════ -->
-<section class="pg" data-chap="III" data-num="05" id="career">
+<!-- ═══════ 06 学歴、職歴 ═══════ -->
+<section class="pg" data-chap="III" data-num="06" id="career">
   <p class="eb rv">Career <b>／ 学歴、職歴</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日系企業3社で約11年、<br /><i>法人営業とIT、人事</i>を担当。</span><span data-l="en">About 11 years at three Japanese companies:<br /><i>B2B sales, IT and HR</i>.</span><span data-l="vi">Khoảng 11 năm tại 3 công ty Nhật:<br /><i>kinh doanh B2B, IT và nhân sự</i>.</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
@@ -764,11 +865,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>05 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>06 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 06 MAYEKAWA ═══════ -->
-<section data-even class="pg" data-chap="IV" data-num="06" id="w-mycom">
+<!-- ═══════ 07 MAYEKAWA ═══════ -->
+<section data-even class="pg" data-chap="IV" data-num="07" id="w-mycom">
   <div class="deco rings"><div class="r1"></div><div class="r2"></div><div class="r3"></div></div>
   <p class="eb rv">Career 01 <b>／ MAYEKAWA VIETNAM</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">顧客の課題を聞き、<br /><i>納品後まで</i>支える。</span><span data-l="en">Hearing client issues,<br /><i>supporting them after delivery</i>.</span><span data-l="vi">Lắng nghe vấn đề của khách,<br /><i>đồng hành cả sau giao hàng</i>.</span></h2>
@@ -835,11 +936,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>06 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>07 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 07 JILNESTA 営業マネージャー ═══════ -->
-<section data-even class="pg" data-chap="V" data-num="07" id="w-jil">
+<!-- ═══════ 08 JILNESTA 営業マネージャー ═══════ -->
+<section data-even class="pg" data-chap="V" data-num="08" id="w-jil">
   <div class="deco halo" style="right:-180px;top:-160px;background:radial-gradient(circle,rgba(31,182,166,.22),transparent 65%)"></div>
   <p class="eb rv">Career 02 <b>／ JILNESTA, Inc.</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">定期レビューで、<br /><i>契約の更新</i>につなげる。</span><span data-l="en">Regular reviews<br />that lead to <i>contract renewals</i>.</span><span data-l="vi">Review định kỳ,<br />dẫn tới <i>gia hạn hợp đồng</i>.</span></h2>
@@ -903,11 +1004,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>07 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>08 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 08 JILNESTA ITコミュニケーター ═══════ -->
-<section data-even class="pg" data-chap="III" data-num="08" id="w-it">
+<!-- ═══════ 09 JILNESTA ITコミュニケーター ═══════ -->
+<section data-even class="pg" data-chap="III" data-num="09" id="w-it">
   <p class="eb rv">Career 03 <b>／ JILNESTA, Inc.</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日本の顧客と<br /><i>ベトナム人エンジニア</i>をつなぐ。</span><span data-l="en">Connecting Japanese clients<br />and <i>Vietnamese engineers</i>.</span><span data-l="vi">Kết nối khách hàng Nhật<br />và <i>kỹ sư Việt Nam</i>.</span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">ITコミュニケーター（2017年8月 ～ 2019年2月）／ 日本人上司に報告</span><span data-l="en">IT communicator (Aug 2017 – Feb 2019), reporting to a Japanese manager</span><span data-l="vi">IT communicator (08/2017 – 02/2019), báo cáo cấp trên người Nhật</span></span>
@@ -944,11 +1045,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   </div>
 
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>08 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>09 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 09 Isuzu ／ LienViet ═══════ -->
-<section data-even class="pg" data-chap="IV" data-num="09" id="w-early">
+<!-- ═══════ 10 Isuzu ／ LienViet ═══════ -->
+<section data-even class="pg" data-chap="IV" data-num="10" id="w-early">
   <p class="eb rv">Career 04 <b>／ Isuzu Vietnam ／ LienViet Post Bank</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">数字と現場を、<br /><i>日本人上司に報告</i>する。</span><span data-l="en">Numbers and the field,<br /><i>reported to Japanese managers</i>.</span><span data-l="vi">Số liệu và thực tế,<br /><i>báo cáo cho cấp trên người Nhật</i>.</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
@@ -992,11 +1093,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <p class="qt" style="font-size:18px;color:#2b2540"><span data-l="ja">報連相の徹底、数字を使った分かりやすい報告、<br />原因分析に基づく筋道を立てた説明。</span><span data-l="en">Consistent horenso, clear reports with numbers,<br />and logical explanations based on cause analysis.</span><span data-l="vi">Horenso nghiêm túc, báo cáo rõ ràng bằng số liệu,<br />giải thích mạch lạc dựa trên phân tích nguyên nhân.</span></p>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>09 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>10 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 10 語学、PC、AI ═══════ -->
-<section data-even class="pg" data-chap="II" data-num="10" id="pcai">
+<!-- ═══════ 11 語学、PC、AI ═══════ -->
+<section data-even class="pg" data-chap="II" data-num="11" id="pcai">
   <div class="deco dots" style="right:40px;top:46px"></div>
   <p class="eb rv">Skills <b>／ 語学、PC、AIスキル</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">3つの言語とAIで、<br /><i>仕事のスピード</i>を上げる。</span><span data-l="en">Three languages and AI<br />to <i>speed up the work</i>.</span><span data-l="vi">3 ngôn ngữ và AI<br />để <i>tăng tốc công việc</i>.</span></h2>
@@ -1039,11 +1140,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>10 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>11 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 11 AI業務管理：仕組み ═══════ -->
-<section class="pg" data-even data-chap="IV" data-num="11" id="aiops">
+<!-- ═══════ 12 AI業務管理：仕組み ═══════ -->
+<section class="pg" data-even data-chap="IV" data-num="12" id="aiops">
   <div class="deco halo" style="right:-180px;top:-160px;background:radial-gradient(circle,rgba(109,91,208,.20),transparent 65%)"></div>
   <p class="eb rv">AI Management <b>／ AIで進めるチームの業務管理</b></p>
   <h2 class="kw rv" style="--d:60ms">仕事の流れを決め、<br /><i>数字で見える化</i>する。</h2>
@@ -1075,11 +1176,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <div class="rp"><b>D</b><span>7.0h</span><span>4件</span><span>2件</span><span>営業プレゼン資料　<em>2／7 技術部門への確認</em></span></div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>11 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>12 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 12 AI業務管理：ダッシュボード ═══════ -->
-<section class="pg" data-chap="IV" data-num="12" id="aidash">
+<!-- ═══════ 13 AI業務管理：ダッシュボード ═══════ -->
+<section class="pg" data-chap="IV" data-num="13" id="aidash">
   <p class="eb rv">AI Dashboard <b>／ Claudeによる分析（例）</b></p>
   <h2 class="kw rv" style="--d:60ms">どこで止まっているかを、<br /><i>毎朝ひと目で</i>。</h2>
   <p class="kw-sub rv" style="--d:100ms">メンバーの日次報告をClaudeが集計し、工程ごとの時間、完了率（着手したタスクのうち完了した割合）、停滞タスクをまとめます。</p>
@@ -1114,11 +1215,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 
   <p class="rv" style="--d:300ms;margin-top:8px;margin-bottom:6px;font:500 10.5px/1.6 'Noto Sans JP',sans-serif;color:#8a83a0">※ グラフと表の数値は、仕組みを説明するためのサンプルです。</p>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>12 ／ 15</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>13 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 13 自己PR ═══════ -->
-<section class="pg" data-chap="I" data-num="13" id="pr">
+<!-- ═══════ 14 自己PR ═══════ -->
+<section class="pg" data-chap="I" data-num="14" id="pr">
   <p class="eb rv">Self PR <b>／ 自己PR</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">私の<i>3つの強み</i></span><span data-l="en">My <i>three strengths</i></span><span data-l="vi"><i>3 điểm mạnh</i> của tôi</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
@@ -1144,11 +1245,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>13 ／ 15</p></div>
+  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>14 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 14 履歴書 PDF ═══════ -->
-<section class="pg" data-chap="III" data-num="14" id="cv">
+<!-- ═══════ 15 履歴書 PDF ═══════ -->
+<section class="pg" data-chap="III" data-num="15" id="cv">
   <p class="eb rv">CV <b>／ 履歴書兼職務経歴書</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">履歴書兼職務経歴書<br /><i>（PDF、3ページ）</i></span><span data-l="en">My CV<br /><i>(PDF, 3 pages, Japanese)</i></span><span data-l="vi">CV của tôi<br /><i>(PDF, 3 trang, tiếng Nhật)</i></span></h2>
   <p class="kw-sub rv" style="--d:100ms"><span data-l="ja">このポートフォリオの内容は、すべてこの履歴書兼職務経歴書に基づいています。</span><span data-l="en">Everything in this portfolio is based on this CV (rirekisho and career history, in Japanese).</span><span data-l="vi">Toàn bộ nội dung portfolio này dựa trên CV (sơ yếu lý lịch và quá trình công tác, tiếng Nhật) dưới đây.</span></p>
@@ -1160,11 +1261,11 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <div class="cv-frame rv grow" style="--d:200ms">
     <iframe src="Rirekisho_ThaiTranHoangNha.pdf#view=FitH" title="履歴書兼職務経歴書 Thai Tran Hoang Nha" loading="lazy"></iframe>
   </div>
-  <div class="ft" style="margin-top:14px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>14 ／ 15</p></div>
+  <div class="ft" style="margin-top:14px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>15 ／ 16</p></div>
 </section>
 
-<!-- ═══════ 15 連絡先 ═══════ -->
-<section class="pg" data-chap="I" data-num="15" id="contact">
+<!-- ═══════ 16 連絡先 ═══════ -->
+<section class="pg" data-chap="I" data-num="16" id="contact">
   <div class="deco halo" style="left:-180px;bottom:-160px"></div>
   <div class="deco rings"><div class="r1"></div><div class="r2"></div><div class="r3"></div></div>
   <p class="eb rv">Contact <b>／ 連絡先</b></p>
@@ -1186,7 +1287,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft" style="margin-top:26px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>15 ／ 15</p></div>
+  <div class="ft" style="margin-top:26px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>16 ／ 16</p></div>
 </section>
 
 </main>
