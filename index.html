@@ -60,7 +60,7 @@ p{margin:0}
 .pg--dark .eb b{color:#fff}
 
 /* Từ khoá trang */
-.kw{display:block;margin:12px 0 0;font:900 44px/1.32 'Noto Sans JP',sans-serif;letter-spacing:-.02em;color:#16141d}
+.kw{display:block;text-wrap:pretty;margin:12px 0 0;font:900 44px/1.32 'Noto Sans JP',sans-serif;letter-spacing:-.02em;color:#16141d}
 .kw--lg{font-size:54px}
 .kw--sm{font-size:36px}
 .pg--dark .kw{color:#fff}
@@ -415,7 +415,7 @@ main[hidden]{display:none!important}
 html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l="en"]),html[lang="vi"] [data-l]:not([data-l="vi"]){display:none!important}
 /* ═══ CV Rirekisho 2026 (task llvz): khối ngôn ngữ, 10 kỹ năng (trang nhúng PDF đã bỏ ở task 4pxr) ═══ */
 .lb{display:flex;flex-direction:column}
-.sk7{gap:8px}.sk7 .card{padding:10px 18px}.sk7 .num{font-size:21px!important;line-height:1.2;margin:0}
+.sk7{gap:8px}.sk7 .card{padding:10px 18px}.sk7>.card{justify-content:flex-start}html[lang="ja"] .sk7 p{word-break:auto-phrase}.sk7 .num{font-size:21px!important;line-height:1.2;margin:0}
 .sk7 .card h3{margin:2px 0 3px;font-size:14px}.sk7 .card p{line-height:1.6}
 @media print{
   /* in A4: ảnh Sales và trang mẫu aidash vốn tràn đáy trang từ bản cũ, thu nhỏ khi in */
@@ -1272,7 +1272,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 <section class="pg" data-chap="II" id="sales-top">
   <span class="eb rv">TASK　<b>SALES &amp; SALES MANAGEMENT</b></span>
   <h2 class="kw rv" style="--d:60ms">顧客を訪問し、<br /><i>商談の進捗を数字で追う。</i></h2>
-  <span class="kw-en rv" style="--d:100ms">Sales &amp; Sales Management</span>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">MAYEKAWA VIETNAM（MYCOM、産業用冷凍機）における営業活動の記録です。2022年2月から2026年6月まで、営業部のアシスタントマネージャー（人事部長を兼務）を務めました。社内メールの予定表と送受信メール、営業部の評価シート、職務記述書、出張規程に記録が残る業務と仕組みに限って掲載しています。顧客名、価格、契約、売上の数字は掲載していません。</p>
   <div class="meta rv" style="--d:180ms;margin-top:18px">
@@ -1449,7 +1448,6 @@ html.js .pg.in .cyc--live>.cyc-a::after{animation:svDot 8s linear infinite}
 <section class="pg" data-chap="II" id="team-top">
   <span class="eb rv">TASK　<b>TEAM MANAGEMENT</b></span>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">チームの仕事を数字で可視化し、<br /><i>人を育てて成果につなげる。</i></span><span data-l="en">I make the team's work visible in numbers<br /><i>and develop people to deliver results.</i></span><span data-l="vi">Tôi quản lý đội bằng số liệu<br /><i>và phát triển con người để tạo ra kết quả.</i></span></h2>
-  <span class="kw-en rv" style="--d:100ms">Team Management</span>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">日系企業での約11年間、営業、IT、人事の各チームを率いてきました。営業担当2～3名の管理、約27名の支店における部下5～6名のチーム運営、さらに人事を1人で担う体制から5名のチームへの拡大と統括を経験しました。いずれの役職でも、目標と役割、工程、毎日の数字、育成という共通の考え方でチームを動かしてきました。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">Over about 11 years at Japanese companies, I have led teams in sales, IT and HR: managing 2 to 3 sales staff, running a team of 5 to 6 in a branch of about 27 people, and growing HR from a function I ran alone into a team of five. In every role I used the same approach: clear targets and roles, standard steps, daily numbers and coaching.</p>
