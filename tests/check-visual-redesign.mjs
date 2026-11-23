@@ -43,7 +43,7 @@ ok(iconHashes.size === syms.length, 'có icon bị dùng trùng file');
 
 // 2) 14 hình minh hoạ tĩnh cũ (assets/skills) đã thay bằng cảnh động .gxs từ icon video (task v3c1, kiểm chi tiết ở check-video-icons)
 ok(!/assets\/skills\//.test(html), 'còn hình tĩnh assets/skills');
-ok((html.match(/<div class="[^"]*\bgxs gxs--/g) || []).length === 14, 'cần 14 cảnh động .gxs thay 14 hình minh hoạ');
+ok((html.match(/<div class="[^"]*\bgxs gxs--/g) || []).length === 12, 'cần 12 cảnh động .gxs (14 hình cũ, hình đầu tab AI / Team đã xoá theo task 3yar / ixrw)');
 
 // 2b) Clip workflow 6 bước (tools/team-flow): icon là icon video assets/gx có file thật, 6 poster đã dựng lại
 const eng = readFileSync(join(root, 'tools/team-flow/engine.html'), 'utf8');
@@ -63,4 +63,4 @@ ok(css && !/#3b2f86/.test(css), '.sv-ib vẫn là ô gradient tím cũ');
 ok(/\.mv-dot>\.sv-ic\{[^}]*(opacity|filter)/.test(html), 'phim workflow: icon ở trạng thái chưa sáng phải mờ đi (.mv-dot>.sv-ic opacity/filter)');
 
 if (fails.length) { console.error(`FAIL check-visual-redesign (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-visual-redesign: ${syms.length} icon 3D của video (webp alpha), 14 cảnh động .gxs thay hình tĩnh, ô icon sáng`);
+console.log(`PASS check-visual-redesign: ${syms.length} icon 3D của video (webp alpha), 12 cảnh động .gxs thay hình tĩnh, ô icon sáng`);

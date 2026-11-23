@@ -55,7 +55,7 @@ try {
     await sleep(500);
     for (const w of reduced ? [330] : [230, 330, 880]) {
       const res = await c.evaluate(MEASURE(w));
-      ok(Array.isArray(res) && res.length === 14, `${w}px: cần 14 cảnh .gxs, thấy ${res && res.length}`);
+      ok(Array.isArray(res) && res.length === 12, `${w}px: cần 12 cảnh .gxs, thấy ${res && res.length}`);
       for (const r of res || []) {
         checks++;
         const at = `${r.key}@${w}px${reduced ? ' (reduced-motion)' : ''}`;
@@ -73,4 +73,4 @@ try {
 } finally { c.close(); }
 
 if (fails.length) { console.error(`FAIL browser-gxs (${fails.length})\n- ` + fails.slice(0, 30).join('\n- ')); process.exit(1); }
-console.log(`PASS browser-gxs: ${checks} lượt đo, 14 cảnh x 230/330/880px + reduced-motion: icon video tải đủ, đúng cỡ, không lọt khung, không đè nhau, vòng lặp chạy, reduced-motion tĩnh`);
+console.log(`PASS browser-gxs: ${checks} lượt đo, 12 cảnh x 230/330/880px + reduced-motion: icon video tải đủ, đúng cỡ, không lọt khung, không đè nhau, vòng lặp chạy, reduced-motion tĩnh`);

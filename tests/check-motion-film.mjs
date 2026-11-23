@@ -17,7 +17,7 @@ for (const id of ['team-top', 'ai-top']) {
   const film = (s.match(/<figure class="mv rv"[\s\S]*?<\/figure>/) || [])[0] || '';
   ok(film, `${id}: chưa có phim workflow (figure.mv)`);
   if (!film) continue;
-  ok(s.indexOf('<figure class="mv') < s.indexOf('<figure class="sv-hero'), `${id}: phim phải đứng trước hình đầu trang`);
+  ok(!s.includes('<figure class="sv-hero') || s.indexOf('<figure class="mv') < s.indexOf('<figure class="sv-hero'), `${id}: phim phải đứng trước hình đầu trang`); // ai-top không còn hình đầu trang (task 3yar)
   ok(/<figcaption class="mv-head">/.test(film), `${id}: phim thiếu tiêu đề (figcaption.mv-head)`);
   const nodes = film.match(/<div class="mv-node mv-n[1-4]"/g) || [];
   ok(nodes.length === 4, `${id}: cần 4 bước (mv-node), thấy ${nodes.length}`);

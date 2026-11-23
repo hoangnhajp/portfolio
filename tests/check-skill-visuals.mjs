@@ -44,13 +44,9 @@ for (const id of ['team-skills', 'ai-uses']) {
   ok(cards.length === 6, `${id}: cần 6 thẻ kỹ năng có hình (sv-card), thấy ${cards.length}`);
   cards.forEach((c, i) => { const t = (c.match(/<div class="sv-spot gxs [\s\S]*?<!--\/gxs-->/) || [])[0]; ok(t, `${id}: thẻ ${i + 1} thiếu minh hoạ động`); if (t) checkSpot(t, `${id}#${i + 1}`); });
 }
-for (const id of ['team-top', 'ai-top']) {
-  const t = (sec(id).match(/<figure class="sv-hero[^"]*"[^>]*>\s*<div class="gxs [\s\S]*?<!--\/gxs-->/) || [])[0];
-  ok(t, `${id}: thiếu hình đầu trang (figure.sv-hero > .gxs)`);
-  if (t) checkSpot(t.slice(t.indexOf('<div')), id);
-}
+for (const id of ['team-top', 'ai-top']) ok(!/class="sv-hero/.test(sec(id)), `${id}: hình đầu tab đã bị xoá (task 3yar: AI, ixrw: Team), không được cấy lại`);
 ok(new Set(keys).size === keys.length, 'có minh hoạ bị dùng trùng');
-ok(keys.length === 14, `cần 14 minh hoạ (12 kỹ năng + 2 đầu trang), thấy ${keys.length}`);
+ok(keys.length === 12, `cần 12 minh hoạ (12 kỹ năng, không còn hình đầu tab), thấy ${keys.length}`);
 
 // 5) CSS animation: có keyframes bước sáng lần lượt + chấm chạy trên mũi tên; tôn trọng giảm chuyển động; bản in ẩn hình, không animation
 ok(/@keyframes svStep\b/.test(html) && /@keyframes svDot\b/.test(html), 'thiếu @keyframes svStep / svDot');
@@ -59,4 +55,4 @@ ok(/@media print\{[^}]*\.sv-hero[^}]*\.sv-spot[^}]*display:none/.test(html), 'b�
 ok(!/<img[^>]+src="https?:/i.test(sec('team-top') + sec('ai-top') + sec('team-skills') + sec('ai-uses')), 'không dùng hình ngoài (http)');
 
 if (fails.length) { console.error(`FAIL check-skill-visuals (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-skill-visuals: workflow sống 2x4 bước có icon, ${symbols.size} icon, 14 minh hoạ động .gxs từ icon video (12 kỹ năng + 2 đầu trang), reduced-motion + bản in an toàn`);
+console.log(`PASS check-skill-visuals: workflow sống 2x4 bước có icon, ${symbols.size} icon, 12 minh hoạ động .gxs từ icon video (12 kỹ năng, không còn hình đầu tab), reduced-motion + bản in an toàn`);

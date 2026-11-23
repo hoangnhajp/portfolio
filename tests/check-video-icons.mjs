@@ -42,14 +42,8 @@ for (const id of ['team-skills', 'ai-uses']) {
     if (sp) spots.push([`${id}#${i + 1}`, sp]);
   });
 }
-for (const id of ['team-top', 'ai-top']) {
-  const f = (sec(id).match(/<figure class="sv-hero[^"]*"[^>]*>([\s\S]*?)<\/figure>/) || [])[1] || '';
-  ok(f && !/<img /.test(f.replace(/<div class="gxs[\s\S]*<!--\/gxs-->/, '')), `${id}: hình đầu tab còn ảnh tĩnh`);
-  const sp = (f.match(/<div class="gxs [^"]*"[\s\S]*?<!--\/gxs-->/) || [])[0];
-  ok(sp, `${id}: hình đầu tab chưa là cảnh động .gxs`);
-  if (sp) spots.push([id, sp]);
-}
-ok(spots.length === 14, `cần 14 cảnh .gxs, có ${spots.length}`);
+for (const id of ['team-top', 'ai-top']) ok(!/class="sv-hero/.test(sec(id)), `${id}: hình đầu tab đã xoá (task 3yar: AI, ixrw: Team), không được cấy lại`);
+ok(spots.length === 12, `cần 12 cảnh .gxs, có ${spots.length}`);
 const kinds = new Set();
 for (const [w, sp] of spots) {
   ok(/^<div class="[^"]*" data-k="[\w-]+" aria-hidden="true">/.test(sp), `${w}: cảnh phải có data-k và aria-hidden="true"`);
@@ -88,4 +82,4 @@ if (existsSync(V4)) {
 } else console.log(`SKIP nguồn video: không có ${V4} trên máy này`);
 
 if (fails.length) { console.error(`FAIL check-video-icons (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-console.log(`PASS check-video-icons: ${syms.length} icon sprite + 6 icon clip lấy từ bộ icon video, 14 cảnh động .gxs (${[...kinds].join('/')}) thay hình tĩnh, icon nhỏ có vòng lặp, cảnh dừng khi ngoài màn hình, reduced-motion, in ẩn`);
+console.log(`PASS check-video-icons: ${syms.length} icon sprite + 6 icon clip lấy từ bộ icon video, 12 cảnh động .gxs (${[...kinds].join('/')}) thay hình tĩnh, icon nhỏ có vòng lặp, cảnh dừng khi ngoài màn hình, reduced-motion, in ẩn`);

@@ -1,7 +1,8 @@
 // Task m9qu: kiểm trên Chrome headless thật (CDP) rằng mỗi section hiện như một trang slide kiểu
-// Landing Page GPR FLEXEYE: tờ trắng bo góc + bóng đổ trên nền tím nhạt, các slide cách nhau,
-// chip "NN / tổng" đúng thứ tự trong từng tab, phím ←/→ nhảy đúng slide, không tràn ngang,
-// mobile vẫn gọn, bản in A4 giữ nguyên (không bo góc, không bóng, không chip).
+// Landing Page GPR FLEXEYE: tờ có bóng đổ trên nền tím nhạt, các tờ không chồng nhau, số slide "NN / tổng"
+// (data-slide + ::after) đúng thứ tự trong từng tab, phím ←/→ nhảy đúng hàng slide (1 hoặc 2 tờ một hàng),
+// không tràn ngang, mobile không tràn, bản in A4 giữ nguyên (không bo góc, không bóng, không số slide).
+// Kích thước / bo góc / vị trí số trang do khối lp-same (task lcbk) quyết, test này không ép.
 // Chạy: node tests/browser-lp-slides.mjs   (thoát 0 = đạt). CHROME=<đường dẫn> để đổi trình duyệt.
 import { spawn } from 'node:child_process';
 import { mkdtempSync, readFileSync, existsSync, rmSync } from 'node:fs';
@@ -74,58 +75,58 @@ async function main() {
   };
   const pad = (n) => String(n).padStart(2, '0');
 
-  // 1) Desktop 1280: 4 tab x 3 ngôn ngữ
-  for (const lang of ['ja', 'en', 'vi']) {
-    for (const hash of ['cover', 'sales-top', 'team-top', 'ai-top']) {
-      const tag = `${hash}/${lang}/1280`;
-      await go(`${pageUrl}?lang=${lang}#${hash}`, 1280);
-      const r = await evaluate(PROBE); checks++;
-      ok(r.slides.length >= 4, `${tag}: chỉ thấy ${r.slides.length} slide`);
-      ok(/207,\s*201,\s*227/.test(r.bg), `${tag}: nền sau slide không phải tím nhạt Landing Page (${r.bg.slice(0, 60)})`);
-      ok(r.overflowX <= 1, `${tag}: tràn ngang ${r.overflowX}px`);
-      r.slides.forEach((s, i) => {
-        ok(s.radius >= 12, `${tag}: #${s.id} không bo góc (${s.radius}px)`);
-        ok(s.shadow && s.shadow !== 'none', `${tag}: #${s.id} không có bóng đổ`);
-        ok(s.left >= 16, `${tag}: #${s.id} dính mép trái (${Math.round(s.left)}px)`);
-        ok(s.right <= r.w - 248 - 16 + 1, `${tag}: #${s.id} đè sidebar (${Math.round(s.right)}px)`);
-        const want = `${pad(i + 1)} / ${pad(r.slides.length)}`;
-        ok(s.slide === want, `${tag}: #${s.id} data-slide "${s.slide}" khác "${want}"`);
-        ok(s.chipDisp !== 'none' && s.chip.includes(want), `${tag}: #${s.id} không hiện chip số slide (${s.chip})`);
-        if (i) ok(s.top - r.slides[i - 1].bottom >= 40, `${tag}: #${s.id} dính slide trước (khe ${Math.round(s.top - r.slides[i - 1].bottom)}px)`);
-      });
+  // 1) Desktop 1280 + 1600: 4 tab x 3 ngôn ngữ
+  for (const [w, langs] of [[1280, ['ja', 'en', 'vi']], [1600, ['ja']]]) {
+    for (const lang of langs) {
+      for (const hash of ['cover', 'sales-top', 'team-top', 'ai-top']) {
+        const tag = `${hash}/${lang}/${w}`;
+        await go(`${pageUrl}?lang=${lang}#${hash}`, w);
+        const r = await evaluate(PROBE); checks++;
+        ok(r.slides.length >= 4, `${tag}: chỉ thấy ${r.slides.length} slide`);
+        ok(/207,\s*201,\s*227/.test(r.bg), `${tag}: nền sau slide không phải tím nhạt Landing Page (${r.bg.slice(0, 60)})`);
+        ok(r.overflowX <= 1, `${tag}: tràn ngang ${r.overflowX}px`);
+        r.slides.forEach((s, i) => {
+          ok(s.shadow && s.shadow !== 'none', `${tag}: #${s.id} không có bóng đổ (không thành tờ riêng)`);
+          ok(s.left >= 8 && s.right <= r.w - 8, `${tag}: #${s.id} dính mép (${Math.round(s.left)}..${Math.round(s.right)})`);
+          const want = `${pad(i + 1)} / ${pad(r.slides.length)}`;
+          ok(s.slide === want, `${tag}: #${s.id} data-slide "${s.slide}" khác "${want}"`);
+          ok(s.chipDisp !== 'none' && s.chip.includes(want), `${tag}: #${s.id} không hiện số slide (${s.chip})`);
+          for (const o of r.slides.slice(0, i)) {
+            const overlap = s.left < o.right - 1 && o.left < s.right - 1 && s.top < o.bottom - 1 && o.top < s.bottom - 1;
+            ok(!overlap, `${tag}: #${s.id} chồng lên #${o.id}`);
+          }
+        });
+      }
     }
   }
 
-  // 2) Phím ←/→ nhảy slide (reduced-motion để cuộn tức thì)
-  await go(`${pageUrl}?lang=ja#team-top`, 1280, '', [{ name: 'prefers-reduced-motion', value: 'reduce' }]);
-  await evaluate('window.scrollTo({top:0,behavior:"instant"}),1'); await sleep(200);
-  const slideTop = (i) => evaluate(`(() => { const m = document.querySelector('main:not([hidden])');
+  // 2) Phím ←/→ nhảy theo hàng slide (reduced-motion để cuộn tức thì); thử cả 1 tờ / hàng và 2 tờ / hàng
+  const ROWS = `(() => { const m = document.querySelector('main:not([hidden])');
     const ps = [...m.children].filter((p) => p.classList.contains('pg') && getComputedStyle(p).display !== 'none');
-    return Math.round(ps[${i}].getBoundingClientRect().top); })()`);
-  await key('ArrowRight', 39); await sleep(500); checks++;
-  const t1 = await slideTop(1);
-  ok(t1 >= 70 && t1 <= 95, `phím →: slide 2 phải lên sát dưới thanh menu (top ${t1}px, mong 82)`);
-  await key('ArrowRight', 39); await sleep(500); checks++;
-  const t2 = await slideTop(2);
-  ok(t2 >= 70 && t2 <= 95, `phím → lần 2: slide 3 phải lên đầu (top ${t2}px)`);
-  await key('ArrowLeft', 37); await sleep(500); checks++;
-  const t1b = await slideTop(1);
-  ok(t1b >= 70 && t1b <= 95, `phím ←: phải quay về slide 2 (top ${t1b}px)`);
-  // vừa bấm tab trên thanh menu (con trỏ đang ở link) thì phím → vẫn chạy
-  await evaluate('window.scrollTo({top:0,behavior:"instant"}),document.querySelector(".top-nav a.on").focus(),1'); await sleep(200);
-  await key('ArrowRight', 39); await sleep(500); checks++;
-  const t1c = await slideTop(1);
-  ok(t1c >= 70 && t1c <= 95, `phím → khi con trỏ ở link tab: slide 2 phải lên đầu (top ${t1c}px)`);
+    const tops = ps.map((p) => Math.round(p.getBoundingClientRect().top));
+    const firsts = []; tops.forEach((t, i) => { if (!firsts.length || t > tops[firsts[firsts.length - 1]] + 10) firsts.push(i) });
+    return { tops, firsts, smt: parseFloat(getComputedStyle(ps[0]).scrollMarginTop) || 0 }; })()`;
+  for (const w of [1280, 1800]) {
+    await go(`${pageUrl}?lang=ja#profile`, w, '', [{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+    await evaluate('window.scrollTo({top:0,behavior:"instant"}),1'); await sleep(200);
+    const base = await evaluate(ROWS);
+    const near = async (k, msg) => { const r = await evaluate(ROWS); checks++;
+      const t = r.tops[base.firsts[k]];
+      ok(Math.abs(t - r.smt) <= 12, `${w}px ${msg}: hàng slide ${k + 1} (#${base.firsts[k] + 1}) phải lên đầu (top ${t}px, mong ${r.smt})`); };
+    await key('ArrowRight', 39); await sleep(400); await near(1, 'phím →');
+    await key('ArrowRight', 39); await sleep(400); await near(2, 'phím → lần 2');
+    await key('ArrowLeft', 37); await sleep(400); await near(1, 'phím ←');
+    // vừa bấm tab trên thanh menu (con trỏ đang ở link) thì phím → vẫn chạy
+    await evaluate('window.scrollTo({top:0,behavior:"instant"}),document.querySelector(".top-nav a")?.focus(),1'); await sleep(200);
+    await key('ArrowRight', 39); await sleep(400); await near(1, 'phím → khi con trỏ ở link tab');
+  }
 
   // 3) Mobile 390
   for (const hash of ['cover', 'team-top']) {
     await go(`${pageUrl}?lang=vi#${hash}`, 390);
     const r = await evaluate(PROBE); checks++;
     ok(r.overflowX <= 1, `${hash}/390: tràn ngang ${r.overflowX}px`);
-    r.slides.forEach((s) => {
-      ok(s.left >= 6 && s.right <= 390 - 6, `${hash}/390: #${s.id} dính mép (${Math.round(s.left)}..${Math.round(s.right)})`);
-      ok(s.radius >= 10, `${hash}/390: #${s.id} không bo góc`);
-    });
+    r.slides.forEach((s) => ok(s.left >= 0 && s.right <= 390, `${hash}/390: #${s.id} tràn mép (${Math.round(s.left)}..${Math.round(s.right)})`));
   }
 
   // 4) Bản in A4 giữ nguyên
@@ -146,7 +147,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-lp-slides (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-lp-slides: ${checks} lượt kiểm, 0 lỗi JS: 4 tab x 3 ngôn ngữ mỗi section là 1 slide (bo góc, bóng, nền tím, khe >= 40px, chip NN / tổng đúng thứ tự), phím ←/→ nhảy đúng slide, mobile không tràn, bản in A4 giữ nguyên`);
+    console.log(`PASS browser-lp-slides: ${checks} lượt kiểm, 0 lỗi JS: 4 tab x 3 ngôn ngữ mỗi section là 1 tờ có bóng trên nền tím, không chồng nhau, số slide NN / tổng đúng thứ tự; phím ←/→ nhảy đúng hàng slide ở 1280 và 1800px; mobile không tràn; bản in A4 giữ nguyên`);
     process.exit(0);
   }, 300);
 });

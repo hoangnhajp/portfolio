@@ -110,22 +110,23 @@ function scene(id, s) {
 
 // ── Cảnh nhỏ .gxs (task v3c1) thay 12 hình tĩnh của thẻ kỹ năng + 2 hình đầu tab Team / AI: chỉ dùng icon video assets/gx,
 // chuyển động theo cách làm của video (icon bật vào back.out, trôi nổi, nét đứt tự vẽ, sao chổi chạy, vòng quỹ đạo quay, cột mọc).
-// k: orbit (lõi + vệ tinh nối nét), flow (3 bước nối nét), chart (biểu đồ cột + kính lúp + icon bên). Chip chỉ chữ trung tính (KPI, SOP...).
+// k: orbit (lõi + vệ tinh nối nét), flow (3 bước nối nét), wf (workflow 3 bước có nhãn, task m3tn), chart (biểu đồ cột + kính lúp + icon bên). Chip chỉ chữ trung tính (KPI, SOP...).
 const SP = {
-  't1-targets': { k: 'orbit', core: 'roadmap', sats: ['manager', 'team-group', 'report-chart'], chip: 'KPI' },
-  't2-steps': { k: 'flow', steps: ['jd-document', 'workflow-gears', 'checklist'] },
-  't3-numbers': { k: 'chart', bars: [48, 66, 40, 72, 90], hot: 4, side: ['stopwatch', 'calendar'] },
-  't4-cause': { k: 'orbit', core: 'magnifier', sats: ['bottleneck', 'report-chart', 'puzzle-fit'] },
-  't5-people': { k: 'flow', steps: ['survey-clipboard', 'interview', 'team-group'], chip: 'SOP' },
-  't6-connect': { k: 'flow', both: true, steps: ['office-building', 'chat-bubbles', 'manager'], chip: 'JA · EN · VI' },
+  // Task m3tn: 6 thẻ kỹ năng tab Team là workflow 3 bước có nhãn (wf), không còn icon to ở giữa / biểu đồ
+  't1-targets': { k: 'wf', steps: [['roadmap', L('目標', 'Goals', 'Mục tiêu')], ['team-group', L('役割', 'Roles', 'Vai trò')], ['report-chart', L('KPIと評価', 'KPI review', 'KPI, đánh giá')]] },
+  't2-steps': { k: 'wf', steps: [['jd-document', L('書き出す', 'Write out', 'Viết ra')], ['workflow-gears', L('標準化', 'Standardise', 'Chuẩn hóa')], ['checklist', L('完了の定義', 'Define done', 'Định nghĩa xong')]] },
+  't3-numbers': { k: 'wf', steps: [['calendar', L('毎日', 'Daily', 'Hằng ngày')], ['stopwatch', L('集計', 'Collect', 'Thu thập')], ['report-chart', L('数字で判断', 'Judge by data', 'Xét bằng số')]] },
+  't4-cause': { k: 'wf', steps: [['bottleneck', L('数字が低下', 'Numbers drop', 'Số liệu giảm')], ['magnifier', L('原因分析', 'Find the cause', 'Tìm nguyên nhân')], ['puzzle-fit', L('次の打ち手', 'Next action', 'Bước tiếp')]] },
+  't5-people': { k: 'wf', steps: [['survey-clipboard', L('SOPと型', 'SOP, templates', 'SOP, mẫu')], ['interview', L('コーチ', 'Coaching', 'Kèm cặp')], ['checklist', L('振り返り', 'Review', 'Rà soát')]] },
+  't6-connect': { k: 'wf', both: true, steps: [['office-building', L('各部門', 'Departments', 'Phòng ban')], ['chat-bubbles', L('調整', 'Coordinate', 'Phối hợp')], ['manager', L('日本語で報告', 'Report in JA', 'Báo cáo tiếng Nhật')]] },
   'a1-read': { k: 'flow', steps: ['jd-document', 'lightbulb', 'milestone-report'], chip: 'AI' },
   'a2-numbers': { k: 'chart', bars: [70, 52, 84, 36, 62], hot: 3, side: ['report-chart', 'shield-check'] },
   'a3-meetings': { k: 'orbit', core: 'calendar', sats: ['chat-bubbles', 'checklist', 'stopwatch'] },
   'a4-hr': { k: 'orbit', core: 'building-blocks', sats: ['survey-clipboard', 'envelope', 'profile-stack'] },
   'a5-recruit': { k: 'flow', steps: ['cv-resume', 'funnel', 'shield-check'], chip: 'JD ✓' },
   'a6-learning': { k: 'orbit', core: 'lightbulb', sats: ['chat-bubbles', 'key', 'puzzle-fit'] },
-  'hero-team': { k: 'orbit', hero: true, core: 'team-group', sats: ['manager', 'report-chart', 'checklist', 'chat-bubbles'], chip: 'TEAM' },
-  'hero-ai': { k: 'orbit', hero: true, core: 'lightbulb', sats: ['workflow-gears', 'jd-document', 'magnifier', 'interview'], chip: 'AI' },
+  // hero-ai: đã xoá theo yêu cầu người vận hành (task 3yar), tab AI không còn hình minh hoạ lớn đầu tab
+  // hero-team: đã xoá (task ixrw), đầu tab Team chỉ còn phim workflow, không cấy lại hình kính lớn
 };
 const r1 = (n) => Math.round(n * 10) / 10;
 function spot(key, s) {
@@ -150,6 +151,12 @@ function spot(key, s) {
     body += X.slice(0, -1).map((x, i) => line(x, Y, X[i + 1], Y, SAT * 0.7, SAT * 0.7, i, s.both)).join('');
     body += s.steps.map((ic, i) => at(X[i], Y, i, plate(ic, '', 88), i === s.steps.length - 1 ? ' is-hot' : '')).join('');
     body += chipAt(X[1], Y + (SAT / 2 + 6) / (100 * R) * 100, s.steps.length); // chip dưới bước giữa: không bị cắt mép phải ở thẻ hẹp
+  } else if (s.k === 'wf') {
+    // workflow (task m3tn): 3 bước cỡ thường nối mũi tên, nhãn đánh số dưới mỗi bước, quầng sáng chạy lần lượt qua từng bước
+    const X = [17, 50, 83], Y = 36;
+    body += X.slice(0, -1).map((x, i) => line(x, Y, X[i + 1], Y, SAT * 0.7, SAT * 0.7, i, s.both)).join('');
+    body += s.steps.map(([ic], i) => at(X[i], Y, i, `<i class="gxs-hl"></i>${plate(ic, '', 88)}`, i === s.steps.length - 1 ? ' is-hot' : '')).join('');
+    body += s.steps.map(([, t], i) => at(X[i], 79, i, `<b class="gxs-lb"><i>${String(i + 1).padStart(2, '0')}</i>${T(t)}</b>`, ' gxs-lbw')).join('');
   } else if (s.k === 'chart') {
     const bars = s.bars.map((h, i) => `<span class="gx-col" style="--h:${h}"><i class="gx-bar${i === s.hot ? ' is-hot' : ''}" style="--h:${h};--i:${i}"></i>${i === s.hot ? `<span class="gx-lens">${img('magnifier', 64)}</span>` : ''}</span>`).join('');
     body += at(38, 54, 0, `<span class="gx-chartc">${bars}<i class="gx-sheen"></i></span>`, ' gxs-chart');
@@ -197,6 +204,18 @@ html.js .gxs:not(.is-in),html.js .gxs:not(.is-in) *,html.js .gxs:not(.is-in) *::
 @keyframes gxsDraw{0%{opacity:0;transform:rotate(var(--a)) translateX(var(--o)) scaleX(0)}100%{opacity:1;transform:rotate(var(--a)) translateX(var(--o)) scaleX(1)}}
 @keyframes gxsSpin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
 @keyframes gxsIc{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-3px) rotate(-4deg) scale(1.06)}}
+/* workflow 3 bước (task m3tn): mũi tên ở đầu nét, nhãn đánh số, quầng sáng + nhãn sáng lần lượt bước 1 > 2 > 3 */
+.sv-spot.gxs--wf{flex:none} /* thẻ flex cột: không cho khung co theo độ dài chữ (co thì cắt nhãn) */
+.gxs--wf .gxs-ln::after{content:'';position:absolute;right:0;top:50%;width:7px;height:7px;margin-top:-4.5px;border:solid rgba(37,161,219,.85);border-width:2px 2px 0 0;transform:rotate(45deg)}
+.gxs-hl{position:absolute;left:50%;top:50%;z-index:-1;width:24cqw;height:24cqw;margin:-12cqw 0 0 -12cqw;border-radius:50%;opacity:0;pointer-events:none;
+  background:radial-gradient(circle,rgba(244,126,42,0) 40%,rgba(244,126,42,.45) 50%,rgba(244,126,42,.16) 60%,rgba(244,126,42,0) 70%)}
+.gxs-lb{position:relative;isolation:isolate;display:block;width:31cqw;box-sizing:border-box;padding:.5em .15em .55em;border-radius:10px;text-align:center;font-weight:700;
+  font-size:clamp(9px,3cqw,13px);line-height:1.25;color:var(--gx-ink);background:rgba(255,255,255,.86);box-shadow:0 0 0 1px rgba(37,161,219,.22),0 6px 14px -10px rgba(15,23,42,.35)}
+.gxs-lb>i{display:block;font-style:normal;font-size:.78em;letter-spacing:.06em;color:var(--gx-ort);margin-bottom:.1em}
+.gxs-lb::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;opacity:0;background:linear-gradient(180deg,#FFF4EA,#FFE2CB);box-shadow:0 0 0 1.5px rgba(244,126,42,.55)}
+html.js .gxs .gxs-lbw>.gxs-lb{animation:gxPop .62s var(--gx-back) both;animation-delay:calc(var(--i,0)*.22s + .45s)}
+html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in-out infinite;animation-delay:calc(var(--i,0)*1.2s + 1.2s)}
+@keyframes gxsStep{0%{opacity:0;transform:scale(.8)}12%{opacity:1;transform:scale(1)}30%{opacity:1;transform:scale(1)}42%{opacity:0;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.gxs *,.gxs *::before,.gxs *::after,.sv-ic{animation:none!important}}
 @media print{.gxs{display:none!important}}`;
 
