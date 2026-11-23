@@ -52,6 +52,10 @@ const SECTIONS = {
     const liText = it.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     ok(!caps.includes(liText), `mục "${liText}": chữ của <li> trùng khoá dịch, đổi ngôn ngữ sẽ xoá ảnh`);
   }
+  // Task febm: hiện hết 10 ảnh dạng lưới như section landing page, không thanh cuộn ngang
+  const evCss = (html.match(/^\.evrow\{([^}]*)\}/m) || [])[1] || '';
+  ok(/display:grid/.test(evCss) && !/overflow-x:(auto|scroll)/.test(evCss), `.evrow phải là lưới hiện hết, không cuộn ngang: {${evCss}}`);
+  ok(!/scroll-snap/.test(html.match(/^\.evrow[^\n]*$/gm)?.join('\n') || ''), '.evrow còn scroll-snap (kiểu băng chuyền cuộn)');
   ok(!/<img\b/.test(sec.replace(/<ol class="evrow"[\s\S]*?<\/ol>/, '')), '#sales-pr còn ảnh ngoài dòng sự kiện (lưới ảnh cũ)');
 }
 const navSales = (html.match(/<nav class="sb-nav" data-for="sales"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';

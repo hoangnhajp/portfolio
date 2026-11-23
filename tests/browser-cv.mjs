@@ -92,6 +92,12 @@ async function main() {
       const s = await evaluate(probe('sales', lang)); checks++;
       ok(s.view === 'sales' && !s.hidden && s.overflowX <= 1, `sales/${lang}/${w}px: view lỗi hoặc tràn ngang`);
       ok(/2026/.test(s.text) && !/2024年3月|03\/2024|March 2024/.test(s.text), `sales/${lang}/${w}px: giai đoạn Sales chưa theo CV mới`);
+      // Task febm: dòng sự kiện 10 ảnh hiện hết như 1 section landing page, không cuộn ngang
+      const ev = await evaluate(`(() => { const r = document.querySelector('#sales-pr .evrow'); const b = r.getBoundingClientRect();
+        const out = [...r.children].filter((li) => { const c = li.getBoundingClientRect(); return c.width < 40 || c.left < b.left - 1 || c.right > b.right + 1; }).length;
+        return { n: r.children.length, scroll: r.scrollWidth - r.clientWidth, ox: getComputedStyle(r).overflowX, out }; })()`); checks++;
+      ok(ev.n === 10 && ev.scroll <= 1 && ev.ox !== 'auto' && ev.ox !== 'scroll' && ev.out === 0,
+        `sales/${lang}/${w}px: dòng sự kiện còn cuộn ngang / ảnh nằm ngoài khung ${JSON.stringify(ev)}`);
     }
     // In A4: không trang nào bị cắt nội dung (pg cao cố định, overflow hidden)
     for (const [view, hash] of [['profile', 'cover'], ['sales', 'sales-top']]) {

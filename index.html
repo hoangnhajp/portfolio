@@ -146,16 +146,17 @@ p{margin:0}
 .tl .yr{font:700 12px 'Space Grotesk',sans-serif;letter-spacing:.06em;color:#6d5bd0}
 .tl h3{margin:3px 0 2px}
 .tl .role{font:700 12px 'Noto Sans JP',sans-serif;color:#0f5a8c;margin-bottom:6px}
-/* Sales 02: dòng sự kiện công tác (task v4un): 1 hàng ngang cuộn được, mỗi mục 1 ảnh + 1 dòng, không năm */
-.evrow{list-style:none;margin:8px 0 0;padding:2px 2px 10px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory}
-.evrow li{flex:0 0 210px;scroll-snap-align:start;position:relative;padding-top:20px}
+/* Sales 02: dòng sự kiện công tác (task v4un): mỗi mục 1 ảnh + 1 dòng, không năm; task febm: lưới hiện hết 10 mục (5 cột, mobile 2 cột), không cuộn ngang */
+.evrow{list-style:none;margin:8px 0 0;padding:2px 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px 14px}
+.evrow li{position:relative;padding-top:20px;min-width:0}
 .evrow li::before{content:'';position:absolute;left:0;right:-14px;top:6px;height:2px;background:#d6cff0}
-.evrow li:last-child::before{right:0}
+.evrow li:nth-child(5n)::before,.evrow li:last-child::before{right:0}
+@media screen and (max-width:900px){.evrow{grid-template-columns:repeat(2,minmax(0,1fr))}.evrow li:nth-child(5n)::before{right:-14px}.evrow li:nth-child(2n)::before{right:0}.evrow img{height:120px}}
 .evrow li::after{content:'';position:absolute;left:0;top:0;width:14px;height:14px;box-sizing:border-box;border-radius:50%;background:#fff;border:3px solid #6d5bd0}
 .evrow .ev-n{position:absolute;left:22px;top:0;font:700 11px/14px 'Space Grotesk',sans-serif;letter-spacing:.06em;color:#6d5bd0;background:#fff;padding:0 5px}
 .evrow img{display:block;width:100%;height:140px;object-fit:cover;border-radius:10px}
 .evrow .ev-t{margin:7px 0 0;font-size:12.5px;line-height:1.45}
-@media print{.evrow{flex-wrap:wrap;overflow:visible;gap:8px;padding-bottom:0}.evrow li{flex:0 0 calc(20% - 7px);break-inside:avoid;padding-top:0}.evrow li::before,.evrow li::after,.evrow .ev-n{display:none}.evrow img{height:78px}.evrow .ev-t{margin-top:3px;font-size:10px;line-height:1.3}}
+@media print{.evrow{gap:8px}.evrow li{break-inside:avoid;padding-top:0}.evrow li::before,.evrow li::after,.evrow .ev-n{display:none}.evrow img{height:78px}.evrow .ev-t{margin-top:3px;font-size:10px;line-height:1.3}}
 /* Career: 1 ô lớn = 1 công ty; vị trí luân chuyển nội bộ lồng bên trong, nối bằng đường dọc */
 .tl .pos{list-style:none;margin:10px 0 0;padding:0 0 0 22px;position:relative;display:flex;flex-direction:column;gap:8px}
 .tl .pos::before{content:'';position:absolute;left:5px;top:12px;bottom:12px;width:2px;background:#d9d2f5}
@@ -437,8 +438,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 @media print{.cv-frame,.cv-act{display:none}
   /* in A4: ảnh Sales và trang mẫu aidash vốn tràn đáy trang từ bản cũ, thu nhỏ khi in */
   #sales-trips figure img{height:140px!important}
-  #sales-flow .card>div[style*="grid"]{grid-template-columns:repeat(6,1fr)!important}
-  #sales-flow figure img{height:84px!important}
   #aidash .card{padding-top:10px;padding-bottom:10px}}
 /* 03 Projects board: lưới thẻ dự án / portfolio (task 62qd) */
 .pj{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
@@ -1420,17 +1419,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <div class="card"><span class="fl4-n">05</span><h3>見込みを共有する</h3><p>見込み台数をCRMに入れ、日本の工場との週次会議で納期を調整</p></div>
     <div class="card"><span class="fl4-n">06</span><h3>報告する</h3><p>週次の予定と結果、出張報告を上司へ提出</p></div>
   </div>
-  <div class="card rv" style="--d:220ms;margin-top:14px"><span class="lbl">Products</span><h3>MYCOMの主な製品</h3>
-    <div style="margin-top:6px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px">
-      <figure style="margin:0"><img src="assets/sales/mycom-mc1200.jpg" alt="MYCOM MC-1200、NH3/CO2冷凍パッケージ" data-alt-vi="MYCOM MC-1200, cụm máy lạnh NH3/CO2" data-alt-en="MYCOM MC-1200 NH3/CO2 refrigeration package" loading="lazy" width="700" height="720" style="width:100%;height:150px;object-fit:contain;background:#fff;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>MC-1200</b>　<span>NH3/CO2冷凍パッケージ</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/mycom-newton.jpg" alt="MYCOM NewTon、自然冷媒の冷凍ユニット" data-alt-vi="MYCOM NewTon, cụm máy lạnh môi chất tự nhiên" data-alt-en="MYCOM NewTon natural refrigerant unit" loading="lazy" width="720" height="480" style="width:100%;height:150px;object-fit:contain;background:#fff;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>NewTon</b>　<span>自然冷媒の冷凍ユニット</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/mycom-screw-compressor.jpg" alt="MYCOMの圧縮機ユニット" data-alt-vi="Cụm máy nén MYCOM" data-alt-en="MYCOM compressor unit" loading="lazy" width="720" height="635" style="width:100%;height:150px;object-fit:contain;background:#fff;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>MYCOM</b>　<span>圧縮機ユニット</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/mycom-iqf-freezer.jpg" alt="MYCOM CHORUS、IQFフリーザー" data-alt-vi="MYCOM CHORUS, máy cấp đông nhanh IQF" data-alt-en="MYCOM CHORUS IQF freezer" loading="lazy" width="720" height="582" style="width:100%;height:150px;object-fit:contain;background:#fff;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>CHORUS</b>　<span>IQFフリーザー</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/mycom-spiral-freezer.jpg" alt="MYCOMのスパイラルフリーザー" data-alt-vi="Máy cấp đông xoắn ốc MYCOM" data-alt-en="MYCOM spiral freezer" loading="lazy" width="720" height="576" style="width:100%;height:150px;object-fit:contain;background:#fff;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>MYCOM</b>　<span>スパイラルフリーザー</span></figcaption></figure>
-      <figure style="margin:0"><img src="assets/sales/mycom-unimo-heatpump.jpg" alt="MYCOM Unimo、ヒートポンプ" data-alt-vi="MYCOM Unimo, bơm nhiệt" data-alt-en="MYCOM Unimo heat pump" loading="lazy" width="690" height="720" style="width:100%;height:150px;object-fit:contain;background:#fff;border-radius:10px" /><figcaption class="ch-t" style="margin:6px 0 0"><b>Unimo</b>　<span>ヒートポンプ</span></figcaption></figure>
-    </div>
-    <p class="ch-t" style="margin:12px 0 0">写真：MAYEKAWAの製品資料（顧客向けカレンダー用の製品写真）</p>
-  </div>
   <p class="ch-t rv" style="--d:240ms;margin:14px 0 0">出典：社内メールの予定表と送受信メール（2022～2024年）、営業部の評価シート（2023年）、組織図と職務記述書（2023年7月）、出張規程（2024年1月）</p>
 </section>
 </main>
@@ -1548,13 +1536,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   "見込み台数をCRMに入れ、日本の工場との週次会議で納期を調整":["Nhập số máy dự kiến vào CRM, điều chỉnh tiến độ giao hàng trong họp tuần với nhà máy Nhật", "Enter forecast units in CRM and adjust delivery in the weekly meeting with the factory in Japan"],
   "報告する":["Báo cáo", "Report"],
   "週次の予定と結果、出張報告を上司へ提出":["Nộp cấp trên báo cáo lịch làm việc, kết quả hằng tuần và báo cáo công tác", "Submit the weekly plan and results, and trip reports, to the manager"],
-  "MYCOMの主な製品":["Sản phẩm chính của MYCOM", "Main MYCOM products"],
-  "NH3/CO2冷凍パッケージ":["Cụm máy lạnh NH3/CO2", "NH3/CO2 refrigeration package"],
-  "自然冷媒の冷凍ユニット":["Cụm máy lạnh môi chất tự nhiên", "Natural refrigerant unit"],
-  "圧縮機ユニット":["Cụm máy nén", "Compressor unit"],
-  "IQFフリーザー":["Máy cấp đông nhanh IQF", "IQF freezer"],
-  "スパイラルフリーザー":["Máy cấp đông xoắn ốc", "Spiral freezer"],
-  "ヒートポンプ":["Bơm nhiệt", "Heat pump"],
   "出張の写真":["Ảnh đi công tác", "Trip photos"],
   "冷凍物流倉庫での顧客訪問":["Gặp khách tại kho lạnh logistics", "Client visit at a cold-chain logistics warehouse"],
   "MYCOM KOREA（韓国拠点）を訪問":["Thăm MYCOM KOREA (chi nhánh Hàn Quốc)", "Visit to MYCOM KOREA (Korea branch)"],
@@ -1585,7 +1566,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   "展示会VIV ASIA（バンコク）を視察しました":["Tôi tham quan triển lãm VIV ASIA tại Bangkok.", "I visited the VIV ASIA trade show in Bangkok."],
   "MYCOM KOREA（韓国拠点）を訪問しました":["Tôi đến thăm MYCOM KOREA (chi nhánh Hàn Quốc).", "I visited MYCOM KOREA, the Korea branch."],
   "ロンアン省の物流倉庫を視察しました":["Tôi khảo sát kho logistics ở Long An.", "I toured a logistics warehouse in Long An."],
-  "写真：MAYEKAWAの製品資料（顧客向けカレンダー用の製品写真）":["Ảnh: tài liệu sản phẩm của MAYEKAWA (ảnh sản phẩm dùng cho lịch tặng khách)", "Photos: MAYEKAWA product materials (product photos from the client gift calendar)"],
   "出典：社内メールの予定表と送受信メール（2022～2024年）、営業部の評価シート（2023年）、組織図と職務記述書（2023年7月）、出張規程（2024年1月）":["Nguồn: lịch, thư gửi và nhận trong email công ty (2022 đến 2024), phiếu đánh giá phòng Kinh doanh (2023), sơ đồ tổ chức và mô tả công việc (07/2023), quy định công tác (01/2024)", "Sources: company email calendar, sent and received mail (2022 to 2024), sales evaluation sheet (2023), org chart and job descriptions (Jul 2023), business trip rules (Jan 2024)"]
   };
   Object.keys(X).forEach(function(k){if(!(k in D2))D2[k]=X[k]});
@@ -1624,7 +1604,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     "見積書を入力ファイルに残し、訪問回数と一緒に集計":["Ghi báo giá vào file và tổng hợp cùng số lượt gặp khách","Log quotations and count them alongside client visits"],
     "見込み台数をCRMに入れ、日本の工場との週次会議で納期を調整":["Cập nhật sản lượng dự kiến vào CRM, rồi thống nhất lịch giao trong họp tuần với nhà máy Nhật","I entered forecast quantities in CRM and aligned delivery dates with the Japan factory in weekly meetings"],
     "週次の予定と結果、出張報告を上司へ提出":["Gửi kế hoạch, kết quả hằng tuần và báo cáo công tác cho cấp trên","I sent weekly plans, results and trip reports to my manager"],
-    "MYCOMの主な製品":["Một số sản phẩm chính của MYCOM","Some of MYCOM's main products"],
     "出張の写真":["Ảnh trong các chuyến công tác","Photos from my work trips"],
     "発表と会議の写真":["Ảnh thuyết trình và họp","Photos from presentations and meetings"],
     "日本の工場との週次CRM会議":["Cuộc họp CRM hằng tuần với nhà máy Nhật","Weekly CRM meeting with the Japan factory"],
@@ -1639,9 +1618,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     "出張を申請する":["Xin duyệt công tác","Request trip approval"],
     "見積を記録する":["Ghi nhận báo giá","Log quotations"],
     "見込みを共有する":["Chia sẻ dự báo","Share the forecast"],
-    "報告する":["Báo cáo","Report"],
-    "製品資料：MAYEKAWAの製品資料（顧客向けカレンダー用の製品写真）":["Ảnh: tài liệu sản phẩm MAYEKAWA dùng cho lịch gửi khách","Images: MAYEKAWA product material prepared for a customer calendar"],
-    "写真：MAYEKAWAの製品資料（顧客向けカレンダー用の製品写真）":["Ảnh: tài liệu sản phẩm MAYEKAWA dùng cho lịch gửi khách","Images: MAYEKAWA product material prepared for a customer calendar"]
+    "報告する":["Báo cáo","Report"]
     ,"メコンデルタ5省、13社の訪問予定":["Lịch dự kiến thăm 13 công ty tại 5 tỉnh Đồng bằng sông Cửu Long","Planned visits to 13 companies across five Mekong Delta provinces"]
     ,"日本の工場と週次のCRM会議":["Họp CRM hằng tuần với nhà máy Nhật","Weekly CRM meetings with the Japan factory"]
     ,"見積件数と訪問回数を集計":["Tổng hợp số báo giá và lượt gặp khách","Tracking quotations and client visits"]
@@ -1666,12 +1643,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     ,"PROPAK ASIA・VIV ASIA（バンコク）":["Triển lãm PROPAK ASIA và VIV ASIA (Bangkok)","PROPAK ASIA and VIV ASIA trade shows (Bangkok)"]
     ,"ロンアン省の物流倉庫を視察":["Kho logistics ở Long An","Long An logistics warehouse"]
     ,"顧客との打ち合わせ":["Gặp khách hàng","Client meeting"]
-    ,"NH3/CO2冷凍パッケージ":["Cụm lạnh NH3/CO2","NH3/CO2 refrigeration package"]
-    ,"自然冷媒の冷凍ユニット":["Cụm lạnh dùng môi chất tự nhiên","Natural refrigerant unit"]
-    ,"圧縮機ユニット":["Cụm máy nén","Compressor unit"]
-    ,"IQFフリーザー":["Máy cấp đông IQF","IQF freezer"]
-    ,"スパイラルフリーザー":["Máy cấp đông xoắn ốc","Spiral freezer"]
-    ,"ヒートポンプ":["Bơm nhiệt","Heat pump"]
     ,"出典：社内メールの予定表と送受信メール（2022～2024年）、営業部の評価シート（2023年）、組織図と職務記述書（2023年7月）、出張規程（2024年1月）":["Nguồn: lịch và email nội bộ (2022–2024), phiếu đánh giá Kinh doanh (2023), sơ đồ tổ chức và mô tả công việc (07/2023), quy định công tác (01/2024).","Sources: internal calendars and emails (2022–2024), Sales evaluation sheet (2023), organisation chart and job description (July 2023), and travel rules (January 2024)."]
   });
   Object.assign(D,{
