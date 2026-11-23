@@ -422,8 +422,8 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   #sales-trips figure img{height:140px!important}
   #aidash .card{padding-top:10px;padding-bottom:10px}}
 /* 03 Projects board: lưới thẻ dự án / portfolio (task 62qd) */
-.pj{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-.pj-c{position:relative;display:flex;flex-direction:column;gap:5px;padding:14px 16px 12px;background:#fff;border:1px solid #ece8f3;border-radius:14px;
+.pj{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.pj-c{position:relative;display:flex;flex-direction:column;gap:7px;padding:16px 16px 13px;background:#fff;border:1px solid #ece8f3;border-radius:14px;
   text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 10px 26px -22px rgba(59,47,134,.5);transition:transform .2s,box-shadow .2s,border-color .2s}
 .pj-c::before{content:'';position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,#3b2f86,#26B3F4)}
 .pj-c:nth-child(4n+2)::before{background:linear-gradient(90deg,#0f8f83,#1FB6A6)}
@@ -432,16 +432,16 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 .pj-c:hover{transform:translateY(-3px);border-color:#d6cff0;box-shadow:0 18px 34px -22px rgba(59,47,134,.6)}
 .pj-top{display:flex;align-items:center;gap:8px;font:700 10px 'Manrope',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a83a0}
 .pj-top em{font:700 10.5px 'Space Grotesk',sans-serif;font-style:normal;letter-spacing:.04em;color:#fff;background:linear-gradient(90deg,#3b2f86,#6d5bd0);border-radius:999px;padding:2px 8px}
-.pj-co{font:700 16px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;color:#16141d}
-.pj-role{font:600 11.4px/1.5 'Noto Sans JP',sans-serif;color:#5b5568}
-.pj-pt{font:700 12.6px/1.55 'Noto Sans JP',sans-serif;color:#3b2f86}
+.pj-co{font:700 14px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;letter-spacing:-.01em;color:#16141d;text-wrap:balance}
+.pj-pt{font:600 12.5px/1.55 'Noto Sans JP',sans-serif;color:#3b2f86}
 .pj-tags>span{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
 .pj-tags i{font:600 10.4px/1.3 'Noto Sans JP',sans-serif;font-style:normal;padding:4px 9px;border-radius:999px;background:#f3f0fa;border:1px solid #e5e0f1;color:#4a3f8f}
 .pj-go{margin-top:auto;padding-top:4px;font:800 9.5px 'Manrope',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#6d5bd0}
-@media screen and (min-width:1200px){.pj{grid-template-columns:repeat(4,1fr);gap:16px}.pj-c{padding:18px 18px 14px}}
+/* task d704: 3 cột (12 thẻ = 4 hàng đều), thẻ đủ rộng cho câu kể 2 đến 3 dòng */
+@media screen and (min-width:1200px){.pj{grid-template-columns:repeat(3,1fr);gap:16px}.pj-c{padding:18px 18px 14px}}
 @media screen and (max-width:900px){.pj{grid-template-columns:1fr}}
 @media print{.pj{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.pj-c{box-shadow:none;break-inside:avoid;padding:9px 11px 8px;gap:3px}.pj-go{display:none}
-  .pj-co{font-size:12.5px}.pj-role{font-size:9.6px;line-height:1.4}.pj-pt{font-size:10.2px;line-height:1.4}.pj-tags>span{gap:4px}.pj-tags i{font-size:8.8px;padding:2px 6px}}
+  .pj-co{font-size:12.5px}.pj-pt{font-size:10.2px;line-height:1.4}.pj-tags>span{gap:4px}.pj-tags i{font-size:8.8px;padding:2px 6px}}
 </style>
 <!-- lp-slide-css:start -->
 <style id="lp-slide-css">
@@ -687,6 +687,15 @@ html.sr .pg>.sr.sr-in{opacity:1;transform:none}
 .gx-tile::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.8) 50%,transparent 65%);transform:translateX(-130%)}
 .gx-no{margin-top:10px}
 .gx--big .gx-lb{font-size:13.5px}
+/* chips (task d704): ô ngang icon trái + nhãn phải, nhãn 1 dòng không ngắt giữa từ, cùng nhịp với thẻ nhãn .gx-tag */
+.gx.gx--chips{padding-left:22px;padding-right:22px;container-type:inline-size}
+.gx--chips .gx-in{gap:10px}
+.gx--grid.gx--chips:not(.gx--big) .gx-tile{flex-direction:row;align-items:center;gap:8px;padding:8px 10px 8px 8px;border-radius:16px;text-align:left}
+.gx--chips .gx-tile .gx-pl{--s:38px;border-radius:12px}
+.gx--chips .gx-lb{min-width:0;margin:0;text-align:left;font-size:12px;line-height:1.3;white-space:nowrap;overflow-wrap:normal}
+/* khung hẹp (theo bề rộng chính cảnh, không theo màn hình): 4 cột không đủ chỗ cho nhãn ⇒ 2 cột; rất hẹp ⇒ icon trên, nhãn dưới */
+@container (max-width:600px){.gx--chips .gx-in{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container (max-width:380px){.gx.gx--grid.gx--chips:not(.gx--big) .gx-tile{flex-direction:column;gap:4px;padding:8px 6px}.gx.gx--chips .gx-tile .gx-pl{--s:34px;border-radius:11px}.gx.gx--chips .gx-lb{text-align:center;font-size:11px}}
 /* ── Chuyển động (chỉ khi có JS; chờ is-in mới chạy, ra khỏi màn hình thì dừng) ── */
 html.js .gx::after{animation:gxDrift 16s ease-in-out infinite alternate}
 html.js .gx .gx-step{animation:gxSlide .5s var(--gx-o3) both}
@@ -739,6 +748,7 @@ html.js .gx:not(.is-in),html.js .gx:not(.is-in) *,html.js .gx:not(.is-in)::after
   .gx-orb--ring{width:116px;height:116px}.gx-num{font-size:36px}.gx-val--s .gx-num{font-size:26px}.gx-val--s .gx-suf{font-size:13px}.gx-unit{margin-top:8px;font-size:11px}
   .gx-chartc{width:210px;height:120px}.gx--grid .gx-in{grid-template-columns:repeat(var(--mc,3),minmax(0,1fr));gap:8px}
   .gx-tile{padding:10px 4px;border-radius:16px}.gx-tile .gx-pl{--s:46px}.gx--big .gx-lb{font-size:10.5px}
+  .gx.gx--chips{padding-left:12px;padding-right:12px}.gx--grid.gx--chips:not(.gx--big) .gx-tile{gap:7px;padding:6px 8px 6px 6px;border-radius:14px}.gx--chips .gx-tile .gx-pl{--s:32px;border-radius:10px}.gx--chips .gx-lb{font-size:11.5px}
   .gx-step{left:12px;top:12px}
 }
 @media (prefers-reduced-motion:reduce){.gx *,.gx *::before,.gx *::after{animation:none!important}.gx::after{animation:none!important}}
@@ -1020,103 +1030,91 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">担当してきた仕事を、<br /><i>一枚で見渡す。</i></span><span data-l="en">My work<br /><i>at a glance</i>.</span><span data-l="vi">Mời anh/chị xem qua<br /><i>những công việc tôi đã làm</i>.</span></h2>
   <p class="kw-sub rv" style="--d:80ms"><span data-l="ja">これまでの経験を業務分野ごとに整理しました。各カードから詳細をご覧いただけます。</span><span data-l="en">I have grouped my experience by area of work. Open any card for details.</span><span data-l="vi">Tôi sắp xếp kinh nghiệm theo từng mảng việc. Anh/chị có thể mở từng thẻ để xem chi tiết phần mình quan tâm.</span></p>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
-  <figure class="gx gx--grid" aria-hidden="true"><span class="gx-step"><i></i><b>02</b> / 12</span><div class="gx-in" style="--c:8;--mc:4"><div class="gx-tile" style="--i:0"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">管理</span><span data-l="en">Management</span><span data-l="vi">Quản lý</span></b></div><div class="gx-tile" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Kinh doanh</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">マーケティング</span><span data-l="en">Marketing</span><span data-l="vi">Marketing</span></b></div><div class="gx-tile" style="--i:3"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></b></div><div class="gx-tile" style="--i:4"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">業務調整</span><span data-l="en">Operations</span><span data-l="vi">Điều phối</span></b></div><div class="gx-tile" style="--i:5"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b></div><div class="gx-tile" style="--i:6"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">語学</span><span data-l="en">Languages</span><span data-l="vi">Ngoại ngữ</span></b></div><div class="gx-tile" style="--i:7"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AI活用</span><span data-l="en">AI projects</span><span data-l="vi">Dự án AI</span></b></div></div></figure>
+  <figure class="gx gx--grid gx--chips" aria-hidden="true"><span class="gx-step"><i></i><b>02</b> / 12</span><div class="gx-in" style="--c:4;--mc:2"><div class="gx-tile" style="--i:0"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">管理</span><span data-l="en">Management</span><span data-l="vi">Quản lý</span></b></div><div class="gx-tile" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Kinh doanh</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">マーケティング</span><span data-l="en">Marketing</span><span data-l="vi">Marketing</span></b></div><div class="gx-tile" style="--i:3"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></b></div><div class="gx-tile" style="--i:4"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">業務調整</span><span data-l="en">Operations</span><span data-l="vi">Điều phối</span></b></div><div class="gx-tile" style="--i:5"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b></div><div class="gx-tile" style="--i:6"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">語学</span><span data-l="en">Languages</span><span data-l="vi">Ngoại ngữ</span></b></div><div class="gx-tile" style="--i:7"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AI活用</span><span data-l="en">AI projects</span><span data-l="vi">Dự án AI</span></b></div></div></figure>
 
   <div class="pj rv" style="--d:140ms">
     <a class="pj-c" href="#w-jil">
       <span class="pj-top"><em>01</em><span data-l="ja">管理</span><span data-l="en">Management</span><span data-l="vi">Quản lý</span></span>
       <b class="pj-co"><span data-l="ja">営業管理</span><span data-l="en">Sales management</span><span data-l="vi">Quản lý kinh doanh</span></b>
-      <span class="pj-role"><span data-l="ja">営業チームと約27名規模の支店</span><span data-l="en">Sales teams and a branch of about 27 staff</span><span data-l="vi">Đội kinh doanh, chi nhánh khoảng 27 người</span></span>
-      <span class="pj-pt"><span data-l="ja">営業プロセスをゼロから構築し、KPIと評価制度に基づいてチームを運営しました。</span><span data-l="en">I built the sales process from scratch and ran the team with KPIs and reviews.</span><span data-l="vi">Tôi xây dựng quy trình kinh doanh từ đầu và quản lý đội bằng KPI cùng chế độ đánh giá.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>部下5～6名</i><i>営業担当2～3名</i><i>売上目標</i></span><span data-l="en"><i>5 to 6 direct reports</i><i>2 to 3 sales staff</i><i>Revenue targets</i></span><span data-l="vi"><i>5 đến 6 cấp dưới</i><i>2 đến 3 nhân viên kinh doanh</i><i>Mục tiêu doanh thu</i></span></span>
+      <span class="pj-pt"><span data-l="ja">営業プロセスを一から作り、KPIでチームを運営しました。</span><span data-l="en">I built the sales process from scratch and ran the team on KPIs.</span><span data-l="vi">Tôi xây dựng quy trình kinh doanh từ đầu, quản lý đội bằng KPI.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>部下5～6名</i><i>約27名の拠点</i></span><span data-l="en"><i>5 to 6 direct reports</i><i>Branch of about 27 staff</i></span><span data-l="vi"><i>5 đến 6 cấp dưới</i><i>Chi nhánh khoảng 27 người</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#w-mycom">
       <span class="pj-top"><em>02</em><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></span>
       <b class="pj-co"><span data-l="ja">人事管理</span><span data-l="en">HR management</span><span data-l="vi">Quản lý nhân sự</span></b>
-      <span class="pj-role"><span data-l="ja">人事部長として人事、総務を担当</span><span data-l="en">Head of HR and general affairs</span><span data-l="vi">Trưởng phòng Nhân sự, tổng vụ</span></span>
-      <span class="pj-pt"><span data-l="ja">人事チームを1名から5名に拡充し、給与、社会保険、社内研修を統括しました。</span><span data-l="en">I grew the HR team from one to five and oversaw payroll, social insurance and in-house training.</span><span data-l="vi">Tôi mở rộng đội Nhân sự từ 1 lên 5 người, quản lý lương, BHXH và đào tạo nội bộ.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>人事 1→5名</i><i>給与、税、社会保険</i><i>報連相の研修</i></span><span data-l="en"><i>HR team 1→5</i><i>Payroll, tax, insurance</i><i>Horenso training</i></span><span data-l="vi"><i>Nhân sự 1→5 người</i><i>Lương, thuế, BHXH</i><i>Đào tạo Horenso</i></span></span>
+      <span class="pj-pt"><span data-l="ja">人事チームを1名から5名に拡充し、給与と研修を統括しました。</span><span data-l="en">I grew the HR team from one to five and ran payroll and training.</span><span data-l="vi">Tôi mở rộng đội Nhân sự từ 1 lên 5 người, quản lý lương và đào tạo.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>人事部長</i><i>報連相の研修</i></span><span data-l="en"><i>Head of HR</i><i>Horenso training</i></span><span data-l="vi"><i>Trưởng phòng Nhân sự</i><i>Đào tạo Horenso</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#sales-top">
       <span class="pj-top"><em>03</em><span data-l="ja">営業</span><span data-l="en">Business</span><span data-l="vi">Kinh doanh</span></span>
       <b class="pj-co"><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Sales</span></b>
-      <span class="pj-role"><span data-l="ja">法人顧客、産業用冷凍設備とIT案件</span><span data-l="en">Business clients, industrial refrigeration and IT projects</span><span data-l="vi">Khách doanh nghiệp, thiết bị lạnh công nghiệp và dự án IT</span></span>
-      <span class="pj-pt"><span data-l="ja">顧客を訪問して課題をヒアリングし、解決策の提案から契約締結までを担当しました。</span><span data-l="en">I met clients, identified their needs, proposed solutions and saw each deal through to contract.</span><span data-l="vi">Tôi gặp khách, lắng nghe vấn đề, đề xuất giải pháp và theo sát đến khi chốt hợp đồng.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>見積、提案書</i><i>価格交渉</i><i>契約更新</i></span><span data-l="en"><i>Quotes and proposals</i><i>Price negotiation</i><i>Contract renewals</i></span><span data-l="vi"><i>Báo giá, đề xuất</i><i>Đàm phán giá</i><i>Gia hạn hợp đồng</i></span></span>
+      <span class="pj-pt"><span data-l="ja">顧客の課題を聞き、提案から契約締結までを担当しました。</span><span data-l="en">I met clients, proposed solutions and saw each deal through to contract.</span><span data-l="vi">Tôi gặp khách, đề xuất giải pháp và theo sát đến khi chốt hợp đồng.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>見積、提案書</i><i>価格交渉</i></span><span data-l="en"><i>Quotes and proposals</i><i>Price negotiation</i></span><span data-l="vi"><i>Báo giá, đề xuất</i><i>Đàm phán giá</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#w-jil">
       <span class="pj-top"><em>04</em><span data-l="ja">営業</span><span data-l="en">Business</span><span data-l="vi">Kinh doanh</span></span>
       <b class="pj-co"><span data-l="ja">マーケティング</span><span data-l="en">Marketing</span><span data-l="vi">Marketing</span></b>
-      <span class="pj-role"><span data-l="ja">営業資料、プレゼン、新規開拓</span><span data-l="en">Sales materials, presentations, new clients</span><span data-l="vi">Tài liệu bán hàng, thuyết trình, tìm khách mới</span></span>
-      <span class="pj-pt"><span data-l="ja">日英越3か国語の会社案内と営業資料を作成し、テレセールスチームを率いて新規顧客を開拓しました。</span><span data-l="en">I produced sales materials and a company profile in three languages, and managed a telesales team to win new clients.</span><span data-l="vi">Tôi làm hồ sơ công ty 3 thứ tiếng, tài liệu bán hàng và quản lý đội telesales tìm khách mới.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>3か国語の会社案内</i><i>テレセールス</i><i>顧客向け贈答品、カレンダー</i></span><span data-l="en"><i>Company profile in 3 languages</i><i>Telesales</i><i>Client gifts and calendars</i></span><span data-l="vi"><i>Hồ sơ công ty 3 thứ tiếng</i><i>Telesales</i><i>Quà tặng, lịch tặng khách</i></span></span>
+      <span class="pj-pt"><span data-l="ja">3か国語の会社案内を作り、テレセールスで新規開拓しました。</span><span data-l="en">I made a company profile in three languages and ran telesales for new clients.</span><span data-l="vi">Tôi làm hồ sơ công ty 3 thứ tiếng và quản lý đội telesales tìm khách mới.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>営業資料</i><i>テレセールス</i></span><span data-l="en"><i>Sales materials</i><i>Telesales</i></span><span data-l="vi"><i>Tài liệu bán hàng</i><i>Telesales</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#w-jil">
       <span class="pj-top"><em>05</em><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></span>
       <b class="pj-co"><span data-l="ja">事業分析</span><span data-l="en">Business analysis</span><span data-l="vi">Phân tích kinh doanh</span></b>
-      <span class="pj-role"><span data-l="ja">営業KPI、契約転換率</span><span data-l="en">Sales KPIs and conversion rates</span><span data-l="vi">KPI kinh doanh, tỷ lệ chốt hợp đồng</span></span>
-      <span class="pj-pt"><span data-l="ja">架電数、訪問数、契約転換率をモニタリングし、KPIの低下時には原因を分析して目標を見直しました。</span><span data-l="en">I tracked calls, client meetings and conversion rates; when KPIs fell, I found the cause and reset targets.</span><span data-l="vi">Tôi theo dõi số cuộc gọi, số lần gặp khách và tỷ lệ chốt hợp đồng; khi KPI giảm, tôi tìm nguyên nhân và điều chỉnh mục tiêu.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>原因分析</i><i>改善提案</i><i>社員別の実績</i></span><span data-l="en"><i>Cause analysis</i><i>Kaizen proposals</i><i>Figures per staff member</i></span><span data-l="vi"><i>Phân tích nguyên nhân</i><i>Đề xuất cải tiến</i><i>Số liệu từng nhân viên</i></span></span>
+      <span class="pj-pt"><span data-l="ja">営業KPIを追い、低下時は原因を探って目標を見直しました。</span><span data-l="en">I tracked sales KPIs and, when they fell, found the cause and reset targets.</span><span data-l="vi">Tôi theo dõi KPI kinh doanh, KPI giảm thì tìm nguyên nhân và chỉnh mục tiêu.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>契約転換率</i><i>改善提案</i></span><span data-l="en"><i>Conversion rates</i><i>Kaizen proposals</i></span><span data-l="vi"><i>Tỷ lệ chốt hợp đồng</i><i>Đề xuất cải tiến</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#w-mycom">
       <span class="pj-top"><em>06</em><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></span>
       <b class="pj-co"><span data-l="ja">市場調査</span><span data-l="en">Market research</span><span data-l="vi">Nghiên cứu thị trường</span></b>
-      <span class="pj-role"><span data-l="ja">冷蔵倉庫、食品工場、北部から南部まで</span><span data-l="en">Cold storage and food plants nationwide</span><span data-l="vi">Kho lạnh, nhà máy chế biến, ba miền</span></span>
-      <span class="pj-pt"><span data-l="ja">北部、中部、南部の冷蔵倉庫市場を調査し、新設や増設を計画する企業をいち早く把握しました。</span><span data-l="en">I researched the cold-storage market across Vietnam and identified companies planning new or expanded facilities at an early stage.</span><span data-l="vi">Tôi nghiên cứu thị trường kho lạnh ba miền để sớm nhận diện doanh nghiệp sắp xây mới hoặc mở rộng.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>入札情報</i><i>案件リスト</i><i>ASEAN会議 3か国</i></span><span data-l="en"><i>Tender news</i><i>Lead list</i><i>ASEAN meetings in 3 countries</i></span><span data-l="vi"><i>Tin đấu thầu</i><i>Danh sách cơ hội</i><i>Họp ASEAN 3 nước</i></span></span>
+      <span class="pj-pt"><span data-l="ja">全国の冷蔵倉庫市場を調べ、新設計画をいち早く把握しました。</span><span data-l="en">I researched the cold storage market nationwide to spot new projects early.</span><span data-l="vi">Tôi nghiên cứu thị trường kho lạnh ba miền, sớm tìm ra dự án xây mới.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>入札情報</i><i>案件リスト</i></span><span data-l="en"><i>Tender news</i><i>Lead list</i></span><span data-l="vi"><i>Tin đấu thầu</i><i>Danh sách cơ hội</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#w-mycom">
       <span class="pj-top"><em>07</em><span data-l="ja">運営</span><span data-l="en">Operations</span><span data-l="vi">Vận hành</span></span>
       <b class="pj-co"><span data-l="ja">報告、受注、納期調整</span><span data-l="en">Reporting and order coordination</span><span data-l="vi">Báo cáo và điều phối đơn hàng</span></b>
-      <span class="pj-role"><span data-l="ja">顧客、工場、技術者、日本本社の間で調整</span><span data-l="en">Linking clients, the factory, engineers and head office in Japan</span><span data-l="vi">Giữa khách, nhà máy, kỹ sư và trụ sở Nhật</span></span>
-      <span class="pj-pt"><span data-l="ja">生産と納期の進捗を管理し、納期遅延のリスクは本社との週次会議で報告しました。</span><span data-l="en">I tracked production and delivery, and reported delay risks at weekly meetings with head office.</span><span data-l="vi">Tôi theo dõi tiến độ sản xuất, giao hàng và báo cáo rủi ro chậm giao hàng trong cuộc họp tuần với trụ sở.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>納期管理</i><i>保証、トラブル対応</i><i>売上レポート</i></span><span data-l="en"><i>Delivery schedules</i><i>Warranty and issue handling</i><i>Sales reports</i></span><span data-l="vi"><i>Tiến độ giao hàng</i><i>Bảo hành, sự cố</i><i>Báo cáo doanh số</i></span></span>
+      <span class="pj-pt"><span data-l="ja">生産と納期を管理し、遅延リスクを本社へ毎週報告しました。</span><span data-l="en">I tracked production and delivery and reported delay risks to head office weekly.</span><span data-l="vi">Tôi theo dõi sản xuất, giao hàng và báo rủi ro chậm trễ với trụ sở hằng tuần.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>納期管理</i><i>保証、トラブル対応</i></span><span data-l="en"><i>Delivery schedules</i><i>Warranty and issues</i></span><span data-l="vi"><i>Tiến độ giao hàng</i><i>Bảo hành, sự cố</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#w-mycom">
       <span class="pj-top"><em>08</em><span data-l="ja">数字</span><span data-l="en">Numbers</span><span data-l="vi">Số liệu</span></span>
       <b class="pj-co"><span data-l="ja">コストと利益の計算</span><span data-l="en">Cost and profit calculation</span><span data-l="vi">Tính toán chi phí và lợi nhuận</span></b>
-      <span class="pj-role"><span data-l="ja">売上、経費、利益</span><span data-l="en">Revenue, expenses and profit</span><span data-l="vi">Doanh thu, chi phí, lợi nhuận</span></span>
-      <span class="pj-pt"><span data-l="ja">部門の売上と経費を管理して利益を算出し、経理部門と数値を照合しました。</span><span data-l="en">I tracked department revenue and costs, calculated profit and reconciled the figures with the accounting team.</span><span data-l="vi">Tôi theo dõi doanh thu, chi phí của phòng, tính lợi nhuận và đối chiếu số liệu với phòng Kế toán.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>計画と実績の比較</i><i>相見積で業者選定</i><i>人件費の確認</i></span><span data-l="en"><i>Plan vs actual</i><i>Supplier quote comparison</i><i>Labour cost checks</i></span><span data-l="vi"><i>Kế hoạch so với thực tế</i><i>So sánh báo giá nhà cung cấp</i><i>Kiểm tra chi phí nhân sự</i></span></span>
+      <span class="pj-pt"><span data-l="ja">部門の利益を算出し、経理と数値を照合しました。</span><span data-l="en">I calculated department profit and reconciled the figures with accounting.</span><span data-l="vi">Tôi tính lợi nhuận của phòng và đối chiếu số liệu với phòng Kế toán.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>計画と実績の比較</i><i>相見積で業者選定</i></span><span data-l="en"><i>Plan vs actual</i><i>Supplier quotes</i></span><span data-l="vi"><i>Kế hoạch so với thực tế</i><i>So sánh báo giá</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#w-mycom">
       <span class="pj-top"><em>09</em><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></span>
       <b class="pj-co"><span data-l="ja">採用と社内活性化</span><span data-l="en">Recruitment and internal marketing</span><span data-l="vi">Tuyển dụng và marketing nội bộ</span></b>
-      <span class="pj-role"><span data-l="ja">採用、オンボーディング、社内イベント</span><span data-l="en">Hiring, onboarding, company events</span><span data-l="vi">Tuyển dụng, onboarding, sự kiện nội bộ</span></span>
-      <span class="pj-pt"><span data-l="ja">ITエンジニアから工場スタッフまでの採用を担当し、チームビルディングや社内パーティーの企画、年次社員アンケートの実施にも取り組みました。</span><span data-l="en">I recruited for roles ranging from IT engineers to plant staff, organised team-building events and company parties, and ran the annual staff survey.</span><span data-l="vi">Tôi tuyển từ kỹ sư IT tới nhân viên nhà máy, tổ chức team building, tiệc công ty và khảo sát nhân viên hằng năm.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>採用担当2名を育成</i><i>採用KPI</i><i>チームビルディング、中秋節</i></span><span data-l="en"><i>Trained 2 recruiters</i><i>Hiring metrics</i><i>Team building, Mid-Autumn Festival</i></span><span data-l="vi"><i>Đào tạo 2 nhân viên tuyển dụng</i><i>Chỉ số tuyển dụng</i><i>Team building, Trung thu</i></span></span>
+      <span class="pj-pt"><span data-l="ja">IT人材から工場スタッフまで採用し、社内行事も企画しました。</span><span data-l="en">I hired everyone from IT engineers to plant staff and ran company events.</span><span data-l="vi">Tôi tuyển từ kỹ sư IT tới nhân viên nhà máy và tổ chức sự kiện nội bộ.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>採用担当2名を育成</i><i>採用KPI</i></span><span data-l="en"><i>Trained 2 recruiters</i><i>Hiring metrics</i></span><span data-l="vi"><i>Đào tạo 2 tuyển dụng viên</i><i>Chỉ số tuyển dụng</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#w-it">
       <span class="pj-top"><em>10</em><span data-l="ja">語学</span><span data-l="en">Languages</span><span data-l="vi">Ngôn ngữ</span></span>
       <b class="pj-co"><span data-l="ja">通訳と日本人社長への報告</span><span data-l="en">Interpreting and reporting to Japanese CEOs</span><span data-l="vi">Thông dịch và báo cáo CEO, giám đốc người Nhật</span></b>
-      <span class="pj-role"><span data-l="ja">日本語N2、英語、ベトナム語</span><span data-l="en">Japanese N2, English, Vietnamese</span><span data-l="vi">Tiếng Nhật N2, tiếng Anh, tiếng Việt</span></span>
-      <span class="pj-pt"><span data-l="ja">会議通訳と資料翻訳を担当し、日本人社長へ日本語で直接報告しました。</span><span data-l="en">I interpreted meetings, translated documents and reported directly to Japanese CEOs in Japanese.</span><span data-l="vi">Tôi phiên dịch các cuộc họp, dịch tài liệu và báo cáo trực tiếp bằng tiếng Nhật cho CEO, giám đốc người Nhật.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>日次、週次、月次の報告</i><i>議事録</i><i>顧客とエンジニアの橋渡し</i></span><span data-l="en"><i>Daily, weekly, monthly reports</i><i>Meeting minutes</i><i>Liaison with engineers</i></span><span data-l="vi"><i>Báo cáo ngày, tuần, tháng</i><i>Biên bản họp</i><i>Cầu nối khách và kỹ sư</i></span></span>
+      <span class="pj-pt"><span data-l="ja">会議通訳と翻訳を担い、日本人社長へ直接報告しました。</span><span data-l="en">I interpreted, translated and reported to Japanese CEOs in Japanese.</span><span data-l="vi">Tôi phiên dịch, dịch tài liệu và báo cáo thẳng cho CEO người Nhật.</span></span>
+      <span class="pj-tags"><span data-l="ja"><i>日本語N2</i><i>議事録</i></span><span data-l="en"><i>Japanese N2</i><i>Meeting minutes</i></span><span data-l="vi"><i>Tiếng Nhật N2</i><i>Biên bản họp</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#aiops">
       <span class="pj-top"><em>AI</em><span data-l="ja">AIの取り組み</span><span data-l="en">AI project</span><span data-l="vi">Dự án AI</span></span>
       <b class="pj-co"><span data-l="ja">AIを活用したチームの業務管理</span><span data-l="en">Team management with AI</span><span data-l="vi">Quản lý công việc nhóm bằng AI</span></b>
-      <span class="pj-role"><span data-l="ja">営業チームで実践</span><span data-l="en">Put into practice with the sales team</span><span data-l="vi">Áp dụng cho đội kinh doanh</span></span>
       <span class="pj-pt"><span data-l="ja">業務の流れを定め、数字で可視化する。</span><span data-l="en">Workflows defined and made visible in numbers.</span><span data-l="vi">Xây dựng quy trình, theo dõi bằng số liệu.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>工程の標準化</i><i>日次報告</i><i>Claudeで分析</i></span><span data-l="en"><i>Standardising the process</i><i>Daily report</i><i>Analysis with Claude</i></span><span data-l="vi"><i>Chuẩn hóa quy trình</i><i>Báo cáo hằng ngày</i><i>Phân tích bằng Claude</i></span></span>
+      <span class="pj-tags"><span data-l="ja"><i>工程の標準化</i><i>Claudeで分析</i></span><span data-l="en"><i>Standard process</i><i>Analysis with Claude</i></span><span data-l="vi"><i>Chuẩn hóa quy trình</i><i>Phân tích bằng Claude</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
     <a class="pj-c" href="#aidash">
       <span class="pj-top"><em>AI</em><span data-l="ja">AIの取り組み</span><span data-l="en">AI project</span><span data-l="vi">Dự án AI</span></span>
       <b class="pj-co"><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b>
-      <span class="pj-role"><span data-l="ja">日次報告をClaudeが集計</span><span data-l="en">Daily reports compiled with Claude</span><span data-l="vi">Claude tổng hợp báo cáo ngày</span></span>
       <span class="pj-pt"><span data-l="ja">どこで止まっているかを、毎朝ひと目で。</span><span data-l="en">Bottlenecks visible every morning.</span><span data-l="vi">Mỗi sáng, nhìn là biết việc kẹt ở đâu.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>完了率</i><i>停滞タスク</i><i>ボトルネック</i></span><span data-l="en"><i>Completion rate</i><i>Stuck tasks</i><i>Bottleneck</i></span><span data-l="vi"><i>Tỷ lệ hoàn thành</i><i>Task bị kẹt</i><i>Điểm nghẽn</i></span></span>
+      <span class="pj-tags"><span data-l="ja"><i>完了率</i><i>ボトルネック</i></span><span data-l="en"><i>Completion rate</i><i>Bottleneck</i></span><span data-l="vi"><i>Tỷ lệ hoàn thành</i><i>Điểm nghẽn</i></span></span>
       <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
     </a>
   </div>

@@ -18,7 +18,8 @@ const S = {
   profile: { k: 'hub', core: { ic: 'briefcase', chip: L('日系企業で約11年', 'About 11 years at Japanese firms', 'Khoảng 11 năm ở công ty Nhật') },
     left: [['handshake', L('B2B営業', 'B2B sales', 'Bán hàng B2B')], ['team-group', L('営業管理', 'Sales management', 'Quản lý kinh doanh')]],
     right: [['chat-bubbles', L('ITコミュニケーター', 'IT communication', 'Cầu nối IT')], ['survey-clipboard', L('人事', 'HR', 'Nhân sự')]] },
-  projects: { k: 'grid', c: 8, mc: 4, tiles: [['manager', L('管理', 'Management', 'Quản lý')], ['handshake', L('営業', 'Sales', 'Kinh doanh')], ['jd-document', L('マーケティング', 'Marketing', 'Marketing')],
+  // task d704: 8 ô dạng chip 4 x 2 (icon trái, nhãn phải 1 dòng) thay 8 cột hẹp làm nhãn gãy "Marketin g"
+  projects: { k: 'grid', chips: true, c: 4, mc: 2, tiles: [['manager', L('管理', 'Management', 'Quản lý')], ['handshake', L('営業', 'Sales', 'Kinh doanh')], ['jd-document', L('マーケティング', 'Marketing', 'Marketing')],
     ['report-chart', L('分析', 'Analysis', 'Phân tích')], ['workflow-gears', L('業務調整', 'Operations', 'Điều phối')], ['team-group', L('人事', 'HR', 'Nhân sự')],
     ['chat-bubbles', L('語学', 'Languages', 'Ngoại ngữ')], ['lightbulb', L('AI活用', 'AI projects', 'Dự án AI')]] },
   skillmap: { k: 'ring', v: 10, p: 100, unit: L('のスキル', 'skills', 'kỹ năng'),
@@ -103,7 +104,7 @@ function scene(id, s) {
     body = s.tiles.map(([ic, t, c], i) => `<div class="gx-tile" style="--i:${i}">${plate(ic, s.big ? 'gx-pl--m' : '', s.big ? 112 : 88)}${c && typeof c === 'string' ? `<em class="gx-chip gx-no">${c}</em>` : ''}<b class="gx-lb">${T(t)}</b>${c && typeof c !== 'string' ? chip(c) : ''}</div>`).join('');
   }
   const long = s.k === 'flow' && s.steps.length > 4 ? ' gx--long' : '';
-  const big = s.big ? ' gx--big' : '';
+  const big = (s.big ? ' gx--big' : '') + (s.chips ? ' gx--chips' : '');
   const cols = s.c ? ` style="--c:${s.c};--mc:${s.mc}"` : '';
   return `<figure class="gx gx--${s.k}${long}${big}${s.both ? ' gx--both' : ''}" aria-hidden="true">${stepChip(id)}<div class="gx-in"${cols}>${body}</div></figure>`;
 }
@@ -307,6 +308,15 @@ const CSS = `<style id="gx-css">
 .gx-tile::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.8) 50%,transparent 65%);transform:translateX(-130%)}
 .gx-no{margin-top:10px}
 .gx--big .gx-lb{font-size:13.5px}
+/* chips (task d704): ô ngang icon trái + nhãn phải, nhãn 1 dòng không ngắt giữa từ, cùng nhịp với thẻ nhãn .gx-tag */
+.gx.gx--chips{padding-left:22px;padding-right:22px;container-type:inline-size}
+.gx--chips .gx-in{gap:10px}
+.gx--grid.gx--chips:not(.gx--big) .gx-tile{flex-direction:row;align-items:center;gap:8px;padding:8px 10px 8px 8px;border-radius:16px;text-align:left}
+.gx--chips .gx-tile .gx-pl{--s:38px;border-radius:12px}
+.gx--chips .gx-lb{min-width:0;margin:0;text-align:left;font-size:12px;line-height:1.3;white-space:nowrap;overflow-wrap:normal}
+/* khung hẹp (theo bề rộng chính cảnh, không theo màn hình): 4 cột không đủ chỗ cho nhãn ⇒ 2 cột; rất hẹp ⇒ icon trên, nhãn dưới */
+@container (max-width:600px){.gx--chips .gx-in{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container (max-width:380px){.gx.gx--grid.gx--chips:not(.gx--big) .gx-tile{flex-direction:column;gap:4px;padding:8px 6px}.gx.gx--chips .gx-tile .gx-pl{--s:34px;border-radius:11px}.gx.gx--chips .gx-lb{text-align:center;font-size:11px}}
 /* ── Chuyển động (chỉ khi có JS; chờ is-in mới chạy, ra khỏi màn hình thì dừng) ── */
 html.js .gx::after{animation:gxDrift 16s ease-in-out infinite alternate}
 html.js .gx .gx-step{animation:gxSlide .5s var(--gx-o3) both}
@@ -359,6 +369,7 @@ html.js .gx:not(.is-in),html.js .gx:not(.is-in) *,html.js .gx:not(.is-in)::after
   .gx-orb--ring{width:116px;height:116px}.gx-num{font-size:36px}.gx-val--s .gx-num{font-size:26px}.gx-val--s .gx-suf{font-size:13px}.gx-unit{margin-top:8px;font-size:11px}
   .gx-chartc{width:210px;height:120px}.gx--grid .gx-in{grid-template-columns:repeat(var(--mc,3),minmax(0,1fr));gap:8px}
   .gx-tile{padding:10px 4px;border-radius:16px}.gx-tile .gx-pl{--s:46px}.gx--big .gx-lb{font-size:10.5px}
+  .gx.gx--chips{padding-left:12px;padding-right:12px}.gx--grid.gx--chips:not(.gx--big) .gx-tile{gap:7px;padding:6px 8px 6px 6px;border-radius:14px}.gx--chips .gx-tile .gx-pl{--s:32px;border-radius:10px}.gx--chips .gx-lb{font-size:11.5px}
   .gx-step{left:12px;top:12px}
 }
 @media (prefers-reduced-motion:reduce){.gx *,.gx *::before,.gx *::after{animation:none!important}.gx::after{animation:none!important}}
