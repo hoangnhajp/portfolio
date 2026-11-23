@@ -1429,6 +1429,75 @@ html.js .pg.in .cyc--live>.cyc-a::after{animation:svDot 8s linear infinite}
 @media (prefers-reduced-motion:reduce){.cyc--live>*,.cyc--live>* .sv-ib::after,.cyc--live .cyc-a::before,.cyc--live .cyc-a::after,.sv-hero img,.sv-card,.sv-spot{animation:none!important;transition:none!important}}
 @media print{.sv-hero,.sv-spot,.sv-ib{display:none!important}.cyc--live .cyc-a{color:#6d5bd0}.cyc--live .cyc-a::before,.cyc--live .cyc-a::after{display:none}}
 </style>
+<!-- Phim workflow 4.8s cho tab Team / AI (task 2fl9): 1 task chạy qua 4 bước rồi ra kết quả; chỉ transform/opacity, dùng chung --mv-t -->
+<style id="mv-css">
+.mv{--mv-t:4.8s;--mv-e:cubic-bezier(.65,0,.35,1);--mv-p:cubic-bezier(.2,.7,.2,1);position:relative;margin:24px 0 0;max-width:880px;border-radius:22px;overflow:hidden;color:#fff;
+  background:radial-gradient(120% 90% at 85% 0%,rgba(109,91,208,.55),transparent 60%),linear-gradient(150deg,#0b1d3a,#14396b);box-shadow:0 30px 60px -40px rgba(11,29,58,.85)}
+.mv-head{display:flex;align-items:center;gap:10px;padding:14px 16px 0 18px;font:600 12.5px/1.4 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.02em;color:rgba(255,255,255,.8)}
+.mv-rec{flex:none;width:8px;height:8px;border-radius:50%;background:#26B3F4;box-shadow:0 0 0 4px rgba(38,179,244,.22)}
+.mv-kick{flex:none;font-family:'Space Grotesk',sans-serif;letter-spacing:.08em;color:#8fd8ff}
+.mv-tt{flex:1;min-width:0}
+.mv-time{flex:none;font:600 11px/1 'Space Grotesk',sans-serif;color:rgba(255,255,255,.55)}
+.mv-pp{flex:none;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;cursor:pointer}
+.mv-pp:hover{background:rgba(255,255,255,.18)}
+.mv-pp:focus-visible{outline:2px solid #8fd8ff;outline-offset:2px}
+.mv-pp i{display:block;width:10px;height:11px;border-left:3px solid #fff;border-right:3px solid #fff}
+.mv.is-paused .mv-pp i{width:0;height:0;margin-left:3px;border:0;border-left:10px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.mv-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.mv-track{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0 8px;padding:22px 0 4px}
+.mv-line,.mv-run{position:absolute;left:0;right:0;top:49px}
+.mv-line{left:10%;right:10%;height:2px;margin-top:-1px;border-radius:2px;background:rgba(255,255,255,.16)}
+.mv-fill{position:absolute;inset:0;border-radius:2px;background:linear-gradient(90deg,#8fd8ff,#26B3F4 55%,#b9a8ff);transform-origin:0 50%}
+.mv-run{z-index:1;height:0;pointer-events:none;opacity:0}
+.mv-tok{position:absolute;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(38,179,244,.35),0 0 18px 5px rgba(143,216,255,.75)}
+.mv-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:0 3px;text-align:center}
+.mv-dot{position:relative;display:flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:16px;background:#162a55;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5)}
+.mv-dot .sv-ic{width:22px;height:22px}
+.mv-lit{position:absolute;inset:-1px;display:flex;align-items:center;justify-content:center;border-radius:inherit;color:#fff;
+  background:linear-gradient(140deg,#6d5bd0,#26B3F4);box-shadow:0 0 0 4px rgba(38,179,244,.2),0 12px 26px -10px rgba(38,179,244,.95)}
+.mv-end .mv-dot{border-radius:50%}
+.mv-end .mv-lit{background:linear-gradient(140deg,#1fb6a6,#26B3F4)}
+.mv-lb{font-size:12px;line-height:1.35;font-weight:700;color:#fff;word-break:keep-all;overflow-wrap:anywhere}
+.mv-chip{max-width:100%;padding:3px 8px;border-radius:999px;font-size:10.5px;line-height:1.3;color:#bfe9ff;background:rgba(143,216,255,.13);border:1px solid rgba(143,216,255,.35)}
+.mv-caps{display:grid;margin:12px 18px 0;text-align:center}
+.mv-cap{grid-area:1/1;align-self:center;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.92);opacity:0}
+.mv-c5{opacity:1;font-weight:700;color:#fff}
+.mv-bar{height:3px;margin-top:14px;background:rgba(255,255,255,.12)}
+.mv-bar span{display:block;height:100%;background:linear-gradient(90deg,#26B3F4,#b9a8ff);transform-origin:0 50%}
+html.js .pg.in .mv-run{animation:mvRun var(--mv-t) var(--mv-e) infinite}
+html.js .pg.in .mv-fill{animation:mvFill var(--mv-t) var(--mv-e) infinite}
+html.js .pg.in .mv-n1 .mv-lit,html.js .pg.in .mv-n1 .mv-chip{animation:mvN1 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-n2 .mv-lit,html.js .pg.in .mv-n2 .mv-chip{animation:mvN2 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-n3 .mv-lit,html.js .pg.in .mv-n3 .mv-chip{animation:mvN3 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-n4 .mv-lit,html.js .pg.in .mv-n4 .mv-chip{animation:mvN4 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-end .mv-lit{animation:mvN5 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-c1{animation:mvC1 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-c2{animation:mvC2 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-c3{animation:mvC3 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-c4{animation:mvC4 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-c5{animation:mvC5 var(--mv-t) var(--mv-p) infinite}
+html.js .pg.in .mv-bar span{animation:mvBar var(--mv-t) linear infinite}
+.mv.is-paused *,.mv.is-off *{animation-play-state:paused!important}
+@keyframes mvRun{0%{transform:translateX(10%);opacity:0}5%,14%{transform:translateX(10%);opacity:1}24%,32%{transform:translateX(30%);opacity:1}42%,50%{transform:translateX(50%);opacity:1}60%,68%{transform:translateX(70%);opacity:1}78%,88%{transform:translateX(90%);opacity:1}94%,100%{transform:translateX(90%);opacity:0}}
+@keyframes mvFill{0%,14%{transform:scaleX(0);opacity:1}24%,32%{transform:scaleX(.25);opacity:1}42%,50%{transform:scaleX(.5);opacity:1}60%,68%{transform:scaleX(.75);opacity:1}78%,90%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
+@keyframes mvN1{0%,2%{opacity:0;transform:scale(.6)}7%{opacity:1;transform:scale(1.12)}11%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes mvN2{0%,22%{opacity:0;transform:scale(.6)}27%{opacity:1;transform:scale(1.12)}31%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes mvN3{0%,40%{opacity:0;transform:scale(.6)}45%{opacity:1;transform:scale(1.12)}49%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes mvN4{0%,58%{opacity:0;transform:scale(.6)}63%{opacity:1;transform:scale(1.12)}67%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes mvN5{0%,76%{opacity:0;transform:scale(.6)}81%{opacity:1;transform:scale(1.12)}85%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes mvC1{0%,4%{opacity:0;transform:translateY(8px)}8%,19%{opacity:1;transform:none}22%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes mvC2{0%,24%{opacity:0;transform:translateY(8px)}28%,37%{opacity:1;transform:none}40%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes mvC3{0%,42%{opacity:0;transform:translateY(8px)}46%,55%{opacity:1;transform:none}58%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes mvC4{0%,60%{opacity:0;transform:translateY(8px)}64%,73%{opacity:1;transform:none}76%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes mvC5{0%,78%{opacity:0;transform:translateY(8px)}82%,92%{opacity:1;transform:none}95%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes mvBar{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@media screen and (max-width:600px){.mv{margin-top:18px;border-radius:16px}.mv-head{padding:12px 12px 0 14px;font-size:12px}.mv-track{margin:0 2px;padding-top:18px}.mv-line,.mv-run{top:39px}
+  .mv-dot{width:42px;height:42px;border-radius:13px}.mv-dot .sv-ic{width:18px;height:18px}.mv-lb{font-size:10.5px}.mv-chip{padding:2px 5px;font-size:9.5px}.mv-caps{margin:10px 12px 0}.mv-cap{font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){.mv *{animation:none!important}.mv-run,.mv-pp,.mv-bar{display:none}.mv-caps{margin-bottom:18px}}
+@media print{.mv{display:none!important}}
+</style>
+<script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.mv-pp');if(!b)return;var f=b.closest('.mv'),p=f.classList.toggle('is-paused');b.setAttribute('aria-pressed',p?'true':'false')});
+document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('is-off',!e.isIntersecting)})});[].forEach.call(document.querySelectorAll('.mv'),function(f){io.observe(f)})})</script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="ic-list" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></symbol>
   <symbol id="ic-report" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 18v-3M12 18v-6M16 18v-4"/></symbol>
@@ -1452,6 +1521,26 @@ html.js .pg.in .cyc--live>.cyc-a::after{animation:svDot 8s linear infinite}
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">日系企業での約11年間、営業、IT、人事の各チームを率いてきました。営業担当2～3名の管理、約27名の支店における部下5～6名のチーム運営、さらに人事を1人で担う体制から5名のチームへの拡大と統括を経験しました。いずれの役職でも、目標と役割、工程、毎日の数字、育成という共通の考え方でチームを動かしてきました。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">Over about 11 years at Japanese companies, I have led teams in sales, IT and HR: managing 2 to 3 sales staff, running a team of 5 to 6 in a branch of about 27 people, and growing HR from a function I ran alone into a team of five. In every role I used the same approach: clear targets and roles, standard steps, daily numbers and coaching.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Trong khoảng 11 năm làm ở công ty Nhật, tôi đã quản lý đội ngũ ở mảng kinh doanh, IT và nhân sự: quản lý 2 đến 3 nhân viên kinh doanh, điều hành đội 5 đến 6 người trong chi nhánh khoảng 27 người, và từ chỗ một mình phụ trách nhân sự đến dẫn dắt đội 5 người. Ở vai trò nào, tôi cũng theo một cách làm chung: mục tiêu và vai trò rõ ràng, quy trình chuẩn, số liệu hằng ngày và kèm cặp con người.</p>
+  <figure class="mv rv" style="--d:150ms">
+    <figcaption class="mv-head"><span class="mv-rec"></span><span class="mv-kick">WORKFLOW</span><span class="mv-tt" data-l="ja">タスクを成果につなげる流れ</span><span class="mv-tt" data-l="en">How I turn a task into a result</span><span class="mv-tt" data-l="vi">Cách tôi đưa một task đến kết quả</span><span class="mv-time" aria-hidden="true">4.8s</span><button class="mv-pp" type="button" aria-pressed="false"><i aria-hidden="true"></i><span class="mv-sr" data-l="ja">一時停止</span><span class="mv-sr" data-l="en">Pause animation</span><span class="mv-sr" data-l="vi">Tạm dừng chuyển động</span></button></figcaption>
+    <div class="mv-track">
+      <div class="mv-line" aria-hidden="true"><span class="mv-fill"></span></div>
+      <div class="mv-run" aria-hidden="true"><span class="mv-tok"></span></div>
+      <div class="mv-node mv-n1"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-people"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-people"/></svg></span></span><b class="mv-lb" data-l="ja">目標と<wbr>役割</b><b class="mv-lb" data-l="en">Targets &amp; roles</b><b class="mv-lb" data-l="vi">Mục tiêu, vai trò</b><span class="mv-chip" data-l="ja">KPI</span><span class="mv-chip" data-l="en">KPIs</span><span class="mv-chip" data-l="vi">KPI</span></div>
+      <div class="mv-node mv-n2"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-list"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-list"/></svg></span></span><b class="mv-lb" data-l="ja">工程の<wbr>標準化</b><b class="mv-lb" data-l="en">Standard steps</b><b class="mv-lb" data-l="vi">Chuẩn hóa quy trình</b><span class="mv-chip" data-l="ja">SOP</span><span class="mv-chip" data-l="en">SOP</span><span class="mv-chip" data-l="vi">SOP</span></div>
+      <div class="mv-node mv-n3"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg></span></span><b class="mv-lb" data-l="ja">日々の<wbr>数字</b><b class="mv-lb" data-l="en">Daily numbers</b><b class="mv-lb" data-l="vi">Số liệu hằng ngày</b><span class="mv-chip" data-l="ja">Claude</span><span class="mv-chip" data-l="en">Claude</span><span class="mv-chip" data-l="vi">Claude</span></div>
+      <div class="mv-node mv-n4"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-meet"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-meet"/></svg></span></span><b class="mv-lb" data-l="ja">確認と<wbr>指導</b><b class="mv-lb" data-l="en">Review &amp; coach</b><b class="mv-lb" data-l="vi">Rà soát, kèm cặp</b><span class="mv-chip" data-l="ja">コーチング</span><span class="mv-chip" data-l="en">Coaching</span><span class="mv-chip" data-l="vi">Kèm cặp</span></div>
+      <div class="mv-node mv-end"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-trend"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-trend"/></svg></span></span><b class="mv-lb" data-l="ja">成果</b><b class="mv-lb" data-l="en">Result</b><b class="mv-lb" data-l="vi">Kết quả</b></div>
+    </div>
+    <div class="mv-caps">
+      <p class="mv-cap mv-c1" data-l="ja">メンバーごとの役割、KPI、評価基準を最初に定めます。</p><p class="mv-cap mv-c1" data-l="en">First I set each member's role, KPIs and appraisal criteria.</p><p class="mv-cap mv-c1" data-l="vi">Trước hết, tôi đặt vai trò, KPI và tiêu chí đánh giá cho từng người.</p>
+      <p class="mv-cap mv-c2" data-l="ja">業務を書き出し、「完了」の定義をチームで共有します。</p><p class="mv-cap mv-c2" data-l="en">We write the work out and agree on what "done" means.</p><p class="mv-cap mv-c2" data-l="vi">Cả đội viết ra công việc và thống nhất thế nào là "hoàn thành".</p>
+      <p class="mv-cap mv-c3" data-l="ja">作業時間、タスク、進捗をClaudeで毎日集計します。</p><p class="mv-cap mv-c3" data-l="en">I compile hours, tasks and progress with Claude every day.</p><p class="mv-cap mv-c3" data-l="vi">Mỗi ngày, tôi dùng Claude tổng hợp giờ làm, task và tiến độ.</p>
+      <p class="mv-cap mv-c4" data-l="ja">毎日の確認で停滞の原因を探り、メンバーをコーチします。</p><p class="mv-cap mv-c4" data-l="en">In the daily review I find out why work is stuck and coach the member.</p><p class="mv-cap mv-c4" data-l="vi">Trong buổi rà soát mỗi ngày, tôi tìm lý do việc bị kẹt và kèm cặp thành viên.</p>
+      <p class="mv-cap mv-c5" data-l="ja">滞った仕事が早く動き出し、チームが目標に近づきます。</p><p class="mv-cap mv-c5" data-l="en">Stalled work moves again sooner, and the team gets closer to its target.</p><p class="mv-cap mv-c5" data-l="vi">Việc bị kẹt được gỡ sớm và cả đội tiến gần mục tiêu hơn.</p>
+    </div>
+    <div class="mv-bar" aria-hidden="true"><span></span></div>
+  </figure>
   <figure class="sv-hero rv" style="--d:160ms"><img src="assets/skills/hero-team.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
   <div class="meta rv" style="--d:180ms;margin-top:18px">
     <div><span>Teams</span><b data-l="ja">営業、IT、人事</b><b data-l="en">Sales, IT, HR</b><b data-l="vi">Kinh doanh, IT, nhân sự</b></div>
@@ -1501,6 +1590,43 @@ html.js .pg.in .cyc--live>.cyc-a::after{animation:svDot 8s linear infinite}
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">役職が変わっても、一貫して次の6つを実践してきました。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">Whatever the role, I have relied on the same six principles.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Dù ở vai trò nào, tôi đều làm sáu việc sau.</p>
+  <!-- Clip workflow 4.8 s (task 7x9o, skill media-business-video). Nguồn + lệnh dựng lại: tools/team-flow/ (node tools/team-flow/render.mjs).
+       Màn <= 600px dùng bản dọc 3:4 (-m) cho chữ đủ to; có nút tạm dừng / phát (WCAG 2.2.2), reduced-motion thì mặc định dừng. -->
+  <style>
+  .tf-vid{position:relative;margin:22px 0 0;max-width:880px;border-radius:22px;overflow:hidden;background:#f4f1fb;border:1px solid #ece8f3;box-shadow:0 30px 60px -42px rgba(59,47,134,.55)}
+  .tf-vid video{display:block;width:100%;height:auto;background:#f4f1fb;cursor:pointer}
+  .tf-pp{position:absolute;right:14px;bottom:14px;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border-radius:50%;
+    border:1px solid rgba(59,47,134,.25);background:rgba(255,255,255,.88);color:#3b2f86;cursor:pointer;box-shadow:0 8px 18px -10px rgba(59,47,134,.6)}
+  .tf-pp:hover{background:#fff}
+  .tf-pp:focus-visible{outline:2px solid #6d5bd0;outline-offset:2px}
+  .tf-pp i{display:block;box-sizing:border-box;width:11px;height:13px;border-left:3.5px solid currentColor;border-right:3.5px solid currentColor}
+  .tf-vid.is-paused .tf-pp i{width:0;height:0;margin-left:4px;border:0;border-left:12px solid currentColor;border-top:7px solid transparent;border-bottom:7px solid transparent}
+  .tf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media screen and (max-width:900px){.tf-vid{margin-top:18px;border-radius:16px}}
+  @media screen and (max-width:600px){.tf-pp{right:10px;bottom:10px;width:34px;height:34px}}
+  @media print{.tf-vid{display:none!important}}
+  </style>
+  <figure class="tf-vid rv" style="--d:160ms">
+    <video class="tf-v" data-l="ja" muted loop playsinline preload="none" poster="assets/workflow/team-flow-ja.webp" width="1280" height="720" aria-label="チーム運営のワークフロー：目標と役割、工程の標準化、日々の数字、原因分析と改善、人材の育成、経営への報告" data-src="assets/workflow/team-flow-ja.mp4" data-src-m="assets/workflow/team-flow-ja-m.mp4" data-poster-m="assets/workflow/team-flow-ja-m.webp"></video>
+    <video class="tf-v" data-l="en" muted loop playsinline preload="none" poster="assets/workflow/team-flow-en.webp" width="1280" height="720" aria-label="How I run a team: targets and roles, standard steps, daily numbers, cause and action, growing people, reporting up" data-src="assets/workflow/team-flow-en.mp4" data-src-m="assets/workflow/team-flow-en-m.mp4" data-poster-m="assets/workflow/team-flow-en-m.webp"></video>
+    <video class="tf-v" data-l="vi" muted loop playsinline preload="none" poster="assets/workflow/team-flow-vi.webp" width="1280" height="720" aria-label="Cách tôi vận hành đội: mục tiêu và vai trò, chuẩn hóa quy trình, số liệu hằng ngày, tìm nguyên nhân, phát triển con người, báo cáo lãnh đạo" data-src="assets/workflow/team-flow-vi.mp4" data-src-m="assets/workflow/team-flow-vi-m.mp4" data-poster-m="assets/workflow/team-flow-vi-m.webp"></video>
+    <button class="tf-pp" type="button" aria-pressed="false"><i aria-hidden="true"></i><span class="tf-sr" data-l="ja">動画を一時停止</span><span class="tf-sr" data-l="en">Pause animation</span><span class="tf-sr" data-l="vi">Tạm dừng hoạt hình</span></button>
+  </figure>
+  <script>/* tf-v: chỉ tải và chạy video của ngôn ngữ đang hiện khi cuộn tới; màn hẹp dùng bản dọc; nút / bấm video để dừng hoặc phát */
+  (function(){var f=document.querySelector('.tf-vid');if(!f)return;
+    var vs=[].slice.call(f.querySelectorAll('video.tf-v')),b=f.querySelector('.tf-pp'),mm=window.matchMedia||function(){return{}};
+    var narrow=!!mm('(max-width: 600px)').matches,stop=!!mm('(prefers-reduced-motion: reduce)').matches;
+    if(narrow)vs.forEach(function(v){v.poster=v.getAttribute('data-poster-m');v.width=720;v.height=960});
+    function run(v){if(!v.getAttribute('src')){v.muted=true;v.src=v.getAttribute(narrow?'data-src-m':'data-src')}var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    function cur(){for(var i=0;i<vs.length;i++)if(vs[i].getClientRects().length)return vs[i]}
+    function set(p){stop=p;f.classList.toggle('is-paused',p);b.setAttribute('aria-pressed',p?'true':'false');var v=cur();if(v){if(p)v.pause();else run(v)}}
+    f.classList.toggle('is-paused',stop);b.setAttribute('aria-pressed',stop?'true':'false');
+    b.addEventListener('click',function(){set(!stop)});
+    vs.forEach(function(v){v.addEventListener('click',function(){set(!stop)})});
+    if(!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;
+      if(e.isIntersecting){if(!stop)run(v)}else if(!v.paused)v.pause()})},{threshold:0.2});
+    vs.forEach(function(v){io.observe(v)})})();</script>
   <div class="g3 rv" style="--d:180ms;margin-top:16px">
     <div class="card sv-card"><img class="sv-spot" src="assets/skills/t1-targets.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="fl4-n">01</span><h3 data-l="ja">目標と役割の明確化</h3><h3 data-l="en">Set targets and roles</h3><h3 data-l="vi">Đặt mục tiêu và vai trò</h3>
       <p data-l="ja">メンバーごとの役割、KPI、評価基準を最初に定め、達成すべきことを全員が共有できる状態をつくります。</p><p data-l="en">I first set each member's role, KPIs and appraisal criteria so that everyone knows what a good result looks like.</p><p data-l="vi">Tôi đặt trước vai trò, KPI và tiêu chí đánh giá cho từng người để ai cũng biết mình cần đạt điều gì.</p></div>
@@ -1550,6 +1676,26 @@ html.js .pg.in .cyc--live>.cyc-a::after{animation:svDot 8s linear infinite}
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">ChatGPTとClaudeを日々の業務に組み込み、資料の要約、数字の集計、議事録、報告書の下書きといった繰り返しの作業をワークフロー化しています。生まれた時間は、問題の原因分析と解決、そして人にしかできない仕事に充てています。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">I build ChatGPT and Claude into my daily work and turn repetitive tasks such as summarising documents, compiling figures, writing minutes and drafting reports into a workflow. I use the time saved to find root causes, solve problems and handle the work that needs a person.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi đưa ChatGPT và Claude vào công việc hằng ngày, biến các việc lặp lại như tóm tắt tài liệu, tổng hợp số liệu, viết biên bản họp, soạn nháp báo cáo thành quy trình. Thời gian tiết kiệm được, tôi dành cho việc phân tích nguyên nhân, giải quyết vấn đề và những việc cần con người.</p>
+  <figure class="mv rv" style="--d:150ms">
+    <figcaption class="mv-head"><span class="mv-rec"></span><span class="mv-kick">WORKFLOW</span><span class="mv-tt" data-l="ja">繰り返しの作業をAIに任せる流れ</span><span class="mv-tt" data-l="en">How I hand repetitive work to AI</span><span class="mv-tt" data-l="vi">Cách tôi giao việc lặp lại cho AI</span><span class="mv-time" aria-hidden="true">4.8s</span><button class="mv-pp" type="button" aria-pressed="false"><i aria-hidden="true"></i><span class="mv-sr" data-l="ja">一時停止</span><span class="mv-sr" data-l="en">Pause animation</span><span class="mv-sr" data-l="vi">Tạm dừng chuyển động</span></button></figcaption>
+    <div class="mv-track">
+      <div class="mv-line" aria-hidden="true"><span class="mv-fill"></span></div>
+      <div class="mv-run" aria-hidden="true"><span class="mv-tok"></span></div>
+      <div class="mv-node mv-n1"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-pen"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-pen"/></svg></span></span><b class="mv-lb" data-l="ja">書き出す</b><b class="mv-lb" data-l="en">Write it out</b><b class="mv-lb" data-l="vi">Liệt kê</b><span class="mv-chip" data-l="ja">工程の分解</span><span class="mv-chip" data-l="en">Steps</span><span class="mv-chip" data-l="vi">Chia bước</span></div>
+      <div class="mv-node mv-n2"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-repeat"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-repeat"/></svg></span></span><b class="mv-lb" data-l="ja">定型作業の<wbr>洗い出し</b><b class="mv-lb" data-l="en">Spot repetition</b><b class="mv-lb" data-l="vi">Tìm việc lặp</b><span class="mv-chip" data-l="ja">毎日、毎週</span><span class="mv-chip" data-l="en">Daily, weekly</span><span class="mv-chip" data-l="vi">Ngày, tuần</span></div>
+      <div class="mv-node mv-n3"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-chip"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-chip"/></svg></span></span><b class="mv-lb" data-l="ja">AIに<wbr>任せる</b><b class="mv-lb" data-l="en">Hand to AI</b><b class="mv-lb" data-l="vi">Giao cho AI</b><span class="mv-chip" data-l="ja">ChatGPT、Claude</span><span class="mv-chip" data-l="en">ChatGPT, Claude</span><span class="mv-chip" data-l="vi">ChatGPT, Claude</span></div>
+      <div class="mv-node mv-n4"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-check"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-check"/></svg></span></span><b class="mv-lb" data-l="ja">人が<wbr>確認</b><b class="mv-lb" data-l="en">A person checks</b><b class="mv-lb" data-l="vi">Người kiểm tra</b><span class="mv-chip" data-l="ja">最終判断</span><span class="mv-chip" data-l="en">Final call</span><span class="mv-chip" data-l="vi">Quyết định cuối</span></div>
+      <div class="mv-node mv-end"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-heart"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-heart"/></svg></span></span><b class="mv-lb" data-l="ja">人の<wbr>仕事へ</b><b class="mv-lb" data-l="en">Time for people</b><b class="mv-lb" data-l="vi">Việc của con người</b></div>
+    </div>
+    <div class="mv-caps">
+      <p class="mv-cap mv-c1" data-l="ja">業務を工程に分解し、時間のかかる箇所を把握します。</p><p class="mv-cap mv-c1" data-l="en">I split the job into steps and see where the time goes.</p><p class="mv-cap mv-c1" data-l="vi">Tôi chia công việc thành từng bước và xem thời gian tốn vào đâu.</p>
+      <p class="mv-cap mv-c2" data-l="ja">毎日、毎週繰り返す定型の作業を洗い出します。</p><p class="mv-cap mv-c2" data-l="en">I pick out the fixed tasks that repeat every day or week.</p><p class="mv-cap mv-c2" data-l="vi">Tôi chọn ra những việc có khuôn mẫu, lặp lại mỗi ngày, mỗi tuần.</p>
+      <p class="mv-cap mv-c3" data-l="ja">プロンプトとテンプレートを用意し、要約や集計をAIに任せます。</p><p class="mv-cap mv-c3" data-l="en">With prompts and templates ready, AI does the summaries and totals.</p><p class="mv-cap mv-c3" data-l="vi">Với prompt và mẫu có sẵn, AI làm phần tóm tắt và tổng hợp.</p>
+      <p class="mv-cap mv-c4" data-l="ja">AIの結果は人が確認し、最終判断も人が担います。</p><p class="mv-cap mv-c4" data-l="en">A person checks the AI output and makes the final call.</p><p class="mv-cap mv-c4" data-l="vi">Con người kiểm tra kết quả AI và đưa ra quyết định cuối cùng.</p>
+      <p class="mv-cap mv-c5" data-l="ja">生まれた時間は、原因の分析や人との対話に充てます。</p><p class="mv-cap mv-c5" data-l="en">The time saved goes to finding root causes and talking with people.</p><p class="mv-cap mv-c5" data-l="vi">Thời gian tiết kiệm được dành cho phân tích nguyên nhân và trao đổi với con người.</p>
+    </div>
+    <div class="mv-bar" aria-hidden="true"><span></span></div>
+  </figure>
   <figure class="sv-hero rv" style="--d:160ms"><img src="assets/skills/hero-ai.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
   <div class="meta rv" style="--d:180ms;margin-top:18px">
     <div><span>Tools</span><b>ChatGPT, Claude, Sesame</b></div>
