@@ -6,4 +6,4 @@ Nội dung theo CV mới `Rirekisho_ThaiTranHoangNha.pdf` (履歴書兼職務経
 
 https://hoangnhajp.github.io/portfolio/
 
-Kiểm tra: `node tests/check-cv-rirekisho.mjs`, `node tests/check-no-cv-section.mjs`, `node tests/check-sales-trip-photos.mjs`, `node tests/check-candidate-voice.mjs` (giọng ứng viên), `node tests/check-no-avatar.mjs` (không còn ảnh chân dung), `node tests/browser-cv.mjs` (cần Chrome).
+Kiểm tra: `node tests/check-cv-rirekisho.mjs`, `node tests/check-no-cv-section.mjs`, `node tests/check-sales-trip-photos.mjs`, `node tests/check-candidate-voice.mjs` (giọng ứng viên), `node tests/check-no-avatar.mjs` (không còn ảnh chân dung), `node tests/check-ja-natural-style.mjs` (văn phong JA kiểu trang công ty / tin tức Nhật), `node tests/check-copy-natural-all.mjs` (JA/EN/VI toàn site không văn dịch), `node tests/browser-cv.mjs` (cần Chrome).
