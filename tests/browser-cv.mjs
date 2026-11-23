@@ -1,4 +1,4 @@
-// Kiểm trang theo CV mới trên Chrome headless thật (CDP, không cần thư viện): lỗi JS, 3 ngôn ngữ, mobile, in A4, nhúng PDF.
+// Kiểm trang theo CV mới trên Chrome headless thật (CDP, không cần thư viện): lỗi JS, 3 ngôn ngữ, mobile, in A4, link PDF sidebar (trang nhúng PDF đã bỏ).
 // Chạy: node tests/browser-cv.mjs   (thoát 0 = đạt). CHROME=<đường dẫn> để đổi trình duyệt.
 import { spawn } from 'node:child_process';
 import { mkdtempSync, readFileSync, existsSync, rmSync } from 'node:fs';
@@ -54,7 +54,7 @@ async function main() {
 
   const EXPECT = {
     ja: ['営業部 アシスタントマネージャー 兼 人事部長', 'ベトナム支店 営業マネージャー', '顧客の課題を聞き取り'],
-    en: ['Assistant manager, Sales department, and head of HR', 'Sales manager, Vietnam branch', 'Hearing client issues'],
+    en: ['Assistant manager, Sales department, and head of HR', 'Sales manager, Vietnam branch', 'Reporting and order coordination'],
     vi: ['Trợ lý trưởng phòng Kinh doanh kiêm trưởng phòng Nhân sự', 'Quản lý kinh doanh, chi nhánh Việt Nam', 'Lắng nghe vấn đề của khách'],
   };
   // Chữ Nhật được phép còn hiện ở EN / VI (tên riêng, nhãn ngôn ngữ, eyebrow gốc)
@@ -82,7 +82,7 @@ async function main() {
       ok(r.wrong === 0, `${tag}: ${r.wrong} khối khác ngôn ngữ đang hiện`);
       for (const s of EXPECT[lang]) ok(r.text.includes(s), `${tag}: thiếu chuỗi "${s}"`);
       ok(r.overflowX <= 1, `${tag}: tràn ngang ${r.overflowX}px`);
-      ok(r.iframe && r.iframe.src.startsWith('Rirekisho_ThaiTranHoangNha.pdf') && r.iframe.h >= 300, `${tag}: khung PDF CV lỗi ${JSON.stringify(r.iframe)}`);
+      ok(r.iframe === null, `${tag}: trang nhúng PDF CV phải đã bỏ (task 4pxr) ${JSON.stringify(r.iframe)}`);
       ok(r.sbPdf === 'Rirekisho_ThaiTranHoangNha.pdf', `${tag}: link PDF sidebar = ${r.sbPdf}`);
       if (lang !== 'ja') {
         const bad = r.leaf.filter((t) => !JA_OK.test(t) && !/^[A-Za-z0-9 ]+ ／ /.test(t));
@@ -120,7 +120,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-cv (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-cv: ${checks} lượt kiểm, 0 lỗi JS, 3 ngôn ngữ x profile/sales x desktop/mobile, không sót chữ Nhật ở EN/VI, in A4 không cắt trang, khung PDF CV hiện`);
+    console.log(`PASS browser-cv: ${checks} lượt kiểm, 0 lỗi JS, 3 ngôn ngữ x profile/sales x desktop/mobile, không sót chữ Nhật ở EN/VI, in A4 không cắt trang, trang nhúng PDF CV đã bỏ, link PDF sidebar còn`);
     process.exit(0);
   }, 300);
 });

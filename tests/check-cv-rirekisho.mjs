@@ -1,5 +1,5 @@
 // Portfolio khớp CV mới (Rirekisho 履歴書兼職務経歴書, 3 trang): không còn CV cũ, không còn nội dung trái CV mới,
-// CV mới nằm trong source và được nhúng / liên kết, đủ 3 ngôn ngữ. Chạy: node tests/check-cv-rirekisho.mjs (thoát 0 = đạt)
+// CV mới nằm trong source và được liên kết, đủ 3 ngôn ngữ. Chạy: node tests/check-cv-rirekisho.mjs (thoát 0 = đạt)
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
@@ -22,12 +22,8 @@ if (existsSync(join(root, CV))) {
   ok(b.subarray(0, 5).toString() === '%PDF-' && b.length > 100 * 1024, `${CV} không phải PDF hợp lệ`);
 }
 
-// 2. CV mới được chèn vào trang: link sidebar + section #cv có nhúng PDF + nút tải
+// 2. CV mới liên kết qua link sidebar (trang nhúng PDF #cv đã bỏ ở task 4pxr, xem check-no-cv-section.mjs)
 ok(new RegExp(`class="sb-pdf" href="${CV}"`).test(html), 'link sidebar chưa trỏ tới CV mới');
-const cv = (html.match(/<section[^>]*id="cv"[\s\S]*?<\/section>/) || [''])[0];
-ok(cv, 'thiếu section #cv');
-ok(new RegExp(`<(iframe|object|embed)[^>]+${CV}`).test(cv), '#cv chưa nhúng PDF');
-ok(new RegExp(`<a[^>]+href="${CV}"[^>]*download`).test(cv), '#cv thiếu nút tải PDF');
 
 // 3. Chỉ còn view Profile + Sales (bỏ Finance / HR / JD / Matching / Management vì không có trong CV mới)
 const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]);
@@ -66,4 +62,4 @@ const ids = new Set([...html.matchAll(/\sid="([\w-]+)"/g)].map((m) => m[1]));
 for (const [, h] of html.matchAll(/href="#([\w-]+)"/g)) ok(ids.has(h), `link #${h} không có đích`);
 
 if (fails.length) { console.error(`FAIL check-cv-rirekisho (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-cv-rirekisho: chỉ còn ${CV}, đã nhúng + link, view profile/sales, 0 nội dung cũ trái CV, ${FACTS.length} sự thật CV có mặt, ${secs.length} section đủ 3 ngôn ngữ`);
+console.log(`PASS check-cv-rirekisho: chỉ còn ${CV}, đã link sidebar, view profile/sales, 0 nội dung cũ trái CV, ${FACTS.length} sự thật CV có mặt, ${secs.length} section đủ 3 ngôn ngữ`);
