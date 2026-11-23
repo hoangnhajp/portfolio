@@ -1,0 +1,50 @@
+// Giọng ứng viên (task bybv): chữ portfolio đọc như ứng viên kể cho nhà tuyển dụng, không phải gạch đầu dòng CV cứng.
+// Chạy: node tests/check-candidate-voice.mjs [index.html] (thoát 0 = đạt)
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+const html = readFileSync(process.argv[2] || fileURLToPath(new URL('../index.html', import.meta.url)), 'utf8');
+const fails = [];
+const ok = (c, m) => { if (!c) fails.push(m); };
+const strip = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const prof = (html.match(/<main class="wrap" data-view="profile">([\s\S]*?)<\/main>/) || [])[1] || '';
+const bullets = (l) => [...prof.matchAll(new RegExp(`<div class="lines" data-l="${l}">([\\s\\S]*?)</div>`, 'g'))]
+  .flatMap((m) => [...m[1].matchAll(/<p>([\s\S]*?)<\/p>/g)].map((p) => strip(p[1])));
+const share = (arr, re) => (arr.length ? arr.filter((s) => re.test(s)).length / arr.length : 0);
+const pct = (x) => `${Math.round(x * 100)}%`;
+
+// 1. Gạch đầu dòng kinh nghiệm nói ở ngôi thứ nhất / câu hoàn chỉnh
+const ja = bullets('ja'), en = bullets('en'), vi = bullets('vi');
+ok(ja.length >= 20 && ja.length === en.length && en.length === vi.length, `số gạch đầu dòng lệch ja/en/vi: ${ja.length}/${en.length}/${vi.length}`);
+const sJa = share(ja, /(ました|ます|でした)。?$/), sEn = share(en, /^(I|I'm|I’ve|I've|My|When|As|At|In|With|After|Before)\b/), sVi = share(vi, /(^|\s)(Tôi|tôi)\s/);
+ok(sJa >= 0.6, `JA: chỉ ${pct(sJa)} gạch đầu dòng là câu です・ます (cần >= 60%)`);
+ok(sEn >= 0.6, `EN: chỉ ${pct(sEn)} gạch đầu dòng nói ở ngôi thứ nhất (cần >= 60%)`);
+ok(sVi >= 0.5, `VI: chỉ ${pct(sVi)} gạch đầu dòng có chủ ngữ "tôi" (cần >= 50%)`);
+
+// 2. Không sáo rỗng, không lặp công thức, xưng hô nhất quán
+const viText = [...html.matchAll(/data-l="vi">([\s\S]*?)<\/(span|p|div)>/g)].map((m) => strip(m[1])).join(' ');
+ok(!/(^|[\s,.(])bạn(?! bè)([\s,.!?)]|$)/i.test(viText), 'VI: còn gọi người đọc là "bạn" (dùng "anh/chị")');
+for (const c of ['passionate', 'results-driven', 'dynamic', 'leverage', 'synergy', 'spearheaded', 'proven track record', 'go-getter', 'I am excited to'])
+  ok(!new RegExp(`\\b${c}\\b`, 'i').test(html), `EN: còn sáo ngữ "${c}"`);
+const n = (s) => html.split(s).length - 1;
+ok(n('ご紹介します') <= 1, `JA: "ご紹介します" lặp ${n('ご紹介します')} lần`);
+ok(n('Here is') <= 1, `EN: "Here is" lặp ${n('Here is')} lần`);
+ok(n('貢献できると確信') <= 1, 'JA: "貢献できると確信" lặp');
+ok(!html.includes('—'), 'có dấu gạch ngang dài');
+
+// 3. Viết lại không làm rơi dữ kiện (MYCOM: khiếu nại; HR: tuyển dụng từ chưa kinh nghiệm)
+const mycom = (html.match(/<section[^>]*id="w-mycom"[\s\S]*?<\/section>/) || [''])[0];
+for (const [l, s] of [['ja', 'クレーム'], ['en', 'complaint'], ['vi', 'khiếu nại'], ['ja', '未経験'], ['vi', 'chưa có kinh nghiệm']])
+  ok(mycom.includes(s), `#w-mycom (${l}) mất dữ kiện "${s}"`);
+ok(mycom.includes('提案書'), '#w-mycom (ja) mất dữ kiện "提案書"');
+const career = (html.match(/<section[^>]*id="career"[\s\S]*?<\/section>/) || [''])[0];
+const ch2 = (career.match(/<h2[\s\S]*?<\/h2>/) || [''])[0];
+for (const s of ['約11年', 'about 11 years', 'khoảng 11 năm']) ok(ch2.toLowerCase().includes(s.toLowerCase()), `#career h2 thiếu "${s}"`);
+ok(career.includes('一身上の都合により'), '#career (ja) mất "一身上の都合により"');
+
+// 4. Từ điển dịch một nguồn: bản dịch mới không bị window.__D2 ghi đè, không chép lặp var D
+ok((html.match(/var D=\{/g) || []).length === 1, `var D bị khai báo ${(html.match(/var D=\{/g) || []).length} lần`);
+ok(!/Object\.assign\(D\s*,/.test(html), 'còn khối Object.assign(D, ...) (bị __D2 ghi đè khi gộp); sửa thẳng trong __D2 / D');
+
+if (fails.length) { console.error(`FAIL check-candidate-voice (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
+console.log(`PASS check-candidate-voice: ${ja.length} gạch đầu dòng x3, JA です・ます ${pct(sJa)}, EN ngôi thứ nhất ${pct(sEn)}, VI "tôi" ${pct(sVi)}, không sáo ngữ / lặp / "bạn", giữ dữ kiện MYCOM`);
