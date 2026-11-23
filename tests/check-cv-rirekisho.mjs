@@ -25,9 +25,10 @@ if (existsSync(join(root, CV))) {
 // 2. CV mới liên kết qua link sidebar (trang nhúng PDF #cv đã bỏ ở task 4pxr, xem check-no-cv-section.mjs)
 ok(new RegExp(`class="sb-pdf" href="${CV}"`).test(html), 'link sidebar chưa trỏ tới CV mới');
 
-// 3. Chỉ còn view Profile + Sales (bỏ Finance / HR / JD / Matching / Management vì không có trong CV mới)
+// 3. View Profile + Sales (bỏ Finance / HR / JD / Matching / Management cũ vì không có trong CV mới)
+//    + Team Management, AI Skills (task cg5a, người vận hành yêu cầu, nội dung theo hồ sơ gốc: check-team-ai-tabs.mjs)
 const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]);
-ok(views.join(',') === 'profile,sales', `view phải là profile,sales; đang ${views.join(',')}`);
+ok(views.join(',') === 'profile,sales,team,ai', `view phải là profile,sales,team,ai; đang ${views.join(',')}`);
 const tops = [...html.matchAll(/<a href="#[\w-]+" data-view="(\w+)"/g)].map((m) => m[1]);
 ok(tops.every((v) => views.includes(v)), `menu trên trỏ tới view không tồn tại: ${tops.join(',')}`);
 
@@ -42,7 +43,7 @@ for (const s of STALE) ok(!html.includes(s), `còn nội dung cũ trái CV mới
 const FACTS = ['MAYEKAWA VIETNAM CO., LTD.（MYCOM）', '営業部 アシスタントマネージャー 兼 人事部長', '2022年2月 ～ 2026年6月',
   'ベトナム支店 営業マネージャー', '2019年2月 ～ 2022年2月', 'ITコミュニケーター', '2017年8月 ～ 2019年2月',
   '部品部 売上管理担当', '2015年6月 ～ 2017年8月', '国際決済部 国際決済担当', '2011年9月 ～ 2015年6月',
-  '日本語能力試験 N2', 'TOEIC 680点', '1989年7月31日', 'nhatth3107@gmail.com', '+84 903 191 364',
+  '日本語能力試験 N2', 'TOEIC 680点', '1989年7月31日', // email / SĐT nằm ở trang Liên hệ đã bỏ (task jofj)
   '日本の仕事の進め方を理解し、日本人とベトナム人をつなぐ力', '顧客の課題を聞き取り、社内と連携して解決まで進める力',
   '分かりやすい資料を作り、人に教えて定着させる力', 'AIを使ったCV解析、JDマッチングシステムの設計と開発を主導'];
 for (const s of FACTS) ok(html.includes(s), `thiếu nội dung CV mới: "${s}"`);
@@ -50,7 +51,7 @@ for (const s of FACTS) ok(html.includes(s), `thiếu nội dung CV mới: "${s}"
 // 6. Mỗi section của view Profile viết mới đủ 3 ngôn ngữ (khối data-l ja / en / vi cân nhau)
 const prof = (html.match(/<main class="wrap" data-view="profile">([\s\S]*?)<\/main>/) || [])[1] || '';
 const secs = [...prof.matchAll(/<section[^>]*id="([\w-]+)"[^>]*>([\s\S]*?)<\/section>/g)];
-ok(secs.length >= 14, `view Profile phải >= 14 section, đang ${secs.length}`);
+ok(secs.length >= 13, `view Profile phải >= 13 section (trang Liên hệ đã bỏ, task jofj), đang ${secs.length}`);
 for (const [, id, body] of secs) {
   if (id === 'aiops' || id === 'aidash') continue; // 2 trang mẫu giữ nguyên, dịch qua từ điển D
   const n = (l) => (body.match(new RegExp(`data-l="${l}"`, 'g')) || []).length;

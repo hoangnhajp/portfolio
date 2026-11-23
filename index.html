@@ -307,7 +307,7 @@ html.js .pg.in .rv{animation:pmRise .82s cubic-bezier(.2,.7,.2,1) both;animation
   [data-num]::after{display:none}
   .g2 .ch svg{max-width:460px;margin:0 auto}
   .sb-nav a em{min-width:26px}
-  #contact>.ft{display:flex}
+  #pr>.ft{display:flex}
   #toc{display:none}
   .wrap .pg[data-even]>.rv~.rv:not(.kw):not(.kw-en):not(.kwbar):not(.kw-sub){margin-top:22px!important}
   .wrap .pg .cyc-loop{margin-top:10px!important}
@@ -317,7 +317,6 @@ html.js .pg.in .rv{animation:pmRise .82s cubic-bezier(.2,.7,.2,1) both;animation
   #cover{min-height:100vh;padding-top:120px}
   #cover .cover-photo{right:var(--gut);top:120px;width:340px;height:452px}
   #cover>div:not(.deco):not(.cover-photo){max-width:640px}
-  #contact{min-height:80vh}
   /* sidebar */
   .wrap{padding-right:248px}
   .sb{position:fixed;top:0;right:0;width:248px;height:100vh;z-index:50;
@@ -463,6 +462,8 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <nav class="top-nav" aria-label="Menu">
       <a href="#cover" data-view="profile">My Profile</a>
       <a href="#sales-top" data-view="sales">Task: Sales</a>
+      <a href="#team-top" data-view="team">Task: Team Management</a>
+      <a href="#ai-top" data-view="ai">Task: AI Skills</a>
     </nav>
   </div>
 </header>
@@ -488,7 +489,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
       <a href="#aiops" data-sec="aiops"><em>11</em><span data-l="ja">AI業務管理</span><span data-l="en">AI management</span><span data-l="vi">Quản lý bằng AI</span></a>
       <a href="#aidash" data-sec="aidash"><em>12</em><span data-l="ja">AIダッシュボード</span><span data-l="en">AI dashboard</span><span data-l="vi">Dashboard AI</span></a>
       <a href="#pr" data-sec="pr"><em>13</em><span data-l="ja">自己PR</span><span data-l="en">Self PR</span><span data-l="vi">Giới thiệu bản thân</span></a>
-      <a href="#contact" data-sec="contact"><em>14</em><span data-l="ja">連絡先</span><span data-l="en">Contact</span><span data-l="vi">Liên hệ</span></a>
     </nav>
     <nav class="sb-nav" data-for="sales" hidden>
       <a href="#sales-top" data-sec="sales-top"><em>TOP</em><span>概要</span></a>
@@ -497,6 +497,18 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
       <a href="#sales-reports" data-sec="sales-reports"><em>03</em><span>報告と会議</span></a>
       <a href="#sales-kpi" data-sec="sales-kpi"><em>04</em><span>KPIの管理</span></a>
       <a href="#sales-flow" data-sec="sales-flow"><em>05</em><span>仕事の流れ</span></a>
+    </nav>
+    <nav class="sb-nav" data-for="team" hidden>
+      <a href="#team-top" data-sec="team-top"><em>TOP</em><span data-l="ja">概要</span><span data-l="en">Overview</span><span data-l="vi">Tổng quan</span></a>
+      <a href="#team-records" data-sec="team-records"><em>01</em><span data-l="ja">役職ごとの記録</span><span data-l="en">Records by role</span><span data-l="vi">Ghi nhận theo vai trò</span></a>
+      <a href="#team-skills" data-sec="team-skills"><em>02</em><span data-l="ja">チームの動かし方</span><span data-l="en">How I run a team</span><span data-l="vi">Cách tôi quản lý đội</span></a>
+      <a href="#team-daily" data-sec="team-daily"><em>03</em><span data-l="ja">毎日の確認</span><span data-l="en">Daily check</span><span data-l="vi">Rà soát hằng ngày</span></a>
+    </nav>
+    <nav class="sb-nav" data-for="ai" hidden>
+      <a href="#ai-top" data-sec="ai-top"><em>TOP</em><span data-l="ja">概要</span><span data-l="en">Overview</span><span data-l="vi">Tổng quan</span></a>
+      <a href="#ai-approach" data-sec="ai-approach"><em>01</em><span data-l="ja">ワークフロー化</span><span data-l="en">My AI workflow</span><span data-l="vi">Quy trình hóa với AI</span></a>
+      <a href="#ai-uses" data-sec="ai-uses"><em>02</em><span data-l="ja">AIを使う場面</span><span data-l="en">Where I use AI</span><span data-l="vi">Việc tôi dùng AI</span></a>
+      <a href="#ai-people" data-sec="ai-people"><em>03</em><span data-l="ja">人にしかできない仕事</span><span data-l="en">Work only people can do</span><span data-l="vi">Việc cần con người</span></a>
     </nav>
     <a class="sb-pdf" href="Rirekisho_ThaiTranHoangNha.pdf" target="_blank" rel="noopener"><span data-l="ja">履歴書（PDF）を開く</span><span data-l="en">Open CV (PDF, Japanese)</span><span data-l="vi">Mở CV (PDF, tiếng Nhật)</span></a>
   </div>
@@ -575,10 +587,9 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <a href="#aiops"><em>11</em><b><span data-l="ja">AIで進めるチームの業務管理</span><span data-l="en">Team management with AI</span><span data-l="vi">Quản lý công việc nhóm bằng AI</span></b><span>AI Management</span></a>
     <a href="#aidash"><em>12</em><b><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b><span>AI Dashboard</span></a>
     <a href="#pr"><em>13</em><b><span data-l="ja">自己PR　3つの強み</span><span data-l="en">Self PR: three strengths</span><span data-l="vi">Giới thiệu bản thân: 3 điểm mạnh</span></b><span>Self PR</span></a>
-    <a href="#contact"><em>14</em><b><span data-l="ja">連絡先</span><span data-l="en">Contact</span><span data-l="vi">Liên hệ</span></b><span>Contact</span></a>
   </nav>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>01 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>01 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 02 プロフィール ═══════ -->
@@ -656,7 +667,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>02 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>02 ／ 13</p></div>
 </section>
 
 <!-- 03 Projects board: bảng dự án / portfolio, mỗi thẻ dẫn tới trang chi tiết -->
@@ -766,7 +777,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </a>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>03 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>03 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 04 スキル ═══════ -->
@@ -829,7 +840,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>04 ／ 14</p></div>
+  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>04 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 05 学歴、職歴 ═══════ -->
@@ -885,7 +896,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>05 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>05 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 06 MAYEKAWA ═══════ -->
@@ -956,7 +967,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>06 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>06 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 07 JILNESTA 営業マネージャー ═══════ -->
@@ -1024,7 +1035,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>07 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>07 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 08 JILNESTA ITコミュニケーター ═══════ -->
@@ -1065,7 +1076,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   </div>
 
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>08 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>08 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 09 Isuzu ／ LienViet ═══════ -->
@@ -1113,7 +1124,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <p class="qt" style="font-size:18px;color:#2b2540"><span data-l="ja">報連相の徹底、数字を使った分かりやすい報告、<br />原因分析に基づく筋道を立てた説明。</span><span data-l="en">Consistent horenso, clear reports with numbers,<br />and logical explanations based on cause analysis.</span><span data-l="vi">Horenso nghiêm túc, báo cáo rõ ràng bằng số liệu,<br />giải thích mạch lạc dựa trên phân tích nguyên nhân.</span></p>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>09 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>09 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 10 語学、PC、AI ═══════ -->
@@ -1160,7 +1171,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>10 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>10 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 11 AI業務管理：仕組み ═══════ -->
@@ -1196,7 +1207,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <div class="rp"><b>D</b><span>7.0h</span><span>4件</span><span>2件</span><span>営業プレゼン資料　<em>2／7 技術部門への確認</em></span></div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>11 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>11 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 12 AI業務管理：ダッシュボード ═══════ -->
@@ -1235,7 +1246,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 
   <p class="rv" style="--d:300ms;margin-top:8px;margin-bottom:6px;font:500 10.5px/1.6 'Noto Sans JP',sans-serif;color:#8a83a0">※ グラフと表の数値は、仕組みを説明するためのサンプルです。</p>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>12 ／ 14</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>12 ／ 13</p></div>
 </section>
 
 <!-- ═══════ 13 自己PR ═══════ -->
@@ -1265,26 +1276,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     </div>
   </div>
 
-  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>13 ／ 14</p></div>
-</section>
-
-<!-- ═══════ 14 連絡先 ═══════ -->
-<section class="pg" data-chap="I" data-num="14" id="contact">
-  <div class="deco halo" style="left:-180px;bottom:-160px"></div>
-  <div class="deco rings"><div class="r1"></div><div class="r2"></div><div class="r3"></div></div>
-  <p class="eb rv">Contact <b>／ 連絡先</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">ここまでお読みいただき、<br /><i>ありがとうございます。</i></span><span data-l="en">Thank you for taking<br /><i>a few minutes to read</i><br />about my work.</span><span data-l="vi">Cảm ơn anh/chị đã dành thời gian<br /><i>tìm hiểu về công việc của tôi.</i></span></h2>
-  <div class="kwbar rv" style="--d:100ms"><span></span></div>
-
-  <div class="rv" style="--d:180ms;margin-top:auto">
-    <div class="g3">
-      <a class="card" href="mailto:nhatth3107@gmail.com" style="text-decoration:none"><span class="lbl" style="color:#6d5bd0">Email</span><p style="color:#16141d;font:700 14px 'Manrope',sans-serif">nhatth3107@gmail.com</p></a>
-      <a class="card" href="tel:+84903191364" style="text-decoration:none"><span class="lbl" style="color:#6d5bd0">Phone</span><p style="color:#16141d;font:700 14px 'Manrope',sans-serif">+84 903 191 364</p></a>
-      <div class="card"><span class="lbl" style="color:#6d5bd0">Location</span><p style="color:#16141d;font:700 14px 'Noto Sans JP',sans-serif"><span data-l="ja">ベトナム、ホーチミン市</span><span data-l="en">Ho Chi Minh City, Vietnam</span><span data-l="vi">TP. Hồ Chí Minh, Việt Nam</span></p></div>
-    </div>
-  </div>
-
-  <div class="ft" style="margin-top:26px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>14 ／ 14</p></div>
+  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>13 ／ 13</p></div>
 </section>
 
 </main>
@@ -1407,6 +1399,196 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     <div class="card"><span class="fl4-n">06</span><h3>報告する</h3><p>週次の予定と結果、出張報告を上司へ提出</p></div>
   </div>
   <p class="ch-t rv" style="--d:240ms;margin:14px 0 0">出典：社内メールの予定表と送受信メール（2022～2024年）、営業部の評価シート（2023年）、組織図と職務記述書（2023年7月）、出張規程（2024年1月）</p>
+</section>
+</main>
+
+<!-- ═══════ Task: Team Management (task cg5a) ═══════ -->
+<style>@media print{#team-records .g2{gap:8px;margin-top:10px!important}#team-records .card{padding:9px 12px}#team-records .card h3{font-size:12px;margin:0 0 4px}#team-records .lines{gap:3px}#team-records .lines p{font-size:9.8px;line-height:1.45}#team-records .lbl{margin-bottom:4px}}</style>
+<main class="wrap" data-view="team" hidden>
+<section class="pg" data-chap="II" id="team-top">
+  <span class="eb rv">TASK　<b>TEAM MANAGEMENT</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">チームの仕事を数字で見える形にし、<br /><i>人を育てて成果につなげてきました。</i></span><span data-l="en">I make the team's work visible in numbers<br /><i>and grow people to deliver results.</i></span><span data-l="vi">Tôi đưa công việc của đội về số liệu<br /><i>và phát triển con người để tạo kết quả.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Team Management</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">日系企業で働いた約11年のうち、営業、IT、人事のチームをまとめてきました。営業担当2～3名の管理、約27名の支店での部下5～6名のチームの運営、そして人事を1人で担当するところから5名のチームを率いるまでです。どの役職でも、目標と役割、工程、毎日の数字、育成という同じ考え方でチームを動かしてきました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Over about 11 years at Japanese companies, I have led teams in sales, IT and HR: managing 2 to 3 sales staff, running a team of 5 to 6 in a branch of about 27 people, and growing HR from a function I ran alone into a team of five. In every role I used the same approach: clear targets and roles, standard steps, daily numbers and coaching.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Trong khoảng 11 năm làm ở công ty Nhật, tôi đã quản lý đội ngũ ở mảng kinh doanh, IT và nhân sự: quản lý 2 đến 3 nhân viên kinh doanh, điều hành đội 5 đến 6 người trong chi nhánh khoảng 27 người, và từ chỗ một mình phụ trách nhân sự đến dẫn dắt đội 5 người. Ở vai trò nào tôi cũng làm theo một cách: mục tiêu và vai trò rõ ràng, quy trình chuẩn, số liệu hằng ngày và kèm cặp con người.</p>
+  <div class="meta rv" style="--d:180ms;margin-top:18px">
+    <div><span>Teams</span><b data-l="ja">営業、IT、人事</b><b data-l="en">Sales, IT, HR</b><b data-l="vi">Kinh doanh, IT, nhân sự</b></div>
+    <div><span>Size</span><b data-l="ja">2～3名、5～6名、1人から5名へ</b><b data-l="en">2 to 3, 5 to 6, one to five</b><b data-l="vi">2 đến 3, 5 đến 6, từ 1 lên 5 người</b></div>
+    <div><span>Numbers</span><b data-l="ja">KPI、日次、週次、月次の報告</b><b data-l="en">KPIs, daily, weekly and monthly reports</b><b data-l="vi">KPI, báo cáo ngày, tuần, tháng</b></div>
+    <div><span>People</span><b data-l="ja">育成、コーチ、評価</b><b data-l="en">Training, coaching, appraisal</b><b data-l="vi">Đào tạo, kèm cặp, đánh giá</b></div>
+  </div>
+</section>
+<section class="pg" data-chap="III" id="team-records">
+  <span class="eb rv">01　<b>RECORDS</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">役職ごとに、<br /><i>チームをまとめた記録です。</i></span><span data-l="en">Records of the teams<br /><i>I led in each role.</i></span><span data-l="vi">Ghi nhận các đội<br /><i>tôi đã quản lý ở từng vai trò.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">会社名は省き、役職と期間、チームの規模、実際に行った管理だけをまとめました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I left out company names and kept only the role, period, team size and what I actually did to manage.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi bỏ tên công ty, chỉ giữ vai trò, thời gian, quy mô đội và những việc quản lý tôi đã làm.</p>
+  <div class="g2 rv" style="--d:180ms;margin-top:16px">
+    <div class="card"><span class="lbl">2022 ～ 2026 ／ HR</span>
+      <h3 data-l="ja">人事部長：1人の体制から5名のチームへ</h3><h3 data-l="en">Head of HR: from a one-person function to a team of five</h3><h3 data-l="vi">Trưởng phòng Nhân sự: từ 1 người lên đội 5 người</h3>
+      <div class="lines" data-l="ja"><p>最初は人事を1人で担当し、その後5名の人事チームを率いました。</p><p>未経験の採用担当2名を育て、採用SOP、面接評価シート、KPI報告の型を日本語と英語でつくりました。</p><p>給与、個人所得税、社会保険を担当するチームを管理しました。</p><p>KPIと人事評価の仕組みをつくって評価の周期を回し、各部門の管理職にパフォーマンスやチームづくりについてコーチしました。</p><p>チームビルディングと年1回の社員アンケートを企画し、結果を制度の改善に使いました。</p></div>
+      <div class="lines" data-l="en"><p>I started by running HR alone and then led an HR team of five.</p><p>I trained 2 recruiters with no prior experience and wrote the hiring SOP, interview scorecard and KPI report templates in Japanese and English.</p><p>I managed the team handling payroll, personal income tax and social insurance.</p><p>I built the KPI and appraisal framework, ran the review cycle and coached managers on performance and team building.</p><p>I planned team-building events and a yearly staff survey, and used the results to improve our policies.</p></div>
+      <div class="lines" data-l="vi"><p>Ban đầu tôi một mình phụ trách nhân sự, sau đó dẫn dắt đội nhân sự 5 người.</p><p>Tôi đào tạo 2 nhân viên tuyển dụng chưa có kinh nghiệm, soạn SOP tuyển dụng, phiếu đánh giá phỏng vấn, mẫu báo cáo KPI bằng tiếng Nhật và tiếng Anh.</p><p>Tôi quản lý đội tính lương, thuế TNCN, BHXH.</p><p>Tôi xây khung KPI và đánh giá nhân sự, vận hành chu kỳ đánh giá và kèm cặp các cấp quản lý về hiệu suất, xây dựng đội.</p><p>Tôi lên kế hoạch team building, khảo sát nhân viên hằng năm và dùng kết quả để cải thiện chính sách.</p></div>
+    </div>
+    <div class="card"><span class="lbl">2022 ～ 2026 ／ Sales</span>
+      <h3 data-l="ja">営業部アシスタントマネージャー：営業担当2～3名</h3><h3 data-l="en">Assistant manager, Sales: 2 to 3 sales staff</h3><h3 data-l="vi">Assistant Manager phòng Kinh doanh: 2 đến 3 nhân viên</h3>
+      <div class="lines" data-l="ja"><p>営業担当2～3名の行動計画、KPI、進捗、見積を管理し、日本語で定期的に報告しました。</p><p>見積と訪問回数を記録する仕組みをつくり、営業活動を数字で見える形にしました。</p></div>
+      <div class="lines" data-l="en"><p>I managed the action plans, KPIs, progress and quotations of 2 to 3 sales staff and reported regularly in Japanese.</p><p>I set up a way to record quotations and client visits so that sales activity could be seen in numbers.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi quản lý kế hoạch hành động, KPI, tiến độ, báo giá của 2 đến 3 nhân viên kinh doanh và báo cáo định kỳ bằng tiếng Nhật.</p><p>Tôi xây cách ghi nhận báo giá và số lần gặp khách để thấy hoạt động kinh doanh bằng số liệu.</p></div>
+    </div>
+    <div class="card"><span class="lbl">2019 ～ 2022 ／ Branch</span>
+      <h3 data-l="ja">支店の営業マネージャー：部下5～6名、支店約27名</h3><h3 data-l="en">Branch sales manager: 5 to 6 direct reports, about 27 staff</h3><h3 data-l="vi">Quản lý kinh doanh chi nhánh: 5 đến 6 cấp dưới, chi nhánh khoảng 27 người</h3>
+      <div class="lines" data-l="ja"><p>営業プロセスと支店の管理体制をゼロからつくり、運用を定着させました。</p><p>営業、ITコミュニケーターの役割、KPI、評価を決め、月次の目標に向けてコーチしました。</p><p>社員ごとの勤務時間、架電数、メール数、顧客訪問数、契約への転換率、売上を確認し、改善策をまとめました。</p><p>KPIが下がった時は活動データから原因を探し、目標を立て直してKPIを回復させました。</p><p>日本の社長へ毎日、毎週、毎月、支店の状況と数字を報告しました。</p></div>
+      <div class="lines" data-l="en"><p>I built the sales process and the branch management system from zero and put them into full use.</p><p>I set roles, KPIs and appraisals for the sales and IT communicator team and coached them toward monthly targets.</p><p>I checked each member's working hours, calls, emails, client visits, conversion to contracts and sales, and proposed improvements.</p><p>When team KPIs dropped, I traced the cause in activity data, reset the targets and brought the KPIs back up.</p><p>I reported the branch status and figures to the President in Japan every day, week and month.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi xây dựng quy trình kinh doanh và hệ thống quản lý chi nhánh từ con số không, đưa vào vận hành hoàn chỉnh.</p><p>Tôi đặt vai trò, KPI, cách đánh giá cho đội sales và IT communicator, kèm cặp đội đạt mục tiêu tháng.</p><p>Tôi theo dõi số liệu từng người: giờ làm, số cuộc gọi, email, lần gặp khách, tỷ lệ chốt hợp đồng, doanh thu, rồi đề xuất cải tiến.</p><p>Khi KPI của đội giảm, tôi tìm nguyên nhân từ dữ liệu hoạt động, đặt lại mục tiêu và đưa KPI hồi phục.</p><p>Tôi báo cáo tình hình và số liệu chi nhánh cho Tổng giám đốc tại Nhật hằng ngày, tuần, tháng.</p></div>
+    </div>
+    <div class="card"><span class="lbl">2017 ～ 2019 ／ IT</span>
+      <h3 data-l="ja">ITコミュニケーター：ITエンジニアチームの進捗と品質</h3><h3 data-l="en">IT communicator: progress and quality of the IT engineer team</h3><h3 data-l="vi">IT communicator: tiến độ và chất lượng của đội kỹ sư IT</h3>
+      <div class="lines" data-l="ja"><p>ITエンジニアチームのタスク、進捗、品質を管理し、日本人の上司に定期的に報告しました。</p><p>仕様書や設計書を日本語、英語、ベトナム語で訳し、要件を開発チームに伝えました。</p><p>基本テストとUATを行い、不具合をエンジニアと確認して、対応が終わるまで追いました。</p></div>
+      <div class="lines" data-l="en"><p>I managed the tasks, progress and quality of the IT engineer team and reported regularly to my Japanese manager.</p><p>I translated specs and designs between Japanese, English and Vietnamese and passed the requirements to the developers.</p><p>I ran basic tests and UAT, checked bugs with the engineers and followed each fix through to the end.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi quản lý công việc, tiến độ, chất lượng của đội kỹ sư IT và báo cáo định kỳ cho cấp trên người Nhật.</p><p>Tôi dịch đặc tả, thiết kế qua lại tiếng Nhật, Anh, Việt và truyền đạt yêu cầu cho đội phát triển.</p><p>Tôi chạy test cơ bản, UAT, xác nhận lỗi với kỹ sư và theo dõi tới khi xử lý xong.</p></div>
+    </div>
+  </div>
+</section>
+<section class="pg" data-chap="IV" id="team-skills">
+  <span class="eb rv">02　<b>HOW I MANAGE</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">記録から見えた、<br /><i>私のチームの動かし方です。</i></span><span data-l="en">How I run a team,<br /><i>drawn from these records.</i></span><span data-l="vi">Cách tôi vận hành đội ngũ,<br /><i>rút ra từ các ghi nhận trên.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">役職が変わっても、私は同じ6つのことを続けてきました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Whatever the role, I have kept doing the same six things.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Dù ở vai trò nào, tôi vẫn làm sáu việc giống nhau.</p>
+  <div class="g3 rv" style="--d:180ms;margin-top:16px">
+    <div class="card"><span class="fl4-n">01</span><h3 data-l="ja">目標と役割を決める</h3><h3 data-l="en">Set targets and roles</h3><h3 data-l="vi">Đặt mục tiêu và vai trò</h3>
+      <p data-l="ja">メンバーごとの役割、KPI、評価の基準を先に決め、何を達成すればよいかを全員がわかる状態にします。</p><p data-l="en">I first set each member's role, KPIs and appraisal criteria so that everyone knows what a good result looks like.</p><p data-l="vi">Tôi đặt trước vai trò, KPI và tiêu chí đánh giá cho từng người để ai cũng biết mình cần đạt điều gì.</p></div>
+    <div class="card"><span class="fl4-n">02</span><h3 data-l="ja">工程を標準化する</h3><h3 data-l="en">Standardise the steps</h3><h3 data-l="vi">Chuẩn hóa quy trình</h3>
+      <p data-l="ja">仕事を最初から最後まで書き出し、「完了」の定義を決めます。止まっている工程がすぐにわかります。</p><p data-l="en">I write each job out from start to finish and define what "done" means, so a stuck step shows up at once.</p><p data-l="vi">Tôi viết ra từng việc từ đầu đến cuối và định nghĩa thế nào là "hoàn thành", để thấy ngay bước nào bị kẹt.</p></div>
+    <div class="card"><span class="fl4-n">03</span><h3 data-l="ja">毎日の数字で見る</h3><h3 data-l="en">Watch the daily numbers</h3><h3 data-l="vi">Theo dõi số liệu hằng ngày</h3>
+      <p data-l="ja">作業時間、タスク数、進捗、架電や訪問の数を毎日集め、感覚ではなく数字で状況を確かめます。</p><p data-l="en">I collect hours, tasks, progress, calls and visits every day and judge the situation by numbers, not by feel.</p><p data-l="vi">Tôi thu số giờ làm, số task, tiến độ, cuộc gọi, lần gặp khách mỗi ngày và nhìn tình hình bằng số liệu chứ không bằng cảm giác.</p></div>
+    <div class="card"><span class="fl4-n">04</span><h3 data-l="ja">原因を探して手を打つ</h3><h3 data-l="en">Find the cause and act</h3><h3 data-l="vi">Tìm nguyên nhân và xử lý</h3>
+      <p data-l="ja">数字が下がった時は、データから原因を探し、目標ややり方を見直して次の行動を決めます。</p><p data-l="en">When the numbers drop, I look for the cause in the data, revise the target or the method and decide the next action.</p><p data-l="vi">Khi số liệu giảm, tôi tìm nguyên nhân trong dữ liệu, điều chỉnh mục tiêu hoặc cách làm và quyết định bước tiếp theo.</p></div>
+    <div class="card"><span class="fl4-n">05</span><h3 data-l="ja">人を育てる</h3><h3 data-l="en">Grow people</h3><h3 data-l="vi">Phát triển con người</h3>
+      <p data-l="ja">未経験のメンバーにはSOPと型を渡してコーチします。採用した社員を7日目、3週目、6週目に振り返るSOPもつくりました。</p><p data-l="en">I give members with no experience SOPs and templates and coach them. I also wrote an SOP to review new hires on day 7, week 3 and week 6.</p><p data-l="vi">Tôi trao cho thành viên chưa có kinh nghiệm SOP và mẫu làm việc rồi kèm cặp. Tôi cũng soạn SOP rà soát nhân viên mới vào ngày 7, tuần 3 và tuần 6.</p></div>
+    <div class="card"><span class="fl4-n">06</span><h3 data-l="ja">部門と経営をつなぐ</h3><h3 data-l="en">Connect departments and management</h3><h3 data-l="vi">Kết nối phòng ban và lãnh đạo</h3>
+      <p data-l="ja">技術、営業、経理の部門と調整し、日本人の経営陣へ日本語で状況と改善案を報告します。</p><p data-l="en">I coordinate with engineering, sales and accounting, and report the status and improvement plans to Japanese management in Japanese.</p><p data-l="vi">Tôi phối hợp với các phòng kỹ thuật, kinh doanh, kế toán và báo cáo tình hình, đề xuất cải tiến cho ban lãnh đạo người Nhật bằng tiếng Nhật.</p></div>
+  </div>
+</section>
+<section class="pg" data-chap="I" id="team-daily">
+  <span class="eb rv">03　<b>DAILY CHECK</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">毎日の確認で、<br /><i>止まっている仕事を早く動かします。</i></span><span data-l="en">A daily check<br /><i>gets stuck work moving again sooner.</i></span><span data-l="vi">Rà soát hằng ngày<br /><i>để việc bị kẹt sớm chạy lại.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">私はチームの業務時間、タスク、進捗を毎日の数字で管理し、日次報告をClaudeで集計して、毎日のミーティングでチームと確認しました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I tracked the team's working hours, tasks and progress with daily numbers, compiled the daily reports with Claude and went through them with the team in our daily meeting.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi quản lý giờ làm, task, tiến độ của đội bằng số liệu hằng ngày, dùng Claude tổng hợp báo cáo ngày và cùng đội rà soát trong cuộc họp mỗi ngày.</p>
+  <div class="cyc rv" style="--d:180ms;margin-top:16px">
+    <div class="card cyc-c"><span class="cyc-n">01</span><h3 data-l="ja">工程の標準化</h3><h3 data-l="en">Standard steps</h3><h3 data-l="vi">Chuẩn hóa quy trình</h3><p data-l="ja">各メンバーが自分の仕事を書き出し、「完了」の定義を決めます。</p><p data-l="en">Each member writes out their work and we define "done".</p><p data-l="vi">Mỗi thành viên viết ra công việc của mình và thống nhất thế nào là "hoàn thành".</p></div>
+    <span class="cyc-a">→</span>
+    <div class="card cyc-c"><span class="cyc-n">02</span><h3 data-l="ja">日次報告</h3><h3 data-l="en">Daily report</h3><h3 data-l="vi">Báo cáo ngày</h3><p data-l="ja">作業時間、タスク数、各タスクの進捗を毎日報告します。</p><p data-l="en">Hours, number of tasks and progress on each task, every day.</p><p data-l="vi">Giờ làm, số task và tiến độ từng task, báo cáo mỗi ngày.</p></div>
+    <span class="cyc-a">→</span>
+    <div class="card cyc-c" style="border-color:#cfc6ef;background:linear-gradient(160deg,#fff,#f4f1fd)"><span class="cyc-n">03</span><h3 data-l="ja">Claudeで分析</h3><h3 data-l="en">Analysis with Claude</h3><h3 data-l="vi">Phân tích bằng Claude</h3><p data-l="ja">工程ごとの時間、完了率、止まっている作業と日数を出します。</p><p data-l="en">Time per step, completion rate, and stuck tasks with days stuck.</p><p data-l="vi">Thời gian từng bước, tỷ lệ hoàn thành, việc bị kẹt và số ngày kẹt.</p></div>
+    <span class="cyc-a">→</span>
+    <div class="card cyc-c"><span class="cyc-n">04</span><h3 data-l="ja">毎日の確認</h3><h3 data-l="en">Daily review</h3><h3 data-l="vi">Rà soát mỗi ngày</h3><p data-l="ja">ミーティングで進捗と状態を確かめ、次の行動を決めます。</p><p data-l="en">In the meeting we check progress and status and decide next actions.</p><p data-l="vi">Trong cuộc họp, cả đội xem tiến độ, trạng thái và quyết định bước tiếp theo.</p></div>
+  </div>
+  <div class="card rv" style="--d:220ms;margin-top:14px"><span class="lbl">More ／ My Profile</span>
+    <p data-l="ja">工程の例、日次報告の型、Claudeで集計したダッシュボードは、My Profile の <a href="#aiops">AI業務管理</a> と <a href="#aidash">AIダッシュボード</a> に載せています。</p>
+    <p data-l="en">Examples of the steps, the daily report format and the dashboard compiled with Claude are in My Profile under <a href="#aiops">AI management</a> and <a href="#aidash">AI dashboard</a>.</p>
+    <p data-l="vi">Ví dụ các bước, mẫu báo cáo ngày và dashboard tổng hợp bằng Claude nằm ở My Profile, mục <a href="#aiops">Quản lý bằng AI</a> và <a href="#aidash">Dashboard AI</a>.</p>
+  </div>
+</section>
+</main>
+
+<!-- ═══════ Task: AI Skills (task cg5a) ═══════ -->
+<main class="wrap" data-view="ai" hidden>
+<section class="pg" data-chap="II" id="ai-top">
+  <span class="eb rv">TASK　<b>AI SKILLS</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">繰り返しの作業はAIに任せ、<br /><i>考えて決める時間を増やしました。</i></span><span data-l="en">I hand repetitive work to AI<br /><i>and spend the time on thinking and deciding.</i></span><span data-l="vi">Tôi giao việc lặp lại cho AI<br /><i>để dành thời gian suy nghĩ và quyết định.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">AI Skills &amp; Workflow</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">私はChatGPTとClaudeを毎日の仕事に組み込み、資料の要約、数字の集計、議事録、報告書の下書きのような繰り返しの作業をワークフローにしています。空いた時間は、問題の原因を分析して解決すること、そして人にしかできない仕事に使っています。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I build ChatGPT and Claude into my daily work and turn repetitive tasks such as summarising documents, compiling figures, writing minutes and drafting reports into a workflow. I spend the time saved on analysing the root causes of problems, solving them, and the work that needs a person.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi đưa ChatGPT và Claude vào công việc hằng ngày, biến các việc lặp lại như tóm tắt tài liệu, tổng hợp số liệu, viết biên bản họp, soạn nháp báo cáo thành quy trình. Thời gian tiết kiệm được, tôi dành cho việc phân tích nguyên nhân, giải quyết vấn đề và những việc cần con người.</p>
+  <div class="meta rv" style="--d:180ms;margin-top:18px">
+    <div><span>Tools</span><b>ChatGPT, Claude, Sesame</b></div>
+    <div><span>Time</span><b data-l="ja">情報整理の時間 80～90%減（4年前比）</b><b data-l="en">80 to 90% less time organising information (vs four years ago)</b><b data-l="vi">Giảm 80 đến 90% thời gian xử lý thông tin (so với 4 năm trước)</b></div>
+    <div><span>Output</span><b data-l="ja">生産性 約3～4倍</b><b data-l="en">About 3 to 4 times the productivity</b><b data-l="vi">Năng suất khoảng 3 đến 4 lần</b></div>
+    <div><span>Rule</span><b data-l="ja">AIの結果は人が確認してから使う</b><b data-l="en">A person checks AI output before it is used</b><b data-l="vi">Con người kiểm tra kết quả AI trước khi dùng</b></div>
+  </div>
+</section>
+<section class="pg" data-chap="III" id="ai-approach">
+  <span class="eb rv">01　<b>MY WORKFLOW</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">仕事を分けて、<br /><i>AIに任せる部分を決めます。</i></span><span data-l="en">I break the work down<br /><i>and decide which part AI takes.</i></span><span data-l="vi">Tôi chia nhỏ công việc<br /><i>và quyết định phần nào giao cho AI.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">繰り返しの作業は、私は次の流れでワークフローにしています。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">This is how I turn repetitive work into a workflow.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi biến việc lặp lại thành quy trình theo các bước sau.</p>
+  <div class="cyc rv" style="--d:180ms;margin-top:16px">
+    <div class="card cyc-c"><span class="cyc-n">01</span><h3 data-l="ja">書き出す</h3><h3 data-l="en">Write it out</h3><h3 data-l="vi">Viết ra</h3><p data-l="ja">仕事を最初から最後まで工程に分け、どこに時間がかかっているかを見ます。</p><p data-l="en">I split the job into steps from start to finish and see where the time goes.</p><p data-l="vi">Tôi chia công việc thành từng bước từ đầu đến cuối và xem thời gian bị tốn ở đâu.</p></div>
+    <span class="cyc-a">→</span>
+    <div class="card cyc-c"><span class="cyc-n">02</span><h3 data-l="ja">繰り返しを見つける</h3><h3 data-l="en">Spot the repetition</h3><h3 data-l="vi">Tìm việc lặp lại</h3><p data-l="ja">毎日、毎週くり返す作業や、型が決まっている作業を選び出します。</p><p data-l="en">I pick out the tasks repeated every day or week and those that follow a fixed pattern.</p><p data-l="vi">Tôi chọn ra những việc lặp lại mỗi ngày, mỗi tuần và những việc có khuôn mẫu cố định.</p></div>
+    <span class="cyc-a">→</span>
+    <div class="card cyc-c" style="border-color:#cfc6ef;background:linear-gradient(160deg,#fff,#f4f1fd)"><span class="cyc-n">03</span><h3 data-l="ja">AIに任せる</h3><h3 data-l="en">Hand it to AI</h3><h3 data-l="vi">Giao cho AI</h3><p data-l="ja">プロンプトと型を用意し、要約、集計、入力、下書きをAIに任せます。</p><p data-l="en">I prepare prompts and templates and let AI do the summaries, totals, data entry and drafts.</p><p data-l="vi">Tôi chuẩn bị prompt và mẫu, giao cho AI tóm tắt, tổng hợp, nhập liệu và soạn nháp.</p></div>
+    <span class="cyc-a">→</span>
+    <div class="card cyc-c"><span class="cyc-n">04</span><h3 data-l="ja">人が確認して決める</h3><h3 data-l="en">A person checks and decides</h3><h3 data-l="vi">Con người kiểm tra, quyết định</h3><p data-l="ja">AIの結果は人が確認してから使い、判断と最後の決定は人が行います。</p><p data-l="en">A person checks the AI output before it is used, and people make the judgement and the final call.</p><p data-l="vi">Kết quả AI được kiểm tra trước khi dùng; con người đưa ra nhận định và quyết định cuối cùng.</p></div>
+  </div>
+  <div class="card rv" style="--d:220ms;margin-top:14px"><span class="lbl">Example</span>
+    <h3 data-l="ja">例：チームの日次報告</h3><h3 data-l="en">Example: the team's daily report</h3><h3 data-l="vi">Ví dụ: báo cáo ngày của đội</h3>
+    <div class="lines" data-l="ja"><p>AIがすること：日次報告から工程別の時間、完了率、止まっている作業と日数を集計します。</p><p>私がすること：止まっている理由をメンバーと話し、次の行動と優先順位を決めます。</p></div>
+    <div class="lines" data-l="en"><p>What AI does: totals the time per step, completion rate, and stuck tasks with days stuck from the daily reports.</p><p>What I do: talk with members about why work is stuck, then decide the next actions and priorities.</p></div>
+    <div class="lines" data-l="vi"><p>Phần AI làm: từ báo cáo ngày, tổng hợp thời gian từng bước, tỷ lệ hoàn thành, việc bị kẹt và số ngày kẹt.</p><p>Phần tôi làm: trao đổi với thành viên vì sao việc bị kẹt, rồi quyết định bước tiếp theo và thứ tự ưu tiên.</p></div>
+  </div>
+</section>
+<section class="pg" data-chap="IV" id="ai-uses">
+  <span class="eb rv">02　<b>WHERE I USE AI</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">要約、集計、記録、学習。<br /><i>AIを使っている場面です。</i></span><span data-l="en">Summaries, figures, records, learning:<br /><i>where I use AI.</i></span><span data-l="vi">Tóm tắt, số liệu, ghi chép, học tập:<br /><i>những việc tôi dùng AI.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">実際の仕事でAIを使っている場面を、目的ごとにまとめました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">These are the places I actually use AI at work, grouped by purpose.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi tổng hợp những việc thực tế mình dùng AI, chia theo mục đích.</p>
+  <div class="g3 rv" style="--d:180ms;margin-top:16px">
+    <div class="card"><span class="lbl">Read</span><h3 data-l="ja">資料と動画の要約</h3><h3 data-l="en">Summarising documents and video</h3><h3 data-l="vi">Tóm tắt tài liệu, video</h3>
+      <p data-l="ja">数十～数百ページの資料や動画をすぐに要約します。営業では10～20ページの技術資料を、顧客と社内向けの短いプレゼンにまとめました。</p><p data-l="en">I summarise documents of tens to hundreds of pages and video files right away. In sales, I turned 10 to 20 page technical documents into short presentations for clients and colleagues.</p><p data-l="vi">Tôi tóm tắt ngay tài liệu hàng chục đến hàng trăm trang và file video. Khi làm kinh doanh, tôi rút tài liệu kỹ thuật 10 đến 20 trang thành bài thuyết trình ngắn cho khách và nội bộ.</p></div>
+    <div class="card"><span class="lbl">Numbers</span><h3 data-l="ja">数字の集計と照合</h3><h3 data-l="en">Compiling and cross-checking figures</h3><h3 data-l="vi">Tổng hợp, đối chiếu số liệu</h3>
+      <p data-l="ja">数字を集めて分析し、問題の原因を整理します。経理と人事のデータの差異を照合し、誤りを見つけました。</p><p data-l="en">I collect and analyse figures and sort out root causes. I cross-checked accounting and HR data to find discrepancies and errors.</p><p data-l="vi">Tôi thu thập, phân tích số liệu và tìm nguyên nhân gốc. Tôi đối chiếu số liệu kế toán, nhân sự để tìm chênh lệch và chỗ sai.</p></div>
+    <div class="card"><span class="lbl">Meetings</span><h3 data-l="ja">議事録とチームの進捗</h3><h3 data-l="en">Minutes and team progress</h3><h3 data-l="vi">Biên bản họp, tiến độ đội</h3>
+      <p data-l="ja">会議メモと議事録をつくり、チームの業務時間、タスク、進捗を管理しています。</p><p data-l="en">I write meeting notes and minutes and track the team's working hours, tasks and progress.</p><p data-l="vi">Tôi ghi memo, biên bản họp và quản lý giờ làm, task, tiến độ của đội.</p></div>
+    <div class="card"><span class="lbl">HR &amp; Admin</span><h3 data-l="ja">人事、総務の社内ツール</h3><h3 data-l="en">Internal tools for HR and admin</h3><h3 data-l="vi">Công cụ nội bộ nhân sự, hành chính</h3>
+      <p data-l="ja">ChatGPTやAIエージェントで、人事、総務の管理ツール、毎日のリマインド、データ入力、管理用の報告書、組織図をつくりました。</p><p data-l="en">I used ChatGPT and AI agents for HR and admin tools, daily reminders, data entry, management reports and org charts.</p><p data-l="vi">Tôi dùng ChatGPT, AI agent làm công cụ quản lý nhân sự, hành chính, nhắc việc hằng ngày, nhập liệu, báo cáo quản trị và sơ đồ tổ chức.</p></div>
+    <div class="card"><span class="lbl">Recruiting</span><h3 data-l="ja">AIを使った採用の仕組み</h3><h3 data-l="en">AI recruiting systems</h3><h3 data-l="vi">Hệ thống tuyển dụng dùng AI</h3>
+      <p data-l="ja">CV解析とJDマッチング（適合度スコア）のシステム、採用AIエージェントの設計と開発を主導しました。AIの判定は担当者が確認してから反映します。</p><p data-l="en">I led the design and development of a CV-parsing and JD-matching system with fit scores, and of an AI recruiting agent. A person checks each AI decision before it is applied.</p><p data-l="vi">Tôi chủ trì thiết kế và phát triển hệ thống phân tích CV, so khớp JD có điểm phù hợp và AI agent tuyển dụng. Người phụ trách kiểm tra kết quả AI trước khi áp dụng.</p></div>
+    <div class="card"><span class="lbl">Learning</span><h3 data-l="ja">学習と語学</h3><h3 data-l="en">Learning and languages</h3><h3 data-l="vi">Học tập, ngoại ngữ</h3>
+      <p data-l="ja">会計、人事、営業の知識をAIで学び、Sesameで日本語と英語の会話を練習しています。</p><p data-l="en">I learn accounting, HR and sales know-how with AI, and practise Japanese and English conversation with Sesame.</p><p data-l="vi">Tôi học thêm kiến thức kế toán, nhân sự, kinh doanh bằng AI và luyện hội thoại tiếng Nhật, tiếng Anh với Sesame.</p></div>
+  </div>
+</section>
+<section class="pg" data-chap="I" id="ai-people">
+  <span class="eb rv">03　<b>TIME FOR PEOPLE</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">空いた時間は、<br /><i>人にしかできない仕事に使います。</i></span><span data-l="en">I use the time saved<br /><i>on work only people can do.</i></span><span data-l="vi">Thời gian tiết kiệm được,<br /><i>tôi dành cho việc chỉ con người làm được.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">4年前と比べ、情報を集めて整理する時間は80～90%減り、生産性は約3～4倍になりました（私自身の見積もりです）。以前は3～4名で行っていた量の仕事を、今は1人で処理しています。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Compared with four years ago, I spend 80 to 90% less time gathering and organising information, and my productivity is about 3 to 4 times higher (my own estimate). I now handle on my own the workload that used to take 3 to 4 people.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">So với 4 năm trước, tôi giảm 80 đến 90% thời gian thu thập, xử lý thông tin và năng suất tăng khoảng 3 đến 4 lần (tôi tự ước tính). Một mình tôi xử lý lượng việc trước đây cần 3 đến 4 người.</p>
+  <div class="g2 rv" style="--d:180ms;margin-top:16px">
+    <div class="card"><span class="lbl">AI</span><h3 data-l="ja">AIに任せる繰り返しの作業</h3><h3 data-l="en">Repetitive work I hand to AI</h3><h3 data-l="vi">Việc lặp lại tôi giao cho AI</h3>
+      <div data-l="ja"><div class="chips"><span class="chip">要約</span><span class="chip">数字の集計</span><span class="chip">データ入力</span><span class="chip">議事録</span><span class="chip">報告書の下書き</span><span class="chip">差異の照合</span><span class="chip">リマインド</span></div></div>
+      <div data-l="en"><div class="chips"><span class="chip">Summaries</span><span class="chip">Totals</span><span class="chip">Data entry</span><span class="chip">Minutes</span><span class="chip">Report drafts</span><span class="chip">Cross-checks</span><span class="chip">Reminders</span></div></div>
+      <div data-l="vi"><div class="chips"><span class="chip">Tóm tắt</span><span class="chip">Tổng hợp số liệu</span><span class="chip">Nhập liệu</span><span class="chip">Biên bản họp</span><span class="chip">Nháp báo cáo</span><span class="chip">Đối chiếu chênh lệch</span><span class="chip">Nhắc việc</span></div></div>
+    </div>
+    <div class="card" style="border-color:#cfc6ef;background:linear-gradient(160deg,#fff,#f4f1fd)"><span class="lbl">People</span><h3 data-l="ja">私が時間を使う仕事</h3><h3 data-l="en">Work I spend my time on</h3><h3 data-l="vi">Việc tôi dành thời gian</h3>
+      <div data-l="ja"><div class="chips"><span class="chip">原因の分析と判断</span><span class="chip">優先順位を決める</span><span class="chip">メンバーとの対話とコーチ</span><span class="chip">顧客、経営陣との交渉と報告</span><span class="chip">最後の確認</span></div></div>
+      <div data-l="en"><div class="chips"><span class="chip">Root-cause analysis and judgement</span><span class="chip">Setting priorities</span><span class="chip">Talking with and coaching members</span><span class="chip">Negotiating and reporting with clients and management</span><span class="chip">Final checks</span></div></div>
+      <div data-l="vi"><div class="chips"><span class="chip">Phân tích nguyên nhân, nhận định</span><span class="chip">Đặt thứ tự ưu tiên</span><span class="chip">Trao đổi, kèm cặp thành viên</span><span class="chip">Đàm phán, báo cáo với khách và lãnh đạo</span><span class="chip">Kiểm tra cuối cùng</span></div></div>
+    </div>
+  </div>
+  <div class="g2 rv" style="--d:220ms;margin-top:14px">
+    <div class="card" style="background:linear-gradient(150deg,#0b1d3a,#14396b);border:0">
+      <p class="num" style="color:#8fd8ff">80～90<small>%</small></p><p class="num-l" style="color:rgba(255,255,255,.72)" data-l="ja">情報整理の時間を削減（4年前比）</p><p class="num-l" style="color:rgba(255,255,255,.72)" data-l="en">Less time organising information (vs four years ago)</p><p class="num-l" style="color:rgba(255,255,255,.72)" data-l="vi">Giảm thời gian xử lý thông tin (so với 4 năm trước)</p>
+    </div>
+    <div class="card"><span class="lbl">Team</span>
+      <p data-l="ja">チームにもChatGPTとAIエージェントの使い方を教え、報告書の作成や数字の集計に使えるようにしました。</p><p data-l="en">I also taught my team to use ChatGPT and AI agents for writing reports and compiling figures.</p><p data-l="vi">Tôi cũng hướng dẫn đội dùng ChatGPT, AI agent để làm báo cáo và tổng hợp số liệu.</p>
+    </div>
+  </div>
 </section>
 </main>
 
@@ -2051,10 +2233,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
     "Self PR ／ Giới thiệu bản thân",
     "Self PR"
   ],
-  "Contact ／ 連絡先":[
-    "Contact ／ Liên hệ",
-    "Contact"
-  ],
   "5～6名":[
     "5–6<small> người</small>",
     "5–6<small> staff</small>"
@@ -2202,10 +2380,6 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   "自己PR":[
     "Tự giới thiệu",
     "Self PR"
-  ],
-  "連絡先":[
-    "Liên hệ",
-    "Contact"
   ],
   "Contents ／ 目次":[
     "Contents ／ Mục lục",
