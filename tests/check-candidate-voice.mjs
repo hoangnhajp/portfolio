@@ -46,5 +46,19 @@ ok(career.includes('一身上の都合により'), '#career (ja) mất "一身�
 ok((html.match(/var D=\{/g) || []).length === 1, `var D bị khai báo ${(html.match(/var D=\{/g) || []).length} lần`);
 ok(!/Object\.assign\(D\s*,/.test(html), 'còn khối Object.assign(D, ...) (bị __D2 ghi đè khi gộp); sửa thẳng trong __D2 / D');
 
+// 5. Tóm tắt đầu Hồ sơ + câu phụ bìa viết theo giọng ứng viên (task gex9), không còn câu CV cũ, giữ dữ kiện
+const OLD = ['主に法人営業、営業マネージャー、ITコミュニケーターを経験してまいりました', 'mainly in B2B sales, as a sales manager and as an IT communicator', 'chủ yếu ở mảng kinh doanh B2B, quản lý kinh doanh và IT communicator'];
+for (const s of OLD) ok(!html.includes(s), `còn câu tóm tắt cũ "${s}"`);
+const card = (prof.match(/<span class="lbl">Summary[\s\S]*?<\/div>/) || [''])[0];
+const sum = (l) => strip((card.match(new RegExp(`<p data-l="${l}">([\\s\\S]*?)</p>`)) || ['', ''])[1]);
+const sv = sum('vi'), se = sum('en'), sj = sum('ja');
+ok(/^Tôi\s/.test(sv) && (sv.match(/(^|\s)tôi\s/gi) || []).length >= 3, 'VI tóm tắt: cần mở đầu "Tôi" và kể ở ngôi thứ nhất');
+ok(/^I\s/.test(se) && (se.match(/\bI\b/g) || []).length >= 3, 'EN tóm tắt: cần mở đầu "I" và kể ở ngôi thứ nhất');
+ok((sj.match(/ました。/g) || []).length >= 3, 'JA tóm tắt: cần câu です・ます kể việc đã làm');
+for (const [t, l, keys] of [[sj, 'ja', ['約11年', 'JILNESTA', 'MAYEKAWA', 'UAT', '契約更新', '5～6名', '1名から5名']],
+  [se, 'en', ['about 11 years', 'JILNESTA', 'MAYEKAWA', 'UAT', 'contract renewals', '5 to 6', 'one person to a team of five']],
+  [sv, 'vi', ['khoảng 11 năm', 'JILNESTA', 'MAYEKAWA', 'UAT', 'gia hạn hợp đồng', '5 đến 6', '1 người lên 5 người']]])
+  for (const k of keys) ok(t.includes(k), `${l} tóm tắt thiếu dữ kiện "${k}"`);
+
 if (fails.length) { console.error(`FAIL check-candidate-voice (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
 console.log(`PASS check-candidate-voice: ${ja.length} gạch đầu dòng x3, JA です・ます ${pct(sJa)}, EN ngôi thứ nhất ${pct(sEn)}, VI "tôi" ${pct(sVi)}, không sáo ngữ / lặp / "bạn", giữ dữ kiện MYCOM`);
