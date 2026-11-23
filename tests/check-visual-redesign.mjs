@@ -23,14 +23,14 @@ function webpInfo(b) {
   return null;
 }
 
-// 1) Icon: mỗi symbol trong sprite là 1 hình 3D raster (assets/icons/*.webp), không còn nét vẽ line cũ
+// 1) Icon: mỗi symbol trong sprite là 1 icon 3D của bộ icon video GPRFLEXEYE (assets/gx/*.webp, task v3c1), không còn nét vẽ line cũ
 const syms = [...html.matchAll(/<symbol id="(ic-[\w-]+)"[^>]*>([\s\S]*?)<\/symbol>/g)];
 ok(syms.length >= 13, `sprite chỉ có ${syms.length} symbol (cần >= 13)`);
 const iconHashes = new Set();
 for (const [, id, body] of syms) {
   ok(!/<(path|rect|circle|line|polyline)\b/.test(body), `#${id}: còn nét vẽ line SVG cũ`);
   const href = (body.match(/<image\b[^>]*\bhref="([^"]+)"/) || [])[1] || '';
-  ok(href === `assets/icons/${id}.webp`, `#${id}: cần <image href="assets/icons/${id}.webp">, thấy "${href}"`);
+  ok(/^assets\/gx\/[a-z-]+\.webp$/.test(href), `#${id}: cần <image href="assets/gx/<icon video>.webp">, thấy "${href}"`);
   const p = join(root, href);
   if (!href || !existsSync(p)) { ok(false, `#${id}: không có file ${href}`); continue; }
   const b = readFileSync(p), info = webpInfo(b), kb = b.length / 1024;
@@ -41,25 +41,15 @@ for (const [, id, body] of syms) {
 }
 ok(iconHashes.size === syms.length, 'có icon bị dùng trùng file');
 
-// 2) 14 hình minh hoạ: đúng kích thước, là bản MỚI (khác hash bản phẳng tím cũ của task z7gh)
-const OLD = new Set(['8fe3995d03cb07d1', 'b2b741e49c07bc60', '6bc7b4bbb0f0a5e8', '3a3a8fee98b2ccaa', '8efeb9a2614d329f', '86336f75650f720c',
-  '318c51c3f9671ef4', 'c92285d19a24942c', 'aa78156a437c3c45', '08dda977c627a857', '5d76650127a7bc1a', 'af5a8ca555289366', '3021d5138133f93f', '5c0bc6859fc6af4f']);
-const imgs = [...html.matchAll(/<img\b[^>]*\bsrc="(assets\/skills\/[\w-]+\.webp)"[^>]*>/g)];
-ok(imgs.length === 14, `cần 14 hình assets/skills, thấy ${imgs.length}`);
-for (const [tag, src] of imgs) {
-  const p = join(root, src);
-  if (!existsSync(p)) { ok(false, `${src}: không có file`); continue; }
-  const b = readFileSync(p), info = webpInfo(b);
-  const w = +(tag.match(/\bwidth="(\d+)"/) || [])[1], h = +(tag.match(/\bheight="(\d+)"/) || [])[1];
-  ok(info && info.w === w && info.h === h, `${src}: file ${info ? info.w + 'x' + info.h : '?'} khác khai báo ${w}x${h}`);
-  ok(!OLD.has(sha(b)), `${src}: vẫn là hình cũ (chưa thiết kế lại)`);
-}
+// 2) 14 hình minh hoạ tĩnh cũ (assets/skills) đã thay bằng cảnh động .gxs từ icon video (task v3c1, kiểm chi tiết ở check-video-icons)
+ok(!/assets\/skills\//.test(html), 'còn hình tĩnh assets/skills');
+ok((html.match(/<div class="[^"]*\bgxs gxs--/g) || []).length === 14, 'cần 14 cảnh động .gxs thay 14 hình minh hoạ');
 
-// 2b) Clip workflow 6 bước (tools/team-flow): icon vẽ tay đã thay bằng icon 3D có file thật, 6 poster đã dựng lại
+// 2b) Clip workflow 6 bước (tools/team-flow): icon là icon video assets/gx có file thật, 6 poster đã dựng lại
 const eng = readFileSync(join(root, 'tools/team-flow/engine.html'), 'utf8');
 const engIcons = JSON.parse(((eng.match(/const ICONS = (\[[^\]]*\])/) || [])[1] || '[]').replace(/'/g, '"'));
 ok(engIcons.length === 6, `engine: cần 6 icon 3D (const ICONS), thấy ${engIcons.length}`);
-for (const n of engIcons) ok(existsSync(join(root, `assets/icons/${n}.webp`)), `engine: thiếu assets/icons/${n}.webp`);
+for (const n of engIcons) ok(existsSync(join(root, `assets/gx/${n}.webp`)), `engine: thiếu assets/gx/${n}.webp`);
 ok(!/el\('circle'|el\('path', \{ d: 'M4 6/.test(eng.slice(eng.indexOf('const NODES'))), 'engine: còn icon vẽ tay (circle/path) trong ô bước');
 const OLD_POSTER = { ja: '7bfcd308ec9a48f9', 'ja-m': '1525bbb2844f3aa8', en: '5298e44412ac0635', 'en-m': 'ae2e638af37ca8b8', vi: '44740e2e9508357d', 'vi-m': '75dca92b464f8653' };
 for (const [k, h] of Object.entries(OLD_POSTER)) {
@@ -73,4 +63,4 @@ ok(css && !/#3b2f86/.test(css), '.sv-ib vẫn là ô gradient tím cũ');
 ok(/\.mv-dot>\.sv-ic\{[^}]*(opacity|filter)/.test(html), 'phim workflow: icon ở trạng thái chưa sáng phải mờ đi (.mv-dot>.sv-ic opacity/filter)');
 
 if (fails.length) { console.error(`FAIL check-visual-redesign (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-visual-redesign: ${syms.length} icon 3D kính mờ (webp alpha), 14 hình minh hoạ mới đúng kích thước, ô icon sáng`);
+console.log(`PASS check-visual-redesign: ${syms.length} icon 3D của video (webp alpha), 14 cảnh động .gxs thay hình tĩnh, ô icon sáng`);

@@ -137,9 +137,9 @@ for (let i = 0; i < N; i++) {
 }
 const P = (i) => NODES[i].parts;
 
-// Icon 3D kính mờ (task zze2, vẽ bằng ChatGPT, dùng chung assets/icons với trang): lớp chờ = xám mờ, lớp bật = màu + nảy nhẹ.
-const ICONS = ['ic-target', 'ic-list', 'ic-trend', 'ic-cause', 'ic-people', 'ic-report'];
-const ICON_SRC = (n) => `../../assets/icons/${n}.webp`;
+// Icon 3D lấy từ bộ icon của video GPRFLEXEYE (task v3c1, dùng chung assets/gx với trang): lớp chờ = xám mờ, lớp bật = màu + nảy nhẹ.
+const ICONS = ['roadmap', 'checklist', 'report-chart', 'magnifier', 'team-group', 'chat-bubbles'];
+const ICON_SRC = (n) => `../../assets/gx/${n}.webp`;
 ICONS.forEach((name, i) => { const n = NODES[i];
   el('image', { href: ICON_SRC(name), x: -4, y: -4, width: 128, height: 128, filter: 'url(#gray)', opacity: .45 }, n.idle);
   const pop = el('g', { transform: 'translate(60 60) scale(.7) translate(-60 -60)' }, n.act); P(i).pop = pop;
@@ -149,7 +149,7 @@ ICONS.forEach((name, i) => { const n = NODES[i];
 // ── Chữ HTML
 document.getElementById('ttl').textContent = L.title;
 const resEl = document.getElementById('res');
-resEl.innerHTML = `<img src="${ICON_SRC('ic-trend')}" width="34" height="34" alt=""><span>${L.result}</span>`;
+resEl.innerHTML = `<img src="${ICON_SRC('shield-check')}" width="34" height="34" alt=""><span>${L.result}</span>`;
 const labs = document.getElementById('labs'); const LABS = [];
 L.steps.forEach(([h, s], i) => {
   const d = document.createElement('div'); d.className = 'lab';

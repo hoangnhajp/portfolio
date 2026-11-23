@@ -55,9 +55,9 @@ const S = {
   'sales-pr': { k: 'hub', core: { ic: 'chat-bubbles', chip: 'English' },
     left: [['cand-man', L('ASEAN社員総会', 'ASEAN staff meeting', 'Hội nghị ASEAN')], ['cand-woman', L('各国の同僚', 'Colleagues across ASEAN', 'Đồng nghiệp các nước')]],
     right: [['magnifier', 'PROPAK · VIV ASIA'], ['office-building', 'MYCOM KOREA']] },
-  'sales-reports': { k: 'ring', v: 30, p: 100, top: L('約', 'about', 'khoảng'), unit: L('回の週次CRM会議', 'weekly CRM meetings', 'buổi họp CRM tuần'),
-    left: [['calendar', L('週次の予定と結果', 'Weekly plans and results', 'Kế hoạch, kết quả tuần')], ['milestone-report', L('月次報告', 'Monthly reports', 'Báo cáo tháng')]],
-    right: [['roadmap', L('出張報告', 'Trip reports', 'Báo cáo công tác')], ['team-group', L('3拠点合同の朝会', 'Three-site morning meeting', 'Họp sáng 3 chi nhánh')]] },
+  // task lbbd: bỏ vòng số "khoảng 30 buổi họp CRM" (không có trong CV), chỉ còn 4 loại báo cáo / họp
+  'sales-reports': { k: 'grid', c: 4, mc: 2, tiles: [['calendar', L('週次の予定と結果', 'Weekly plans and results', 'Kế hoạch, kết quả tuần')], ['milestone-report', L('月次報告', 'Monthly reports', 'Báo cáo tháng')],
+    ['roadmap', L('出張報告', 'Trip reports', 'Báo cáo công tác')], ['team-group', L('3拠点合同の朝会', 'Three-site morning meeting', 'Họp sáng 3 chi nhánh')]] },
   'sales-kpi': { k: 'chart', bars: [[52], [38], [66], [48], [80, 1]], cap: L('見積と訪問を記録', 'Quotes and visits logged', 'Ghi báo giá, lượt gặp'),
     left: [['jd-document', L('見積件数', 'Quotations', 'Số báo giá')]],
     right: [['interview', L('訪問回数', 'Client visits', 'Lượt gặp khách')], ['survey-clipboard', L('評価シート', 'Evaluation sheet', 'Phiếu đánh giá')]] },
@@ -108,15 +108,102 @@ function scene(id, s) {
   return `<figure class="gx gx--${s.k}${long}${big}${s.both ? ' gx--both' : ''}" aria-hidden="true">${stepChip(id)}<div class="gx-in"${cols}>${body}</div></figure>`;
 }
 
+// ── Cảnh nhỏ .gxs (task v3c1) thay 12 hình tĩnh của thẻ kỹ năng + 2 hình đầu tab Team / AI: chỉ dùng icon video assets/gx,
+// chuyển động theo cách làm của video (icon bật vào back.out, trôi nổi, nét đứt tự vẽ, sao chổi chạy, vòng quỹ đạo quay, cột mọc).
+// k: orbit (lõi + vệ tinh nối nét), flow (3 bước nối nét), chart (biểu đồ cột + kính lúp + icon bên). Chip chỉ chữ trung tính (KPI, SOP...).
+const SP = {
+  't1-targets': { k: 'orbit', core: 'roadmap', sats: ['manager', 'team-group', 'report-chart'], chip: 'KPI' },
+  't2-steps': { k: 'flow', steps: ['jd-document', 'workflow-gears', 'checklist'] },
+  't3-numbers': { k: 'chart', bars: [48, 66, 40, 72, 90], hot: 4, side: ['stopwatch', 'calendar'] },
+  't4-cause': { k: 'orbit', core: 'magnifier', sats: ['bottleneck', 'report-chart', 'puzzle-fit'] },
+  't5-people': { k: 'flow', steps: ['survey-clipboard', 'interview', 'team-group'], chip: 'SOP' },
+  't6-connect': { k: 'flow', both: true, steps: ['office-building', 'chat-bubbles', 'manager'], chip: 'JA · EN · VI' },
+  'a1-read': { k: 'flow', steps: ['jd-document', 'lightbulb', 'milestone-report'], chip: 'AI' },
+  'a2-numbers': { k: 'chart', bars: [70, 52, 84, 36, 62], hot: 3, side: ['report-chart', 'shield-check'] },
+  'a3-meetings': { k: 'orbit', core: 'calendar', sats: ['chat-bubbles', 'checklist', 'stopwatch'] },
+  'a4-hr': { k: 'orbit', core: 'building-blocks', sats: ['survey-clipboard', 'envelope', 'profile-stack'] },
+  'a5-recruit': { k: 'flow', steps: ['cv-resume', 'funnel', 'shield-check'], chip: 'JD ✓' },
+  'a6-learning': { k: 'orbit', core: 'lightbulb', sats: ['chat-bubbles', 'key', 'puzzle-fit'] },
+  'hero-team': { k: 'orbit', hero: true, core: 'team-group', sats: ['manager', 'report-chart', 'checklist', 'chat-bubbles'], chip: 'TEAM' },
+  'hero-ai': { k: 'orbit', hero: true, core: 'lightbulb', sats: ['workflow-gears', 'jd-document', 'magnifier', 'interview'], chip: 'AI' },
+};
+const r1 = (n) => Math.round(n * 10) / 10;
+function spot(key, s) {
+  const R = s.hero ? 0.45 : 0.5625;                        // cao / rộng của khung (16:9 thẻ, 20:9 đầu tab)
+  const CORE = s.hero ? 17 : 26, SAT = s.hero ? 10.5 : 15;  // cỡ icon theo % bề rộng khung (cqw)
+  const at = (x, y, i, inner, cls = '') => `<span class="gxs-at${cls}" style="--x:${r1(x)};--y:${r1(y * R)};--i:${i}">${inner}</span>`;
+  const line = (x0, y0, x1, y1, o0, o1, i, both) => {
+    const dx = x1 - x0, dy = (y1 - y0) * R, len = Math.hypot(dx, dy), a = Math.atan2(dy, dx) * 180 / Math.PI;
+    return `<i class="gxs-ln" style="--x:${r1(x0)};--y:${r1(y0 * R)};--a:${r1(a)}deg;--o:${r1(o0)}cqw;--l:${r1(len - o0 - o1)}cqw;--i:${i}"><i class="gx-cm"></i>${both ? '<i class="gx-cm gx-cm--r"></i>' : ''}</i>`;
+  };
+  const chipAt = (x, y, i) => s.chip ? at(x, y, i, `<em class="gx-chip gx-chip--o gxs-chip">${s.chip}</em>`, ' gxs-tx') : '';
+  let body = '';
+  if (s.k === 'orbit') {
+    const P = s.sats.length === 4 ? [[15, 27], [15, 73], [85, 27], [85, 73]] : [[16, 50], [84, 27], [84, 73]];
+    body += `<i class="gxs-ring" style="--x:50;--y:${r1(50 * R)};--d:${CORE + 16}"></i>`;
+    body += P.map(([x, y], i) => line(x, y, 50, 50, SAT / 2 + 1, CORE / 2 + 3, i + 1)).join('');
+    body += at(50, 50, 0, `<span class="gx-orb">${plate(s.core, 'gx-pl--l', 132)}</span>`, ' gxs-core');
+    body += s.sats.map((ic, i) => at(P[i][0], P[i][1], i + 1, plate(ic, '', 88))).join('');
+    body += chipAt(50, 50 + (CORE / 2 + 7) / (100 * R) * 100, s.sats.length + 1);
+  } else if (s.k === 'flow') {
+    const X = [18, 50, 82], Y = s.chip ? 44 : 50;
+    body += X.slice(0, -1).map((x, i) => line(x, Y, X[i + 1], Y, SAT * 0.7, SAT * 0.7, i, s.both)).join('');
+    body += s.steps.map((ic, i) => at(X[i], Y, i, plate(ic, '', 88), i === s.steps.length - 1 ? ' is-hot' : '')).join('');
+    body += chipAt(X[1], Y + (SAT / 2 + 6) / (100 * R) * 100, s.steps.length); // chip dưới bước giữa: không bị cắt mép phải ở thẻ hẹp
+  } else if (s.k === 'chart') {
+    const bars = s.bars.map((h, i) => `<span class="gx-col" style="--h:${h}"><i class="gx-bar${i === s.hot ? ' is-hot' : ''}" style="--h:${h};--i:${i}"></i>${i === s.hot ? `<span class="gx-lens">${img('magnifier', 64)}</span>` : ''}</span>`).join('');
+    body += at(38, 54, 0, `<span class="gx-chartc">${bars}<i class="gx-sheen"></i></span>`, ' gxs-chart');
+    body += s.side.map((ic, i) => at(84, i ? 73 : 30, i + 2, plate(ic, '', 88))).join('');
+  }
+  return `<div class="${s.hero ? '' : 'sv-spot '}gxs gxs--${s.k}${s.hero ? ' gxs--hero' : ''}" data-k="${key}" aria-hidden="true"><div class="gxs-in">${body}</div></div><!--/gxs-->`;
+}
+const SPOT_CSS = `
+/* ── Cảnh nhỏ .gxs (task v3c1): thay hình tĩnh ở thẻ kỹ năng / đầu tab, cùng chất liệu và nhịp chuyển động với video ── */
+.gx,.gxs{--gx-blue:#25A1DB;--gx-or:#F47E2A;--gx-ort:#DD6417;--gx-ink:#1E293B;--gx-body:#475569;
+  --gx-edge:linear-gradient(135deg,rgba(244,126,42,.55),rgba(255,255,255,.2) 45%,rgba(37,161,219,.6));--gx-card:linear-gradient(180deg,#FFFFFF 0%,#F6F9FC 100%);
+  --gx-sh:inset 0 1px 0 rgba(255,255,255,.95),0 1px 2px rgba(15,23,42,.06),0 10px 20px -8px rgba(15,23,42,.14),0 28px 56px -22px rgba(27,127,176,.38),0 22px 44px -30px rgba(244,126,42,.40);
+  --gx-back:cubic-bezier(.34,1.56,.64,1);--gx-out:cubic-bezier(.16,1,.3,1);--gx-o3:cubic-bezier(.165,.84,.44,1);--gx-io:cubic-bezier(.645,.045,.355,1)}
+.gxs{position:relative;isolation:isolate;overflow:hidden;container-type:inline-size;aspect-ratio:16/9;border:1.5px solid transparent}
+.gxs,.sv-spot.gxs{background:radial-gradient(55% 80% at 10% 8%,rgba(37,161,219,.12),transparent 70%) padding-box,radial-gradient(50% 75% at 94% 96%,rgba(244,126,42,.11),transparent 70%) padding-box,var(--gx-card) padding-box,var(--gx-edge) border-box}
+.gxs--hero{aspect-ratio:20/9;border-radius:22px;box-shadow:var(--gx-sh)}
+.sv-hero:has(>.gxs){background:none;border:0;overflow:visible;box-shadow:none}
+.gxs::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.55;background-image:radial-gradient(rgba(100,116,139,.30) 1.2px,transparent 1.3px);background-size:18px 18px;
+  -webkit-mask-image:radial-gradient(70% 75% at 50% 50%,#000 30%,transparent 80%);mask-image:radial-gradient(70% 75% at 50% 50%,#000 30%,transparent 80%)}
+.gxs-in{position:absolute;inset:0}
+.gxs-at{position:absolute;left:calc(var(--x)*1cqw);top:calc(var(--y)*1cqw);transform:translate(-50%,-50%);display:grid;place-items:center}
+.gxs .gx-pl{--s:15cqw;border-radius:calc(var(--s)*.28)}
+.gxs .gx-pl--l{--s:26cqw}
+.gxs--hero .gx-pl{--s:10.5cqw}.gxs--hero .gx-pl--l{--s:17cqw}
+.gxs .is-hot>.gx-pl{--s:17cqw;box-shadow:inset 0 2px 1px rgba(255,255,255,.98),inset 0 -10px 16px -8px rgba(244,126,42,.18),0 5px 0 -1px #FBCBA6,0 0 0 5px rgba(244,126,42,.12),var(--gx-sh)}
+.gxs .gx-orb::before,.gxs .gx-orb::after{inset:-2cqw}
+.gxs-ln{position:absolute;left:calc(var(--x)*1cqw);top:calc(var(--y)*1cqw);width:var(--l);height:2px;margin-top:-1px;transform-origin:0 50%;transform:rotate(var(--a)) translateX(var(--o));
+  background:repeating-linear-gradient(90deg,rgba(37,161,219,.6) 0 5px,transparent 5px 11px)}
+.gxs-ring{position:absolute;left:calc(var(--x)*1cqw);top:calc(var(--y)*1cqw);width:calc(var(--d)*1cqw);height:calc(var(--d)*1cqw);border-radius:50%;border:1.5px dashed rgba(37,161,219,.45);transform:translate(-50%,-50%)}
+.gxs-ring::after{content:'';position:absolute;left:50%;top:-5px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:radial-gradient(circle,#fff 0 22%,#F47E2A 50%,rgba(244,126,42,0) 75%);box-shadow:0 0 10px 3px rgba(244,126,42,.35)}
+.gxs-chip{margin:0;font-size:clamp(9px,2.6cqw,12px);white-space:nowrap}
+.gxs .gx-chartc{width:50cqw;height:32cqw;gap:2cqw;padding:3cqw 3.4cqw 2.6cqw;border-radius:18px}
+.gxs .gx-lens{width:9cqw;height:9cqw;margin-left:-2cqw}
+html.js .gxs .gxs-at>.gx-pl,html.js .gxs .gxs-at>.gx-orb,html.js .gxs .gxs-tx>.gx-chip{animation:gxPop .62s var(--gx-back) both;animation-delay:calc(var(--i,0)*.22s + .15s)}
+html.js .gxs .gx-pl img{animation:gxFloat 3.4s ease-in-out infinite;animation-delay:calc(var(--i,0)*-.7s)}
+html.js .gxs .gxs-ln{animation:gxsDraw .5s var(--gx-io) both;animation-delay:calc(var(--i,0)*.22s + .35s)}
+html.js .gxs .gx-cm{animation:gxRun 2.4s cubic-bezier(.45,0,.55,1) infinite;animation-delay:calc(var(--i,0)*.3s + 1s)}
+html.js .gxs .gx-cm--r{animation-direction:reverse;animation-delay:calc(var(--i,0)*.3s + 2.2s)}
+html.js .gxs .gxs-ring{animation:gxsSpin 18s linear infinite}
+html.js .pg.in .sv-ib .sv-ic,html.js .pg.in .lbl .sv-ic{animation:gxsIc 3.6s ease-in-out infinite}
+html.js .pg.in .cyc-c:nth-child(3) .sv-ic,html.js .pg.in .card:nth-child(2n) .sv-ic{animation-delay:-1.2s}
+html.js .pg.in .cyc-c:nth-child(5) .sv-ic,html.js .pg.in .card:nth-child(3n) .sv-ic{animation-delay:-2.4s}
+html.js .gxs:not(.is-in),html.js .gxs:not(.is-in) *,html.js .gxs:not(.is-in) *::before,html.js .gxs:not(.is-in) *::after{animation-play-state:paused!important}
+.gxs.is-off *,.gxs.is-off *::before,.gxs.is-off *::after{animation-play-state:paused!important}
+@keyframes gxsDraw{0%{opacity:0;transform:rotate(var(--a)) translateX(var(--o)) scaleX(0)}100%{opacity:1;transform:rotate(var(--a)) translateX(var(--o)) scaleX(1)}}
+@keyframes gxsSpin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes gxsIc{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-3px) rotate(-4deg) scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.gxs *,.gxs *::before,.gxs *::after,.sv-ic{animation:none!important}}
+@media print{.gxs{display:none!important}}`;
+
 const CSS = `<style id="gx-css">
 /* Cảnh minh hoạ động theo phong cách video GPRFLEXEYE: thẻ trắng viền gradient cam-xanh, bóng 3D, icon 3D kính, lưới chấm, pop back.out, vẽ nét, đếm số */
 @property --n{syntax:'<integer>';inherits:false;initial-value:0}
-.gx{--gx-blue:#25A1DB;--gx-or:#F47E2A;--gx-ort:#DD6417;--gx-ink:#1E293B;--gx-body:#475569;
-  --gx-edge:linear-gradient(135deg,rgba(244,126,42,.55),rgba(255,255,255,.2) 45%,rgba(37,161,219,.6));
-  --gx-card:linear-gradient(180deg,#FFFFFF 0%,#F6F9FC 100%);
-  --gx-sh:inset 0 1px 0 rgba(255,255,255,.95),0 1px 2px rgba(15,23,42,.06),0 10px 20px -8px rgba(15,23,42,.14),0 28px 56px -22px rgba(27,127,176,.38),0 22px 44px -30px rgba(244,126,42,.40);
-  --gx-back:cubic-bezier(.34,1.56,.64,1);--gx-out:cubic-bezier(.16,1,.3,1);--gx-o3:cubic-bezier(.165,.84,.44,1);--gx-io:cubic-bezier(.645,.045,.355,1);
-  position:relative;isolation:isolate;overflow:hidden;margin:26px 0 8px;padding:52px 30px 30px;border-radius:28px;border:1.5px solid transparent;
+.gx{position:relative;isolation:isolate;overflow:hidden;margin:26px 0 8px;padding:52px 30px 30px;border-radius:28px;border:1.5px solid transparent;
   background:radial-gradient(55% 80% at 10% 8%,rgba(37,161,219,.11),transparent 70%) padding-box,radial-gradient(50% 75% at 94% 96%,rgba(244,126,42,.10),transparent 70%) padding-box,var(--gx-card) padding-box,var(--gx-edge) border-box;
   box-shadow:var(--gx-sh);color:var(--gx-ink);font-family:'Manrope','Noto Sans JP',sans-serif}
 .gx::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.55;background-image:radial-gradient(rgba(100,116,139,.30) 1.2px,transparent 1.3px);background-size:22px 22px;
@@ -256,12 +343,12 @@ html.js .gx:not(.is-in),html.js .gx:not(.is-in) *,html.js .gx:not(.is-in)::after
   .gx-step{left:12px;top:12px}
 }
 @media (prefers-reduced-motion:reduce){.gx *,.gx *::before,.gx *::after{animation:none!important}.gx::after{animation:none!important}}
-@media print{.gx{display:none!important}}
+@media print{.gx{display:none!important}}${SPOT_CSS}
 </style>`;
 const JS = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="gxRingG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBA65A"/><stop offset=".55" stop-color="#F47E2A"/><stop offset="1" stop-color="#25A1DB"/></linearGradient></defs></svg>
 <script id="gx-js">
 (function(){
-  var fs=[].slice.call(document.querySelectorAll('.gx'));if(!fs.length)return;
+  var fs=[].slice.call(document.querySelectorAll('.gx,.gxs'));if(!fs.length)return;
   if(!('IntersectionObserver' in window)){fs.forEach(function(f){f.classList.add('is-in')});return}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){var f=e.target;
     if(e.isIntersecting&&e.intersectionRatio>=.2)f.classList.add('is-in');
@@ -286,6 +373,13 @@ for (const [id, s] of Object.entries(S)) {
   lines.splice(k, 0, '  ' + scene(id, s));
   html = lines.join(EOL);
 }
+// Cảnh nhỏ .gxs: lần đầu thay <img> tĩnh assets/skills/<key>.webp, các lần sau thay chính cảnh cũ (đánh dấu data-k ... <!--/gxs-->)
+for (const [key, s] of Object.entries(SP)) {
+  const re = new RegExp(`<img (?:class="sv-spot" )?src="assets/skills/${key}\\.webp"[^>]*>|<div class="[^"]*\\bgxs\\b[^"]*" data-k="${key}"[\\s\\S]*?<!--/gxs-->`, 'g');
+  const n = (html.match(re) || []).length;
+  if (n !== 1) throw new Error(`gxs ${key}: cần đúng 1 chỗ, thấy ${n}`);
+  html = html.replace(re, () => spot(key, s));
+}
 const fix = (t) => t.replace(/\r?\n/g, EOL);
 const head = html.indexOf('</head>');
 if (head < 0) throw new Error('không thấy </head>');
@@ -294,4 +388,4 @@ const anchor = html.search(/<script>\r?\n\(function\(\)\{\r?\n  var pages=docume
 if (anchor < 0) throw new Error('không thấy chỗ chèn JS');
 html = html.slice(0, anchor) + '<!-- gx:start -->' + EOL + fix(JS) + EOL + '<!-- gx:end -->' + EOL + html.slice(anchor);
 writeFileSync(file, html);
-console.log('gx: đã chèn', Object.keys(S).length, 'cảnh');
+console.log("gx: đã chèn", Object.keys(S).length, "cảnh +", Object.keys(SP).length, "cảnh nhỏ .gxs");

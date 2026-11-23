@@ -443,16 +443,141 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 @media print{.pj{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.pj-c{box-shadow:none;break-inside:avoid;padding:9px 11px 8px;gap:3px}.pj-go{display:none}
   .pj-co{font-size:12.5px}.pj-role{font-size:9.6px;line-height:1.4}.pj-pt{font-size:10.2px;line-height:1.4}.pj-tags>span{gap:4px}.pj-tags i{font-size:8.8px;padding:2px 6px}}
 </style>
+<!-- lp-slide-css:start -->
+<style id="lp-slide-css">
+/* Task m9qu: trình bày từng section thành một trang slide như Landing Page GPR FLEXEYE
+   (D:\Gprflexeye Homepages\Landing Page): nền tím nhạt, mỗi section là một tờ trắng có bóng đổ,
+   giữ thanh chương mép trái, số slide "03 / 13" bằng ::after (data-slide do khối JS lp-slide gán).
+   Khối lp-same-css (lcbk) đặt sau, đè kích thước / bo góc / vị trí số trang cho y hệt mẫu.
+   Chỉ áp cho màn hình; bản in A4 giữ nguyên. */
+@media screen{
+  body{background:#cfc9e3}
+  main.wrap{display:flex;flex-direction:column;align-items:center;gap:56px;min-height:100vh;
+    padding:106px 264px 120px 16px;background:linear-gradient(160deg,#cfc9e3,#b3abce)}
+  /* lề trong co theo khung: ở 1280px chữ gần rộng như dải tràn viền cũ để không đổi chỗ ngắt dòng */
+  .wrap>.pg{width:100%;max-width:1180px;min-height:calc(100vh - 164px);border-radius:18px;
+    --gut:clamp(24px,calc((100% - 1000px) / 2),72px);padding:88px var(--gut) 76px;justify-content:center;scroll-margin-top:82px;
+    box-shadow:0 40px 90px -34px rgba(60,50,90,.5),0 4px 14px -8px rgba(60,50,90,.25)}
+  .wrap>.pg:not(.pg--dark){background:linear-gradient(165deg,#fdfbf8 0%,#fefcfa 46%,#ffffff 100%)}
+  .wrap>.pg--dark{box-shadow:0 40px 90px -34px rgba(10,25,55,.72),0 6px 18px -10px rgba(10,25,55,.4)}
+  .wrap>.pg[data-slide]::after{display:block;content:attr(data-slide);position:absolute;top:24px;right:28px;bottom:auto;z-index:3;pointer-events:none;
+    padding:5px 12px;border-radius:999px;background:#f3f0fa;border:1px solid #e5e0f1;
+    font:700 11px 'Space Grotesk',sans-serif;letter-spacing:.14em;color:#6d5bd0}
+  .wrap>.pg--dark[data-slide]::after{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#bfe9ff}
+}
+@media screen and (max-width:1100px){
+  main.wrap{padding-right:16px}
+}
+@media screen and (max-width:900px){
+  main.wrap{gap:24px;padding:74px 8px 72px}
+  .wrap>.pg{min-height:0;border-radius:14px;padding:56px 10px 44px;justify-content:flex-start}
+  .wrap>.pg[data-slide]::after{top:14px;right:14px;padding:4px 10px;font-size:10px}
+}
+</style>
+<!-- lp-slide-css:end -->
+<!-- sr-css:start -->
+<style id="sr-css">
+/* Task zcd9: kéo tới đâu hiện ra tới đó, như Landing Page GPR FLEXEYE (assets/js/hien-dan.js).
+   Chỉ có hiệu lực khi khối JS sr gắn .sr lên <html>: tắt JS, reduced-motion hay in thì trang hiện đủ như cũ.
+   .rv: giữ ẩn tới khi CHÍNH nó vào khung nhìn (không còn chạy cả trang một lượt khi .pg có .in), rồi chạy pmRise cũ.
+   .pg>.sr: khối con không có .rv, hiện bằng mờ dần + trượt lên, so le theo lượt (--sr). */
+html.sr .pg .rv:not(.sr-in){animation:none!important;opacity:0}
+html.sr .pg .rv.sr-in{animation:pmRise .82s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,0ms)}
+html.sr .pg>.sr{opacity:0;transform:translateY(28px);
+  transition:opacity .6s cubic-bezier(.33,1,.68,1),transform .6s cubic-bezier(.33,1,.68,1);transition-delay:calc(var(--sr,0)*80ms)}
+html.sr .pg>.sr.sr-in{opacity:1;transform:none}
+@media print{html.sr .pg .rv,html.sr .pg>.sr{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){html.sr .pg .rv,html.sr .pg>.sr{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}}
+</style>
+<!-- sr-css:end -->
+<!-- lp-same-css:start -->
+<style id="lp-same-css">
+/* Task lcbk: trình bày Y HỆT Landing Page GPR FLEXEYE (D:\Gprflexeye Homepages\Landing Page), chép đúng thông số mẫu:
+   nền tím #cfc9e3 -> #b3abce, mỗi section là một tờ A4 794px bo 3px, bóng đổ như mẫu, khe 88/76px (đủ rộng thì hai tờ
+   một hàng), thanh chương 5px, chân trang .ft hiện, số trang chìm ở góc dưới, bìa nền navy; menu tab và nút ngôn ngữ là
+   viên thuốc navy nổi (đang chọn màu cam #F68209), mục lục thành ngăn kéo; tiêu đề EN / VI Space Grotesk chữ hoa.
+   Đặt SAU mọi khối khác và thêm tiền tố `body` để thắng lp-slide-css (m9qu) mà không cần !important. Chỉ màn hình;
+   bản in A4 giữ nguyên. Nút ngôn ngữ #lp-i18n do khối JS lp-same tạo. */
+@media screen{
+  body{background:#c9c3dd}
+  body main.wrap{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:flex-start;
+    gap:88px 76px;min-height:100vh;padding:96px 64px 130px;background:linear-gradient(160deg,#cfc9e3,#b3abce)}
+  body .wrap>.pg{width:794px;max-width:100%;height:auto;min-height:1123px;border-radius:3px;
+    padding:56px 60px;justify-content:flex-start;
+    box-shadow:0 40px 90px -34px rgba(60,50,90,.5),0 4px 14px -8px rgba(60,50,90,.25)}
+  body .wrap>.pg:not(.pg--dark){background:linear-gradient(165deg,#fdfbf8 0%,#fefcfa 46%,#ffffff 100%)}
+  body .wrap>.pg--dark{background:linear-gradient(155deg,#08152b 0%,#12325e 52%,#1a4a86 100%);
+    box-shadow:0 40px 90px -34px rgba(10,25,55,.72),0 6px 18px -10px rgba(10,25,55,.4)}
+  body .wrap>.pg[data-chap]::before{width:5px}
+  body .wrap>.pg>.ft{display:flex}
+  /* Số trang chìm góc dưới như [data-num] của mẫu; vẫn đọc data-slide "NN / tổng" do lp-slide gán */
+  body .wrap>.pg[data-slide]::after{top:auto;right:16px;bottom:-22px;z-index:0;padding:0;border:0;border-radius:0;background:none;
+    font:700 84px 'Space Grotesk',sans-serif;letter-spacing:-4px;color:rgba(22,20,29,.055);white-space:nowrap;pointer-events:none}
+  body .wrap>.pg--dark[data-slide]::after{background:none;color:rgba(255,255,255,.09)}
+  /* Bìa nền navy như trang bìa của mẫu (khối JS gắn .pg--dark); chữ inline màu sẫm phải đổi sang sáng */
+  body .wrap>#cover{min-height:1123px;padding-top:56px}
+  body #cover.pg--dark .eb{color:#8fd8ff}
+  body #cover.pg--dark .eb b,body #cover.pg--dark .qt,body #cover.pg--dark [style*="color:#16141d"]{color:#fff!important}
+  body #cover.pg--dark [style*="color:#6d5bd0"]{color:#8fd8ff!important}
+  body #cover.pg--dark [style*="color:#8a83a0"]{color:rgba(191,233,255,.7)!important}
+  /* Tiêu đề trang: chữ Latin theo .kw của mẫu (Space Grotesk 700 chữ hoa, line-height 1.3 cho dấu tiếng Việt chồng hai tầng) */
+  html[lang="en"] body .pg .kw,html[lang="vi"] body .pg .kw{font-family:'Space Grotesk','Manrope',sans-serif;font-weight:700;
+    text-transform:uppercase;letter-spacing:-1.6px;line-height:1.3}
+  /* Menu tab = viên thuốc navy nổi, giống nút #i18n của mẫu */
+  body .top{top:16px;left:50%;right:auto;height:auto;max-width:calc(100vw - 420px);transform:translateX(-50%);
+    border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(11,28,56,.74);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 8px 26px -10px rgba(10,25,55,.7)}
+  body .top-in{height:auto;padding:5px 6px;gap:0;min-width:0}
+  body .top-me{display:none}
+  body .top-nav{gap:2px;min-width:0}
+  body .top-nav a{padding:7px 14px;border-radius:999px;color:rgba(255,255,255,.76);line-height:1.2;
+    font:700 11.5px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.06em}
+  body .top-nav a:hover{color:#fff;background:rgba(255,255,255,.12)}
+  body .top-nav a.on{color:#08152b;background:#F68209}
+  body .top-nav a:focus-visible{outline:2px solid #8fd8ff;outline-offset:2px}
+  /* Mẫu không có sidebar: mục lục thành ngăn kéo, mở bằng nút viên thuốc navy góc dưới phải */
+  body .sb{top:0;height:100vh;width:280px;z-index:2147482990;transform:translateX(105%);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  body .sb.open{transform:none}
+  body .sb-in{padding-bottom:84px}
+  body .sb-btn{display:block;position:fixed;right:18px;bottom:18px;z-index:2147482995;padding:11px 18px;cursor:pointer;
+    border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(11,28,56,.86);color:#fff;
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 8px 26px -10px rgba(10,25,55,.7);
+    font:700 12.5px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.06em}
+  body .sb-btn:focus-visible{outline:2px solid #8fd8ff;outline-offset:2px}
+  /* Nút ngôn ngữ: chép nguyên #i18n của mẫu */
+  #lp-i18n{position:fixed;top:16px;right:18px;z-index:2147483000;display:flex;align-items:center;gap:2px;
+    padding:5px 6px 5px 10px;border-radius:999px;background:rgba(11,28,56,.74);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 26px -10px rgba(10,25,55,.7);font-family:'Manrope',system-ui,sans-serif}
+  #lp-i18n>svg{width:15px;height:15px;flex:0 0 auto;margin-right:5px;opacity:.78}
+  #lp-i18n button{appearance:none;border:0;cursor:pointer;background:transparent;color:rgba(255,255,255,.76);
+    font:700 11.5px 'Manrope',sans-serif;letter-spacing:.06em;padding:6px 10px;border-radius:999px;line-height:1;
+    transition:background .18s,color .18s}
+  #lp-i18n button:hover{color:#fff;background:rgba(255,255,255,.12)}
+  #lp-i18n button:focus-visible{outline:2px solid #8fd8ff;outline-offset:2px}
+  #lp-i18n button[aria-pressed="true"]{color:#08152b;background:#F68209}
+}
+@media screen and (max-width:1100px){
+  body .top{left:18px;transform:none;max-width:calc(100vw - 230px)}
+}
+@media screen and (max-width:900px){
+  body main.wrap{gap:36px 0;padding:72px 12px 84px}
+  body .wrap>.pg,body .wrap>#cover{width:100%;min-height:0;padding:32px 24px 36px}
+  body .wrap>.pg[data-slide]::after{font-size:60px;letter-spacing:-2.5px;bottom:-12px}
+  body .wrap>.pg>.ft{flex-wrap:wrap;gap:10px;align-items:flex-start}
+  body .top{top:10px;left:10px;max-width:calc(100vw - 20px)}
+  body .top-nav a{padding:7px 10px;font-size:10.5px}
+  #lp-i18n{top:auto;bottom:18px;right:auto;left:12px}
+  #lp-i18n button{padding:6px 8px;font-size:10.5px}
+}
+@media print{#lp-i18n{display:none!important}}
+</style>
+<!-- lp-same-css:end -->
 <!-- gx-css:start -->
 <style id="gx-css">
 /* Cảnh minh hoạ động theo phong cách video GPRFLEXEYE: thẻ trắng viền gradient cam-xanh, bóng 3D, icon 3D kính, lưới chấm, pop back.out, vẽ nét, đếm số */
 @property --n{syntax:'<integer>';inherits:false;initial-value:0}
-.gx{--gx-blue:#25A1DB;--gx-or:#F47E2A;--gx-ort:#DD6417;--gx-ink:#1E293B;--gx-body:#475569;
-  --gx-edge:linear-gradient(135deg,rgba(244,126,42,.55),rgba(255,255,255,.2) 45%,rgba(37,161,219,.6));
-  --gx-card:linear-gradient(180deg,#FFFFFF 0%,#F6F9FC 100%);
-  --gx-sh:inset 0 1px 0 rgba(255,255,255,.95),0 1px 2px rgba(15,23,42,.06),0 10px 20px -8px rgba(15,23,42,.14),0 28px 56px -22px rgba(27,127,176,.38),0 22px 44px -30px rgba(244,126,42,.40);
-  --gx-back:cubic-bezier(.34,1.56,.64,1);--gx-out:cubic-bezier(.16,1,.3,1);--gx-o3:cubic-bezier(.165,.84,.44,1);--gx-io:cubic-bezier(.645,.045,.355,1);
-  position:relative;isolation:isolate;overflow:hidden;margin:26px 0 8px;padding:52px 30px 30px;border-radius:28px;border:1.5px solid transparent;
+.gx{position:relative;isolation:isolate;overflow:hidden;margin:26px 0 8px;padding:52px 30px 30px;border-radius:28px;border:1.5px solid transparent;
   background:radial-gradient(55% 80% at 10% 8%,rgba(37,161,219,.11),transparent 70%) padding-box,radial-gradient(50% 75% at 94% 96%,rgba(244,126,42,.10),transparent 70%) padding-box,var(--gx-card) padding-box,var(--gx-edge) border-box;
   box-shadow:var(--gx-sh);color:var(--gx-ink);font-family:'Manrope','Noto Sans JP',sans-serif}
 .gx::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.55;background-image:radial-gradient(rgba(100,116,139,.30) 1.2px,transparent 1.3px);background-size:22px 22px;
@@ -593,6 +718,47 @@ html.js .gx:not(.is-in),html.js .gx:not(.is-in) *,html.js .gx:not(.is-in)::after
 }
 @media (prefers-reduced-motion:reduce){.gx *,.gx *::before,.gx *::after{animation:none!important}.gx::after{animation:none!important}}
 @media print{.gx{display:none!important}}
+/* ── Cảnh nhỏ .gxs (task v3c1): thay hình tĩnh ở thẻ kỹ năng / đầu tab, cùng chất liệu và nhịp chuyển động với video ── */
+.gx,.gxs{--gx-blue:#25A1DB;--gx-or:#F47E2A;--gx-ort:#DD6417;--gx-ink:#1E293B;--gx-body:#475569;
+  --gx-edge:linear-gradient(135deg,rgba(244,126,42,.55),rgba(255,255,255,.2) 45%,rgba(37,161,219,.6));--gx-card:linear-gradient(180deg,#FFFFFF 0%,#F6F9FC 100%);
+  --gx-sh:inset 0 1px 0 rgba(255,255,255,.95),0 1px 2px rgba(15,23,42,.06),0 10px 20px -8px rgba(15,23,42,.14),0 28px 56px -22px rgba(27,127,176,.38),0 22px 44px -30px rgba(244,126,42,.40);
+  --gx-back:cubic-bezier(.34,1.56,.64,1);--gx-out:cubic-bezier(.16,1,.3,1);--gx-o3:cubic-bezier(.165,.84,.44,1);--gx-io:cubic-bezier(.645,.045,.355,1)}
+.gxs{position:relative;isolation:isolate;overflow:hidden;container-type:inline-size;aspect-ratio:16/9;border:1.5px solid transparent}
+.gxs,.sv-spot.gxs{background:radial-gradient(55% 80% at 10% 8%,rgba(37,161,219,.12),transparent 70%) padding-box,radial-gradient(50% 75% at 94% 96%,rgba(244,126,42,.11),transparent 70%) padding-box,var(--gx-card) padding-box,var(--gx-edge) border-box}
+.gxs--hero{aspect-ratio:20/9;border-radius:22px;box-shadow:var(--gx-sh)}
+.sv-hero:has(>.gxs){background:none;border:0;overflow:visible;box-shadow:none}
+.gxs::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.55;background-image:radial-gradient(rgba(100,116,139,.30) 1.2px,transparent 1.3px);background-size:18px 18px;
+  -webkit-mask-image:radial-gradient(70% 75% at 50% 50%,#000 30%,transparent 80%);mask-image:radial-gradient(70% 75% at 50% 50%,#000 30%,transparent 80%)}
+.gxs-in{position:absolute;inset:0}
+.gxs-at{position:absolute;left:calc(var(--x)*1cqw);top:calc(var(--y)*1cqw);transform:translate(-50%,-50%);display:grid;place-items:center}
+.gxs .gx-pl{--s:15cqw;border-radius:calc(var(--s)*.28)}
+.gxs .gx-pl--l{--s:26cqw}
+.gxs--hero .gx-pl{--s:10.5cqw}.gxs--hero .gx-pl--l{--s:17cqw}
+.gxs .is-hot>.gx-pl{--s:17cqw;box-shadow:inset 0 2px 1px rgba(255,255,255,.98),inset 0 -10px 16px -8px rgba(244,126,42,.18),0 5px 0 -1px #FBCBA6,0 0 0 5px rgba(244,126,42,.12),var(--gx-sh)}
+.gxs .gx-orb::before,.gxs .gx-orb::after{inset:-2cqw}
+.gxs-ln{position:absolute;left:calc(var(--x)*1cqw);top:calc(var(--y)*1cqw);width:var(--l);height:2px;margin-top:-1px;transform-origin:0 50%;transform:rotate(var(--a)) translateX(var(--o));
+  background:repeating-linear-gradient(90deg,rgba(37,161,219,.6) 0 5px,transparent 5px 11px)}
+.gxs-ring{position:absolute;left:calc(var(--x)*1cqw);top:calc(var(--y)*1cqw);width:calc(var(--d)*1cqw);height:calc(var(--d)*1cqw);border-radius:50%;border:1.5px dashed rgba(37,161,219,.45);transform:translate(-50%,-50%)}
+.gxs-ring::after{content:'';position:absolute;left:50%;top:-5px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:radial-gradient(circle,#fff 0 22%,#F47E2A 50%,rgba(244,126,42,0) 75%);box-shadow:0 0 10px 3px rgba(244,126,42,.35)}
+.gxs-chip{margin:0;font-size:clamp(9px,2.6cqw,12px);white-space:nowrap}
+.gxs .gx-chartc{width:50cqw;height:32cqw;gap:2cqw;padding:3cqw 3.4cqw 2.6cqw;border-radius:18px}
+.gxs .gx-lens{width:9cqw;height:9cqw;margin-left:-2cqw}
+html.js .gxs .gxs-at>.gx-pl,html.js .gxs .gxs-at>.gx-orb,html.js .gxs .gxs-tx>.gx-chip{animation:gxPop .62s var(--gx-back) both;animation-delay:calc(var(--i,0)*.22s + .15s)}
+html.js .gxs .gx-pl img{animation:gxFloat 3.4s ease-in-out infinite;animation-delay:calc(var(--i,0)*-.7s)}
+html.js .gxs .gxs-ln{animation:gxsDraw .5s var(--gx-io) both;animation-delay:calc(var(--i,0)*.22s + .35s)}
+html.js .gxs .gx-cm{animation:gxRun 2.4s cubic-bezier(.45,0,.55,1) infinite;animation-delay:calc(var(--i,0)*.3s + 1s)}
+html.js .gxs .gx-cm--r{animation-direction:reverse;animation-delay:calc(var(--i,0)*.3s + 2.2s)}
+html.js .gxs .gxs-ring{animation:gxsSpin 18s linear infinite}
+html.js .pg.in .sv-ib .sv-ic,html.js .pg.in .lbl .sv-ic{animation:gxsIc 3.6s ease-in-out infinite}
+html.js .pg.in .cyc-c:nth-child(3) .sv-ic,html.js .pg.in .card:nth-child(2n) .sv-ic{animation-delay:-1.2s}
+html.js .pg.in .cyc-c:nth-child(5) .sv-ic,html.js .pg.in .card:nth-child(3n) .sv-ic{animation-delay:-2.4s}
+html.js .gxs:not(.is-in),html.js .gxs:not(.is-in) *,html.js .gxs:not(.is-in) *::before,html.js .gxs:not(.is-in) *::after{animation-play-state:paused!important}
+.gxs.is-off *,.gxs.is-off *::before,.gxs.is-off *::after{animation-play-state:paused!important}
+@keyframes gxsDraw{0%{opacity:0;transform:rotate(var(--a)) translateX(var(--o)) scaleX(0)}100%{opacity:1;transform:rotate(var(--a)) translateX(var(--o)) scaleX(1)}}
+@keyframes gxsSpin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes gxsIc{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-3px) rotate(-4deg) scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.gxs *,.gxs *::before,.gxs *::after,.sv-ic{animation:none!important}}
+@media print{.gxs{display:none!important}}
 </style>
 <!-- gx-css:end -->
 </head>
@@ -1514,9 +1680,9 @@ html.js .gx:not(.is-in),html.js .gx:not(.is-in) *,html.js .gx:not(.is-in)::after
   <h2 class="kw rv" style="--d:60ms">報告と会議を通じて、<br /><i>商談の見込みと納期を把握する。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">営業部の報告体制と、参加した会議の概要です。</p>
-  <figure class="gx gx--ring" aria-hidden="true"><span class="gx-step"><i></i><b>04</b> / 06</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/calendar.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">週次の予定と結果</span><span data-l="en">Weekly plans and results</span><span data-l="vi">Kế hoạch, kết quả tuần</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">月次報告</span><span data-l="en">Monthly reports</span><span data-l="vi">Báo cáo tháng</span></b></span></div><div class="gx-core"><span class="gx-orb gx-orb--ring"><svg viewBox="0 0 120 120"><circle class="gx-rt" cx="60" cy="60" r="52"/><circle class="gx-rf" pathLength="100" cx="60" cy="60" r="52" style="stroke-dashoffset:0"/></svg><span class="gx-val"><small class="gx-pre"><span data-l="ja">約</span><span data-l="en">about</span><span data-l="vi">khoảng</span></small><span class="gx-vn"><b class="gx-num" style="--v:30"></b></span></span></span><b class="gx-unit"><span data-l="ja">回の週次CRM会議</span><span data-l="en">weekly CRM meetings</span><span data-l="vi">buổi họp CRM tuần</span></b></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/roadmap.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">出張報告</span><span data-l="en">Trip reports</span><span data-l="vi">Báo cáo công tác</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">3拠点合同の朝会</span><span data-l="en">Three-site morning meeting</span><span data-l="vi">Họp sáng 3 chi nhánh</span></b></span></div></div></figure>
+  <figure class="gx gx--grid" aria-hidden="true"><span class="gx-step"><i></i><b>04</b> / 06</span><div class="gx-in" style="--c:4;--mc:2"><div class="gx-tile" style="--i:0"><span class="gx-pl"><img src="assets/gx/calendar.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">週次の予定と結果</span><span data-l="en">Weekly plans and results</span><span data-l="vi">Kế hoạch, kết quả tuần</span></b></div><div class="gx-tile" style="--i:1"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">月次報告</span><span data-l="en">Monthly reports</span><span data-l="vi">Báo cáo tháng</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl"><img src="assets/gx/roadmap.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">出張報告</span><span data-l="en">Trip reports</span><span data-l="vi">Báo cáo công tác</span></b></div><div class="gx-tile" style="--i:3"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">3拠点合同の朝会</span><span data-l="en">Three-site morning meeting</span><span data-l="vi">Họp sáng 3 chi nhánh</span></b></div></div></figure>
   <div class="g3 rv" style="--d:180ms">
-    <div class="card"><span class="lbl">Weekly ／ 日本語</span><h3>日本の工場との週次CRM会議</h3><p>CRMに入力した見込み台数などを日本の工場と共有し、納期を調整する会議です。2023年2月～2024年2月に約30回、主に木曜日にオンラインで開催され、招待を受けていました。</p></div>
+    <div class="card"><span class="lbl">Weekly ／ 日本語</span><h3>日本の工場との週次CRM会議</h3><p>CRMに入力した見込み台数などを日本の工場と共有し、納期を調整する会議で、毎週オンラインで開催され、招待を受けていました。</p></div>
     <div class="card"><span class="lbl">CRM</span><h3>CRM入力状況の確認会議</h3><p>2023年3月、CRMの運用方法と入力状況を日本側と確認する会議に招待されました。</p></div>
     <div class="card"><span class="lbl">Weekly</span><h3>週次の予定と結果の報告</h3><p>営業部では毎週、業務の予定と結果を上司へ報告しており、この報告は評価シートの採点項目にも含まれていました。</p></div>
     <div class="card"><span class="lbl">Monthly</span><h3>月次報告と販促施策の報告</h3><p>営業部の職務記述書（2023年7月）に、販売プロセスの成果分析、販促施策の結果報告、月次報告が規定されていました。</p></div>
@@ -1560,11 +1726,11 @@ html.js .gx:not(.is-in),html.js .gx:not(.is-in) *,html.js .gx:not(.is-in)::after
 
 <!-- ═══════ Task: Team Management (task cg5a) ═══════ -->
 <style>@media print{#team-records .g2{gap:8px;margin-top:10px!important}#team-records .card{padding:9px 12px}#team-records .card h3{font-size:12px;margin:0 0 4px}#team-records .lines{gap:3px}#team-records .lines p{font-size:9.8px;line-height:1.45}#team-records .lbl{margin-bottom:4px}}</style>
-<!-- Hình, icon, workflow động cho tab Team / AI (task z7gh). Hình minh hoạ: ChatGPT worker, assets/skills/*.webp -->
+<!-- Icon, workflow động cho tab Team / AI (task z7gh). Hình thẻ kỹ năng / đầu tab: cảnh động .gxs từ icon video assets/gx (task v3c1, tools/gx/build.mjs) -->
 <style>
 .sv-hero{margin:26px 0 0;max-width:880px;border-radius:22px;overflow:hidden;background:#f7f5fc;border:1px solid #ece8f3;box-shadow:0 30px 60px -42px rgba(59,47,134,.55)}
-.sv-hero img{display:block;width:100%;height:auto}
-html.js .pg.in .sv-hero img{animation:svFloat 9s ease-in-out 1s infinite}
+.sv-hero>img{display:block;width:100%;height:auto}
+html.js .pg.in .sv-hero>img{animation:svFloat 9s ease-in-out 1s infinite}
 @keyframes svFloat{0%,100%{transform:scale(1.03) translateY(0)}50%{transform:scale(1.03) translateY(-4px)}}
 .sv-card{display:flex;flex-direction:column}
 .sv-spot{display:block;width:calc(100% + 16px);height:auto;aspect-ratio:16/9;object-fit:cover;margin:-8px -8px 12px;border-radius:12px;background:#f7f5fc;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
@@ -1671,19 +1837,19 @@ html.js .pg.in .mv-bar span{animation:mvBar var(--mv-t) linear infinite}
 <script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.mv-pp');if(!b)return;var f=b.closest('.mv'),p=f.classList.toggle('is-paused');b.setAttribute('aria-pressed',p?'true':'false')});
 document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('is-off',!e.isIntersecting)})});[].forEach.call(document.querySelectorAll('.mv'),function(f){io.observe(f)})})</script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="ic-list" viewBox="0 0 24 24"><image href="assets/icons/ic-list.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-report" viewBox="0 0 24 24"><image href="assets/icons/ic-report.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-spark" viewBox="0 0 24 24"><image href="assets/icons/ic-spark.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-meet" viewBox="0 0 24 24"><image href="assets/icons/ic-meet.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-pen" viewBox="0 0 24 24"><image href="assets/icons/ic-pen.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-repeat" viewBox="0 0 24 24"><image href="assets/icons/ic-repeat.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-chip" viewBox="0 0 24 24"><image href="assets/icons/ic-chip.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-check" viewBox="0 0 24 24"><image href="assets/icons/ic-check.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-people" viewBox="0 0 24 24"><image href="assets/icons/ic-people.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-trend" viewBox="0 0 24 24"><image href="assets/icons/ic-trend.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-branch" viewBox="0 0 24 24"><image href="assets/icons/ic-branch.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-code" viewBox="0 0 24 24"><image href="assets/icons/ic-code.webp" width="24" height="24"/></symbol>
-  <symbol id="ic-heart" viewBox="0 0 24 24"><image href="assets/icons/ic-heart.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-list" viewBox="0 0 24 24"><image href="assets/gx/checklist.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-report" viewBox="0 0 24 24"><image href="assets/gx/milestone-report.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 24 24"><image href="assets/gx/stopwatch.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-meet" viewBox="0 0 24 24"><image href="assets/gx/interview.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-pen" viewBox="0 0 24 24"><image href="assets/gx/jd-document.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-repeat" viewBox="0 0 24 24"><image href="assets/gx/workflow-gears.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-chip" viewBox="0 0 24 24"><image href="assets/gx/lightbulb.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><image href="assets/gx/shield-check.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-people" viewBox="0 0 24 24"><image href="assets/gx/team-group.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-trend" viewBox="0 0 24 24"><image href="assets/gx/report-chart.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-branch" viewBox="0 0 24 24"><image href="assets/gx/office-building.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-code" viewBox="0 0 24 24"><image href="assets/gx/building-blocks.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-heart" viewBox="0 0 24 24"><image href="assets/gx/handshake.webp" width="24" height="24"/></symbol>
 </svg>
 <main class="wrap" data-view="team" hidden>
 <section class="pg" data-chap="II" id="team-top">
@@ -1713,7 +1879,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     </div>
     <div class="mv-bar" aria-hidden="true"><span></span></div>
   </figure>
-  <figure class="sv-hero rv" style="--d:160ms"><img src="assets/skills/hero-team.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
+  <figure class="sv-hero rv" style="--d:160ms"><div class="gxs gxs--orbit gxs--hero" data-k="hero-team" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:22.5;--d:33"></i><i class="gxs-ln" style="--x:15;--y:12.2;--a:16.5deg;--o:6.3cqw;--l:18.7cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:15;--y:32.9;--a:-16.5deg;--o:6.3cqw;--l:18.7cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:85;--y:12.2;--a:163.5deg;--o:6.3cqw;--l:18.7cqw;--i:3"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:85;--y:32.9;--a:-163.5deg;--o:6.3cqw;--l:18.7cqw;--i:4"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:22.5;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/team-group.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:15;--y:12.2;--i:1"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:15;--y:32.9;--i:2"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:85;--y:12.2;--i:3"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:85;--y:32.9;--i:4"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at gxs-tx" style="--x:50;--y:38;--i:5"><em class="gx-chip gx-chip--o gxs-chip">TEAM</em></span></div></div><!--/gxs--></figure>
   <div class="meta rv" style="--d:180ms;margin-top:18px">
     <div><span>Teams</span><b data-l="ja">営業、IT、人事</b><b data-l="en">Sales, IT, HR</b><b data-l="vi">Kinh doanh, IT, nhân sự</b></div>
     <div><span>Size</span><b data-l="ja">2～3名、5～6名、1人から5名へ</b><b data-l="en">2 to 3, 5 to 6, one to five</b><b data-l="vi">2 đến 3, 5 đến 6, từ 1 lên 5 người</b></div>
@@ -1800,18 +1966,18 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;
       if(e.isIntersecting){if(!stop)run(v)}else if(!v.paused)v.pause()})},{threshold:0.2});
     vs.forEach(function(v){io.observe(v)})})();</script>
-  <div class="g3 rv" style="--d:180ms;margin-top:16px">
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/t1-targets.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="fl4-n">01</span><h3 data-l="ja">目標と役割の明確化</h3><h3 data-l="en">Set targets and roles</h3><h3 data-l="vi">Đặt mục tiêu và vai trò</h3>
+  <div class="g3 rv" data-deck style="--d:180ms;margin-top:16px">
+    <div class="card sv-card"><div class="sv-spot gxs gxs--orbit" data-k="t1-targets" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:28.1;--d:42"></i><i class="gxs-ln" style="--x:16;--y:28.1;--a:0deg;--o:8.5cqw;--l:9.5cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:15.2;--a:159.2deg;--o:8.5cqw;--l:11.9cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:41.1;--a:-159.2deg;--o:8.5cqw;--l:11.9cqw;--i:3"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:28.1;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/roadmap.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:16;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:15.2;--i:2"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at gxs-tx" style="--x:50;--y:48.1;--i:4"><em class="gx-chip gx-chip--o gxs-chip">KPI</em></span></div></div><!--/gxs--><span class="fl4-n">01</span><h3 data-l="ja">目標と役割の明確化</h3><h3 data-l="en">Set targets and roles</h3><h3 data-l="vi">Đặt mục tiêu và vai trò</h3>
       <p data-l="ja">メンバーごとの役割、KPI、評価基準を最初に定め、達成すべきことを全員が共有できる状態をつくります。</p><p data-l="en">I first set each member's role, KPIs and appraisal criteria so that everyone knows what a good result looks like.</p><p data-l="vi">Tôi đặt trước vai trò, KPI và tiêu chí đánh giá cho từng người để ai cũng biết mình cần đạt điều gì.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/t2-steps.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="fl4-n">02</span><h3 data-l="ja">工程の標準化</h3><h3 data-l="en">Standardise the steps</h3><h3 data-l="vi">Chuẩn hóa quy trình</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--flow" data-k="t2-steps" aria-hidden="true"><div class="gxs-in"><i class="gxs-ln" style="--x:18;--y:28.1;--a:0deg;--o:10.5cqw;--l:11cqw;--i:0"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:50;--y:28.1;--a:0deg;--o:10.5cqw;--l:11cqw;--i:1"><i class="gx-cm"></i></i><span class="gxs-at" style="--x:18;--y:28.1;--i:0"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:50;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at is-hot" style="--x:82;--y:28.1;--i:2"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="fl4-n">02</span><h3 data-l="ja">工程の標準化</h3><h3 data-l="en">Standardise the steps</h3><h3 data-l="vi">Chuẩn hóa quy trình</h3>
       <p data-l="ja">業務を最初から最後まで書き出し、「完了」の定義を定めます。これにより、滞っている工程をすぐに把握できます。</p><p data-l="en">I write each job out from start to finish and define what "done" means, so a stuck step shows up at once.</p><p data-l="vi">Tôi viết ra từng việc từ đầu đến cuối và định nghĩa thế nào là "hoàn thành", để thấy ngay bước nào bị kẹt.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/t3-numbers.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="fl4-n">03</span><h3 data-l="ja">日々の数字による管理</h3><h3 data-l="en">Watch the daily numbers</h3><h3 data-l="vi">Theo dõi số liệu hằng ngày</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--chart" data-k="t3-numbers" aria-hidden="true"><div class="gxs-in"><span class="gxs-at gxs-chart" style="--x:38;--y:30.4;--i:0"><span class="gx-chartc"><span class="gx-col" style="--h:48"><i class="gx-bar" style="--h:48;--i:0"></i></span><span class="gx-col" style="--h:66"><i class="gx-bar" style="--h:66;--i:1"></i></span><span class="gx-col" style="--h:40"><i class="gx-bar" style="--h:40;--i:2"></i></span><span class="gx-col" style="--h:72"><i class="gx-bar" style="--h:72;--i:3"></i></span><span class="gx-col" style="--h:90"><i class="gx-bar is-hot" style="--h:90;--i:4"></i><span class="gx-lens"><img src="assets/gx/magnifier.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></span><i class="gx-sheen"></i></span></span><span class="gxs-at" style="--x:84;--y:16.9;--i:2"><span class="gx-pl"><img src="assets/gx/stopwatch.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/calendar.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="fl4-n">03</span><h3 data-l="ja">日々の数字による管理</h3><h3 data-l="en">Watch the daily numbers</h3><h3 data-l="vi">Theo dõi số liệu hằng ngày</h3>
       <p data-l="ja">作業時間、タスク数、進捗、架電数、訪問数を毎日集計し、感覚ではなく数字で状況を判断します。</p><p data-l="en">I collect hours, tasks, progress, calls and visits every day and judge the situation by numbers, not by feel.</p><p data-l="vi">Mỗi ngày, tôi thu thập số giờ làm, số task, tiến độ, cuộc gọi, lần gặp khách để đánh giá tình hình bằng số liệu thay vì cảm tính.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/t4-cause.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="fl4-n">04</span><h3 data-l="ja">原因分析と改善</h3><h3 data-l="en">Find the cause and act</h3><h3 data-l="vi">Tìm nguyên nhân và xử lý</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--orbit" data-k="t4-cause" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:28.1;--d:42"></i><i class="gxs-ln" style="--x:16;--y:28.1;--a:0deg;--o:8.5cqw;--l:9.5cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:15.2;--a:159.2deg;--o:8.5cqw;--l:11.9cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:41.1;--a:-159.2deg;--o:8.5cqw;--l:11.9cqw;--i:3"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:28.1;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/magnifier.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:16;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/bottleneck.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:15.2;--i:2"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/puzzle-fit.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="fl4-n">04</span><h3 data-l="ja">原因分析と改善</h3><h3 data-l="en">Find the cause and act</h3><h3 data-l="vi">Tìm nguyên nhân và xử lý</h3>
       <p data-l="ja">数字が下がった際は、データから原因を分析し、目標や手法を見直して次の打ち手を決めます。</p><p data-l="en">When the numbers drop, I look for the cause in the data, revise the target or the method and decide the next action.</p><p data-l="vi">Khi số liệu giảm, tôi tìm nguyên nhân trong dữ liệu, điều chỉnh mục tiêu hoặc cách làm và quyết định bước tiếp theo.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/t5-people.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="fl4-n">05</span><h3 data-l="ja">人材の育成</h3><h3 data-l="en">Grow people</h3><h3 data-l="vi">Phát triển con người</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--flow" data-k="t5-people" aria-hidden="true"><div class="gxs-in"><i class="gxs-ln" style="--x:18;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:0"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:50;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:1"><i class="gx-cm"></i></i><span class="gxs-at" style="--x:18;--y:24.8;--i:0"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:50;--y:24.8;--i:1"><span class="gx-pl"><img src="assets/gx/interview.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at is-hot" style="--x:82;--y:24.8;--i:2"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at gxs-tx" style="--x:50;--y:38.3;--i:3"><em class="gx-chip gx-chip--o gxs-chip">SOP</em></span></div></div><!--/gxs--><span class="fl4-n">05</span><h3 data-l="ja">人材の育成</h3><h3 data-l="en">Grow people</h3><h3 data-l="vi">Phát triển con người</h3>
       <p data-l="ja">未経験のメンバーにはSOPとテンプレートを渡し、コーチしながら育成します。入社7日目、3週目、6週目に新入社員と振り返りを実施するSOPも整備しました。</p><p data-l="en">I give inexperienced members SOPs and templates and coach them. I also wrote an SOP for reviewing new hires on day 7, week 3 and week 6.</p><p data-l="vi">Với thành viên chưa có kinh nghiệm, tôi giao SOP và mẫu làm việc rồi kèm cặp trực tiếp. Tôi cũng soạn SOP rà soát nhân viên mới vào ngày thứ 7, tuần thứ 3 và tuần thứ 6.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/t6-connect.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="fl4-n">06</span><h3 data-l="ja">部門と経営の橋渡し</h3><h3 data-l="en">Connect departments and management</h3><h3 data-l="vi">Kết nối phòng ban và lãnh đạo</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--flow" data-k="t6-connect" aria-hidden="true"><div class="gxs-in"><i class="gxs-ln" style="--x:18;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:0"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><i class="gxs-ln" style="--x:50;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:1"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><span class="gxs-at" style="--x:18;--y:24.8;--i:0"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:50;--y:24.8;--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at is-hot" style="--x:82;--y:24.8;--i:2"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at gxs-tx" style="--x:50;--y:38.3;--i:3"><em class="gx-chip gx-chip--o gxs-chip">JA · EN · VI</em></span></div></div><!--/gxs--><span class="fl4-n">06</span><h3 data-l="ja">部門と経営の橋渡し</h3><h3 data-l="en">Connect departments and management</h3><h3 data-l="vi">Kết nối phòng ban và lãnh đạo</h3>
       <p data-l="ja">技術、営業、経理の各部門と調整し、日本人経営陣へ状況と改善案を日本語で報告します。</p><p data-l="en">I coordinate with engineering, sales and accounting, and report the status and improvement plans to Japanese management in Japanese.</p><p data-l="vi">Tôi phối hợp với các phòng kỹ thuật, kinh doanh, kế toán và báo cáo tình hình, đề xuất cải tiến cho ban lãnh đạo người Nhật bằng tiếng Nhật.</p></div>
   </div>
 </section>
@@ -1869,7 +2035,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     </div>
     <div class="mv-bar" aria-hidden="true"><span></span></div>
   </figure>
-  <figure class="sv-hero rv" style="--d:160ms"><img src="assets/skills/hero-ai.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
+  <figure class="sv-hero rv" style="--d:160ms"><div class="gxs gxs--orbit gxs--hero" data-k="hero-ai" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:22.5;--d:33"></i><i class="gxs-ln" style="--x:15;--y:12.2;--a:16.5deg;--o:6.3cqw;--l:18.7cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:15;--y:32.9;--a:-16.5deg;--o:6.3cqw;--l:18.7cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:85;--y:12.2;--a:163.5deg;--o:6.3cqw;--l:18.7cqw;--i:3"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:85;--y:32.9;--a:-163.5deg;--o:6.3cqw;--l:18.7cqw;--i:4"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:22.5;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/lightbulb.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:15;--y:12.2;--i:1"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:15;--y:32.9;--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:85;--y:12.2;--i:3"><span class="gx-pl"><img src="assets/gx/magnifier.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:85;--y:32.9;--i:4"><span class="gx-pl"><img src="assets/gx/interview.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at gxs-tx" style="--x:50;--y:38;--i:5"><em class="gx-chip gx-chip--o gxs-chip">AI</em></span></div></div><!--/gxs--></figure>
   <div class="meta rv" style="--d:180ms;margin-top:18px">
     <div><span>Tools</span><b>ChatGPT, Claude, Sesame</b></div>
     <div><span>Time</span><b data-l="ja">情報整理の時間 80～90%減（4年前比）</b><b data-l="en">80 to 90% less time organising information (vs four years ago)</b><b data-l="vi">Giảm 80 đến 90% thời gian xử lý thông tin (so với 4 năm trước)</b></div>
@@ -1907,18 +2073,18 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">実務でAIを活用している場面を、目的別に紹介します。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">These are the places I actually use AI at work, grouped by purpose.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Dưới đây là những việc tôi thực sự dùng AI, chia theo mục đích.</p>
-  <div class="g3 rv" style="--d:180ms;margin-top:16px">
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/a1-read.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="lbl">Read</span><h3 data-l="ja">資料と動画の要約</h3><h3 data-l="en">Summarising documents and video</h3><h3 data-l="vi">Tóm tắt tài liệu, video</h3>
+  <div class="g3 rv" data-deck style="--d:180ms;margin-top:16px">
+    <div class="card sv-card"><div class="sv-spot gxs gxs--flow" data-k="a1-read" aria-hidden="true"><div class="gxs-in"><i class="gxs-ln" style="--x:18;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:0"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:50;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:1"><i class="gx-cm"></i></i><span class="gxs-at" style="--x:18;--y:24.8;--i:0"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:50;--y:24.8;--i:1"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at is-hot" style="--x:82;--y:24.8;--i:2"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at gxs-tx" style="--x:50;--y:38.3;--i:3"><em class="gx-chip gx-chip--o gxs-chip">AI</em></span></div></div><!--/gxs--><span class="lbl">Read</span><h3 data-l="ja">資料と動画の要約</h3><h3 data-l="en">Summarising documents and video</h3><h3 data-l="vi">Tóm tắt tài liệu, video</h3>
       <p data-l="ja">数十～数百ページの資料や動画を短時間で要約します。営業では、10～20ページの技術資料を顧客向け、社内向けの短いプレゼン資料にまとめました。</p><p data-l="en">I quickly summarise documents running to tens or hundreds of pages, as well as video files. In sales, I turned 10 to 20-page technical documents into short presentations for clients and colleagues.</p><p data-l="vi">Tôi tóm tắt nhanh tài liệu dài hàng chục đến hàng trăm trang và cả file video. Khi làm kinh doanh, tôi rút gọn tài liệu kỹ thuật 10 đến 20 trang thành bài thuyết trình ngắn cho khách và nội bộ.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/a2-numbers.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="lbl">Numbers</span><h3 data-l="ja">数字の集計と照合</h3><h3 data-l="en">Compiling and cross-checking figures</h3><h3 data-l="vi">Tổng hợp, đối chiếu số liệu</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--chart" data-k="a2-numbers" aria-hidden="true"><div class="gxs-in"><span class="gxs-at gxs-chart" style="--x:38;--y:30.4;--i:0"><span class="gx-chartc"><span class="gx-col" style="--h:70"><i class="gx-bar" style="--h:70;--i:0"></i></span><span class="gx-col" style="--h:52"><i class="gx-bar" style="--h:52;--i:1"></i></span><span class="gx-col" style="--h:84"><i class="gx-bar" style="--h:84;--i:2"></i></span><span class="gx-col" style="--h:36"><i class="gx-bar is-hot" style="--h:36;--i:3"></i><span class="gx-lens"><img src="assets/gx/magnifier.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></span><span class="gx-col" style="--h:62"><i class="gx-bar" style="--h:62;--i:4"></i></span><i class="gx-sheen"></i></span></span><span class="gxs-at" style="--x:84;--y:16.9;--i:2"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/shield-check.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="lbl">Numbers</span><h3 data-l="ja">数字の集計と照合</h3><h3 data-l="en">Compiling and cross-checking figures</h3><h3 data-l="vi">Tổng hợp, đối chiếu số liệu</h3>
       <p data-l="ja">数字を収集、分析し、問題の原因を整理します。経理データと人事データを照合して差異を洗い出し、誤りを発見しました。</p><p data-l="en">I collect and analyse figures and identify root causes. I cross-checked accounting and HR data to find discrepancies and errors.</p><p data-l="vi">Tôi thu thập, phân tích số liệu để tìm nguyên nhân gốc, đồng thời đối chiếu số liệu kế toán, nhân sự để phát hiện chênh lệch và sai sót.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/a3-meetings.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="lbl">Meetings</span><h3 data-l="ja">議事録とチームの進捗</h3><h3 data-l="en">Minutes and team progress</h3><h3 data-l="vi">Biên bản họp, tiến độ đội</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--orbit" data-k="a3-meetings" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:28.1;--d:42"></i><i class="gxs-ln" style="--x:16;--y:28.1;--a:0deg;--o:8.5cqw;--l:9.5cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:15.2;--a:159.2deg;--o:8.5cqw;--l:11.9cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:41.1;--a:-159.2deg;--o:8.5cqw;--l:11.9cqw;--i:3"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:28.1;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/calendar.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:16;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:15.2;--i:2"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/stopwatch.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="lbl">Meetings</span><h3 data-l="ja">議事録とチームの進捗</h3><h3 data-l="en">Minutes and team progress</h3><h3 data-l="vi">Biên bản họp, tiến độ đội</h3>
       <p data-l="ja">会議メモと議事録を作成し、チームの業務時間、タスク、進捗を管理しています。</p><p data-l="en">I write meeting notes and minutes and track the team's working hours, tasks and progress.</p><p data-l="vi">Tôi ghi chú, viết biên bản họp và quản lý giờ làm, task, tiến độ của đội.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/a4-hr.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="lbl">HR &amp; Admin</span><h3 data-l="ja">人事、総務の社内ツール</h3><h3 data-l="en">Internal tools for HR and admin</h3><h3 data-l="vi">Công cụ nội bộ nhân sự, hành chính</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--orbit" data-k="a4-hr" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:28.1;--d:42"></i><i class="gxs-ln" style="--x:16;--y:28.1;--a:0deg;--o:8.5cqw;--l:9.5cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:15.2;--a:159.2deg;--o:8.5cqw;--l:11.9cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:41.1;--a:-159.2deg;--o:8.5cqw;--l:11.9cqw;--i:3"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:28.1;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/building-blocks.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:16;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:15.2;--i:2"><span class="gx-pl"><img src="assets/gx/envelope.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/profile-stack.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="lbl">HR &amp; Admin</span><h3 data-l="ja">人事、総務の社内ツール</h3><h3 data-l="en">Internal tools for HR and admin</h3><h3 data-l="vi">Công cụ nội bộ nhân sự, hành chính</h3>
       <p data-l="ja">ChatGPTやAIエージェントを活用し、人事、総務の管理ツール、日次リマインド、データ入力、管理用レポート、組織図を作成しました。</p><p data-l="en">I used ChatGPT and AI agents for HR and admin tools, daily reminders, data entry, management reports and org charts.</p><p data-l="vi">Tôi dùng ChatGPT, AI agent để tạo công cụ quản lý nhân sự, hành chính, nhắc việc hằng ngày, nhập liệu, báo cáo quản trị và sơ đồ tổ chức.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/a5-recruit.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="lbl">Recruiting</span><h3 data-l="ja">AIを活用した採用システム</h3><h3 data-l="en">AI recruiting systems</h3><h3 data-l="vi">Hệ thống tuyển dụng dùng AI</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--flow" data-k="a5-recruit" aria-hidden="true"><div class="gxs-in"><i class="gxs-ln" style="--x:18;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:0"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:50;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:1"><i class="gx-cm"></i></i><span class="gxs-at" style="--x:18;--y:24.8;--i:0"><span class="gx-pl"><img src="assets/gx/cv-resume.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:50;--y:24.8;--i:1"><span class="gx-pl"><img src="assets/gx/funnel.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at is-hot" style="--x:82;--y:24.8;--i:2"><span class="gx-pl"><img src="assets/gx/shield-check.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at gxs-tx" style="--x:50;--y:38.3;--i:3"><em class="gx-chip gx-chip--o gxs-chip">JD ✓</em></span></div></div><!--/gxs--><span class="lbl">Recruiting</span><h3 data-l="ja">AIを活用した採用システム</h3><h3 data-l="en">AI recruiting systems</h3><h3 data-l="vi">Hệ thống tuyển dụng dùng AI</h3>
       <p data-l="ja">CV解析とJDマッチング（適合度スコア）のシステム、および採用AIエージェントの設計と開発を主導しました。AIの判定は、担当者が確認したうえで反映します。</p><p data-l="en">I led the design and development of a CV-parsing and JD-matching system with fit scores, and of an AI recruiting agent. A person checks each AI decision before it is applied.</p><p data-l="vi">Tôi chủ trì thiết kế và phát triển hệ thống phân tích CV, so khớp JD có điểm phù hợp và AI agent tuyển dụng. Người phụ trách kiểm tra kết quả AI trước khi áp dụng.</p></div>
-    <div class="card sv-card"><img class="sv-spot" src="assets/skills/a6-learning.webp" alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="lbl">Learning</span><h3 data-l="ja">学習と語学</h3><h3 data-l="en">Learning and languages</h3><h3 data-l="vi">Học tập, ngoại ngữ</h3>
+    <div class="card sv-card"><div class="sv-spot gxs gxs--orbit" data-k="a6-learning" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:28.1;--d:42"></i><i class="gxs-ln" style="--x:16;--y:28.1;--a:0deg;--o:8.5cqw;--l:9.5cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:15.2;--a:159.2deg;--o:8.5cqw;--l:11.9cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:41.1;--a:-159.2deg;--o:8.5cqw;--l:11.9cqw;--i:3"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:28.1;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/lightbulb.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:16;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:15.2;--i:2"><span class="gx-pl"><img src="assets/gx/key.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/puzzle-fit.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="lbl">Learning</span><h3 data-l="ja">学習と語学</h3><h3 data-l="en">Learning and languages</h3><h3 data-l="vi">Học tập, ngoại ngữ</h3>
       <p data-l="ja">AIを活用して会計、人事、営業の知識を学び、Sesameで日本語と英語の会話力を磨いています。</p><p data-l="en">I learn accounting, HR and sales know-how with AI, and practise Japanese and English conversation with Sesame.</p><p data-l="vi">Tôi học thêm kiến thức kế toán, nhân sự, kinh doanh bằng AI và luyện hội thoại tiếng Nhật, tiếng Anh với Sesame.</p></div>
   </div>
 </section>
@@ -1953,11 +2119,211 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
 </section>
 </main>
 
+<!-- deck:start -->
+<style id="deck-css">
+/* Task nod3: lưới [data-deck] chạy như slide thuyết trình (JS gắn .deck-on; không JS / bản in giữ nguyên lưới) */
+@media screen{
+.deck-on{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:0!important;position:relative;outline:none;border-radius:20px}
+.deck-on:focus-visible{box-shadow:0 0 0 3px rgba(38,179,244,.45)}
+.deck-on>.card{grid-area:1/1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);column-gap:34px;align-items:center;padding:22px 32px 22px 22px;touch-action:pan-y;
+  opacity:0;visibility:hidden;transition:opacity .38s ease,visibility 0s .38s;box-shadow:0 30px 60px -40px rgba(59,47,134,.6)}
+.deck-on>.card.is-cur{opacity:1;visibility:visible;transition:opacity .38s ease,visibility 0s}
+.deck-on>.card,.deck-on>.card:hover{transform:none}
+.deck-on>.card>:first-child{min-width:0}
+.deck-on .sv-spot{width:100%;margin:0;border-radius:14px}
+.deck-on>.card:hover .sv-spot{transform:none}
+.deck-on .deck-txt{min-width:0}
+.deck-on .deck-txt .fl4-n{display:table;font-size:46px;line-height:1;margin-bottom:12px;background:linear-gradient(120deg,#FBA65A,#6d5bd0 55%,#26B3F4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.deck-on .deck-txt .lbl{font-size:11px;margin-bottom:12px}
+.deck-on .deck-txt h3{font-size:22px;line-height:1.45;margin-bottom:12px}
+.deck-on .deck-txt p{font-size:14.5px;line-height:1.9}
+.deck-on.is-live>.card.is-cur>:first-child{animation:deckVis .7s cubic-bezier(.2,.7,.2,1) both,deckKb 9s ease-in-out .7s infinite alternate}
+.deck-on.is-live>.card.is-cur .deck-txt>*{animation:deckUp .6s cubic-bezier(.2,.7,.2,1) both}
+.deck-on.is-live>.card.is-cur .deck-txt>.fl4-n,.deck-on.is-live>.card.is-cur .deck-txt>.lbl{animation:deckPop .55s cubic-bezier(.3,1.4,.5,1) .05s both;transform-origin:left center}
+.deck-on.is-live>.card.is-cur .deck-txt>h3{animation-delay:.14s}
+.deck-on.is-live>.card.is-cur .deck-txt>p{animation-delay:.26s}
+@keyframes deckVis{from{opacity:0;transform:translateX(calc(var(--dx,1)*48px)) scale(.94)}to{opacity:1;transform:none}}
+@keyframes deckKb{from{transform:none}to{transform:scale(1.035)}}
+@keyframes deckUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes deckPop{0%{opacity:0;transform:scale(.4)}60%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:none}}
+@keyframes deckProg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.deck-bar{grid-area:2/1;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.deck-prog{order:-1;flex:1 0 100%;height:3px;border-radius:3px;background:#ece8f3;overflow:hidden;margin-bottom:4px}
+.deck-prog i{display:block;height:100%;background:linear-gradient(90deg,#FBA65A,#6d5bd0,#26B3F4);transform-origin:left center;transform:scaleX(0)}
+.deck-on.is-play .deck-prog i{animation:deckProg var(--deck-t,7s) linear both}
+.deck-on.is-hold .deck-prog i{animation-play-state:paused}
+.deck-bar button{appearance:none;display:inline-flex;align-items:center;justify-content:center;height:34px;min-width:34px;padding:0;border:1px solid #e1dcef;border-radius:999px;background:#fff;color:#3b2f86;cursor:pointer;font:700 12px 'Space Grotesk',sans-serif;transition:background .2s,color .2s,border-color .2s}
+.deck-bar button:hover{border-color:#6d5bd0}
+.deck-bar button:focus-visible{outline:2px solid #26B3F4;outline-offset:2px}
+.deck-dots{display:flex;gap:6px;flex-wrap:wrap}
+.deck-dots button{min-width:40px;padding:0 10px}
+.deck-dots button.on{background:#3b2f86;border-color:#3b2f86;color:#fff}
+.deck-count{margin-left:auto;font:700 13px 'Space Grotesk',sans-serif;color:#8a84a3;letter-spacing:.06em}
+.deck-count b{color:#3b2f86;font-size:17px}
+.deck-pp i{display:block;width:10px;height:11px;border-left:3px solid currentColor;border-right:3px solid currentColor;box-sizing:border-box}
+.deck-on:not(.is-play) .deck-pp i{width:0;height:0;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent currentColor;margin-left:3px}
+.deck-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+@media screen and (max-width:900px){
+.deck-on>.card{grid-template-columns:minmax(0,1fr);row-gap:14px;padding:16px 18px 20px}
+.deck-on .deck-txt .fl4-n{font-size:36px}
+.deck-on .deck-txt h3{font-size:19px}
+.deck-on .deck-txt p{font-size:14px}
+.deck-dots{gap:4px}
+.deck-dots button{min-width:0;width:30px;padding:0}
+}
+@media screen and (max-width:600px){.deck-count{display:none}.deck-pp{margin-left:auto}}
+@media screen and (max-width:420px){.deck-dots button{width:26px;height:30px;font-size:11px}.deck-bar{gap:6px}.deck-bar>button{height:30px;min-width:30px}}
+@media (prefers-reduced-motion:reduce){.deck-on>.card,.deck-on>.card *{animation:none!important;transition:none!important}.deck-prog{display:none}}
+@media print{.deck-bar{display:none!important}}
+</style>
+<script id="deck-js">
+(function(){
+  var ds=[].slice.call(document.querySelectorAll('[data-deck]'));if(!ds.length)return;
+  var rm=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var T={prev:['前のスライド','Previous slide','Trang trước'],next:['次のスライド','Next slide','Trang sau'],pp:['自動再生','Autoplay','Tự chạy']};
+  function sr(k){return '<span class="deck-sr"><span data-l="ja">'+T[k][0]+'</span><span data-l="en">'+T[k][1]+'</span><span data-l="vi">'+T[k][2]+'</span></span>'}
+  function chev(d){return '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="'+d+'" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
+  function pad(n){return (n<10?'0':'')+n}
+  ds.forEach(function(d){
+    var cs=[].slice.call(d.children).filter(function(c){return c.classList.contains('card')}),n=cs.length;if(n<2)return;
+    cs.forEach(function(c,i){var w=document.createElement('div');w.className='deck-txt';
+      [].slice.call(c.children).slice(1).forEach(function(x){w.appendChild(x)});c.appendChild(w);
+      c.setAttribute('role','group');c.setAttribute('aria-label',(i+1)+' / '+n)});
+    var dots='';for(var i=0;i<n;i++)dots+='<button type="button" data-i="'+i+'">'+pad(i+1)+'</button>';
+    var bar=document.createElement('div');bar.className='deck-bar';
+    bar.innerHTML='<span class="deck-prog" aria-hidden="true"><i></i></span>'+
+      '<button type="button" class="deck-prev">'+chev('M15 5l-7 7 7 7')+sr('prev')+'</button>'+
+      '<span class="deck-dots">'+dots+'</span>'+
+      '<button type="button" class="deck-next">'+chev('M9 5l7 7-7 7')+sr('next')+'</button>'+
+      '<span class="deck-sr deck-live" aria-live="polite"></span><span class="deck-count" aria-hidden="true"><b>01</b> / '+pad(n)+'</span>'+
+      (rm?'':'<button type="button" class="deck-pp" aria-pressed="true"><i></i>'+sr('pp')+'</button>');
+    d.appendChild(bar);d.classList.add('deck-on');d.tabIndex=0;
+    d.setAttribute('role','region');d.setAttribute('aria-roledescription','carousel');
+    var s=d.closest('section'),h2=s&&s.querySelector('h2');if(h2){if(!h2.id)h2.id=s.id+'-h';d.setAttribute('aria-labelledby',h2.id)}
+    var cur=-1,stopped=rm,hov=false,foc=false,vis=false,prog=bar.querySelector('.deck-prog i'),cnt=bar.querySelector('.deck-count b'),
+      pp=bar.querySelector('.deck-pp'),db=[].slice.call(bar.querySelectorAll('.deck-dots button')),live=bar.querySelector('.deck-live'),due=false;
+    function hold(){var h=hov||foc||!vis;d.classList.toggle('is-hold',h);if(!h&&due){due=false;if(!stopped)go(cur+1,1)}}
+    function restart(){prog.style.animation='none';void prog.offsetWidth;prog.style.animation=''}
+    function play(){d.classList.toggle('is-play',!stopped);if(pp)pp.setAttribute('aria-pressed',stopped?'false':'true')}
+    function go(i,dir,say){i=(i+n)%n;if(i===cur)return;due=false;d.style.setProperty('--dx',dir||(i>cur?1:-1));
+      cs.forEach(function(c,k){var on=k===i;c.classList.toggle('is-cur',on);if(on)c.removeAttribute('inert');else c.setAttribute('inert','');c.setAttribute('aria-hidden',on?'false':'true')});
+      db.forEach(function(b,k){b.classList.toggle('on',k===i);if(k===i)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});
+      cnt.textContent=pad(i+1);cur=i;restart();
+      if(say){var t=[].filter.call(cs[i].querySelectorAll('h3'),function(x){return x.getClientRects().length})[0];live.textContent=(i+1)+' / '+n+(t?' '+t.textContent:'')}}
+    prog.addEventListener('animationend',function(){if(stopped)return;if(d.classList.contains('is-hold'))due=true;else go(cur+1,1)});
+    bar.querySelector('.deck-prev').addEventListener('click',function(){go(cur-1,-1,1)});
+    bar.querySelector('.deck-next').addEventListener('click',function(){go(cur+1,1,1)});
+    db.forEach(function(b){b.addEventListener('click',function(){go(+b.getAttribute('data-i'),0,1)})});
+    if(pp)pp.addEventListener('click',function(){stopped=!stopped;play();restart()});
+    d.addEventListener('keydown',function(e){var k=e.key;if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;
+      if(k==='ArrowRight')go(cur+1,1,1);else if(k==='ArrowLeft')go(cur-1,-1,1);else if(k==='Home')go(0,-1,1);else if(k==='End')go(n-1,1,1);else return;e.preventDefault();if(d.contains(document.activeElement)){foc=true;hold()}});
+    d.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){hov=true;hold()}});
+    d.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){hov=false;hold()}});
+    d.addEventListener('focusin',function(){var f=document.activeElement;try{foc=!!(f&&f.matches(':focus-visible'))}catch(x){foc=true}hold()});
+    d.addEventListener('focusout',function(e){if(!d.contains(e.relatedTarget)){foc=false;hold()}});
+    var sx=null,sy=0;
+    d.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'){sx=e.clientX;sy=e.clientY}});
+    d.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx,dy=e.clientY-sy;sx=null;
+      if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.3)go(cur+(dx<0?1:-1),dx<0?1:-1,1)});
+    d.addEventListener('pointercancel',function(){sx=null});
+    go(0,1);play();
+    if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting&&e.intersectionRatio>=.25;
+      if(vis&&!d.classList.contains('is-live')){d.classList.add('is-live');restart()}hold()})},{threshold:[0,.25,.5]}).observe(d)}
+    else{vis=true;d.classList.add('is-live')}
+    hold();
+  });
+})();
+</script>
+<!-- deck:end -->
+<!-- motion-all:start -->
+<style id="mo-css">
+/* motion-all (task bye2): phần còn tĩnh bên trong khối chuyển động như video (khối hiện dần khi cuộn do task zcd9, lưới slide do nod3): biểu đồ tự vẽ + chấm sáng chạy, ảnh Ken Burns, dòng sự kiện có nhịp sáng, icon cảnh gx trôi nhẹ. Vào màn hình mới chạy, ra khỏi thì dừng; reduced-motion và bản in: tĩnh. Ảnh kỹ năng .sv-card / .sv-hero và icon ic-* do task v3c1 lo */
+.mo-kb{display:block;overflow:hidden;border-radius:10px;transform:translateZ(0)}
+.mo-kb>img{display:block}
+.mo-cnt{font-variant-numeric:tabular-nums}
+.mo-bar,.mo-dot{transform-box:fill-box}
+.mo-h .mo-bar{transform-origin:0 50%}.mo-v .mo-bar{transform-origin:50% 100%}.mo-dot{transform-origin:50% 50%}
+.mo-line{stroke-dasharray:1 1}
+.mo-run{fill:none!important;stroke:#F47E2A;stroke-width:4;stroke-linecap:round;stroke-dasharray:.035 .965;opacity:0;pointer-events:none;filter:drop-shadow(0 0 3px rgba(244,126,42,.8))}
+@media screen{
+  .mo-arm.evrow:not(.mo-on)>li,.mo-arm.mo-kb:not(.mo-on)>img,.mo-arm:not(.mo-on) .mo-area{opacity:0}
+  .mo-arm.mo-h:not(.mo-on) .mo-bar{transform:scaleX(0)}.mo-arm.mo-v:not(.mo-on) .mo-bar{transform:scaleY(0)}
+  .mo-arm:not(.mo-on) .mo-dot{transform:scale(0)}.mo-arm:not(.mo-on) .mo-line{stroke-dashoffset:1}
+}
+html.js .mo-kb.mo-on>img{animation:moKbIn 1.1s cubic-bezier(.16,1,.3,1) both,moKb 16s ease-in-out 1.1s infinite alternate}
+html.js .mo-on.mo-h .mo-bar{animation:moGx .9s cubic-bezier(.34,1.56,.64,1) backwards,moBx 4.8s ease-in-out infinite;animation-delay:calc(var(--mi,0)*.12s + .15s),calc(var(--mi,0)*.4s + 1.6s)}
+html.js .mo-on.mo-v .mo-bar{animation:moGy .9s cubic-bezier(.34,1.56,.64,1) backwards,moBy 4.8s ease-in-out infinite;animation-delay:calc(var(--mi,0)*.12s + .15s),calc(var(--mi,0)*.4s + 1.6s)}
+html.js .mo-on .mo-line{animation:moDraw 1.4s cubic-bezier(.65,0,.35,1) .2s backwards}
+html.js .mo-on .mo-area{animation:moFade 1s ease .9s backwards}
+html.js .mo-on .mo-dot{animation:moDotIn .5s cubic-bezier(.34,1.56,.64,1) backwards,moDotP 3.2s ease-in-out infinite;animation-delay:calc(var(--mi,0)*.11s + .4s),calc(var(--mi,0)*.32s + 2s)}
+html.js .mo-on .mo-run{animation:moRun 3.4s linear 1.7s infinite}
+html.js .evrow.mo-on>li{animation:moPop .7s cubic-bezier(.34,1.56,.64,1) backwards;animation-delay:calc(var(--mi,0)*.08s)}
+html.js .evrow.mo-on>li::before{transform-origin:0 50%;animation:moLine .6s cubic-bezier(.65,0,.35,1) backwards;animation-delay:calc(var(--mi,0)*.08s + .2s)}
+html.js .evrow.mo-on>li::after{animation:moTick 6s ease-in-out infinite;animation-delay:calc(var(--mi,0)*.6s + 1s)}
+html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ease-in-out infinite;animation-delay:calc(var(--i,0)*-.55s)}
+.mo-off,.mo-off *,.mo-off::before,.mo-off::after,.mo-off *::before,.mo-off *::after{animation-play-state:paused!important}
+@keyframes moPop{0%{opacity:0;transform:translateY(24px) scale(.95)}55%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes moKbIn{0%{opacity:0;transform:scale(1.22)}100%{opacity:1;transform:scale(1.04)}}
+@keyframes moKb{0%{transform:scale(1.04)}100%{transform:scale(1.14) translate(var(--kx,-2%),var(--ky,-2%))}}
+@keyframes moGx{0%{transform:scaleX(0)}}
+@keyframes moGy{0%{transform:scaleY(0)}}
+@keyframes moBx{0%,100%{transform:none}50%{transform:scaleX(1.035)}}
+@keyframes moBy{0%,100%{transform:none}50%{transform:scaleY(1.04)}}
+@keyframes moDraw{0%{stroke-dashoffset:1}}
+@keyframes moFade{0%{opacity:0}}
+@keyframes moDotIn{0%{transform:scale(0)}}
+@keyframes moDotP{0%,24%,100%{transform:none}12%{transform:scale(1.45)}}
+@keyframes moRun{0%{opacity:1;stroke-dashoffset:1}100%{opacity:1;stroke-dashoffset:0}}
+@keyframes moLine{0%{transform:scaleX(0)}}
+@keyframes moTick{0%,14%,100%{transform:none;box-shadow:0 0 0 0 rgba(244,126,42,0)}5%{transform:scale(1.3);border-color:#F47E2A;box-shadow:0 0 0 6px rgba(244,126,42,.18)}}
+@media (prefers-reduced-motion:reduce){.mo-arm,.mo-arm *,.mo-arm>li::before,.mo-arm>li::after,.gx-tag .gx-pl img,.gx-tile .gx-pl img{animation:none!important}.mo-run{display:none}}
+@media print{.mo-arm,.mo-arm *,.mo-arm>li::before,.mo-arm>li::after{animation:none!important}.mo-kb>img{transform:none!important}.mo-run{display:none}}
+</style>
+<script id="mo-js">
+(function(){
+  if(!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var Q=function(s,r){return [].slice.call((r||document).querySelectorAll(s))},T=[];
+  function arm(el){el.classList.add('mo-arm');T.push(el)}
+  // biểu đồ: cột mọc lên, đường tự vẽ, chấm nảy, chấm sáng chạy dọc đường
+  Q('.ch svg').forEach(function(s){
+    var bars=Q('g>rect',s).filter(function(r){return r.getAttribute('fill')!=='transparent'}),
+        xs=bars.map(function(r){return r.getAttribute('x')});
+    s.classList.add(bars.length>1&&xs.every(function(x){return x===xs[0]})?'mo-h':'mo-v');
+    bars.forEach(function(r,i){r.classList.add('mo-bar');r.style.setProperty('--mi',i)});
+    Q('polyline',s).forEach(function(p){p.setAttribute('pathLength','1');p.classList.add('mo-line');
+      var c=p.cloneNode(false);c.setAttribute('class','mo-run');c.setAttribute('aria-hidden','true');p.parentNode.insertBefore(c,p.nextSibling)});
+    Q('path',s).forEach(function(p){var f=p.getAttribute('fill');if(f&&f!=='none'&&f!=='transparent')p.classList.add('mo-area')});
+    Q('circle',s).forEach(function(c,i){c.classList.add('mo-dot');c.style.setProperty('--mi',i)});
+    arm(s)});
+  // ảnh công tác: lia máy Ken Burns (khung bọc giữ nguyên cỡ ảnh)
+  var D=[[-2,-2],[2,-2],[-2,2],[2,1.5]];
+  Q('.evrow img,#sales-trips figure>img').forEach(function(im,i){
+    var w=document.createElement('span');w.className='mo-kb';w.style.setProperty('--kx',D[i%4][0]+'%');w.style.setProperty('--ky',D[i%4][1]+'%');
+    im.parentNode.insertBefore(w,im);w.appendChild(im);arm(w)});
+  // dòng sự kiện: mục bật vào, nét nối tự kéo, chấm mốc sáng lần lượt
+  Q('.evrow').forEach(function(o){[].forEach.call(o.children,function(li,i){li.style.setProperty('--mi',i)});arm(o)});
+  // số liệu: đếm từ 0 lên như video (bỏ số thứ tự 01..10 và chữ)
+  Q('.pg .num').forEach(function(n){var t=n.textContent.trim();
+    if(!/^[1-9]\d*(～[1-9]\d*)?$/.test(t)||n.closest('.gx,.mv,.sk7'))return;n.setAttribute('data-mo-n',t);n.classList.add('mo-cnt');arm(n)});
+  if(!T.length)return;
+  function count(n){var t=n.getAttribute('data-mo-n'),ps=t.split('～').map(Number),t0=null;
+    function f(ts){if(!n.hasAttribute('data-mo-n'))return;if(t0===null)t0=ts;var k=Math.min(1,(ts-t0)/1300),e=1-Math.pow(1-k,3);
+      n.textContent=k<1?ps.map(function(v){return Math.round(v*e)}).join('～'):t;if(k<1)requestAnimationFrame(f)}
+    requestAnimationFrame(f)}
+  function on(el){if(el.classList.contains('mo-on'))return;el.classList.add('mo-on');if(el.hasAttribute('data-mo-n'))count(el)}
+  if(!('IntersectionObserver' in window)){T.forEach(on);return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){var el=e.target;if(e.isIntersecting)on(el);el.classList.toggle('mo-off',!e.isIntersecting)})},{rootMargin:"0px 0px -10% 0px"});
+  T.forEach(function(el){io.observe(el)});
+  addEventListener('beforeprint',function(){T.forEach(function(el){var t=el.getAttribute('data-mo-n');if(t){el.removeAttribute('data-mo-n');el.textContent=t}el.classList.add('mo-on')})});
+})();
+</script>
+<!-- motion-all:end -->
 <!-- gx:start -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="gxRingG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBA65A"/><stop offset=".55" stop-color="#F47E2A"/><stop offset="1" stop-color="#25A1DB"/></linearGradient></defs></svg>
 <script id="gx-js">
 (function(){
-  var fs=[].slice.call(document.querySelectorAll('.gx'));if(!fs.length)return;
+  var fs=[].slice.call(document.querySelectorAll('.gx,.gxs'));if(!fs.length)return;
   if(!('IntersectionObserver' in window)){fs.forEach(function(f){f.classList.add('is-in')});return}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){var f=e.target;
     if(e.isIntersecting&&e.intersectionRatio>=.2)f.classList.add('is-in');
@@ -2129,9 +2495,9 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     "Cuộc họp CRM hằng tuần với nhà máy Nhật",
     "Weekly CRM meeting with the Japan factory"
   ],
-  "CRMに入力した見込み台数などを日本の工場と共有し、納期を調整する会議です。2023年2月～2024年2月に約30回、主に木曜日にオンラインで開催され、招待を受けていました。":[
-    "Tại cuộc họp này, tôi cùng nhà máy Nhật xem sản lượng dự kiến trên CRM và điều chỉnh lịch giao. Từ 02/2023 đến 02/2024 có khoảng 30 cuộc họp online, chủ yếu vào thứ Năm; tôi được mời tham dự.",
-    "These meetings covered CRM forecasts and delivery dates with the Japan factory. I was invited to about 30 online meetings, mostly on Thursdays, from February 2023 to February 2024."
+  "CRMに入力した見込み台数などを日本の工場と共有し、納期を調整する会議で、毎週オンラインで開催され、招待を受けていました。":[
+    "Tại cuộc họp này, tôi cùng nhà máy Nhật xem sản lượng dự kiến trên CRM và điều chỉnh lịch giao. Cuộc họp diễn ra online hằng tuần và tôi được mời tham dự.",
+    "These meetings covered CRM forecasts and delivery dates with the Japan factory. They were held online every week, and I was invited to attend."
   ],
   "CRM入力状況の確認会議":[
     "Họp rà soát nhập liệu CRM",
@@ -2876,5 +3242,110 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   route();
 })();
 </script>
+<!-- lp-slide:start -->
+<script>
+/* Task m9qu: mỗi section là một slide như Landing Page GPR FLEXEYE. Gán data-slide "NN / tổng" theo từng tab
+   (bỏ qua section bị ẩn như #toc; khối lp-same của lcbk cũng đọc thuộc tính này), và phím ←/→ nhảy sang hàng slide
+   trước / sau (màn rộng có thể 2 tờ một hàng) khi không ở ô nhập hay khối có điều khiển riêng. */
+(function(){
+  function pad(n){return (n<10?'0':'')+n}
+  function slides(m){return [].filter.call(m.children,function(p){return p.classList.contains('pg')&&getComputedStyle(p).display!=='none'})}
+  /* main bị hidden không làm con của nó display:none, nên đánh số một lần cho cả 4 tab là đủ */
+  [].forEach.call(document.querySelectorAll('main.wrap'),function(m){
+    var ps=slides(m);
+    ps.forEach(function(p,i){p.setAttribute('data-slide',pad(i+1)+' / '+pad(ps.length))});
+  });
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  document.addEventListener('keydown',function(e){
+    if(e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;
+    var dir=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+    if(!dir)return;
+    var t=e.target;
+    if(t&&t.closest&&t.closest('input,textarea,select,[contenteditable],video,audio,[data-deck]'))return;
+    var m=document.querySelector('main.wrap:not([hidden])');
+    if(!m)return;
+    var ps=slides(m);
+    if(!ps.length)return;
+    var line=(parseFloat(getComputedStyle(ps[0]).scrollMarginTop)||0)+8;
+    var tops=ps.map(function(p){return p.getBoundingClientRect().top});
+    var row=tops[0];
+    tops.forEach(function(t){if(t<=line+innerHeight*0.3&&t>row)row=t});
+    var next=-1,i;
+    if(dir>0){for(i=0;i<ps.length;i++)if(tops[i]>row+10){next=i;break}}
+    else if(row<line-20){next=tops.indexOf(row)}
+    else{for(i=ps.length-1;i>=0;i--)if(tops[i]<row-10){next=i;break}
+      if(next>=0)for(i=next;i>=0;i--)if(Math.abs(tops[i]-tops[next])<=10)next=i}
+    if(next<0)return;
+    e.preventDefault();
+    ps[next].scrollIntoView({behavior:reduce.matches?'instant':'smooth',block:'start'});
+  });
+})();
+</script>
+<!-- lp-slide:end -->
+<!-- sr:start -->
+<script id="sr-js">
+/* Task zcd9: kéo tới đâu hiện ra tới đó (cùng cách với Landing Page GPR FLEXEYE, assets/js/hien-dan.js).
+   Theo dõi từng khối (mọi .rv + con trực tiếp của .pg không phải nền trang trí), khối vào khung nhìn thì gắn .sr-in
+   một lần rồi thôi theo dõi, nên nội dung không bao giờ ẩn lại. Van an toàn: 2 giây không nhận được nhịp nào
+   thì bỏ .sr, trang hiện đủ (thà mất hiệu ứng còn hơn mất chữ). window.scrollReveal để test đo. */
+(function(){
+  var root=document.documentElement;
+  if(!('IntersectionObserver' in window))return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||matchMedia('print').matches)return;
+  var items=[];
+  [].forEach.call(document.querySelectorAll('.pg'),function(pg){
+    [].forEach.call(pg.children,function(c){
+      if(/^(SCRIPT|STYLE|TEMPLATE)$/.test(c.tagName)||c.classList.contains('deco')||c.classList.contains('rv')||c.querySelector('.rv'))return;
+      var p=getComputedStyle(c).position;if(p==='absolute'||p==='fixed')return;
+      c.classList.add('sr');items.push(c);
+    });
+    [].forEach.call(pg.querySelectorAll('.rv'),function(e){items.push(e)});
+  });
+  if(!items.length)return;
+  root.classList.add('sr');
+  var got=0,van=0;
+  function show(e){if(e.classList.contains('sr-in'))return;e.classList.add('sr-in');io.unobserve(e)}
+  var io=new IntersectionObserver(function(es){
+    got++;if(van){clearTimeout(van);van=0}
+    var k=0;
+    es.forEach(function(en){if(!en.isIntersecting)return;var e=en.target;
+      if(e.classList.contains('sr'))e.style.setProperty('--sr',String(Math.min(k++,4)));show(e)});
+  },{rootMargin:'0px 0px -10% 0px',threshold:0});
+  items.forEach(function(e){io.observe(e)});
+  function arm(){if(van||got||document.visibilityState!=='visible')return;
+    van=setTimeout(function(){if(!got){root.classList.remove('sr');io.disconnect()}},2000)}
+  document.addEventListener('visibilitychange',arm);arm();
+  // Khối nằm trong dải 10% đáy ở cuối trang sẽ không bao giờ vượt mép theo dõi: cuộn chạm đáy thì hiện nốt.
+  addEventListener('scroll',function(){
+    if(innerHeight+scrollY<root.scrollHeight-2)return;
+    items.forEach(function(e){if(!e.classList.contains('sr-in')&&e.getClientRects().length&&e.getBoundingClientRect().top<innerHeight)show(e)});
+  },{passive:true});
+  addEventListener('beforeprint',function(){items.forEach(show)});
+  window.scrollReveal={count:items.length,pending:function(){return items.filter(function(e){return !e.classList.contains('sr-in')}).length}};
+})();
+</script>
+<!-- sr:end -->
+<!-- lp-same:start -->
+<script id="lp-same-js">
+/* Task lcbk: bìa nền navy như mẫu + nút ngôn ngữ viên thuốc nổi góc phải (chép #i18n của Landing Page).
+   Nút chỉ chuyển tiếp cú bấm sang nút .sb-lang có sẵn (setLang cũ), tự sáng theo <html lang>. */
+(function(){
+  var c=document.getElementById('cover');if(c)c.classList.add('pg--dark');
+  var src=[].slice.call(document.querySelectorAll('.sb-lang button[data-lang]'));
+  if(!src.length||document.getElementById('lp-i18n'))return;
+  var bar=document.createElement('div');bar.id='lp-i18n';bar.setAttribute('role','group');bar.setAttribute('aria-label','Language');
+  bar.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="1.6"/>'+
+    '<path d="M3 12h18M12 3c2.8 2.6 2.8 15.4 0 18M12 3c-2.8 2.6-2.8 15.4 0 18" fill="none" stroke="#fff" stroke-width="1.6"/></svg>';
+  src.forEach(function(s){var l=s.getAttribute('data-lang'),b=document.createElement('button');
+    b.type='button';b.setAttribute('data-lang',l);b.setAttribute('lang',l);b.setAttribute('aria-label',s.textContent);
+    b.textContent=l.toUpperCase();b.addEventListener('click',function(){s.click()});bar.appendChild(b)});
+  document.body.appendChild(bar);
+  function sync(){var l=document.documentElement.lang;
+    [].forEach.call(bar.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lang')===l?'true':'false')})}
+  sync();
+  if('MutationObserver' in window)new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+})();
+</script>
+<!-- lp-same:end -->
 </body>
 </html>
