@@ -443,6 +443,158 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 @media print{.pj{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.pj-c{box-shadow:none;break-inside:avoid;padding:9px 11px 8px;gap:3px}.pj-go{display:none}
   .pj-co{font-size:12.5px}.pj-role{font-size:9.6px;line-height:1.4}.pj-pt{font-size:10.2px;line-height:1.4}.pj-tags>span{gap:4px}.pj-tags i{font-size:8.8px;padding:2px 6px}}
 </style>
+<!-- gx-css:start -->
+<style id="gx-css">
+/* Cảnh minh hoạ động theo phong cách video GPRFLEXEYE: thẻ trắng viền gradient cam-xanh, bóng 3D, icon 3D kính, lưới chấm, pop back.out, vẽ nét, đếm số */
+@property --n{syntax:'<integer>';inherits:false;initial-value:0}
+.gx{--gx-blue:#25A1DB;--gx-or:#F47E2A;--gx-ort:#DD6417;--gx-ink:#1E293B;--gx-body:#475569;
+  --gx-edge:linear-gradient(135deg,rgba(244,126,42,.55),rgba(255,255,255,.2) 45%,rgba(37,161,219,.6));
+  --gx-card:linear-gradient(180deg,#FFFFFF 0%,#F6F9FC 100%);
+  --gx-sh:inset 0 1px 0 rgba(255,255,255,.95),0 1px 2px rgba(15,23,42,.06),0 10px 20px -8px rgba(15,23,42,.14),0 28px 56px -22px rgba(27,127,176,.38),0 22px 44px -30px rgba(244,126,42,.40);
+  --gx-back:cubic-bezier(.34,1.56,.64,1);--gx-out:cubic-bezier(.16,1,.3,1);--gx-o3:cubic-bezier(.165,.84,.44,1);--gx-io:cubic-bezier(.645,.045,.355,1);
+  position:relative;isolation:isolate;overflow:hidden;margin:26px 0 8px;padding:52px 30px 30px;border-radius:28px;border:1.5px solid transparent;
+  background:radial-gradient(55% 80% at 10% 8%,rgba(37,161,219,.11),transparent 70%) padding-box,radial-gradient(50% 75% at 94% 96%,rgba(244,126,42,.10),transparent 70%) padding-box,var(--gx-card) padding-box,var(--gx-edge) border-box;
+  box-shadow:var(--gx-sh);color:var(--gx-ink);font-family:'Manrope','Noto Sans JP',sans-serif}
+.gx::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.55;background-image:radial-gradient(rgba(100,116,139,.30) 1.2px,transparent 1.3px);background-size:22px 22px;
+  -webkit-mask-image:radial-gradient(70% 75% at 50% 50%,#000 30%,transparent 80%);mask-image:radial-gradient(70% 75% at 50% 50%,#000 30%,transparent 80%)}
+.gx::after{content:'';position:absolute;z-index:-1;left:58%;top:-45%;width:320px;height:320px;border-radius:50%;background:radial-gradient(closest-side,rgba(92,196,240,.16),transparent);pointer-events:none}
+.gx-step{position:absolute;left:18px;top:14px;display:inline-flex;align-items:center;gap:8px;height:26px;padding:0 12px 0 10px;border-radius:13px;border:1px solid transparent;
+  background:linear-gradient(#fff,#F6F9FC) padding-box,var(--gx-edge) border-box;box-shadow:0 6px 14px -8px rgba(27,127,176,.35);font:600 11px/1 'Space Grotesk',sans-serif;letter-spacing:.14em;color:#64748B}
+.gx-step i{width:7px;height:7px;border-radius:50%;background:var(--gx-blue);box-shadow:0 0 0 3px rgba(37,161,219,.15)}
+.gx-step b{color:var(--gx-ort);font-weight:700}
+.gx-in{position:relative}
+/* Đế icon 3D: mặt kính trắng, mép xanh, vệt bóng trên, bóng xanh + cam */
+.gx-pl{--s:76px;position:relative;flex:none;display:grid;place-items:center;width:var(--s);height:var(--s);border-radius:calc(var(--s)*.28);border:1.5px solid transparent;
+  background:radial-gradient(120% 55% at 50% 0%,rgba(255,255,255,.9),transparent 62%) padding-box,linear-gradient(165deg,#EEF7FD 0%,#FFF 56%,#F6F9FC) padding-box,var(--gx-edge) border-box;
+  box-shadow:inset 0 2px 1px rgba(255,255,255,.98),inset 0 -10px 16px -8px rgba(27,127,176,.16),0 5px 0 -1px #CBE5F6,var(--gx-sh)}
+.gx-pl img{display:block;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 10px 12px rgba(27,127,176,.24)) drop-shadow(0 4px 5px rgba(244,126,42,.16))}
+.gx-pl--l{--s:112px}
+.gx-pl--m{--s:84px}
+.is-hot>.gx-pl{box-shadow:inset 0 2px 1px rgba(255,255,255,.98),inset 0 -10px 16px -8px rgba(244,126,42,.18),0 5px 0 -1px #FBCBA6,0 0 0 5px rgba(244,126,42,.12),var(--gx-sh)}
+.gx-lb{display:block;margin-top:10px;font:700 12.5px/1.4 'Manrope','Noto Sans JP',sans-serif;color:var(--gx-ink);text-align:center;word-break:keep-all;overflow-wrap:anywhere}
+.gx-chip{display:inline-flex;align-items:center;margin-top:7px;padding:3px 10px;border-radius:999px;border:1px solid transparent;font:700 10.5px/1.35 'Space Grotesk','Noto Sans JP',sans-serif;letter-spacing:.04em;font-style:normal;
+  color:var(--gx-ort);background:linear-gradient(#fff,#fff) padding-box,var(--gx-edge) border-box;white-space:nowrap}
+.gx-chip--o{color:#fff;border:0;padding:4px 11px;background:linear-gradient(135deg,#EE7A2C 0%,#D9631A 52%,#C2520F 100%);text-shadow:0 1px 1px rgba(110,40,0,.35);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 8px 16px -8px rgba(217,99,26,.6)}
+/* flow: các bước nối bằng nét đứt, sao chổi cam chạy dọc */
+.gx--flow .gx-in{display:flex;align-items:flex-start;justify-content:center}
+.gx-st{flex:0 1 132px;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.gx-ln{position:relative;flex:1 1 40px;min-width:16px;max-width:130px;height:2px;margin-top:37px;border-radius:2px;transform-origin:0 50%;
+  background:repeating-linear-gradient(90deg,rgba(37,161,219,.6) 0 6px,transparent 6px 13px)}
+.gx-cm{position:absolute;inset:0;opacity:0}
+.gx-cm::before{content:'';position:absolute;left:0;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:radial-gradient(circle,#fff 0 22%,#F47E2A 46%,rgba(244,126,42,0) 72%);box-shadow:0 0 14px 4px rgba(244,126,42,.4)}
+.gx-cm--r::before{background:radial-gradient(circle,#fff 0 22%,#25A1DB 46%,rgba(37,161,219,0) 72%);box-shadow:0 0 14px 4px rgba(37,161,219,.4)}
+/* hub / ring / chart: lõi ở giữa, thẻ nhãn hai bên nối bằng nét đứt */
+.gx--hub .gx-in,.gx--ring .gx-in,.gx--chart .gx-in{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;column-gap:64px}
+.gx-side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.gx-side--l{align-items:flex-end}
+.gx-side--r{align-items:flex-start}
+.gx-tag{position:relative;display:flex;align-items:center;gap:10px;max-width:260px;padding:7px 14px 7px 7px;border-radius:18px;border:1.5px solid transparent;
+  background:var(--gx-card) padding-box,var(--gx-edge) border-box;box-shadow:var(--gx-sh)}
+.gx-tag .gx-pl{--s:46px;border-radius:14px}
+.gx-tag .gx-lb{margin:0;text-align:left;font-size:12.5px}
+.gx-tag::after{content:'';position:absolute;top:50%;width:52px;height:2px;margin-top:-1px;background:repeating-linear-gradient(90deg,rgba(37,161,219,.55) 0 5px,transparent 5px 11px)}
+.gx-side--l .gx-tag::after{left:100%;margin-left:6px;transform-origin:100% 50%}
+.gx-side--r .gx-tag::after{right:100%;margin-right:6px;transform-origin:0 50%}
+.gx-core{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+.gx-orb{position:relative;display:grid;place-items:center}
+.gx-orb::before,.gx-orb::after{content:'';position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(244,126,42,.45);box-shadow:0 0 22px rgba(244,126,42,.25),inset 0 0 18px rgba(244,126,42,.2);opacity:0;pointer-events:none}
+.gx-core>.gx-chip{margin-top:14px}
+.gx-orb--ring{width:136px;height:136px}
+.gx-orb--ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.gx-rt{fill:#fff;stroke:#E2E8F0;stroke-width:9;filter:drop-shadow(0 10px 14px rgba(27,127,176,.18))}
+.gx-rf{fill:none;stroke:url(#gxRingG);stroke-width:9;stroke-linecap:round;stroke-dasharray:100 100}
+.gx-val{position:relative;display:flex;flex-direction:column;align-items:center;max-width:112px}
+.gx-vn{display:flex;align-items:baseline;justify-content:center}
+.gx-pre{margin-bottom:2px;font:700 11px/1.2 'Manrope','Noto Sans JP',sans-serif;color:var(--gx-ort)}
+.gx-val--s .gx-num{font-size:31px}.gx-val--s .gx-suf{font-size:15px}
+.gx-num{counter-reset:n var(--n);--n:var(--v);font:700 44px/1 'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;white-space:nowrap;
+  background:linear-gradient(180deg,#FBA65A 0%,#F47E2A 55%,#E0661A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 10px rgba(244,126,42,.25))}
+.gx-num::after{content:counter(n)}
+.gx-pfx{font-size:.62em}
+.gx-suf{font:700 20px/1 'Space Grotesk',sans-serif;color:var(--gx-or)}
+.gx-unit{display:block;max-width:190px;margin-top:12px;font:700 12.5px/1.4 'Manrope','Noto Sans JP',sans-serif;color:var(--gx-body)}
+.gx-chartc{position:relative;display:flex;align-items:flex-end;gap:12px;width:230px;height:140px;padding:18px 20px 16px;border-radius:22px;border:1.5px solid transparent;
+  background:repeating-linear-gradient(180deg,transparent 0 26px,rgba(226,232,240,.8) 26px 27px) padding-box,var(--gx-card) padding-box,var(--gx-edge) border-box;box-shadow:var(--gx-sh)}
+.gx-chartc.has-ax{padding-bottom:30px}
+.gx-col{position:relative;flex:1;height:100%;display:flex;align-items:flex-end}
+.gx-bar{display:block;width:100%;height:calc(var(--h)*1%);border-radius:8px 8px 3px 3px;transform-origin:50% 100%;
+  background:linear-gradient(180deg,#5CC4F0 0%,#25A1DB 55%,#1B7FB0 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 14px -8px rgba(27,127,176,.6)}
+.gx-bar.is-hot{background:linear-gradient(180deg,#FBA65A 0%,#F47E2A 55%,#E0661A 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 18px -8px rgba(221,100,23,.7)}
+.gx-ax{position:absolute;left:0;right:0;top:100%;margin-top:6px;font:700 11px/1 'Space Grotesk',sans-serif;color:#64748B}
+.gx-sheen{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+.gx-sheen::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%);transform:translateX(-130%)}
+.gx-lens{position:absolute;left:50%;bottom:calc(var(--h)*1% + 2px);width:46px;height:46px;margin-left:-12px}
+.gx-lens img{width:100%;height:100%;filter:drop-shadow(0 10px 12px rgba(27,127,176,.3))}
+/* grid: thẻ lật vào lần lượt, vệt sáng lướt qua */
+.gx--grid .gx-in{display:grid;grid-template-columns:repeat(var(--c,4),minmax(0,1fr));gap:14px;perspective:1200px}
+.gx--big .gx-in{gap:18px}
+.gx-tile{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0;padding:14px 10px 14px;border-radius:22px;border:1.5px solid transparent;
+  background:var(--gx-card) padding-box,var(--gx-edge) border-box;box-shadow:var(--gx-sh);transform-origin:50% 100%}
+.gx-tile .gx-pl{--s:60px}
+.gx--grid:not(.gx--big) .gx-tile{padding:14px 4px}
+.gx-tile .gx-pl--m{--s:84px}
+.gx-tile::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.8) 50%,transparent 65%);transform:translateX(-130%)}
+.gx-no{margin-top:10px}
+.gx--big .gx-lb{font-size:13.5px}
+/* ── Chuyển động (chỉ khi có JS; chờ is-in mới chạy, ra khỏi màn hình thì dừng) ── */
+html.js .gx::after{animation:gxDrift 16s ease-in-out infinite alternate}
+html.js .gx .gx-step{animation:gxSlide .5s var(--gx-o3) both}
+html.js .gx-st .gx-pl,html.js .gx-orb,html.js .gx-tag .gx-pl{animation:gxPop .62s var(--gx-back) both;animation-delay:calc(var(--i,0)*.26s + .1s)}
+html.js .gx-orb .gx-pl img,html.js .gx-st .gx-pl img{animation:gxFloat 3.4s ease-in-out infinite;animation-delay:calc(var(--i,0)*-.7s)}
+html.js .gx-st .gx-lb,html.js .gx-st .gx-chip,html.js .gx-core>.gx-chip,html.js .gx-unit{animation:gxRise .5s var(--gx-o3) both;animation-delay:calc(var(--i,0)*.26s + .32s)}
+html.js .gx-ln{animation:gxDraw .5s var(--gx-io) both;animation-delay:calc(var(--i)*.26s + .3s)}
+html.js .gx-cm{animation:gxRun 2.6s cubic-bezier(.45,0,.55,1) infinite;animation-delay:calc(var(--i)*.26s + .9s)}
+html.js .gx-cm--r{animation-direction:reverse;animation-delay:calc(var(--i)*.26s + 2.2s)}
+html.js .gx-tag{animation:gxRise .55s var(--gx-o3) both;animation-delay:calc(var(--i)*.16s + .35s)}
+html.js .gx-tag::after{animation:gxDraw .45s var(--gx-io) both;animation-delay:calc(var(--i)*.16s + .55s)}
+html.js .gx-orb::before{animation:gxPulse 2.8s var(--gx-o3) infinite;animation-delay:1s}
+html.js .gx-orb::after{animation:gxPulse 2.8s var(--gx-o3) infinite;animation-delay:2.4s}
+html.js .gx-orb--ring::before,html.js .gx-orb--ring::after{inset:-8px}
+html.js .gx-rf{animation:gxRing 1.6s var(--gx-o3) .35s both}
+html.js .gx-num{animation:gxCount 1.6s var(--gx-o3) .35s both}
+html.js .gx-chartc{animation:gxPop .6s var(--gx-back) .1s both}
+html.js .gx-bar{animation:gxGrow .7s var(--gx-back) both;animation-delay:calc(var(--i)*.12s + .4s)}
+html.js .gx-sheen::after{animation:gxGloss 5.5s var(--gx-io) 1.6s infinite}
+html.js .gx-lens{animation:gxPop .6s var(--gx-back) 1.2s both}
+html.js .gx-lens img{animation:gxBob 3s ease-in-out 1.8s infinite}
+html.js .gx-tile{animation:gxFlip .8s var(--gx-out) both;animation-delay:calc(var(--i)*.12s + .1s)}
+html.js .gx-tile::after{animation:gxGloss 6s var(--gx-io) infinite;animation-delay:calc(var(--i)*.35s + 1.4s)}
+html.js .gx:not(.is-in),html.js .gx:not(.is-in) *,html.js .gx:not(.is-in)::after,html.js .gx:not(.is-in) *::before,html.js .gx:not(.is-in) *::after{animation-play-state:paused!important}
+.gx.is-off *,.gx.is-off::after,.gx.is-off *::before,.gx.is-off *::after{animation-play-state:paused!important}
+@keyframes gxPop{0%{opacity:0;transform:scale(.4) rotate(-8deg)}35%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes gxRise{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:none}}
+@keyframes gxSlide{0%{opacity:0;transform:translateX(-24px)}100%{opacity:1;transform:none}}
+@keyframes gxDraw{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@keyframes gxGrow{0%{transform:scaleY(0)}100%{transform:scaleY(1)}}
+@keyframes gxFlip{0%{opacity:0;transform:rotateX(-65deg) translateY(30px)}30%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes gxRing{0%{stroke-dashoffset:100}}
+@keyframes gxCount{0%{--n:var(--n0,0)}}
+@keyframes gxFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-4px) rotate(1deg)}}
+@keyframes gxBob{0%,100%{transform:translate(0,0) rotate(-6deg)}50%{transform:translate(-4px,-5px) rotate(4deg)}}
+@keyframes gxRun{0%{opacity:0;transform:translateX(0)}12%{opacity:1}88%{opacity:1}100%{opacity:0;transform:translateX(100%)}}
+@keyframes gxPulse{0%{opacity:.9;transform:scale(.72)}100%{opacity:0;transform:scale(1.35)}}
+@keyframes gxGloss{0%{transform:translateX(-130%)}22%,100%{transform:translateX(130%)}}
+@keyframes gxDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-90px,50px) scale(1.14)}}
+@media screen and (max-width:900px){.gx--hub .gx-in,.gx--ring .gx-in,.gx--chart .gx-in{column-gap:40px}.gx-tag::after{width:30px}}
+@media screen and (max-width:600px){
+  .gx{margin-top:20px;padding:46px 12px 18px;border-radius:20px}
+  .gx-pl{--s:52px}.gx-pl--l{--s:84px}.gx-tile .gx-pl--m{--s:64px}
+  .gx-lb{margin-top:7px;font-size:10.5px}.gx-chip{padding:2px 7px;font-size:9.5px;white-space:normal}
+  .gx--flow .gx-in{align-items:flex-start}.gx-ln{min-width:6px;margin-top:25px}
+  .gx--long .gx-in{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 8px}.gx--long .gx-ln{display:none}
+  .gx--hub .gx-in,.gx--ring .gx-in,.gx--chart .gx-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 10px}
+  .gx-core{grid-column:1/-1;order:-1}.gx-side{gap:10px}.gx-side--l,.gx-side--r{align-items:stretch}
+  .gx-tag{max-width:none;padding:6px 8px 6px 6px;gap:7px;border-radius:14px}.gx-tag .gx-pl{--s:38px;border-radius:11px}.gx-tag .gx-lb{font-size:10.5px}.gx-tag::after{display:none}
+  .gx-orb--ring{width:116px;height:116px}.gx-num{font-size:36px}.gx-val--s .gx-num{font-size:26px}.gx-val--s .gx-suf{font-size:13px}.gx-unit{margin-top:8px;font-size:11px}
+  .gx-chartc{width:210px;height:120px}.gx--grid .gx-in{grid-template-columns:repeat(var(--mc,3),minmax(0,1fr));gap:8px}
+  .gx-tile{padding:10px 4px;border-radius:16px}.gx-tile .gx-pl{--s:46px}.gx--big .gx-lb{font-size:10.5px}
+  .gx-step{left:12px;top:12px}
+}
+@media (prefers-reduced-motion:reduce){.gx *,.gx *::before,.gx *::after{animation:none!important}.gx::after{animation:none!important}}
+@media print{.gx{display:none!important}}
+</style>
+<!-- gx-css:end -->
 </head>
 <body>
 <header class="top" id="top">
@@ -586,6 +738,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja"><i>タイ チャン ホアン ニャ</i></span><span data-l="en"><i>Thai Tran Hoang Nha</i></span><span data-l="vi"><i>Thái Trần Hoàng Nhã</i></span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">法人営業、営業管理、ITコミュニケーション、人事の実務経験</span><span data-l="en">I have worked across B2B sales, sales management, IT communication and HR</span><span data-l="vi">Tôi đã làm kinh doanh B2B, quản lý kinh doanh, IT communicator và nhân sự</span></span>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
+  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>01</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">B2B営業</span><span data-l="en">B2B sales</span><span data-l="vi">Bán hàng B2B</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業管理</span><span data-l="en">Sales management</span><span data-l="vi">Quản lý kinh doanh</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/briefcase.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o"><span data-l="ja">日系企業で約11年</span><span data-l="en">About 11 years at Japanese firms</span><span data-l="vi">Khoảng 11 năm ở công ty Nhật</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ITコミュニケーター</span><span data-l="en">IT communication</span><span data-l="vi">Cầu nối IT</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b></span></div></div></figure>
 
   <div class="rv" style="--d:140ms">
     <div class="card" style="display:flex;flex-direction:column;justify-content:center">
@@ -664,6 +817,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">担当してきた仕事を、<br /><i>一枚で見渡す。</i></span><span data-l="en">My work<br /><i>at a glance</i>.</span><span data-l="vi">Mời anh/chị xem qua<br /><i>những công việc tôi đã làm</i>.</span></h2>
   <p class="kw-sub rv" style="--d:80ms"><span data-l="ja">これまでの経験を業務分野ごとに整理しました。各カードから詳細をご覧いただけます。</span><span data-l="en">I have grouped my experience by area of work. Open any card for details.</span><span data-l="vi">Tôi sắp xếp kinh nghiệm theo từng mảng việc. Anh/chị có thể mở từng thẻ để xem chi tiết phần mình quan tâm.</span></p>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
+  <figure class="gx gx--grid" aria-hidden="true"><span class="gx-step"><i></i><b>02</b> / 12</span><div class="gx-in" style="--c:8;--mc:4"><div class="gx-tile" style="--i:0"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">管理</span><span data-l="en">Management</span><span data-l="vi">Quản lý</span></b></div><div class="gx-tile" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Kinh doanh</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">マーケティング</span><span data-l="en">Marketing</span><span data-l="vi">Marketing</span></b></div><div class="gx-tile" style="--i:3"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></b></div><div class="gx-tile" style="--i:4"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">業務調整</span><span data-l="en">Operations</span><span data-l="vi">Điều phối</span></b></div><div class="gx-tile" style="--i:5"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b></div><div class="gx-tile" style="--i:6"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">語学</span><span data-l="en">Languages</span><span data-l="vi">Ngoại ngữ</span></b></div><div class="gx-tile" style="--i:7"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AI活用</span><span data-l="en">AI projects</span><span data-l="vi">Dự án AI</span></b></div></div></figure>
 
   <div class="pj rv" style="--d:140ms">
     <a class="pj-c" href="#w-jil">
@@ -773,6 +927,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <p class="eb rv">Skills <b>／ 活かせる経験、知識、スキル</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">仕事に活きる<i>10のスキル</i></span><span data-l="en">My <i>ten skills</i></span><span data-l="vi"><i>10 kỹ năng</i> của tôi</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
+  <figure class="gx gx--ring" aria-hidden="true"><span class="gx-step"><i></i><b>03</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">法人顧客対応</span><span data-l="en">B2B client work</span><span data-l="vi">Khách doanh nghiệp</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ITプロジェクト</span><span data-l="en">IT projects</span><span data-l="vi">Dự án IT</span></b></span></div><div class="gx-core"><span class="gx-orb gx-orb--ring"><svg viewBox="0 0 120 120"><circle class="gx-rt" cx="60" cy="60" r="52"/><circle class="gx-rf" pathLength="100" cx="60" cy="60" r="52" style="stroke-dashoffset:0"/></svg><span class="gx-val"><span class="gx-vn"><b class="gx-num" style="--v:10"></b></span></span></span><b class="gx-unit"><span data-l="ja">のスキル</span><span data-l="en">skills</span><span data-l="vi">kỹ năng</span></b></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">チーム管理</span><span data-l="en">Team management</span><span data-l="vi">Quản lý đội</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AI活用</span><span data-l="en">Using AI</span><span data-l="vi">Ứng dụng AI</span></b></span></div></div></figure>
 
   <div class="g2 rv grow sk7" style="--d:140ms">
     <div class="card"><p class="num" style="font-size:26px;color:#c14343">01</p>
@@ -835,6 +990,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <p class="eb rv">Career <b>／ 学歴、職歴</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日系企業3社で約11年、<br /><i>営業、IT、人事の現場を歩んできた。</i></span><span data-l="en">I spent about 11 years at three Japanese companies,<br /><i>working in sales, IT and HR</i>.</span><span data-l="vi">Tôi có khoảng 11 năm làm việc tại 3 công ty Nhật,<br /><i>trong mảng kinh doanh, IT và nhân sự.</i></span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
+  <figure class="gx gx--flow" aria-hidden="true"><span class="gx-step"><i></i><b>04</b> / 12</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">銀行</span><span data-l="en">Bank</span><span data-l="vi">Ngân hàng</span></b><em class="gx-chip">2011</em></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i></i><div class="gx-st" style="--i:1"><span class="gx-pl"><img src="assets/gx/briefcase.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb">Isuzu</b><em class="gx-chip">2015</em></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb">JILNESTA</b><em class="gx-chip">2017</em></div><i class="gx-ln" style="--i:2"><i class="gx-cm"></i></i><div class="gx-st" style="--i:3"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb">MAYEKAWA</b><em class="gx-chip">2022</em></div></div></figure>
 
   <div class="tl rv" style="--d:140ms">
     <div class="co card">
@@ -893,6 +1049,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">設備の提案から、<br /><i>導入後のフォローまで</i>一貫して担う。</span><span data-l="en">From equipment proposals<br /><i>to after-sales follow-up</i>.</span><span data-l="vi">Tôi cùng khách chọn thiết bị<br /><i>và tiếp tục hỗ trợ sau khi bàn giao</i>.</span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">営業部 アシスタントマネージャー 兼 人事部長（2022年2月 ～ 2026年6月）</span><span data-l="en">Assistant manager, Sales, and head of HR (Feb 2022 – Jun 2026)</span><span data-l="vi">Trợ lý trưởng phòng Kinh doanh kiêm trưởng phòng Nhân sự (02/2022 – 06/2026)</span></span>
   <div class="kwbar rv" style="--d:110ms"><span></span></div>
+  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>05</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">設備の提案</span><span data-l="en">Equipment proposals</span><span data-l="vi">Đề xuất thiết bị</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">技術者と連携</span><span data-l="en">With engineers</span><span data-l="vi">Cùng kỹ sư</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/handshake.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o">MAYEKAWA</em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/shield-check.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">納品後のフォロー</span><span data-l="en">After-sales follow-up</span><span data-l="vi">Theo sát sau bàn giao</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事チーム 1→5名</span><span data-l="en">HR team 1 → 5</span><span data-l="vi">Đội nhân sự 1 → 5</span></b></span></div></div></figure>
 
   <div class="meta rv" style="--d:140ms">
     <div><span>Business</span><b><span data-l="ja">産業用冷凍機、コンプレッサー</span><span data-l="en">Industrial refrigeration, compressors</span><span data-l="vi">Máy lạnh công nghiệp, máy nén</span></b></div>
@@ -964,6 +1121,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">定期レビューで、<br /><i>契約の更新</i>につなげる。</span><span data-l="en">Regular reviews<br />that lead to <i>contract renewals</i>.</span><span data-l="vi">Rà soát định kỳ,<br />dẫn đến <i>gia hạn hợp đồng</i>.</span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">ベトナム支店 営業マネージャー（2019年2月 ～ 2022年2月）</span><span data-l="en">Sales manager, Vietnam branch (Feb 2019 – Feb 2022)</span><span data-l="vi">Quản lý kinh doanh, chi nhánh Việt Nam (02/2019 – 02/2022)</span></span>
   <div class="kwbar rv" style="--d:110ms"><span></span></div>
+  <figure class="gx gx--ring" aria-hidden="true"><span class="gx-step"><i></i><b>06</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業 4〜5名</span><span data-l="en">4 to 5 in sales</span><span data-l="vi">4–5 kinh doanh</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">開発 約20名</span><span data-l="en">About 20 developers</span><span data-l="vi">Khoảng 20 lập trình viên</span></b></span></div><div class="gx-core"><span class="gx-orb gx-orb--ring"><svg viewBox="0 0 120 120"><circle class="gx-rt" cx="60" cy="60" r="52"/><circle class="gx-rf" pathLength="100" cx="60" cy="60" r="52" style="stroke-dashoffset:0"/></svg><span class="gx-val"><small class="gx-pre"><span data-l="ja">約</span><span data-l="en">about</span><span data-l="vi">khoảng</span></small><span class="gx-vn"><b class="gx-num" style="--v:27"></b></span></span></span><b class="gx-unit"><span data-l="ja">名の拠点</span><span data-l="en">staff at the branch</span><span data-l="vi">người ở chi nhánh</span></b></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/calendar.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">定期レビュー</span><span data-l="en">Regular reviews</span><span data-l="vi">Rà soát định kỳ</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">契約更新</span><span data-l="en">Contract renewals</span><span data-l="vi">Gia hạn hợp đồng</span></b></span></div></div></figure>
 
   <div class="g3 rv" style="--d:140ms">
     <div class="card"><p class="num gr">27</p><p class="num-l"><span data-l="ja">支店約27名（営業4～5名、ITコミュニケーター2名、開発約20名）</span><span data-l="en">Branch of about 27 (4 to 5 sales, 2 IT communicators, about 20 developers)</span><span data-l="vi">Chi nhánh khoảng 27 người (4 đến 5 kinh doanh, 2 IT communicator, khoảng 20 lập trình viên)</span></p></div>
@@ -1031,6 +1189,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日本の顧客と<br /><i>ベトナム人エンジニア</i>をつなぐ。</span><span data-l="en">Connecting Japanese clients<br />and <i>Vietnamese engineers</i>.</span><span data-l="vi">Kết nối khách hàng Nhật<br />và <i>kỹ sư Việt Nam</i>.</span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">ITコミュニケーター（2017年8月 ～ 2019年2月）／ 日本人上司に報告</span><span data-l="en">IT communicator (Aug 2017 – Feb 2019), reporting to a Japanese manager</span><span data-l="vi">IT communicator (08/2017 – 02/2019), báo cáo cấp trên người Nhật</span></span>
   <div class="kwbar rv" style="--d:110ms"><span></span></div>
+  <figure class="gx gx--flow gx--both" aria-hidden="true"><span class="gx-step"><i></i><b>07</b> / 12</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本の顧客</span><span data-l="en">Japanese clients</span><span data-l="vi">Khách hàng Nhật</span></b></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><div class="gx-st is-hot" style="--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">通訳と翻訳</span><span data-l="en">Interpreting</span><span data-l="vi">Phiên dịch</span></b><em class="gx-chip gx-chip--o">JA · EN · VI</em></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ベトナム人技術者</span><span data-l="en">Vietnamese engineers</span><span data-l="vi">Kỹ sư Việt Nam</span></b></div></div></figure>
 
   <div class="rv" style="--d:140ms;display:grid;grid-template-columns:1fr 46px 1fr 46px 1fr;align-items:stretch">
     <div class="card" style="text-align:center;display:flex;flex-direction:column;justify-content:center"><span class="lbl">Client</span><h3 style="margin:0"><span data-l="ja">日本の顧客、上司</span><span data-l="en">Japanese clients and manager</span><span data-l="vi">Khách hàng, cấp trên người Nhật</span></h3><p><span data-l="ja">要件、仕様、質問</span><span data-l="en">Requirements, specs, questions</span><span data-l="vi">Yêu cầu, đặc tả, câu hỏi</span></p></div>
@@ -1071,6 +1230,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <p class="eb rv">Career 04 <b>／ Isuzu Vietnam ／ LienViet Post Bank</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">数字と現場の実情を、<br /><i>日本人上司に報告</i>する。</span><span data-l="en">Figures and field insight,<br /><i>reported to Japanese managers</i>.</span><span data-l="vi">Số liệu và thực tế,<br /><i>báo cáo cho cấp trên người Nhật</i>.</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
+  <figure class="gx gx--chart" aria-hidden="true"><span class="gx-step"><i></i><b>08</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">国際送金</span><span data-l="en">International payments</span><span data-l="vi">Thanh toán quốc tế</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/briefcase.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">部品の営業事務</span><span data-l="en">Parts sales admin</span><span data-l="vi">Hành chính bán phụ tùng</span></b></span></div><div class="gx-core"><span class="gx-chartc"><span class="gx-col" style="--h:46"><i class="gx-bar" style="--h:46;--i:0"></i></span><span class="gx-col" style="--h:70"><i class="gx-bar" style="--h:70;--i:1"></i></span><span class="gx-col" style="--h:38"><i class="gx-bar" style="--h:38;--i:2"></i></span><span class="gx-col" style="--h:62"><i class="gx-bar" style="--h:62;--i:3"></i></span><span class="gx-col" style="--h:84"><i class="gx-bar is-hot" style="--h:84;--i:4"></i></span><i class="gx-sheen"></i></span><em class="gx-chip gx-chip--o"><span data-l="ja">数字で報告</span><span data-l="en">Reports with numbers</span><span data-l="vi">Báo cáo bằng số liệu</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本人上司へ報告</span><span data-l="en">Reporting to Japanese managers</span><span data-l="vi">Báo cáo cấp trên người Nhật</span></b></span></div></div></figure>
 
   <div class="card rv" style="--d:140ms">
     <span class="lbl"><span data-l="ja">2015年6月 ～ 2017年8月</span><span data-l="en">Jun 2015 – Aug 2017</span><span data-l="vi">06/2015 – 08/2017</span></span>
@@ -1120,6 +1280,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <p class="eb rv">Skills <b>／ 語学、PC、AIスキル</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">3つの言語とAIで、<br /><i>仕事のスピード</i>を上げる。</span><span data-l="en">Three languages and AI<br />to <i>speed up the work</i>.</span><span data-l="vi">3 ngôn ngữ và AI<br />để <i>tăng tốc công việc</i>.</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
+  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>09</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本語 N2</span><span data-l="en">Japanese N2</span><span data-l="vi">Tiếng Nhật N2</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">英語 TOEIC 680</span><span data-l="en">English TOEIC 680</span><span data-l="vi">Tiếng Anh TOEIC 680</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/lightbulb.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o">AI</em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/person-bust.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ベトナム語 母語</span><span data-l="en">Vietnamese, native</span><span data-l="vi">Tiếng Việt bản ngữ</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">1人で3〜4人分</span><span data-l="en">One person, work of 3 to 4</span><span data-l="vi">1 người, việc của 3–4 người</span></b></span></div></div></figure>
 
   <div class="g3 rv" style="--d:140ms">
     <div class="card"><p class="num gr" style="font-size:28px">日本語</p><p class="num-l"><span data-l="ja">JLPT N2（2016年8月）。日本人社長、経営陣への直接報告、会議、交渉</span><span data-l="en">JLPT N2 (Aug 2016). Direct reports, meetings and negotiation with the Japanese president and management</span><span data-l="vi">JLPT N2 (08/2016). Báo cáo trực tiếp, họp, đàm phán với Tổng giám đốc và ban lãnh đạo người Nhật</span></p></div>
@@ -1168,6 +1329,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms">業務の流れを整え、<br /><i>進捗を数字で把握する。</i></h2>
   <p class="kw-sub rv" style="--d:100ms">MAYEKAWA VIETNAMでは、標準化した工程と日々の数値をもとに、チームの業務時間、タスク、進捗を管理していました。Claudeで数値を分析し、毎日のミーティングでチームと確認しました。</p>
   <div class="kwbar rv" style="--d:130ms"><span></span></div>
+  <figure class="gx gx--flow" aria-hidden="true"><span class="gx-step"><i></i><b>10</b> / 12</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">工程の標準化</span><span data-l="en">Standard steps</span><span data-l="vi">Chuẩn hoá quy trình</span></b></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i></i><div class="gx-st" style="--i:1"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日次報告</span><span data-l="en">Daily reports</span><span data-l="vi">Báo cáo hằng ngày</span></b></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">Claudeで分析</span><span data-l="en">Analysis with Claude</span><span data-l="vi">Phân tích bằng Claude</span></b></div><i class="gx-ln" style="--i:2"><i class="gx-cm"></i></i><div class="gx-st is-hot" style="--i:3"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">毎日の確認</span><span data-l="en">Daily checks</span><span data-l="vi">Kiểm tra hằng ngày</span></b></div></div></figure>
 
   <div class="cyc rv" style="--d:160ms">
     <div class="card cyc-c"><span class="cyc-n">01</span><h3>工程の標準化</h3><p>各メンバーが担当業務を最初から最後まで洗い出し、「完了」の定義を明確化</p></div>
@@ -1203,6 +1365,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms">毎朝、日次報告から<br /><i>滞っている作業を洗い出す。</i></h2>
   <p class="kw-sub rv" style="--d:100ms">日次報告をClaudeで集計し、工程別の所要時間、完了率（着手分のうち完了した割合）、停滞中の作業を確認しました。</p>
   <div class="kwbar rv" style="--d:130ms"><span></span></div>
+  <figure class="gx gx--chart" aria-hidden="true"><span class="gx-step"><i></i><b>11</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日次報告</span><span data-l="en">Daily reports</span><span data-l="vi">Báo cáo hằng ngày</span></b></span></div><div class="gx-core"><span class="gx-chartc has-ax"><span class="gx-col" style="--h:92"><i class="gx-bar" style="--h:92;--i:0"></i><b class="gx-lb gx-ax">A</b></span><span class="gx-col" style="--h:85"><i class="gx-bar" style="--h:85;--i:1"></i><b class="gx-lb gx-ax">B</b></span><span class="gx-col" style="--h:78"><i class="gx-bar" style="--h:78;--i:2"></i><b class="gx-lb gx-ax">C</b></span><span class="gx-col" style="--h:64"><i class="gx-bar is-hot" style="--h:64;--i:3"></i><b class="gx-lb gx-ax">D</b><span class="gx-lens"><img src="assets/gx/magnifier.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></span><span class="gx-col" style="--h:88"><i class="gx-bar" style="--h:88;--i:4"></i><b class="gx-lb gx-ax">E</b></span><i class="gx-sheen"></i></span><em class="gx-chip gx-chip--o"><span data-l="ja">担当D：滞留3日</span><span data-l="en">Owner D: stalled 3 days</span><span data-l="vi">Người D: tồn 3 ngày</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/bottleneck.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">滞留を見つける</span><span data-l="en">Spot stalled work</span><span data-l="vi">Tìm việc bị tồn</span></b></span><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">朝のうちに対応</span><span data-l="en">Act the same morning</span><span data-l="vi">Xử lý ngay buổi sáng</span></b></span></div></div></figure>
 
   <div class="kpi rv" style="--d:160ms">
     <div class="card"><span class="lbl">本日の完了タスク</span><p class="num gr">23<small>／27件</small></p></div>
@@ -1241,6 +1404,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <p class="eb rv">Self PR <b>／ 自己PR</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">採用担当の方にお伝えしたい<i>3つの強み</i></span><span data-l="en">Three strengths I would bring to your team</span><span data-l="vi">3 điểm mạnh tôi muốn chia sẻ với nhà tuyển dụng</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
+  <figure class="gx gx--grid gx--big" aria-hidden="true"><span class="gx-step"><i></i><b>12</b> / 12</span><div class="gx-in" style="--c:3;--mc:3"><div class="gx-tile" style="--i:0"><span class="gx-pl gx-pl--m"><img src="assets/gx/chat-bubbles.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><em class="gx-chip gx-no">01</em><b class="gx-lb"><span data-l="ja">日本とベトナムをつなぐ</span><span data-l="en">Bridging Japan and Vietnam</span><span data-l="vi">Kết nối Nhật – Việt</span></b></div><div class="gx-tile" style="--i:1"><span class="gx-pl gx-pl--m"><img src="assets/gx/puzzle-fit.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><em class="gx-chip gx-no">02</em><b class="gx-lb"><span data-l="ja">課題を聞き、解決まで進める</span><span data-l="en">From client issue to solution</span><span data-l="vi">Từ vấn đề đến giải pháp</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl gx-pl--m"><img src="assets/gx/jd-document.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><em class="gx-chip gx-no">03</em><b class="gx-lb"><span data-l="ja">資料を作り、教えて定着させる</span><span data-l="en">Clear materials, lasting training</span><span data-l="vi">Tài liệu rõ, đào tạo đến nơi</span></b></div></div></figure>
 
   <div style="display:flex;flex-direction:column;gap:14px;flex:1">
     <div class="card rv" style="--d:140ms;display:grid;grid-template-columns:64px 1fr;gap:14px;flex:1;align-items:center">
@@ -1274,6 +1438,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms">顧客を訪問し、<br /><i>商談の進捗を数字で追う。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">MAYEKAWA VIETNAM（MYCOM、産業用冷凍機）における営業活動の記録です。2022年2月から2026年6月まで、営業部のアシスタントマネージャー（人事部長を兼務）を務めました。社内メールの予定表と送受信メール、営業部の評価シート、職務記述書、出張規程に記録が残る業務と仕組みに限って掲載しています。顧客名、価格、契約、売上の数字は掲載していません。</p>
+  <figure class="gx gx--grid" aria-hidden="true"><span class="gx-step"><i></i><b>01</b> / 06</span><div class="gx-in" style="--c:4;--mc:2"><div class="gx-tile" style="--i:0"><span class="gx-pl"><img src="assets/gx/roadmap.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">出張</span><span data-l="en">Trips</span><span data-l="vi">Công tác</span></b><em class="gx-chip"><span data-l="ja">5省13社</span><span data-l="en">5 provinces, 13 firms</span><span data-l="vi">5 tỉnh, 13 công ty</span></em></div><div class="gx-tile" style="--i:1"><span class="gx-pl"><img src="assets/gx/calendar.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">週次CRM会議</span><span data-l="en">Weekly CRM meetings</span><span data-l="vi">Họp CRM hằng tuần</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">見積と訪問の集計</span><span data-l="en">Quote and visit KPIs</span><span data-l="vi">KPI báo giá, gặp khách</span></b></div><div class="gx-tile" style="--i:3"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">週次報告と出張報告</span><span data-l="en">Weekly and trip reports</span><span data-l="vi">Báo cáo tuần, công tác</span></b></div></div></figure>
   <div class="meta rv" style="--d:180ms;margin-top:18px">
     <div><span>Trips</span><b>メコンデルタ5省、13社の訪問計画</b></div>
     <div><span>Meetings</span><b>日本の工場との週次CRM会議</b></div>
@@ -1286,6 +1451,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms">担当した<br /><i>顧客訪問と出張の記録。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">予定表に記録が残る商談と顧客訪問を、時系列で紹介します。訪問先は業種と地域のみを記載しています。</p>
+  <figure class="gx gx--flow" aria-hidden="true"><span class="gx-step"><i></i><b>02</b> / 06</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/roadmap.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">訪問計画</span><span data-l="en">Visit plan</span><span data-l="vi">Kế hoạch gặp khách</span></b></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i></i><div class="gx-st" style="--i:1"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">出張の承認</span><span data-l="en">Trip approval</span><span data-l="vi">Duyệt công tác</span></b></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/interview.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">顧客訪問</span><span data-l="en">Client visit</span><span data-l="vi">Gặp khách</span></b></div><i class="gx-ln" style="--i:2"><i class="gx-cm"></i></i><div class="gx-st is-hot" style="--i:3"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">出張報告</span><span data-l="en">Trip report</span><span data-l="vi">Báo cáo công tác</span></b><em class="gx-chip gx-chip--o"><span data-l="ja">3営業日以内</span><span data-l="en">Within 3 days</span><span data-l="vi">Trong 3 ngày</span></em></div></div></figure>
   <div class="tl rv" style="--d:180ms;margin-top:18px">
     <div class="card">
       <p class="yr">2022年7月 ～ 8月</p>
@@ -1321,6 +1487,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms">ASEANの会議に英語で登壇し、<br /><i>各国の同僚と意見を交わす。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">タイで開催されたMAYEKAWA ASEAN社員総会での発表、展示会「PROPAK ASIA」、「VIV ASIA」（バンコク）の視察、MYCOM KOREAへの訪問、ベトナムでの顧客訪問を写真で紹介します。顧客名と数値は伏せています。</p>
+  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>03</b> / 06</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/cand-man.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ASEAN社員総会</span><span data-l="en">ASEAN staff meeting</span><span data-l="vi">Hội nghị ASEAN</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/cand-woman.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">各国の同僚</span><span data-l="en">Colleagues across ASEAN</span><span data-l="vi">Đồng nghiệp các nước</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/chat-bubbles.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o">English</em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/magnifier.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb">PROPAK · VIV ASIA</b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb">MYCOM KOREA</b></span></div></div></figure>
   <div class="meta rv" style="--d:180ms;margin-top:14px">
     <div><span>Presentation</span><b>英語資料を用い、ASEAN各国の社員に向けて発表</b></div>
     <div><span>Meetings</span><b>各国の同僚との会議と交流</b></div>
@@ -1347,6 +1514,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms">報告と会議を通じて、<br /><i>商談の見込みと納期を把握する。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">営業部の報告体制と、参加した会議の概要です。</p>
+  <figure class="gx gx--ring" aria-hidden="true"><span class="gx-step"><i></i><b>04</b> / 06</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/calendar.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">週次の予定と結果</span><span data-l="en">Weekly plans and results</span><span data-l="vi">Kế hoạch, kết quả tuần</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">月次報告</span><span data-l="en">Monthly reports</span><span data-l="vi">Báo cáo tháng</span></b></span></div><div class="gx-core"><span class="gx-orb gx-orb--ring"><svg viewBox="0 0 120 120"><circle class="gx-rt" cx="60" cy="60" r="52"/><circle class="gx-rf" pathLength="100" cx="60" cy="60" r="52" style="stroke-dashoffset:0"/></svg><span class="gx-val"><small class="gx-pre"><span data-l="ja">約</span><span data-l="en">about</span><span data-l="vi">khoảng</span></small><span class="gx-vn"><b class="gx-num" style="--v:30"></b></span></span></span><b class="gx-unit"><span data-l="ja">回の週次CRM会議</span><span data-l="en">weekly CRM meetings</span><span data-l="vi">buổi họp CRM tuần</span></b></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/roadmap.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">出張報告</span><span data-l="en">Trip reports</span><span data-l="vi">Báo cáo công tác</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">3拠点合同の朝会</span><span data-l="en">Three-site morning meeting</span><span data-l="vi">Họp sáng 3 chi nhánh</span></b></span></div></div></figure>
   <div class="g3 rv" style="--d:180ms">
     <div class="card"><span class="lbl">Weekly ／ 日本語</span><h3>日本の工場との週次CRM会議</h3><p>CRMに入力した見込み台数などを日本の工場と共有し、納期を調整する会議です。2023年2月～2024年2月に約30回、主に木曜日にオンラインで開催され、招待を受けていました。</p></div>
     <div class="card"><span class="lbl">CRM</span><h3>CRM入力状況の確認会議</h3><p>2023年3月、CRMの運用方法と入力状況を日本側と確認する会議に招待されました。</p></div>
@@ -1361,6 +1529,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms">見積と訪問回数を記録し、<br /><i>営業活動を数字で可視化する。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">営業担当として整備した記録の仕組みと、評価項目を紹介します。</p>
+  <figure class="gx gx--chart" aria-hidden="true"><span class="gx-step"><i></i><b>05</b> / 06</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">見積件数</span><span data-l="en">Quotations</span><span data-l="vi">Số báo giá</span></b></span></div><div class="gx-core"><span class="gx-chartc"><span class="gx-col" style="--h:52"><i class="gx-bar" style="--h:52;--i:0"></i></span><span class="gx-col" style="--h:38"><i class="gx-bar" style="--h:38;--i:1"></i></span><span class="gx-col" style="--h:66"><i class="gx-bar" style="--h:66;--i:2"></i></span><span class="gx-col" style="--h:48"><i class="gx-bar" style="--h:48;--i:3"></i></span><span class="gx-col" style="--h:80"><i class="gx-bar is-hot" style="--h:80;--i:4"></i></span><i class="gx-sheen"></i></span><em class="gx-chip gx-chip--o"><span data-l="ja">見積と訪問を記録</span><span data-l="en">Quotes and visits logged</span><span data-l="vi">Ghi báo giá, lượt gặp</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/interview.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">訪問回数</span><span data-l="en">Client visits</span><span data-l="vi">Lượt gặp khách</span></b></span><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">評価シート</span><span data-l="en">Evaluation sheet</span><span data-l="vi">Phiếu đánh giá</span></b></span></div></div></figure>
   <div class="g2 rv" style="--d:160ms">
     <div class="card"><span class="lbl">Built ／ 営業担当時代</span><h3>見積と訪問を集計する仕組み</h3><div class="lines">
       <p>見積書の入力ファイルを設計し、運用</p>
@@ -1376,6 +1545,7 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   <h2 class="kw rv" style="--d:60ms">問い合わせから納期調整まで、<br /><i>順を追って対応する。</i></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms">記録に残る業務を、顧客対応の流れに沿って整理しました。</p>
+  <figure class="gx gx--flow gx--long" aria-hidden="true"><span class="gx-step"><i></i><b>06</b> / 06</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/envelope.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">引き合い受付</span><span data-l="en">Enquiry</span><span data-l="vi">Tiếp nhận yêu cầu</span></b></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i></i><div class="gx-st" style="--i:1"><span class="gx-pl"><img src="assets/gx/roadmap.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">訪問計画</span><span data-l="en">Visit plan</span><span data-l="vi">Lên lịch gặp</span></b></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">出張申請</span><span data-l="en">Trip request</span><span data-l="vi">Xin công tác</span></b></div><i class="gx-ln" style="--i:2"><i class="gx-cm"></i></i><div class="gx-st" style="--i:3"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">見積の記録</span><span data-l="en">Log quotes</span><span data-l="vi">Ghi báo giá</span></b></div><i class="gx-ln" style="--i:3"><i class="gx-cm"></i></i><div class="gx-st" style="--i:4"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">見込みの共有</span><span data-l="en">Share forecasts</span><span data-l="vi">Chia sẻ dự báo</span></b></div><i class="gx-ln" style="--i:4"><i class="gx-cm"></i></i><div class="gx-st is-hot" style="--i:5"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">定例報告</span><span data-l="en">Regular reports</span><span data-l="vi">Báo cáo định kỳ</span></b></div></div></figure>
   <div class="g3 rv" style="--d:180ms">
     <div class="card"><span class="fl4-n">01</span><h3>引き合い受付</h3><p>顧客の仕様書（RFQ）を受け取り、要件を項目ごとに確認</p></div>
     <div class="card"><span class="fl4-n">02</span><h3>訪問計画</h3><p>省ごとに訪問先と先方担当者を決め、予定表に登録</p></div>
@@ -1400,11 +1570,12 @@ html.js .pg.in .sv-hero img{animation:svFloat 9s ease-in-out 1s infinite}
 .sv-spot{display:block;width:calc(100% + 16px);height:auto;aspect-ratio:16/9;object-fit:cover;margin:-8px -8px 12px;border-radius:12px;background:#f7f5fc;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .sv-card{overflow:hidden;transition:box-shadow .3s,transform .3s}
 @media (hover:hover){.sv-card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -28px rgba(59,47,134,.55)}.sv-card:hover .sv-spot{transform:scale(1.04)}}
-.sv-ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.sv-ib{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;color:#fff;
-  background:linear-gradient(140deg,#3b2f86,#6d5bd0 55%,#26B3F4);box-shadow:0 10px 20px -12px rgba(59,47,134,.9);position:relative}
+.sv-ic{width:20px;height:20px;flex:none}
+.sv-ib{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:14px;color:#fff;
+  background:linear-gradient(150deg,#fff,#eaf3ff 60%,#fff1e6);border:1px solid #e1e8f5;box-shadow:inset 0 1px 0 #fff,0 12px 22px -14px rgba(46,111,196,.55);position:relative}
+.sv-ib .sv-ic{width:32px;height:32px}
 .cyc-c .sv-ib{float:right;margin:-2px -2px 0 6px}
-.lbl .sv-ic,.sv-lbl .sv-ic{width:15px;height:15px;vertical-align:-3px;margin-right:6px;color:#6d5bd0}
+.lbl .sv-ic,.sv-lbl .sv-ic{width:22px;height:22px;vertical-align:-6px;margin-right:6px;color:#6d5bd0}
 .cyc--live .cyc-c{transition:none;will-change:transform}
 .cyc--live .cyc-a{position:relative;color:transparent;min-height:18px}
 .cyc--live .cyc-a::before{content:'';position:absolute;left:2px;right:2px;top:50%;height:2px;margin-top:-1px;
@@ -1452,11 +1623,12 @@ html.js .pg.in .cyc--live>.cyc-a::after{animation:svDot 8s linear infinite}
 .mv-tok{position:absolute;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(38,179,244,.35),0 0 18px 5px rgba(143,216,255,.75)}
 .mv-node{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:0 3px;text-align:center}
 .mv-dot{position:relative;display:flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:16px;background:#162a55;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5)}
-.mv-dot .sv-ic{width:22px;height:22px}
+.mv-dot .sv-ic{width:36px;height:36px}
+.mv-dot>.sv-ic{opacity:.42;filter:grayscale(1) brightness(1.5)}
 .mv-lit{position:absolute;inset:-1px;display:flex;align-items:center;justify-content:center;border-radius:inherit;color:#fff;
-  background:linear-gradient(140deg,#6d5bd0,#26B3F4);box-shadow:0 0 0 4px rgba(38,179,244,.2),0 12px 26px -10px rgba(38,179,244,.95)}
+  background:linear-gradient(150deg,#fff,#dcecff 60%,#ffe9d9);box-shadow:0 0 0 4px rgba(38,179,244,.2),0 12px 26px -10px rgba(38,179,244,.95)}
 .mv-end .mv-dot{border-radius:50%}
-.mv-end .mv-lit{background:linear-gradient(140deg,#1fb6a6,#26B3F4)}
+.mv-end .mv-lit{background:linear-gradient(150deg,#fff,#ffe6d2 55%,#dcecff)}
 .mv-lb{font-size:12px;line-height:1.35;font-weight:700;color:#fff;word-break:keep-all;overflow-wrap:anywhere}
 .mv-chip{max-width:100%;padding:3px 8px;border-radius:999px;font-size:10.5px;line-height:1.3;color:#bfe9ff;background:rgba(143,216,255,.13);border:1px solid rgba(143,216,255,.35)}
 .mv-caps{display:grid;margin:12px 18px 0;text-align:center}
@@ -1492,26 +1664,26 @@ html.js .pg.in .mv-bar span{animation:mvBar var(--mv-t) linear infinite}
 @keyframes mvC5{0%,78%{opacity:0;transform:translateY(8px)}82%,92%{opacity:1;transform:none}95%,100%{opacity:0;transform:translateY(-6px)}}
 @keyframes mvBar{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
 @media screen and (max-width:600px){.mv{margin-top:18px;border-radius:16px}.mv-head{padding:12px 12px 0 14px;font-size:12px}.mv-track{margin:0 2px;padding-top:18px}.mv-line,.mv-run{top:39px}
-  .mv-dot{width:42px;height:42px;border-radius:13px}.mv-dot .sv-ic{width:18px;height:18px}.mv-lb{font-size:10.5px}.mv-chip{padding:2px 5px;font-size:9.5px}.mv-caps{margin:10px 12px 0}.mv-cap{font-size:12.5px}}
+  .mv-dot{width:42px;height:42px;border-radius:13px}.mv-dot .sv-ic{width:28px;height:28px}.mv-lb{font-size:10.5px}.mv-chip{padding:2px 5px;font-size:9.5px}.mv-caps{margin:10px 12px 0}.mv-cap{font-size:12.5px}}
 @media (prefers-reduced-motion:reduce){.mv *{animation:none!important}.mv-run,.mv-pp,.mv-bar{display:none}.mv-caps{margin-bottom:18px}}
 @media print{.mv{display:none!important}}
 </style>
 <script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.mv-pp');if(!b)return;var f=b.closest('.mv'),p=f.classList.toggle('is-paused');b.setAttribute('aria-pressed',p?'true':'false')});
 document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('is-off',!e.isIntersecting)})});[].forEach.call(document.querySelectorAll('.mv'),function(f){io.observe(f)})})</script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="ic-list" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></symbol>
-  <symbol id="ic-report" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 18v-3M12 18v-6M16 18v-4"/></symbol>
-  <symbol id="ic-spark" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/><path d="M20 3v4M22 5h-4"/></symbol>
-  <symbol id="ic-meet" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-  <symbol id="ic-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.38 3.62a1 1 0 0 1 3 3L7.37 18.64a2 2 0 0 1-.86.5l-2.87.84a.5.5 0 0 1-.62-.62l.84-2.87a2 2 0 0 1 .5-.86z"/></symbol>
-  <symbol id="ic-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
-  <symbol id="ic-chip" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
-  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
-  <symbol id="ic-people" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.2"/><path d="M5.5 21v-1.5A5.5 5.5 0 0 1 11 14h2a5.5 5.5 0 0 1 5.5 5.5V21"/><path d="M4 11.5a2.5 2.5 0 1 1 2-4M20 11.5a2.5 2.5 0 1 0-2-4"/></symbol>
-  <symbol id="ic-trend" viewBox="0 0 24 24"><path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
-  <symbol id="ic-branch" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
-  <symbol id="ic-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
-  <symbol id="ic-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+  <symbol id="ic-list" viewBox="0 0 24 24"><image href="assets/icons/ic-list.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-report" viewBox="0 0 24 24"><image href="assets/icons/ic-report.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 24 24"><image href="assets/icons/ic-spark.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-meet" viewBox="0 0 24 24"><image href="assets/icons/ic-meet.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-pen" viewBox="0 0 24 24"><image href="assets/icons/ic-pen.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-repeat" viewBox="0 0 24 24"><image href="assets/icons/ic-repeat.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-chip" viewBox="0 0 24 24"><image href="assets/icons/ic-chip.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><image href="assets/icons/ic-check.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-people" viewBox="0 0 24 24"><image href="assets/icons/ic-people.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-trend" viewBox="0 0 24 24"><image href="assets/icons/ic-trend.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-branch" viewBox="0 0 24 24"><image href="assets/icons/ic-branch.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-code" viewBox="0 0 24 24"><image href="assets/icons/ic-code.webp" width="24" height="24"/></symbol>
+  <symbol id="ic-heart" viewBox="0 0 24 24"><image href="assets/icons/ic-heart.webp" width="24" height="24"/></symbol>
 </svg>
 <main class="wrap" data-view="team" hidden>
 <section class="pg" data-chap="II" id="team-top">
@@ -1556,6 +1728,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">会社名は伏せ、役職、期間、チーム規模と、実際に担った管理業務に絞って掲載しています。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">I have omitted company names and shown only the role, period, team size and how I managed each team.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Phần này không nêu tên công ty, chỉ ghi vai trò, thời gian, quy mô đội và những việc quản lý tôi đã làm.</p>
+  <figure class="gx gx--hub" aria-hidden="true"><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業チーム</span><span data-l="en">Sales teams</span><span data-l="vi">Đội kinh doanh</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事チーム 1→5名</span><span data-l="en">HR team 1 → 5</span><span data-l="vi">Đội nhân sự 1 → 5</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/manager.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o"><span data-l="ja">役職ごとの記録</span><span data-l="en">Role by role</span><span data-l="vi">Theo từng vai trò</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">KPIとレビュー</span><span data-l="en">KPIs and reviews</span><span data-l="vi">KPI và rà soát</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">約27名の拠点</span><span data-l="en">Branch of about 27</span><span data-l="vi">Chi nhánh khoảng 27 người</span></b></span></div></div></figure>
   <div class="g2 rv" style="--d:180ms;margin-top:16px">
     <div class="card"><span class="lbl"><svg class="sv-ic" aria-hidden="true" focusable="false"><use href="#ic-people"/></svg>2022 ～ 2026 ／ HR</span>
       <h3 data-l="ja">人事部長：1人の体制から5名のチームへ</h3><h3 data-l="en">Head of HR: from a one-person function to a team of five</h3><h3 data-l="vi">Trưởng phòng Nhân sự: từ 1 người lên đội 5 người</h3>
@@ -1756,6 +1929,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">4年前と比べ、情報の収集と整理にかかる時間は80～90%減り、生産性は約3～4倍に向上しました（自己試算）。以前は3～4名で担っていた業務量を、現在は1人で処理しています。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">Compared with four years ago, I spend 80 to 90% less time gathering and organising information, and my productivity is about 3 to 4 times higher (my own estimate). I now do on my own the work that used to take 3 to 4 people.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">So với 4 năm trước, thời gian tôi thu thập, xử lý thông tin giảm 80 đến 90%, năng suất tăng khoảng 3 đến 4 lần (theo ước tính của tôi). Một mình tôi xử lý lượng việc trước đây cần 3 đến 4 người.</p>
+  <figure class="gx gx--ring" aria-hidden="true"><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AIで要約、集計</span><span data-l="en">AI: summaries, totals</span><span data-l="vi">AI: tóm tắt, tổng hợp</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AIで報告書の下書き</span><span data-l="en">AI: report drafts</span><span data-l="vi">AI: nháp báo cáo</span></b></span></div><div class="gx-core"><span class="gx-orb gx-orb--ring"><svg viewBox="0 0 120 120"><circle class="gx-rt" cx="60" cy="60" r="52"/><circle class="gx-rf" pathLength="100" cx="60" cy="60" r="52" style="stroke-dashoffset:10"/></svg><span class="gx-val gx-val--s"><span class="gx-vn"><b class="gx-num" style="--v:90;--n0:80"><span class="gx-pfx">80–</span></b><small class="gx-suf">%</small></span></span></span><b class="gx-unit"><span data-l="ja">情報整理の時間を削減</span><span data-l="en">less time organising information</span><span data-l="vi">thời gian xử lý thông tin giảm</span></b></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/magnifier.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">原因の分析と判断</span><span data-l="en">Root cause, judgement</span><span data-l="vi">Phân tích, nhận định</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/interview.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">対話とコーチ</span><span data-l="en">Coaching members</span><span data-l="vi">Kèm cặp thành viên</span></b></span></div></div></figure>
   <div class="g2 rv" style="--d:180ms;margin-top:16px">
     <div class="card"><span class="lbl"><svg class="sv-ic" aria-hidden="true" focusable="false"><use href="#ic-chip"/></svg>AI</span><h3 data-l="ja">AIに任せる繰り返しの作業</h3><h3 data-l="en">Repetitive work I hand to AI</h3><h3 data-l="vi">Việc lặp lại tôi giao cho AI</h3>
       <div data-l="ja"><div class="chips"><span class="chip">要約</span><span class="chip">数字の集計</span><span class="chip">データ入力</span><span class="chip">議事録</span><span class="chip">報告書の下書き</span><span class="chip">差異の照合</span><span class="chip">リマインド</span></div></div>
@@ -1779,6 +1953,19 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
 </section>
 </main>
 
+<!-- gx:start -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="gxRingG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBA65A"/><stop offset=".55" stop-color="#F47E2A"/><stop offset="1" stop-color="#25A1DB"/></linearGradient></defs></svg>
+<script id="gx-js">
+(function(){
+  var fs=[].slice.call(document.querySelectorAll('.gx'));if(!fs.length)return;
+  if(!('IntersectionObserver' in window)){fs.forEach(function(f){f.classList.add('is-in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){var f=e.target;
+    if(e.isIntersecting&&e.intersectionRatio>=.2)f.classList.add('is-in');
+    f.classList.toggle('is-off',!e.isIntersecting)})},{threshold:[0,.2]});
+  fs.forEach(function(f){io.observe(f)});
+})();
+</script>
+<!-- gx:end -->
 <script>
 (function(){
   var pages=document.querySelectorAll('.pg');

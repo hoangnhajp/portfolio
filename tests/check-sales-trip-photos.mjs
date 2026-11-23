@@ -56,7 +56,7 @@ const SECTIONS = {
   const evCss = (html.match(/^\.evrow\{([^}]*)\}/m) || [])[1] || '';
   ok(/display:grid/.test(evCss) && !/overflow-x:(auto|scroll)/.test(evCss), `.evrow phải là lưới hiện hết, không cuộn ngang: {${evCss}}`);
   ok(!/scroll-snap/.test(html.match(/^\.evrow[^\n]*$/gm)?.join('\n') || ''), '.evrow còn scroll-snap (kiểu băng chuyền cuộn)');
-  ok(!/<img\b/.test(sec.replace(/<ol class="evrow"[\s\S]*?<\/ol>/, '')), '#sales-pr còn ảnh ngoài dòng sự kiện (lưới ảnh cũ)');
+  ok(!/<img\b/.test(sec.replace(/<ol class="evrow"[\s\S]*?<\/ol>/, '').replace(/<figure class="gx [\s\S]*?<\/figure>/g, '')), '#sales-pr còn ảnh ngoài dòng sự kiện (lưới ảnh cũ; icon cảnh .gx không tính)');
 }
 const navSales = (html.match(/<nav class="sb-nav" data-for="sales"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
 const navNums = [...navSales.matchAll(/data-sec="([\w-]+)"><em>(\w+)<\/em>/g)].map((m) => `${m[1]}:${m[2]}`).join(' ');

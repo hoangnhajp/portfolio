@@ -14,7 +14,9 @@ export async function openChrome({ extraArgs = [] } = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'tflow-'));
   const proc = spawn(chromePath, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run',
     '--no-default-browser-check', '--hide-scrollbars', '--force-device-scale-factor=1', '--allow-file-access-from-files',
-    '--autoplay-policy=no-user-gesture-required', ...extraArgs, 'about:blank'], { stdio: 'ignore' });
+    '--autoplay-policy=no-user-gesture-required',
+    // vẽ lại đủ tile mỗi khung: partial raster tái dùng tile cũ làm lệch 1/255 ở mép chữ, khung không còn thuần theo t (task zze2)
+    '--disable-partial-raster', ...extraArgs, 'about:blank'], { stdio: 'ignore' });
   let port;
   for (let i = 0; i < 150 && !port; i++) {
     await sleep(100);

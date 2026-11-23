@@ -30,7 +30,7 @@ html[lang="ja"] .lab .s{font-weight:500;font-size:15.5px;letter-spacing:.04em}
 .res{left:50%;top:760px;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:14px 30px;border-radius:999px;
   background:#fff;border:1.5px solid #e2dcf2;box-shadow:0 18px 40px -26px rgba(59,47,134,.55);font-weight:800;font-size:19px;color:#3b2f86;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
 html[lang="ja"] .res{letter-spacing:.08em;font-weight:700;font-size:20px}
-.res svg{flex:none}
+.res img{flex:none}
 /* bố cục dọc cho màn hẹp (?layout=m) */
 html.m,html.m body{width:1200px;height:1600px}
 html.m .eb{left:80px;top:64px;font-size:26px}
@@ -49,7 +49,7 @@ html.m[lang="ja"] .lab .s{font-size:33px}
 html.m .res{top:1466px;font-size:28px;padding:20px 36px;gap:16px}
 html.m[lang="vi"] .res{font-size:25px}
 html.m[lang="ja"] .res{font-size:31px}
-html.m .res svg{width:34px;height:34px}
+html.m .res img{width:44px;height:44px}
 </style></head>
 <body>
 <div id="stage"><div id="grid"></div>
@@ -109,23 +109,22 @@ const svg = document.getElementById('flow');
 svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); (parent || svg).appendChild(e); return e; };
 svg.innerHTML = `<defs>
-  <linearGradient id="gBrand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b2f86"/><stop offset=".55" stop-color="#6d5bd0"/><stop offset="1" stop-color="#26B3F4"/></linearGradient>
-  <linearGradient id="gLane" gradientUnits="userSpaceOnUse" x1="${X(0)}" y1="${Y(0)}" x2="${X(N - 1)}" y2="${Y(N - 1)}"><stop offset="0" stop-color="#6d5bd0"/><stop offset="1" stop-color="#26B3F4"/></linearGradient>
-  <filter id="sh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#3b2f86" flood-opacity=".22"/></filter>
-  <filter id="shA" x="-40%" y="-40%" width="180%" height="190%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#6d5bd0" flood-opacity=".42"/></filter>
+  <linearGradient id="gBrand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E9BFF"/><stop offset=".6" stop-color="#8CCBFF"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient>
+  <filter id="gray"><feColorMatrix type="saturate" values="0"/></filter>
+  <linearGradient id="gLane" gradientUnits="userSpaceOnUse" x1="${X(0)}" y1="${Y(0)}" x2="${X(N - 1)}" y2="${Y(N - 1)}"><stop offset="0" stop-color="#2E9BFF"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient>
+  <filter id="sh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#2E6FC4" flood-opacity=".2"/></filter>
+  <filter id="shA" x="-40%" y="-40%" width="180%" height="190%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#2E9BFF" flood-opacity=".38"/></filter>
 </defs>`;
 // làn chảy: nét đứt nền + nét đặc vẽ dần (stroke-dashoffset trên chính nét, không có vật thể bay tự do)
 const LANE_LEN = GAP * (N - 1);
-el('line', { x1: X(0), y1: Y(0), x2: X(N - 1), y2: Y(N - 1), stroke: '#d9d2ec', 'stroke-width': 4, 'stroke-dasharray': '2 12', 'stroke-linecap': 'round' });
+el('line', { x1: X(0), y1: Y(0), x2: X(N - 1), y2: Y(N - 1), stroke: '#d6e4f5', 'stroke-width': 4, 'stroke-dasharray': '2 12', 'stroke-linecap': 'round' });
 const lane = el('line', { x1: X(0), y1: Y(0), x2: X(N - 1), y2: Y(N - 1), stroke: 'url(#gLane)', 'stroke-width': 6, 'stroke-linecap': 'round',
   'stroke-dasharray': `${LANE_LEN} ${LANE_LEN + 20}`, 'stroke-dashoffset': LANE_LEN });
 // chevron chỉ hướng giữa các ô
-for (let i = 0; i < N - 1; i++) { const x = (X(i) + X(i + 1)) / 2, y = (Y(i) + Y(i + 1)) / 2; el('path', { d: MOB ? `M${x - 8} ${y - 5} L${x} ${y + 4} L${x + 8} ${y - 5}` : `M${x - 5} ${y - 8} L${x + 4} ${y} L${x - 5} ${y + 8}`, fill: 'none', stroke: '#c9c0e6', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'chev' }); }
+for (let i = 0; i < N - 1; i++) { const x = (X(i) + X(i + 1)) / 2, y = (Y(i) + Y(i + 1)) / 2; el('path', { d: MOB ? `M${x - 8} ${y - 5} L${x} ${y + 4} L${x + 8} ${y - 5}` : `M${x - 5} ${y - 8} L${x + 4} ${y} L${x - 5} ${y + 8}`, fill: 'none', stroke: '#b9cfea', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'chev' }); }
 
-const GRAY = '#bdb6d3', GRAY2 = '#d9d3ea';
 // Mỗi ô: lớp idle (xám, tĩnh) + lớp active (màu, hoạt hình theo thời gian cục bộ lt = t - TA[i]).
-// Hình minh hoạ vẽ trong hộp cục bộ 120x120, gốc (cx-60, cy-60).
-function drawLen(p) { return { len: p, dash: `${p} ${p + 10}` }; }
+// Icon đặt trong hộp cục bộ 120x120, gốc (cx-60, cy-60).
 const NODES = [];
 for (let i = 0; i < N; i++) {
   const g = el('g', {});
@@ -138,77 +137,19 @@ for (let i = 0; i < N; i++) {
 }
 const P = (i) => NODES[i].parts;
 
-// 1) Mục tiêu & vai trò: bia 3 vòng (vẽ nét) + mũi tên cắm giữa
-(() => { const n = NODES[0];
-  for (const r of [46, 31, 16]) el('circle', { cx: 60, cy: 60, r, fill: 'none', stroke: GRAY2, 'stroke-width': 6 }, n.idle);
-  P(0).rings = [46, 31, 16].map((r, k) => el('circle', { cx: 60, cy: 60, r, fill: 'none', stroke: ['#3b2f86', '#6d5bd0', '#26B3F4'][k], 'stroke-width': 6,
-    'stroke-dasharray': `${2 * Math.PI * r} ${2 * Math.PI * r + 10}`, 'stroke-dashoffset': 2 * Math.PI * r, transform: 'rotate(-90 60 60)', 'stroke-linecap': 'round' }, n.act));
-  P(0).dot = el('circle', { cx: 60, cy: 60, r: 7, fill: '#3b2f86', transform: 'translate(60 60) scale(0) translate(-60 -60)' }, n.act);
-  const ar = el('g', { opacity: 0 }, n.act); P(0).arrow = ar;
-  el('line', { x1: 62, y1: 58, x2: 104, y2: 16, stroke: '#16141d', 'stroke-width': 5, 'stroke-linecap': 'round' }, ar);
-  el('path', { d: 'M96 10 L112 8 L110 24', fill: 'none', stroke: '#16141d', 'stroke-width': 5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, ar);
-})();
-// 2) Chuẩn hoá quy trình: checklist 3 dòng, dấu tick vẽ lần lượt
-(() => { const n = NODES[1]; P(1).ticks = []; P(1).bars = [];
-  [22, 58, 94].forEach((y, k) => {
-    el('rect', { x: 6, y: y - 12, width: 24, height: 24, rx: 7, fill: 'none', stroke: GRAY2, 'stroke-width': 4 }, n.idle);
-    el('line', { x1: 44, y1: y, x2: [112, 98, 106][k], y2: y, stroke: GRAY2, 'stroke-width': 7, 'stroke-linecap': 'round' }, n.idle);
-    P(1).boxes = P(1).boxes || [];
-    P(1).boxes.push(el('rect', { x: 6, y: y - 12, width: 24, height: 24, rx: 7, fill: '#26B3F4', stroke: '#26B3F4', 'stroke-width': 4, opacity: 0 }, n.act));
-    P(1).ticks.push(el('path', { d: `M11 ${y} l6 6 l9 -11`, fill: 'none', stroke: '#fff', 'stroke-width': 4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-dasharray': '24 34', 'stroke-dashoffset': 24 }, n.act));
-    const len = [112, 98, 106][k] - 44;
-    P(1).bars.push(el('line', { x1: 44, y1: y, x2: [112, 98, 106][k], y2: y, stroke: k === 0 ? '#3b2f86' : '#6d5bd0', 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-dasharray': `${len} ${len + 10}`, 'stroke-dashoffset': len }, n.act));
-  });
-})();
-// 3) Số liệu hằng ngày: 5 cột (T2..T6) mọc lên trên trục
-(() => { const n = NODES[2]; P(2).cols = [];
-  const xs = [8, 32, 56, 80, 104], idleH = [26, 38, 32, 46, 40], actH = [40, 58, 50, 78, 98];
-  el('line', { x1: 2, y1: 112, x2: 118, y2: 112, stroke: GRAY, 'stroke-width': 4, 'stroke-linecap': 'round' }, n.idle);
-  xs.forEach((x, k) => el('rect', { x, y: 108 - idleH[k], width: 16, height: idleH[k], rx: 4, fill: GRAY2 }, n.idle));
-  el('line', { x1: 2, y1: 112, x2: 118, y2: 112, stroke: '#3b2f86', 'stroke-width': 4, 'stroke-linecap': 'round' }, n.act);
-  xs.forEach((x, k) => P(2).cols.push({ e: el('rect', { x, y: 108 - actH[k], width: 16, height: actH[k], rx: 4, fill: k === 4 ? '#26B3F4' : '#6d5bd0', transform: `translate(0 108) scale(1 0) translate(0 -108)` }, n.act), h: actH[k] }));
-})();
-// 4) Tìm nguyên nhân & xử lý: đường số liệu tụt rồi hồi, kính lúp ở điểm tụt, mũi tên lên
-(() => { const n = NODES[3];
-  const d = 'M16 40 L36 46 L54 84 L78 62 L110 22';
-  // trục biểu đồ (trái + đáy) để đọc ra là biểu đồ số liệu
-  el('path', { d: 'M4 6 V112 H116', fill: 'none', stroke: GRAY, 'stroke-width': 4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, n.idle);
-  el('path', { d: 'M4 6 V112 H116', fill: 'none', stroke: '#3b2f86', 'stroke-width': 4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, n.act);
-  el('path', { d, fill: 'none', stroke: GRAY2, 'stroke-width': 6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, n.idle);
-  const pl = el('path', { d, fill: 'none', stroke: '#6d5bd0', 'stroke-width': 6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, n.act);
-  const len = pl.getTotalLength(); pl.setAttribute('stroke-dasharray', `${len} ${len + 10}`); pl.setAttribute('stroke-dashoffset', len); P(3).line = pl; P(3).len = len;
-  const mg = el('g', { transform: 'translate(54 84) scale(0) translate(-54 -84)' }, n.act); P(3).mag = mg;
-  el('circle', { cx: 54, cy: 84, r: 15, fill: 'rgba(38,179,244,.16)', stroke: '#26B3F4', 'stroke-width': 4.5 }, mg);
-  el('line', { x1: 65, y1: 95, x2: 75, y2: 105, stroke: '#26B3F4', 'stroke-width': 5, 'stroke-linecap': 'round' }, mg);
-  const up = el('g', { transform: 'translate(110 22) scale(0) translate(-110 -22)' }, n.act); P(3).up = up;
-  el('circle', { cx: 110, cy: 22, r: 7, fill: '#3b2f86' }, up);
-})();
-// 5) Phát triển con người: 1 người giữa, thêm 4 người lần lượt (đội 1 lên 5)
-(() => { const n = NODES[4];
-  const person = (parent, x, y, s, fill) => { const g = el('g', { transform: `translate(${x} ${y}) scale(${s})` }, parent);
-    el('circle', { cx: 0, cy: -12, r: 11, fill }, g); el('path', { d: 'M-19 20 a19 19 0 0 1 38 0 Z', fill }, g); return g; };
-  person(n.idle, 60, 54, 1.25, GRAY2);
-  P(4).lead = person(n.act, 60, 54, 1.25, '#3b2f86');
-  P(4).team = [[18, 58], [102, 58], [32, 102], [88, 102]].map(([x, y]) => { const w = el('g', { transform: `translate(${x} ${y}) scale(0)` }, n.act); person(w, 0, 0, .78, '#6d5bd0'); return w; });
-  P(4).teamPos = [[18, 58], [102, 58], [32, 102], [88, 102]];
-})();
-// 6) Báo cáo lãnh đạo: tài liệu, các dòng viết dần, huy hiệu đã gửi
-(() => { const n = NODES[5];
-  el('rect', { x: 18, y: 6, width: 66, height: 90, rx: 9, fill: 'none', stroke: GRAY2, 'stroke-width': 5 }, n.idle);
-  [26, 42, 58, 74].forEach((y, k) => el('line', { x1: 32, y1: y, x2: [70, 64, 70, 54][k], y2: y, stroke: GRAY2, 'stroke-width': 5, 'stroke-linecap': 'round' }, n.idle));
-  el('rect', { x: 18, y: 6, width: 66, height: 90, rx: 9, fill: '#fff', stroke: '#3b2f86', 'stroke-width': 5 }, n.act);
-  P(5).lines = [26, 42, 58, 74].map((y, k) => { const len = [70, 64, 70, 54][k] - 32;
-    return el('line', { x1: 32, y1: y, x2: 32 + len, y2: y, stroke: k === 3 ? '#26B3F4' : '#6d5bd0', 'stroke-width': 5, 'stroke-linecap': 'round', 'stroke-dasharray': `${len} ${len + 10}`, 'stroke-dashoffset': len }); });
-  P(5).lines.forEach((l) => n.act.appendChild(l));
-  const b = el('g', { transform: 'translate(92 92) scale(0) translate(-92 -92)' }, n.act); P(5).badge = b;
-  el('circle', { cx: 92, cy: 92, r: 20, fill: '#26B3F4', stroke: '#fff', 'stroke-width': 4 }, b);
-  P(5).check = el('path', { d: 'M83 92 l6 6 l11 -12', fill: 'none', stroke: '#fff', 'stroke-width': 4.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-dasharray': '26 36', 'stroke-dashoffset': 26 }, b);
-})();
+// Icon 3D kính mờ (task zze2, vẽ bằng ChatGPT, dùng chung assets/icons với trang): lớp chờ = xám mờ, lớp bật = màu + nảy nhẹ.
+const ICONS = ['ic-target', 'ic-list', 'ic-trend', 'ic-cause', 'ic-people', 'ic-report'];
+const ICON_SRC = (n) => `../../assets/icons/${n}.webp`;
+ICONS.forEach((name, i) => { const n = NODES[i];
+  el('image', { href: ICON_SRC(name), x: -4, y: -4, width: 128, height: 128, filter: 'url(#gray)', opacity: .45 }, n.idle);
+  const pop = el('g', { transform: 'translate(60 60) scale(.7) translate(-60 -60)' }, n.act); P(i).pop = pop;
+  el('image', { href: ICON_SRC(name), x: -4, y: -4, width: 128, height: 128 }, pop);
+});
 
 // ── Chữ HTML
 document.getElementById('ttl').textContent = L.title;
 const resEl = document.getElementById('res');
-resEl.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#26B3F4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><span>${L.result}</span>`;
+resEl.innerHTML = `<img src="${ICON_SRC('ic-trend')}" width="34" height="34" alt=""><span>${L.result}</span>`;
 const labs = document.getElementById('labs'); const LABS = [];
 L.steps.forEach(([h, s], i) => {
   const d = document.createElement('div'); d.className = 'lab';
@@ -241,22 +182,8 @@ function seek(t) {
     n.act.setAttribute('opacity', k.toFixed(4)); n.actRect.setAttribute('opacity', k.toFixed(4)); n.idle.setAttribute('opacity', (1 - k).toFixed(4));
     const s = 1 + 0.07 * bump(lt / 0.42);
     n.tile.setAttribute('transform', `translate(${X(i)} ${Y(i)}) scale(${s.toFixed(4)}) translate(${-X(i)} ${-Y(i)})`);
-    // hoạt hình riêng từng ô
-    const u = (a, b) => eo((lt - a) / (b - a));
-    if (i === 0) { p.rings.forEach((r, j) => { const c = 2 * Math.PI * [46, 31, 16][j]; r.setAttribute('stroke-dashoffset', (c * (1 - u(0.02 + j * 0.06, 0.34 + j * 0.06))).toFixed(2)); });
-      p.dot.setAttribute('transform', `translate(60 60) scale(${back((lt - 0.26) / 0.18).toFixed(4)}) translate(-60 -60)`);
-      p.arrow.setAttribute('opacity', u(0.28, 0.4).toFixed(4)); }
-    if (i === 1) { p.bars.forEach((b, j) => { const len = Number(b.getAttribute('stroke-dasharray').split(' ')[0]); b.setAttribute('stroke-dashoffset', (len * (1 - u(0.02 + j * 0.1, 0.28 + j * 0.1))).toFixed(2)); });
-      p.boxes.forEach((b, j) => b.setAttribute('opacity', u(0.1 + j * 0.11, 0.2 + j * 0.11).toFixed(4)));
-      p.ticks.forEach((c, j) => c.setAttribute('stroke-dashoffset', (24 * (1 - u(0.14 + j * 0.11, 0.3 + j * 0.11))).toFixed(2))); }
-    if (i === 2) p.cols.forEach((c, j) => c.e.setAttribute('transform', `translate(0 108) scale(1 ${eo((lt - 0.03 - j * 0.06) / 0.3).toFixed(4)}) translate(0 -108)`));
-    if (i === 3) { p.line.setAttribute('stroke-dashoffset', (p.len * (1 - u(0, 0.42))).toFixed(2));
-      p.mag.setAttribute('transform', `translate(54 84) scale(${back((lt - 0.14) / 0.2).toFixed(4)}) translate(-54 -84)`);
-      p.up.setAttribute('transform', `translate(110 22) scale(${back((lt - 0.36) / 0.16).toFixed(4)}) translate(-110 -22)`); }
-    if (i === 4) p.team.forEach((g, j) => { const [x, y] = p.teamPos[j]; g.setAttribute('transform', `translate(${x} ${y}) scale(${back((lt - 0.06 - j * 0.07) / 0.2).toFixed(4)})`); });
-    if (i === 5) { p.lines.forEach((l, j) => { const len = Number(l.getAttribute('stroke-dasharray').split(' ')[0]); l.setAttribute('stroke-dashoffset', (len * (1 - u(0.02 + j * 0.07, 0.18 + j * 0.07))).toFixed(2)); });
-      p.badge.setAttribute('transform', `translate(92 92) scale(${back((lt - 0.3) / 0.18).toFixed(4)}) translate(-92 -92)`);
-      p.check.setAttribute('stroke-dashoffset', (26 * (1 - u(0.38, 0.5))).toFixed(2)); }
+    // icon bật: nảy từ 0.7 lên 1
+    p.pop.setAttribute('transform', `translate(60 60) scale(${(0.7 + 0.3 * back((lt - 0.02) / 0.3)).toFixed(4)}) translate(-60 -60)`);
     // chữ: xám khi chờ, đậm khi bật
     LABS[i].querySelector('.h').style.color = rgb(mix([143, 137, 166], [22, 20, 29], k));
     LABS[i].querySelector('.s').style.color = rgb(mix([168, 162, 190], [95, 88, 125], k));

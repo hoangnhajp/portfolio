@@ -14,7 +14,10 @@ const sec = (id) => (html.match(new RegExp(`<section[^>]*id="${id}"[\\s\\S]*?</s
 for (const id of ['cover', 'profile']) {
   const s = sec(id);
   ok(s.length > 0, `không tìm thấy section #${id}`);
-  ok(!/<img\b/.test(s), `section #${id} còn thẻ <img>`);
+  // Cảnh minh hoạ .gx (task kzo4) chỉ dùng icon 3D trang trí, không phải ảnh chân dung: bỏ qua khi tìm <img>, nhưng cấm icon hình người
+  const gx = (s.match(/<figure class="gx [\s\S]*?<\/figure>/g) || []).join('');
+  ok(!/assets\/gx\/(person-bust|cand-man|cand-woman|manager)\.webp/.test(gx), `cảnh minh hoạ ở #${id} dùng icon hình người (giống avatar)`);
+  ok(!/<img\b/.test(s.replace(/<figure class="gx [\s\S]*?<\/figure>/g, '')), `section #${id} còn thẻ <img>`);
 }
 // Trang Profile vẫn giữ khung tóm tắt, không còn cột 200px dành cho ảnh
 const prof = sec('profile');
