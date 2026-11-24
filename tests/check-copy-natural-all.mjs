@@ -12,7 +12,7 @@ const body = html.replace(/<(script|style)[\s\S]*?<\/\1>/g, ' ');
 // 1. JA: mọi gạch đầu dòng kinh nghiệm (.lines data-l="ja") là câu trọn, kết thúc 「。」
 const jaBul = [...body.matchAll(/<div class="lines" data-l="ja">([\s\S]*?)<\/div>/g)].flatMap((m) => [...m[1].matchAll(/<p>([\s\S]*?)<\/p>/g)].map((p) => strip(p[1])));
 const noStop = jaBul.filter((s) => /[ぁ-ん]$/.test(s));
-ok(jaBul.length >= 40, `chỉ thấy ${jaBul.length} gạch đầu dòng JA`);
+ok(jaBul.length >= 20, `chỉ thấy ${jaBul.length} gạch đầu dòng JA`);
 ok(noStop.length === 0, `JA: ${noStop.length} gạch đầu dòng thiếu 「。」: ${noStop.slice(0, 3).join(' / ')}`);
 
 // 2. JA: alt / aria-label không cụt bằng trợ từ (で / と / に / を)

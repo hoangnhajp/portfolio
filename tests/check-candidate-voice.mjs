@@ -9,13 +9,15 @@ const ok = (c, m) => { if (!c) fails.push(m); };
 const strip = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const prof = (html.match(/<main class="wrap" data-view="profile">([\s\S]*?)<\/main>/) || [])[1] || '';
 const bullets = (l) => [...prof.matchAll(new RegExp(`<div class="lines" data-l="${l}">([\\s\\S]*?)</div>`, 'g'))]
-  .flatMap((m) => [...m[1].matchAll(/<p>([\s\S]*?)<\/p>/g)].map((p) => strip(p[1])));
+  .flatMap((m) => [...m[1].matchAll(/<p>([\s\S]*?)<\/p>/g)].filter((p) => !/^\s*<b>/.test(p[1])).map((p) => strip(p[1]))); // bỏ bảng ngày tháng
 const share = (arr, re) => (arr.length ? arr.filter((s) => re.test(s)).length / arr.length : 0);
 const pct = (x) => `${Math.round(x * 100)}%`;
 
 // 1. Gạch đầu dòng kinh nghiệm nói ở ngôi thứ nhất / câu hoàn chỉnh
 const ja = bullets('ja'), en = bullets('en'), vi = bullets('vi');
-ok(ja.length >= 20 && ja.length === en.length && en.length === vi.length, `số gạch đầu dòng lệch ja/en/vi: ${ja.length}/${en.length}/${vi.length}`);
+// task f5po: mỗi khối kinh nghiệm chỉ còn keyword + 1 câu, nên đếm >= 7 thay vì >= 20
+// task p0r6: thẻ Sales #w-mycom thành workflow zigzag (không còn câu), nên còn >= 6
+ok(ja.length >= 6 && ja.length === en.length && en.length === vi.length, `số gạch đầu dòng lệch ja/en/vi: ${ja.length}/${en.length}/${vi.length}`);
 const sJa = share(ja, /(ました|ます|でした)。?$/), sEn = share(en, /^(I|I'm|I’ve|I've|My|When|As|At|In|With|After|Before)\b/), sVi = share(vi, /(^|\s)(Tôi|tôi)\s/);
 ok(sJa >= 0.6, `JA: chỉ ${pct(sJa)} gạch đầu dòng là câu です・ます (cần >= 60%)`);
 ok(sEn >= 0.6, `EN: chỉ ${pct(sEn)} gạch đầu dòng nói ở ngôi thứ nhất (cần >= 60%)`);
@@ -49,16 +51,18 @@ ok(!/Object\.assign\(D\s*,/.test(html), 'còn khối Object.assign(D, ...) (bị
 // 5. Tóm tắt đầu Hồ sơ + câu phụ bìa viết theo giọng ứng viên (task gex9), không còn câu CV cũ, giữ dữ kiện
 const OLD = ['主に法人営業、営業マネージャー、ITコミュニケーターを経験してまいりました', 'mainly in B2B sales, as a sales manager and as an IT communicator', 'chủ yếu ở mảng kinh doanh B2B, quản lý kinh doanh và IT communicator'];
 for (const s of OLD) ok(!html.includes(s), `còn câu tóm tắt cũ "${s}"`);
-const card = (prof.match(/<span class="lbl">Summary[\s\S]*?<\/div>/) || [''])[0];
+// Task f5po: tóm tắt = hàng keyword (giữ dữ kiện cốt lõi) + đúng 1 câu ngôi thứ nhất
+const card = (prof.match(/<span class="lbl">Summary[\s\S]*?<p data-l="vi">[\s\S]*?<\/p>/) || [''])[0];
 const sum = (l) => strip((card.match(new RegExp(`<p data-l="${l}">([\\s\\S]*?)</p>`)) || ['', ''])[1]);
+const kws = (l) => strip((card.match(new RegExp(`<div class="chips" data-l="${l}">([\\s\\S]*?)</div>`)) || ['', ''])[1]);
 const sv = sum('vi'), se = sum('en'), sj = sum('ja');
-ok(/^Tôi\s/.test(sv) && (sv.match(/(^|\s)tôi\s/gi) || []).length >= 3, 'VI tóm tắt: cần mở đầu "Tôi" và kể ở ngôi thứ nhất');
-ok(/^I\s/.test(se) && (se.match(/\bI\b/g) || []).length >= 3, 'EN tóm tắt: cần mở đầu "I" và kể ở ngôi thứ nhất');
-ok((sj.match(/ました。/g) || []).length >= 3, 'JA tóm tắt: cần câu です・ます kể việc đã làm');
-for (const [t, l, keys] of [[sj, 'ja', ['約11年', 'JILNESTA', 'MAYEKAWA', 'UAT', '契約更新', '5～6名', '1名から5名']],
-  [se, 'en', ['about 11 years', 'JILNESTA', 'MAYEKAWA', 'UAT', 'contract renewals', '5 to 6', 'one person to a team of five']],
-  [sv, 'vi', ['khoảng 11 năm', 'JILNESTA', 'MAYEKAWA', 'UAT', 'gia hạn hợp đồng', '5 đến 6', '1 người lên 5 người']]])
-  for (const k of keys) ok(t.includes(k), `${l} tóm tắt thiếu dữ kiện "${k}"`);
+ok(/^Tôi\s/.test(sv), 'VI tóm tắt: cần mở đầu "Tôi" (ngôi thứ nhất)');
+ok(/^I\s/.test(se), 'EN tóm tắt: cần mở đầu "I" (ngôi thứ nhất)');
+ok(/ました。$/.test(sj) && (sj.match(/。/g) || []).length === 1, 'JA tóm tắt: đúng 1 câu です・ます kể việc đã làm');
+for (const [l, keys] of [['ja', ['約11年', 'JILNESTA', 'MAYEKAWA', '1名から5名']],
+  ['en', ['about 11 years', 'JILNESTA', 'MAYEKAWA', '1 to 5']],
+  ['vi', ['khoảng 11 năm', 'JILNESTA', 'MAYEKAWA', '1 lên 5']]])
+  for (const k of keys) ok(kws(l).includes(k), `${l} keyword tóm tắt thiếu dữ kiện "${k}"`);
 
 if (fails.length) { console.error(`FAIL check-candidate-voice (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
 console.log(`PASS check-candidate-voice: ${ja.length} gạch đầu dòng x3, JA です・ます ${pct(sJa)}, EN ngôi thứ nhất ${pct(sEn)}, VI "tôi" ${pct(sVi)}, không sáo ngữ / lặp / "bạn", giữ dữ kiện MYCOM`);

@@ -51,7 +51,8 @@ for (const [tab, ids] of Object.entries(TABS)) {
     for (const im of imgs) {
       icons++;
       const src = (im.match(/src="([^"]+)"/) || [])[1] || '';
-      ok(/^assets\/gx\/[a-z-]+\.webp$/.test(src), `${id}: icon sai thư mục ${src}`);
+      // task p0r6: cảnh #career dùng logo thật của 4 công ty (assets/logos), các cảnh khác chỉ icon 3D của video
+      ok(/^assets\/gx\/[a-z-]+\.webp$/.test(src) || (id === 'career' && /^assets\/logos\/[a-z-]+\.(svg|png)$/.test(src)), `${id}: icon sai thư mục ${src}`);
       ok(existsSync(root + src) && statSync(root + src).size < 20000, `${id}: thiếu file hoặc file quá nặng ${src}`);
       ok(/ alt=""/.test(im) && / loading="lazy"/.test(im) && / width="\d+"/.test(im) && / height="\d+"/.test(im), `${id}: icon thiếu alt="" / loading="lazy" / width / height: ${im}`);
       usedIcons.add(src);

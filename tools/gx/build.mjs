@@ -9,7 +9,10 @@ const file = fileURLToPath(new URL('../../index.html', import.meta.url));
 const L = (ja, en, vi) => ({ ja, en, vi: vi ?? en });
 const T = (t) => typeof t === 'string' ? t : `<span data-l="ja">${t.ja}</span><span data-l="en">${t.en}</span><span data-l="vi">${t.vi}</span>`;
 const img = (n, s = 88) => `<img src="assets/gx/${n}.webp" alt="" width="${s}" height="${s}" loading="lazy" decoding="async">`;
-const plate = (n, cls = '', s) => `<span class="gx-pl${cls ? ' ' + cls : ''}">${img(n, s)}</span>`;
+// 'logo:<file>' = logo thật của công ty (assets/logos, task p0r6), đặt trên đế ngang thay icon 3D
+const plate = (n, cls = '', s) => n.startsWith('logo:')
+  ? `<span class="gx-pl gx-pl--logo"><img src="assets/logos/${n.slice(5)}" alt="" width="96" height="48" loading="lazy" decoding="async"></span>`
+  :`<span class="gx-pl${cls ? ' ' + cls : ''}">${img(n, s)}</span>`;
 const chip = (t, o) => t ? `<em class="gx-chip${o ? ' gx-chip--o' : ''}">${T(t)}</em>` : '';
 
 // ── Dữ liệu cảnh (chỉ dùng dữ kiện đã có trong chữ của chính section) ──
@@ -25,7 +28,8 @@ const S = {
   skillmap: { k: 'ring', v: 10, p: 100, unit: L('のスキル', 'skills', 'kỹ năng'),
     left: [['handshake', L('法人顧客対応', 'B2B client work', 'Khách doanh nghiệp')], ['workflow-gears', L('ITプロジェクト', 'IT projects', 'Dự án IT')]],
     right: [['team-group', L('チーム管理', 'Team management', 'Quản lý đội')], ['lightbulb', L('AI活用', 'Using AI', 'Ứng dụng AI')]] },
-  career: { k: 'flow', steps: [['office-building', L('銀行', 'Bank', 'Ngân hàng'), '2011'], ['briefcase', 'Isuzu', '2015'], ['chat-bubbles', 'JILNESTA', '2017'], ['workflow-gears', 'MAYEKAWA', '2022']] },
+  // task p0r6: 4 mốc dùng logo thật của từng công ty thay icon 3D
+  career: { k: 'flow', steps: [['logo:lienviet.png', L('銀行', 'Bank', 'Ngân hàng'), '2011'], ['logo:isuzu.svg', 'Isuzu', '2015'], ['logo:jilnesta.png', 'JILNESTA', '2017'], ['logo:mayekawa.svg', 'MAYEKAWA', '2022']] },
   'w-mycom': { k: 'hub', core: { ic: 'handshake', chip: 'MAYEKAWA' },
     left: [['jd-document', L('設備の提案', 'Equipment proposals', 'Đề xuất thiết bị')], ['workflow-gears', L('技術者と連携', 'With engineers', 'Cùng kỹ sư')]],
     right: [['shield-check', L('納品後のフォロー', 'After-sales follow-up', 'Theo sát sau bàn giao')], ['team-group', L('人事チーム 1→5名', 'HR team 1 → 5', 'Đội nhân sự 1 → 5')]] },
@@ -240,6 +244,8 @@ const CSS = `<style id="gx-css">
   box-shadow:inset 0 2px 1px rgba(255,255,255,.98),inset 0 -10px 16px -8px rgba(27,127,176,.16),0 5px 0 -1px #CBE5F6,var(--gx-sh)}
 .gx-pl img{display:block;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 10px 12px rgba(27,127,176,.24)) drop-shadow(0 4px 5px rgba(244,126,42,.16))}
 .gx-pl--l{--s:112px}
+.gx-pl.gx-pl--logo{width:calc(var(--s)*1.55);background:#fff padding-box,var(--gx-edge) border-box}
+.gx-pl--logo img{width:80%;height:62%;filter:none}
 .gx-pl--m{--s:84px}
 .is-hot>.gx-pl{box-shadow:inset 0 2px 1px rgba(255,255,255,.98),inset 0 -10px 16px -8px rgba(244,126,42,.18),0 5px 0 -1px #FBCBA6,0 0 0 5px rgba(244,126,42,.12),var(--gx-sh)}
 .gx-lb{display:block;margin-top:10px;font:700 12.5px/1.4 'Manrope','Noto Sans JP',sans-serif;color:var(--gx-ink);text-align:center;word-break:keep-all;overflow-wrap:anywhere}
@@ -392,7 +398,7 @@ let html = readFileSync(file, 'utf8');
 const EOL = html.includes('\r\n') ? '\r\n' : '\n';
 html = html.replace(/\r?\n[ \t]*<figure class="gx [\s\S]*?<\/figure>/g, '');
 html = html.replace(/<!-- gx-css:start -->[\s\S]*?<!-- gx-css:end -->\r?\n/, '').replace(/<!-- gx:start -->[\s\S]*?<!-- gx:end -->\r?\n/, '');
-const HEAD = /^\s*(<(p|span|h2|div) class="(eb|kw|kw-en|kwbar|kw-sub|deco)[ "]|$)/;
+const HEAD = /^\s*(<(p|span|h2|div) class="(colg|eb|kw|kw-en|kwbar|kw-sub|deco)[ "]|$)/;
 for (const [id, s] of Object.entries(S)) {
   const lines = html.split(/\r?\n/);
   const at = lines.findIndex((l) => l.startsWith('<section ') && l.includes(` id="${id}"`));
