@@ -17,6 +17,9 @@ const css = take(/<!-- pyr-css:start -->[\s\S]*?<!-- pyr-css:end -->\n/, 'khối
 const sec = take(/<section class="pg" data-chap="V" id="ai-pyramid">[\s\S]*?<\/section>\n/, 'section #ai-pyramid');
 const navNew = take(/<nav class="sb-nav" data-for="ai"[\s\S]*?<\/nav>/, 'mục lục tab AI');
 const put = (from, to, what) => { if (!h.includes(from)) throw new Error('HEAD thiếu ' + what); h = h.replace(from, to); };
+// edof đã commit (6beaf4f) thì HEAD đã chứa đủ phần kim tự tháp: không ghép lại, chỉ chạy bộ test trên HEAD
+const inHead = h.includes('id="ai-pyramid"');
+if (!inHead) {
 put('<!-- zz-css:end -->\n', '<!-- zz-css:end -->\n' + css, 'zz-css:end');
 const ai = h.match(/<section class="pg" data-chap="II" id="ai-top">[\s\S]*?<\/section>\n/);
 if (!ai) throw new Error('HEAD thiếu #ai-top');
@@ -26,6 +29,7 @@ put('<span class="eb rv">01　<b>MY WORKFLOW</b>', '<span class="eb rv">02　<b>
 put('<span class="eb rv">02　<b>WHERE I USE AI</b>', '<span class="eb rv">03　<b>WHERE I USE AI</b>', 'eb ai-uses');
 put('<span class="eb rv">03　<b>TIME FOR PEOPLE</b>', '<span class="eb rv">04　<b>TIME FOR PEOPLE</b>', 'eb ai-people');
 put("'ai-top','ai-approach',", "'ai-top','ai-pyramid','ai-approach',", 'IDS pganh');
+}
 
 const dir = mkdtempSync(join(tmpdir(), 'edof-'));
 let fails = 0; const out = [];
