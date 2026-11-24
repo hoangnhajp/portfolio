@@ -27,7 +27,7 @@ ok(cards.length >= 8, `bảng dự án cần >= 8 thẻ, đang ${cards.length}`)
 for (const [c, id] of cards) {
   ok(order.includes(id), `thẻ trỏ tới #${id} không tồn tại`);
   const n = ['ja', 'en', 'vi'].map((l) => count(c, new RegExp(`data-l="${l}"`, 'g')));
-  ok(n[0] >= 3 && n[0] === n[1] && n[1] === n[2], `thẻ #${id}: khối ja/en/vi lệch ${n.join('/')}`);
+  ok(n[0] >= 1 && n[0] === n[1] && n[1] === n[2], `thẻ #${id}: khối ja/en/vi lệch ${n.join('/')}`);
 }
 ok(!/[—]/.test(pj + h2), 'có dấu gạch ngang dài');
 

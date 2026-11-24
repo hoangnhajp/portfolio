@@ -33,9 +33,11 @@ const S = {
   'w-mycom': { k: 'hub', core: { ic: 'handshake', chip: 'MAYEKAWA' },
     left: [['jd-document', L('設備の提案', 'Equipment proposals', 'Đề xuất thiết bị')], ['workflow-gears', L('技術者と連携', 'With engineers', 'Cùng kỹ sư')]],
     right: [['shield-check', L('納品後のフォロー', 'After-sales follow-up', 'Theo sát sau bàn giao')], ['team-group', L('人事チーム 1→5名', 'HR team 1 → 5', 'Đội nhân sự 1 → 5')]] },
-  'w-jil': { k: 'ring', v: 27, p: 100, top: L('約', 'about', 'khoảng'), unit: L('名の拠点', 'staff at the branch', 'người ở chi nhánh'),
-    left: [['team-group', L('営業 4〜5名', '4 to 5 in sales', '4–5 kinh doanh')], ['workflow-gears', L('開発 約20名', 'About 20 developers', 'Khoảng 20 lập trình viên')]],
-    right: [['calendar', L('定期レビュー', 'Regular reviews', 'Rà soát định kỳ')], ['handshake', L('契約更新', 'Contract renewals', 'Gia hạn hợp đồng')]] },
+  // task nu9w: workflow 6 bước "từ 0 lên đội bán hàng" thay vòng số 27 người + "rà soát định kỳ / gia hạn hợp đồng"
+  'w-jil': { k: 'flow', steps: [['person-bust', L('自ら営業', 'Hands-on sales', 'Tự đi sales'), L('チーム未設立', 'No team yet', 'Chưa có đội')],
+    ['interview', L('ニーズ把握', 'Client needs', 'Thấu hiểu nhu cầu')], ['jd-document', L('基本仕様', 'Basic specs', 'Viết đặc tả'), L('Excelと図', 'Excel + visuals', 'Excel + hình')],
+    ['chat-bubbles', L('開発と調整', 'Dev team', 'Trao đổi đội dev')], ['workflow-gears', L('アプリとWeb', 'Apps, websites', 'App và web')],
+    ['team-group', L('1→5〜6名', 'Sales 1 → 5~6', 'Đội 1 → 5~6'), 'Startup', true]] },
   'w-it': { k: 'flow', both: true, steps: [['office-building', L('日本の顧客', 'Japanese clients', 'Khách hàng Nhật')], ['chat-bubbles', L('通訳と翻訳', 'Interpreting', 'Phiên dịch'), 'JA · EN · VI', true], ['workflow-gears', L('ベトナム人技術者', 'Vietnamese engineers', 'Kỹ sư Việt Nam')]] },
   'w-early': { k: 'chart', bars: [[46], [70], [38], [62], [84, 1]], cap: L('数字で報告', 'Reports with numbers', 'Báo cáo bằng số liệu'),
     left: [['office-building', L('国際送金', 'International payments', 'Thanh toán quốc tế')], ['briefcase', L('部品の営業事務', 'Parts sales admin', 'Hành chính bán phụ tùng')]],
@@ -43,14 +45,7 @@ const S = {
   pcai: { k: 'hub', core: { ic: 'lightbulb', chip: 'AI' },
     left: [['chat-bubbles', L('日本語 N2', 'Japanese N2', 'Tiếng Nhật N2')], ['jd-document', L('英語 TOEIC 680', 'English TOEIC 680', 'Tiếng Anh TOEIC 680')]],
     right: [['person-bust', L('ベトナム語 母語', 'Vietnamese, native', 'Tiếng Việt bản ngữ')], ['team-group', L('1人で3〜4人分', 'One person, work of 3 to 4', '1 người, việc của 3–4 người')]] },
-  aiops: { k: 'flow', steps: [['survey-clipboard', L('工程の標準化', 'Standard steps', 'Chuẩn hoá quy trình')], ['milestone-report', L('日次報告', 'Daily reports', 'Báo cáo hằng ngày')],
-    ['lightbulb', L('Claudeで分析', 'Analysis with Claude', 'Phân tích bằng Claude')], ['checklist', L('毎日の確認', 'Daily checks', 'Kiểm tra hằng ngày'), null, true]] },
-  aidash: { k: 'chart', bars: [[92, 0, 'A'], [85, 0, 'B'], [78, 0, 'C'], [64, 1, 'D'], [88, 0, 'E']], lens: true, cap: L('担当D：滞留3日', 'Owner D: stalled 3 days', 'Người D: tồn 3 ngày'),
-    left: [['milestone-report', L('日次報告', 'Daily reports', 'Báo cáo hằng ngày')]],
-    right: [['bottleneck', L('滞留を見つける', 'Spot stalled work', 'Tìm việc bị tồn')], ['checklist', L('朝のうちに対応', 'Act the same morning', 'Xử lý ngay buổi sáng')]] },
-  pr: { k: 'grid', c: 3, mc: 3, big: true, tiles: [['chat-bubbles', L('日本とベトナムをつなぐ', 'Bridging Japan and Vietnam', 'Kết nối Nhật – Việt'), '01'],
-    ['puzzle-fit', L('課題を聞き、解決まで進める', 'From client issue to solution', 'Từ vấn đề đến giải pháp'), '02'],
-    ['jd-document', L('資料を作り、教えて定着させる', 'Clear materials, lasting training', 'Tài liệu rõ, đào tạo đến nơi'), '03']] },
+  // task ye4s: bỏ 3 trang cuối tab Profile (aiops, aidash, pr) nên không còn cảnh của chúng
   // Tab Sales
   'sales-top': { k: 'grid', c: 4, mc: 2, tiles: [['roadmap', L('出張', 'Trips', 'Công tác'), L('5省13社', '5 provinces, 13 firms', '5 tỉnh, 13 công ty')],
     ['calendar', L('週次CRM会議', 'Weekly CRM meetings', 'Họp CRM hằng tuần')], ['report-chart', L('見積と訪問の集計', 'Quote and visit KPIs', 'KPI báo giá, gặp khách')],
@@ -76,7 +71,7 @@ const S = {
     left: [['workflow-gears', L('AIで要約、集計', 'AI: summaries, totals', 'AI: tóm tắt, tổng hợp')], ['jd-document', L('AIで報告書の下書き', 'AI: report drafts', 'AI: nháp báo cáo')]],
     right: [['magnifier', L('原因の分析と判断', 'Root cause, judgement', 'Phân tích, nhận định')], ['interview', L('対話とコーチ', 'Coaching members', 'Kèm cặp thành viên')]] },
 };
-const STEP = { profile: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early', 'pcai', 'aiops', 'aidash', 'pr'],
+const STEP = { profile: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early', 'pcai'],
   sales: ['sales-top', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi', 'sales-flow'] };
 const stepChip = (id) => { for (const ids of Object.values(STEP)) { const n = ids.indexOf(id); if (n >= 0) return `<span class="gx-step"><i></i><b>${String(n + 1).padStart(2, '0')}</b> / ${String(ids.length).padStart(2, '0')}</span>`; } return ''; };
 

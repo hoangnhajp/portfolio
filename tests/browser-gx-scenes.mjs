@@ -24,7 +24,7 @@ const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 let checks = 0;
 
-const TABS = { cover: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early', 'pcai', 'aiops', 'aidash', 'pr'],
+const TABS = { cover: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early', 'pcai'], // task ye4s bỏ aiops, aidash, pr
   'sales-top': ['sales-top', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi', 'sales-flow'], 'team-top': ['team-records'], 'ai-top': ['ai-people'] };
 
 // Đo 1 cảnh: phần tử nhìn thấy (đúng ngôn ngữ), độ hiện, khung, chồng lấn nhãn
@@ -177,7 +177,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-gx-scenes (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-gx-scenes: ${checks} lượt đo, 0 lỗi JS; 20 cảnh x 3 ngôn ngữ x desktop/điện thoại: vào cảnh khi cuộn tới, vòng lặp nền chạy, icon tải được, nhãn không lọt khung / không đè nhau / đúng ngôn ngữ, không tràn ngang, bộ đếm đúng số cuối, ra khỏi màn hình thì dừng, reduced-motion tĩnh`);
+    console.log(`PASS browser-gx-scenes: ${checks} lượt đo, 0 lỗi JS; 17 cảnh x 3 ngôn ngữ x desktop/điện thoại: vào cảnh khi cuộn tới, vòng lặp nền chạy, icon tải được, nhãn không lọt khung / không đè nhau / đúng ngôn ngữ, không tràn ngang, bộ đếm đúng số cuối, ra khỏi màn hình thì dừng, reduced-motion tĩnh`);
     process.exit(0);
   }, 300);
 });

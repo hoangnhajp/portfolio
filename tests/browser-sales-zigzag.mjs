@@ -24,14 +24,15 @@ const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 let checks = 0;
 
-const PROBE = `(() => {
-  const z = document.querySelector('#w-mycom [data-zz]'); const zr = z.getBoundingClientRect();
+// task pt2m: đo cả 2 workflow của #w-mycom (Sales 7 bước, HR 4 bước), bỏ qua icon <img> khi tìm nhãn, kiểm icon tải được
+const probe = (sel) => `(() => {
+  const z = document.querySelector('${sel}'); const zr = z.getBoundingClientRect();
   const ds = [...z.querySelectorAll('.zz-d')].map((d) => { const r = d.getBoundingClientRect(); return [r.left + r.width / 2 - zr.left, r.top + r.height / 2 - zr.top]; });
   const d = z.querySelector('.zz-lit').getAttribute('d') || '';
   const pts = [...d.matchAll(/(-?[\\d.]+) (-?[\\d.]+)/g)].map((m) => [+m[1], +m[2]]);
   const broken = []; const over = []; const rects = [];
   for (const t of z.querySelectorAll('.zz-t')) {
-    const sp = [...t.children].find((s) => getComputedStyle(s).display !== 'none'); if (!sp) continue;
+    const sp = [...t.children].find((s) => s.tagName === 'SPAN' && getComputedStyle(s).display !== 'none'); if (!sp) continue;
     const r = t.getBoundingClientRect(); rects.push([r.left, r.top, r.right, r.bottom, sp.textContent]);
     if (r.left < zr.left - 1 || r.right > zr.right + 1) over.push(sp.textContent);
     const n = sp.firstChild; const re = /[A-Za-zÀ-ỹ0-9][A-Za-zÀ-ỹ0-9'’-]*/g; let m;
@@ -43,9 +44,11 @@ const PROBE = `(() => {
   const logos = [...document.querySelectorAll('#career img[src^="assets/logos/"], .colg img')].map((i) => ({ s: i.getAttribute('src'), ok: i.complete && i.naturalWidth > 0 }));
   const colg = ['w-mycom', 'w-jil', 'w-it', 'w-early'].map((id) => { const s = document.getElementById(id); const c = s.querySelector('.colg').getBoundingClientRect(), e = s.querySelector('.eb').getBoundingClientRect();
     return { id, above: c.bottom <= e.top + 1, left: Math.abs(c.left - e.left) <= 2, fit: c.width <= 300 }; });
-  return { ds, pts, on: z.querySelectorAll('.zz-n.on').length, orb: +getComputedStyle(z.querySelector('.zz-orb')).opacity, broken, over, hit, logos, colg,
+  const ic = [...z.querySelectorAll('.zz-n')].map((n) => { const i = n.querySelector('.zz-ic'); return !!i && i.complete && i.naturalWidth > 0 && i.getBoundingClientRect().width >= 20; });
+  return { ds, pts, ic, on: z.querySelectorAll('.zz-n.on').length, orb: +getComputedStyle(z.querySelector('.zz-orb')).opacity, broken, over, hit, logos, colg,
     w: Math.round(zr.width), overflowX: document.documentElement.scrollWidth - innerWidth };
 })()`;
+const PROBE = probe('#w-mycom [data-zz]'), PROBE_HR = probe('#w-mycom .zz--4[data-zz]');
 
 async function main() {
   let port;
@@ -78,6 +81,7 @@ async function main() {
     await evaluate(`document.fonts.ready.then(() => 1)`);
     // đi qua 4 trang Career để logo tải (lazy) rồi dừng ở workflow
     for (const s of ['#career', '#w-jil', '#w-it', '#w-early']) await evaluate(`(document.querySelector('${s}').scrollIntoView(), new Promise((r) => setTimeout(r, 250)))`);
+    await evaluate(`(document.querySelector('#w-mycom .zz--4').scrollIntoView({block:'center'}), new Promise((r) => setTimeout(r, 600)))`);
     await evaluate(`(document.querySelector('#w-mycom [data-zz]').scrollIntoView({block:'center'}), new Promise((r) => setTimeout(r, 1200)))`);
   };
   const near = (a, b) => Math.abs(a[0] - b[0]) <= 2 && Math.abs(a[1] - b[1]) <= 2;
@@ -98,6 +102,15 @@ async function main() {
       ok(r.logos.length === 9 && r.logos.every((l) => l.ok), `${tag}: logo chưa tải được ${r.logos.filter((l) => !l.ok).map((l) => l.s).join(',')} (${r.logos.length}/9)`);
       for (const c of r.colg) ok(c.above && c.left && c.fit, `${tag}: logo #${c.id} không nằm góc trái trên dòng Career (hoặc khung bị kéo giãn)`);
       ok(r.overflowX <= 1, `${tag}: tràn ngang ${r.overflowX}px`);
+      ok(r.ic.length === 7 && r.ic.every(Boolean), `${tag}: icon Sales chưa tải / quá nhỏ ${JSON.stringify(r.ic)}`);
+      const h = await evaluate(PROBE_HR); checks++;
+      ok(h.pts.length === 4 && h.pts.every((p, i) => h.ds[i] && near(p, h.ds[i])), `${tag} HR: đường nối không qua tâm 4 chấm`);
+      const hy = h.ds.slice(1).map((p, i) => p[1] - h.ds[i][1]), hx = h.ds.slice(1).map((p, i) => p[0] - h.ds[i][0]);
+      if (h.w > 560) ok(hy.every((v, i) => Math.abs(v) > 40 && (i === 0 || Math.sign(v) !== Math.sign(hy[i - 1]))) && hx.every((v) => v > 20), `${tag} HR: khung rộng chưa zigzag ngang`);
+      else ok(hx.every((v, i) => Math.abs(v) > 20 && (i === 0 || Math.sign(v) !== Math.sign(hx[i - 1]))) && hy.every((v) => v > 20), `${tag} HR: khung hẹp chưa zigzag dọc`);
+      ok(!h.broken.length && !h.over.length && !h.hit.length, `${tag} HR: nhãn ngắt từ / tràn / đè ${[...h.broken, ...h.over, ...h.hit].slice(0, 3).join(' | ')}`);
+      ok(h.on === 4 && h.orb === 0, `${tag} HR: reduced-motion cần sáng đủ 4 bước (on ${h.on})`);
+      ok(h.ic.length === 4 && h.ic.every(Boolean), `${tag} HR: icon chưa tải / quá nhỏ ${JSON.stringify(h.ic)}`);
       if (SHOT && (w === 1280 || w === 390)) {
         const s = await send('Page.captureScreenshot', { format: 'png' });
         writeFileSync(join(SHOT, `zz-${lang}-${w}.png`), Buffer.from(s.result.data, 'base64'));
@@ -115,6 +128,11 @@ async function main() {
     m = Math.max(m, document.querySelectorAll('#w-mycom [data-zz] .zz-n.on').length);
     if (m === 7 || Date.now() - t0 > 12000) r(m); else setTimeout(tick, 100); })(); })`); checks++;
   ok(maxOn === 7, `chuyển động: hết đường cần sáng đủ 7 (tối đa ${maxOn})`);
+  await evaluate(`(document.querySelector('#w-mycom .zz--4').scrollIntoView({block:'center'}), 1)`);
+  const maxHr = await evaluate(`new Promise((r) => { let m = 0, lo = 9; const t0 = Date.now(); (function tick() {
+    const n = document.querySelectorAll('#w-mycom .zz--4 .zz-n.on').length; m = Math.max(m, n); lo = Math.min(lo, n);
+    if ((m === 4 && lo < 4) || Date.now() - t0 > 12000) r([lo, m]); else setTimeout(tick, 100); })(); })`); checks++;
+  ok(maxHr[1] === 4 && maxHr[0] < 4, `chuyển động HR: bước cần sáng dần tới đủ 4 (thấp nhất ${maxHr[0]}, cao nhất ${maxHr[1]})`);
   if (SHOT) {
     for (const s of ['#career .gx', '#w-mycom .colg', '#w-early .colg', '#w-jil .colg']) {
       await evaluate(`(document.querySelector('${s}').scrollIntoView({block:'center'}), new Promise((r) => setTimeout(r, 1500)))`);

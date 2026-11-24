@@ -17,7 +17,8 @@ const pct = (x) => `${Math.round(x * 100)}%`;
 const ja = bullets('ja'), en = bullets('en'), vi = bullets('vi');
 // task f5po: mỗi khối kinh nghiệm chỉ còn keyword + 1 câu, nên đếm >= 7 thay vì >= 20
 // task p0r6: thẻ Sales #w-mycom thành workflow zigzag (không còn câu), nên còn >= 6
-ok(ja.length >= 6 && ja.length === en.length && en.length === vi.length, `số gạch đầu dòng lệch ja/en/vi: ${ja.length}/${en.length}/${vi.length}`);
+// task pt2m: thẻ HR #w-mycom cũng thành workflow 4 bước có icon (không còn .lines), nên còn >= 5
+ok(ja.length >= 5 && ja.length === en.length && en.length === vi.length, `số gạch đầu dòng lệch ja/en/vi: ${ja.length}/${en.length}/${vi.length}`);
 const sJa = share(ja, /(ました|ます|でした)。?$/), sEn = share(en, /^(I|I'm|I’ve|I've|My|When|As|At|In|With|After|Before)\b/), sVi = share(vi, /(^|\s)(Tôi|tôi)\s/);
 ok(sJa >= 0.6, `JA: chỉ ${pct(sJa)} gạch đầu dòng là câu です・ます (cần >= 60%)`);
 ok(sEn >= 0.6, `EN: chỉ ${pct(sEn)} gạch đầu dòng nói ở ngôi thứ nhất (cần >= 60%)`);

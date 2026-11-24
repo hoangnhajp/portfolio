@@ -20,14 +20,8 @@ const AREAS = ['Quản lý kinh doanh', 'Quản lý nhân sự', 'Sales', 'Marke
 const titles = cards.map((c) => strip((c.match(/<b class="pj-co">[\s\S]*?<\/b>/) || [''])[0].replace(/<span data-l="(ja|en)">[\s\S]*?<\/span>/g, '')).trim());
 for (const a of AREAS) ok(titles.includes(a), `thiếu thẻ mảng việc "${a}" (đang: ${titles.join(' | ')})`);
 
-// 3. Mỗi thẻ mảng việc có câu kể giọng ứng viên ở cả 3 ngôn ngữ
-for (const c of cards.filter((c, i) => AREAS.includes(titles[i]))) {
-  const pt = (l) => strip((c.match(new RegExp(`<span class="pj-pt">[\\s\\S]*?<span data-l="${l}">([\\s\\S]*?)</span>`)) || ['', ''])[1]).trim();
-  const t = titles[cards.indexOf(c)];
-  ok(/^Tôi\s/.test(pt('vi')), `thẻ "${t}": câu VI cần mở đầu "Tôi"`);
-  ok(/^I\s/.test(pt('en')), `thẻ "${t}": câu EN cần mở đầu "I"`);
-  ok(/(ました|ます|でした)。$/.test(pt('ja')), `thẻ "${t}": câu JA cần です・ます`);
-}
+// 3. Task kfh1: bảng chỉ ghi TÊN mảng việc (dạng workflow), không còn câu kể / nhãn ở thẻ
+for (const [i, c] of cards.entries()) ok(!/class="pj-(pt|tags|go|role)"/.test(c), `thẻ "${titles[i]}": còn câu kể / nhãn (chỉ để tên)`);
 
 // 4. Không bịa: không hạch toán / BCTC (master-profile §9.18), không ký tự cấm
 for (const w of ['hạch toán', 'báo cáo tài chính', '仕訳', '財務諸表', 'bookkeeping', 'financial statements', 'P&L'])
@@ -35,4 +29,4 @@ for (const w of ['hạch toán', 'báo cáo tài chính', '仕訳', '財務諸�
 ok(!/[—·・•]/.test(strip(pj)), '#projects có dấu gạch dài / chấm giữa / ký hiệu đầu dòng');
 
 if (fails.length) { console.error(`FAIL check-work-areas-board (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-work-areas-board: ${cards.length} thẻ, đủ ${AREAS.length} mảng việc, 0 tên công ty, câu kể giọng ứng viên JA/EN/VI`);
+console.log(`PASS check-work-areas-board: ${cards.length} thẻ, đủ ${AREAS.length} mảng việc, 0 tên công ty, chỉ ghi tên`);

@@ -1,6 +1,5 @@
 // motion-all (task bye2) trên Chrome headless thật (CDP): phần còn tĩnh bên trong khối chuyển động như video.
-// 1) Biểu đồ #aidash: cuộn tới => mo-on, cột mọc / đường tự vẽ / chấm nảy đang chạy, chấm sáng chạy lặp; xong vào cảnh: cột đủ cỡ, đường vẽ đủ, vùng hiện;
-//    cuộn đi => mo-off, vòng lặp dừng. 2) Ảnh công tác Sales: mỗi ảnh nằm trong khung .mo-kb cùng cỡ ảnh, khung cắt tràn, Ken Burns lặp đang chạy,
+// 1) (bỏ theo task ye4s: trang #aidash có biểu đồ đã xoá). 2) Ảnh công tác Sales: mỗi ảnh nằm trong khung .mo-kb cùng cỡ ảnh, khung cắt tràn, Ken Burns lặp đang chạy,
 //    ảnh hiện rõ sau khi vào. 3) Dòng sự kiện: mục hiện đủ, chấm mốc sáng lặp. 4) Icon trong cảnh gx (thẻ nhãn / ô lưới) trôi lặp.
 // 5) Số liệu .mo-cnt đếm lên và dừng đúng số gốc. 6) 3 ngôn ngữ x 1280 / 390: không tràn ngang. 7) reduced-motion: không gắn gì, 0 animation mo*,
 //    số giữ nguyên. 8) Chế độ in: mọi phần hiện, không animation. 9) 0 lỗi JS.
@@ -69,37 +68,8 @@ async function main() {
   for (const lang of ['ja', 'en', 'vi']) {
     for (const w of [1280, 390]) {
       const T = `${lang}/${w}px`;
-      // ── 1) Biểu đồ #aidash
+      // ── 1) (task ye4s) trang #aidash có 3 biểu đồ đã bỏ khỏi tab Profile, không còn biểu đồ để đo
       await go(`${pageUrl}?lang=${lang}#cover`, w);
-      const svgs = await evaluate(`document.querySelectorAll('#aidash .ch svg.mo-arm').length`);
-      ok(svgs === 3, `${T}: #aidash cần 3 biểu đồ có motion-all (đang ${svgs})`);
-      for (let k = 0; k < svgs; k++) {
-        await evaluate(`(document.querySelectorAll('#aidash .ch svg.mo-arm')[${k}].scrollIntoView({ block: 'center', behavior: 'instant' }), 1)`); await sleep(350);
-        const a = await evaluate(`(() => { const s = document.querySelectorAll('#aidash .ch svg.mo-arm')[${k}];
-          const an = s.getAnimations({ subtree: true }).filter((x) => /^mo/.test(x.animationName || ''));
-          return { on: s.classList.contains('mo-on'), bars: s.querySelectorAll('.mo-bar').length, line: s.querySelectorAll('.mo-line').length, run: s.querySelectorAll('.mo-run').length,
-            total: an.length, running: an.filter((x) => x.playState === 'running').length }; })()`); checks++;
-        ok(a.on, `${T}: biểu đồ ${k + 1} cuộn tới mà chưa mo-on`);
-        ok(a.bars + a.line >= 1, `${T}: biểu đồ ${k + 1} không có cột / đường nào được gắn chuyển động`);
-        ok(a.running >= 2, `${T}: biểu đồ ${k + 1} animation chưa chạy (${a.running}/${a.total})`);
-        if (a.line) ok(a.run === a.line, `${T}: biểu đồ ${k + 1} thiếu chấm sáng chạy dọc đường`);
-        await evaluate(`(document.querySelectorAll('#aidash .ch svg.mo-arm')[${k}].getAnimations({ subtree: true }).forEach((x) => { if (x.effect.getTiming().iterations !== Infinity) x.finish(); else { x.pause(); x.currentTime = 0; } }), 1)`);
-        const f = await evaluate(`(() => { const s = document.querySelectorAll('#aidash .ch svg.mo-arm')[${k}];
-          const small = [...s.querySelectorAll('.mo-bar')].filter((r) => { const b = r.getBoundingClientRect(), bb = r.getBBox(), m = r.getScreenCTM(); return (s.classList.contains('mo-h') ? b.width / (bb.width * m.a) : b.height / (bb.height * m.d)) < 0.97; }).length;
-          const line = [...s.querySelectorAll('.mo-line')].map((p) => +getComputedStyle(p).strokeDashoffset.replace('px', ''));
-          const area = [...s.querySelectorAll('.mo-area')].map((p) => +getComputedStyle(p).opacity);
-          const dots = [...s.querySelectorAll('.mo-dot')].filter((c) => c.getBoundingClientRect().width < 1 && +c.getAttribute('r') > 0).length;
-          return { small, line, area, dots }; })()`); checks++;
-        ok(f.small === 0, `${T}: biểu đồ ${k + 1} còn ${f.small} cột chưa mọc đủ sau khi vào cảnh`);
-        ok(f.line.every((x) => Math.abs(x) < 0.01), `${T}: biểu đồ ${k + 1} đường chưa vẽ đủ (dashoffset ${f.line.join(',')})`);
-        ok(f.area.every((x) => x > 0.05), `${T}: biểu đồ ${k + 1} vùng dưới đường chưa hiện (${f.area.join(',')})`);
-        ok(f.dots === 0, `${T}: biểu đồ ${k + 1} còn ${f.dots} chấm chưa hiện`);
-      }
-      // Cuộn đi: biểu đồ phải mo-off, mọi animation dừng
-      await evaluate(`scrollTo({ top: 0, behavior: 'instant' })`); await sleep(350);
-      const off = await evaluate(`(() => { const s = [...document.querySelectorAll('#aidash .ch svg.mo-arm')];
-        return { off: s.filter((e) => e.classList.contains('mo-off')).length, running: s.flatMap((e) => e.getAnimations({ subtree: true })).filter((x) => /^mo/.test(x.animationName || '') && x.playState === 'running').length }; })()`); checks++;
-      ok(off.off === svgs && off.running === 0, `${T}: biểu đồ ra khỏi màn hình mà chưa dừng (off ${off.off}/${svgs}, chạy ${off.running})`);
       // ── 4) Icon cảnh gx (thẻ nhãn) trôi lặp: thử ở cảnh vòng #skillmap
       await center('#skillmap .gx'); await sleep(400);
       const gi = await evaluate(ANIMS('#skillmap .gx .gx-tag .gx-pl img')); checks++;
@@ -168,10 +138,6 @@ async function main() {
   const pr = await evaluate(`(() => { const o = ${op}; const s = [...document.querySelectorAll('.mo-kb>img,.evrow>li')].filter((e) => e.getClientRects().length);
     return { n: s.length, faint: s.filter((e) => o(e) < 0.95).length, anims: document.getAnimations().filter((x) => /^mo/.test(x.animationName || '')).length }; })()`); checks++;
   ok(pr.n >= 10 && pr.faint === 0 && pr.anims === 0, `print: phần motion-all chưa hiện tĩnh (${JSON.stringify(pr)})`);
-  await go(`${pageUrl}?lang=ja#cover`, 1280, 'no-preference', 'print');
-  const pc = await evaluate(`(() => { const b = [...document.querySelectorAll('#aidash .mo-bar')].filter((r) => r.getBoundingClientRect().width > 0.5 && r.getBoundingClientRect().height > 0.5).length;
-    return { b, all: document.querySelectorAll('#aidash .mo-bar').length, line: [...document.querySelectorAll('.mo-line')].map((p) => getComputedStyle(p).strokeDashoffset) }; })()`); checks++;
-  ok(pc.b === pc.all && pc.line.every((x) => parseFloat(x) === 0), `print: biểu đồ chưa hiện đủ khi in (${JSON.stringify(pc)})`);
 
   ok(errors.length === 0, `lỗi JS/console: ${errors.slice(0, 5).join(' | ')}`);
   ws.close();
@@ -182,7 +148,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-motion-all (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-motion-all: ${checks} lượt đo, 0 lỗi JS; 3 ngôn ngữ x 1280/390: biểu đồ tự vẽ + chấm chạy rồi dừng khi ra khỏi màn hình, 12 ảnh công tác Ken Burns trong khung cùng cỡ, dòng sự kiện sáng lặp, icon cảnh gx trôi, số đếm lên đúng số gốc, không tràn ngang; reduced-motion và bản in tĩnh`);
+    console.log(`PASS browser-motion-all: ${checks} lượt đo, 0 lỗi JS; 3 ngôn ngữ x 1280/390: 12 ảnh công tác Ken Burns trong khung cùng cỡ, dòng sự kiện sáng lặp, icon cảnh gx trôi, số đếm lên đúng số gốc, không tràn ngang; reduced-motion và bản in tĩnh`);
     process.exit(0);
   }, 300);
 });

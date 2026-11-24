@@ -198,59 +198,18 @@ nav.toc.grow{display:flex;flex-direction:column;justify-content:space-between}
 .pg[data-even]>.rv~.rv:not(.kw):not(.kw-en):not(.kwbar):not(.kw-sub){margin-top:14px}
 
 
-/* AI業務管理 section */
+/* vòng quy trình .cyc (#team-daily) */
 .cyc{display:grid;grid-template-columns:1fr 18px 1fr 18px 1fr 18px 1fr;align-items:stretch;gap:0}
 .cyc-c{padding:14px 12px}
 .cyc-c h3{font-size:13.5px;margin:4px 0 4px}
 .card .cyc-c p,.cyc-c p{font-size:11.2px;line-height:1.65}
 .cyc-n{font:700 20px 'Space Grotesk',sans-serif;color:#6d5bd0}
 .cyc-a{align-self:center;text-align:center;font:700 16px 'Space Grotesk',sans-serif;color:#6d5bd0}
-.cyc-loop{margin-top:6px;text-align:center;font:700 11px 'Noto Sans JP',sans-serif;letter-spacing:.06em;color:#6d5bd0}
-.fl{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:6px 0 12px}
-.fl::before{content:'';position:absolute;left:7%;right:7%;top:15px;height:2px;
-  background:repeating-linear-gradient(90deg,#6d5bd0 0 6px,transparent 6px 11px);animation:pmFlowX 1.2s linear infinite}
 @keyframes pmFlowX{to{background-position:11px 0}}
-.fl-step{position:relative;text-align:center}
-.fl-dot{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
-  background:#fff;border:2px solid #6d5bd0;font:700 13px 'Space Grotesk',sans-serif;color:#3b2f86}
-.fl-step:last-child .fl-dot{background:#1FB6A6;border-color:#1FB6A6;color:#fff}
-.card .fl-step p,.fl-step p{margin-top:6px;font:600 10.5px/1.45 'Noto Sans JP',sans-serif;color:#3d3849}
-.dod{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:#f3fbf9;border:1px solid #cdeee8}
-.dod b{white-space:nowrap;font:700 11.5px 'Noto Sans JP',sans-serif;color:#0f8f83}
-.dod span{font:400 11.4px/1.7 'Noto Sans JP',sans-serif;color:#3d3849}
-.rp{display:grid;grid-template-columns:44px 70px 70px 54px 1fr;gap:8px;padding:7px 0;border-bottom:1px dashed #e0dbea;
-  font:500 11.4px 'Noto Sans JP',sans-serif;color:#3d3849;align-items:center}
-.rp:last-child{border-bottom:0}
-.rp-h{font:800 9px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.12em;color:#8a83a0;border-bottom:1px solid #ece8f3}
-.rp b{font:700 12px 'Space Grotesk',sans-serif;color:#3b2f86}
-.rp em{font-style:normal;font-size:10.5px;color:#6d5bd0;font-weight:700}
-.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.kpi .card{padding:12px 14px}
-.kpi .lbl{margin-bottom:2px}
-.card .kpi .num,.kpi .num{font-size:32px}
-.ch{padding:12px 14px}
 .card .ch-t,.ch-t{font:500 10.5px 'Noto Sans JP',sans-serif;color:#8a83a0;margin:-4px 0 6px}
-.ch svg{display:block;overflow:visible}
-.ch svg g:hover rect:first-of-type,.ch svg g:hover circle{filter:brightness(1.18)}
-.st-row{display:grid;grid-template-columns:78px 50px 1fr 110px 90px 34px;gap:8px;align-items:center;padding:4px 0;
-  border-bottom:1px dashed #e0dbea;font:500 11.2px 'Noto Sans JP',sans-serif;color:#3d3849}
-.st-row:last-child{border-bottom:0}
-.st-row>b{font-weight:700;color:#16141d}
-.st-pill{display:inline-flex;align-items:center;gap:5px;padding:2px 8px 2px 3px;border:1px solid;border-radius:999px;font:700 10px 'Noto Sans JP',sans-serif;background:#fff}
-.st-pill i{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;color:#fff;font:800 9px 'Manrope',sans-serif;font-style:normal}
-.st-step{font-size:10.5px;color:#6d5bd0;font-weight:700}
-.st-days{height:8px;border-radius:4px;background:#f1eef7;overflow:hidden}
-.st-days>span{display:block;height:100%;border-radius:4px}
-.st-n{text-align:right}
 @media screen and (max-width:900px){
   .cyc{grid-template-columns:1fr}
   .cyc-a{transform:rotate(90deg);margin:2px 0}
-  .fl{grid-template-columns:repeat(4,1fr);row-gap:12px}
-  .fl::before{display:none}
-  .kpi{grid-template-columns:1fr 1fr}
-  .rp{grid-template-columns:30px 50px 44px 40px 1fr;font-size:10.5px}
-  .st-row{grid-template-columns:70px 44px 1fr;row-gap:4px}
-  .st-step,.st-days,.st-n{grid-column:auto}
 }
 
 /* Hiệu ứng xuất hiện khi cuộn tới */
@@ -296,12 +255,10 @@ html.js .pg.in .rv{animation:pmRise .82s cubic-bezier(.2,.7,.2,1) both;animation
   .kw-sub{font-size:15px;max-width:760px}
   .pg>.ft{display:none}
   [data-num]::after{display:none}
-  .g2 .ch svg{max-width:460px;margin:0 auto}
   .sb-nav a em{min-width:26px}
-  #pr>.ft{display:flex}
+  #pcai>.ft{display:flex}
   #toc{display:none}
   .wrap .pg[data-even]>.rv~.rv:not(.kw):not(.kw-en):not(.kwbar):not(.kw-sub){margin-top:22px!important}
-  .wrap .pg .cyc-loop{margin-top:10px!important}
   .g2,.g3{gap:18px}
   .card{padding:22px 24px}
   /* bìa = hero toàn màn hình */
@@ -405,7 +362,6 @@ main[hidden]{display:none!important}
 .bar>span{display:block;height:100%;background:linear-gradient(90deg,#3b2f86,#26B3F4)}
 .bar--v>span{background:linear-gradient(90deg,#0f8f83,#7ef0dd)}
 .aitab .r{text-align:right;font:600 12.5px 'Space Grotesk',sans-serif;color:#16141d}
-.ch .ax{font:600 10px 'Space Grotesk',sans-serif;fill:#8a83a0}
 .lg{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;font:600 11px 'Noto Sans JP',sans-serif;color:#5b5568}
 .lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 @media screen and (max-width:900px){.fl4{grid-template-columns:1fr 1fr}}
@@ -418,30 +374,52 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 .sk7{gap:8px}.sk7 .card{padding:10px 18px}.sk7>.card{justify-content:flex-start}html[lang="ja"] .sk7 p{word-break:auto-phrase}.sk7 .num{font-size:21px!important;line-height:1.2;margin:0}
 .sk7 .card h3{margin:2px 0 3px;font-size:14px}.sk7 .card p{line-height:1.6}
 @media print{
-  /* in A4: ảnh Sales và trang mẫu aidash vốn tràn đáy trang từ bản cũ, thu nhỏ khi in */
-  #sales-trips figure img{height:140px!important}
-  #aidash .card{padding-top:10px;padding-bottom:10px}}
-/* 03 Projects board: lưới thẻ dự án / portfolio (task 62qd) */
-.pj{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
-.pj-c{position:relative;display:flex;flex-direction:column;gap:7px;padding:16px 16px 13px;background:#fff;border:1px solid #ece8f3;border-radius:14px;
-  text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 10px 26px -22px rgba(59,47,134,.5);transition:transform .2s,box-shadow .2s,border-color .2s}
-.pj-c::before{content:'';position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,#3b2f86,#26B3F4)}
-.pj-c:nth-child(4n+2)::before{background:linear-gradient(90deg,#0f8f83,#1FB6A6)}
-.pj-c:nth-child(4n+3)::before{background:linear-gradient(90deg,#c14343,#F68209)}
-.pj-c:nth-child(4n)::before{background:linear-gradient(90deg,#0f5a8c,#26B3F4)}
-.pj-c:hover{transform:translateY(-3px);border-color:#d6cff0;box-shadow:0 18px 34px -22px rgba(59,47,134,.6)}
-.pj-top{display:flex;align-items:center;gap:8px;font:700 10px 'Manrope',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a83a0}
-.pj-top em{font:700 10.5px 'Space Grotesk',sans-serif;font-style:normal;letter-spacing:.04em;color:#fff;background:linear-gradient(90deg,#3b2f86,#6d5bd0);border-radius:999px;padding:2px 8px}
-.pj-co{font:700 14px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;letter-spacing:-.01em;color:#16141d;text-wrap:balance}
-.pj-pt{font:600 12.5px/1.55 'Noto Sans JP',sans-serif;color:#3b2f86}
-.pj-tags>span{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
-.pj-tags i{font:600 10.4px/1.3 'Noto Sans JP',sans-serif;font-style:normal;padding:4px 9px;border-radius:999px;background:#f3f0fa;border:1px solid #e5e0f1;color:#4a3f8f}
-.pj-go{margin-top:auto;padding-top:4px;font:800 9.5px 'Manrope',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#6d5bd0}
-/* task d704: 3 cột (12 thẻ = 4 hàng đều), thẻ đủ rộng cho câu kể 2 đến 3 dòng */
-@media screen and (min-width:1200px){.pj{grid-template-columns:repeat(3,1fr);gap:16px}.pj-c{padding:18px 18px 14px}}
-@media screen and (max-width:900px){.pj{grid-template-columns:1fr}}
-@media print{.pj{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.pj-c{box-shadow:none;break-inside:avoid;padding:9px 11px 8px;gap:3px}.pj-go{display:none}
-  .pj-co{font-size:12.5px}.pj-pt{font-size:10.2px;line-height:1.4}.pj-tags>span{gap:4px}.pj-tags i{font-size:8.8px;padding:2px 6px}}
+  /* in A4: ảnh Sales vốn tràn đáy trang từ bản cũ, thu nhỏ khi in */
+  #sales-trips figure img{height:140px!important}}
+/* 03 Projects (task kfh1): những việc đã làm thành workflow 4 làn, mỗi bước chỉ icon + số + tên; vệt sáng chạy dọc làn, từng bước sáng lần lượt */
+.pjf{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.pjf-ln{position:relative;padding:12px 14px 14px 16px;background:#fff;border:1px solid #ece8f3;border-radius:14px;box-shadow:0 10px 26px -22px rgba(59,47,134,.5)}
+.pjf-ln::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:14px 0 0 14px;background:linear-gradient(180deg,#3b2f86,#26B3F4)}
+.pjf-ln:nth-child(2)::before{background:linear-gradient(180deg,#0f8f83,#1FB6A6)}
+.pjf-ln:nth-child(3)::before{background:linear-gradient(180deg,#c14343,#F68209)}
+.pjf-ln:nth-child(4)::before{background:linear-gradient(180deg,#0f5a8c,#26B3F4)}
+.pjf-lb{display:flex;align-items:center;gap:8px;margin-bottom:10px;font:700 10px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a83a0}
+.pjf-lb em{font:700 10.5px 'Space Grotesk',sans-serif;font-style:normal;color:#fff;background:linear-gradient(90deg,#3b2f86,#6d5bd0);border-radius:999px;padding:2px 8px}
+.pjf-row{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
+.pjf-row>li{position:relative;min-width:0}
+/* đường nối giữa các bước (qua tâm icon) + vệt sáng chạy theo; tâm cột k = 10% - 4px + k*(100% + 10px)/5 */
+.pjf-row::before{content:'';position:absolute;top:22px;left:calc(10% - 4px);width:calc((var(--pjn) - 1)*(100% + 10px)/5);height:2px;background:repeating-linear-gradient(90deg,#d6cff0 0 6px,transparent 6px 11px)}
+.pjf-row::after{content:'';position:absolute;top:19px;left:calc(10% - 8px);width:8px;height:8px;border-radius:50%;background:#F68209;box-shadow:0 0 0 4px rgba(246,130,9,.18);opacity:0;pointer-events:none;z-index:1}
+.pjf-row>li+li::before{content:'';position:absolute;top:18px;left:-10px;width:7px;height:7px;border-top:2px solid #8a7fd0;border-right:2px solid #8a7fd0;transform:rotate(45deg);z-index:1}
+.pjf-row .pj-c{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;text-decoration:none;color:inherit;padding:0 2px;border-radius:12px;transition:transform .2s}
+.pjf-row .pj-c:hover{transform:translateY(-3px)}
+.pjf-ic{flex:none;position:relative;z-index:2;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#f3f0fa;border:1px solid #e5e0f1;transition:box-shadow .2s}
+.pjf-ic img{width:32px;height:32px;object-fit:contain}
+.pjf-row .pj-c:focus-visible{outline:2px solid #6d5bd0;outline-offset:3px}
+.pjf-row .pj-c:hover .pjf-ic,.pjf-row .pj-c:focus-visible .pjf-ic{box-shadow:0 0 0 4px rgba(109,91,208,.25)}
+.pjf-no{font:700 9.5px 'Space Grotesk',sans-serif;font-style:normal;letter-spacing:.06em;color:#6d5bd0}
+.pjf-row .pj-co{font:700 12px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;letter-spacing:-.01em;color:#16141d;text-wrap:balance;overflow-wrap:normal}
+/* animation: bước hiện lần lượt khi khối vào khung nhìn; sau đó vệt sáng chạy dọc làn và icon sáng lần lượt (lặp) */
+html.js .pg.in .pjf-row>li,html.sr .rv.sr-in .pjf-row>li{animation:pjfIn .55s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--l,0)*.15s + var(--i,0)*.12s + .2s)}
+html.js .pg.in .pjf-row::after,html.sr .rv.sr-in .pjf-row::after{animation:pjfRun calc(var(--pjn)*.8s) linear infinite;animation-delay:calc(var(--l,0)*.4s + 1s)}
+html.js .pg.in .pjf-ic,html.sr .rv.sr-in .pjf-ic{animation:pjfHi calc(var(--pjn)*.8s) ease-in-out infinite;animation-delay:calc(var(--l,0)*.4s + 1s + var(--i,0)*var(--pjn)*.8s/(var(--pjn) - 1))}
+@keyframes pjfIn{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes pjfRun{0%{opacity:0;left:calc(10% - 8px)}8%,92%{opacity:1}100%{opacity:0;left:calc(10% - 8px + (var(--pjn) - 1)*(100% + 10px)/5)}}
+@keyframes pjfRunV{0%{opacity:0;top:19px}8%,92%{opacity:1}100%{opacity:0;top:calc(100% - 27px)}}
+@keyframes pjfHi{0%,34%,100%{background:#f3f0fa;border-color:#e5e0f1;box-shadow:0 0 0 0 rgba(246,130,9,0)}8%,22%{background:#fff4e6;border-color:#F68209;box-shadow:0 0 0 5px rgba(246,130,9,.16)}}
+/* màn hẹp: làn thành danh sách dọc, đường nối dọc qua tâm icon */
+@media screen and (max-width:700px){
+  .pjf-row{grid-template-columns:1fr;gap:6px}
+  .pjf-row::before{top:23px;bottom:23px;left:22px;width:2px;height:auto;background:repeating-linear-gradient(180deg,#d6cff0 0 6px,transparent 6px 11px)}
+  .pjf-row::after{left:19px}
+  html.js .pg.in .pjf-row::after,html.sr .rv.sr-in .pjf-row::after{animation-name:pjfRunV}
+  .pjf-row>li+li::before{display:none}
+  .pjf-row .pj-c{flex-direction:row;text-align:left;gap:10px;padding:0}
+  .pjf-no{min-width:18px}.pjf-row .pj-co{font-size:12.5px}
+}
+@media (prefers-reduced-motion:reduce){.pjf *,.pjf *::before,.pjf *::after{animation:none!important;transition:none!important}.pjf-row::after{display:none}}
+@media print{.pjf{gap:6px;margin-top:12px}.pjf-ln{box-shadow:none;break-inside:avoid;padding:7px 10px 8px}.pjf-row::after{display:none}.pjf-row>li,.pjf-ic{animation:none!important;opacity:1!important}
+  .pjf-ic{width:34px;height:34px}.pjf-ic img{width:24px;height:24px}.pjf-row::before{top:16px}.pjf-row>li+li::before{top:12px}.pjf-row .pj-co{font-size:10.5px}}
 </style>
 <!-- lp-slide-css:start -->
 <style id="lp-slide-css">
@@ -604,6 +582,16 @@ html.sr .pg>.sr.sr-in{opacity:1;transform:none}
 .colg{display:inline-flex;align-self:flex-start;width:max-content;max-width:100%;box-sizing:border-box;align-items:center;gap:18px;margin:0 0 14px;padding:10px 16px;border-radius:14px;background:#fff;border:1px solid #ece8f3;box-shadow:0 1px 2px rgba(15,23,42,.06),0 10px 24px -14px rgba(27,127,176,.35)}
 .colg img{display:block;width:auto;height:26px;max-width:220px}
 .colg img[src*="jilnesta"]{height:32px}
+/* task nu9w: 5 kỹ năng đạt được ở JILNESTA (#w-jil), số thứ tự cam, từng dòng hiện lần lượt */
+.jil-sk{list-style:none;counter-reset:sk;margin:10px 0 0;padding:0;display:grid;gap:7px}
+.jil-sk li{counter-increment:sk;display:flex;align-items:center;gap:10px;padding:7px 12px 7px 8px;border-radius:12px;background:linear-gradient(90deg,#fff4ec,#fff 70%);border:1px solid #fbd9c0;font:600 12.6px/1.45 'Noto Sans JP',sans-serif;color:#2a2438}
+.jil-sk li::before{content:counter(sk,decimal-leading-zero);flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:#F47E2A;color:#fff;font:700 11px 'Space Grotesk',sans-serif}
+html.js .pg.in .jil-sk li,html.sr .rv.sr-in .jil-sk li{animation:jilSk .5s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--n,0)*.12s + .2s)}
+.jil-sk li:nth-child(2){--n:1}.jil-sk li:nth-child(3){--n:2}.jil-sk li:nth-child(4){--n:3}.jil-sk li:nth-child(5){--n:4}
+#w-jil .g2{grid-template-columns:1fr}
+@media (min-width:601px){#w-jil .jil-sk{grid-template-columns:1fr 1fr}#w-jil .jil-sk li:last-child{grid-column:1/-1}}
+@keyframes jilSk{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.jil-sk li{animation:none!important}}
 .colg img[src*="lienviet"]{height:44px}
 .zz{--zz-or:#F47E2A;--zz-bl:#25A1DB;position:relative;container-type:inline-size;margin:14px 0 2px}
 .zz-svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
@@ -633,6 +621,17 @@ html.sr .pg>.sr.sr-in{opacity:1;transform:none}
   .zz-n:nth-child(even){margin-left:20%}
   .zz-t{width:auto;flex:1;margin:0;text-align:left}
 }
+/* task pt2m: trang 06 (#w-mycom) giải thích bằng workflow + icon: icon 3D trên mỗi bước (bật lên khi cục sáng chạm), câu dẫn 1 dòng, workflow 4 bước cho thẻ HR */
+.zz-lead{margin:6px 0 0;font:500 13.5px/1.6 'Noto Sans JP','Manrope',sans-serif;color:#475569}
+.zz-ic{display:block;width:34px;height:34px;margin:0 auto 5px;object-fit:contain;transform:scale(.86);opacity:.72;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .35s}
+.zz-n.on .zz-ic{transform:scale(1.08) translateY(-2px);opacity:1}
+.zz--4 .zz-list{grid-template-columns:repeat(5,minmax(0,1fr))}
+.zz--4 .zz-n:nth-child(1){grid-column:1/3}.zz--4 .zz-n:nth-child(2){grid-column:2/4}.zz--4 .zz-n:nth-child(3){grid-column:3/5}.zz--4 .zz-n:nth-child(4){grid-column:4/6}
+@container (max-width:560px){
+  .zz-t{display:flex;align-items:center;gap:8px}
+  .zz-ic{width:28px;height:28px;margin:0;flex:none}
+}
+@media (prefers-reduced-motion:reduce){.zz-ic,.zz-n.on .zz-ic{transition:none;transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.zz-d,.zz-t,.zz-orb{transition:none}}
 @media print{.zz-orb{display:none}}
 </style>
@@ -971,9 +970,6 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
       <a href="#w-it" data-sec="w-it"><em>08</em><span data-l="ja">JILNESTA IT</span><span data-l="en">JILNESTA IT</span><span data-l="vi">JILNESTA IT</span></a>
       <a href="#w-early" data-sec="w-early"><em>09</em><span data-l="ja">Isuzu、銀行</span><span data-l="en">Isuzu, bank</span><span data-l="vi">Isuzu, ngân hàng</span></a>
       <a href="#pcai" data-sec="pcai"><em>10</em><span data-l="ja">語学、PC、AI</span><span data-l="en">Languages, PC, AI</span><span data-l="vi">Ngoại ngữ, tin học, AI</span></a>
-      <a href="#aiops" data-sec="aiops"><em>11</em><span data-l="ja">AI業務管理</span><span data-l="en">AI management</span><span data-l="vi">Quản lý bằng AI</span></a>
-      <a href="#aidash" data-sec="aidash"><em>12</em><span data-l="ja">AIダッシュボード</span><span data-l="en">AI dashboard</span><span data-l="vi">Dashboard AI</span></a>
-      <a href="#pr" data-sec="pr"><em>13</em><span data-l="ja">自己PR</span><span data-l="en">Self PR</span><span data-l="vi">Giới thiệu bản thân</span></a>
     </nav>
     <nav class="sb-nav" data-for="sales" hidden>
       <a href="#sales-top" data-sec="sales-top"><em>TOP</em><span>概要</span></a>
@@ -1069,12 +1065,9 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
     <a href="#w-it"><em>08</em><b>JILNESTA</b><span><span data-l="ja">ITコミュニケーター</span><span data-l="en">IT communicator</span><span data-l="vi">IT communicator</span></span></a>
     <a href="#w-early"><em>09</em><b>Isuzu Vietnam ／ LienViet Post Bank</b><span><span data-l="ja">初期の経歴</span><span data-l="en">Early career</span><span data-l="vi">Giai đoạn đầu</span></span></a>
     <a href="#pcai"><em>10</em><b><span data-l="ja">語学、PC、AIスキル</span><span data-l="en">Languages, PC and AI skills</span><span data-l="vi">Ngoại ngữ, tin học, AI</span></b><span>Skills</span></a>
-    <a href="#aiops"><em>11</em><b><span data-l="ja">AIを活用したチームの業務管理</span><span data-l="en">Team management with AI</span><span data-l="vi">Quản lý công việc nhóm bằng AI</span></b><span>AI Management</span></a>
-    <a href="#aidash"><em>12</em><b><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b><span>AI Dashboard</span></a>
-    <a href="#pr"><em>13</em><b><span data-l="ja">自己PR　3つの強み</span><span data-l="en">Self PR: three strengths</span><span data-l="vi">Giới thiệu bản thân: 3 điểm mạnh</span></b><span>Self PR</span></a>
   </nav>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>01 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>01 ／ 10</p></div>
 </section>
 
 <!-- ═══════ 02 プロフィール ═══════ -->
@@ -1083,7 +1076,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja"><i>タイ チャン ホアン ニャ</i></span><span data-l="en"><i>Thai Tran Hoang Nha</i></span><span data-l="vi"><i>Thái Trần Hoàng Nhã</i></span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">法人営業、営業管理、ITコミュニケーション、人事の実務経験</span><span data-l="en">I have worked across B2B sales, sales management, IT communication and HR</span><span data-l="vi">Tôi đã làm kinh doanh B2B, quản lý kinh doanh, IT communicator và nhân sự</span></span>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
-  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>01</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">B2B営業</span><span data-l="en">B2B sales</span><span data-l="vi">Bán hàng B2B</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業管理</span><span data-l="en">Sales management</span><span data-l="vi">Quản lý kinh doanh</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/briefcase.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o"><span data-l="ja">日系企業で約11年</span><span data-l="en">About 11 years at Japanese firms</span><span data-l="vi">Khoảng 11 năm ở công ty Nhật</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ITコミュニケーター</span><span data-l="en">IT communication</span><span data-l="vi">Cầu nối IT</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b></span></div></div></figure>
+  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>01</b> / 09</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">B2B営業</span><span data-l="en">B2B sales</span><span data-l="vi">Bán hàng B2B</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業管理</span><span data-l="en">Sales management</span><span data-l="vi">Quản lý kinh doanh</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/briefcase.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o"><span data-l="ja">日系企業で約11年</span><span data-l="en">About 11 years at Japanese firms</span><span data-l="vi">Khoảng 11 năm ở công ty Nhật</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ITコミュニケーター</span><span data-l="en">IT communication</span><span data-l="vi">Cầu nối IT</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b></span></div></div></figure>
 
   <div class="rv" style="--d:140ms">
     <div class="card" style="display:flex;flex-direction:column;justify-content:center">
@@ -1157,105 +1150,49 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>02 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>02 ／ 10</p></div>
 </section>
 
 <!-- 03 Projects board: bảng dự án / portfolio, mỗi thẻ dẫn tới trang chi tiết -->
 <section class="pg" data-chap="V" data-num="03" id="projects">
   <div class="deco dots" style="right:48px;top:52px"></div>
   <p class="eb rv">Projects <b>／ Portfolio</b></p>
-  <p class="kw-sub rv" style="--d:80ms"><span data-l="ja">これまでの経験を業務分野ごとに整理しました。各カードから詳細をご覧いただけます。</span><span data-l="en">I have grouped my experience by area of work. Open any card for details.</span><span data-l="vi">Tôi sắp xếp kinh nghiệm theo từng mảng việc. Anh/chị có thể mở từng thẻ để xem chi tiết phần mình quan tâm.</span></p>
+  <p class="kw-sub rv" style="--d:80ms"><span data-l="ja">これまでの仕事を、業務の流れに沿って並べました。</span><span data-l="en">My work so far, laid out as a workflow.</span><span data-l="vi">Những việc tôi đã làm, xếp theo dòng công việc.</span></p>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
-  <figure class="gx gx--grid gx--chips" aria-hidden="true"><span class="gx-step"><i></i><b>02</b> / 12</span><div class="gx-in" style="--c:4;--mc:2"><div class="gx-tile" style="--i:0"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">管理</span><span data-l="en">Management</span><span data-l="vi">Quản lý</span></b></div><div class="gx-tile" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Kinh doanh</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">マーケティング</span><span data-l="en">Marketing</span><span data-l="vi">Marketing</span></b></div><div class="gx-tile" style="--i:3"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></b></div><div class="gx-tile" style="--i:4"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">業務調整</span><span data-l="en">Operations</span><span data-l="vi">Điều phối</span></b></div><div class="gx-tile" style="--i:5"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b></div><div class="gx-tile" style="--i:6"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">語学</span><span data-l="en">Languages</span><span data-l="vi">Ngoại ngữ</span></b></div><div class="gx-tile" style="--i:7"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AI活用</span><span data-l="en">AI projects</span><span data-l="vi">Dự án AI</span></b></div></div></figure>
+  <figure class="gx gx--grid gx--chips" aria-hidden="true"><span class="gx-step"><i></i><b>02</b> / 09</span><div class="gx-in" style="--c:4;--mc:2"><div class="gx-tile" style="--i:0"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">管理</span><span data-l="en">Management</span><span data-l="vi">Quản lý</span></b></div><div class="gx-tile" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Kinh doanh</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">マーケティング</span><span data-l="en">Marketing</span><span data-l="vi">Marketing</span></b></div><div class="gx-tile" style="--i:3"><span class="gx-pl"><img src="assets/gx/report-chart.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></b></div><div class="gx-tile" style="--i:4"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">業務調整</span><span data-l="en">Operations</span><span data-l="vi">Điều phối</span></b></div><div class="gx-tile" style="--i:5"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b></div><div class="gx-tile" style="--i:6"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">語学</span><span data-l="en">Languages</span><span data-l="vi">Ngoại ngữ</span></b></div><div class="gx-tile" style="--i:7"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AI活用</span><span data-l="en">AI projects</span><span data-l="vi">Dự án AI</span></b></div></div></figure>
 
-  <div class="pj rv" style="--d:140ms">
-    <a class="pj-c" href="#w-jil">
-      <span class="pj-top"><em>01</em><span data-l="ja">管理</span><span data-l="en">Management</span><span data-l="vi">Quản lý</span></span>
-      <b class="pj-co"><span data-l="ja">営業管理</span><span data-l="en">Sales management</span><span data-l="vi">Quản lý kinh doanh</span></b>
-      <span class="pj-pt"><span data-l="ja">営業プロセスを一から作り、KPIでチームを運営しました。</span><span data-l="en">I built the sales process from scratch and ran the team on KPIs.</span><span data-l="vi">Tôi xây dựng quy trình kinh doanh từ đầu, quản lý đội bằng KPI.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>部下5～6名</i><i>約27名の拠点</i></span><span data-l="en"><i>5 to 6 direct reports</i><i>Branch of about 27 staff</i></span><span data-l="vi"><i>5 đến 6 cấp dưới</i><i>Chi nhánh khoảng 27 người</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#w-mycom">
-      <span class="pj-top"><em>02</em><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></span>
-      <b class="pj-co"><span data-l="ja">人事管理</span><span data-l="en">HR management</span><span data-l="vi">Quản lý nhân sự</span></b>
-      <span class="pj-pt"><span data-l="ja">人事チームを1名から5名に拡充し、給与と研修を統括しました。</span><span data-l="en">I grew the HR team from one to five and ran payroll and training.</span><span data-l="vi">Tôi mở rộng đội Nhân sự từ 1 lên 5 người, quản lý lương và đào tạo.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>人事部長</i><i>報連相の研修</i></span><span data-l="en"><i>Head of HR</i><i>Horenso training</i></span><span data-l="vi"><i>Trưởng phòng Nhân sự</i><i>Đào tạo Horenso</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#sales-top">
-      <span class="pj-top"><em>03</em><span data-l="ja">営業</span><span data-l="en">Business</span><span data-l="vi">Kinh doanh</span></span>
-      <b class="pj-co"><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Sales</span></b>
-      <span class="pj-pt"><span data-l="ja">顧客の課題を聞き、提案から契約締結までを担当しました。</span><span data-l="en">I met clients, proposed solutions and saw each deal through to contract.</span><span data-l="vi">Tôi gặp khách, đề xuất giải pháp và theo sát đến khi chốt hợp đồng.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>見積、提案書</i><i>価格交渉</i></span><span data-l="en"><i>Quotes and proposals</i><i>Price negotiation</i></span><span data-l="vi"><i>Báo giá, đề xuất</i><i>Đàm phán giá</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#w-jil">
-      <span class="pj-top"><em>04</em><span data-l="ja">営業</span><span data-l="en">Business</span><span data-l="vi">Kinh doanh</span></span>
-      <b class="pj-co"><span data-l="ja">マーケティング</span><span data-l="en">Marketing</span><span data-l="vi">Marketing</span></b>
-      <span class="pj-pt"><span data-l="ja">3か国語の会社案内を作り、テレセールスで新規開拓しました。</span><span data-l="en">I made a company profile in three languages and ran telesales for new clients.</span><span data-l="vi">Tôi làm hồ sơ công ty 3 thứ tiếng và quản lý đội telesales tìm khách mới.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>営業資料</i><i>テレセールス</i></span><span data-l="en"><i>Sales materials</i><i>Telesales</i></span><span data-l="vi"><i>Tài liệu bán hàng</i><i>Telesales</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#w-jil">
-      <span class="pj-top"><em>05</em><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></span>
-      <b class="pj-co"><span data-l="ja">事業分析</span><span data-l="en">Business analysis</span><span data-l="vi">Phân tích kinh doanh</span></b>
-      <span class="pj-pt"><span data-l="ja">営業KPIを追い、低下時は原因を探って目標を見直しました。</span><span data-l="en">I tracked sales KPIs and, when they fell, found the cause and reset targets.</span><span data-l="vi">Tôi theo dõi KPI kinh doanh, KPI giảm thì tìm nguyên nhân và chỉnh mục tiêu.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>契約転換率</i><i>改善提案</i></span><span data-l="en"><i>Conversion rates</i><i>Kaizen proposals</i></span><span data-l="vi"><i>Tỷ lệ chốt hợp đồng</i><i>Đề xuất cải tiến</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#w-mycom">
-      <span class="pj-top"><em>06</em><span data-l="ja">分析</span><span data-l="en">Analysis</span><span data-l="vi">Phân tích</span></span>
-      <b class="pj-co"><span data-l="ja">市場調査</span><span data-l="en">Market research</span><span data-l="vi">Nghiên cứu thị trường</span></b>
-      <span class="pj-pt"><span data-l="ja">全国の冷蔵倉庫市場を調べ、新設計画をいち早く把握しました。</span><span data-l="en">I researched the cold storage market nationwide to spot new projects early.</span><span data-l="vi">Tôi nghiên cứu thị trường kho lạnh ba miền, sớm tìm ra dự án xây mới.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>入札情報</i><i>案件リスト</i></span><span data-l="en"><i>Tender news</i><i>Lead list</i></span><span data-l="vi"><i>Tin đấu thầu</i><i>Danh sách cơ hội</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#w-mycom">
-      <span class="pj-top"><em>07</em><span data-l="ja">運営</span><span data-l="en">Operations</span><span data-l="vi">Vận hành</span></span>
-      <b class="pj-co"><span data-l="ja">報告、受注、納期調整</span><span data-l="en">Reporting and order coordination</span><span data-l="vi">Báo cáo và điều phối đơn hàng</span></b>
-      <span class="pj-pt"><span data-l="ja">生産と納期を管理し、遅延リスクを本社へ毎週報告しました。</span><span data-l="en">I tracked production and delivery and reported delay risks to head office weekly.</span><span data-l="vi">Tôi theo dõi sản xuất, giao hàng và báo rủi ro chậm trễ với trụ sở hằng tuần.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>納期管理</i><i>保証、トラブル対応</i></span><span data-l="en"><i>Delivery schedules</i><i>Warranty and issues</i></span><span data-l="vi"><i>Tiến độ giao hàng</i><i>Bảo hành, sự cố</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#w-mycom">
-      <span class="pj-top"><em>08</em><span data-l="ja">数字</span><span data-l="en">Numbers</span><span data-l="vi">Số liệu</span></span>
-      <b class="pj-co"><span data-l="ja">コストと利益の計算</span><span data-l="en">Cost and profit calculation</span><span data-l="vi">Tính toán chi phí và lợi nhuận</span></b>
-      <span class="pj-pt"><span data-l="ja">部門の利益を算出し、経理と数値を照合しました。</span><span data-l="en">I calculated department profit and reconciled the figures with accounting.</span><span data-l="vi">Tôi tính lợi nhuận của phòng và đối chiếu số liệu với phòng Kế toán.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>計画と実績の比較</i><i>相見積で業者選定</i></span><span data-l="en"><i>Plan vs actual</i><i>Supplier quotes</i></span><span data-l="vi"><i>Kế hoạch so với thực tế</i><i>So sánh báo giá</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#w-mycom">
-      <span class="pj-top"><em>09</em><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></span>
-      <b class="pj-co"><span data-l="ja">採用と社内活性化</span><span data-l="en">Recruitment and internal marketing</span><span data-l="vi">Tuyển dụng và marketing nội bộ</span></b>
-      <span class="pj-pt"><span data-l="ja">IT人材から工場スタッフまで採用し、社内行事も企画しました。</span><span data-l="en">I hired everyone from IT engineers to plant staff and ran company events.</span><span data-l="vi">Tôi tuyển từ kỹ sư IT tới nhân viên nhà máy và tổ chức sự kiện nội bộ.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>採用担当2名を育成</i><i>採用KPI</i></span><span data-l="en"><i>Trained 2 recruiters</i><i>Hiring metrics</i></span><span data-l="vi"><i>Đào tạo 2 tuyển dụng viên</i><i>Chỉ số tuyển dụng</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#w-it">
-      <span class="pj-top"><em>10</em><span data-l="ja">語学</span><span data-l="en">Languages</span><span data-l="vi">Ngôn ngữ</span></span>
-      <b class="pj-co"><span data-l="ja">通訳と日本人社長への報告</span><span data-l="en">Interpreting and reporting to Japanese CEOs</span><span data-l="vi">Thông dịch và báo cáo CEO, giám đốc người Nhật</span></b>
-      <span class="pj-pt"><span data-l="ja">会議通訳と翻訳を担い、日本人社長へ直接報告しました。</span><span data-l="en">I interpreted, translated and reported to Japanese CEOs in Japanese.</span><span data-l="vi">Tôi phiên dịch, dịch tài liệu và báo cáo thẳng cho CEO người Nhật.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>日本語N2</i><i>議事録</i></span><span data-l="en"><i>Japanese N2</i><i>Meeting minutes</i></span><span data-l="vi"><i>Tiếng Nhật N2</i><i>Biên bản họp</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#aiops">
-      <span class="pj-top"><em>AI</em><span data-l="ja">AIの取り組み</span><span data-l="en">AI project</span><span data-l="vi">Dự án AI</span></span>
-      <b class="pj-co"><span data-l="ja">AIを活用したチームの業務管理</span><span data-l="en">Team management with AI</span><span data-l="vi">Quản lý công việc nhóm bằng AI</span></b>
-      <span class="pj-pt"><span data-l="ja">業務の流れを定め、数字で可視化する。</span><span data-l="en">Workflows defined and made visible in numbers.</span><span data-l="vi">Xây dựng quy trình, theo dõi bằng số liệu.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>工程の標準化</i><i>Claudeで分析</i></span><span data-l="en"><i>Standard process</i><i>Analysis with Claude</i></span><span data-l="vi"><i>Chuẩn hóa quy trình</i><i>Phân tích bằng Claude</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-    <a class="pj-c" href="#aidash">
-      <span class="pj-top"><em>AI</em><span data-l="ja">AIの取り組み</span><span data-l="en">AI project</span><span data-l="vi">Dự án AI</span></span>
-      <b class="pj-co"><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b>
-      <span class="pj-pt"><span data-l="ja">どこで止まっているかを、毎朝ひと目で。</span><span data-l="en">Bottlenecks visible every morning.</span><span data-l="vi">Mỗi sáng, nhìn là biết việc kẹt ở đâu.</span></span>
-      <span class="pj-tags"><span data-l="ja"><i>完了率</i><i>ボトルネック</i></span><span data-l="en"><i>Completion rate</i><i>Bottleneck</i></span><span data-l="vi"><i>Tỷ lệ hoàn thành</i><i>Điểm nghẽn</i></span></span>
-      <span class="pj-go"><span data-l="ja">詳しく見る →</span><span data-l="en">View details →</span><span data-l="vi">Xem chi tiết →</span></span>
-    </a>
-  </div>
+  <div class="pjf rv" style="--d:140ms">
+    <div class="pjf-ln" style="--pjn:5;--l:0"><b class="pjf-lb"><em>A</em><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Kinh doanh</span></b>
+      <ol class="pjf-row">
+        <li style="--i:0"><a class="pj-c" href="#w-mycom"><span class="pjf-ic"><img src="assets/gx/magnifier.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">01</em><b class="pj-co"><span data-l="ja">市場調査</span><span data-l="en">Market research</span><span data-l="vi">Nghiên cứu thị trường</span></b></a></li>
+        <li style="--i:1"><a class="pj-c" href="#w-jil"><span class="pjf-ic"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">02</em><b class="pj-co"><span data-l="ja">マーケティング</span><span data-l="en">Marketing</span><span data-l="vi">Marketing</span></b></a></li>
+        <li style="--i:2"><a class="pj-c" href="#sales-top"><span class="pjf-ic"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">03</em><b class="pj-co"><span data-l="ja">営業</span><span data-l="en">Sales</span><span data-l="vi">Sales</span></b></a></li>
+        <li style="--i:3"><a class="pj-c" href="#w-jil"><span class="pjf-ic"><img src="assets/gx/report-chart.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">04</em><b class="pj-co"><span data-l="ja">事業分析</span><span data-l="en">Business analysis</span><span data-l="vi">Phân tích kinh doanh</span></b></a></li>
+        <li style="--i:4"><a class="pj-c" href="#w-jil"><span class="pjf-ic"><img src="assets/gx/manager.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">05</em><b class="pj-co"><span data-l="ja">営業管理</span><span data-l="en">Sales management</span><span data-l="vi">Quản lý kinh doanh</span></b></a></li>
+      </ol>
+    </div>
+    <div class="pjf-ln" style="--pjn:3;--l:1"><b class="pjf-lb"><em>B</em><span data-l="ja">運営</span><span data-l="en">Operations</span><span data-l="vi">Vận hành</span></b>
+      <ol class="pjf-row">
+        <li style="--i:0"><a class="pj-c" href="#w-mycom"><span class="pjf-ic"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">06</em><b class="pj-co"><span data-l="ja">報告、受注、納期調整</span><span data-l="en">Reporting and order coordination</span><span data-l="vi">Báo cáo và điều phối đơn hàng</span></b></a></li>
+        <li style="--i:1"><a class="pj-c" href="#w-mycom"><span class="pjf-ic"><img src="assets/gx/milestone-report.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">07</em><b class="pj-co"><span data-l="ja">コストと利益の計算</span><span data-l="en">Cost and profit calculation</span><span data-l="vi">Tính toán chi phí và lợi nhuận</span></b></a></li>
+        <li style="--i:2"><a class="pj-c" href="#w-it"><span class="pjf-ic"><img src="assets/gx/chat-bubbles.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">08</em><b class="pj-co"><span data-l="ja">通訳と日本人社長への報告</span><span data-l="en">Interpreting and reporting to Japanese CEOs</span><span data-l="vi">Thông dịch và báo cáo CEO, giám đốc người Nhật</span></b></a></li>
+      </ol>
+    </div>
+    <div class="pjf-ln" style="--pjn:2;--l:2"><b class="pjf-lb"><em>C</em><span data-l="ja">人事</span><span data-l="en">HR</span><span data-l="vi">Nhân sự</span></b>
+      <ol class="pjf-row">
+        <li style="--i:0"><a class="pj-c" href="#w-mycom"><span class="pjf-ic"><img src="assets/gx/interview.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">09</em><b class="pj-co"><span data-l="ja">採用と社内活性化</span><span data-l="en">Recruitment and internal marketing</span><span data-l="vi">Tuyển dụng và marketing nội bộ</span></b></a></li>
+        <li style="--i:1"><a class="pj-c" href="#w-mycom"><span class="pjf-ic"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">10</em><b class="pj-co"><span data-l="ja">人事管理</span><span data-l="en">HR management</span><span data-l="vi">Quản lý nhân sự</span></b></a></li>
+      </ol>
+    </div>
+    <div class="pjf-ln" style="--pjn:2;--l:3"><b class="pjf-lb"><em>D</em><span data-l="ja">AIの取り組み</span><span data-l="en">AI projects</span><span data-l="vi">Dự án AI</span></b>
+      <ol class="pjf-row">
+        <li style="--i:0"><a class="pj-c" href="#team-daily"><span class="pjf-ic"><img src="assets/gx/lightbulb.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">AI</em><b class="pj-co"><span data-l="ja">AIでチームの業務管理</span><span data-l="en">Team management with AI</span><span data-l="vi">Quản lý công việc nhóm bằng AI</span></b></a></li>
+        <li style="--i:1"><a class="pj-c" href="#ai-uses"><span class="pjf-ic"><img src="assets/gx/bottleneck.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">AI</em><b class="pj-co"><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b></a></li>
+      </ol>
+    </div>
+  </div><!-- /pjf -->
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>03 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>03 ／ 10</p></div>
 </section>
 
 <!-- ═══════ 04 スキル ═══════ -->
@@ -1264,7 +1201,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <p class="eb rv">Skills <b>／ 活かせる経験、知識、スキル</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">仕事に活きる<i>10のスキル</i></span><span data-l="en">My <i>ten skills</i></span><span data-l="vi"><i>10 kỹ năng</i> của tôi</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
-  <figure class="gx gx--ring" aria-hidden="true"><span class="gx-step"><i></i><b>03</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">法人顧客対応</span><span data-l="en">B2B client work</span><span data-l="vi">Khách doanh nghiệp</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ITプロジェクト</span><span data-l="en">IT projects</span><span data-l="vi">Dự án IT</span></b></span></div><div class="gx-core"><span class="gx-orb gx-orb--ring"><svg viewBox="0 0 120 120"><circle class="gx-rt" cx="60" cy="60" r="52"/><circle class="gx-rf" pathLength="100" cx="60" cy="60" r="52" style="stroke-dashoffset:0"/></svg><span class="gx-val"><span class="gx-vn"><b class="gx-num" style="--v:10"></b></span></span></span><b class="gx-unit"><span data-l="ja">のスキル</span><span data-l="en">skills</span><span data-l="vi">kỹ năng</span></b></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">チーム管理</span><span data-l="en">Team management</span><span data-l="vi">Quản lý đội</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AI活用</span><span data-l="en">Using AI</span><span data-l="vi">Ứng dụng AI</span></b></span></div></div></figure>
+  <figure class="gx gx--ring" aria-hidden="true"><span class="gx-step"><i></i><b>03</b> / 09</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">法人顧客対応</span><span data-l="en">B2B client work</span><span data-l="vi">Khách doanh nghiệp</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ITプロジェクト</span><span data-l="en">IT projects</span><span data-l="vi">Dự án IT</span></b></span></div><div class="gx-core"><span class="gx-orb gx-orb--ring"><svg viewBox="0 0 120 120"><circle class="gx-rt" cx="60" cy="60" r="52"/><circle class="gx-rf" pathLength="100" cx="60" cy="60" r="52" style="stroke-dashoffset:0"/></svg><span class="gx-val"><span class="gx-vn"><b class="gx-num" style="--v:10"></b></span></span></span><b class="gx-unit"><span data-l="ja">のスキル</span><span data-l="en">skills</span><span data-l="vi">kỹ năng</span></b></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">チーム管理</span><span data-l="en">Team management</span><span data-l="vi">Quản lý đội</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">AI活用</span><span data-l="en">Using AI</span><span data-l="vi">Ứng dụng AI</span></b></span></div></div></figure>
 
   <div class="g2 rv grow sk7" style="--d:140ms">
     <div class="card"><p class="num" style="font-size:26px;color:#c14343">01</p>
@@ -1319,7 +1256,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
     </div>
   </div>
 
-  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>04 ／ 13</p></div>
+  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>04 ／ 10</p></div>
 </section>
 
 <!-- ═══════ 05 学歴、職歴 ═══════ -->
@@ -1327,7 +1264,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <p class="eb rv">Career <b>／ 学歴、職歴</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日系企業で約11年、<br /><i>営業、IT、人事の現場を歩んできた。</i></span><span data-l="en">I spent about 11 years at Japanese companies,<br /><i>working in sales, IT and HR</i>.</span><span data-l="vi">Tôi có khoảng 11 năm làm việc tại công ty Nhật,<br /><i>trong mảng kinh doanh, IT và nhân sự.</i></span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
-  <figure class="gx gx--flow" aria-hidden="true"><span class="gx-step"><i></i><b>04</b> / 12</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl gx-pl--logo"><img src="assets/logos/lienviet.png" alt="" width="96" height="48" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">銀行</span><span data-l="en">Bank</span><span data-l="vi">Ngân hàng</span></b><em class="gx-chip">2011</em></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i></i><div class="gx-st" style="--i:1"><span class="gx-pl gx-pl--logo"><img src="assets/logos/isuzu.svg" alt="" width="96" height="48" loading="lazy" decoding="async"></span><b class="gx-lb">Isuzu</b><em class="gx-chip">2015</em></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl gx-pl--logo"><img src="assets/logos/jilnesta.png" alt="" width="96" height="48" loading="lazy" decoding="async"></span><b class="gx-lb">JILNESTA</b><em class="gx-chip">2017</em></div><i class="gx-ln" style="--i:2"><i class="gx-cm"></i></i><div class="gx-st" style="--i:3"><span class="gx-pl gx-pl--logo"><img src="assets/logos/mayekawa.svg" alt="" width="96" height="48" loading="lazy" decoding="async"></span><b class="gx-lb">MAYEKAWA</b><em class="gx-chip">2022</em></div></div></figure>
+  <figure class="gx gx--flow" aria-hidden="true"><span class="gx-step"><i></i><b>04</b> / 09</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl gx-pl--logo"><img src="assets/logos/lienviet.png" alt="" width="96" height="48" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">銀行</span><span data-l="en">Bank</span><span data-l="vi">Ngân hàng</span></b><em class="gx-chip">2011</em></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i></i><div class="gx-st" style="--i:1"><span class="gx-pl gx-pl--logo"><img src="assets/logos/isuzu.svg" alt="" width="96" height="48" loading="lazy" decoding="async"></span><b class="gx-lb">Isuzu</b><em class="gx-chip">2015</em></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl gx-pl--logo"><img src="assets/logos/jilnesta.png" alt="" width="96" height="48" loading="lazy" decoding="async"></span><b class="gx-lb">JILNESTA</b><em class="gx-chip">2017</em></div><i class="gx-ln" style="--i:2"><i class="gx-cm"></i></i><div class="gx-st" style="--i:3"><span class="gx-pl gx-pl--logo"><img src="assets/logos/mayekawa.svg" alt="" width="96" height="48" loading="lazy" decoding="async"></span><b class="gx-lb">MAYEKAWA</b><em class="gx-chip">2022</em></div></div></figure>
 
   <div class="tl rv" style="--d:140ms">
     <div class="co card">
@@ -1376,7 +1313,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>05 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>05 ／ 10</p></div>
 </section>
 
 <!-- ═══════ 06 MAYEKAWA ═══════ -->
@@ -1387,7 +1324,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">お客様の技術的なご要望を一つずつ伺い、<br /><i>納品後も支援を続ける。</i></span><span data-l="en">I listen to each client's technical needs<br /><i>and keep supporting them after delivery</i>.</span><span data-l="vi">Tôi lắng nghe từng nhu cầu kỹ thuật của khách,<br /><i>và tiếp tục hỗ trợ sau khi bàn giao sản phẩm</i>.</span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">営業部 アシスタントマネージャー 兼 人事部長（2022年2月 ～ 2026年6月）</span><span data-l="en">Assistant manager, Sales, and head of HR (Feb 2022 – Jun 2026)</span><span data-l="vi">Trợ lý trưởng phòng Kinh doanh kiêm trưởng phòng Nhân sự (02/2022 – 06/2026)</span></span>
   <div class="kwbar rv" style="--d:110ms"><span></span></div>
-  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>05</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">設備の提案</span><span data-l="en">Equipment proposals</span><span data-l="vi">Đề xuất thiết bị</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">技術者と連携</span><span data-l="en">With engineers</span><span data-l="vi">Cùng kỹ sư</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/handshake.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o">MAYEKAWA</em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/shield-check.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">納品後のフォロー</span><span data-l="en">After-sales follow-up</span><span data-l="vi">Theo sát sau bàn giao</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事チーム 1→5名</span><span data-l="en">HR team 1 → 5</span><span data-l="vi">Đội nhân sự 1 → 5</span></b></span></div></div></figure>
+  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>05</b> / 09</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">設備の提案</span><span data-l="en">Equipment proposals</span><span data-l="vi">Đề xuất thiết bị</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">技術者と連携</span><span data-l="en">With engineers</span><span data-l="vi">Cùng kỹ sư</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/handshake.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o">MAYEKAWA</em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/shield-check.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">納品後のフォロー</span><span data-l="en">After-sales follow-up</span><span data-l="vi">Theo sát sau bàn giao</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">人事チーム 1→5名</span><span data-l="en">HR team 1 → 5</span><span data-l="vi">Đội nhân sự 1 → 5</span></b></span></div></div></figure>
 
   <div class="meta rv" style="--d:140ms">
     <div><span>Business</span><b><span data-l="ja">産業用冷凍機、コンプレッサー</span><span data-l="en">Industrial refrigeration, compressors</span><span data-l="vi">Máy lạnh công nghiệp, máy nén</span></b></div>
@@ -1398,41 +1335,40 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
 
   <div class="card rv" style="--d:180ms">
     <span class="lbl">Sales ／ <span data-l="ja">営業部門：法人顧客への提案、導入後のフォロー</span><span data-l="en">Sales: proposals to business clients and post-installation follow-up</span><span data-l="vi">Kinh doanh: đề xuất cho khách doanh nghiệp, theo dõi sau lắp đặt</span></span>
+    <p class="zz-lead"><span data-l="ja">初回訪問から納品後まで、お客様に寄り添いました。トラブル時は工場や日本本社と連携して対応しました。</span><span data-l="en">I stayed with clients from the first visit to after delivery. When issues arose, I worked with the factory and head office in Japan.</span><span data-l="vi">Tôi đồng hành cùng khách từ lần gặp đầu tới sau khi bàn giao. Khi có sự cố, tôi phối hợp với nhà máy và trụ sở Nhật để xử lý.</span></p>
     <!-- zz:wf (task p0r6): việc Sales tại MAYEKAWA = workflow zigzag 7 bước, cục sáng chạy tới đâu bước đó sáng tới đó (CSS/JS ở khối zz-css / zz) -->
     <div class="zz" data-zz>
       <svg class="zz-svg" aria-hidden="true" focusable="false"><path class="zz-base" d="" /><path class="zz-lit" d="" /></svg>
       <i class="zz-orb" aria-hidden="true"></i>
       <ol class="zz-list">
-        <li class="zz-n" style="--i:0"><b class="zz-d" aria-hidden="true">01</b><span class="zz-t"><span data-l="ja">顧客訪問とニーズ把握</span><span data-l="en">Visit clients, learn needs</span><span data-l="vi">Gặp khách, tìm nhu cầu</span></span></li>
-        <li class="zz-n" style="--i:1"><b class="zz-d" aria-hidden="true">02</b><span class="zz-t"><span data-l="ja">技術者と仕様を決定</span><span data-l="en">Pick specs with engineers</span><span data-l="vi">Cùng kỹ sư chọn máy</span></span></li>
-        <li class="zz-n" style="--i:2"><b class="zz-d" aria-hidden="true">03</b><span class="zz-t"><span data-l="ja">提案書と見積、プレゼン</span><span data-l="en">Proposal, quote, pitch</span><span data-l="vi">Đề xuất và thuyết trình</span></span></li>
-        <li class="zz-n" style="--i:3"><b class="zz-d" aria-hidden="true">04</b><span class="zz-t"><span data-l="ja">交渉とクレーム対応</span><span data-l="en">Negotiate, handle complaints</span><span data-l="vi">Đàm phán và khiếu nại</span></span></li>
-        <li class="zz-n" style="--i:4"><b class="zz-d" aria-hidden="true">05</b><span class="zz-t"><span data-l="ja">納品トラブルに対応</span><span data-l="en">Fix delivery issues</span><span data-l="vi">Gỡ sự cố giao hàng</span></span></li>
-        <li class="zz-n" style="--i:5"><b class="zz-d" aria-hidden="true">06</b><span class="zz-t"><span data-l="ja">営業チームを育成</span><span data-l="en">Train the sales team</span><span data-l="vi">Đào tạo đội kinh doanh</span></span></li>
-        <li class="zz-n" style="--i:6"><b class="zz-d" aria-hidden="true">07</b><span class="zz-t"><span data-l="ja">ASEAN会議で英語報告</span><span data-l="en">Report at ASEAN meetings</span><span data-l="vi">Báo cáo họp ASEAN</span></span></li>
+        <li class="zz-n" style="--i:0"><b class="zz-d" aria-hidden="true">01</b><span class="zz-t"><img class="zz-ic" src="assets/gx/magnifier-person.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">顧客訪問とニーズ把握</span><span data-l="en">Visit clients, learn needs</span><span data-l="vi">Gặp khách, tìm nhu cầu</span></span></li>
+        <li class="zz-n" style="--i:1"><b class="zz-d" aria-hidden="true">02</b><span class="zz-t"><img class="zz-ic" src="assets/gx/workflow-gears.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">技術者と仕様を決定</span><span data-l="en">Pick specs with engineers</span><span data-l="vi">Cùng kỹ sư chọn máy</span></span></li>
+        <li class="zz-n" style="--i:2"><b class="zz-d" aria-hidden="true">03</b><span class="zz-t"><img class="zz-ic" src="assets/gx/jd-document.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">提案書と見積、プレゼン</span><span data-l="en">Proposal, quote, pitch</span><span data-l="vi">Đề xuất và thuyết trình</span></span></li>
+        <li class="zz-n" style="--i:3"><b class="zz-d" aria-hidden="true">04</b><span class="zz-t"><img class="zz-ic" src="assets/gx/handshake.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">交渉とクレーム対応</span><span data-l="en">Negotiate, handle complaints</span><span data-l="vi">Đàm phán và khiếu nại</span></span></li>
+        <li class="zz-n" style="--i:4"><b class="zz-d" aria-hidden="true">05</b><span class="zz-t"><img class="zz-ic" src="assets/gx/shield-check.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">納品トラブルに対応</span><span data-l="en">Fix delivery issues</span><span data-l="vi">Gỡ sự cố giao hàng</span></span></li>
+        <li class="zz-n" style="--i:5"><b class="zz-d" aria-hidden="true">06</b><span class="zz-t"><img class="zz-ic" src="assets/gx/team-group.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">営業チームを育成</span><span data-l="en">Train the sales team</span><span data-l="vi">Đào tạo đội kinh doanh</span></span></li>
+        <li class="zz-n" style="--i:6"><b class="zz-d" aria-hidden="true">07</b><span class="zz-t"><img class="zz-ic" src="assets/gx/report-chart.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">ASEAN会議で英語報告</span><span data-l="en">Report at ASEAN meetings</span><span data-l="vi">Báo cáo họp ASEAN</span></span></li>
       </ol>
     </div>
   </div>
 
   <div class="card rv" style="--d:220ms">
     <span class="lbl">HR ／ <span data-l="ja">人事、総務部門：社内研修と制度整備</span><span data-l="en">HR and general affairs: training and building systems</span><span data-l="vi">Nhân sự, hành chính: đào tạo nội bộ, xây dựng chế độ</span></span>
-    <div class="kw1" style="margin:8px 0 10px">
-      <div class="chips" data-l="ja"><span class="chip">ChatGPT</span><span class="chip">データ照合</span><span class="chip">日越研修</span><span class="chip">採用担当育成</span></div>
-      <div class="chips" data-l="en"><span class="chip">ChatGPT</span><span class="chip">data cross-checks</span><span class="chip">Japan-Vietnam training</span><span class="chip">recruiter training</span></div>
-      <div class="chips" data-l="vi"><span class="chip">ChatGPT</span><span class="chip">đối chiếu dữ liệu</span><span class="chip">đào tạo Nhật Việt</span><span class="chip">đào tạo tuyển dụng</span></div>
-    </div>
-    <div class="lines" data-l="ja">
-      <p>ChatGPTの活用やデータ照合を進め、未経験の採用担当2名を育成しました。</p>
-    </div>
-    <div class="lines" data-l="en">
-      <p>I used ChatGPT, cross-checked accounting and HR data, and trained two recruiters with no experience.</p>
-    </div>
-    <div class="lines" data-l="vi">
-      <p>Tôi dùng ChatGPT, đối chiếu dữ liệu kế toán và nhân sự, đồng thời đào tạo 2 nhân viên tuyển dụng chưa có kinh nghiệm.</p>
+    <p class="zz-lead"><span data-l="ja">ChatGPTとAIエージェントを報告書作成とデータ照合に活用しました。未経験の採用担当2名を育成し、人事チームを5名に広げました。</span><span data-l="en">I brought ChatGPT and AI agents into reports and data checks. I trained two recruiters with no experience and grew HR to five people.</span><span data-l="vi">Tôi đưa ChatGPT và AI agent vào báo cáo, đối chiếu số liệu. Tôi đào tạo 2 nhân viên tuyển dụng chưa có kinh nghiệm và mở rộng đội lên 5 người.</span></p>
+    <!-- zz:wf (task pt2m): việc HR tại MAYEKAWA = workflow zigzag 4 bước có icon, dùng chung khối zz-css / zz -->
+    <div class="zz zz--4" data-zz>
+      <svg class="zz-svg" aria-hidden="true" focusable="false"><path class="zz-base" d="" /><path class="zz-lit" d="" /></svg>
+      <i class="zz-orb" aria-hidden="true"></i>
+      <ol class="zz-list">
+        <li class="zz-n" style="--i:0"><b class="zz-d" aria-hidden="true">01</b><span class="zz-t"><img class="zz-ic" src="assets/gx/chat-bubbles.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">ChatGPTで報告書</span><span data-l="en">Reports with ChatGPT</span><span data-l="vi">Báo cáo bằng ChatGPT</span></span></li>
+        <li class="zz-n" style="--i:1"><b class="zz-d" aria-hidden="true">02</b><span class="zz-t"><img class="zz-ic" src="assets/gx/magnifier.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">会計と人事の照合</span><span data-l="en">Cross-check accounting, HR</span><span data-l="vi">Đối chiếu số liệu</span></span></li>
+        <li class="zz-n" style="--i:2"><b class="zz-d" aria-hidden="true">03</b><span class="zz-t"><img class="zz-ic" src="assets/gx/lightbulb.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">報連相と日越研修</span><span data-l="en">Horenso, culture training</span><span data-l="vi">Horenso, văn hoá Nhật Việt</span></span></li>
+        <li class="zz-n" style="--i:3"><b class="zz-d" aria-hidden="true">04</b><span class="zz-t"><img class="zz-ic" src="assets/gx/interview.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span data-l="ja">採用担当を育成</span><span data-l="en">Train new recruiters</span><span data-l="vi">Kèm nhân viên tuyển dụng</span></span></li>
+      </ol>
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>06 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>06 ／ 10</p></div>
 </section>
 
 <!-- ═══════ 07 JILNESTA 営業マネージャー ═══════ -->
@@ -1440,55 +1376,58 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <div class="deco halo" style="right:-180px;top:-160px;background:radial-gradient(circle,rgba(31,182,166,.22),transparent 65%)"></div>
   <p class="colg rv"><img src="assets/logos/jilnesta.png" alt="JILNESTA" width="138" height="38" decoding="async" /></p>
   <p class="eb rv">Career 02 <b>／ JILNESTA, Inc.</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">定期レビューで、<br /><i>契約の更新</i>につなげる。</span><span data-l="en">Regular reviews<br />that lead to <i>contract renewals</i>.</span><span data-l="vi">Rà soát định kỳ,<br />dẫn đến <i>gia hạn hợp đồng</i>.</span></h2>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">人材派遣と<i>IT案件</i>の<br />営業チームを率いる。</span><span data-l="en">Leading the sales team<br />for <i>IT staffing</i><br />and <i>IT projects</i>.</span><span data-l="vi">Quản lý đội ngũ<br />kinh doanh outsourcing<br />nhân sự và <i>dự án IT</i><br />cho khách hàng.</span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">ベトナム支店 営業マネージャー（2019年2月 ～ 2022年2月）</span><span data-l="en">Sales manager, Vietnam branch (Feb 2019 – Feb 2022)</span><span data-l="vi">Quản lý kinh doanh, chi nhánh Việt Nam (02/2019 – 02/2022)</span></span>
   <div class="kwbar rv" style="--d:110ms"><span></span></div>
-  <figure class="gx gx--ring" aria-hidden="true"><span class="gx-step"><i></i><b>06</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">営業 4〜5名</span><span data-l="en">4 to 5 in sales</span><span data-l="vi">4–5 kinh doanh</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">開発 約20名</span><span data-l="en">About 20 developers</span><span data-l="vi">Khoảng 20 lập trình viên</span></b></span></div><div class="gx-core"><span class="gx-orb gx-orb--ring"><svg viewBox="0 0 120 120"><circle class="gx-rt" cx="60" cy="60" r="52"/><circle class="gx-rf" pathLength="100" cx="60" cy="60" r="52" style="stroke-dashoffset:0"/></svg><span class="gx-val"><small class="gx-pre"><span data-l="ja">約</span><span data-l="en">about</span><span data-l="vi">khoảng</span></small><span class="gx-vn"><b class="gx-num" style="--v:27"></b></span></span></span><b class="gx-unit"><span data-l="ja">名の拠点</span><span data-l="en">staff at the branch</span><span data-l="vi">người ở chi nhánh</span></b></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/calendar.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">定期レビュー</span><span data-l="en">Regular reviews</span><span data-l="vi">Rà soát định kỳ</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/handshake.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">契約更新</span><span data-l="en">Contract renewals</span><span data-l="vi">Gia hạn hợp đồng</span></b></span></div></div></figure>
+  <figure class="gx gx--flow gx--long" aria-hidden="true"><span class="gx-step"><i></i><b>06</b> / 09</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/person-bust.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">自ら営業</span><span data-l="en">Hands-on sales</span><span data-l="vi">Tự đi sales</span></b><em class="gx-chip"><span data-l="ja">チーム未設立</span><span data-l="en">No team yet</span><span data-l="vi">Chưa có đội</span></em></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i></i><div class="gx-st" style="--i:1"><span class="gx-pl"><img src="assets/gx/interview.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ニーズ把握</span><span data-l="en">Client needs</span><span data-l="vi">Thấu hiểu nhu cầu</span></b></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">基本仕様</span><span data-l="en">Basic specs</span><span data-l="vi">Viết đặc tả</span></b><em class="gx-chip"><span data-l="ja">Excelと図</span><span data-l="en">Excel + visuals</span><span data-l="vi">Excel + hình</span></em></div><i class="gx-ln" style="--i:2"><i class="gx-cm"></i></i><div class="gx-st" style="--i:3"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">開発と調整</span><span data-l="en">Dev team</span><span data-l="vi">Trao đổi đội dev</span></b></div><i class="gx-ln" style="--i:3"><i class="gx-cm"></i></i><div class="gx-st" style="--i:4"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">アプリとWeb</span><span data-l="en">Apps, websites</span><span data-l="vi">App và web</span></b></div><i class="gx-ln" style="--i:4"><i class="gx-cm"></i></i><div class="gx-st is-hot" style="--i:5"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">1→5〜6名</span><span data-l="en">Sales 1 → 5~6</span><span data-l="vi">Đội 1 → 5~6</span></b><em class="gx-chip gx-chip--o">Startup</em></div></div></figure>
 
   <div class="g3 rv" style="--d:140ms">
     <div class="card"><p class="num gr">27</p><p class="num-l"><span data-l="ja">支店約27名（営業4～5名、ITコミュニケーター2名、開発約20名）</span><span data-l="en">Branch of about 27 (4 to 5 sales, 2 IT communicators, about 20 developers)</span><span data-l="vi">Chi nhánh khoảng 27 người (4 đến 5 kinh doanh, 2 IT communicator, khoảng 20 lập trình viên)</span></p></div>
-    <div class="card"><p class="num gr">5～6</p><p class="num-l"><span data-l="ja">部下の人数</span><span data-l="en">Direct reports</span><span data-l="vi">Số cấp dưới</span></p></div>
-    <div class="card"><p class="num gr">6<small><span data-l="ja">か月～1年</span><span data-l="en">mo to 1 yr</span><span data-l="vi">tháng đến 1 năm</span></small></p><p class="num-l"><span data-l="ja">更新を担当した契約期間</span><span data-l="en">Term of renewed contracts</span><span data-l="vi">Thời hạn hợp đồng phụ trách gia hạn</span></p></div>
+    <div class="card"><p class="num gr">5～6</p><p class="num-l"><span data-l="ja">1名から育てた営業チーム（部下）</span><span data-l="en">Sales team grown from 1 (direct reports)</span><span data-l="vi">Đội bán hàng xây từ 1 người (cấp dưới)</span></p></div>
+    <div class="card"><p class="num gr">20</p><p class="num-l"><span data-l="ja">アプリとWebを一緒に作った開発者（約）</span><span data-l="en">About 20 developers I built apps and websites with</span><span data-l="vi">Khoảng 20 lập trình viên cùng làm app và web</span></p></div>
   </div>
 
   <div class="g2 rv" style="--d:180ms">
     <div class="card">
-      <span class="lbl">Clients ／ <span data-l="ja">法人顧客対応、IT案件の提案</span><span data-l="en">Business clients and IT proposals</span><span data-l="vi">Khách doanh nghiệp, đề xuất dự án IT</span></span>
+      <span class="lbl">Startup ／ <span data-l="ja">営業チームを1名から5〜6名に</span><span data-l="en">Sales team from 1 person to 5~6 people</span><span data-l="vi">Đội bán hàng từ 1 người lên 5~6 người</span></span>
       <div class="kw1" style="margin:8px 0 10px">
-        <div class="chips" data-l="ja"><span class="chip">IT案件</span><span class="chip">要件確認</span><span class="chip">契約更新</span><span class="chip">新規開拓</span></div>
-        <div class="chips" data-l="en"><span class="chip">IT projects</span><span class="chip">requirements</span><span class="chip">contract renewals</span><span class="chip">new clients</span></div>
-        <div class="chips" data-l="vi"><span class="chip">dự án IT</span><span class="chip">yêu cầu</span><span class="chip">gia hạn hợp đồng</span><span class="chip">khách hàng mới</span></div>
+        <div class="chips" data-l="ja"><span class="chip">人材派遣</span><span class="chip">IT案件</span><span class="chip">アプリとWeb</span><span class="chip">1→5〜6名</span></div>
+        <div class="chips" data-l="en"><span class="chip">IT staffing</span><span class="chip">IT projects</span><span class="chip">apps and websites</span><span class="chip">1 → 5~6</span></div>
+        <div class="chips" data-l="vi"><span class="chip">outsourcing nhân sự</span><span class="chip">dự án IT</span><span class="chip">app và web</span><span class="chip">1 → 5~6</span></div>
       </div>
       <div class="lines" data-l="ja">
-        <p>IT案件の要件確認から契約更新、新規顧客の開拓まで担当しました。</p>
+        <p>営業チームがない段階から自ら営業し、IT案件のニーズを理解して基本仕様を書き、開発チームと要望どおりのアプリとWebを作りました。</p>
       </div>
       <div class="lines" data-l="en">
-        <p>I handled IT project requirements, contract renewals and new client development.</p>
+        <p>Before a sales team existed, I sold in person, understood IT project needs, wrote basic specs and built apps and websites with the dev team.</p>
       </div>
       <div class="lines" data-l="vi">
-        <p>Tôi phụ trách yêu cầu dự án IT, gia hạn hợp đồng và tìm khách hàng mới.</p>
+        <p>Khi đội kinh doanh chưa thành lập, tôi tự đi sales, thấu hiểu nhu cầu dự án IT, viết đặc tả cơ bản, cùng đội dev làm app và web theo yêu cầu.</p>
       </div>
     </div>
     <div class="card">
-      <span class="lbl">Team ／ <span data-l="ja">資料作成、チーム運営</span><span data-l="en">Documentation and team management</span><span data-l="vi">Soạn tài liệu, vận hành đội</span></span>
+      <span class="lbl">Skills ／ <span data-l="ja">身についたスキル</span><span data-l="en">Skills gained</span><span data-l="vi">Kỹ năng đạt được</span></span>
       <div class="kw1" style="margin:8px 0 10px">
-        <div class="chips" data-l="ja"><span class="chip">営業体制</span><span class="chip">3か国語資料</span><span class="chip">KPI管理</span><span class="chip">目標調整</span></div>
-        <div class="chips" data-l="en"><span class="chip">sales process</span><span class="chip">three-language materials</span><span class="chip">KPI management</span><span class="chip">target adjustment</span></div>
-        <div class="chips" data-l="vi"><span class="chip">quy trình bán hàng</span><span class="chip">tài liệu ba ngôn ngữ</span><span class="chip">quản lý KPI</span><span class="chip">điều chỉnh mục tiêu</span></div>
+        <div class="chips" data-l="ja"><span class="chip">顧客理解</span><span class="chip">仕様書</span><span class="chip">IT用語</span><span class="chip">チーム編成</span></div>
+        <div class="chips" data-l="en"><span class="chip">client insight</span><span class="chip">specs</span><span class="chip">IT terms</span><span class="chip">team building</span></div>
+        <div class="chips" data-l="vi"><span class="chip">hiểu khách</span><span class="chip">đặc tả</span><span class="chip">thuật ngữ IT</span><span class="chip">build team</span></div>
       </div>
       <div class="lines" data-l="ja">
-        <p>営業体制を構築し、資料作成やKPI管理を通じてチームを運営しました。</p>
+        <p>顧客の要望を仕様に変え、開発チームを組んで形にする力が身につきました。</p>
       </div>
       <div class="lines" data-l="en">
-        <p>I built the sales process and managed the branch through materials and KPI tracking.</p>
+        <p>I learned to turn client requests into specs and to build the team that delivers them.</p>
       </div>
       <div class="lines" data-l="vi">
-        <p>Tôi xây dựng quy trình bán hàng và quản lý chi nhánh bằng tài liệu và KPI.</p>
+        <p>Tôi học được cách biến yêu cầu của khách thành đặc tả và lập đội để làm ra sản phẩm.</p>
       </div>
+      <ol class="jil-sk" role="list" data-l="ja"><li>顧客の意図をくみ取る力</li><li>ニーズを仕様に落とし込む力</li><li>IT技術と用語の理解</li><li>Excelと図で基本仕様書を作成</li><li>要望に合わせて開発チームを採用、編成</li></ol>
+      <ol class="jil-sk" role="list" data-l="en"><li>Understanding what clients really want</li><li>Turning needs into specifications</li><li>Technical and IT terminology</li><li>Basic specs in Excel and diagrams</li><li>Recruiting and building dev teams for client needs</li></ol>
+      <ol class="jil-sk" role="list" data-l="vi"><li>Hiểu ý khách hàng</li><li>Nắm bắt nhu cầu, chuyển thành đặc tả</li><li>Hiểu kỹ thuật và thuật ngữ IT</li><li>Viết đặc tả cơ bản bằng Excel và hình</li><li>Tuyển dụng, build team dev theo yêu cầu</li></ol>
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>07 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>07 ／ 10</p></div>
 </section>
 
 <!-- ═══════ 08 JILNESTA ITコミュニケーター ═══════ -->
@@ -1498,7 +1437,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日本の顧客と<br /><i>ベトナム人エンジニア</i>をつなぐ。</span><span data-l="en">Connecting Japanese clients<br />and <i>Vietnamese engineers</i>.</span><span data-l="vi">Kết nối khách hàng Nhật<br />và <i>kỹ sư Việt Nam</i>.</span></h2>
   <span class="kw-en rv" style="--d:80ms"><span data-l="ja">ITコミュニケーター（2017年8月 ～ 2019年2月）／ 日本人上司に報告</span><span data-l="en">IT communicator (Aug 2017 – Feb 2019), reporting to a Japanese manager</span><span data-l="vi">IT communicator (08/2017 – 02/2019), báo cáo cấp trên người Nhật</span></span>
   <div class="kwbar rv" style="--d:110ms"><span></span></div>
-  <figure class="gx gx--flow gx--both" aria-hidden="true"><span class="gx-step"><i></i><b>07</b> / 12</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本の顧客</span><span data-l="en">Japanese clients</span><span data-l="vi">Khách hàng Nhật</span></b></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><div class="gx-st is-hot" style="--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">通訳と翻訳</span><span data-l="en">Interpreting</span><span data-l="vi">Phiên dịch</span></b><em class="gx-chip gx-chip--o">JA · EN · VI</em></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ベトナム人技術者</span><span data-l="en">Vietnamese engineers</span><span data-l="vi">Kỹ sư Việt Nam</span></b></div></div></figure>
+  <figure class="gx gx--flow gx--both" aria-hidden="true"><span class="gx-step"><i></i><b>07</b> / 09</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本の顧客</span><span data-l="en">Japanese clients</span><span data-l="vi">Khách hàng Nhật</span></b></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><div class="gx-st is-hot" style="--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">通訳と翻訳</span><span data-l="en">Interpreting</span><span data-l="vi">Phiên dịch</span></b><em class="gx-chip gx-chip--o">JA · EN · VI</em></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ベトナム人技術者</span><span data-l="en">Vietnamese engineers</span><span data-l="vi">Kỹ sư Việt Nam</span></b></div></div></figure>
 
   <div class="rv" style="--d:140ms;display:grid;grid-template-columns:1fr 46px 1fr 46px 1fr;align-items:stretch">
     <div class="card" style="text-align:center;display:flex;flex-direction:column;justify-content:center"><span class="lbl">Client</span><h3 style="margin:0"><span data-l="ja">日本の顧客、上司</span><span data-l="en">Japanese clients and manager</span><span data-l="vi">Khách hàng, cấp trên người Nhật</span></h3><p><span data-l="ja">要件、仕様、質問</span><span data-l="en">Requirements, specs, questions</span><span data-l="vi">Yêu cầu, đặc tả, câu hỏi</span></p></div>
@@ -1527,7 +1466,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   </div>
 
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>08 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>08 ／ 10</p></div>
 </section>
 
 <!-- ═══════ 09 Isuzu ／ LienViet ═══════ -->
@@ -1536,7 +1475,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <p class="eb rv">Career 04 <b>／ Isuzu Vietnam ／ LienViet Post Bank</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">数字と現場の実情を、<br /><i>日本人上司に報告</i>する。</span><span data-l="en">Figures and field insight,<br /><i>reported to Japanese managers</i>.</span><span data-l="vi">Số liệu và thực tế,<br /><i>báo cáo cho cấp trên người Nhật</i>.</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
-  <figure class="gx gx--chart" aria-hidden="true"><span class="gx-step"><i></i><b>08</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">国際送金</span><span data-l="en">International payments</span><span data-l="vi">Thanh toán quốc tế</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/briefcase.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">部品の営業事務</span><span data-l="en">Parts sales admin</span><span data-l="vi">Hành chính bán phụ tùng</span></b></span></div><div class="gx-core"><span class="gx-chartc"><span class="gx-col" style="--h:46"><i class="gx-bar" style="--h:46;--i:0"></i></span><span class="gx-col" style="--h:70"><i class="gx-bar" style="--h:70;--i:1"></i></span><span class="gx-col" style="--h:38"><i class="gx-bar" style="--h:38;--i:2"></i></span><span class="gx-col" style="--h:62"><i class="gx-bar" style="--h:62;--i:3"></i></span><span class="gx-col" style="--h:84"><i class="gx-bar is-hot" style="--h:84;--i:4"></i></span><i class="gx-sheen"></i></span><em class="gx-chip gx-chip--o"><span data-l="ja">数字で報告</span><span data-l="en">Reports with numbers</span><span data-l="vi">Báo cáo bằng số liệu</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本人上司へ報告</span><span data-l="en">Reporting to Japanese managers</span><span data-l="vi">Báo cáo cấp trên người Nhật</span></b></span></div></div></figure>
+  <figure class="gx gx--chart" aria-hidden="true"><span class="gx-step"><i></i><b>08</b> / 09</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">国際送金</span><span data-l="en">International payments</span><span data-l="vi">Thanh toán quốc tế</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/briefcase.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">部品の営業事務</span><span data-l="en">Parts sales admin</span><span data-l="vi">Hành chính bán phụ tùng</span></b></span></div><div class="gx-core"><span class="gx-chartc"><span class="gx-col" style="--h:46"><i class="gx-bar" style="--h:46;--i:0"></i></span><span class="gx-col" style="--h:70"><i class="gx-bar" style="--h:70;--i:1"></i></span><span class="gx-col" style="--h:38"><i class="gx-bar" style="--h:38;--i:2"></i></span><span class="gx-col" style="--h:62"><i class="gx-bar" style="--h:62;--i:3"></i></span><span class="gx-col" style="--h:84"><i class="gx-bar is-hot" style="--h:84;--i:4"></i></span><i class="gx-sheen"></i></span><em class="gx-chip gx-chip--o"><span data-l="ja">数字で報告</span><span data-l="en">Reports with numbers</span><span data-l="vi">Báo cáo bằng số liệu</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/manager.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本人上司へ報告</span><span data-l="en">Reporting to Japanese managers</span><span data-l="vi">Báo cáo cấp trên người Nhật</span></b></span></div></div></figure>
 
   <div class="card rv" style="--d:140ms">
     <span class="lbl"><span data-l="ja">2015年6月 ～ 2017年8月</span><span data-l="en">Jun 2015 – Aug 2017</span><span data-l="vi">06/2015 – 08/2017</span></span>
@@ -1584,7 +1523,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
     <p class="qt" style="font-size:18px;color:#2b2540"><span data-l="ja">報連相の徹底、数字を用いた分かりやすい報告、<br />原因分析を踏まえた論理的な説明。</span><span data-l="en">Consistent horenso, clear reports with numbers,<br />and logical explanations based on cause analysis.</span><span data-l="vi">Horenso nghiêm túc, báo cáo rõ ràng bằng số liệu,<br />giải thích mạch lạc dựa trên phân tích nguyên nhân.</span></p>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>09 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>09 ／ 10</p></div>
 </section>
 
 <!-- ═══════ 10 語学、PC、AI ═══════ -->
@@ -1593,7 +1532,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
   <p class="eb rv">Skills <b>／ 語学、PC、AIスキル</b></p>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">3つの言語とAIで、<br /><i>仕事のスピード</i>を上げる。</span><span data-l="en">Three languages and AI<br />to <i>speed up the work</i>.</span><span data-l="vi">3 ngôn ngữ và AI<br />để <i>tăng tốc công việc</i>.</span></h2>
   <div class="kwbar rv" style="--d:100ms"><span></span></div>
-  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>09</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本語 N2</span><span data-l="en">Japanese N2</span><span data-l="vi">Tiếng Nhật N2</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">英語 TOEIC 680</span><span data-l="en">English TOEIC 680</span><span data-l="vi">Tiếng Anh TOEIC 680</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/lightbulb.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o">AI</em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/person-bust.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ベトナム語 母語</span><span data-l="en">Vietnamese, native</span><span data-l="vi">Tiếng Việt bản ngữ</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">1人で3〜4人分</span><span data-l="en">One person, work of 3 to 4</span><span data-l="vi">1 người, việc của 3–4 người</span></b></span></div></div></figure>
+  <figure class="gx gx--hub" aria-hidden="true"><span class="gx-step"><i></i><b>09</b> / 09</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本語 N2</span><span data-l="en">Japanese N2</span><span data-l="vi">Tiếng Nhật N2</span></b></span><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/jd-document.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">英語 TOEIC 680</span><span data-l="en">English TOEIC 680</span><span data-l="vi">Tiếng Anh TOEIC 680</span></b></span></div><div class="gx-core"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/lightbulb.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span><em class="gx-chip gx-chip--o">AI</em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/person-bust.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ベトナム語 母語</span><span data-l="en">Vietnamese, native</span><span data-l="vi">Tiếng Việt bản ngữ</span></b></span><span class="gx-tag" style="--i:4"><span class="gx-pl"><img src="assets/gx/team-group.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">1人で3〜4人分</span><span data-l="en">One person, work of 3 to 4</span><span data-l="vi">1 người, việc của 3–4 người</span></b></span></div></div></figure>
 
   <div class="g3 rv" style="--d:140ms">
     <div class="card"><p class="num gr" style="font-size:28px">日本語</p><p class="num-l"><span data-l="ja">JLPT N2（2016年8月）。日本人社長、経営陣への直接報告、会議、交渉</span><span data-l="en">JLPT N2 (Aug 2016). Direct reports, meetings and negotiation with the Japanese president and management</span><span data-l="vi">JLPT N2 (08/2016). Báo cáo trực tiếp, họp, đàm phán với Tổng giám đốc và ban lãnh đạo người Nhật</span></p></div>
@@ -1632,115 +1571,7 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
     </div>
   </div>
 
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>10 ／ 13</p></div>
-</section>
-
-<!-- ═══════ 11 AI業務管理：仕組み ═══════ -->
-<section class="pg" data-even data-chap="IV" data-num="11" id="aiops">
-  <div class="deco halo" style="right:-180px;top:-160px;background:radial-gradient(circle,rgba(109,91,208,.20),transparent 65%)"></div>
-  <p class="eb rv">AI Management <b>／ AIを活用したチームの業務管理</b></p>
-  <h2 class="kw rv" style="--d:60ms">業務の流れを整え、<br /><i>進捗を数字で把握する。</i></h2>
-  <p class="kw-sub rv" style="--d:100ms">MAYEKAWA VIETNAMでは、標準化した工程と日々の数値をもとに、チームの業務時間、タスク、進捗を管理していました。Claudeで数値を分析し、毎日のミーティングでチームと確認しました。</p>
-  <div class="kwbar rv" style="--d:130ms"><span></span></div>
-  <figure class="gx gx--flow" aria-hidden="true"><span class="gx-step"><i></i><b>10</b> / 12</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">工程の標準化</span><span data-l="en">Standard steps</span><span data-l="vi">Chuẩn hoá quy trình</span></b></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i></i><div class="gx-st" style="--i:1"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日次報告</span><span data-l="en">Daily reports</span><span data-l="vi">Báo cáo hằng ngày</span></b></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/lightbulb.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">Claudeで分析</span><span data-l="en">Analysis with Claude</span><span data-l="vi">Phân tích bằng Claude</span></b></div><i class="gx-ln" style="--i:2"><i class="gx-cm"></i></i><div class="gx-st is-hot" style="--i:3"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">毎日の確認</span><span data-l="en">Daily checks</span><span data-l="vi">Kiểm tra hằng ngày</span></b></div></div></figure>
-
-  <div class="cyc rv" style="--d:160ms">
-    <div class="card cyc-c"><span class="cyc-n">01</span><h3>工程の標準化</h3><p>各メンバーが担当業務を最初から最後まで洗い出し、「完了」の定義を明確化</p></div>
-    <span class="cyc-a">→</span>
-    <div class="card cyc-c"><span class="cyc-n">02</span><h3>日次報告</h3><p>作業時間、タスク数、各タスクの進捗を毎日報告</p></div>
-    <span class="cyc-a">→</span>
-    <div class="card cyc-c" style="border-color:#cfc6ef;background:linear-gradient(160deg,#fff,#f4f1fd)"><span class="cyc-n">03</span><h3>Claudeで分析</h3><p>工程ごとの所要時間、完了率、停滞中のタスクとその日数を算出</p></div>
-    <span class="cyc-a">→</span>
-    <div class="card cyc-c"><span class="cyc-n">04</span><h3>毎日の確認</h3><p>ミーティングで進捗と状況を確認し、次の行動を決定</p></div>
-  </div>
-  <p class="cyc-loop rv" style="--d:180ms;margin-top:8px!important">↻　毎日繰り返し、工程そのものも見直す</p>
-
-  <div class="card rv" style="--d:200ms">
-    <span class="lbl">Example ／ 例：営業プレゼン資料の作成</span>
-    <div class="fl"><div class="fl-step"><span class="fl-dot">1</span><p>資料収集</p></div><div class="fl-step"><span class="fl-dot">2</span><p>技術部門への確認</p></div><div class="fl-step"><span class="fl-dot">3</span><p>技術面の質問</p></div><div class="fl-step"><span class="fl-dot">4</span><p>修正、調整</p></div><div class="fl-step"><span class="fl-dot">5</span><p>ダブルチェック</p></div><div class="fl-step"><span class="fl-dot">6</span><p>提出</p></div><div class="fl-step"><span class="fl-dot">7</span><p>報告</p></div></div>
-    <div class="dod"><b>完了の定義</b><span>技術部門の確認を経た資料をダブルチェックし、提出のうえ上司へ報告した時点を「完了」とする。途中の工程で止まっている場合は「進行中」とし、経過日数を数える。</span></div>
-  </div>
-
-  <div class="card rv" style="--d:240ms">
-    <span class="lbl">Daily Report ／ 日次報告のフォーマット（例）</span>
-    <div class="rp rp-h"><span>担当</span><span>作業時間</span><span>タスク数</span><span>完了</span><span>進行中のタスクと工程</span></div>
-    <div class="rp"><b>A</b><span>7.5h</span><span>6件</span><span>5件</span><span>見積書の作成　<em>4／7 修正、調整</em></span></div>
-    <div class="rp"><b>C</b><span>8.0h</span><span>5件</span><span>3件</span><span>見積書の作成　<em>5／7 ダブルチェック</em></span></div>
-    <div class="rp"><b>D</b><span>7.0h</span><span>4件</span><span>2件</span><span>営業プレゼン資料　<em>2／7 技術部門への確認</em></span></div>
-  </div>
-
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>11 ／ 13</p></div>
-</section>
-
-<!-- ═══════ 12 AI業務管理：ダッシュボード ═══════ -->
-<section class="pg" data-chap="IV" data-num="12" id="aidash">
-  <p class="eb rv">AI Dashboard <b>／ Claudeによる分析（例）</b></p>
-  <h2 class="kw rv" style="--d:60ms">毎朝、日次報告から<br /><i>滞っている作業を洗い出す。</i></h2>
-  <p class="kw-sub rv" style="--d:100ms">日次報告をClaudeで集計し、工程別の所要時間、完了率（着手分のうち完了した割合）、停滞中の作業を確認しました。</p>
-  <div class="kwbar rv" style="--d:130ms"><span></span></div>
-  <figure class="gx gx--chart" aria-hidden="true"><span class="gx-step"><i></i><b>11</b> / 12</span><div class="gx-in"><div class="gx-side gx-side--l"><span class="gx-tag" style="--i:1"><span class="gx-pl"><img src="assets/gx/milestone-report.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日次報告</span><span data-l="en">Daily reports</span><span data-l="vi">Báo cáo hằng ngày</span></b></span></div><div class="gx-core"><span class="gx-chartc has-ax"><span class="gx-col" style="--h:92"><i class="gx-bar" style="--h:92;--i:0"></i><b class="gx-lb gx-ax">A</b></span><span class="gx-col" style="--h:85"><i class="gx-bar" style="--h:85;--i:1"></i><b class="gx-lb gx-ax">B</b></span><span class="gx-col" style="--h:78"><i class="gx-bar" style="--h:78;--i:2"></i><b class="gx-lb gx-ax">C</b></span><span class="gx-col" style="--h:64"><i class="gx-bar is-hot" style="--h:64;--i:3"></i><b class="gx-lb gx-ax">D</b><span class="gx-lens"><img src="assets/gx/magnifier.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span></span><span class="gx-col" style="--h:88"><i class="gx-bar" style="--h:88;--i:4"></i><b class="gx-lb gx-ax">E</b></span><i class="gx-sheen"></i></span><em class="gx-chip gx-chip--o"><span data-l="ja">担当D：滞留3日</span><span data-l="en">Owner D: stalled 3 days</span><span data-l="vi">Người D: tồn 3 ngày</span></em></div><div class="gx-side gx-side--r"><span class="gx-tag" style="--i:2"><span class="gx-pl"><img src="assets/gx/bottleneck.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">滞留を見つける</span><span data-l="en">Spot stalled work</span><span data-l="vi">Tìm việc bị tồn</span></b></span><span class="gx-tag" style="--i:3"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">朝のうちに対応</span><span data-l="en">Act the same morning</span><span data-l="vi">Xử lý ngay buổi sáng</span></b></span></div></div></figure>
-
-  <div class="kpi rv" style="--d:160ms">
-    <div class="card"><span class="lbl">本日の完了タスク</span><p class="num gr">23<small>／27件</small></p></div>
-    <div class="card"><span class="lbl">完了率</span><p class="num gr">85<small>%</small></p></div>
-    <div class="card"><span class="lbl">停滞タスク</span><p class="num" style="color:#c14343">3<small>件</small></p></div>
-    <div class="card"><span class="lbl">最長の停滞日数</span><p class="num" style="color:#c14343">3<small>日</small></p></div>
-  </div>
-
-  <div class="g2 rv" style="--d:200ms;margin-top:10px">
-    <div class="card ch"><span class="lbl">Chart 1 ／ 工程別の平均所要時間</span><p class="ch-t">例：営業プレゼン資料（1件あたり）</p><svg viewBox="0 0 320 219" width="100%" role="img" aria-label="工程別の平均所要時間（例）" font-family="'Noto Sans JP',sans-serif"><line x1="104.0" y1="4" x2="104.0" y2="199" stroke="#ece8f3" stroke-width="1"/><text x="104.0" y="213" font-size="9" fill="#8a83a0" text-anchor="middle">0h</text><line x1="137.0" y1="4" x2="137.0" y2="199" stroke="#ece8f3" stroke-width="1"/><text x="137.0" y="213" font-size="9" fill="#8a83a0" text-anchor="middle">1h</text><line x1="170.0" y1="4" x2="170.0" y2="199" stroke="#ece8f3" stroke-width="1"/><text x="170.0" y="213" font-size="9" fill="#8a83a0" text-anchor="middle">2h</text><line x1="203.0" y1="4" x2="203.0" y2="199" stroke="#ece8f3" stroke-width="1"/><text x="203.0" y="213" font-size="9" fill="#8a83a0" text-anchor="middle">3h</text><line x1="236.0" y1="4" x2="236.0" y2="199" stroke="#ece8f3" stroke-width="1"/><text x="236.0" y="213" font-size="9" fill="#8a83a0" text-anchor="middle">4h</text><text x="96" y="21" font-size="10.5" fill="#3d3849" text-anchor="end" font-weight="500">資料収集</text><g><title>資料収集：平均 2.5時間</title><rect x="104" y="11" width="82.5" height="13" rx="3" fill="#6d5bd0"/><rect x="104" y="8" width="192" height="23" fill="transparent"/></g><text x="192.5" y="21" font-size="10" fill="#16141d" font-weight="700">2.5h</text><text x="96" y="48" font-size="10.5" fill="#3d3849" text-anchor="end" font-weight="700">技術部門への確認</text><g><title>技術部門への確認：平均 4.0時間</title><rect x="104" y="38" width="132.0" height="13" rx="3" fill="#F68209"/><rect x="104" y="35" width="192" height="23" fill="transparent"/></g><text x="242.0" y="48" font-size="10" fill="#16141d" font-weight="700">4.0h</text><text x="270.0" y="48" font-size="9.5" fill="#F68209" font-weight="700">ボトルネック</text><text x="96" y="75" font-size="10.5" fill="#3d3849" text-anchor="end" font-weight="500">技術面の質問</text><g><title>技術面の質問：平均 1.5時間</title><rect x="104" y="65" width="49.5" height="13" rx="3" fill="#6d5bd0"/><rect x="104" y="62" width="192" height="23" fill="transparent"/></g><text x="159.5" y="75" font-size="10" fill="#16141d" font-weight="700">1.5h</text><text x="96" y="102" font-size="10.5" fill="#3d3849" text-anchor="end" font-weight="500">修正、調整</text><g><title>修正、調整：平均 3.0時間</title><rect x="104" y="92" width="99.0" height="13" rx="3" fill="#6d5bd0"/><rect x="104" y="89" width="192" height="23" fill="transparent"/></g><text x="209.0" y="102" font-size="10" fill="#16141d" font-weight="700">3.0h</text><text x="96" y="129" font-size="10.5" fill="#3d3849" text-anchor="end" font-weight="500">ダブルチェック</text><g><title>ダブルチェック：平均 1.0時間</title><rect x="104" y="119" width="33.0" height="13" rx="3" fill="#6d5bd0"/><rect x="104" y="116" width="192" height="23" fill="transparent"/></g><text x="143.0" y="129" font-size="10" fill="#16141d" font-weight="700">1.0h</text><text x="96" y="156" font-size="10.5" fill="#3d3849" text-anchor="end" font-weight="500">提出</text><g><title>提出：平均 0.5時間</title><rect x="104" y="146" width="16.5" height="13" rx="3" fill="#6d5bd0"/><rect x="104" y="143" width="192" height="23" fill="transparent"/></g><text x="126.5" y="156" font-size="10" fill="#16141d" font-weight="700">0.5h</text><text x="96" y="183" font-size="10.5" fill="#3d3849" text-anchor="end" font-weight="500">報告</text><g><title>報告：平均 0.5時間</title><rect x="104" y="173" width="16.5" height="13" rx="3" fill="#6d5bd0"/><rect x="104" y="170" width="192" height="23" fill="transparent"/></g><text x="126.5" y="183" font-size="10" fill="#16141d" font-weight="700">0.5h</text></svg></div>
-    <div class="card ch"><span class="lbl">Chart 2 ／ 担当者別の完了率</span><p class="ch-t">今週の着手タスクに占める完了タスクの割合（%）。点線はチーム平均 81%</p><svg viewBox="0 0 300 200" width="100%" role="img" aria-label="担当者別の完了率（例）" font-family="'Noto Sans JP',sans-serif"><line x1="30" y1="174.0" x2="294" y2="174.0" stroke="#ece8f3"/><text x="24" y="177.0" font-size="9" fill="#8a83a0" text-anchor="end">0</text><line x1="30" y1="134.0" x2="294" y2="134.0" stroke="#ece8f3"/><text x="24" y="137.0" font-size="9" fill="#8a83a0" text-anchor="end">25</text><line x1="30" y1="94.0" x2="294" y2="94.0" stroke="#ece8f3"/><text x="24" y="97.0" font-size="9" fill="#8a83a0" text-anchor="end">50</text><line x1="30" y1="54.0" x2="294" y2="54.0" stroke="#ece8f3"/><text x="24" y="57.0" font-size="9" fill="#8a83a0" text-anchor="end">75</text><line x1="30" y1="14.0" x2="294" y2="14.0" stroke="#ece8f3"/><text x="24" y="17.0" font-size="9" fill="#8a83a0" text-anchor="end">100</text><g><title>担当 A：完了率 92%</title><rect x="41.0" y="26.8" width="30" height="147.2" rx="4" fill="#6d5bd0"/><rect x="30.0" y="14" width="52.0" height="160" fill="transparent"/></g><text x="56.0" y="21.8" font-size="10" fill="#16141d" font-weight="700" text-anchor="middle">92%</text><text x="56.0" y="191" font-size="10.5" fill="#3d3849" text-anchor="middle" font-weight="600">A</text><g><title>担当 B：完了率 85%</title><rect x="93.0" y="38.0" width="30" height="136.0" rx="4" fill="#6d5bd0"/><rect x="82.0" y="14" width="52.0" height="160" fill="transparent"/></g><text x="108.0" y="33.0" font-size="10" fill="#16141d" font-weight="700" text-anchor="middle">85%</text><text x="108.0" y="191" font-size="10.5" fill="#3d3849" text-anchor="middle" font-weight="600">B</text><g><title>担当 C：完了率 78%</title><rect x="145.0" y="49.2" width="30" height="124.8" rx="4" fill="#6d5bd0"/><rect x="134.0" y="14" width="52.0" height="160" fill="transparent"/></g><text x="160.0" y="44.2" font-size="10" fill="#16141d" font-weight="700" text-anchor="middle">78%</text><text x="160.0" y="191" font-size="10.5" fill="#3d3849" text-anchor="middle" font-weight="600">C</text><g><title>担当 D：完了率 64%</title><rect x="197.0" y="71.6" width="30" height="102.4" rx="4" fill="#6d5bd0"/><rect x="186.0" y="14" width="52.0" height="160" fill="transparent"/></g><text x="212.0" y="66.6" font-size="10" fill="#16141d" font-weight="700" text-anchor="middle">64%</text><text x="212.0" y="191" font-size="10.5" fill="#3d3849" text-anchor="middle" font-weight="600">D</text><g><title>担当 E：完了率 88%</title><rect x="249.0" y="33.2" width="30" height="140.8" rx="4" fill="#6d5bd0"/><rect x="238.0" y="14" width="52.0" height="160" fill="transparent"/></g><text x="264.0" y="28.2" font-size="10" fill="#16141d" font-weight="700" text-anchor="middle">88%</text><text x="264.0" y="191" font-size="10.5" fill="#3d3849" text-anchor="middle" font-weight="600">E</text><line x1="30" y1="44.4" x2="294" y2="44.4" stroke="#16141d" stroke-width="1.2" stroke-dasharray="4 3"/></svg></div>
-  </div>
-
-  <div class="card ch rv" style="--d:240ms;margin-top:10px"><span class="lbl">Chart 3 ／ チームの完了率の推移</span><p class="ch-t">2週間、日別（%）</p><svg viewBox="0 0 674 112" width="100%" role="img" aria-label="チームの完了率の推移（例）" font-family="'Noto Sans JP',sans-serif"><line x1="30" y1="90.0" x2="620" y2="90.0" stroke="#ece8f3"/><text x="24" y="93.0" font-size="9" fill="#8a83a0" text-anchor="end">60</text><line x1="30" y1="71.5" x2="620" y2="71.5" stroke="#ece8f3"/><text x="24" y="74.5" font-size="9" fill="#8a83a0" text-anchor="end">70</text><line x1="30" y1="53.0" x2="620" y2="53.0" stroke="#ece8f3"/><text x="24" y="56.0" font-size="9" fill="#8a83a0" text-anchor="end">80</text><line x1="30" y1="34.5" x2="620" y2="34.5" stroke="#ece8f3"/><text x="24" y="37.5" font-size="9" fill="#8a83a0" text-anchor="end">90</text><line x1="30" y1="16.0" x2="620" y2="16.0" stroke="#ece8f3"/><text x="24" y="19.0" font-size="9" fill="#8a83a0" text-anchor="end">100</text><line x1="325.0" y1="10" x2="325.0" y2="90" stroke="#8a83a0" stroke-dasharray="2 3"/><text x="30.0" y="11" font-size="9" fill="#8a83a0">1週目</text><text x="331.0" y="11" font-size="9" fill="#8a83a0">2週目（工程の見直し後）</text><path d="M30.0,90 L30.0,67.8 L95.6,64.1 L161.1,66.0 L226.7,58.5 L292.2,54.9 L357.8,53.0 L423.3,49.3 L488.9,51.1 L554.4,45.6 L620.0,41.9 L620.0,90 Z" fill="#6d5bd0" opacity=".10"/><polyline fill="none" stroke="#3b2f86" stroke-width="2" points="30.0,67.8 95.6,64.1 161.1,66.0 226.7,58.5 292.2,54.9 357.8,53.0 423.3,49.3 488.9,51.1 554.4,45.6 620.0,41.9"/><g><title>1週目 月曜日：72%</title><circle cx="30.0" cy="67.8" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="16.0" y="16" width="28" height="74" fill="transparent"/></g><text x="30.0" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">月</text><g><title>1週目 火曜日：74%</title><circle cx="95.6" cy="64.1" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="81.6" y="16" width="28" height="74" fill="transparent"/></g><text x="95.6" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">火</text><g><title>1週目 水曜日：73%</title><circle cx="161.1" cy="66.0" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="147.1" y="16" width="28" height="74" fill="transparent"/></g><text x="161.1" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">水</text><g><title>1週目 木曜日：77%</title><circle cx="226.7" cy="58.5" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="212.7" y="16" width="28" height="74" fill="transparent"/></g><text x="226.7" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">木</text><g><title>1週目 金曜日：79%</title><circle cx="292.2" cy="54.9" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="278.2" y="16" width="28" height="74" fill="transparent"/></g><text x="292.2" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">金</text><g><title>2週目 月曜日：80%</title><circle cx="357.8" cy="53.0" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="343.8" y="16" width="28" height="74" fill="transparent"/></g><text x="357.8" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">月</text><g><title>2週目 火曜日：82%</title><circle cx="423.3" cy="49.3" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="409.3" y="16" width="28" height="74" fill="transparent"/></g><text x="423.3" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">火</text><g><title>2週目 水曜日：81%</title><circle cx="488.9" cy="51.1" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="474.9" y="16" width="28" height="74" fill="transparent"/></g><text x="488.9" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">水</text><g><title>2週目 木曜日：84%</title><circle cx="554.4" cy="45.6" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="540.4" y="16" width="28" height="74" fill="transparent"/></g><text x="554.4" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">木</text><g><title>2週目 金曜日：86%</title><circle cx="620.0" cy="41.9" r="4" fill="#3b2f86" stroke="#fff" stroke-width="2"/><rect x="606.0" y="16" width="28" height="74" fill="transparent"/></g><text x="620.0" y="104" font-size="9" fill="#8a83a0" text-anchor="middle">金</text><text x="38.0" y="81.8" font-size="10" fill="#16141d" font-weight="700">72%</text><text x="630.0" y="45.9" font-size="11" fill="#16141d" font-weight="700">86%</text></svg></div>
-
-  <div class="card rv" style="--d:280ms;margin-top:10px">
-    <span class="lbl">Stuck ／ 停滞タスク（朝会で確認）</span>
-    <div class="st-row"><span class="st-pill" style="color:#c14343;border-color:#c14343"><i style="background:#c14343">!</i>要対応</span>
-<b>担当 D</b><span>営業プレゼン資料</span><span class="st-step">技術部門への確認</span>
-<span class="st-days"><span style="width:100%;background:#c14343"></span></span><b class="st-n">3日</b></div>
-<div class="st-row"><span class="st-pill" style="color:#d98a04;border-color:#d98a04"><i style="background:#d98a04">!</i>注意</span>
-<b>担当 C</b><span>見積書の作成</span><span class="st-step">ダブルチェック</span>
-<span class="st-days"><span style="width:67%;background:#d98a04"></span></span><b class="st-n">2日</b></div>
-<div class="st-row"><span class="st-pill" style="color:#8a83a0;border-color:#8a83a0"><i style="background:#8a83a0">i</i>確認</span>
-<b>担当 D</b><span>顧客リストの更新</span><span class="st-step">資料収集</span>
-<span class="st-days"><span style="width:33%;background:#8a83a0"></span></span><b class="st-n">1日</b></div>
-  </div>
-
-  <p class="rv" style="--d:300ms;margin-top:8px;margin-bottom:6px;font:500 10.5px/1.6 'Noto Sans JP',sans-serif;color:#8a83a0">※ グラフと表の数値は、仕組みを説明するためのサンプルです。</p>
-
-  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>12 ／ 13</p></div>
-</section>
-
-<!-- ═══════ 13 自己PR ═══════ -->
-<section class="pg" data-chap="I" data-num="13" id="pr">
-  <p class="eb rv">Self PR <b>／ 自己PR</b></p>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">採用担当の方にお伝えしたい<i>3つの強み</i></span><span data-l="en">Three strengths I would bring to your team</span><span data-l="vi">3 điểm mạnh tôi muốn chia sẻ với nhà tuyển dụng</span></h2>
-  <div class="kwbar rv" style="--d:100ms"><span></span></div>
-  <figure class="gx gx--grid gx--big" aria-hidden="true"><span class="gx-step"><i></i><b>12</b> / 12</span><div class="gx-in" style="--c:3;--mc:3"><div class="gx-tile" style="--i:0"><span class="gx-pl gx-pl--m"><img src="assets/gx/chat-bubbles.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><em class="gx-chip gx-no">01</em><b class="gx-lb"><span data-l="ja">日本とベトナムをつなぐ</span><span data-l="en">Bridging Japan and Vietnam</span><span data-l="vi">Kết nối Nhật – Việt</span></b></div><div class="gx-tile" style="--i:1"><span class="gx-pl gx-pl--m"><img src="assets/gx/puzzle-fit.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><em class="gx-chip gx-no">02</em><b class="gx-lb"><span data-l="ja">課題を聞き、解決まで進める</span><span data-l="en">From client issue to solution</span><span data-l="vi">Từ vấn đề đến giải pháp</span></b></div><div class="gx-tile" style="--i:2"><span class="gx-pl gx-pl--m"><img src="assets/gx/jd-document.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><em class="gx-chip gx-no">03</em><b class="gx-lb"><span data-l="ja">資料を作り、教えて定着させる</span><span data-l="en">Clear materials, lasting training</span><span data-l="vi">Tài liệu rõ, đào tạo đến nơi</span></b></div></div></figure>
-
-  <div style="display:flex;flex-direction:column;gap:14px;flex:1">
-    <div class="card rv" style="--d:140ms;display:grid;grid-template-columns:64px 1fr;gap:14px;flex:1;align-items:center">
-      <p class="num" style="color:#0f5a8c">01</p>
-      <div data-l="ja"><h3>日本の仕事の進め方を理解し、日本人とベトナム人をつなぐ力</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">報連相</span><span class="chip">数値報告</span><span class="chip">原因分析</span></div><p>2015年からの経験を生かし、日越チームの連携を支えます。</p></div>
-      <div data-l="en"><h3>Understanding Japanese business practice and bridging Japanese and Vietnamese teams</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">Horenso</span><span class="chip">Numerical reporting</span><span class="chip">Cause analysis</span></div><p>Since 2015, I have helped Japanese and Vietnamese teams work together.</p></div>
-      <div data-l="vi"><h3>Hiểu cách làm việc của người Nhật, kết nối người Nhật và người Việt</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">Horenso</span><span class="chip">Báo cáo số liệu</span><span class="chip">Phân tích nguyên nhân</span></div><p>Từ năm 2015, tôi hỗ trợ đội ngũ Nhật và Việt phối hợp hiệu quả.</p></div>
-    </div>
-    <div class="card rv" style="--d:180ms;display:grid;grid-template-columns:64px 1fr;gap:14px;flex:1;align-items:center">
-      <p class="num" style="color:#c14343">02</p>
-      <div data-l="ja"><h3>顧客の課題を聞き取り、社内と連携して解決まで進める力</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">顧客課題</span><span class="chip">技術連携</span><span class="chip">納品後支援</span><span class="chip">契約更新</span></div><p>MAYEKAWA VIETNAMとJILNESTAで、顧客課題の解決と契約更新を支えました。</p></div>
-      <div data-l="en"><h3>Understanding client issues and resolving them with colleagues</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">Client issues</span><span class="chip">Engineer collaboration</span><span class="chip">Post-delivery support</span><span class="chip">Contract renewals</span></div><p>At MAYEKAWA VIETNAM and JILNESTA, I worked with clients and engineers to resolve issues and support renewals.</p></div>
-      <div data-l="vi"><h3>Lắng nghe vấn đề của khách, phối hợp nội bộ để giải quyết</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">Vấn đề khách hàng</span><span class="chip">Phối hợp kỹ sư</span><span class="chip">Hỗ trợ sau bàn giao</span><span class="chip">Gia hạn hợp đồng</span></div><p>Tại MAYEKAWA VIETNAM và JILNESTA, tôi phối hợp với khách và kỹ sư để giải quyết vấn đề, hỗ trợ gia hạn.</p></div>
-    </div>
-    <div class="card rv" style="--d:220ms;display:grid;grid-template-columns:64px 1fr;gap:14px;flex:1;align-items:center">
-      <p class="num" style="color:#0f8f83">03</p>
-      <div data-l="ja"><h3>分かりやすい資料を作り、人に教えて定着させる力</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">技術資料</span><span class="chip">チーム指導</span><span class="chip">ChatGPT</span><span class="chip">AI活用</span></div><p>資料や指導を通じ、ChatGPTとAI活用で報告作業を効率化しました。</p></div>
-      <div data-l="en"><h3>Creating clear materials, training people and embedding new practices</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">Technical guides</span><span class="chip">Team coaching</span><span class="chip">ChatGPT</span><span class="chip">AI tools</span></div><p>I created clear guides and trained colleagues to use ChatGPT and AI agents, reducing reporting time.</p></div>
-      <div data-l="vi"><h3>Soạn tài liệu dễ hiểu, hướng dẫn đến khi người khác tự làm được</h3><div class="chips" style="margin:6px 0 8px"><span class="chip">Tài liệu kỹ thuật</span><span class="chip">Kèm cặp đội ngũ</span><span class="chip">ChatGPT</span><span class="chip">Công cụ AI</span></div><p>Tôi soạn hướng dẫn và dạy đồng nghiệp dùng ChatGPT, AI agent để giảm thời gian làm báo cáo.</p></div>
-    </div>
-  </div>
-
-  <div class="ft" style="margin-top:22px"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>13 ／ 13</p></div>
+  <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>10 ／ 10</p></div>
 </section>
 
 </main>
@@ -2192,11 +2023,6 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <div class="card cyc-c" style="border-color:#cfc6ef;background:linear-gradient(160deg,#fff,#f4f1fd)"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg></span><span class="cyc-n">03</span><h3 data-l="ja">Claudeで分析</h3><h3 data-l="en">Analysis with Claude</h3><h3 data-l="vi">Phân tích bằng Claude</h3><p data-l="ja">工程ごとの所要時間、完了率、停滞中の作業とその日数を算出します。</p><p data-l="en">Time per step, completion rate, and stuck tasks with days stuck.</p><p data-l="vi">Thời gian từng bước, tỷ lệ hoàn thành, việc bị kẹt và số ngày kẹt.</p></div>
     <span class="cyc-a">→</span>
     <div class="card cyc-c"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-meet"/></svg></span><span class="cyc-n">04</span><h3 data-l="ja">毎日の確認</h3><h3 data-l="en">Daily review</h3><h3 data-l="vi">Rà soát mỗi ngày</h3><p data-l="ja">ミーティングで進捗と状況を確認し、次の行動を決めます。</p><p data-l="en">In the meeting we check progress and status and decide next actions.</p><p data-l="vi">Trong cuộc họp, cả đội xem tiến độ, trạng thái và quyết định bước tiếp theo.</p></div>
-  </div>
-  <div class="card rv" style="--d:220ms;margin-top:14px"><span class="lbl">More ／ My Profile</span>
-    <p data-l="ja">工程例、日次報告、Claude集計のダッシュボードを、My Profileの<a href="#aiops">AI業務管理</a>と<a href="#aidash">AIダッシュボード</a>に掲載しています。</p>
-    <p data-l="en">I share process examples, daily reports and a Claude dashboard in My Profile under <a href="#aiops">AI management</a> and <a href="#aidash">AI dashboard</a>.</p>
-    <p data-l="vi">Tôi đăng ví dụ quy trình, báo cáo ngày và dashboard Claude tại mục <a href="#aiops">Quản lý bằng AI</a> và <a href="#aidash">Dashboard AI</a> trong My Profile.</p>
   </div>
 </section>
 </main>
@@ -3014,7 +2840,6 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
 </script>
 <script>
 (function(){
-  var SH={"資料収集": ["Thu thập", "Collect"], "技術部門への確認": ["Xác nhận KT", "Eng. check"], "技術面の質問": ["Hỏi kỹ thuật", "Tech Q&A"], "修正、調整": ["Chỉnh sửa", "Revise"], "ダブルチェック": ["Kiểm tra lại", "Double-check"], "提出": ["Nộp", "Submit"], "報告": ["Báo cáo", "Report"], "ボトルネック": ["Điểm nghẽn", "Bottleneck"]};
    UI={"ja": {"menu": "目次", "close": "閉じる", "title": "タイ チャン ホアン ニャ ポートフォリオ"}, "vi": {"menu": "Mục lục", "close": "Đóng", "title": "Thái Trần Hoàng Nhã | Portfolio"}, "en": {"menu": "Menu", "close": "Close", "title": "Thai Tran Hoang Nha | Portfolio"}};
   var D={
   "タイ チャン ホアン ニャ":[
@@ -3041,21 +2866,9 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     "Tiếng Nhật",
     "Japanese"
   ],
-  "AI Management ／ AIを活用したチームの業務管理":[
-    "AI Management <b>／ Quản lý công việc của team bằng AI</b>",
-    "<b>Managing team work with AI</b>"
-  ],
-  "業務の流れを定め、数字で可視化する。":[
-    "Đặt ra quy trình,<br /><i>trực quan hóa bằng số liệu</i>.",
-    "Define the workflow,<br /><i>make it visible with numbers</i>."
-  ],
   "工程の標準化":[
     "Chuẩn hóa quy trình",
     "Standardising the process"
-  ],
-  "各メンバーが担当業務を最初から最後まで洗い出し、「完了」の定義を明確化":[
-    "Mỗi thành viên tự viết ra công việc của mình từ đầu đến cuối và định nghĩa thế nào là “hoàn thành”",
-    "Each member writes out their work from start to finish and defines what “done” means"
   ],
   "日次報告":[
     "Báo cáo hằng ngày",
@@ -3069,49 +2882,9 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     "Phân tích bằng Claude",
     "Analysis with Claude"
   ],
-  "工程ごとの所要時間、完了率、停滞中のタスクとその日数を算出":[
-    "Tính thời gian từng bước, tỷ lệ hoàn thành, task bị kẹt và số ngày kẹt",
-    "Calculate time per step, completion rate, stuck tasks and days stuck"
-  ],
   "毎日の確認":[
     "Xác nhận hằng ngày",
     "Daily check"
-  ],
-  "ミーティングで進捗と状況を確認し、次の行動を決定":[
-    "Trong họp, xác nhận tiến độ và trạng thái, quyết định bước tiếp theo",
-    "Confirm progress and status in the meeting and decide next actions"
-  ],
-  "↻ 毎日繰り返し、工程そのものも見直す":[
-    "Lặp lại mỗi ngày, rà soát cả chính quy trình",
-    "Repeat daily and review the process itself"
-  ],
-  "Example ／ 例：営業プレゼン資料の作成":[
-    "Example <b>／ Ví dụ: làm slide thuyết trình kinh doanh</b>",
-    "<b>Example: preparing a sales presentation</b>"
-  ],
-  "資料収集":[
-    "Thu thập hồ sơ",
-    "Collect materials"
-  ],
-  "技術部門への確認":[
-    "Xác nhận với phòng kỹ thuật",
-    "Confirm with engineering"
-  ],
-  "技術面の質問":[
-    "Hỏi về kỹ thuật",
-    "Technical questions"
-  ],
-  "修正、調整":[
-    "Chỉnh sửa, điều chỉnh",
-    "Revise and adjust"
-  ],
-  "ダブルチェック":[
-    "Kiểm tra lại (double check)",
-    "Double-check"
-  ],
-  "Daily Report ／ 日次報告のフォーマット（例）":[
-    "Daily Report <b>／ Mẫu báo cáo ngày (ví dụ)</b>",
-    "<b>Daily report format (example)</b>"
   ],
   "作業時間":[
     "Giờ làm",
@@ -3121,93 +2894,9 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     "Số task",
     "Tasks"
   ],
-  "進行中のタスクと工程":[
-    "Task đang làm và bước hiện tại",
-    "Task in progress and current step"
-  ],
-  "見積書の作成 4／7 修正、調整":[
-    "Làm báo giá, bước 4/7 chỉnh sửa, điều chỉnh",
-    "Quotation, step 4/7 revise and adjust"
-  ],
-  "見積書の作成 5／7 ダブルチェック":[
-    "Làm báo giá, bước 5/7 double check",
-    "Quotation, step 5/7 double-check"
-  ],
-  "営業プレゼン資料 2／7 技術部門への確認":[
-    "Slide thuyết trình kinh doanh, bước 2/7 xác nhận với phòng kỹ thuật",
-    "Sales presentation, step 2/7 confirm with engineering"
-  ],
-  "AI Dashboard ／ Claudeによる分析（例）":[
-    "AI Dashboard <b>／ Phân tích bằng Claude (ví dụ)</b>",
-    "<b>Analysis by Claude (example)</b>"
-  ],
-  "どこで止まっているかを、毎朝ひと目で。":[
-    "Kẹt ở đâu,<br /><i>mỗi sáng nhìn là biết</i>.",
-    "Where work is stuck,<br /><i>clear every morning</i>."
-  ],
-  "本日の完了タスク":[
-    "Task hoàn thành hôm nay",
-    "Tasks completed today"
-  ],
   "完了率":[
     "Tỷ lệ hoàn thành",
     "Completion rate"
-  ],
-  "停滞タスク":[
-    "Task bị kẹt",
-    "Stuck tasks"
-  ],
-  "最長の停滞日数":[
-    "Số ngày kẹt lâu nhất",
-    "Longest delay (days)"
-  ],
-  "Chart 1 ／ 工程別の平均所要時間":[
-    "Chart 1 <b>／ Biểu đồ 1: thời gian trung bình theo từng bước</b>",
-    "<b>Chart 1: avg. time per step</b>"
-  ],
-  "例：営業プレゼン資料（1件あたり）":[
-    "Ví dụ: slide thuyết trình kinh doanh (mỗi bộ)",
-    "Example: sales deck (per job)"
-  ],
-  "ボトルネック":[
-    "Điểm nghẽn",
-    "Bottleneck"
-  ],
-  "Chart 2 ／ 担当者別の完了率":[
-    "Chart 2 <b>／ Biểu đồ 2: tỷ lệ hoàn thành theo người phụ trách</b>",
-    "<b>Chart 2: completion by owner</b>"
-  ],
-  "今週の着手タスクに占める完了タスクの割合（%）。点線はチーム平均 81%":[
-    "Tuần này, tỷ lệ task đã xong trên task đã bắt đầu (%). Đường chấm là trung bình team 81%",
-    "Started tasks completed this week (%); dotted line: team average 81%."
-  ],
-  "Chart 3 ／ チームの完了率の推移":[
-    "Chart 3 <b>／ Biểu đồ 3: xu hướng tỷ lệ hoàn thành của team</b>",
-    "<b>Chart 3: team completion trend</b>"
-  ],
-  "2週間、日別（%）":[
-    "2 tuần, theo ngày (%)",
-    "Two weeks, by day (%)"
-  ],
-  "1週目":[
-    "Tuần 1",
-    "Week 1"
-  ],
-  "2週目（工程の見直し後）":[
-    "Tuần 2 (sau khi điều chỉnh quy trình)",
-    "Week 2 (after the process review)"
-  ],
-  "Stuck ／ 停滞タスク（朝会で確認）":[
-    "Stuck <b>／ Task đang bị kẹt (xác nhận trong họp sáng)</b>",
-    "<b>Stuck tasks: morning meeting check</b>"
-  ],
-  "※ グラフと表の数値は、仕組みを説明するためのサンプルです。":[
-    "Số liệu trong biểu đồ và bảng là số mẫu để minh họa cơ chế.",
-    "Sample chart/table figures illustrate the system."
-  ],
-  "Self PR ／ 自己PR":[
-    "Self PR ／ Giới thiệu bản thân",
-    "Self PR"
   ],
   "5～6名":[
     "5–6<small> người</small>",
@@ -3221,10 +2910,6 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     "3–4<small> lần</small>",
     "3–4<small>x</small>"
   ],
-  "3件":[
-    "3<small> task</small>",
-    "3<small> tasks</small>"
-  ],
   "3日":[
     "3<small> ngày</small>",
     "3<small> days</small>"
@@ -3236,22 +2921,6 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
   "1日":[
     "1 ngày",
     "1 day"
-  ],
-  "6件":[
-    "6",
-    "6"
-  ],
-  "5件":[
-    "5",
-    "5"
-  ],
-  "4件":[
-    "4",
-    "4"
-  ],
-  "2件":[
-    "2",
-    "2"
   ],
   "担当":[
     "Phụ trách",
@@ -3289,61 +2958,21 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     "T2",
     "Mon"
   ],
-  "火":[
-    "T3",
-    "Tue"
-  ],
   "水":[
     "T4",
     "Wed"
-  ],
-  "木":[
-    "T5",
-    "Thu"
   ],
   "金":[
     "T6",
     "Fri"
   ],
-  "要対応":[
-    "Cần xử lý",
-    "Action needed"
-  ],
-  "注意":[
-    "Chú ý",
-    "Watch"
-  ],
   "確認":[
     "Theo dõi",
     "Check"
   ],
-  "担当 D":[
-    "Phụ trách D",
-    "Owner D"
-  ],
-  "担当 C":[
-    "Phụ trách C",
-    "Owner C"
-  ],
-  "営業プレゼン資料":[
-    "Slide thuyết trình kinh doanh",
-    "Sales presentation"
-  ],
-  "見積書の作成":[
-    "Làm báo giá",
-    "Quotation"
-  ],
-  "顧客リストの更新":[
-    "Cập nhật danh sách khách hàng",
-    "Customer list update"
-  ],
   "完了の定義":[
     "Định nghĩa hoàn thành",
     "Definition of done"
-  ],
-  "技術部門の確認を経た資料をダブルチェックし、提出のうえ上司へ報告した時点を「完了」とする。途中の工程で止まっている場合は「進行中」とし、経過日数を数える。":[
-    "Tài liệu đã được phòng kỹ thuật xác nhận, double check, nộp và báo cáo cấp trên thì mới tính là “hoàn thành”. Nếu dừng ở bước giữa thì tính là “đang làm” và đếm số ngày.",
-    "The deck is “done” only when it has been confirmed by engineering, double-checked, submitted and reported to the manager. If it stops at a middle step, it is “in progress” and the days are counted."
   ],
   "プロフィール":[
     "Hồ sơ",
@@ -3352,10 +2981,6 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
   "キャリア":[
     "Sự nghiệp",
     "Career"
-  ],
-  "自己PR":[
-    "Tự giới thiệu",
-    "Self PR"
   ],
   "Contents ／ 目次":[
     "Contents ／ Mục lục",
@@ -3376,18 +3001,6 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
   "CV ／ 履歴書兼職務経歴書":[
     "CV ／ Sơ yếu lý lịch và quá trình công tác",
     "CV ／ Rirekisho and career history"
-  ],
-  "業務の流れを整え、進捗を数字で把握する。":[
-    "Tôi sắp xếp quy trình,<br /><i>theo dõi tiến độ bằng số liệu</i>.",
-    "I organised the workflow,<br /><i>and tracked progress with figures</i>."
-  ],
-  "毎朝、日次報告から滞っている作業を洗い出す。":[
-    "Mỗi sáng, tôi xem báo cáo<br /><i>để kiểm tra việc đang bị chậm</i>.",
-    "I checked reports daily<br /><i>for stalled work</i>."
-  ],
-  "23／27件":[
-    "23<small>/27</small>",
-    "23<small>/27</small>"
   ],
   "顧客を訪問し、商談の進捗を数字で追う。":[
     "Tôi gặp khách,<br /><i>theo dõi tiến độ bán hàng bằng số liệu</i>.",
@@ -3435,7 +3048,7 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     var ix=lang==='vi'?0:1;
     claimed.forEach(function(c){
       if(lang==='ja'){c.el.innerHTML=c.ja;return}
-      if(c.isSvg){var s=SH[c.k];c.el.textContent=s?s[ix]:stripTags(D[c.k][ix]);return}
+      if(c.isSvg){c.el.textContent=stripTags(D[c.k][ix]);return}
       c.el.innerHTML=D[c.k][ix];
     });
     tnodes.forEach(function(t){t.n.nodeValue=lang==='ja'?t.ja:stripTags(D[t.k][ix])});
@@ -3590,7 +3203,7 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
    khung nhìn ~1 màn hình (tab ẩn không tải ảnh), hiện dần khi section vào khung nhìn, một lần rồi giữ.
    Không có IntersectionObserver: nạp và hiện ngay; reduced-motion: hiện ngay, vẫn tải lười. window.sectionPhotos để test đo. */
 (function(){
-  var IDS=['cover','toc','profile','projects','skillmap','career','w-mycom','w-jil','w-it','w-early','pcai','aiops','aidash','pr',
+  var IDS=['cover','toc','profile','projects','skillmap','career','w-mycom','w-jil','w-it','w-early','pcai',
     'sales-top','sales-trips','sales-pr','sales-reports','sales-kpi','sales-flow',
     'team-top','team-records','team-skills','team-daily','ai-top','ai-pyramid','ai-approach','ai-uses','ai-people'];
   var layers=[];

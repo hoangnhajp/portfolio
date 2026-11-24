@@ -44,16 +44,15 @@ const FACTS = ['MAYEKAWA VIETNAM CO., LTD.（MYCOM）', '営業部 アシスタ�
   'ベトナム支店 営業マネージャー', '2019年2月 ～ 2022年2月', 'ITコミュニケーター', '2017年8月 ～ 2019年2月',
   '部品部 売上管理担当', '2015年6月 ～ 2017年8月', '国際決済部 国際決済担当', '2011年9月 ～ 2015年6月',
   '日本語能力試験 N2', 'TOEIC 680点', '1989年7月31日', // email / SĐT nằm ở trang Liên hệ đã bỏ (task jofj)
-  '日本の仕事の進め方を理解し、日本人とベトナム人をつなぐ力', '顧客の課題を聞き取り、社内と連携して解決まで進める力',
-  '分かりやすい資料を作り、人に教えて定着させる力', 'AIを使ったCV解析、JDマッチングシステムの設計と開発を主導'];
+  // 3 điểm mạnh 自己PR nằm ở trang #pr, đã bỏ theo task ye4s
+  'AIを使ったCV解析、JDマッチングシステムの設計と開発を主導'];
 for (const s of FACTS) ok(html.includes(s), `thiếu nội dung CV mới: "${s}"`);
 
 // 6. Mỗi section của view Profile viết mới đủ 3 ngôn ngữ (khối data-l ja / en / vi cân nhau)
 const prof = (html.match(/<main class="wrap" data-view="profile">([\s\S]*?)<\/main>/) || [])[1] || '';
 const secs = [...prof.matchAll(/<section[^>]*id="([\w-]+)"[^>]*>([\s\S]*?)<\/section>/g)];
-ok(secs.length >= 13, `view Profile phải >= 13 section (trang Liên hệ đã bỏ, task jofj), đang ${secs.length}`);
+ok(secs.length >= 11, `view Profile phải >= 11 section (task jofj bỏ Liên hệ, task ye4s bỏ 11~13), đang ${secs.length}`);
 for (const [, id, body] of secs) {
-  if (id === 'aiops' || id === 'aidash') continue; // 2 trang mẫu giữ nguyên, dịch qua từ điển D
   const n = (l) => (body.match(new RegExp(`data-l="${l}"`, 'g')) || []).length;
   ok(n('ja') > 0 && n('ja') === n('en') && n('ja') === n('vi'), `#${id}: khối ngôn ngữ lệch ja/en/vi = ${n('ja')}/${n('en')}/${n('vi')}`);
 }

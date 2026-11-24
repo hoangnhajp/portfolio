@@ -2,7 +2,7 @@
 // Chrome headless thật (CDP), 3 ngôn ngữ x 10 bề rộng (1440 xuống 340):
 // 1) cảnh 8 ô icon (.gx--grid): mỗi nhãn nằm trên 1 dòng, không ngắt giữa từ ("Marketin g"), không tràn ô; icon cùng cỡ, cân giữa ô
 // 2) cảnh lưới khác (Sales / Team / AI): nhãn không ngắt giữa từ
-// 3) 12 thẻ .pj-c: tiêu đề tối đa 2 dòng, câu kể tối đa 3 dòng, tối đa 2 nhãn, không chữ nào bị ngắt giữa từ, tổng chữ thẻ <= trần
+// 3) task kfh1: workflow 12 bước .pj-c chỉ ghi tên: tên tối đa 3 dòng, không ngắt giữa từ, không câu kể / nhãn, icon cùng cỡ, bước không tràn làn, tổng chữ <= trần
 // 4) không tràn ngang, không lỗi JS.
 // Chạy: node tests/browser-work-areas-fit.mjs [--report]   (thoát 0 = đạt). CHROME=<đường dẫn> để đổi trình duyệt.
 import { spawn } from 'node:child_process';
@@ -25,7 +25,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 let checks = 0;
-const MAX_CARD_CHARS = { vi: 150, en: 150, ja: 75 };   // trần tổng chữ hiển thị của 1 thẻ (không tính "Xem chi tiết")
+const MAX_CARD_CHARS = { vi: 50, en: 50, ja: 16 };   // trần tổng chữ hiển thị của 1 bước (số + tên)
 
 const PROBE = `(() => {
   const vis = (e) => e && e.getClientRects().length > 0 && getComputedStyle(e).display !== 'none';
@@ -62,14 +62,17 @@ const PROBE = `(() => {
       icon: Math.round(pr.width), top: Math.round(tb.top), w: Math.round(tb.width), h: Math.round(tb.height) });
   }
   for (const c of sec.querySelectorAll('.pj-c')) {
-    const go = c.querySelector('.pj-go');
-    const all = text(c).replace(go ? text(go) : '', '').trim();
+    const all = text(c);
+    const ln = c.closest('.pjf-ln'), lr = ln ? ln.getBoundingClientRect() : null, cr = c.getBoundingClientRect();
+    const ic = c.querySelector('.pjf-ic img');
     const brokenAll = [];
     for (const part of c.querySelectorAll('.pj-top,.pj-co,.pj-role,.pj-pt,.pj-tags i')) if (vis(part)) brokenAll.push(...lineInfo(part).broken);
     const vtags = [...c.querySelectorAll('.pj-tags i')].filter(vis);
     out.cards.push({ co: text(c.querySelector('.pj-co')), coLines: lineInfo(c.querySelector('.pj-co')).lines,
       ptLines: vis(c.querySelector('.pj-pt')) ? lineInfo(c.querySelector('.pj-pt')).lines : 0,
-      role: vis(c.querySelector('.pj-role')), tags: vtags.length, chars: [...all.replace(/\\s/g, '')].length, broken: brokenAll });
+      role: vis(c.querySelector('.pj-role')), tags: vtags.length, detail: !!c.querySelector('.pj-pt,.pj-tags,.pj-go'),
+      icon: ic && vis(ic) ? Math.round(ic.getBoundingClientRect().width) : 0,
+      out: lr ? Math.round(Math.max(cr.right - lr.right, lr.left - cr.left, 0)) : 99, chars: [...all.replace(/\\s/g, '')].length, broken: brokenAll });
   }
   for (const lb of document.querySelectorAll('main .gx--grid .gx-tile .gx-lb')) {
     if (lb.closest('#projects') || !vis(lb)) continue;
@@ -138,13 +141,15 @@ async function main() {
       ok(Math.max(...hs) - Math.min(...hs) <= 2, `${tag}: các ô cao lệch nhau ${hs}`);
       ok(r.cards.length === 12, `${tag}: cần 12 thẻ (đang ${r.cards.length})`);
       for (const c of r.cards) {
-        ok(c.coLines <= 2, `${tag}: tiêu đề "${c.co}" ${c.coLines} dòng (tối đa 2)`);
-        ok(c.ptLines <= 3, `${tag}: câu kể thẻ "${c.co}" ${c.ptLines} dòng (tối đa 3)`);
-        ok(c.tags <= 2, `${tag}: thẻ "${c.co}" có ${c.tags} nhãn (tối đa 2)`);
+        ok(c.coLines >= 1 && c.coLines <= 3, `${tag}: tên bước "${c.co}" ${c.coLines} dòng (1 đến 3)`);
+        ok(!c.detail && !c.ptLines && !c.tags, `${tag}: bước "${c.co}" còn câu kể / nhãn (chỉ để tên)`);
+        ok(c.icon > 0, `${tag}: bước "${c.co}" không thấy icon`);
+        ok(c.out <= 1, `${tag}: bước "${c.co}" tràn khỏi làn ${c.out}px`);
         ok(!c.role, `${tag}: thẻ "${c.co}" còn dòng phụ .pj-role (trùng ý câu kể)`);
         ok(c.chars <= MAX_CARD_CHARS[lang], `${tag}: thẻ "${c.co}" ${c.chars} ký tự (trần ${MAX_CARD_CHARS[lang]})`);
         ok(!c.broken.length, `${tag}: thẻ "${c.co}" có chữ bị ngắt giữa từ ${c.broken.join(',')}`);
       }
+      ok(new Set(r.cards.map((c) => c.icon)).size === 1, `${tag}: icon các bước không cùng cỡ ${[...new Set(r.cards.map((c) => c.icon))]}`);
       ok(!r.otherGrid.length, `${tag}: cảnh lưới khác có nhãn ngắt giữa từ ${r.otherGrid.join(' | ')}`);
       ok(r.overflowX <= 1, `${tag}: tràn ngang ${r.overflowX}px`);
     }
@@ -162,7 +167,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-work-areas-fit (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-work-areas-fit: ${checks} lượt (3 ngôn ngữ x 10 bề rộng): 8 ô icon nhãn 1 dòng không ngắt từ, icon cùng cỡ; 12 thẻ tiêu đề <= 2 dòng, câu kể <= 3 dòng, <= 2 nhãn, không ngắt từ; không tràn, 0 lỗi JS`);
+    console.log(`PASS browser-work-areas-fit: ${checks} lượt (3 ngôn ngữ x 10 bề rộng): 8 ô icon nhãn 1 dòng không ngắt từ, icon cùng cỡ; workflow 12 bước chỉ ghi tên <= 3 dòng, icon cùng cỡ, không ngắt từ, không tràn làn; không tràn, 0 lỗi JS`);
     process.exit(0);
   }, 300);
 });
