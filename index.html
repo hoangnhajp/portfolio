@@ -637,6 +637,96 @@ html.sr .pg>.sr.sr-in{opacity:1;transform:none}
 @media print{.zz-orb{display:none}}
 </style>
 <!-- zz-css:end -->
+<!-- pyr-css:start -->
+<style id="pyr-css">
+/* Task edof: 2 kim tự tháp động ở #ai-pyramid (tab AI). Khung dùng lại phim .mv (nền navy, tiêu đề, nút dừng, thanh tiến trình,
+   tự dừng khi ra khỏi màn hình nhờ IO của mv-css). Một chu kỳ --py-t: 3 tầng mọc từ đáy lên -> tầng đáy 70% sáng + vệt quét AI ->
+   tầng giữa 20% -> tầng đỉnh 10% phát sáng, hạt thời gian bay từ đáy lên đỉnh -> tổng kết. Chỉ animate transform / opacity.
+   Trạng thái mặc định = khung tĩnh đầy đủ (3 tầng sáng, phụ đề tổng kết) cho reduced-motion và bản in. */
+.pyr{--py-t:12s;--py-e:cubic-bezier(.2,.7,.2,1)}
+.py-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:14px 14px 0}
+.py-col{min-width:0;padding:0 10px}
+.py-col--sales{border-left:1px dashed rgba(143,216,255,.28)}
+.py-head{display:flex;justify-content:center;margin-bottom:6px}
+.py-hd{padding:4px 12px;border-radius:999px;font:700 12px/1.35 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.02em;color:#fff;
+  background:rgba(143,216,255,.12);border:1px solid rgba(143,216,255,.35);text-align:center}
+.py-col--sales .py-hd{color:#FFE3C8;background:rgba(246,130,9,.14);border-color:rgba(251,166,90,.5)}
+.py-svg{display:block;width:100%;max-width:330px;height:auto;margin:0 auto;overflow:visible}
+.py-gd{stroke:rgba(255,255,255,.16);stroke-width:1;stroke-dasharray:4 5}
+.py-sh{fill:rgba(255,255,255,.06);stroke:rgba(255,255,255,.22);stroke-width:1}
+.py-lt{stroke:rgba(255,255,255,.55);stroke-width:1}
+.py-t{transform-box:fill-box;transform-origin:50% 100%}
+.py-t image{filter:drop-shadow(0 3px 4px rgba(8,21,43,.35))}
+.py-pc{font:700 13px 'Space Grotesk',sans-serif;letter-spacing:-.02em}
+svg .py-pc{fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(8,21,43,.35);stroke-width:3px}
+svg .py-pc1{font-size:30px}
+svg .py-pc2{font-size:17px}
+svg .py-pc3{font-size:12px}
+.py-ai rect{fill:#fff;stroke:#26B3F4;stroke-width:1.5}
+.py-ai text{font:800 11px 'Space Grotesk',sans-serif;fill:#0f5a8c;text-anchor:middle}
+.py-ai{transform-box:fill-box;transform-origin:50% 50%}
+.py-scan{opacity:0;transform-box:view-box}
+.py-gl{fill:none;stroke:#FFE3C8;stroke-width:5;opacity:0;filter:drop-shadow(0 0 8px rgba(246,130,9,.95))}
+.py-fly{fill:#FFE3C8;opacity:0;filter:drop-shadow(0 0 4px rgba(246,130,9,.9))}
+.py-leg{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}
+.py-r{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);gap:1px 8px;align-items:start;padding:6px 8px;border-radius:10px}
+.py-rbg{position:absolute;inset:0;border-radius:inherit;background:rgba(255,255,255,.1);border:1px solid rgba(143,216,255,.4);opacity:0}
+.py-r>*:not(.py-rbg){position:relative}
+.py-pcl{grid-row:1/3;align-self:center;justify-self:center;padding:3px 0;width:40px;border-radius:8px;text-align:center;color:#08152b}
+.py-r1 .py-pcl{background:linear-gradient(135deg,#8fd8ff,#26B3F4)}
+.py-r2 .py-pcl{background:linear-gradient(135deg,#d6ccff,#9a87f0)}
+.py-r3 .py-pcl{background:linear-gradient(135deg,#FFD3A6,#FBA65A)}
+.py-nm{font-size:12px;line-height:1.35;font-weight:700;color:#fff;word-break:keep-all;overflow-wrap:anywhere}
+.py-tk{font-size:11px;line-height:1.45;color:rgba(255,255,255,.74);word-break:keep-all;overflow-wrap:anywhere}
+.py-caps{min-height:44px}
+.pyr .mv-cap{font-size:13px}
+.pyr .py-c4{opacity:1;font-weight:700;color:#fff}
+/* Chuyển động: chỉ khi trang đã hiện (.pg.in), dừng theo .is-paused / .is-off của .mv */
+html.js .pg.in .pyr .py-t1{animation:pyT1 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-t2{animation:pyT2 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-t3{animation:pyT3 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-t1 .py-lt{animation:pyL1 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-t2 .py-lt{animation:pyL2 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-t3 .py-lt{animation:pyL3 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-scan{animation:pyScan var(--py-t) linear infinite}
+html.js .pg.in .pyr .py-ai{animation:pyAi var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-gl{animation:pyGlow var(--py-t) ease-in-out infinite}
+html.js .pg.in .pyr .py-fly{animation:pyFly var(--py-t) cubic-bezier(.3,0,.5,1) infinite;animation-delay:calc(var(--i) * 110ms)}
+html.js .pg.in .pyr .py-r1 .py-rbg{animation:pyR1 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-r2 .py-rbg{animation:pyR2 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-r3 .py-rbg{animation:pyR3 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-c1{animation:pyC1 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-c2{animation:pyC2 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-c3{animation:pyC3 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .py-c4{animation:pyC4 var(--py-t) var(--py-e) infinite}
+html.js .pg.in .pyr .mv-bar span{animation:pyBar var(--py-t) linear infinite}
+/* 0-8% mọc tầng | 8-32% tầng đáy | 32-56% tầng giữa | 56-80% tầng đỉnh | 80-96% tổng kết | 96-100% mờ để lặp */
+@keyframes pyT1{0%{opacity:0;transform:translateY(18px)}4%{opacity:1;transform:none}9%{transform:none}12%{transform:scale(1.04)}15%,96%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+@keyframes pyT2{0%,2%{opacity:0;transform:translateY(18px)}6%{opacity:1;transform:none}33%{transform:none}36%{transform:scale(1.06)}39%,96%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+@keyframes pyT3{0%,4%{opacity:0;transform:translateY(18px)}8%{opacity:1;transform:none}57%{transform:none}60%{transform:scale(1.12)}63%,96%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+@keyframes pyL1{0%,8%{opacity:.08}11%,96%{opacity:1}100%{opacity:0}}
+@keyframes pyL2{0%,32%{opacity:.08}35%,96%{opacity:1}100%{opacity:0}}
+@keyframes pyL3{0%,56%{opacity:.08}59%,96%{opacity:1}100%{opacity:0}}
+@keyframes pyScan{0%,10%{opacity:0;transform:translateX(0)}12%{opacity:1;transform:translateX(30px)}28%{opacity:1;transform:translateX(330px)}30%,100%{opacity:0;transform:translateX(360px)}}
+@keyframes pyAi{0%,12%{opacity:0;transform:scale(.4)}15%{opacity:1;transform:scale(1.2)}18%,96%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+@keyframes pyGlow{0%,58%{opacity:0}62%{opacity:1}68%{opacity:.35}74%{opacity:1}80%{opacity:.5}90%{opacity:.9}96%,100%{opacity:0}}
+@keyframes pyFly{0%,58%{opacity:0;transform:translateY(0)}61%{opacity:1;transform:translateY(-10px)}74%{opacity:.9;transform:translateY(-120px)}78%,100%{opacity:0;transform:translateY(-140px)}}
+@keyframes pyR1{0%,8%{opacity:0}11%,30%{opacity:1}33%,100%{opacity:0}}
+@keyframes pyR2{0%,32%{opacity:0}35%,54%{opacity:1}57%,100%{opacity:0}}
+@keyframes pyR3{0%,56%{opacity:0}59%,78%{opacity:1}81%,100%{opacity:0}}
+@keyframes pyC1{0%,8%{opacity:0;transform:translateY(8px)}11%,29%{opacity:1;transform:none}32%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes pyC2{0%,32%{opacity:0;transform:translateY(8px)}35%,53%{opacity:1;transform:none}56%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes pyC3{0%,56%{opacity:0;transform:translateY(8px)}59%,77%{opacity:1;transform:none}80%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes pyC4{0%,80%{opacity:0;transform:translateY(8px)}83%,94%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes pyBar{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@media screen and (max-width:600px){.py-cols{grid-template-columns:1fr;gap:14px;margin:12px 8px 0}
+  .py-col--sales{border-left:0;border-top:1px dashed rgba(143,216,255,.28);padding-top:14px}.py-svg{max-width:300px}.pyr .mv-cap{font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){.pyr *{animation:none!important}}
+@media print{.mv.pyr{display:block!important;margin-top:12px;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pyr *{animation:none!important}.pyr .mv-pp,.pyr .mv-bar,.pyr .mv-time{display:none}.pyr .py-caps{margin-bottom:14px}
+  .pyr .py-svg{max-width:250px}.pyr .py-r{padding:4px 6px}.pyr .py-tk{font-size:10px}}
+</style>
+<!-- pyr-css:end -->
 <!-- gx-css:start -->
 <style id="gx-css">
 /* Cảnh minh hoạ động theo phong cách video GPRFLEXEYE: thẻ trắng viền gradient cam-xanh, bóng 3D, icon 3D kính, lưới chấm, pop back.out, vẽ nét, đếm số */
@@ -901,9 +991,10 @@ html.js .gxs .gxs-hl,html.js .gxs .gxs-lb::before{animation:gxsStep 3.6s ease-in
     </nav>
     <nav class="sb-nav" data-for="ai" hidden>
       <a href="#ai-top" data-sec="ai-top"><em>TOP</em><span data-l="ja">概要</span><span data-l="en">Overview</span><span data-l="vi">Tổng quan</span></a>
-      <a href="#ai-approach" data-sec="ai-approach"><em>01</em><span data-l="ja">ワークフロー化</span><span data-l="en">My AI workflow</span><span data-l="vi">Quy trình hóa với AI</span></a>
-      <a href="#ai-uses" data-sec="ai-uses"><em>02</em><span data-l="ja">AIの活用場面</span><span data-l="en">Where I use AI</span><span data-l="vi">Việc tôi dùng AI</span></a>
-      <a href="#ai-people" data-sec="ai-people"><em>03</em><span data-l="ja">人にしかできない仕事</span><span data-l="en">Work only people can do</span><span data-l="vi">Việc cần con người</span></a>
+      <a href="#ai-pyramid" data-sec="ai-pyramid"><em>01</em><span data-l="ja">仕事の3層とAI</span><span data-l="en">Three layers of work</span><span data-l="vi">Ba tầng công việc</span></a>
+      <a href="#ai-approach" data-sec="ai-approach"><em>02</em><span data-l="ja">ワークフロー化</span><span data-l="en">My AI workflow</span><span data-l="vi">Quy trình hóa với AI</span></a>
+      <a href="#ai-uses" data-sec="ai-uses"><em>03</em><span data-l="ja">AIの活用場面</span><span data-l="en">Where I use AI</span><span data-l="vi">Việc tôi dùng AI</span></a>
+      <a href="#ai-people" data-sec="ai-people"><em>04</em><span data-l="ja">人にしかできない仕事</span><span data-l="en">Work only people can do</span><span data-l="vi">Việc cần con người</span></a>
     </nav>
     <a class="sb-pdf" href="Rirekisho_ThaiTranHoangNha.pdf" target="_blank" rel="noopener"><span data-l="ja">履歴書（PDF）を開く</span><span data-l="en">Open CV (PDF, Japanese)</span><span data-l="vi">Mở CV (PDF, tiếng Nhật)</span></a>
   </div>
@@ -2152,8 +2243,32 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <div><span>Rule</span><b data-l="ja">AIの結果は人が確認してから使う</b><b data-l="en">A person checks AI output before it is used</b><b data-l="vi">Con người kiểm tra kết quả AI trước khi dùng</b></div>
   </div>
 </section>
+<section class="pg" data-chap="V" id="ai-pyramid">
+  <span class="eb rv">01　<b>WHERE THE TIME GOES</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">仕事は3つの層。<br /><i>土台の約7割はAIと進める。</i></span><span data-l="en">Work has three layers.<br /><i>AI does the groundwork, about 70%.</i></span><span data-l="vi">Công việc có ba tầng.<br /><i>Tầng đáy khoảng 70%, tôi làm cùng AI.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">私の見方では業務時間の約7割を占める情報の収集と整理をAIに任せ、分析と人との信頼関係づくりに時間を使います。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I hand AI the collecting and organising of information, roughly 70% of working time in my view, and focus on analysis and people.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi giao cho AI phần thu thập, xử lý thông tin (theo tôi, khoảng 70% thời gian) để dành thời gian cho phân tích và quan hệ với con người.</p>
+  <div class="kw1 rv" style="margin:8px 0 10px">
+    <div class="chips" data-l="ja"><span class="chip">日々の運用 70%</span><span class="chip">分析と計画 20%</span><span class="chip">関係と責任 10%</span></div>
+    <div class="chips" data-l="en"><span class="chip">daily operations 70%</span><span class="chip">analysis and planning 20%</span><span class="chip">relationships 10%</span></div>
+    <div class="chips" data-l="vi"><span class="chip">vận hành hằng ngày 70%</span><span class="chip">phân tích, kế hoạch 20%</span><span class="chip">quan hệ, trách nhiệm 10%</span></div>
+  </div>
+  <figure class="mv pyr rv" style="--d:150ms">
+    <figcaption class="mv-head"><span class="mv-rec"></span><span class="mv-kick">PYRAMID</span><span class="mv-tt" data-l="ja">仕事の3層とAIの役割</span><span class="mv-tt" data-l="en">Three layers of work and where AI fits</span><span class="mv-tt" data-l="vi">Ba tầng công việc và vai trò của AI</span><span class="mv-time" aria-hidden="true">12s</span><button class="mv-pp" type="button" aria-pressed="false"><i aria-hidden="true"></i><span class="mv-sr" data-l="ja">一時停止</span><span class="mv-sr" data-l="en">Pause animation</span><span class="mv-sr" data-l="vi">Tạm dừng chuyển động</span></button></figcaption>
+    <div class="py-cols"><div class="py-col py-col--gen"><div class="py-head"><b class="py-hd" data-l="ja">人の仕事の3層</b><b class="py-hd" data-l="en">Three layers of work</b><b class="py-hd" data-l="vi">Ba tầng công việc</b></div><svg class="py-svg" viewBox="0 0 300 250" aria-hidden="true" focusable="false"><defs><clipPath id="py-clip-gen"><polygon points="60.2,154 239.8,154 294,242 6,242"/></clipPath><linearGradient id="py-g1-gen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset=".55" stop-color="#26B3F4"/><stop offset="1" stop-color="#0f5a8c"/></linearGradient><linearGradient id="py-g2-gen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6ccff"/><stop offset=".5" stop-color="#9a87f0"/><stop offset="1" stop-color="#5b49c4"/></linearGradient><linearGradient id="py-g3-gen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD3A6"/><stop offset=".5" stop-color="#FBA65A"/><stop offset="1" stop-color="#DD6417"/></linearGradient><linearGradient id="py-sg-gen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".6" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><line class="py-gd" x1="0" y1="83" x2="300" y2="83"/><line class="py-gd" x1="0" y1="151" x2="300" y2="151"/><g class="py-t py-t1"><polygon class="py-sh" points="60.2,154 239.8,154 294,242 6,242"/><polygon class="py-lt" points="60.2,154 239.8,154 294,242 6,242" fill="url(#py-g1-gen)"/><g clip-path="url(#py-clip-gen)"><rect class="py-scan" x="-60" y="150" width="56" height="96" fill="url(#py-sg-gen)"/></g><image href="assets/gx/magnifier.webp" x="104" y="162" width="26" height="26"/><image href="assets/gx/checklist.webp" x="137" y="162" width="26" height="26"/><image href="assets/gx/milestone-report.webp" x="170" y="162" width="26" height="26"/><text class="py-pc py-pc1" x="150" y="228">70%</text><g class="py-ai"><rect x="212" y="202" width="36" height="19" rx="9.5"/><text x="230" y="215.5">AI</text></g></g><g class="py-t py-t2"><polygon class="py-sh" points="102,86 198,86 236.2,148 63.8,148"/><polygon class="py-lt" points="102,86 198,86 236.2,148 63.8,148" fill="url(#py-g2-gen)"/><image href="assets/gx/report-chart.webp" x="137" y="91" width="26" height="26"/><text class="py-pc py-pc2" x="150" y="140">20%</text></g><g class="py-t py-t3"><polygon class="py-sh" points="150,8 194.3,80 105.7,80"/><polygon class="py-lt" points="150,8 194.3,80 105.7,80" fill="url(#py-g3-gen)"/><polygon class="py-gl" points="150,8 194.3,80 105.7,80"/><image href="assets/gx/handshake.webp" x="138" y="36" width="24" height="24"/><text class="py-pc py-pc3" x="150" y="75">10%</text></g><circle class="py-fly" cx="96" cy="206" r="2.6" style="--i:0"/><circle class="py-fly" cx="118" cy="196" r="3.6" style="--i:1"/><circle class="py-fly" cx="140" cy="206" r="2.6" style="--i:2"/><circle class="py-fly" cx="162" cy="196" r="2.6" style="--i:3"/><circle class="py-fly" cx="184" cy="206" r="3.6" style="--i:4"/><circle class="py-fly" cx="206" cy="196" r="2.6" style="--i:5"/></svg><ol class="py-leg"><li class="py-r py-r3"><span class="py-rbg" aria-hidden="true"></span><span class="py-pc py-pcl py-pc3">10%</span><b class="py-nm" data-l="ja">人との関係と責任</b><b class="py-nm" data-l="en">Relationships and responsibility</b><b class="py-nm" data-l="vi">Quan hệ và trách nhiệm</b><span class="py-tk" data-l="ja">関係を築き、保ち、専門性と経験で最終責任を負う</span><span class="py-tk" data-l="en">Build and keep relationships, own the result with expertise and experience</span><span class="py-tk" data-l="vi">Tạo và giữ quan hệ, chịu trách nhiệm cuối cùng bằng chuyên môn, kinh nghiệm</span></li><li class="py-r py-r2"><span class="py-rbg" aria-hidden="true"></span><span class="py-pc py-pcl py-pc2">20%</span><b class="py-nm" data-l="ja">分析と計画</b><b class="py-nm" data-l="en">Analysis and planning</b><b class="py-nm" data-l="vi">Phân tích và lập kế hoạch</b><span class="py-tk" data-l="ja">分析し、考え、仕事の計画を立てる</span><span class="py-tk" data-l="en">Analyse, think and plan the work</span><span class="py-tk" data-l="vi">Phân tích, suy nghĩ và lập kế hoạch công việc</span></li><li class="py-r py-r1"><span class="py-rbg" aria-hidden="true"></span><span class="py-pc py-pcl py-pc1">70%</span><b class="py-nm" data-l="ja">日々の運用業務</b><b class="py-nm" data-l="en">Daily operations</b><b class="py-nm" data-l="vi">Vận hành hằng ngày</b><span class="py-tk" data-l="ja">調査、確認、要約、入力、報告</span><span class="py-tk" data-l="en">Research, checking, summaries, data entry, reports</span><span class="py-tk" data-l="vi">Tìm kiếm, kiểm tra, tóm tắt, nhập liệu, báo cáo</span></li></ol></div><div class="py-col py-col--sales"><div class="py-head"><b class="py-hd" data-l="ja">例：営業の仕事</b><b class="py-hd" data-l="en">Example: sales</b><b class="py-hd" data-l="vi">Ví dụ: công việc Sales</b></div><svg class="py-svg" viewBox="0 0 300 250" aria-hidden="true" focusable="false"><defs><clipPath id="py-clip-sales"><polygon points="60.2,154 239.8,154 294,242 6,242"/></clipPath><linearGradient id="py-g1-sales" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset=".55" stop-color="#26B3F4"/><stop offset="1" stop-color="#0f5a8c"/></linearGradient><linearGradient id="py-g2-sales" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6ccff"/><stop offset=".5" stop-color="#9a87f0"/><stop offset="1" stop-color="#5b49c4"/></linearGradient><linearGradient id="py-g3-sales" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD3A6"/><stop offset=".5" stop-color="#FBA65A"/><stop offset="1" stop-color="#DD6417"/></linearGradient><linearGradient id="py-sg-sales" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".6" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><line class="py-gd" x1="0" y1="83" x2="300" y2="83"/><line class="py-gd" x1="0" y1="151" x2="300" y2="151"/><g class="py-t py-t1"><polygon class="py-sh" points="60.2,154 239.8,154 294,242 6,242"/><polygon class="py-lt" points="60.2,154 239.8,154 294,242 6,242" fill="url(#py-g1-sales)"/><g clip-path="url(#py-clip-sales)"><rect class="py-scan" x="-60" y="150" width="56" height="96" fill="url(#py-sg-sales)"/></g><image href="assets/gx/profile-stack.webp" x="104" y="162" width="26" height="26"/><image href="assets/gx/shield-check.webp" x="137" y="162" width="26" height="26"/><image href="assets/gx/jd-document.webp" x="170" y="162" width="26" height="26"/><text class="py-pc py-pc1" x="150" y="228">70%</text><g class="py-ai"><rect x="212" y="202" width="36" height="19" rx="9.5"/><text x="230" y="215.5">AI</text></g></g><g class="py-t py-t2"><polygon class="py-sh" points="102,86 198,86 236.2,148 63.8,148"/><polygon class="py-lt" points="102,86 198,86 236.2,148 63.8,148" fill="url(#py-g2-sales)"/><image href="assets/gx/funnel.webp" x="137" y="91" width="26" height="26"/><text class="py-pc py-pc2" x="150" y="140">20%</text></g><g class="py-t py-t3"><polygon class="py-sh" points="150,8 194.3,80 105.7,80"/><polygon class="py-lt" points="150,8 194.3,80 105.7,80" fill="url(#py-g3-sales)"/><polygon class="py-gl" points="150,8 194.3,80 105.7,80"/><image href="assets/gx/interview.webp" x="138" y="36" width="24" height="24"/><text class="py-pc py-pc3" x="150" y="75">10%</text></g><circle class="py-fly" cx="96" cy="206" r="2.6" style="--i:0"/><circle class="py-fly" cx="118" cy="196" r="3.6" style="--i:1"/><circle class="py-fly" cx="140" cy="206" r="2.6" style="--i:2"/><circle class="py-fly" cx="162" cy="196" r="2.6" style="--i:3"/><circle class="py-fly" cx="184" cy="206" r="3.6" style="--i:4"/><circle class="py-fly" cx="206" cy="196" r="2.6" style="--i:5"/></svg><ol class="py-leg"><li class="py-r py-r3"><span class="py-rbg" aria-hidden="true"></span><span class="py-pc py-pcl py-pc3">10%</span><b class="py-nm" data-l="ja">顧客との信頼関係</b><b class="py-nm" data-l="en">Customer relationships</b><b class="py-nm" data-l="vi">Quan hệ khách hàng</b><span class="py-tk" data-l="ja">経験を生かして関係を築き、保ち、顧客への責任を持つ</span><span class="py-tk" data-l="en">Use my experience to build and keep relationships and take responsibility to the customer</span><span class="py-tk" data-l="vi">Dùng kỹ năng, kinh nghiệm tạo và giữ quan hệ, chịu trách nhiệm với khách hàng</span></li><li class="py-r py-r2"><span class="py-rbg" aria-hidden="true"></span><span class="py-pc py-pcl py-pc2">20%</span><b class="py-nm" data-l="ja">活動と売上指標の分析</b><b class="py-nm" data-l="en">Activity and sales figures</b><b class="py-nm" data-l="vi">Phân tích chỉ số</b><span class="py-tk" data-l="ja">活動と売上の指標を分析し、PDCAで次の行動を決める</span><span class="py-tk" data-l="en">Analyse activity and sales figures, then set the next action with PDCA</span><span class="py-tk" data-l="vi">Phân tích chỉ số hoạt động, kinh doanh, đánh giá hành động theo PDCA</span></li><li class="py-r py-r1"><span class="py-rbg" aria-hidden="true"></span><span class="py-pc py-pcl py-pc1">70%</span><b class="py-nm" data-l="ja">顧客情報の収集</b><b class="py-nm" data-l="en">Customer information</b><b class="py-nm" data-l="vi">Tìm thông tin khách</b><span class="py-tk" data-l="ja">見込み顧客の調査、情報源の確認、集計、入力、報告、記録</span><span class="py-tk" data-l="en">Finding customers, checking sources, compiling, data entry, reports, filing</span><span class="py-tk" data-l="vi">Tìm khách hàng, kiểm tra nguồn, tổng hợp, nhập liệu, báo cáo, lưu hồ sơ</span></li></ol></div></div>
+    <div class="mv-caps py-caps">
+      <p class="mv-cap py-c1" data-l="ja">私の見方では、業務時間の約7割は情報を集め、確かめ、まとめ、報告する作業です。ここはAIに任せ、結果は人が確認します。</p><p class="mv-cap py-c1" data-l="en">In my view, about 70% of work time is collecting, checking, summarising and reporting. AI drafts this layer; I check the results.</p><p class="mv-cap py-c1" data-l="vi">Theo tôi, khoảng 70% thời gian là thu thập, kiểm tra, tóm tắt, báo cáo thông tin. Tầng này giao cho AI, kết quả do người kiểm tra.</p>
+      <p class="mv-cap py-c2" data-l="ja">約2割は分析と計画です。AIが数字をそろえ、考えて決めるのは人です。</p><p class="mv-cap py-c2" data-l="en">About 20% is analysis and planning. AI lines up the figures; a person thinks it through and decides.</p><p class="mv-cap py-c2" data-l="vi">Khoảng 20% là phân tích và lập kế hoạch. AI chuẩn bị số liệu, con người suy nghĩ và quyết định.</p>
+      <p class="mv-cap py-c3" data-l="ja">最上層は、人と人の信頼関係と責任です。ここはAIがまだ届かない領域です。</p><p class="mv-cap py-c3" data-l="en">The top layer is trust and responsibility between people, which AI does not reach yet.</p><p class="mv-cap py-c3" data-l="vi">Tầng cao nhất là quan hệ và trách nhiệm giữa người với người, nơi AI chưa chạm tới.</p>
+      <p class="mv-cap py-c4" data-l="ja">営業でも同じ3層です。顧客情報の整理をAIに任せ、数字の分析と顧客との関係に時間を使います。</p><p class="mv-cap py-c4" data-l="en">Sales has the same three layers: AI organises customer data, and I spend the time on the figures and on customers.</p><p class="mv-cap py-c4" data-l="vi">Sales cũng có ba tầng như vậy: AI xử lý thông tin khách, tôi dành thời gian cho số liệu và khách hàng.</p>
+    </div>
+    <div class="mv-bar" aria-hidden="true"><span></span></div>
+  </figure>
+</section>
 <section class="pg" data-chap="III" id="ai-approach">
-  <span class="eb rv">01　<b>MY WORKFLOW</b></span>
+  <span class="eb rv">02　<b>MY WORKFLOW</b></span>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">業務を分解し、<br /><i>AIに任せる領域を見極める。</i></span><span data-l="en">I break the work down<br /><i>and decide which part AI takes.</i></span><span data-l="vi">Tôi chia nhỏ công việc<br /><i>và quyết định phần nào giao cho AI.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">繰り返しの作業は、次の流れでワークフロー化しています。</p>
@@ -2187,7 +2302,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   </div>
 </section>
 <section class="pg" data-chap="IV" id="ai-uses">
-  <span class="eb rv">02　<b>WHERE I USE AI</b></span>
+  <span class="eb rv">03　<b>WHERE I USE AI</b></span>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">要約、集計、記録、学習。<br /><i>AIの活用場面。</i></span><span data-l="en">Summaries, figures, records, learning:<br /><i>where I use AI.</i></span><span data-l="vi">Tóm tắt, số liệu, ghi chép, học tập:<br /><i>những việc tôi dùng AI.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">実務でAIを活用している場面を、目的別に紹介します。</p>
@@ -2209,7 +2324,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   </div>
 </section>
 <section class="pg" data-chap="I" id="ai-people">
-  <span class="eb rv">03　<b>TIME FOR PEOPLE</b></span>
+  <span class="eb rv">04　<b>TIME FOR PEOPLE</b></span>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">生まれた時間を、<br /><i>人にしかできない仕事へ。</i></span><span data-l="en">I use the time saved<br /><i>on work only people can do.</i></span><span data-l="vi">Thời gian tiết kiệm được,<br /><i>tôi dành cho việc chỉ con người làm được.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">4年前と比べ、情報整理の時間を80～90%削減し、生産性を約3～4倍に高めました（自己試算）。</p>
@@ -3477,7 +3592,7 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
 (function(){
   var IDS=['cover','toc','profile','projects','skillmap','career','w-mycom','w-jil','w-it','w-early','pcai','aiops','aidash','pr',
     'sales-top','sales-trips','sales-pr','sales-reports','sales-kpi','sales-flow',
-    'team-top','team-records','team-skills','team-daily','ai-top','ai-approach','ai-uses','ai-people'];
+    'team-top','team-records','team-skills','team-daily','ai-top','ai-pyramid','ai-approach','ai-uses','ai-people'];
   var layers=[];
   IDS.forEach(function(id){
     var pg=document.getElementById(id);if(!pg||!pg.classList.contains('pg')||pg.querySelector(':scope>.pganh'))return;

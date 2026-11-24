@@ -73,7 +73,7 @@ async function main() {
         const r = await evaluate(probe(view, lang)); checks++;
         ok(r.view === view && !r.hidden && r.topOn === view, `${tag}: view không mở (${r.view}, top ${r.topOn})`);
         ok(r.navShown && r.otherNavs === 0, `${tag}: mục lục sidebar sai (navShown ${r.navShown}, khác đang hiện ${r.otherNavs})`);
-        ok(r.pages === 4, `${tag}: số trang ${r.pages}`);
+        ok(r.pages === (view === 'ai' ? 5 : 4), `${tag}: số trang ${r.pages}`); // task edof: tab AI thêm #ai-pyramid
         ok(r.lang === lang && r.wrong === 0, `${tag}: lang ${r.lang}, ${r.wrong} khối khác ngôn ngữ đang hiện`);
         ok(r.text.includes(EXPECT[view][lang]), `${tag}: thiếu "${EXPECT[view][lang]}"`);
         ok(r.overflowX <= 1, `${tag}: tràn ngang ${r.overflowX}px`);
@@ -89,12 +89,13 @@ async function main() {
       ok(over.length === 0, `in ${view}/${lang}: trang bị cắt ${JSON.stringify(over)}`);
     }
   }
-  // Link chéo từ tab Team sang trang AI業務管理 của Profile: router đổi view
-  await go(`${pageUrl}?lang=vi#team-daily`, 1280);
-  await evaluate("[...document.querySelectorAll('#team-daily a[href=\"#aiops\"]')].find((a) => a.getClientRects().length).click()");
+  // Link chéo từ thẻ AI ở #projects (Profile) sang #team-daily của tab Team: router đổi view
+  // (task ye4s bỏ trang #aiops / #aidash nên link chéo cũ Team -> Profile không còn)
+  await go(`${pageUrl}?lang=vi#projects`, 1280);
+  await evaluate("[...document.querySelectorAll('#projects a[href=\"#team-daily\"]')].find((a) => a.getClientRects().length).click()");
   await sleep(300); checks++;
   const cross = await evaluate("({ view: document.body.dataset.view, hash: location.hash })");
-  ok(cross.view === 'profile' && cross.hash === '#aiops', `link #aiops từ tab Team không mở Profile: ${JSON.stringify(cross)}`);
+  ok(cross.view === 'team' && cross.hash === '#team-daily', `link #team-daily từ #projects không mở tab Team: ${JSON.stringify(cross)}`);
   if (process.env.SHOT) for (const [view, hash] of [['team', 'team-records'], ['ai', 'ai-approach']]) {
     await go(`${pageUrl}?lang=${process.env.SHOT}#${hash}`, 1280);
     const s = await send('Page.captureScreenshot', { format: 'png' });

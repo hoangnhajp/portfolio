@@ -15,7 +15,7 @@ const TABS = {
   team: { top: 'team-top', secs: ['team-top', 'team-records', 'team-skills', 'team-daily'],
     facts: { ja: ['5～6名', '約27名', '2～3名', '1人', '5名', 'KPI', 'コーチ'], en: ['5 to 6', 'about 27', '2 to 3', 'five', 'KPI', 'coach'],
       vi: ['5 đến 6', 'khoảng 27', '2 đến 3', '5 người', 'KPI', 'kèm cặp'] } },
-  ai: { top: 'ai-top', secs: ['ai-top', 'ai-approach', 'ai-uses', 'ai-people'],
+  ai: { top: 'ai-top', secs: ['ai-top', 'ai-pyramid', 'ai-approach', 'ai-uses', 'ai-people'], // task edof: thêm 01 kim tự tháp
     facts: { ja: ['ChatGPT', 'Claude', 'Sesame', '80～90%', '3～4', '繰り返し', '人が確認', '設計と開発を主導'],
       en: ['ChatGPT', 'Claude', 'Sesame', '80 to 90%', '3 to 4', 'repetitive', 'checks', 'led the design and development'],
       vi: ['ChatGPT', 'Claude', 'Sesame', '80 đến 90%', '3 đến 4', 'lặp lại', 'kiểm tra', 'chủ trì thiết kế'] } },
