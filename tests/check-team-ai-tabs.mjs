@@ -50,7 +50,7 @@ for (const [v, t] of Object.entries(TABS)) {
   ok(!/(^|[\s,.(])bạn(?! bè)([\s,.!?)]|$)/i.test(txt.vi), `${v}/vi: còn gọi người đọc là "bạn"`);
 }
 // Nút ngôn ngữ, PDF: tab mới không đổi luật router (main nào không phải profile thì ẩn link PDF)
-ok((html.match(/<main class="wrap" data-view=(?!"sw"|"it"|"jd"|"wv")/g) || []).length === 6, // task g6pn: tab sw kiểm ở check-sw-tab.mjs; task g9d5: tab it ở check-it-tab.mjs; task wp5x: tab jd ở check-jd-tab.mjs; task wxw5: tab wv ở check-wv-tab.mjs
+ok((html.match(/<main class="wrap" data-view=(?!"sw"|"it"|"jd"|"wv"|"ap")/g) || []).length === 6, // task g6pn: tab sw kiểm ở check-sw-tab.mjs; task g9d5: tab it ở check-it-tab.mjs; task wp5x: tab jd ở check-jd-tab.mjs; task wxw5: tab wv ở check-wv-tab.mjs; task m07v: tab ap ở check-ap-tab.mjs
  'số view khác 6 (profile, sales, hr, team, ai, lang; tab Languages task a9f4 kiểm ở check-lang-tab.mjs, tab HR task 4ubf ở check-hr-tab.mjs)');
 
 if (fails.length) { console.error(`FAIL check-team-ai-tabs (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }

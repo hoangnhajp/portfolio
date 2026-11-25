@@ -1472,6 +1472,84 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
 @media print{.jm-shape,.jm-row,.jm-nums li,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}.jd-doc{font-size:9.2px}}
 </style>
 <!-- jd-css:end -->
+<!-- ap-css:start -->
+<style id="ap-css">
+/* Tab Andpad Info (task m07v, HTML sinh bằng node tools/ap/build.mjs): #ap-top thẻ số liệu công ty + sứ mệnh + ANDPAD Vietnam,
+   #ap-products 5 nhóm sản phẩm, #ap-news dòng thời gian + 4 thẻ hoạt động, #ap-role 4 chặng + bảng việc theo sản phẩm.
+   Chỉ transform / opacity, chỉ chạy khi khối đã hiện (.sr-in). Tắt JS, reduced-motion, bản in: tĩnh, hiện đủ. */
+.kw.ap-kw{font-size:32px;line-height:1.3;margin-top:8px}
+.kw-sub.ap-sub{font-size:12.6px;line-height:1.75;margin-top:8px}
+.ap-kv{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ap-kv li{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #ece8f3;border-radius:14px;padding:11px 12px}
+.ap-kv img{width:36px;height:36px;flex:none}
+.ap-k{display:block;font:800 9.5px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6d5bd0}
+.ap-kv b{display:block;margin-top:2px;font:700 12.6px/1.45 'Noto Sans JP',sans-serif;color:#16141d}
+.card.ap-ms,.card.ap-vn{margin-top:12px;padding:14px 18px}
+.ap-ms h3{margin:2px 0 4px;font-size:17px;color:#3b2f86}
+.ap-ms p{margin:0 0 8px}
+.ap-vn h3{margin:2px 0 6px}
+.ap-vn ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.ap-vn li{display:flex;gap:9px;align-items:flex-start;font:400 11.6px/1.65 'Noto Sans JP',sans-serif;color:#3d3849}
+.ap-vn img{width:30px;height:30px;flex:none}
+.ap-src{margin:auto 0 0;padding-top:10px;font:400 9.4px/1.6 'Noto Sans JP',sans-serif;color:#7a7488}
+.ap-src a{color:#6d5bd0;text-decoration:none;border-bottom:1px dotted #c9c2da;word-break:break-all}
+.ap-grps{display:grid;gap:6px;margin-top:10px}
+.ap-gh{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.ap-gh .ap-leg{margin:0 0 0 auto}
+.ap-gh img{width:22px;height:22px}
+.ap-gh .lbl{margin:0}
+.ap-gh h3{margin:0;font:700 12.6px 'Noto Sans JP',sans-serif;color:#16141d}
+.ap-pds{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.ap-pd{position:relative;background:#fff;border:1px solid #ece8f3;border-radius:10px;padding:5px 8px 5px}
+.ap-pd b{display:block;font:700 11.4px/1.35 'Noto Sans JP',sans-serif;color:#16141d;padding-right:20px}
+.ap-pd i{display:block;font:600 8.8px/1.4 'Manrope',sans-serif;font-style:normal;color:#8d86a0}
+.ap-pd span{display:block;margin-top:1px;font:400 10px/1.42 'Noto Sans JP',sans-serif;color:#3d3849}
+.ap-vi{display:inline-flex;align-items:center;justify-content:center;font:800 8.5px/1 'Manrope',sans-serif;font-style:normal;letter-spacing:.06em;color:#fff;background:#F68209;border-radius:6px;padding:3px 5px}
+.ap-pd .ap-vi{position:absolute;top:6px;right:6px}
+.ap-leg{display:flex;align-items:center;gap:7px;margin:8px 0 0;font:400 10.4px 'Noto Sans JP',sans-serif;color:#5a546a}
+.ap-tl{list-style:none;margin:12px 0 0;padding:0 0 0 2px;position:relative;display:grid;gap:3px}
+.ap-tl::before{content:"";position:absolute;left:69px;top:8px;bottom:8px;width:2px;background:repeating-linear-gradient(#c9c2da 0 5px,transparent 5px 9px)}
+.ap-ev{position:relative;display:grid;grid-template-columns:56px 18px 64px 1fr;align-items:center;gap:0 6px;background:rgba(255,255,255,.88);border-radius:9px;padding:4px 8px 4px 0;font:400 11.2px/1.45 'Noto Sans JP',sans-serif;color:#2b2735}
+.ap-ev time{font:800 10.5px 'Manrope',sans-serif;letter-spacing:.04em;color:#3b2f86;text-align:right}
+.ap-ev>i{justify-self:center;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #6d5bd0}
+.ap-ev[data-t="ai"]>i{border-color:#2d9cdb}.ap-ev[data-t="vn"]>i{border-color:#F68209;background:#F68209}.ap-ev[data-t="ev"]>i{border-color:#18a57a}
+.ap-ev em{font:700 9.2px/1 'Noto Sans JP',sans-serif;font-style:normal;text-align:center;color:#6d5bd0;background:#f3f0fa;border-radius:999px;padding:4px 6px}
+.ap-ev[data-t="ai"] em{color:#1f7fb8;background:#e8f4fb}.ap-ev[data-t="vn"] em{color:#c25f00;background:#fff1e2}.ap-ev[data-t="ev"] em{color:#12805e;background:#e6f6f0}
+.ap-acts{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}
+.card.ap-act{padding:11px 12px}
+.ap-act img{width:32px;height:32px;display:block;margin-bottom:4px}
+.ap-act .lbl{margin-bottom:3px}
+.ap-act p{margin:0;font-size:10.6px;line-height:1.6}
+.ap-jr{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ap-js{position:relative;background:#fff;border:1px solid #ece8f3;border-radius:14px;padding:11px 12px 10px}
+.ap-js img{width:34px;height:34px;display:block}
+.ap-n{position:absolute;top:10px;right:12px;font:800 11px 'Manrope',sans-serif;letter-spacing:.14em;color:#c9c2da}
+.ap-js h3{margin:6px 0 3px;font:700 12.8px/1.45 'Noto Sans JP',sans-serif;color:#16141d}
+.ap-js p{margin:0;font:400 10.8px/1.6 'Noto Sans JP',sans-serif;color:#3d3849}
+.ap-js:not(:first-child)::before{content:"›";position:absolute;left:-10px;top:22px;width:10px;text-align:center;font:800 16px/1 'Manrope',sans-serif;color:#c9c2da}
+.ap-js::after{content:"";position:absolute;inset:-1px;border-radius:inherit;border:2px solid #F68209;opacity:0;pointer-events:none}
+.card.ap-rws{margin-top:12px;padding:13px 16px}
+.ap-rws h3{margin:2px 0 6px}
+.ap-rws ul{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.ap-rw{display:grid;grid-template-columns:28px 150px 1fr;gap:10px;align-items:center;border-top:1px solid #f0edf6;padding-top:5px;font:400 11px/1.55 'Noto Sans JP',sans-serif;color:#3d3849}
+.ap-rw:first-child{border-top:0;padding-top:0}
+.ap-rw img{width:28px;height:28px}
+.ap-rp b{font:700 10.8px/1.45 'Noto Sans JP',sans-serif;color:#3b2f86}
+.ap-go{margin:10px 0 0;font:700 12px 'Noto Sans JP',sans-serif}
+.ap-go a{color:#c25f00;text-decoration:none}
+@keyframes apUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes apPing{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+@keyframes apLit{0%,22%{opacity:1}30%,100%{opacity:0}}
+html.sr .ap-kv.sr-in li,html.sr .ap-tl.sr-in .ap-ev,html.sr .ap-rws.sr-in .ap-rw{animation:apUp .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms)}
+html.sr .ap-grps.sr-in .ap-pd{animation:apUp .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*35ms)}
+html.sr .ap-tl.sr-in .ap-ev[data-t="vn"]>i,html.sr .ap-tl.sr-in .ap-ev[data-t="ai"]>i{animation:apPing 2.4s ease-in-out infinite;animation-delay:calc(var(--i,0)*120ms)}
+html.sr .ap-jr.sr-in .ap-js::after{animation:apLit 6s linear infinite;animation-delay:calc(var(--i,0)*1.5s)}
+@media (max-width:600px){.ap-kv,.ap-acts{grid-template-columns:1fr 1fr}.ap-pds,.ap-jr{grid-template-columns:1fr 1fr}.ap-vn ul{grid-template-columns:1fr}
+  .ap-rw{grid-template-columns:28px 1fr}.ap-rw>span{grid-column:2}.ap-ev{grid-template-columns:52px 14px 1fr}.ap-ev em{display:none!important}.ap-tl::before{left:63px}}
+@media (prefers-reduced-motion:reduce){.ap-kv li,.ap-pd,.ap-ev,.ap-ev>i,.ap-js::after,.ap-rw{animation:none!important}}
+@media print{.ap-kv li,.ap-pd,.ap-ev,.ap-ev>i,.ap-js::after,.ap-rw{animation:none!important}.ap-js::after{opacity:0}}
+</style>
+<!-- ap-css:end -->
 </head>
 <body>
 <svg class="flg-sprite" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><defs><symbol id="flg-jp" viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/></symbol><symbol id="flg-uk" viewBox="0 0 60 30"><clipPath id="flg-ukc"><path d="M0,0v30h60V0z"/></clipPath><clipPath id="flg-ukt"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#flg-ukc)"><path d="M0,0v30h60V0z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#flg-ukt)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></g></symbol><symbol id="flg-vn" viewBox="0 0 30 20"><rect width="30" height="20" fill="#da251d"/><polygon points="15.00,4.00 16.43,8.03 20.71,8.15 17.31,10.75 18.53,14.85 15.00,12.43 11.47,14.85 12.69,10.75 9.29,8.15 13.57,8.03" fill="#ff0"/></symbol></defs></svg>
@@ -1488,6 +1566,7 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
       <a href="#lang-top" data-view="lang">Languages<span class="flgs"><svg class="flg flg--jp" viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#flg-jp"/></svg><svg class="flg flg--uk" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#flg-uk"/></svg></span></a>
       <a href="#wv-kaizen" data-view="wv">Work Philosophy</a>
       <a href="#jd-top" data-view="jd">JD ANDPAD</a>
+      <a href="#ap-top" data-view="ap">Andpad Info</a>
       <a href="#sw-top" data-view="sw">Software Products</a>
     </nav>
   </div>
@@ -1560,6 +1639,12 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
       <a href="#jd-top" data-sec="jd-top"><em>TOP</em><span data-l="ja">求人票</span><span data-l="en">Job description</span><span data-l="vi">Thông tin tuyển dụng</span></a>
       <a href="#jd-fit" data-sec="jd-fit"><em>01</em><span data-l="ja">求められる人物像</span><span data-l="en">Candidate profile</span><span data-l="vi">Chân dung ứng viên</span></a>
       <a href="#jd-match" data-sec="jd-match"><em>02</em><span data-l="ja">スキルの照合</span><span data-l="en">Skill match</span><span data-l="vi">Đối chiếu kỹ năng</span></a>
+    </nav>
+    <nav class="sb-nav" data-for="ap" hidden>
+      <a href="#ap-top" data-sec="ap-top"><em>TOP</em><span data-l="ja">会社の概要</span><span data-l="en">Company overview</span><span data-l="vi">Tổng quan công ty</span></a>
+      <a href="#ap-products" data-sec="ap-products"><em>01</em><span data-l="ja">製品の一覧</span><span data-l="en">Product map</span><span data-l="vi">Các sản phẩm</span></a>
+      <a href="#ap-news" data-sec="ap-news"><em>02</em><span data-l="ja">活動とイベント</span><span data-l="en">Activities and events</span><span data-l="vi">Hoạt động và sự kiện</span></a>
+      <a href="#ap-role" data-sec="ap-role"><em>03</em><span data-l="ja">仕事の予想</span><span data-l="en">Role forecast</span><span data-l="vi">Dự báo công việc vị trí</span></a>
     </nav>
     <nav class="sb-nav" data-for="sw" hidden>
       <a href="#sw-top" data-sec="sw-top"><em>TOP</em><span data-l="ja">概要</span><span data-l="en">Overview</span><span data-l="vi">Tổng quan</span></a>
@@ -3380,6 +3465,171 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
 </section>
 </main>
 <!-- jd:end -->
+<!-- ap:start -->
+<!-- ═══════ Andpad Info (task m07v: công ty, sản phẩm, hoạt động, dự báo công việc; sinh bằng node tools/ap/build.mjs) ═══════ -->
+<main class="wrap" data-view="ap" hidden>
+<section class="pg" data-chap="I" id="ap-top">
+  <span class="eb rv">COMPANY　<b>ANDPAD</b></span>
+  <h2 class="kw ap-kw rv" style="--d:60ms"><span data-l="ja">建設業界のための<br /><i>クラウド施工管理。</i></span><span data-l="en">Cloud project management<br /><i>for construction.</i></span><span data-l="vi">Quản lý thi công trên đám mây<br /><i>cho ngành xây dựng.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Vertical SaaS ／ Construction DX ／ Japan and Vietnam</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="ja">株式会社アンドパッドは建設業界向けのVertical SaaS企業です。現場の写真、図面、工程、受発注までを一つのクラウドで管理できます。</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="en">ANDPAD Inc. is a vertical SaaS company for construction. Its cloud keeps site photos, drawings, schedules and orders in one place.</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="vi">ANDPAD Inc. là công ty Vertical SaaS cho ngành xây dựng Nhật Bản. Nền tảng gom ảnh hiện trường, bản vẽ, tiến độ và đơn đặt hàng vào một chỗ trên đám mây.</p>
+  <ul class="ap-kv rv" style="--d:180ms">
+    <li style="--i:0"><img src="assets/gx/office-building.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><div><span class="ap-k" data-l="ja">設立</span><span class="ap-k" data-l="en">Founded</span><span class="ap-k" data-l="vi">Thành lập</span><b data-l="ja">2012年9月</b><b data-l="en">September 2012</b><b data-l="vi">Tháng 9/2012</b></div></li>
+    <li style="--i:1"><img src="assets/gx/manager.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><div><span class="ap-k" data-l="ja">代表取締役CEO</span><span class="ap-k" data-l="en">CEO</span><span class="ap-k" data-l="vi">CEO</span><b data-l="ja">稲田 武夫（Takeo Inada）</b><b data-l="en">Takeo Inada</b><b data-l="vi">Takeo Inada (稲田 武夫)</b></div></li>
+    <li style="--i:2"><img src="assets/gx/key.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><div><span class="ap-k" data-l="ja">本社</span><span class="ap-k" data-l="en">Head office</span><span class="ap-k" data-l="vi">Trụ sở</span><b data-l="ja">東京都港区三田</b><b data-l="en">Mita, Minato-ku, Tokyo</b><b data-l="vi">Mita, Minato-ku, Tokyo</b></div></li>
+    <li style="--i:3"><img src="assets/gx/team-group.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><div><span class="ap-k" data-l="ja">社員数</span><span class="ap-k" data-l="en">Employees</span><span class="ap-k" data-l="vi">Nhân viên</span><b data-l="ja">1,072名（2026年11月1日）</b><b data-l="en">1,072 (1 Nov 2026)</b><b data-l="vi">1.072 người (1/11/2026)</b></div></li>
+    <li style="--i:4"><img src="assets/gx/building-blocks.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><div><span class="ap-k" data-l="ja">利用</span><span class="ap-k" data-l="en">In use at</span><span class="ap-k" data-l="vi">Đang dùng</span><b data-l="ja">27.9万社、81.8万ユーザー</b><b data-l="en">279,000 companies, 818,000 users</b><b data-l="vi">279.000 công ty, 818.000 người dùng</b></div></li>
+    <li style="--i:5"><img src="assets/gx/report-chart.webp" alt="" width="36" height="36" loading="lazy" decoding="async"><div><span class="ap-k" data-l="ja">ARR</span><span class="ap-k" data-l="en">ARR</span><span class="ap-k" data-l="vi">ARR</span><b data-l="ja">100億円を突破（2026年）</b><b data-l="en">Passed ¥10 billion (2026)</b><b data-l="vi">Vượt 10 tỷ yên (2026)</b></div></li>
+  </ul>
+  <div class="card ap-ms rv" style="--d:200ms">
+    <span class="lbl">MISSION ／ VALUES</span>
+    <h3>「幸せを築く人を、幸せに。」</h3>
+    <p data-l="ja">家を建てる人、街をつくる人の働き方を、テクノロジーで良くすることを目指しています。</p><p data-l="en">Make the people who build happiness, happy: better working lives for everyone who builds homes and towns.</p><p data-l="vi">Mang hạnh phúc đến những người kiến tạo hạnh phúc: cải thiện cách làm việc của người xây nhà, xây phố bằng công nghệ.</p>
+    <div class="chips"><span class="chip">Professional</span><span class="chip">Mission Driven</span><span class="chip">Reality</span><span class="chip">Customer Success</span><span class="chip">Technology First</span><span class="chip">Love ANDPAD</span></div>
+  </div>
+  <div class="card ap-vn rv" style="--d:220ms">
+    <span class="lbl">ANDPAD VIETNAM</span>
+    <h3 data-l="ja">ANDPAD Vietnam（ホーチミン、ハノイ）</h3><h3 data-l="en">ANDPAD Vietnam (Ho Chi Minh City and Hanoi)</h3><h3 data-l="vi">ANDPAD Vietnam (TP.HCM và Hà Nội)</h3>
+    <ul>
+      <li><img src="assets/gx/office-building.webp" alt="" width="30" height="30" loading="lazy" decoding="async"><span data-l="ja">本社はホーチミン市（90 Nguyen Dinh Chieu）。ハノイ事務所は2025年5月に開設し、2026年4月にTaisei Square Hanoiへ移転。</span><span data-l="en">Head office in Ho Chi Minh City (90 Nguyen Dinh Chieu). The Hanoi office opened in May 2025 and moved to Taisei Square Hanoi in April 2026.</span><span data-l="vi">Trụ sở tại TP.HCM (90 Nguyễn Đình Chiểu). Văn phòng Hà Nội mở tháng 5/2025, dời về Taisei Square Hanoi tháng 4/2026.</span></li>
+      <li><img src="assets/gx/workflow-gears.webp" alt="" width="30" height="30" loading="lazy" decoding="async"><span data-l="ja">開発部門：ANDPADを開発する拠点（Go、Ruby on Rails、React、Vue、Kotlin、Swift、AWS）。</span><span data-l="en">Development Division: builds the ANDPAD service (Go, Ruby on Rails, React, Vue, Kotlin, Swift, AWS).</span><span data-l="vi">Khối Phát triển: phát triển dịch vụ ANDPAD (Go, Ruby on Rails, React, Vue, Kotlin, Swift, AWS).</span></li>
+      <li><img src="assets/gx/handshake.webp" alt="" width="30" height="30" loading="lazy" decoding="async"><span data-l="ja">ビジネス部門：導入、研修、サポートを担うCustomer Successチーム。今回の募集はこのチームです。</span><span data-l="en">Business Division: the Customer Success team for onboarding, training and support. This opening is in this team.</span><span data-l="vi">Khối Kinh doanh: đội Customer Success lo triển khai, đào tạo, hỗ trợ khách hàng. Vị trí đang tuyển thuộc đội này.</span></li>
+      <li><img src="assets/gx/chat-bubbles.webp" alt="" width="30" height="30" loading="lazy" decoding="async"><span data-l="ja">2025年2月に英語版、6月にベトナム語版（施工管理、チャット、図面）を公開。</span><span data-l="en">English version in February 2025, Vietnamese in June 2025 (Construction Management, Chat, Drawings).</span><span data-l="vi">Ra bản tiếng Anh tháng 2/2025, bản tiếng Việt tháng 6/2025 (Quản lý thi công, Chat, Bản vẽ).</span></li>
+    </ul>
+  </div>
+  <p class="ap-src rv" style="--d:260ms"><span data-l="ja">出典（2026年11月25日に確認）：</span><span data-l="en">Sources (checked 25 Nov 2026): </span><span data-l="vi">Nguồn (tra cứu 25/11/2026): </span><a href="https://andpad.co.jp/company" target="_blank" rel="noopener">andpad.co.jp/company</a> ／ <a href="https://andpad.co.jp/mission/" target="_blank" rel="noopener">andpad.co.jp/mission</a> ／ <a href="https://andpad.jp/" target="_blank" rel="noopener">andpad.jp</a> ／ <a href="https://careers.andpad.vn/jobs" target="_blank" rel="noopener">careers.andpad.vn</a> ／ <a href="https://vietnamnews.vn/media-outreach/1778975/hanoi-office-at-andpad-vietnam-relocated.html" target="_blank" rel="noopener">Vietnam News 2026</a> ／ <a href="https://thebridge.jp/2026/04/andpad-stellarc-ai-agent-construction-hot100" target="_blank" rel="noopener">THE BRIDGE 2026</a></p>
+</section>
+<section class="pg" data-chap="II" id="ap-products">
+  <span class="eb rv">01　<b>PRODUCTS</b></span>
+  <h2 class="kw ap-kw rv" style="--d:60ms"><span data-l="ja">現場から経営までを<br /><i>一つのクラウドで。</i></span><span data-l="en">From the site to management,<br /><i>in one cloud.</i></span><span data-l="vi">Từ công trường tới quản trị,<br /><i>trên một nền tảng.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Site ／ Documents ／ Money ／ Owners ／ AI</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="ja">製品は20を超え、現場、書類、お金、施主、連携とAIの5つの分野に分かれます。</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="en">More than 20 products in five areas: site work, documents, money, homeowners, and integrations with AI.</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="vi">Hơn 20 sản phẩm, chia thành 5 nhóm: hiện trường, hồ sơ, tài chính, chủ nhà, kết nối và AI.</p>
+  <div class="ap-grps rv" style="--d:180ms">
+    <div class="ap-grp">
+      <div class="ap-gh"><img src="assets/gx/checklist.webp" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="lbl">SITE</span><h3 data-l="ja">現場の管理</h3><h3 data-l="en">Site work</h3><h3 data-l="vi">Quản lý hiện trường</h3><span class="ap-leg"><em class="ap-vi">VI</em><span data-l="ja">ベトナム語に対応（2025年6月）</span><span data-l="en">Available in Vietnamese (June 2025)</span><span data-l="vi">Đã có bản tiếng Việt (6/2025)</span></span></div>
+      <ul class="ap-pds">
+        <li class="ap-pd" style="--i:0"><b>ANDPAD 施工管理</b><i>Construction Management</i><span data-l="ja">案件ごとに写真、工程、資料、連絡を一元管理</span><span data-l="en">Photos, schedules, files and messages per project</span><span data-l="vi">Gom ảnh, tiến độ, tài liệu, liên lạc theo từng công trình</span><em class="ap-vi">VI</em></li>
+        <li class="ap-pd" style="--i:1"><b>ANDPAD チャット</b><i>Chat</i><span data-l="ja">現場関係者とのグループチャット</span><span data-l="en">Group chat with everyone on site</span><span data-l="vi">Chat nhóm với mọi người ở công trình</span><em class="ap-vi">VI</em></li>
+        <li class="ap-pd" style="--i:2"><b>ANDPAD 図面</b><i>Drawings</i><span data-l="ja">図面の上に指示と写真を記録</span><span data-l="en">Notes and photos pinned on drawings</span><span data-l="vi">Ghi chỉ thị và ảnh ngay trên bản vẽ</span><em class="ap-vi">VI</em></li>
+        <li class="ap-pd" style="--i:3"><b>ANDPAD 黒板</b><i>Blackboard</i><span data-l="ja">電子黒板付きで工事写真を撮影</span><span data-l="en">Site photos with a digital signboard</span><span data-l="vi">Chụp ảnh thi công kèm bảng đen điện tử</span></li>
+        <li class="ap-pd" style="--i:4"><b>ANDPAD 検査</b><i>Inspection</i><span data-l="ja">紙を使わず、漏れのない検査</span><span data-l="en">Paperless inspections, nothing missed</span><span data-l="vi">Kiểm tra không giấy, không sót hạng mục</span></li>
+        <li class="ap-pd" style="--i:5"><b>ANDPAD 遠隔臨場</b><i>Remote Inspection</i><span data-l="ja">現場に行かずに立会検査</span><span data-l="en">Witness inspections without travelling</span><span data-l="vi">Nghiệm thu từ xa, không cần tới công trình</span></li>
+        <li class="ap-pd" style="--i:6"><b>ANDPAD 入退場管理</b><i>Site Entry</i><span data-l="ja">入退場と安全書類の管理</span><span data-l="en">Entry, exit and safety records</span><span data-l="vi">Quản lý ra vào và hồ sơ an toàn</span></li>
+        <li class="ap-pd" style="--i:7"><b>ANDPAD 3Dスキャン</b><i>3D Scan</i><span data-l="ja">現場の3D計測データを共有</span><span data-l="en">Share 3D scans of the site</span><span data-l="vi">Chia sẻ dữ liệu quét 3D hiện trường</span></li>
+      </ul>
+    </div>
+    <div class="ap-grp">
+      <div class="ap-gh"><img src="assets/gx/calendar.webp" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="lbl">DOCUMENTS</span><h3 data-l="ja">工程と書類</h3><h3 data-l="en">Schedules and documents</h3><h3 data-l="vi">Tiến độ và hồ sơ</h3></div>
+      <ul class="ap-pds">
+        <li class="ap-pd" style="--i:8"><b>ANDPAD ボード</b><i>Board</i><span data-l="ja">工程表を関係者で共有</span><span data-l="en">Shared site schedule</span><span data-l="vi">Bảng tiến độ dùng chung</span></li>
+        <li class="ap-pd" style="--i:9"><b>ANDPAD レポート</b><i>Report</i><span data-l="ja">今の帳票をそのまま電子化</span><span data-l="en">Existing forms, digitised as they are</span><span data-l="vi">Số hoá biểu mẫu, giữ nguyên bố cục</span></li>
+        <li class="ap-pd" style="--i:10"><b>ANDPAD 資料承認</b><i>Document Approval</i><span data-l="ja">書類の提出と承認</span><span data-l="en">Submit and approve documents</span><span data-l="vi">Nộp và duyệt hồ sơ</span></li>
+        <li class="ap-pd" style="--i:11"><b>ANDPAD 電子納品</b><i>e-Delivery</i><span data-l="ja">公共工事の電子納品</span><span data-l="en">Electronic delivery for public works</span><span data-l="vi">Nộp hồ sơ điện tử công trình công</span></li>
+        <li class="ap-pd" style="--i:12"><b>ANDPAD BIM</b><i>BIM</i><span data-l="ja">BIMモデルをクラウドで閲覧</span><span data-l="en">Cloud BIM viewer</span><span data-l="vi">Xem mô hình BIM trên đám mây</span></li>
+      </ul>
+    </div>
+    <div class="ap-grp">
+      <div class="ap-gh"><img src="assets/gx/funnel.webp" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="lbl">MONEY</span><h3 data-l="ja">営業とお金</h3><h3 data-l="en">Sales and back office</h3><h3 data-l="vi">Kinh doanh và kế toán</h3></div>
+      <ul class="ap-pds">
+        <li class="ap-pd" style="--i:13"><b>ANDPAD 引合粗利管理</b><i>Leads and Gross Profit</i><span data-l="ja">引合から粗利までを見える化</span><span data-l="en">From lead to gross profit in one view</span><span data-l="vi">Theo dõi từ cơ hội bán tới lãi gộp</span></li>
+        <li class="ap-pd" style="--i:14"><b>ANDPAD 受発注</b><i>Ordering</i><span data-l="ja">元請と協力会社の受発注を電子化</span><span data-l="en">Paperless orders with subcontractors</span><span data-l="vi">Số hoá đặt hàng giữa tổng thầu và thầu phụ</span></li>
+        <li class="ap-pd" style="--i:15"><b>ANDPAD 請求管理</b><i>Billing</i><span data-l="ja">建設業向けの請求管理</span><span data-l="en">Billing built for construction</span><span data-l="vi">Quản lý hoá đơn cho ngành xây dựng</span></li>
+        <li class="ap-pd" style="--i:16"><b>ANDPAD 歩掛管理</b><i>Labour Productivity</i><span data-l="ja">日報から工数と原価を集計</span><span data-l="en">Hours and cost from daily reports</span><span data-l="vi">Tổng hợp công và chi phí từ báo cáo ngày</span></li>
+        <li class="ap-pd" style="--i:17"><b>ANDPAD 早受取</b><i>Early Pay</i><span data-l="ja">売掛金を早く受け取る</span><span data-l="en">Get paid for receivables early</span><span data-l="vi">Nhận tiền công nợ sớm</span></li>
+      </ul>
+    </div>
+    <div class="ap-grp">
+      <div class="ap-gh"><img src="assets/gx/person-bust.webp" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="lbl">OWNERS</span><h3 data-l="ja">施主と経営</h3><h3 data-l="en">Owners and management</h3><h3 data-l="vi">Chủ nhà và quản trị</h3></div>
+      <ul class="ap-pds">
+        <li class="ap-pd" style="--i:18"><b>ANDPAD おうちノート</b><i>Ouchi Note</i><span data-l="ja">施主とのやり取りをアプリで</span><span data-l="en">App for talking with homeowners</span><span data-l="vi">Trao đổi với chủ nhà qua app</span></li>
+        <li class="ap-pd" style="--i:19"><b>ANDPAD Analytics</b><i>Analytics</i><span data-l="ja">経営の数字をリアルタイムで可視化</span><span data-l="en">Real-time business dashboard</span><span data-l="vi">Dashboard số liệu kinh doanh theo thời gian thực</span></li>
+        <li class="ap-pd" style="--i:20"><b>ANDPAD BM</b><i>Building Maintenance</i><span data-l="ja">建物と設備の維持管理</span><span data-l="en">Building and facility maintenance</span><span data-l="vi">Bảo trì toà nhà và thiết bị</span></li>
+      </ul>
+    </div>
+    <div class="ap-grp">
+      <div class="ap-gh"><img src="assets/gx/workflow-gears.webp" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="lbl">CONNECT ／ AI</span><h3 data-l="ja">連携とAI</h3><h3 data-l="en">Integrations and AI</h3><h3 data-l="vi">Kết nối và AI</h3></div>
+      <ul class="ap-pds">
+        <li class="ap-pd" style="--i:21"><b>ANDPAD API連携</b><i>API</i><span data-l="ja">自社システムとANDPADをつなぐ</span><span data-l="en">Connect in-house systems to ANDPAD</span><span data-l="vi">Kết nối hệ thống nội bộ với ANDPAD</span></li>
+        <li class="ap-pd" style="--i:22"><b>ANDPAD アプリマーケット</b><i>App Market</i><span data-l="ja">他社サービスとの連携アプリ</span><span data-l="en">Partner integrations marketplace</span><span data-l="vi">Chợ ứng dụng tích hợp của đối tác</span></li>
+        <li class="ap-pd" style="--i:23"><b>ANDPAD ナレッジAI</b><i>Knowledge AI</i><span data-l="ja">社内の知識から答えるAI</span><span data-l="en">AI that answers from company know-how</span><span data-l="vi">AI trả lời từ kho tri thức công ty</span></li>
+        <li class="ap-pd" style="--i:24"><b>ANDPAD AI-BPO</b><i>AI-BPO</i><span data-l="ja">AIと専門スタッフが積算などを代行</span><span data-l="en">AI plus experts handle work like estimating</span><span data-l="vi">AI cùng chuyên viên làm thay việc như dự toán</span></li>
+      </ul>
+    </div>
+  </div>
+  <p class="ap-src rv" style="--d:260ms"><span data-l="ja">出典（2026年11月25日に確認）：</span><span data-l="en">Sources (checked 25 Nov 2026): </span><span data-l="vi">Nguồn (tra cứu 25/11/2026): </span><a href="https://andpad.jp/" target="_blank" rel="noopener">andpad.jp</a> ／ <a href="https://appmarket.andpad.jp/" target="_blank" rel="noopener">appmarket.andpad.jp</a> ／ <a href="https://andpad.co.jp/" target="_blank" rel="noopener">andpad.co.jp</a> ／ <a href="https://vietnamnews.vn/media-outreach/1720265/andpad-launches-vietnamese-language-support-for-its-cloud-based-construction-project-management-service.html" target="_blank" rel="noopener">Vietnam News 2025</a></p>
+</section>
+<section class="pg" data-chap="III" id="ap-news">
+  <span class="eb rv">02　<b>ACTIVITIES ／ EVENTS</b></span>
+  <h2 class="kw ap-kw rv" style="--d:60ms"><span data-l="ja">資金調達、AI、<br /><i>そしてベトナムへ。</i></span><span data-l="en">Funding, AI,<br /><i>and Vietnam.</i></span><span data-l="vi">Gọi vốn, AI<br /><i>và Việt Nam.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Timeline ／ Award ／ AI ／ Vietnam</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="ja">主な出来事を年ごとに並べました。2025年からはAIとベトナムの動きが増えています。</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="en">Key moves by year. Since 2025 most news is about AI and Vietnam.</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="vi">Các mốc chính theo năm. Từ 2025, tin về AI và Việt Nam tăng rõ.</p>
+  <ol class="ap-tl rv" style="--d:180ms">
+    <li class="ap-ev" data-t="co" style="--i:0"><time>2012.09</time><i aria-hidden="true"></i><em data-l="ja">会社</em><em data-l="en">Company</em><em data-l="vi">Công ty</em><span data-l="ja">株式会社オクトとして設立</span><span data-l="en">Founded as Oct Inc.</span><span data-l="vi">Thành lập với tên Oct Inc.</span></li>
+    <li class="ap-ev" data-t="co" style="--i:1"><time>2016</time><i aria-hidden="true"></i><em data-l="ja">会社</em><em data-l="en">Company</em><em data-l="vi">Công ty</em><span data-l="ja">施工管理サービスANDPADを開始</span><span data-l="en">ANDPAD service launched</span><span data-l="vi">Ra mắt dịch vụ ANDPAD</span></li>
+    <li class="ap-ev" data-t="ev" style="--i:2"><time>2019.12</time><i aria-hidden="true"></i><em data-l="ja">イベント</em><em data-l="en">Event</em><em data-l="vi">Sự kiện</em><span data-l="ja">第1回 工務店支援EXPO（東京ビッグサイト）に出展</span><span data-l="en">Booth at the 1st Builder Support EXPO, Tokyo Big Sight</span><span data-l="vi">Tham gia triển lãm Builder Support EXPO lần 1 (Tokyo Big Sight)</span></li>
+    <li class="ap-ev" data-t="co" style="--i:3"><time>2020.05</time><i aria-hidden="true"></i><em data-l="ja">会社</em><em data-l="en">Company</em><em data-l="vi">Công ty</em><span data-l="ja">社名を株式会社アンドパッドに変更</span><span data-l="en">Renamed ANDPAD Inc.</span><span data-l="vi">Đổi tên thành ANDPAD Inc.</span></li>
+    <li class="ap-ev" data-t="co" style="--i:4"><time>2022.09</time><i aria-hidden="true"></i><em data-l="ja">会社</em><em data-l="en">Company</em><em data-l="vi">Công ty</em><span data-l="ja">Series Dで約122億円を調達（借入を含む）</span><span data-l="en">Series D: about ¥12.2 billion, loans included</span><span data-l="vi">Gọi vốn Series D khoảng 12,2 tỷ yên (gồm vốn vay)</span></li>
+    <li class="ap-ev" data-t="vn" style="--i:5"><time>2024.02</time><i aria-hidden="true"></i><em data-l="ja">ベトナム</em><em data-l="en">Vietnam</em><em data-l="vi">Việt Nam</em><span data-l="ja">JETROの事業として、ベトナムの建設現場で実証を開始</span><span data-l="en">JETRO-backed pilot starts on Vietnamese construction sites</span><span data-l="vi">Bắt đầu thí điểm tại công trường Việt Nam trong chương trình của JETRO</span></li>
+    <li class="ap-ev" data-t="vn" style="--i:6"><time>2025.06</time><i aria-hidden="true"></i><em data-l="ja">ベトナム</em><em data-l="en">Vietnam</em><em data-l="vi">Việt Nam</em><span data-l="ja">ベトナム語版を公開</span><span data-l="en">Vietnamese version released</span><span data-l="vi">Ra mắt bản tiếng Việt</span></li>
+    <li class="ap-ev" data-t="ev" style="--i:7"><time>2025.06</time><i aria-hidden="true"></i><em data-l="ja">イベント</em><em data-l="en">Event</em><em data-l="vi">Sự kiện</em><span data-l="ja">ANDPAD AWARD 2025 授賞式</span><span data-l="en">ANDPAD AWARD 2025 ceremony</span><span data-l="vi">Lễ trao giải ANDPAD AWARD 2025</span></li>
+    <li class="ap-ev" data-t="vn" style="--i:8"><time>2025.10</time><i aria-hidden="true"></i><em data-l="ja">ベトナム</em><em data-l="en">Vietnam</em><em data-l="vi">Việt Nam</em><span data-l="ja">ベトナム実証の完了を発表。現場の作業時間は30〜50％減り、紙の記録が不要に</span><span data-l="en">Pilot results: on-site work time down 30 to 50%, no more paper records</span><span data-l="vi">Công bố kết quả thí điểm: giờ làm tại hiện trường giảm 30 đến 50%, bỏ hồ sơ giấy</span></li>
+    <li class="ap-ev" data-t="ai" style="--i:9"><time>2025.12</time><i aria-hidden="true"></i><em data-l="ja">AI</em><em data-l="en">AI</em><em data-l="vi">AI</em><span data-l="ja">建設に特化したAIプロジェクト「ANDPAD Stellarc」を開始</span><span data-l="en">ANDPAD Stellarc, an AI project for construction, begins</span><span data-l="vi">Khởi động dự án AI chuyên ngành xây dựng ANDPAD Stellarc</span></li>
+    <li class="ap-ev" data-t="vn" style="--i:10"><time>2026.04</time><i aria-hidden="true"></i><em data-l="ja">ベトナム</em><em data-l="en">Vietnam</em><em data-l="vi">Việt Nam</em><span data-l="ja">ハノイ事務所をTaisei Square Hanoiへ移転</span><span data-l="en">Hanoi office moves to Taisei Square Hanoi</span><span data-l="vi">Dời văn phòng Hà Nội về Taisei Square Hanoi</span></li>
+    <li class="ap-ev" data-t="co" style="--i:11"><time>2026.04</time><i aria-hidden="true"></i><em data-l="ja">会社</em><em data-l="en">Company</em><em data-l="vi">Công ty</em><span data-l="ja">ARRが100億円を突破</span><span data-l="en">ARR passes ¥10 billion</span><span data-l="vi">ARR vượt 10 tỷ yên</span></li>
+    <li class="ap-ev" data-t="ai" style="--i:12"><time>2026.05</time><i aria-hidden="true"></i><em data-l="ja">AI</em><em data-l="en">AI</em><em data-l="vi">AI</em><span data-l="ja">ANDPAD ナレッジAIと、図面の測定箇所を自動で拾うAIを公開</span><span data-l="en">ANDPAD Knowledge AI, plus AI that finds measuring points on drawings</span><span data-l="vi">Ra mắt ANDPAD Knowledge AI và AI tự tìm điểm đo trên bản vẽ</span></li>
+    <li class="ap-ev" data-t="ev" style="--i:13"><time>2026.06</time><i aria-hidden="true"></i><em data-l="ja">イベント</em><em data-l="en">Event</em><em data-l="vi">Sự kiện</em><span data-l="ja">ANDPAD AWARD 2026。新部門「DX Project」を設置</span><span data-l="en">ANDPAD AWARD 2026 adds a DX Project category</span><span data-l="vi">ANDPAD AWARD 2026 thêm hạng mục DX Project</span></li>
+    <li class="ap-ev" data-t="co" style="--i:14"><time>2026.08</time><i aria-hidden="true"></i><em data-l="ja">会社</em><em data-l="en">Company</em><em data-l="vi">Công ty</em><span data-l="ja">東京ガス、ダイキン、カインズと資本業務提携</span><span data-l="en">Capital and business tie-ups with Tokyo Gas, Daikin and Cainz</span><span data-l="vi">Hợp tác vốn và kinh doanh với Tokyo Gas, Daikin, Cainz</span></li>
+    <li class="ap-ev" data-t="ev" style="--i:15"><time>2026.10</time><i aria-hidden="true"></i><em data-l="ja">イベント</em><em data-l="en">Event</em><em data-l="vi">Sự kiện</em><span data-l="ja">「NextGen Tech 30 2026」に選出</span><span data-l="en">Named to NextGen Tech 30 2026</span><span data-l="vi">Lọt danh sách NextGen Tech 30 2026</span></li>
+  </ol>
+  <div class="ap-acts rv" style="--d:220ms">
+    <div class="card ap-act"><img src="assets/gx/milestone-report.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div><span class="lbl">ANDPAD AWARD</span><p data-l="ja">ANDPADでDXの成果を出した会社を毎年表彰しています。</p><p data-l="en">Yearly awards for customers who got results with ANDPAD.</p><p data-l="vi">Giải thưởng hằng năm cho doanh nghiệp chuyển đổi số thành công với ANDPAD.</p></div></div>
+    <div class="card ap-act"><img src="assets/gx/team-group.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div><span class="lbl">ANDPAD ONE</span><p data-l="ja">建設業界の人と情報が集まるコミュニティとメディアです。</p><p data-l="en">A community and media site for people in construction.</p><p data-l="vi">Cộng đồng và kênh tin tức cho người trong ngành xây dựng.</p></div></div>
+    <div class="card ap-act"><img src="assets/gx/interview.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div><span class="lbl">EXPO ／ SEMINAR</span><p data-l="ja">住宅と建設の展示会に出展し、利用者向けの説明会も開いています。</p><p data-l="en">Booths at housing and construction shows, plus briefings for users.</p><p data-l="vi">Tham gia triển lãm nhà ở, xây dựng và mở buổi hướng dẫn cho người dùng.</p></div></div>
+    <div class="card ap-act"><img src="assets/gx/roadmap.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div><span class="lbl">NEXT</span><p data-l="ja">ベトナムの主要都市、その後は近隣国へ広げる計画です。</p><p data-l="en">Plan: major Vietnamese cities first, then neighbouring countries.</p><p data-l="vi">Kế hoạch: mở rộng ra các thành phố lớn của Việt Nam, sau đó tới nước lân cận.</p></div></div>
+  </div>
+  <p class="ap-src rv" style="--d:260ms"><span data-l="ja">出典（2026年11月25日に確認）：</span><span data-l="en">Sources (checked 25 Nov 2026): </span><span data-l="vi">Nguồn (tra cứu 25/11/2026): </span><a href="https://prtimes.jp/main/html/rd/p/000000198.000018154.html" target="_blank" rel="noopener">PR TIMES（AWARD 2026）</a> ／ <a href="https://thebridge.jp/2022/09/andpad-series-d-round-funding/" target="_blank" rel="noopener">THE BRIDGE 2022</a> ／ <a href="https://vietnamnews.vn/media-outreach/1726656/andpad-completes-the-vietnam-demonstration-project-under-jetro-s-japan-asean-asia-digital-transformation-promotion-program.html" target="_blank" rel="noopener">JETRO pilot</a> ／ <a href="https://thebridge.jp/2026/05/andpad-launches-knowledge-ai-powered-by-stellarc" target="_blank" rel="noopener">Knowledge AI</a> ／ <a href="https://sogyotecho.jp/news/20260820andpad/" target="_blank" rel="noopener">Tie-ups 2026</a> ／ <a href="https://kyodonewsprwire.jp/release/202610238598" target="_blank" rel="noopener">NextGen Tech 30</a> ／ <a href="https://andpad.co.jp/" target="_blank" rel="noopener">andpad.co.jp</a></p>
+</section>
+<section class="pg" data-chap="IV" id="ap-role">
+  <span class="eb rv">03　<b>FORECAST</b></span>
+  <h2 class="kw ap-kw rv" style="--d:60ms"><span data-l="ja">このポジションで<br /><i>担うと予想する仕事。</i></span><span data-l="en">What I expect<br /><i>this role to do.</i></span><span data-l="vi">Dự báo công việc<br /><i>của vị trí này.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Customer Success ／ Onboarding ／ Product by product</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="ja">求人票（Customer Success Staff、IT）と公開情報をもとにした予想です。顧客はANDPADを使う日系の建設会社と、そのベトナム法人が中心になると考えます。</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="en">This is my forecast from the job description (Customer Success Staff, IT) and public information. I expect most clients to be Japanese construction companies using ANDPAD and their Vietnamese subsidiaries.</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="vi">Đây là dự báo của tôi dựa trên JD (Customer Success Staff, IT) và thông tin công khai. Tôi cho rằng khách hàng chính là các công ty xây dựng Nhật dùng ANDPAD và công ty con của họ tại Việt Nam.</p>
+  <ol class="ap-jr rv" style="--d:180ms">
+    <li class="ap-js" style="--i:0"><img src="assets/gx/interview.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span class="ap-n" aria-hidden="true">01</span><h3 data-l="ja">Salesとデモ</h3><h3 data-l="en">Demo with Sales</h3><h3 data-l="vi">Demo cùng Sales</h3><p data-l="ja">顧客の現場に合わせてANDPADをデモし、導入の効果を説明します。</p><p data-l="en">I demo ANDPAD on the client's own site cases and explain the benefits for their sites.</p><p data-l="vi">Tôi demo ANDPAD theo đúng tình huống công trình của khách và nói rõ hiệu quả.</p></li>
+    <li class="ap-js" style="--i:1"><img src="assets/gx/checklist.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span class="ap-n" aria-hidden="true">02</span><h3 data-l="ja">導入と研修</h3><h3 data-l="en">Onboarding and training</h3><h3 data-l="vi">Triển khai và đào tạo</h3><p data-l="ja">案件、権限、黒板、検査表を設定し、現場監督と協力会社に研修をします。</p><p data-l="en">I set up projects, permissions, photo boards and checklists, then train supervisors and subcontractors.</p><p data-l="vi">Tôi thiết lập dự án, phân quyền, bảng đen, checklist rồi đào tạo giám sát và thầu phụ.</p></li>
+    <li class="ap-js" style="--i:2"><img src="assets/gx/report-chart.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span class="ap-n" aria-hidden="true">03</span><h3 data-l="ja">定着の確認</h3><h3 data-l="en">Adoption check</h3><h3 data-l="vi">Theo dõi mức dùng</h3><p data-l="ja">利用状況を数字で確認し、フォローアップ会議で課題を聞いて解決策を出します。</p><p data-l="en">I track usage in numbers, hear problems in follow-up meetings and propose fixes.</p><p data-l="vi">Tôi theo dõi mức sử dụng bằng số liệu, họp follow-up để nghe khó khăn và đề xuất giải pháp.</p></li>
+    <li class="ap-js" style="--i:3"><img src="assets/gx/roadmap.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><span class="ap-n" aria-hidden="true">04</span><h3 data-l="ja">活用の拡大</h3><h3 data-l="en">Expansion</h3><h3 data-l="vi">Mở rộng</h3><p data-l="ja">成果を共有し、他の現場や受発注、Analyticsなどの製品へ広げます。</p><p data-l="en">I share results and extend use to more sites and products such as Ordering or Analytics.</p><p data-l="vi">Tôi chia sẻ kết quả, mở rộng sang công trình khác và sản phẩm như Đặt hàng (受発注), Analytics.</p></li>
+  </ol>
+  <div class="card ap-rws rv" style="--d:200ms">
+    <span class="lbl">PRODUCT × TASK</span>
+    <h3 data-l="ja">製品ごとに予想する仕事</h3><h3 data-l="en">Expected tasks, product by product</h3><h3 data-l="vi">Dự báo việc cần làm theo từng sản phẩm</h3>
+    <ul>
+      <li class="ap-rw" style="--i:0"><img src="assets/gx/building-blocks.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><div class="ap-rp"><b data-l="ja">施工管理 ／ チャット</b><b data-l="en">Construction Mgmt ／ Chat</b><b data-l="vi">Quản lý thi công ／ Chat</b></div><span data-l="ja">案件のひな形と権限を設定し、現場監督と職人に使い方を研修。日本語とベトナム語の操作マニュアルも作ります。</span><span data-l="en">Set up project templates and permissions, train supervisors and trades, and write user guides in Japanese and Vietnamese.</span><span data-l="vi">Thiết lập mẫu dự án, phân quyền; đào tạo giám sát và thợ; viết tài liệu hướng dẫn bằng tiếng Nhật và tiếng Việt.</span></li>
+      <li class="ap-rw" style="--i:1"><img src="assets/gx/checklist.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><div class="ap-rp"><b data-l="ja">図面 ／ 黒板 ／ 検査</b><b data-l="en">Drawings ／ Blackboard ／ Inspection</b><b data-l="vi">Bản vẽ ／ Bảng đen ／ Kiểm tra</b></div><span data-l="ja">顧客の基準に合わせて黒板と検査表のテンプレートを作り、図面への記録を現場で一緒に練習します。</span><span data-l="en">Build photo-board and inspection templates to the client's standards, and practise recording on drawings together on site.</span><span data-l="vi">Tạo mẫu bảng đen và checklist kiểm tra theo tiêu chuẩn của khách; cùng tập ghi nhận trên bản vẽ tại công trình.</span></li>
+      <li class="ap-rw" style="--i:2"><img src="assets/gx/funnel.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><div class="ap-rp"><b data-l="ja">受発注 ／ 請求管理 ／ 引合粗利管理</b><b data-l="en">Ordering ／ Billing ／ Leads and Profit</b><b data-l="vi">Đặt hàng ／ Hoá đơn ／ Cơ hội và lãi gộp</b></div><span data-l="ja">今の業務（AsIs）を聞き取り、あるべき流れ（ToBe）を設計して、マスタデータの移行を管理します。</span><span data-l="en">Map the current flow (AsIs), design the target flow (ToBe) and manage the master-data migration.</span><span data-l="vi">Khảo sát quy trình hiện tại (AsIs), thiết kế quy trình mới (ToBe), quản lý việc chuyển dữ liệu master.</span></li>
+      <li class="ap-rw" style="--i:3"><img src="assets/gx/report-chart.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><div class="ap-rp"><b data-l="ja">Analytics ／ レポート</b><b data-l="en">Analytics ／ Report</b><b data-l="vi">Analytics ／ Báo cáo</b></div><span data-l="ja">利用状況と現場の数字を定例レポートにまとめ、改善を提案します。</span><span data-l="en">Turn usage and site numbers into a regular report and suggest improvements.</span><span data-l="vi">Tổng hợp mức sử dụng và số liệu công trình thành báo cáo định kỳ, đề xuất cải tiến.</span></li>
+      <li class="ap-rw" style="--i:4"><img src="assets/gx/workflow-gears.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><div class="ap-rp"><b data-l="ja">API連携 ／ アプリマーケット</b><b data-l="en">API ／ App Market</b><b data-l="vi">API ／ Chợ ứng dụng</b></div><span data-l="ja">基幹システムとの連携の要望を整理し、ソリューションエンジニアやベトナムの開発チームにつなぎます。</span><span data-l="en">Collect integration needs with core systems and pass them to solution engineers and the Vietnam dev team.</span><span data-l="vi">Tổng hợp nhu cầu kết nối với hệ thống lõi, chuyển cho Solution Engineer và đội phát triển tại Việt Nam.</span></li>
+      <li class="ap-rw" style="--i:5"><img src="assets/gx/lightbulb.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><div class="ap-rp"><b data-l="ja">ナレッジAI ／ AI-BPO</b><b data-l="en">Knowledge AI ／ AI-BPO</b><b data-l="vi">Knowledge AI ／ AI-BPO</b></div><span data-l="ja">新しいAI機能をデモし、顧客の声を製品チームに届けます。</span><span data-l="en">Demo new AI features and bring client feedback to the product team.</span><span data-l="vi">Demo tính năng AI mới, gom phản hồi của khách gửi đội sản phẩm.</span></li>
+      <li class="ap-rw" style="--i:6"><img src="assets/gx/briefcase.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><div class="ap-rp"><b data-l="ja">説明会 ／ 出張</b><b data-l="en">Briefings ／ Site visits</b><b data-l="vi">Hướng dẫn ／ Công tác</b></div><span data-l="ja">顧客の現場や事務所に出向き、利用説明会やセミナーを開きます。</span><span data-l="en">Visit client sites and offices to run user briefings and seminars.</span><span data-l="vi">Đi công tác tới công trình, văn phòng khách để tổ chức buổi hướng dẫn và hội thảo.</span></li>
+    </ul>
+  </div>
+  <p class="ap-go rv" style="--d:240ms"><a href="#jd-match"><span data-l="ja">私のスキルとの照合は「スキルの照合」ページへ →</span><span data-l="en">How my skills match: see the Skill match page →</span><span data-l="vi">Kỹ năng của tôi khớp thế nào: xem trang Đối chiếu kỹ năng →</span></a></p>
+  <p class="ap-src rv" style="--d:260ms"><span data-l="ja">出典（2026年11月25日に確認）：</span><span data-l="en">Sources (checked 25 Nov 2026): </span><span data-l="vi">Nguồn (tra cứu 25/11/2026): </span><a href="https://careers.andpad.vn/jobs/8693932-customer-success-staff-hcm-it-n2-eng-leader-candidate" target="_blank" rel="noopener">careers.andpad.vn（Customer Success Staff）</a> ／ <a href="https://hrmos.co/pages/andpad/jobs/biz0000411" target="_blank" rel="noopener">ANDPAD Customer Success（Japan）</a> ／ <a href="https://andpad.jp/" target="_blank" rel="noopener">andpad.jp</a></p>
+</section>
+</main>
+<!-- ap:end -->
 <main class="wrap" data-view="sw" hidden>
 <section class="pg" data-chap="I" id="sw-top">
   <span class="eb rv">SOFTWARE　<b>PRODUCTS</b></span>
@@ -4492,7 +4742,7 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     'it-top','it-stack','it-arch','it-change',
     'lang-top','lang-ja','lang-en','lang-bridge',
     'wv-kaizen','wv-data','wv-people',
-    'jd-top','jd-fit','jd-match','sw-top','sw-remote','sw-talent','sw-leads','sw-leads2'];
+    'jd-top','jd-fit','jd-match','ap-top','ap-products','ap-news','ap-role','sw-top','sw-remote','sw-talent','sw-leads','sw-leads2'];
   var layers=[];
   IDS.forEach(function(id){
     var pg=document.getElementById(id);if(!pg||!pg.classList.contains('pg')||pg.querySelector(':scope>.pganh'))return;

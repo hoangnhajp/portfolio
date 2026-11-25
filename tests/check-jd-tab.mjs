@@ -22,7 +22,8 @@ ok(/<a href="#jd-top" data-view="jd">JD ANDPAD<\/a>/.test(topNav), 'top-nav thi�
 const order = [...topNav.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]);
 const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]);
 ok(order.join(',') === views.join(','), `menu trên và main lệch nhau: ${order} / ${views}`);
-ok(order.indexOf('jd') === order.indexOf('sw') - 1, `tab JD phải đứng ngay trước Software Products: ${order}`);
+// task m07v: tab Andpad Info (ap) chen giữa JD và Software Products
+ok(order.indexOf('jd') === order.indexOf('ap') - 1 && order.indexOf('ap') === order.indexOf('sw') - 1, `tab JD phải đứng ngay trước Andpad Info, rồi tới Software Products: ${order}`);
 
 const main = (html.match(/<main class="wrap" data-view="jd" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 ok(main, 'thiếu <main class="wrap" data-view="jd" hidden>');
