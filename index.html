@@ -381,19 +381,20 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
    một cục sáng chạy liên tục dọc ống, đi qua bước nào bước đó sáng (SVG .pjf-pipe + script pjf-js) */
 .pjf{position:relative;display:flex;flex-direction:column;gap:12px;margin-top:20px}
 .pjf-ln{position:relative;padding:12px 14px 14px 16px;background:#fff;border:1px solid #ece8f3;border-radius:14px;box-shadow:0 10px 26px -22px rgba(59,47,134,.5)}
-.pjf.is-pipe .pjf-ln{padding-left:30px;padding-right:30px}
+.pjf.is-pipe .pjf-ln{padding-left:24px;padding-right:24px}
 .pjf-ln::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:14px 0 0 14px;background:linear-gradient(180deg,#3b2f86,#26B3F4)}
 .pjf-ln:nth-child(2)::before{background:linear-gradient(180deg,#0f8f83,#1FB6A6)}
 .pjf-ln:nth-child(3)::before{background:linear-gradient(180deg,#c14343,#F68209)}
 .pjf-ln:nth-child(4)::before{background:linear-gradient(180deg,#0f5a8c,#26B3F4)}
-.pjf-lb{display:flex;align-items:center;gap:8px;margin-bottom:10px;font:700 10px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a83a0}
-.pjf-lb em{font:700 10.5px 'Space Grotesk',sans-serif;font-style:normal;color:#fff;background:linear-gradient(90deg,#3b2f86,#6d5bd0);border-radius:999px;padding:2px 8px}
+.pjf-lb{display:flex;align-items:center;gap:8px;margin-bottom:10px;font:700 11px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a83a0}
+.pjf-lb em{font:700 11.5px 'Space Grotesk',sans-serif;font-style:normal;color:#fff;background:linear-gradient(90deg,#3b2f86,#6d5bd0);border-radius:999px;padding:2px 8px}
 .pjf-row{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
 .pjf-row>li{position:relative;z-index:2;min-width:0}
-/* đường nối tĩnh trong làn (khi chưa có JS); có JS thì SVG .pjf-pipe vẽ cả đường ống. Tâm cột k = 10% - 4px + k*(100% + 10px)/5 */
-.pjf-row::before{content:'';position:absolute;top:22px;left:calc(10% - 4px);width:calc((var(--pjn) - 1)*(100% + 10px)/5);height:2px;background:repeating-linear-gradient(90deg,#d6cff0 0 6px,transparent 6px 11px)}
+/* đường nối tĩnh trong làn (khi chưa có JS); có JS thì SVG .pjf-pipe vẽ cả đường ống. Tâm cột k = 10% - 4px + k*(100% + 10px)/5.
+   task cogy: nét mảnh 1px, tâm dọc = nửa icon 54px */
+.pjf-row::before{content:'';position:absolute;top:26.5px;left:calc(10% - 4px);width:calc((var(--pjn) - 1)*(100% + 10px)/5);height:1px;background:repeating-linear-gradient(90deg,#cfc6ee 0 4px,transparent 4px 9px)}
 .pjf.is-pipe .pjf-row::before{display:none}
-.pjf-row>li+li::before{content:'';position:absolute;top:18px;left:-10px;width:7px;height:7px;border-top:2px solid #8a7fd0;border-right:2px solid #8a7fd0;transform:rotate(45deg);z-index:1}
+.pjf-row>li+li::before{content:'';position:absolute;top:23.5px;left:-9px;width:5px;height:5px;border-top:1.2px solid #a89ddc;border-right:1.2px solid #a89ddc;transform:rotate(45deg);z-index:1}
 /* làn chẵn (B, D) chạy ngược: bước đầu ở cột phải ngoài cùng, mũi tên chỉ sang trái */
 @media screen and (min-width:701px){
   .pjf-ln:nth-child(even) .pjf-row>li{grid-row:1}
@@ -401,42 +402,42 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
   .pjf-ln:nth-child(even) .pjf-row>li:nth-child(3){grid-column:3}.pjf-ln:nth-child(even) .pjf-row>li:nth-child(4){grid-column:2}
   .pjf-ln:nth-child(even) .pjf-row>li:nth-child(5){grid-column:1}
   .pjf-ln:nth-child(even) .pjf-row::before{left:auto;right:calc(10% - 4px)}
-  .pjf-ln:nth-child(even) .pjf-row>li+li::before{left:auto;right:-10px;transform:rotate(-135deg)}
+  .pjf-ln:nth-child(even) .pjf-row>li+li::before{left:auto;right:-9px;transform:rotate(-135deg)}
 }
-.pjf-row .pj-c{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;text-decoration:none;color:inherit;padding:0 2px;border-radius:12px;transition:transform .2s}
+.pjf-row .pj-c{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;text-decoration:none;color:inherit;padding:0;border-radius:12px;transition:transform .2s}
 .pjf-row .pj-c:hover{transform:translateY(-3px)}
-.pjf-ic{flex:none;position:relative;z-index:2;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#f3f0fa;border:1px solid #e5e0f1;transition:box-shadow .35s,background-color .35s,border-color .35s,transform .35s}
-.pjf-ic img{width:32px;height:32px;object-fit:contain}
+.pjf-ic{flex:none;position:relative;z-index:2;display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#f3f0fa;border:1px solid #e5e0f1;transition:box-shadow .35s,background-color .35s,border-color .35s,transform .35s}
+.pjf-ic img{width:38px;height:38px;object-fit:contain}
 .pjf-row .pj-c:focus-visible{outline:2px solid #6d5bd0;outline-offset:3px}
 .pjf-row .pj-c:hover .pjf-ic,.pjf-row .pj-c:focus-visible .pjf-ic{box-shadow:0 0 0 4px rgba(109,91,208,.25)}
-.pjf-row>li.on .pjf-ic{background:#fff4e6;border-color:#F68209;box-shadow:0 0 0 5px rgba(246,130,9,.18),0 0 18px 2px rgba(246,130,9,.35);transform:scale(1.08)}
-.pjf-no{font:700 9.5px 'Space Grotesk',sans-serif;font-style:normal;letter-spacing:.06em;color:#6d5bd0}
-.pjf-row .pj-co{font:700 12px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;letter-spacing:-.01em;color:#16141d;text-wrap:balance;overflow-wrap:normal}
-/* đường ống: ống mờ + dòng chảy chấm gạch + vệt sáng đuôi sao chổi; cục sáng là .pjf-orb (vị trí do JS đặt) */
+.pjf-row>li.on .pjf-ic{background:#fff4e6;border-color:#F68209;box-shadow:0 0 0 4px rgba(246,130,9,.14),0 0 14px 1px rgba(246,130,9,.28);transform:scale(1.06)}
+.pjf-no{font:700 10.5px 'Space Grotesk',sans-serif;font-style:normal;letter-spacing:.06em;color:#6d5bd0}
+.pjf-row .pj-co{font:700 13px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;letter-spacing:-.01em;color:#16141d;text-wrap:balance;overflow-wrap:normal}
+/* đường ống: ống mờ + dòng chảy chấm gạch + vệt sáng đuôi sao chổi; cục sáng là .pjf-orb (vị trí do JS đặt). task cogy: mọi nét đều mảnh */
 .pjf-pipe{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1;display:none}
 .pjf.is-pipe .pjf-pipe{display:block}
 .pjf-pipe path{fill:none;stroke-linecap:round;stroke-linejoin:round}
-.pjf-tube{stroke:rgba(109,91,208,.13);stroke-width:9}
-.pjf-flow{stroke:#b3a6e6;stroke-width:2;stroke-dasharray:6 8}
-.pjf-lit{stroke:#F68209;stroke-width:3.5;filter:drop-shadow(0 0 4px rgba(246,130,9,.7));opacity:0;transition:opacity .4s}
+.pjf-tube{stroke:rgba(109,91,208,.08);stroke-width:3}
+.pjf-flow{stroke:#b3a6e6;stroke-width:1.2;stroke-dasharray:4 5}
+.pjf-lit{stroke:#F68209;stroke-width:1.8;filter:drop-shadow(0 0 3px rgba(246,130,9,.55));opacity:0;transition:opacity .4s}
 .pjf.is-run .pjf-flow{animation:pjfFlow .9s linear infinite}
 .pjf.is-run .pjf-lit{opacity:1}
-.pjf-orb{position:absolute;left:0;top:0;z-index:1;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;opacity:0;pointer-events:none;will-change:transform;transition:opacity .4s;
-  background:radial-gradient(circle,#fff 0 26%,#F68209 50%,rgba(246,130,9,0) 74%);box-shadow:0 0 16px 6px rgba(246,130,9,.45)}
+.pjf-orb{position:absolute;left:0;top:0;z-index:1;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;opacity:0;pointer-events:none;will-change:transform;transition:opacity .4s;
+  background:radial-gradient(circle,#fff 0 28%,#F68209 54%,rgba(246,130,9,0) 76%);box-shadow:0 0 10px 3px rgba(246,130,9,.4)}
 .pjf.is-run .pjf-orb{opacity:1}
 .pjf.is-hold .pjf-orb,.pjf.is-hold .pjf-lit{opacity:0}
 /* animation: bước hiện lần lượt khi khối vào khung nhìn */
 html.js .pg.in .pjf-row>li,html.sr .rv.sr-in .pjf-row>li{animation:pjfIn .55s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--l,0)*.15s + var(--i,0)*.12s + .2s)}
 @keyframes pjfIn{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
-@keyframes pjfFlow{to{stroke-dashoffset:-14}}
+@keyframes pjfFlow{to{stroke-dashoffset:-9}}
 /* màn hẹp: làn thành danh sách dọc, ống chạy dọc qua tâm icon và vòng qua mép trái sang làn sau */
 @media screen and (max-width:700px){
   .pjf-row{grid-template-columns:1fr;gap:6px}
   .pjf.is-pipe .pjf-ln{padding-right:14px}
-  .pjf-row::before{top:23px;bottom:23px;left:22px;width:2px;height:auto;background:repeating-linear-gradient(180deg,#d6cff0 0 6px,transparent 6px 11px)}
+  .pjf-row::before{top:27px;bottom:27px;left:26.5px;width:1px;height:auto;background:repeating-linear-gradient(180deg,#cfc6ee 0 4px,transparent 4px 9px)}
   .pjf-row>li+li::before{display:none}
   .pjf-row .pj-c{flex-direction:row;text-align:left;gap:10px;padding:0}
-  .pjf-no{min-width:18px}.pjf-row .pj-co{font-size:12.5px}
+  .pjf-no{min-width:20px}.pjf-row .pj-co{font-size:14px}
 }
 @media (prefers-reduced-motion:reduce){.pjf *,.pjf *::before,.pjf *::after{animation:none!important;transition:none!important}.pjf-orb,.pjf-lit{display:none}}
 @media print{.pjf{gap:6px;margin-top:12px}.pjf-ln,.pjf.is-pipe .pjf-ln{box-shadow:none;break-inside:avoid;padding:7px 10px 8px}.pjf-orb,.pjf .pjf-pipe{display:none!important}.pjf.is-pipe .pjf-row::before{display:block}.pjf-row>li.on .pjf-ic{background:#f3f0fa;border-color:#e5e0f1;box-shadow:none;transform:none}.pjf-row>li,.pjf-ic{animation:none!important;opacity:1!important}
@@ -1039,13 +1040,30 @@ html.js .lg-chat .lg-b3{animation:lgB3 12s ease-out infinite}
 html.js .lg-chat .lg-b4{animation:lgB4 12s ease-out infinite}
 html.js .lg-chat .lg-typing{animation:lgType 12s linear infinite}
 html.js .lg-chat .lg-typing>i{animation:lgDot 1s ease-in-out infinite;animation-delay:calc(var(--j,0)*.15s)}
-.lg-steps{display:flex;flex-direction:column;gap:10px}
-.lg-step{display:flex;gap:12px;align-items:flex-start;padding:12px 14px}
-.lg-step img{width:40px;height:40px;flex:none}
-.lg-step h3{margin:0 0 2px;font-size:14px}
-.lg-step p{margin:0}
-html.js .lg-steps .lg-step{animation:lgRise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*.16s + .2s)}
-html.js .lg-steps .lg-step img{animation:lgFloat 3.4s ease-in-out infinite;animation-delay:calc(var(--i,0)*.35s)}
+/* task ila7: dải hourensou (Hō / Ren / Sō) + dòng tiến trình 6 bước: nắm tổng thể, deadline, kế hoạch, theo dõi, báo cáo theo mốc, kết quả */
+.lg-hrs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.lg-hr{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:#fff;border:1px solid #ece8f3;border-radius:16px;box-shadow:0 14px 30px -26px rgba(60,50,90,.5)}
+.lg-hr-k{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font:700 15px 'Space Grotesk',sans-serif;color:#fff;background:linear-gradient(135deg,#3b2f86,#6d5bd0)}
+.lg-hr:nth-child(2) .lg-hr-k{background:linear-gradient(135deg,#0f8f83,#1FB6A6)}
+.lg-hr:nth-child(3) .lg-hr-k{background:linear-gradient(135deg,#c14343,#F68209)}
+.lg-hr h3{margin:0 0 3px;font-size:14px}
+.lg-hr p{margin:0;font-size:12.5px;line-height:1.6}
+html.js .lg-hrs .lg-hr{animation:lgRise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*.16s)}
+html.js .lg-hrs .lg-hr-k{animation:lgPop .55s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--i,0)*.16s + .25s)}
+.lg-track{display:flex;flex-direction:column}
+.lg-tks{position:relative;list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.lg-tks::before,.lg-tks::after{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:2px;border-radius:2px;background:#ece8f3}
+.lg-tks::after{background:linear-gradient(180deg,#3b2f86,#26B3F4 60%,#F68209);transform-origin:top}
+.lg-tk{position:relative;display:flex;gap:12px;align-items:center}
+.lg-tk>img{position:relative;z-index:1;flex:none;width:40px;height:40px;padding:5px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #e5e0f1}
+.lg-tk-n{display:block;font:700 9.5px 'Space Grotesk',sans-serif;letter-spacing:.08em;color:#6d5bd0}
+.lg-tk h3{margin:0;font-size:13.5px}
+.lg-tk p{margin:0;font-size:12px;line-height:1.5}
+@keyframes lgFill{0%{opacity:1;transform:scaleY(0)}70%,90%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(1)}}
+@keyframes lgTk{0%,14%,100%{transform:scale(1)}7%{transform:scale(1.14)}}
+html.js .lg-track .lg-tks::after{animation:lgFill 7s ease-in-out infinite}
+html.js .lg-track .lg-tk{animation:lgRise .55s ease-out both;animation-delay:calc(var(--i,0)*.14s + .2s)}
+html.js .lg-track .lg-tk>img{animation:lgTk 7s ease-in-out infinite;animation-delay:calc(var(--i,0)*.98s)}
 
 /* Sân khấu ASEAN (#lang-en) */
 .lg-stage{position:relative;overflow:hidden;border-radius:18px;margin-top:16px;padding:18px 20px 16px;color:#fff;
@@ -1059,7 +1077,6 @@ html.js .lg-stage .lg-wave{animation:lgPulse 2.4s ease-out infinite;animation-de
 .lg-sl{position:absolute;inset:0;display:flex;align-items:center;gap:14px;padding:0 20px}
 .lg-sl img{width:58px;height:58px;flex:none}
 .lg-sl b{display:block;font:700 16px/1.35 'Noto Sans JP',sans-serif;color:#fff}
-.lg-sl small{display:block;font:800 9px 'Manrope',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#7ef0dd;margin-bottom:3px}
 html.js .lg-stage .lg-sl{opacity:0;animation:lgSlide 9s ease-in-out infinite;animation-delay:calc(var(--i,0)*3s)}
 .lg-aud{display:flex;justify-content:center;gap:clamp(8px,2.4vw,18px);margin-top:14px}
 .lg-hd{width:20px;height:26px;border-radius:10px 10px 6px 6px;background:linear-gradient(180deg,rgba(191,233,255,.55),rgba(191,233,255,.18))}
@@ -1085,6 +1102,7 @@ html.js .lg-bridge .lg-run--b{animation-direction:reverse;animation-delay:calc(v
 .lg-node{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:1}
 .lg-node .lg-flagb{width:clamp(44px,8vw,64px);height:clamp(44px,8vw,64px);margin:0}
 .lg-node .lg-flagb .flg{width:58%;height:auto;aspect-ratio:3/2}
+.lg-node .lg-flagb img{width:68%;height:68%;object-fit:contain}
 .lg-node b{font:700 12px 'Noto Sans JP',sans-serif;color:#16141d;background:rgba(255,255,255,.9);padding:2px 8px;border-radius:999px;white-space:nowrap}
 html.js .lg-bridge .lg-node{animation:lgRise .6s ease-out both;animation-delay:calc(var(--i,0)*.2s)}
 html.js .lg-bridge .lg-node .lg-flagb{animation:lgFloat 3.6s ease-in-out infinite;animation-delay:calc(var(--i,0)*.5s)}
@@ -1115,7 +1133,7 @@ html.js .tk .tk-c::after{opacity:1;animation:lgSheen 4.2s ease-in-out infinite;a
 html:not(.js) .lg-stage .lg-sl:not(:first-child),html:not(.js) .lg-typing{opacity:0}
 html:not(.js) .lg-bar>i{display:none}
 @media screen and (max-width:900px){
-  .lg-meter,.lg-two{grid-template-columns:1fr}
+  .lg-meter,.lg-two,.lg-hrs{grid-template-columns:1fr}
   .tk{grid-template-columns:1fr}
   .lg-st-in{grid-template-columns:84px 1fr;gap:10px}
   .lg-spk{height:96px}.lg-spk img{width:56px;height:56px}
@@ -1211,7 +1229,7 @@ html:not(.js) .lg-bar>i{display:none}
       <a href="#lang-top" data-sec="lang-top"><em>TOP</em><span data-l="ja">概要</span><span data-l="en">Overview</span><span data-l="vi">Tổng quan</span></a>
       <a href="#lang-ja" data-sec="lang-ja"><em>01</em><span data-l="ja">日本語で報告、会議</span><span data-l="en">Japanese at work</span><span data-l="vi">Tiếng Nhật trong công việc</span></a>
       <a href="#lang-en" data-sec="lang-en"><em>02</em><span data-l="ja">英語で発表、交渉</span><span data-l="en">English on stage</span><span data-l="vi">Tiếng Anh: thuyết trình, đàm phán</span></a>
-      <a href="#lang-bridge" data-sec="lang-bridge"><em>03</em><span data-l="ja">3言語の橋渡し</span><span data-l="en">Bridging three languages</span><span data-l="vi">Cầu nối 3 ngôn ngữ</span></a>
+      <a href="#lang-bridge" data-sec="lang-bridge"><em>03</em><span data-l="ja">CEOとチームの橋渡し</span><span data-l="en">Bridging CEO and team</span><span data-l="vi">Cầu nối CEO và đội ngũ</span></a>
     </nav>
     <a class="sb-pdf" href="Rirekisho_ThaiTranHoangNha.pdf" target="_blank" rel="noopener"><span data-l="ja">履歴書（PDF）を開く</span><span data-l="en">Open CV (PDF, Japanese)</span><span data-l="vi">Mở CV (PDF, tiếng Nhật)</span></a>
   </div>
@@ -2023,14 +2041,14 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
       <div class="mv-run" aria-hidden="true"><span class="mv-tok"></span></div>
       <div class="mv-node mv-n1"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-people"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-people"/></svg></span></span><b class="mv-lb" data-l="ja">目標と<wbr>役割</b><b class="mv-lb" data-l="en">Targets &amp; roles</b><b class="mv-lb" data-l="vi">Mục tiêu, vai trò</b><span class="mv-chip" data-l="ja">KPI</span><span class="mv-chip" data-l="en">KPIs</span><span class="mv-chip" data-l="vi">KPI</span></div>
       <div class="mv-node mv-n2"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-list"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-list"/></svg></span></span><b class="mv-lb" data-l="ja">工程の<wbr>標準化</b><b class="mv-lb" data-l="en">Standard steps</b><b class="mv-lb" data-l="vi">Chuẩn hóa quy trình</b><span class="mv-chip" data-l="ja">SOP</span><span class="mv-chip" data-l="en">SOP</span><span class="mv-chip" data-l="vi">SOP</span></div>
-      <div class="mv-node mv-n3"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg></span></span><b class="mv-lb" data-l="ja">日々の<wbr>数字</b><b class="mv-lb" data-l="en">Daily numbers</b><b class="mv-lb" data-l="vi">Số liệu hằng ngày</b><span class="mv-chip" data-l="ja">Claude</span><span class="mv-chip" data-l="en">Claude</span><span class="mv-chip" data-l="vi">Claude</span></div>
+      <div class="mv-node mv-n3"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg></span></span><b class="mv-lb" data-l="ja">日々の<wbr>数字</b><b class="mv-lb" data-l="en">Daily numbers</b><b class="mv-lb" data-l="vi">Số liệu hằng ngày</b><span class="mv-chip" data-l="ja">数値分析</span><span class="mv-chip" data-l="en">Analysis</span><span class="mv-chip" data-l="vi">Phân tích</span></div>
       <div class="mv-node mv-n4"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-meet"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-meet"/></svg></span></span><b class="mv-lb" data-l="ja">確認と<wbr>指導</b><b class="mv-lb" data-l="en">Review &amp; coach</b><b class="mv-lb" data-l="vi">Rà soát, kèm cặp</b><span class="mv-chip" data-l="ja">コーチング</span><span class="mv-chip" data-l="en">Coaching</span><span class="mv-chip" data-l="vi">Kèm cặp</span></div>
       <div class="mv-node mv-end"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-trend"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-trend"/></svg></span></span><b class="mv-lb" data-l="ja">成果</b><b class="mv-lb" data-l="en">Result</b><b class="mv-lb" data-l="vi">Kết quả</b></div>
     </div>
     <div class="mv-caps">
       <p class="mv-cap mv-c1" data-l="ja">メンバーごとの役割、KPI、評価基準を最初に定めます。</p><p class="mv-cap mv-c1" data-l="en">First I set each member's role, KPIs and appraisal criteria.</p><p class="mv-cap mv-c1" data-l="vi">Trước hết, tôi đặt vai trò, KPI và tiêu chí đánh giá cho từng người.</p>
       <p class="mv-cap mv-c2" data-l="ja">業務を書き出し、「完了」の定義をチームで共有します。</p><p class="mv-cap mv-c2" data-l="en">We write the work out and agree on what "done" means.</p><p class="mv-cap mv-c2" data-l="vi">Cả đội viết ra công việc và thống nhất thế nào là "hoàn thành".</p>
-      <p class="mv-cap mv-c3" data-l="ja">作業時間、タスク、進捗をClaudeで毎日集計します。</p><p class="mv-cap mv-c3" data-l="en">I compile hours, tasks and progress with Claude every day.</p><p class="mv-cap mv-c3" data-l="vi">Mỗi ngày, tôi dùng Claude tổng hợp giờ làm, task và tiến độ.</p>
+      <p class="mv-cap mv-c3" data-l="ja">作業時間、タスク、進捗を毎日集計します。</p><p class="mv-cap mv-c3" data-l="en">I compile hours, tasks and progress every day.</p><p class="mv-cap mv-c3" data-l="vi">Mỗi ngày, tôi tổng hợp giờ làm, task và tiến độ.</p>
       <p class="mv-cap mv-c4" data-l="ja">毎日の確認で停滞の原因を探り、メンバーをコーチします。</p><p class="mv-cap mv-c4" data-l="en">In the daily review I find out why work is stuck and coach the member.</p><p class="mv-cap mv-c4" data-l="vi">Trong buổi rà soát mỗi ngày, tôi tìm lý do việc bị kẹt và kèm cặp thành viên.</p>
       <p class="mv-cap mv-c5" data-l="ja">滞った仕事が早く動き出し、チームが目標に近づきます。</p><p class="mv-cap mv-c5" data-l="en">Stalled work moves again sooner, and the team gets closer to its target.</p><p class="mv-cap mv-c5" data-l="vi">Việc bị kẹt được gỡ sớm và cả đội tiến gần mục tiêu hơn.</p>
     </div>
@@ -2182,20 +2200,20 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <span class="eb rv">03　<b>DAILY CHECK</b></span>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">毎日の確認で、<br /><i>滞った仕事をいち早く動かす。</i></span><span data-l="en">Daily checks<br /><i>get stalled work moving again sooner.</i></span><span data-l="vi">Rà soát hằng ngày<br /><i>để sớm gỡ việc bị kẹt.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">Claudeで日次報告をまとめ、チームの業務時間や進捗を毎日の会議で確認しました。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">I used Claude to compile daily reports and reviewed team hours and progress in daily meetings.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi dùng Claude tổng hợp báo cáo ngày và rà soát giờ làm, tiến độ của đội trong họp hằng ngày.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">日次報告をまとめ、チームの業務時間や進捗を毎日の会議で確認しました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I compiled daily reports and reviewed team hours and progress in daily meetings.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi tổng hợp báo cáo ngày và rà soát giờ làm, tiến độ của đội trong họp hằng ngày.</p>
   <div class="kw1 rv" style="margin:8px 0 10px">
-    <div class="chips" data-l="ja"><span class="chip">日次データ</span><span class="chip">Claude</span><span class="chip">チーム会議</span></div>
-    <div class="chips" data-l="en"><span class="chip">daily data</span><span class="chip">Claude</span><span class="chip">team meetings</span></div>
-    <div class="chips" data-l="vi"><span class="chip">số liệu hằng ngày</span><span class="chip">Claude</span><span class="chip">họp đội ngũ</span></div>
+    <div class="chips" data-l="ja"><span class="chip">日次データ</span><span class="chip">数値分析</span><span class="chip">チーム会議</span></div>
+    <div class="chips" data-l="en"><span class="chip">daily data</span><span class="chip">data analysis</span><span class="chip">team meetings</span></div>
+    <div class="chips" data-l="vi"><span class="chip">số liệu hằng ngày</span><span class="chip">phân tích số liệu</span><span class="chip">họp đội ngũ</span></div>
   </div>
   <div class="cyc cyc--live rv" style="--d:180ms;margin-top:16px">
     <div class="card cyc-c"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-list"/></svg></span><span class="cyc-n">01</span><h3 data-l="ja">工程の標準化</h3><h3 data-l="en">Standard steps</h3><h3 data-l="vi">Chuẩn hóa quy trình</h3><p data-l="ja">各メンバーが自分の業務を書き出し、「完了」の定義を明確にします。</p><p data-l="en">Each member writes out their work and we define "done".</p><p data-l="vi">Mỗi thành viên viết ra công việc của mình và thống nhất thế nào là "hoàn thành".</p></div>
     <span class="cyc-a">→</span>
     <div class="card cyc-c"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-report"/></svg></span><span class="cyc-n">02</span><h3 data-l="ja">日次報告</h3><h3 data-l="en">Daily report</h3><h3 data-l="vi">Báo cáo ngày</h3><p data-l="ja">作業時間、タスク数、各タスクの進捗を毎日報告します。</p><p data-l="en">Hours, number of tasks and progress on each task, every day.</p><p data-l="vi">Giờ làm, số task và tiến độ từng task, báo cáo mỗi ngày.</p></div>
     <span class="cyc-a">→</span>
-    <div class="card cyc-c" style="border-color:#cfc6ef;background:linear-gradient(160deg,#fff,#f4f1fd)"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg></span><span class="cyc-n">03</span><h3 data-l="ja">Claudeで分析</h3><h3 data-l="en">Analysis with Claude</h3><h3 data-l="vi">Phân tích bằng Claude</h3><p data-l="ja">工程ごとの所要時間、完了率、停滞中の作業とその日数を算出します。</p><p data-l="en">Time per step, completion rate, and stuck tasks with days stuck.</p><p data-l="vi">Thời gian từng bước, tỷ lệ hoàn thành, việc bị kẹt và số ngày kẹt.</p></div>
+    <div class="card cyc-c" style="border-color:#cfc6ef;background:linear-gradient(160deg,#fff,#f4f1fd)"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-spark"/></svg></span><span class="cyc-n">03</span><h3 data-l="ja">数値分析</h3><h3 data-l="en">Data analysis</h3><h3 data-l="vi">Phân tích số liệu</h3><p data-l="ja">工程ごとの所要時間、完了率、停滞中の作業とその日数を算出します。</p><p data-l="en">Time per step, completion rate, and stuck tasks with days stuck.</p><p data-l="vi">Thời gian từng bước, tỷ lệ hoàn thành, việc bị kẹt và số ngày kẹt.</p></div>
     <span class="cyc-a">→</span>
     <div class="card cyc-c"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-meet"/></svg></span><span class="cyc-n">04</span><h3 data-l="ja">毎日の確認</h3><h3 data-l="en">Daily review</h3><h3 data-l="vi">Rà soát mỗi ngày</h3><p data-l="ja">ミーティングで進捗と状況を確認し、次の行動を決めます。</p><p data-l="en">In the meeting we check progress and status and decide next actions.</p><p data-l="vi">Trong cuộc họp, cả đội xem tiến độ, trạng thái và quyết định bước tiếp theo.</p></div>
   </div>
@@ -2436,30 +2454,40 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <div><span>Japanese</span><b>JLPT N2</b></div>
     <div><span>English</span><b>TOEIC 680</b></div>
     <div><span>Vietnamese</span><b data-l="ja">母語</b><b data-l="en">Native</b><b data-l="vi">Bản ngữ</b></div>
-    <div><span>Practice</span><b data-l="ja">Sesameで日本語と英語の会話を練習</b><b data-l="en">Japanese and English practice with Sesame</b><b data-l="vi">Luyện hội thoại tiếng Nhật, tiếng Anh với Sesame</b></div>
+    <div><span>Practice</span><b data-l="ja">日本語と英語の会話を毎日練習</b><b data-l="en">Daily Japanese and English conversation practice</b><b data-l="vi">Luyện hội thoại tiếng Nhật, tiếng Anh mỗi ngày</b></div>
   </div>
 </section>
 <section class="pg" data-chap="III" id="lang-ja">
   <span class="eb rv">01　<b>JAPANESE AT WORK</b></span>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日本人の経営陣に、<br /><i>日本語で直接報告する。</i></span><span data-l="en">Reporting directly<br /><i>to Japanese management, in Japanese.</i></span><span data-l="vi">Báo cáo trực tiếp<br /><i>cho lãnh đạo người Nhật bằng tiếng Nhật.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">JLPT N2（2016年8月）。数字と現場の状況を整理し、報告、会議、交渉を日本語で進めてきました。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">JLPT N2 (Aug 2016). I organise the figures and the facts on the ground, then handle reports, meetings and negotiation in Japanese.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">JLPT N2 (08/2016). Tôi sắp xếp số liệu và tình hình thực tế, rồi báo cáo, họp và đàm phán bằng tiếng Nhật.</p>
-  <div class="lg-two rv" style="--d:180ms">
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">JLPT N2（2016年8月）。日本人の経営陣には報連相を主体的に行い、全体の進捗把握から期限、計画、進捗管理、結果の報告まで、主に日本語で進めてきました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">JLPT N2 (Aug 2016). I practise hourensou with Japanese management and stay proactive: from grasping overall progress, deadlines and plans to tracking work and reporting results, I work mainly in Japanese.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">JLPT N2 (08/2016). Tôi chủ động hourensou (báo cáo, liên lạc, xin ý kiến) với lãnh đạo người Nhật. Từ nắm tiến độ tổng thể, deadline, lập kế hoạch, theo dõi tiến độ đến báo cáo kết quả, tôi làm chủ yếu bằng tiếng Nhật.</p>
+  <div class="lg-hrs lg-anim rv" style="--d:170ms">
+    <div class="lg-hr" style="--i:0"><span class="lg-hr-k" aria-hidden="true">Hō</span><div><h3 data-l="ja">報告</h3><h3 data-l="en">Hō: report</h3><h3 data-l="vi">Hō: báo cáo</h3><p data-l="ja">経過と結果を、数字で自分から報告します。</p><p data-l="en">I report progress and results with figures, before being asked.</p><p data-l="vi">Tôi tự báo cáo diễn biến và kết quả bằng số liệu, không đợi hỏi.</p></div></div>
+    <div class="lg-hr" style="--i:1"><span class="lg-hr-k" aria-hidden="true">Ren</span><div><h3 data-l="ja">連絡</h3><h3 data-l="en">Ren: update</h3><h3 data-l="vi">Ren: liên lạc</h3><p data-l="ja">予定の変更や問題は、すぐに関係者へ連絡します。</p><p data-l="en">I update everyone involved as soon as plans change or problems appear.</p><p data-l="vi">Có thay đổi hay vấn đề, tôi liên lạc ngay với người liên quan.</p></div></div>
+    <div class="lg-hr" style="--i:2"><span class="lg-hr-k" aria-hidden="true">Sō</span><div><h3 data-l="ja">相談</h3><h3 data-l="en">Sō: consult</h3><h3 data-l="vi">Sō: xin ý kiến</h3><p data-l="ja">判断に迷う点は、選択肢を用意して早めに相談します。</p><p data-l="en">When a decision is unclear, I consult early with options ready.</p><p data-l="vi">Việc cần quyết, tôi xin ý kiến sớm, kèm sẵn phương án.</p></div></div>
+  </div>
+  <div class="lg-two rv" style="--d:200ms">
     <div class="card lg-chat lg-anim">
-      <span class="lbl"><span data-l="ja">例：報連相</span><span data-l="en">Example: a quick report</span><span data-l="vi">Ví dụ: báo cáo nhanh</span></span>
-      <div class="lg-msg lg-b1"><span class="lg-av" aria-hidden="true"><img src="assets/gx/manager.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>President</small><span data-l="ja">今月の進み具合はどうですか。</span><span data-l="en">How is this month going?</span><span data-l="vi">Tháng này tiến độ thế nào?</span></p></div>
-      <div class="lg-msg lg-msg--me lg-b2"><span class="lg-av" aria-hidden="true"><img src="assets/gx/person-bust.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>Me</small><span data-l="ja">目標との差と原因を、数字でご報告します。</span><span data-l="en">Let me report the gap to target and its cause, with figures.</span><span data-l="vi">Tôi xin báo cáo chênh lệch với mục tiêu và nguyên nhân bằng số liệu.</span></p></div>
+      <span class="lbl"><span data-l="ja">例：日本語での報連相</span><span data-l="en">Example: hourensou in Japanese</span><span data-l="vi">Ví dụ: hourensou bằng tiếng Nhật</span></span>
+      <div class="lg-msg lg-b1"><span class="lg-av" aria-hidden="true"><img src="assets/gx/manager.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>President</small><span data-l="ja">今月の案件、期限に間に合いますか。</span><span data-l="en">Will this month's project make the deadline?</span><span data-l="vi">Dự án tháng này có kịp deadline không?</span></p></div>
+      <div class="lg-msg lg-msg--me lg-b2"><span class="lg-av" aria-hidden="true"><img src="assets/gx/person-bust.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>Me</small><span data-l="ja">全体の進捗と遅れている作業を、数字でご報告します。</span><span data-l="en">Let me report overall progress and the late tasks, with figures.</span><span data-l="vi">Tôi xin báo cáo tiến độ tổng thể và các việc đang chậm bằng số liệu.</span></p></div>
       <div class="lg-msg lg-b3"><span class="lg-av" aria-hidden="true"><img src="assets/gx/manager.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>President</small><span data-l="ja">対策はどうしますか。</span><span data-l="en">What is the plan?</span><span data-l="vi">Hướng xử lý thế nào?</span></p></div>
-      <div class="lg-msg lg-msg--me lg-b4"><span class="lg-av" aria-hidden="true"><img src="assets/gx/person-bust.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>Me</small><span data-l="ja">優先順位を決め、来週の会議で進捗をご報告します。</span><span data-l="en">I will set the priorities and report progress at next week's meeting.</span><span data-l="vi">Tôi sẽ đặt thứ tự ưu tiên và báo cáo tiến độ ở buổi họp tuần sau.</span></p></div>
+      <div class="lg-msg lg-msg--me lg-b4"><span class="lg-av" aria-hidden="true"><img src="assets/gx/person-bust.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>Me</small><span data-l="ja">計画を組み直しました。節目ごとに進捗をご報告します。</span><span data-l="en">I have re-planned the work and will report progress at each milestone.</span><span data-l="vi">Tôi đã lập lại kế hoạch và sẽ báo cáo tiến độ theo từng mốc.</span></p></div>
       <div class="lg-typing" aria-hidden="true"><i style="--j:0"></i><i style="--j:1"></i><i style="--j:2"></i></div>
     </div>
-    <div class="lg-steps lg-anim">
-      <div class="card lg-step" style="--i:0"><img src="assets/gx/manager.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><h3 data-l="ja">報告</h3><h3 data-l="en">Reporting</h3><h3 data-l="vi">Báo cáo</h3><p data-l="ja">日本人社長と経営陣に、数字を用いて直接報告しました。</p><p data-l="en">I reported directly to the Japanese president and management, with figures.</p><p data-l="vi">Tôi báo cáo trực tiếp Tổng giám đốc người Nhật và ban lãnh đạo bằng số liệu.</p></div></div>
-      <div class="card lg-step" style="--i:1"><img src="assets/gx/chat-bubbles.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><h3 data-l="ja">会議</h3><h3 data-l="en">Meetings</h3><h3 data-l="vi">Họp</h3><p data-l="ja">日本本社への定期報告と会議を日本語で行いました。</p><p data-l="en">I made regular reports to head office in Japan and held meetings in Japanese.</p><p data-l="vi">Tôi báo cáo định kỳ cho trụ sở Nhật Bản và họp bằng tiếng Nhật.</p></div></div>
-      <div class="card lg-step" style="--i:2"><img src="assets/gx/handshake.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><h3 data-l="ja">交渉</h3><h3 data-l="en">Negotiation</h3><h3 data-l="vi">Đàm phán</h3><p data-l="ja">日本人社長、経営陣との会議や交渉を日本語で行いました。</p><p data-l="en">I handled meetings and negotiation in Japanese with the Japanese president and management.</p><p data-l="vi">Tôi họp và đàm phán bằng tiếng Nhật với Tổng giám đốc và ban lãnh đạo người Nhật.</p></div></div>
-      <div class="card lg-step" style="--i:3"><img src="assets/gx/interview.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><h3 data-l="ja">通訳と記録</h3><h3 data-l="en">Interpreting and minutes</h3><h3 data-l="vi">Thông dịch và biên bản</h3><p data-l="ja">会議記録の作成と日越通訳を担当しました。</p><p data-l="en">I took meeting minutes and interpreted between Japanese and Vietnamese.</p><p data-l="vi">Tôi ghi biên bản họp và thông dịch Nhật - Việt.</p></div></div>
+    <div class="card lg-track lg-anim">
+      <span class="lbl"><span data-l="ja">仕事の進め方</span><span data-l="en">How I run the work</span><span data-l="vi">Cách tôi làm chủ công việc</span></span>
+      <ol class="lg-tks">
+        <li class="lg-tk" style="--i:0"><img src="assets/gx/roadmap.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">01</span><h3 data-l="ja">全体の進捗を把握</h3><h3 data-l="en">Grasp overall progress</h3><h3 data-l="vi">Nắm tiến độ tổng thể</h3><p data-l="ja">仕事全体と各工程の状況をつかみます。</p><p data-l="en">I keep the whole picture and each step in view.</p><p data-l="vi">Tôi nắm bức tranh chung và tình trạng từng bước.</p></div></li>
+        <li class="lg-tk" style="--i:1"><img src="assets/gx/calendar.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">02</span><h3 data-l="ja">期限と納期を理解</h3><h3 data-l="en">Understand deadlines</h3><h3 data-l="vi">Hiểu deadline, thời hạn</h3><p data-l="ja">期限から逆算し、優先順位を決めます。</p><p data-l="en">I work back from deadlines to set priorities.</p><p data-l="vi">Tôi tính ngược từ deadline để đặt thứ tự ưu tiên.</p></div></li>
+        <li class="lg-tk" style="--i:2"><img src="assets/gx/checklist.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">03</span><h3 data-l="ja">業務計画を立てる</h3><h3 data-l="en">Plan the work</h3><h3 data-l="vi">Lập kế hoạch công việc</h3><p data-l="ja">担当、手順、日程を計画にまとめます。</p><p data-l="en">I set owners, steps and dates in one plan.</p><p data-l="vi">Tôi lên kế hoạch gồm người phụ trách, các bước và lịch.</p></div></li>
+        <li class="lg-tk" style="--i:3"><img src="assets/gx/stopwatch.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">04</span><h3 data-l="ja">進捗を追う</h3><h3 data-l="en">Track progress</h3><h3 data-l="vi">Theo dõi tiến độ</h3><p data-l="ja">計画との差を毎日確認します。</p><p data-l="en">I check the gap against the plan every day.</p><p data-l="vi">Tôi kiểm tra chênh lệch so với kế hoạch mỗi ngày.</p></div></li>
+        <li class="lg-tk" style="--i:4"><img src="assets/gx/milestone-report.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">05</span><h3 data-l="ja">節目ごとに報告</h3><h3 data-l="en">Report at each milestone</h3><h3 data-l="vi">Báo cáo theo tiến trình</h3><p data-l="ja">進み具合を日本語で報告します。</p><p data-l="en">I report how the work is going, in Japanese.</p><p data-l="vi">Tôi báo cáo tiến độ bằng tiếng Nhật.</p></div></li>
+        <li class="lg-tk" style="--i:5"><img src="assets/gx/report-chart.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">06</span><h3 data-l="ja">結果を報告</h3><h3 data-l="en">Report results</h3><h3 data-l="vi">Báo cáo kết quả</h3><p data-l="ja">実施結果と次の課題を報告します。</p><p data-l="en">I report the results and the next issues.</p><p data-l="vi">Tôi báo cáo kết quả thực hiện và việc cần làm tiếp.</p></div></li>
+      </ol>
     </div>
   </div>
 </section>
@@ -2474,9 +2502,9 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <div class="lg-st-in">
       <div class="lg-spk" aria-hidden="true"><i class="lg-wave" style="--j:0"></i><i class="lg-wave" style="--j:1"></i><i class="lg-wave" style="--j:2"></i><img src="assets/gx/cand-man.webp" alt="" width="74" height="74" loading="lazy" decoding="async"></div>
       <div class="lg-screen">
-        <div class="lg-sl" style="--i:0"><img src="assets/gx/magnifier.webp" alt="" width="58" height="58" loading="lazy" decoding="async"><div><small>Slide 01</small><b data-l="ja">ベトナム市場の動き</b><b data-l="en">The Vietnam market</b><b data-l="vi">Thị trường Việt Nam</b></div></div>
-        <div class="lg-sl" style="--i:1"><img src="assets/gx/report-chart.webp" alt="" width="58" height="58" loading="lazy" decoding="async"><div><small>Slide 02</small><b data-l="ja">売上と案件の数字</b><b data-l="en">Sales and project figures</b><b data-l="vi">Số liệu doanh số, dự án</b></div></div>
-        <div class="lg-sl" style="--i:2"><img src="assets/gx/handshake.webp" alt="" width="58" height="58" loading="lazy" decoding="async"><div><small>Slide 03</small><b data-l="ja">各国の同僚と意見交換</b><b data-l="en">Exchanging views across ASEAN</b><b data-l="vi">Trao đổi với đồng nghiệp các nước</b></div></div>
+        <div class="lg-sl" style="--i:0"><img src="assets/gx/magnifier.webp" alt="" width="58" height="58" loading="lazy" decoding="async"><div><b data-l="ja">ベトナム市場の動き</b><b data-l="en">The Vietnam market</b><b data-l="vi">Thị trường Việt Nam</b></div></div>
+        <div class="lg-sl" style="--i:1"><img src="assets/gx/report-chart.webp" alt="" width="58" height="58" loading="lazy" decoding="async"><div><b data-l="ja">売上と案件の数字</b><b data-l="en">Sales and project figures</b><b data-l="vi">Số liệu doanh số, dự án</b></div></div>
+        <div class="lg-sl" style="--i:2"><img src="assets/gx/handshake.webp" alt="" width="58" height="58" loading="lazy" decoding="async"><div><b data-l="ja">各国の同僚と意見交換</b><b data-l="en">Exchanging views across ASEAN</b><b data-l="vi">Trao đổi với đồng nghiệp các nước</b></div></div>
       </div>
     </div>
     <div class="lg-aud" aria-hidden="true"><i class="lg-hd" style="--j:0"></i><i class="lg-hd" style="--j:3"></i><i class="lg-hd" style="--j:1"></i><i class="lg-hd" style="--j:4"></i><i class="lg-hd" style="--j:2"></i><i class="lg-hd" style="--j:5"></i><i class="lg-hd" style="--j:1"></i><i class="lg-hd" style="--j:3"></i><i class="lg-hd" style="--j:0"></i></div>
@@ -2490,28 +2518,28 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   </div>
 </section>
 <section class="pg" data-chap="I" id="lang-bridge">
-  <span class="eb rv">03　<b>THREE-LANGUAGE BRIDGE</b></span>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日本語、英語、ベトナム語を<br /><i>行き来して、仕事をつなぐ。</i></span><span data-l="en">Moving between Japanese, English<br /><i>and Vietnamese to keep work moving.</i></span><span data-l="vi">Chuyển qua lại tiếng Nhật, Anh, Việt<br /><i>để công việc thông suốt.</i></span></h2>
+  <span class="eb rv">03　<b>BRIDGING CEO AND TEAM</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">社長とチームの間に立ち、<br /><i>意図を伝えて成果につなげる。</i></span><span data-l="en">Standing between the CEO and the team,<br /><i>turning intent into results.</i></span><span data-l="vi">Cầu nối giữa CEO và đội ngũ,<br /><i>truyền đúng ý để ra kết quả.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">ITコミュニケーターとして日本の顧客とベトナム人技術者の間で通訳し、仕様書、設計書、メールを3言語で翻訳しました。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">As an IT communicator I interpreted between Japanese clients and Vietnamese engineers, and translated specs, designs and emails in three languages.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Là IT communicator, tôi thông dịch giữa khách hàng Nhật và kỹ sư Việt Nam, dịch đặc tả, thiết kế, email qua lại 3 thứ tiếng.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">社長とベトナム人のチーム、各部署の間に立つ橋渡し役として、社長の言葉の選び方、考え方を常に学び、双方の意図を伝えています。目指すのは通訳だけでなく、仕事の成果です。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">As the bridge between the CEO and the Vietnamese team and departments, I keep learning the CEO's choice of words, thinking and mindset, so I can carry the intent of both sides. The goal is results, not just translation.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Là cầu nối giữa CEO với đội ngũ và các phòng ban người Việt Nam, tôi luôn tìm hiểu, học hỏi cách dùng từ, cách suy nghĩ và tư duy của CEO để truyền tải đúng ý nghĩa thông điệp của hai bên, hướng tới kết quả công việc, không chỉ chuyển ngữ.</p>
   <div class="lg-bridge lg-anim rv" style="--d:180ms" aria-hidden="true">
     <i class="lg-edge" style="--x:18;--y:28;--l:64;--a:0deg"><b class="lg-run" style="--j:0"><i class="lg-tok"></i></b><b class="lg-run lg-run--b" style="--j:0"><i class="lg-tok"></i></b></i>
     <i class="lg-edge" style="--x:82;--y:28;--l:38.83;--a:145.49deg"><b class="lg-run" style="--j:1"><i class="lg-tok"></i></b><b class="lg-run lg-run--b" style="--j:1"><i class="lg-tok"></i></b></i>
     <i class="lg-edge" style="--x:50;--y:72;--l:38.83;--a:214.51deg"><b class="lg-run" style="--j:2"><i class="lg-tok"></i></b><b class="lg-run lg-run--b" style="--j:2"><i class="lg-tok"></i></b></i>
-    <span class="lg-node" style="--x:18;--y:28;--i:0"><span class="lg-flagb"><svg class="flg flg--jp" viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice" focusable="false"><use href="#flg-jp"/></svg></span><b><span data-l="ja">日本の顧客</span><span data-l="en">Japanese clients</span><span data-l="vi">Khách hàng Nhật</span></b></span>
-    <span class="lg-node" style="--x:82;--y:28;--i:1"><span class="lg-flagb"><svg class="flg flg--uk" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" focusable="false"><use href="#flg-uk"/></svg></span><b><span data-l="ja">英語の資料</span><span data-l="en">English documents</span><span data-l="vi">Tài liệu tiếng Anh</span></b></span>
-    <span class="lg-node" style="--x:50;--y:72;--i:2"><span class="lg-flagb"><svg class="flg flg--vn" viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice" focusable="false"><use href="#flg-vn"/></svg></span><b><span data-l="ja">ベトナム人技術者</span><span data-l="en">Vietnamese engineers</span><span data-l="vi">Kỹ sư Việt Nam</span></b></span>
+    <span class="lg-node" style="--x:18;--y:28;--i:0"><span class="lg-flagb"><img src="assets/gx/manager.webp" alt="" width="40" height="40" loading="lazy" decoding="async"></span><b><span data-l="ja">社長</span><span data-l="en">CEO</span><span data-l="vi">CEO</span></b></span>
+    <span class="lg-node" style="--x:82;--y:28;--i:1"><span class="lg-flagb"><img src="assets/gx/team-group.webp" alt="" width="40" height="40" loading="lazy" decoding="async"></span><b><span data-l="ja">チーム、各部署</span><span data-l="en">Team, departments</span><span data-l="vi">Đội ngũ, phòng ban</span></b></span>
+    <span class="lg-node" style="--x:50;--y:72;--i:2"><span class="lg-flagb"><img src="assets/gx/report-chart.webp" alt="" width="40" height="40" loading="lazy" decoding="async"></span><b><span data-l="ja">仕事の成果</span><span data-l="en">Work results</span><span data-l="vi">Kết quả công việc</span></b></span>
     <span class="lg-hub"><img src="assets/gx/person-bust.webp" alt="" width="58" height="58" loading="lazy" decoding="async"></span>
-    <span class="lg-doc" style="--x:50;--y:19;--i:0"><span data-l="ja">仕様書</span><span data-l="en">Specs</span><span data-l="vi">Đặc tả</span></span>
-    <span class="lg-doc" style="--x:77;--y:56;--i:1"><span data-l="ja">メール</span><span data-l="en">Emails</span><span data-l="vi">Email</span></span>
-    <span class="lg-doc" style="--x:23;--y:56;--i:2"><span data-l="ja">設計書</span><span data-l="en">Designs</span><span data-l="vi">Thiết kế</span></span>
+    <span class="lg-doc" style="--x:50;--y:19;--i:0"><span data-l="ja">双方の意図</span><span data-l="en">Intent, both ways</span><span data-l="vi">Ý nghĩa thông điệp</span></span>
+    <span class="lg-doc" style="--x:77;--y:56;--i:1"><span data-l="ja">実行</span><span data-l="en">Action</span><span data-l="vi">Hành động</span></span>
+    <span class="lg-doc" style="--x:23;--y:56;--i:2"><span data-l="ja">考え方</span><span data-l="en">Thinking</span><span data-l="vi">Tư duy</span></span>
   </div>
   <div class="g3 rv" style="--d:220ms;margin-top:16px">
-    <div class="card"><span class="lbl">Interpret</span><h3 data-l="ja">通訳</h3><h3 data-l="en">Interpreting</h3><h3 data-l="vi">Thông dịch</h3><p data-l="ja">通訳で要件を伝え、UATから不具合修正まで管理しました。</p><p data-l="en">I interpreted requirements, then managed UAT and bug fixes.</p><p data-l="vi">Tôi thông dịch yêu cầu, rồi quản lý UAT đến khi sửa xong lỗi.</p></div>
-    <div class="card"><span class="lbl">Translate</span><h3 data-l="ja">翻訳</h3><h3 data-l="en">Translation</h3><h3 data-l="vi">Biên dịch</h3><p data-l="ja">仕様書、設計書、メールを日英越の3言語で翻訳しました。</p><p data-l="en">I translated specs, designs and emails between Japanese, English and Vietnamese.</p><p data-l="vi">Tôi dịch đặc tả, thiết kế, email qua lại tiếng Nhật, Anh, Việt.</p></div>
-    <div class="card"><span class="lbl">Practice</span><h3 data-l="ja">毎日の練習</h3><h3 data-l="en">Daily practice</h3><h3 data-l="vi">Luyện tập mỗi ngày</h3><p data-l="ja">Sesameで日本語と英語の会話を練習しています。</p><p data-l="en">I practise Japanese and English conversation with Sesame.</p><p data-l="vi">Tôi luyện hội thoại tiếng Nhật và tiếng Anh với Sesame.</p></div>
+    <div class="card"><span class="lbl">Learn</span><h3 data-l="ja">社長の言葉を学ぶ</h3><h3 data-l="en">Learning the CEO's language</h3><h3 data-l="vi">Học cách CEO dùng từ</h3><p data-l="ja">社長の言葉の選び方、考え方、判断の軸を常に学んでいます。</p><p data-l="en">I keep learning how the CEO chooses words, thinks and decides.</p><p data-l="vi">Tôi luôn học cách CEO dùng từ, cách suy nghĩ và tư duy khi ra quyết định.</p></div>
+    <div class="card"><span class="lbl">Convey</span><h3 data-l="ja">双方の意図を伝える</h3><h3 data-l="en">Carrying both sides' intent</h3><h3 data-l="vi">Truyền đúng ý hai bên</h3><p data-l="ja">社長の方針をチームと各部署に伝え、現場の声を社長に届けます。</p><p data-l="en">I pass the CEO's direction to the team and departments, and bring their voice back to the CEO.</p><p data-l="vi">Tôi truyền định hướng của CEO tới đội ngũ, phòng ban và đưa tiếng nói của họ ngược lên CEO.</p></div>
+    <div class="card"><span class="lbl">Result</span><h3 data-l="ja">成果につなげる</h3><h3 data-l="en">Driving results</h3><h3 data-l="vi">Hướng tới kết quả</h3><p data-l="ja">言葉を置き換えるだけでなく、仕事が成果を出すまで見届けます。</p><p data-l="en">I do not just swap words; I follow through until the work delivers results.</p><p data-l="vi">Tôi không chỉ chuyển ngữ mà theo sát tới khi công việc ra kết quả.</p></div>
   </div>
 </section>
 </main>
@@ -3108,13 +3136,13 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     "Triển lãm PROPAK ASIA và VIV ASIA (Bangkok)",
     "PROPAK ASIA and VIV ASIA trade shows (Bangkok)"
   ],
-  "MAYEKAWA VIETNAMでは、標準化した工程と日々の数値をもとに、チームの業務時間、タスク、進捗を管理していました。Claudeで数値を分析し、毎日のミーティングでチームと確認しました。":[
-    "Tại MAYEKAWA VIETNAM, tôi quản lý thời gian, công việc và tiến độ của đội theo quy trình chuẩn hóa, dựa trên số liệu hằng ngày. Tôi dùng Claude phân tích số liệu và cùng đội rà soát trong cuộc họp mỗi ngày.",
-    "At MAYEKAWA VIETNAM, I managed the team's hours, tasks and progress through standardised workflows and daily figures. I used Claude to analyse the numbers and reviewed them with the team each day."
+  "MAYEKAWA VIETNAMでは、標準化した工程と日々の数値をもとに、チームの業務時間、タスク、進捗を管理していました。数値を分析し、毎日のミーティングでチームと確認しました。":[
+    "Tại MAYEKAWA VIETNAM, tôi quản lý thời gian, công việc và tiến độ của đội theo quy trình chuẩn hóa, dựa trên số liệu hằng ngày. Tôi phân tích số liệu và cùng đội rà soát trong cuộc họp mỗi ngày.",
+    "At MAYEKAWA VIETNAM, I managed the team's hours, tasks and progress through standardised workflows and daily figures. I analysed the numbers and reviewed them with the team each day."
   ],
-  "日次報告をClaudeで集計し、工程別の所要時間、完了率（着手分のうち完了した割合）、停滞中の作業を確認しました。":[
-    "Tôi dùng Claude tổng hợp báo cáo hằng ngày để theo dõi thời gian từng công đoạn, tỷ lệ hoàn thành và việc đang đình trệ.",
-    "I summarised daily reports with Claude: step times, completion rates, stalled tasks."
+  "日次報告を集計し、工程別の所要時間、完了率（着手分のうち完了した割合）、停滞中の作業を確認しました。":[
+    "Tôi tổng hợp báo cáo hằng ngày để theo dõi thời gian từng công đoạn, tỷ lệ hoàn thành và việc đang đình trệ.",
+    "I summarised daily reports: step times, completion rates, stalled tasks."
   ],
   "商談と顧客訪問を、時系列で紹介します。":[
     "Các buổi gặp và làm việc với khách của tôi, theo thứ tự thời gian.",
@@ -3185,9 +3213,9 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     "Báo cáo mỗi ngày giờ làm, số task, tiến độ từng task",
     "Report working hours, number of tasks and the progress of each task every day"
   ],
-  "Claudeで分析":[
-    "Phân tích bằng Claude",
-    "Analysis with Claude"
+  "数値分析":[
+    "Phân tích số liệu",
+    "Data analysis"
   ],
   "毎日の確認":[
     "Xác nhận hằng ngày",
