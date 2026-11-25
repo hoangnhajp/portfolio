@@ -100,7 +100,7 @@ async function main() {
       await reveal('main[data-view="sw"] .pg');
       await evaluate(`Promise.all([...document.querySelectorAll('main[data-view="sw"] img')].map((i) => (i.loading = 'eager', i.decode().catch(() => 0))))`);
       const r = await evaluate(PROBE); checks++;
-      ok(r.imgs >= 16 && !r.broken.length, `${tag}: ảnh không tải được (${r.imgs} ảnh) ${r.broken.slice(0, 4).join(' | ')}`);
+      ok(r.imgs >= 22  /* task ve3p: 3 thẻ + 4 icon + 3 sản phẩm x 5 ảnh app English */ && !r.broken.length, `${tag}: ảnh không tải được (${r.imgs} ảnh) ${r.broken.slice(0, 4).join(' | ')}`);
       ok(r.view === 'sw' && r.on === 'sw' && r.sb, `${tag}: tab SW chưa bật (view ${r.view}, menu ${r.on}, sidebar ${r.sb})`);
       ok(r.pages === 4, `${tag}: cần 4 trang SW, đang ${r.pages}`);
       ok(!r.over.length, `${tag}: chữ tràn thẻ ${r.over.slice(0, 4).join(' | ')}`);

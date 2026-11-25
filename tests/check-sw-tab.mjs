@@ -48,11 +48,17 @@ for (const id of ids) {
 const build = existsSync(p('tools/sw/build-shots.py')) ? readFileSync(p('tools/sw/build-shots.py'), 'utf8') : '';
 ok(build, 'thiếu tools/sw/build-shots.py (nguồn sinh ảnh đã che)');
 const shotsOf = (s) => [...s.matchAll(/<img\b[^>]*src="(assets\/sw\/[\w-]+\.webp)"/g)].map((m) => m[1]);
-// sw-leads (task tskl): 2 ảnh app quản lý khách hàng (danh sách + Kanban), thẻ 03 ở #sw-top dùng ảnh thật thay ảnh minh hoạ
-const MIN = { 'sw-remote': 4, 'sw-talent': 4, 'sw-leads': 2 };
-for (const s of ['crm-list', 'crm-kanban']) ok(shotsOf(sec('sw-leads')).includes(`assets/sw/${s}.webp`), `#sw-leads thiếu ảnh assets/sw/${s}.webp`);
-const card03 = (sec('sw-top').match(/<a class="card sw-p" href="#sw-leads"[\s\S]*?<\/a>/) || [''])[0];
-ok(/<img\b[^>]*src="assets\/sw\/crm-list\.webp"/.test(card03), 'thẻ 03 ở #sw-top phải dùng ảnh assets/sw/crm-list.webp');
+// Task ve3p: ảnh minh hoạ app phải là giao diện tiếng Anh (kiểm ở tests/check-sw-english.mjs). Cả 3 sản phẩm có ảnh
+// English: #sw-remote 5 ảnh, #sw-talent 5 ảnh, #sw-leads 5 ảnh; mỗi thẻ ở #sw-top dùng ảnh app của sản phẩm đó.
+const MIN = { 'sw-remote': 5, 'sw-talent': 5, 'sw-leads': 5 };
+const NEED = {
+  'sw-talent': ['recruit-dashboard', 'recruit-cv', 'recruit-jd', 'recruit-process', 'recruit-matching'],
+  'sw-leads': ['crm-dashboard', 'crm-list', 'crm-kanban', 'crm-calendar', 'crm-report'],
+};
+for (const [id, list] of Object.entries(NEED)) for (const s of list) ok(shotsOf(sec(id)).includes(`assets/sw/${s}.webp`), `#${id} thiếu ảnh assets/sw/${s}.webp`);
+const card = (href) => (sec('sw-top').match(new RegExp(`<a class="card sw-p" href="#${href}"[\\s\\S]*?<\\/a>`)) || [''])[0];
+for (const [href, pre] of [['sw-remote', 'staff'], ['sw-talent', 'recruit'], ['sw-leads', 'crm']])
+  ok(new RegExp(`<img src="assets/sw/${pre}-[\\w-]+\\.webp"`).test(card(href)), `thẻ #${href} ở #sw-top phải dùng ảnh app assets/sw/${pre}-*.webp`);
 for (const [id, n] of Object.entries(MIN)) ok(shotsOf(sec(id)).length >= n, `#${id} cần >= ${n} ảnh chụp màn hình, thấy ${shotsOf(sec(id)).length}`);
 for (const src of shotsOf(main)) {
   ok(existsSync(p(src)), `thiếu file ${src}`);
