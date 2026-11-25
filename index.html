@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>タイ チャン ホアン ニャ ポートフォリオ</title>
-<meta name="description" content="法人営業、営業マネージャー、ITコミュニケーター、人事。日系企業で約11年、JLPT N2、TOEIC 680点。" />
+<meta name="description" content="法人営業、営業マネージャー、ITコミュニケーター、人事。日系企業で約11年、JLPT N2。" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -1151,6 +1151,33 @@ html:not(.js) .lg-bar>i{display:none}
 }
 </style>
 <!-- lang-css:end -->
+<!-- hr-css:start -->
+<style id="hr-css">
+/* Tab Task: HR (task 4ubf): 4 thẻ mảng việc, tiến trình tuyển dụng 6 bước, lưới thẻ 2 cột.
+   Chuyển động chỉ khi khối cha đã hiện (.sr-in của khối sr): thẻ / bước nảy lên so le một lần, icon bật nhẹ.
+   Tắt JS, reduced-motion, bản in: tĩnh, hiện đủ. */
+.hr-ar{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.card.hr-c{display:flex;gap:14px;align-items:flex-start}
+.hr-ic{width:52px;height:52px;flex:none;border-radius:14px;background:#f6f3fb;padding:5px;box-sizing:border-box}
+.hr-c h3{margin:0 0 4px}
+.hr-c p{margin:0}
+.hr-fl{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hr-st{background:#fff;border:1px solid #ece8f3;border-radius:14px;padding:13px 14px 12px;position:relative}
+.hr-st img{width:40px;height:40px;display:block}
+.hr-n{position:absolute;top:12px;right:14px;font:800 11px 'Manrope',sans-serif;letter-spacing:.14em;color:#c9c2da}
+.hr-st h3{margin:8px 0 3px;font:700 13.5px/1.45 'Noto Sans JP',sans-serif;color:#16141d}
+.hr-st p{margin:0;font:400 11.8px/1.7 'Noto Sans JP',sans-serif;color:#3d3849}
+.hr-g{margin-top:14px}
+.hr-g .lbl img{width:22px;height:22px;vertical-align:-6px;margin-right:6px}
+@keyframes hrRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes hrPop{0%{transform:scale(.6)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+html.sr .hr-ar.sr-in .hr-c,html.sr .hr-fl.sr-in .hr-st{animation:hrRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*90ms + 200ms)}
+html.sr .hr-ar.sr-in .hr-ic,html.sr .hr-fl.sr-in .hr-st img{animation:hrPop .5s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--i,0)*90ms + 380ms)}
+@media (max-width:700px){.hr-ar,.hr-fl{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.hr-c,.hr-st,.hr-ic,.hr-st img{animation:none!important}}
+@media print{.hr-c,.hr-st,.hr-ic,.hr-st img{animation:none!important}}
+</style>
+<!-- hr-css:end -->
 </head>
 <body>
 <svg class="flg-sprite" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><defs><symbol id="flg-jp" viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/></symbol><symbol id="flg-uk" viewBox="0 0 60 30"><clipPath id="flg-ukc"><path d="M0,0v30h60V0z"/></clipPath><clipPath id="flg-ukt"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#flg-ukc)"><path d="M0,0v30h60V0z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#flg-ukt)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></g></symbol><symbol id="flg-vn" viewBox="0 0 30 20"><rect width="30" height="20" fill="#da251d"/><polygon points="15.00,4.00 16.43,8.03 20.71,8.15 17.31,10.75 18.53,14.85 15.00,12.43 11.47,14.85 12.69,10.75 9.29,8.15 13.57,8.03" fill="#ff0"/></symbol></defs></svg>
@@ -1160,6 +1187,7 @@ html:not(.js) .lg-bar>i{display:none}
     <nav class="top-nav" aria-label="Menu">
       <a href="#cover" data-view="profile">My Profile</a>
       <a href="#sales-top" data-view="sales">Task: Sales</a>
+      <a href="#hr-top" data-view="hr">Task: HR</a>
       <a href="#team-top" data-view="team">Task: Team Management</a>
       <a href="#ai-top" data-view="ai">Task: AI Skills</a>
       <a href="#lang-top" data-view="lang">Languages<span class="flgs"><svg class="flg flg--jp" viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#flg-jp"/></svg><svg class="flg flg--uk" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#flg-uk"/></svg></span></a>
@@ -1192,6 +1220,12 @@ html:not(.js) .lg-bar>i{display:none}
       <a href="#sales-reports" data-sec="sales-reports"><em>03</em><span>報告と会議</span></a>
       <a href="#sales-kpi" data-sec="sales-kpi"><em>04</em><span>KPIと評価項目</span></a>
       <a href="#sales-flow" data-sec="sales-flow"><em>05</em><span>業務の流れ</span></a>
+    </nav>
+    <nav class="sb-nav" data-for="hr" hidden>
+      <a href="#hr-top" data-sec="hr-top"><em>TOP</em><span data-l="ja">概要</span><span data-l="en">Overview</span><span data-l="vi">Tổng quan</span></a>
+      <a href="#hr-hire" data-sec="hr-hire"><em>01</em><span data-l="ja">採用と入社後フォロー</span><span data-l="en">Recruiting and onboarding</span><span data-l="vi">Tuyển dụng và theo dõi sau tuyển</span></a>
+      <a href="#hr-people" data-sec="hr-people"><em>02</em><span data-l="ja">育成と評価</span><span data-l="en">Training and appraisal</span><span data-l="vi">Đào tạo và đánh giá</span></a>
+      <a href="#hr-ops" data-sec="hr-ops"><em>03</em><span data-l="ja">給与、労務、総務</span><span data-l="en">Payroll, HR admin, GA</span><span data-l="vi">Lương, thủ tục, tổng vụ</span></a>
     </nav>
     <nav class="sb-nav" data-for="team" hidden>
       <a href="#team-top" data-sec="team-top"><em>TOP</em><span data-l="ja">概要</span><span data-l="en">Overview</span><span data-l="vi">Tổng quan</span></a>
@@ -1233,7 +1267,7 @@ html:not(.js) .lg-bar>i{display:none}
     <div class="kwbar"><span></span></div>
     <p class="qt" style="max-width:600px">日本の考え方と働き方を、<br /><span class="gr">現場で活かす</span>。</p>
     <p class="kw-sub" style="max-width:560px">日系企業で約11年、日本の顧客と現場の間に立ち、営業、IT、人事の業務に携わってきました。</p>
-    <div class="chips" style="margin-top:26px"><span class="chip">日系企業 約11年</span><span class="chip">法人営業</span><span class="chip">営業マネージャー（部下5～6名）</span><span class="chip">ITコミュニケーター</span><span class="chip">人事部長（5名）</span><span class="chip">JLPT N2</span><span class="chip">TOEIC 680点</span></div>
+    <div class="chips" style="margin-top:26px"><span class="chip">日系企業 約11年</span><span class="chip">法人営業</span><span class="chip">営業マネージャー（部下5～6名）</span><span class="chip">ITコミュニケーター</span><span class="chip">人事部長（5名）</span><span class="chip">JLPT N2</span></div>
   </div>
   <div class="lb rv" style="--d:120ms;margin-top:auto" data-l="en">
     <p style="font:700 13px 'Manrope',sans-serif;letter-spacing:.3em;color:#6d5bd0">PORTFOLIO</p>
@@ -1241,7 +1275,7 @@ html:not(.js) .lg-bar>i{display:none}
     <div class="kwbar"><span></span></div>
     <p class="qt" style="max-width:600px">Applying the Japanese mindset<br />and <span class="gr">way of working</span>.</p>
     <p class="kw-sub" style="max-width:560px">For about 11 years at Japanese companies, I have stood between Japanese clients and local teams, working in sales, IT and HR.</p>
-    <div class="chips" style="margin-top:26px"><span class="chip">Japanese companies, about 11 years</span><span class="chip">B2B sales</span><span class="chip">Sales manager (5 to 6 reports)</span><span class="chip">IT communicator</span><span class="chip">HR head (team of 5)</span><span class="chip">JLPT N2</span><span class="chip">TOEIC 680</span></div>
+    <div class="chips" style="margin-top:26px"><span class="chip">Japanese companies, about 11 years</span><span class="chip">B2B sales</span><span class="chip">Sales manager (5 to 6 reports)</span><span class="chip">IT communicator</span><span class="chip">HR head (team of 5)</span><span class="chip">JLPT N2</span></div>
   </div>
   <div class="lb rv" style="--d:120ms;margin-top:auto" data-l="vi">
     <p style="font:700 13px 'Manrope',sans-serif;letter-spacing:.3em;color:#6d5bd0">THÁI TRẦN HOÀNG NHÃ</p>
@@ -1249,7 +1283,7 @@ html:not(.js) .lg-bar>i{display:none}
     <div class="kwbar"><span></span></div>
     <p class="qt" style="max-width:600px">Vận dụng tư duy và cách làm việc<br />của <span class="gr">người Nhật</span>.</p>
     <p class="kw-sub" style="max-width:560px">Khoảng 11 năm tại công ty Nhật, tôi đứng giữa khách hàng Nhật và đội ngũ tại chỗ, làm kinh doanh, IT và nhân sự.</p>
-    <div class="chips" style="margin-top:26px"><span class="chip">Công ty Nhật khoảng 11 năm</span><span class="chip">Kinh doanh B2B</span><span class="chip">Quản lý kinh doanh (5 đến 6 người)</span><span class="chip">IT communicator</span><span class="chip">Trưởng phòng Nhân sự (5 người)</span><span class="chip">JLPT N2</span><span class="chip">TOEIC 680</span></div>
+    <div class="chips" style="margin-top:26px"><span class="chip">Công ty Nhật khoảng 11 năm</span><span class="chip">Kinh doanh B2B</span><span class="chip">Quản lý kinh doanh (5 đến 6 người)</span><span class="chip">IT communicator</span><span class="chip">Trưởng phòng Nhân sự (5 người)</span><span class="chip">JLPT N2</span></div>
   </div>
 
   <div class="ft" style="margin-top:34px">
@@ -1333,15 +1367,12 @@ html:not(.js) .lg-bar>i{display:none}
       <span class="lbl" style="margin-top:14px">Certificates ／ <span data-l="ja">免許、資格</span><span data-l="en">Certificates</span><span data-l="vi">Chứng chỉ</span></span>
       <div class="lines" data-l="ja">
         <p><b>2016年8月</b>　日本語能力試験 N2 合格</p>
-        <p><b>2011年10月</b>　TOEIC 680点</p>
       </div>
       <div class="lines" data-l="en">
         <p><b>Aug 2016</b>　Japanese Language Proficiency Test N2</p>
-        <p><b>Oct 2011</b>　TOEIC 680</p>
       </div>
       <div class="lines" data-l="vi">
         <p><b>08/2016</b>　Đỗ JLPT N2</p>
-        <p><b>10/2011</b>　TOEIC 680 điểm</p>
       </div>
     </div>
     <div class="card">
@@ -1350,21 +1381,21 @@ html:not(.js) .lg-bar>i{display:none}
         <p><b>生年月日</b>　1989年7月31日</p>
         <p><b>居住地</b>　ベトナム、ホーチミン市</p>
         <p><b>直近の職歴</b>　MAYEKAWA VIETNAM CO., LTD.　営業部 アシスタントマネージャー 兼 人事部長（2026年6月 退社）</p>
-        <p><b>言語</b>　日本語（JLPT N2）、英語（TOEIC 680点）、ベトナム語（母語）</p>
+        <p><b>言語</b>　日本語（JLPT N2）、英語（ビジネス英語）、ベトナム語（母語）</p>
         <p><b>経験業界</b>　産業用冷凍機メーカー、ITアウトソーシング、自動車、銀行</p>
       </div>
       <div class="lines" data-l="en">
         <p><b>Date of birth</b>　31 July 1989</p>
         <p><b>Location</b>　Ho Chi Minh City, Vietnam</p>
         <p><b>Latest role</b>　MAYEKAWA VIETNAM CO., LTD., Assistant manager of Sales and head of HR (left in June 2026)</p>
-        <p><b>Languages</b>　Japanese (JLPT N2), English (TOEIC 680), Vietnamese (native)</p>
+        <p><b>Languages</b>　Japanese (JLPT N2), English (business), Vietnamese (native)</p>
         <p><b>Industries</b>　Industrial refrigeration, IT outsourcing, automotive, banking</p>
       </div>
       <div class="lines" data-l="vi">
         <p><b>Ngày sinh</b>　31/07/1989</p>
         <p><b>Nơi ở</b>　TP. Hồ Chí Minh, Việt Nam</p>
         <p><b>Công việc gần nhất</b>　MAYEKAWA VIETNAM CO., LTD., trợ lý trưởng phòng Kinh doanh kiêm trưởng phòng Nhân sự (nghỉ việc 06/2026)</p>
-        <p><b>Ngôn ngữ</b>　Tiếng Nhật (JLPT N2), tiếng Anh (TOEIC 680), tiếng Việt (bản ngữ)</p>
+        <p><b>Ngôn ngữ</b>　Tiếng Nhật (JLPT N2), tiếng Anh (công việc), tiếng Việt (bản ngữ)</p>
         <p><b>Ngành đã làm</b>　Máy lạnh công nghiệp, outsourcing IT, ô tô, ngân hàng</p>
       </div>
     </div>
@@ -1450,9 +1481,9 @@ html:not(.js) .lg-bar>i{display:none}
       <div data-l="vi"><h3>Quản lý đội ngũ</h3><p>Tôi quản lý và phát triển 5 đến 6 nhân viên kinh doanh, IT communicator và 5 nhân sự.</p></div>
     </div>
     <div class="card"><p class="num" style="font-size:26px;color:#F68209">06</p>
-      <div data-l="ja"><h3>語学</h3><p>JLPT N2、TOEIC 680の語学力で会議や交渉に対応します。</p></div>
-      <div data-l="en"><h3>Languages</h3><p>I use Japanese (JLPT N2) and English (TOEIC 680) in meetings and negotiations.</p></div>
-      <div data-l="vi"><h3>Ngoại ngữ</h3><p>Tôi dùng tiếng Nhật (JLPT N2) và tiếng Anh (TOEIC 680) trong họp, đàm phán.</p></div>
+      <div data-l="ja"><h3>語学</h3><p>日本語（JLPT N2）とビジネス英語で、会議や交渉に対応します。</p></div>
+      <div data-l="en"><h3>Languages</h3><p>I use Japanese (JLPT N2) and business English in meetings and negotiations.</p></div>
+      <div data-l="vi"><h3>Ngoại ngữ</h3><p>Tôi dùng tiếng Nhật (JLPT N2) và tiếng Anh công việc trong họp, đàm phán.</p></div>
     </div>
     <div class="card"><p class="num" style="font-size:26px;color:#1FB6A6">07</p>
       <div data-l="ja"><h3>AI活用</h3><p>生成AIで、3～4名分の業務を担います（自己試算）。</p></div>
@@ -2000,6 +2031,139 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <symbol id="ic-code" viewBox="0 0 24 24"><image href="assets/gx/building-blocks.webp" width="24" height="24"/></symbol>
   <symbol id="ic-heart" viewBox="0 0 24 24"><image href="assets/gx/handshake.webp" width="24" height="24"/></symbol>
 </svg>
+<!-- ═══════ Task: HR (task 4ubf, năng lực nhân sự theo skill nha-revised-cv-apply) ═══════ -->
+<main class="wrap" data-view="hr" hidden>
+<section class="pg" data-chap="II" id="hr-top">
+  <span class="eb rv">TASK　<b>HR</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">人事を1名体制から、<br /><i>5名のチームに広げた。</i></span><span data-l="en">From a one-person HR function<br /><i>to a team of five.</i></span><span data-l="vi">Từ phòng nhân sự một người<br /><i>lên đội 5 người.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Recruiting ／ Training ／ Appraisal ／ Payroll</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">MAYEKAWA VIETNAMでは営業部と兼務で人事部長を務め、採用から育成、評価、給与、総務まで人事の仕事を一通り担当しました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">At MAYEKAWA VIETNAM I was head of HR alongside my sales role, covering the full HR cycle from hiring and training to appraisals, payroll and general affairs.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tại MAYEKAWA VIETNAM, tôi là trưởng phòng Nhân sự kiêm nhiệm cùng phòng Kinh doanh, phụ trách trọn chu trình nhân sự từ tuyển dụng, đào tạo, đánh giá đến tiền lương và hành chính.</p>
+  <div class="kw1 rv" style="margin:8px 0 10px">
+    <div class="chips" data-l="ja"><span class="chip">人事部長</span><span class="chip">1名から5名へ</span><span class="chip">採用担当2名を育成</span><span class="chip">日英の手順書</span></div>
+    <div class="chips" data-l="en"><span class="chip">head of HR</span><span class="chip">team of 1 to 5</span><span class="chip">two recruiters trained</span><span class="chip">SOPs in Japanese and English</span></div>
+    <div class="chips" data-l="vi"><span class="chip">trưởng phòng Nhân sự</span><span class="chip">đội từ 1 lên 5 người</span><span class="chip">đào tạo 2 nhân viên tuyển dụng</span><span class="chip">SOP tiếng Nhật, tiếng Anh</span></div>
+  </div>
+  <div class="hr-ar rv" style="--d:180ms">
+    <div class="card hr-c" style="--i:0"><img class="hr-ic" src="assets/gx/interview.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><div><span class="lbl">Recruiting</span><h3 data-l="ja">採用</h3><h3 data-l="en">Recruiting</h3><h3 data-l="vi">Tuyển dụng</h3><p data-l="ja">経営陣と採用計画を立て、技術者の採用を最初から最後まで担当しました。</p><p data-l="en">I planned hiring with management and ran engineer recruitment end to end.</p><p data-l="vi">Tôi cùng ban lãnh đạo lập kế hoạch tuyển dụng và tuyển kỹ sư trọn quy trình.</p></div></div>
+    <div class="card hr-c" style="--i:1"><img class="hr-ic" src="assets/gx/lightbulb.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><div><span class="lbl">Training</span><h3 data-l="ja">育成と研修</h3><h3 data-l="en">Training</h3><h3 data-l="vi">Đào tạo</h3><p data-l="ja">未経験の採用担当2名を育成し、日越の働き方の違いを踏まえた研修を作りました。</p><p data-l="en">I trained two recruiters from scratch and built training on Japanese and Vietnamese ways of working.</p><p data-l="vi">Tôi đào tạo 2 nhân viên tuyển dụng chưa có kinh nghiệm và soạn chương trình đào tạo về khác biệt cách làm việc Nhật, Việt.</p></div></div>
+    <div class="card hr-c" style="--i:2"><img class="hr-ic" src="assets/gx/report-chart.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><div><span class="lbl">Appraisal</span><h3 data-l="ja">評価と定着</h3><h3 data-l="en">Appraisal and retention</h3><h3 data-l="vi">Đánh giá và giữ chân</h3><p data-l="ja">KPIと評価制度を整え、年1回の社員アンケートで施策を見直しました。</p><p data-l="en">I set up KPIs and appraisals, and used an annual staff survey to improve policies.</p><p data-l="vi">Tôi xây KPI, chế độ đánh giá và dùng khảo sát nhân viên hằng năm để cải thiện chính sách.</p></div></div>
+    <div class="card hr-c" style="--i:3"><img class="hr-ic" src="assets/gx/shield-check.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><div><span class="lbl">Payroll ／ GA</span><h3 data-l="ja">給与、労務、総務</h3><h3 data-l="en">Payroll, HR admin, general affairs</h3><h3 data-l="vi">Tiền lương, thủ tục, tổng vụ</h3><p data-l="ja">給与計算チームを管理し、税務、社会保険、労働契約、総務の手配を担当しました。</p><p data-l="en">I managed the payroll team and handled tax, social insurance, employment contracts and general affairs.</p><p data-l="vi">Tôi quản lý đội tính lương, phụ trách thuế, BHXH, hợp đồng lao động và hành chính tổng vụ.</p></div></div>
+  </div>
+  <div class="meta rv" style="--d:220ms;margin-top:16px">
+    <div><span>Role</span><b data-l="ja">人事部長（営業部と兼務）</b><b data-l="en">Head of HR, alongside sales</b><b data-l="vi">Trưởng phòng Nhân sự kiêm Kinh doanh</b></div>
+    <div><span>Team</span><b data-l="ja">1名体制から5名へ</b><b data-l="en">From one person to five</b><b data-l="vi">Từ 1 người lên 5 người</b></div>
+    <div><span>Recruiters</span><b data-l="ja">未経験から2名を育成</b><b data-l="en">Two trained from scratch</b><b data-l="vi">Đào tạo 2 người từ đầu</b></div>
+    <div><span>Documents</span><b data-l="ja">日英の手順書、評価シート</b><b data-l="en">SOPs and scorecards in Japanese and English</b><b data-l="vi">SOP, phiếu đánh giá tiếng Nhật, tiếng Anh</b></div>
+  </div>
+</section>
+<section class="pg" data-chap="III" id="hr-hire">
+  <span class="eb rv">01　<b>RECRUITING</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">採用計画から入社後まで、<br /><i>一人ずつ見届ける。</i></span><span data-l="en">From the hiring plan to the first weeks,<br /><i>one hire at a time.</i></span><span data-l="vi">Từ kế hoạch tuyển dụng đến những tuần đầu,<br /><i>theo sát từng người.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">建設、プラント、設計、CADの技術者を募集し、1ポジションあたり20～40名を選考して上位1～2名を推薦しました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I hired construction, plant, design and CAD engineers, screening 20 to 40 candidates per role to put forward the best one or two.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi tuyển kỹ sư xây dựng, nhà máy, thiết kế và CAD; mỗi vị trí sàng lọc 20 đến 40 ứng viên để đề xuất 1 đến 2 người phù hợp nhất.</p>
+  <ol class="hr-fl rv" style="--d:180ms">
+    <li class="hr-st" style="--i:0"><img src="assets/gx/roadmap.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">01</span><h3 data-l="ja">採用計画</h3><h3 data-l="en">Hiring plan</h3><h3 data-l="vi">Kế hoạch tuyển dụng</h3><p data-l="ja">経営陣と年間の人員計画を決めます。</p><p data-l="en">I agree the yearly headcount with management.</p><p data-l="vi">Tôi cùng ban lãnh đạo chốt nhu cầu nhân sự cả năm.</p></li>
+    <li class="hr-st" style="--i:1"><img src="assets/gx/magnifier-person.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">02</span><h3 data-l="ja">役割の定義と募集</h3><h3 data-l="en">Roles and sourcing</h3><h3 data-l="vi">Xác định vai trò, tìm ứng viên</h3><p data-l="ja">部門長と役割を決め、求人を出します。</p><p data-l="en">I define roles with department heads and post the jobs.</p><p data-l="vi">Tôi cùng trưởng bộ phận xác định vai trò và đăng tin.</p></li>
+    <li class="hr-st" style="--i:2"><img src="assets/gx/cv-resume.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">03</span><h3 data-l="ja">書類選考</h3><h3 data-l="en">Screening</h3><h3 data-l="vi">Sàng lọc hồ sơ</h3><p data-l="ja">1ポジション20～40名の応募書類を確認します。</p><p data-l="en">I review 20 to 40 applications per role.</p><p data-l="vi">Tôi xem 20 đến 40 hồ sơ cho mỗi vị trí.</p></li>
+    <li class="hr-st" style="--i:3"><img src="assets/gx/interview.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">04</span><h3 data-l="ja">面接と評価</h3><h3 data-l="en">Interviews</h3><h3 data-l="vi">Phỏng vấn</h3><p data-l="ja">評価シートで同じ基準の面接をします。</p><p data-l="en">I interview to one standard with a scorecard.</p><p data-l="vi">Tôi phỏng vấn theo một chuẩn bằng phiếu đánh giá.</p></li>
+    <li class="hr-st" style="--i:4"><img src="assets/gx/handshake.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">05</span><h3 data-l="ja">推薦と内定</h3><h3 data-l="en">Shortlist and offer</h3><h3 data-l="vi">Đề xuất và mời nhận việc</h3><p data-l="ja">上位1～2名を推薦し、内定を出します。</p><p data-l="en">I put forward the best one or two for an offer.</p><p data-l="vi">Tôi đề xuất 1 đến 2 người tốt nhất để mời nhận việc.</p></li>
+    <li class="hr-st" style="--i:5"><img src="assets/gx/calendar.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">06</span><h3 data-l="ja">入社後フォロー</h3><h3 data-l="en">After joining</h3><h3 data-l="vi">Sau khi nhận việc</h3><p data-l="ja">7日目、3週目、6週目に状況を確認します。</p><p data-l="en">I check in on day 7, week 3 and week 6.</p><p data-l="vi">Tôi theo dõi ở ngày 7, tuần 3 và tuần 6.</p></li>
+  </ol>
+  <div class="g2 hr-g rv" style="--d:220ms">
+    <div class="card"><span class="lbl"><img src="assets/gx/funnel.webp" alt="" width="22" height="22" loading="lazy" decoding="async">Metrics</span>
+      <h3 data-l="ja">採用の質を数字で見る</h3><h3 data-l="en">Hiring quality in numbers</h3><h3 data-l="vi">Đo chất lượng tuyển dụng bằng số liệu</h3>
+      <div class="lines" data-l="ja"><p>採用までの日数、採用単価、経路別の通過率、内定承諾率、試用期間の通過率を追い、改善案を経営陣に提案しました。</p></div>
+      <div class="lines" data-l="en"><p>I tracked time to fill, cost per hire, source conversion, offer acceptance and probation pass rates, and proposed improvements to management.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi theo dõi thời gian tuyển, chi phí mỗi người, tỉ lệ chuyển đổi theo nguồn, tỉ lệ nhận offer và tỉ lệ qua thử việc, rồi đề xuất cải thiện với ban lãnh đạo.</p></div>
+    </div>
+    <div class="card"><span class="lbl"><img src="assets/gx/checklist.webp" alt="" width="22" height="22" loading="lazy" decoding="async">SOP</span>
+      <h3 data-l="ja">日英の手順書と評価シート</h3><h3 data-l="en">SOPs and scorecards in two languages</h3><h3 data-l="vi">SOP và phiếu đánh giá hai ngôn ngữ</h3>
+      <div class="lines" data-l="ja"><p>採用の手順書、面接の評価シート、報告書の様式を日本語と英語で作り、採用担当2名が同じ基準で動ける体制を整えました。</p></div>
+      <div class="lines" data-l="en"><p>I wrote the recruiting SOP, interview scorecards and report templates in Japanese and English so the two recruiters work to the same standard.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi soạn SOP tuyển dụng, phiếu đánh giá phỏng vấn và mẫu báo cáo bằng tiếng Nhật, tiếng Anh để 2 nhân viên tuyển dụng làm theo cùng một chuẩn.</p></div>
+    </div>
+  </div>
+</section>
+<section class="pg" data-chap="IV" id="hr-people">
+  <span class="eb rv">02　<b>TRAINING AND APPRAISAL</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">人を育て、<br /><i>同じ基準で評価する。</i></span><span data-l="en">Developing people<br /><i>and appraising them by one standard.</i></span><span data-l="vi">Phát triển con người<br /><i>và đánh giá theo cùng một chuẩn.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">研修、評価、社員アンケート、社内行事を通じて、社員が働きやすく、成長できる仕組みを整えました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Through training, appraisals, staff surveys and company events, I built systems that help staff work well and grow.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Qua đào tạo, đánh giá, khảo sát nhân viên và sự kiện nội bộ, tôi xây cơ chế giúp nhân viên làm việc thuận lợi và phát triển.</p>
+  <div class="g2 hr-g rv" style="--d:180ms">
+    <div class="card"><span class="lbl"><img src="assets/gx/lightbulb.webp" alt="" width="22" height="22" loading="lazy" decoding="async">Culture training</span>
+      <h3 data-l="ja">日越の違いを踏まえた研修</h3><h3 data-l="en">Training on Japanese and Vietnamese work styles</h3><h3 data-l="vi">Đào tạo về khác biệt cách làm việc Nhật, Việt</h3>
+      <div class="lines" data-l="ja"><p>日越の考え方の違いを踏まえて研修資料を作り、報連相、交渉、数値報告の方法を社員に指導しました。</p></div>
+      <div class="lines" data-l="en"><p>I wrote training materials on how Japanese and Vietnamese colleagues think, and coached staff on hourensou (report, update, consult), negotiation and reporting with figures.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi soạn tài liệu đào tạo về khác biệt tư duy làm việc Việt, Nhật và hướng dẫn nhân viên hourensou (báo cáo, liên lạc, xin ý kiến), đàm phán, báo cáo bằng số liệu.</p></div>
+    </div>
+    <div class="card"><span class="lbl"><img src="assets/gx/team-group.webp" alt="" width="22" height="22" loading="lazy" decoding="async">Recruiters</span>
+      <h3 data-l="ja">未経験の採用担当2名を育成</h3><h3 data-l="en">Two new recruiters trained</h3><h3 data-l="vi">Đào tạo 2 nhân viên tuyển dụng mới</h3>
+      <div class="lines" data-l="ja"><p>手順書と評価シートを使って仕事を教え、一人で採用を進められるまで指導しました。</p></div>
+      <div class="lines" data-l="en"><p>I taught them with the SOP and scorecards, and coached them until each could run hiring alone.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi hướng dẫn bằng SOP, phiếu đánh giá và kèm cặp tới khi cả hai tự làm tuyển dụng được.</p></div>
+    </div>
+    <div class="card"><span class="lbl"><img src="assets/gx/report-chart.webp" alt="" width="22" height="22" loading="lazy" decoding="async">KPI ／ Appraisal</span>
+      <h3 data-l="ja">KPIと評価制度</h3><h3 data-l="en">KPIs and appraisals</h3><h3 data-l="vi">KPI và chế độ đánh giá</h3>
+      <div class="lines" data-l="ja"><p>KPIと評価の仕組みを作って評価を回し、昇給、昇格、定着策を経営陣に提案しました。管理職にも評価や難しい人事の場面について助言しました。</p></div>
+      <div class="lines" data-l="en"><p>I built the KPI and appraisal framework, ran the review cycle and proposed pay rises, promotions and retention steps to management. I also coached managers on reviews and difficult people issues.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi xây khung KPI, đánh giá, vận hành chu kỳ đánh giá và đề xuất tăng lương, thăng chức, giữ chân nhân sự với ban lãnh đạo; đồng thời tư vấn cho quản lý về đánh giá và các tình huống nhân sự khó.</p></div>
+    </div>
+    <div class="card"><span class="lbl"><img src="assets/gx/survey-clipboard.webp" alt="" width="22" height="22" loading="lazy" decoding="async">Engagement</span>
+      <h3 data-l="ja">社員アンケートと社内行事</h3><h3 data-l="en">Staff survey and company events</h3><h3 data-l="vi">Khảo sát nhân viên và sự kiện nội bộ</h3>
+      <div class="lines" data-l="ja"><p>年1回の社員アンケートを設計、実施し、結果を施策の改善に使いました。社員旅行、チームビルディング、中秋節の行事も企画しました。</p></div>
+      <div class="lines" data-l="en"><p>I designed and ran the annual staff survey and used the results to improve policies. I also planned company trips, team building and Mid-Autumn events.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi thiết kế, thực hiện khảo sát nhân viên hằng năm và dùng kết quả để cải thiện chính sách; tổ chức du lịch công ty, team building và Trung thu.</p></div>
+    </div>
+  </div>
+</section>
+<section class="pg" data-chap="I" id="hr-ops">
+  <span class="eb rv">03　<b>PAYROLL AND HR ADMIN</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">給与と労務を、<br /><i>数字と書類で正確に回す。</i></span><span data-l="en">Payroll and HR admin,<br /><i>kept accurate with figures and records.</i></span><span data-l="vi">Tiền lương và thủ tục nhân sự,<br /><i>chính xác bằng số liệu và hồ sơ.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">給与、税務、社会保険の手続きから契約、監査書類、総務の手配まで、経理部門と連携して担当しました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I handled payroll, tax and social insurance, contracts, audit documents and general affairs, working closely with the accounting team.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi phụ trách tiền lương, thuế, BHXH, hợp đồng, hồ sơ kiểm toán và hành chính tổng vụ, phối hợp chặt với phòng Kế toán.</p>
+  <div class="g2 hr-g rv" style="--d:180ms">
+    <div class="card"><span class="lbl"><img src="assets/gx/checklist.webp" alt="" width="22" height="22" loading="lazy" decoding="async">Payroll</span>
+      <h3 data-l="ja">給与計算チームの管理</h3><h3 data-l="en">Running the payroll team</h3><h3 data-l="vi">Quản lý đội tính lương</h3>
+      <div class="lines" data-l="ja"><p>毎月の給与、個人所得税、社会保険の手続きを統括し、人事の書類と証憑を経理部門に提出しました。</p></div>
+      <div class="lines" data-l="en"><p>I ran monthly payroll, personal income tax and social insurance, and sent HR records and vouchers to accounting.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi quản lý lương hằng tháng, thuế TNCN, BHXH và gửi hồ sơ, chứng từ nhân sự cho phòng Kế toán.</p></div>
+    </div>
+    <div class="card"><span class="lbl"><img src="assets/gx/jd-document.webp" alt="" width="22" height="22" loading="lazy" decoding="async">Contracts</span>
+      <h3 data-l="ja">労働契約と業務委託契約</h3><h3 data-l="en">Employment and contractor agreements</h3><h3 data-l="vi">Hợp đồng lao động và hợp đồng dịch vụ</h3>
+      <div class="lines" data-l="ja"><p>ベトナムの労働関連の法令に沿って、契約の更新、条件の変更、終了の手続きを進めました。</p></div>
+      <div class="lines" data-l="en"><p>I handled renewals, changes and terminations of employment and contractor agreements under Vietnamese labour rules.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi xử lý gia hạn, thay đổi điều kiện, chấm dứt hợp đồng lao động và hợp đồng dịch vụ theo quy định lao động Việt Nam.</p></div>
+    </div>
+    <div class="card"><span class="lbl"><img src="assets/gx/magnifier.webp" alt="" width="22" height="22" loading="lazy" decoding="async">Audit</span>
+      <h3 data-l="ja">監査書類とデータの照合</h3><h3 data-l="en">Audit documents and data checks</h3><h3 data-l="vi">Hồ sơ kiểm toán và đối chiếu số liệu</h3>
+      <div class="lines" data-l="ja"><p>外資系企業として必要な監査、決算の書類を準備しました。AIも使って経理と人事のデータを照合し、差異や誤りを見つけました。</p></div>
+      <div class="lines" data-l="en"><p>I prepared the audit and year-end documents a foreign-invested company needs, and used AI to cross-check accounting and HR figures for errors.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi chuẩn bị hồ sơ kiểm toán, quyết toán theo quy định với doanh nghiệp vốn nước ngoài và dùng AI đối chiếu số liệu kế toán, nhân sự để tìm sai lệch.</p></div>
+    </div>
+    <div class="card"><span class="lbl"><img src="assets/gx/office-building.webp" alt="" width="22" height="22" loading="lazy" decoding="async">General affairs</span>
+      <h3 data-l="ja">総務、業者選定、拠点間の共有</h3><h3 data-l="en">General affairs, vendors, regional sharing</h3><h3 data-l="vi">Tổng vụ, chọn nhà cung cấp, chia sẻ khu vực</h3>
+      <div class="lines" data-l="ja"><p>行事や贈答品などの業者を相見積で比べて選びました。韓国での拠点間会議では、人事と総務の運用方法を各国の拠点と共有しました。</p></div>
+      <div class="lines" data-l="en"><p>I compared quotes and chose vendors for events, gifts and other GA items. At a regional meeting in Korea, I shared HR and GA practices with other country offices.</p></div>
+      <div class="lines" data-l="vi"><p>Tôi so sánh báo giá và chọn nhà cung cấp cho sự kiện, quà tặng và các hạng mục tổng vụ; tại cuộc họp khu vực ở Hàn Quốc, tôi chia sẻ cách quản lý nhân sự, tổng vụ với các chi nhánh.</p></div>
+    </div>
+  </div>
+  <div class="meta rv" style="--d:220ms;margin-top:16px">
+    <div><span>Payroll</span><b data-l="ja">毎月の給与計算</b><b data-l="en">Monthly payroll</b><b data-l="vi">Tính lương hằng tháng</b></div>
+    <div><span>Tax ／ Insurance</span><b data-l="ja">個人所得税、社会保険</b><b data-l="en">Income tax, social insurance</b><b data-l="vi">Thuế TNCN, BHXH</b></div>
+    <div><span>Contracts</span><b data-l="ja">労働契約、業務委託契約</b><b data-l="en">Employment, contractor</b><b data-l="vi">Lao động, dịch vụ</b></div>
+    <div><span>Audit</span><b data-l="ja">監査、決算の書類</b><b data-l="en">Audit and year-end files</b><b data-l="vi">Hồ sơ kiểm toán, quyết toán</b></div>
+  </div>
+</section>
+</main>
 <main class="wrap" data-view="team" hidden>
 <section class="pg" data-chap="II" id="team-top">
   <span class="eb rv">TASK　<b>TEAM MANAGEMENT</b></span>
@@ -3507,6 +3671,7 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
 (function(){
   var IDS=['cover','toc','profile','projects','skillmap','career','w-mycom','w-jil','w-it','w-early',
     'sales-top','sales-trips','sales-pr','sales-reports','sales-kpi','sales-flow',
+    'hr-top','hr-hire','hr-people','hr-ops',
     'team-top','team-records','team-skills','team-daily','ai-top','ai-pyramid','ai-approach','ai-uses','ai-people','ai-tools',
     'lang-top','lang-ja','lang-en','lang-bridge'];
   var layers=[];

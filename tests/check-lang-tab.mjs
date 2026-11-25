@@ -23,11 +23,11 @@ ok(/Languages/.test(strip(langA)), 'tab phải tên "Languages"');
 ok(/class="flg flg--jp"/.test(langA) && /class="flg flg--uk"/.test(langA), 'tab Languages thiếu 2 cờ Nhật (flg--jp) và Anh (flg--uk)');
 ok(/<svg class="flg flg--jp"[^>]*aria-hidden="true"/.test(langA) && /<svg class="flg flg--uk"[^>]*aria-hidden="true"/.test(langA), 'cờ là hình trang trí: cần aria-hidden');
 const order = [...topNav.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]).join(',');
-ok(order === 'profile,sales,team,ai,lang', `thứ tự tab menu trên: ${order}`);
+ok(order === 'profile,sales,hr,team,ai,lang', `thứ tự tab menu trên (task 4ubf thêm Task: HR sau Sales): ${order}`);
 
 // 2) Main + sidebar
 const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]).join(',');
-ok(views === 'profile,sales,team,ai,lang', `view phải là profile,sales,team,ai,lang; đang ${views}`);
+ok(views === 'profile,sales,hr,team,ai,lang', `view phải là profile,sales,hr,team,ai,lang; đang ${views}`);
 const main = (html.match(/<main class="wrap" data-view="lang" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 ok(main, 'thiếu <main class="wrap" data-view="lang" hidden>');
 const SECS = ['lang-top', 'lang-ja', 'lang-en', 'lang-bridge'];
