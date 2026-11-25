@@ -116,6 +116,129 @@ const ROUNDS = [
   { who: 'CEO', ja: '3次：オンラインまたは対面', en: 'Round 3: online or in person', vi: 'Vòng 3: online hoặc trực tiếp' },
 ];
 
+// ---------- Trang 3 (task yt50): đối chiếu kỹ năng trong portfolio với JD ----------
+// Mức của tôi = tự đánh giá theo kinh nghiệm có trên các trang portfolio (cùng 9 trục, cùng thứ tự AX). why = bằng chứng (tooltip).
+const ME = [
+  { v: 5, why: 'Khách doanh nghiệp ở MAYEKAWA và JILNESTA' },
+  { v: 5, why: 'Đào tạo đội kinh doanh, 2 nhân viên tuyển dụng; SOP tiếng Nhật, tiếng Anh' },
+  { v: 5, why: 'Xử lý khiếu nại, sự cố giao hàng; phân tích nguyên nhân' },
+  { v: 4, why: 'Đặc tả, UAT 3 phần mềm; chưa trực tiếp triển khai ERP/CRM' },
+  { v: 4, why: 'JLPT N2, báo cáo lãnh đạo người Nhật' },
+  { v: 4, why: 'Thuyết trình ở hội nghị ASEAN, đàm phán với CEO châu Âu' },
+  { v: 5, why: 'Khoảng 11 năm ở công ty Nhật' },
+  { v: 4, why: 'Quản lý 5 đến 6 người ở chi nhánh, đội Nhân sự từ 1 lên 5 người' },
+  { v: 4, why: 'Đàm phán, xử lý khiếu nại với khách doanh nghiệp' },
+];
+if (ME.length !== AX.length) throw new Error('ME phải cùng số trục với AX');
+const MEET = ME.filter((m, i) => m.v >= AX[i].v).length;
+// Mỗi dòng phủ các mã yêu cầu của JD: m1..m7 bắt buộc (đúng thứ tự trong JD), l1 tiếng Nhật, l2 tiếng Anh, e1 học vấn, n1 quản lý đội, n2 đàm phán.
+const REQ_N = COMP.reduce((a, c) => a + c.n, 0);
+const ROWS = [
+  { t: 'must', r: 'm1', go: [['#w-mycom', 'Career'], ['#sales-trips', 'Sales']],
+    ja: '法人顧客（B2B）の経験', en: 'B2B client experience', vi: 'Khách hàng doanh nghiệp (B2B)',
+    eja: '法人顧客に設備を提案し、5省13社の訪問を計画しました。', een: 'I proposed equipment to corporate clients and planned visits to 13 companies in 5 provinces.', evi: 'Tôi đề xuất thiết bị cho khách doanh nghiệp, lập kế hoạch thăm 13 công ty ở 5 tỉnh.' },
+  { t: 'must', r: 'm2', go: [['#career', 'Career']],
+    ja: '日系企業での勤務', en: 'Work at a Japanese company', vi: 'Làm việc tại công ty Nhật',
+    eja: '日系企業で約11年、日本人上司に直接報告してきました。', een: 'About 11 years at Japanese companies, reporting directly to Japanese managers.', evi: 'Khoảng 11 năm ở công ty Nhật, báo cáo trực tiếp lãnh đạo người Nhật.' },
+  { t: 'must', r: 'm3 m7', go: [['#sw-top', 'Software Products'], ['#it-top', 'IT Knowledge']],
+    ja: 'IT、システム導入、コンサルへの関心', en: 'IT, system rollout, consulting', vi: 'Quan tâm IT, triển khai hệ thống, tư vấn',
+    eja: '顧客の要望から仕様書を書き、UATを経て3つのソフトを納品しました。', een: 'I wrote specs, ran UAT and delivered 3 software products for clients.', evi: 'Tôi viết đặc tả, chạy UAT và bàn giao 3 phần mềm theo yêu cầu khách hàng.' },
+  { t: 'must', r: 'm4', go: [['#w-mycom', 'Career'], ['#sales-kpi', 'Sales']],
+    ja: '論理的思考、課題解決', en: 'Logic and problem solving', vi: 'Tư duy logic, giải quyết vấn đề',
+    eja: 'クレームや納品トラブルを工場、日本本社と連携して解決し、数字で報告しました。', een: 'I resolved complaints and delivery issues with the factory and Japan HQ, reporting in numbers.', evi: 'Tôi xử lý khiếu nại, sự cố giao hàng cùng nhà máy và trụ sở Nhật, báo cáo bằng số liệu.' },
+  { t: 'must', r: 'm5', go: [['#w-mycom', 'Career'], ['#hr-top', 'HR']],
+    ja: 'コミュニケーション、向上心、顧客志向', en: 'Communication, growth mindset, customer focus', vi: 'Giao tiếp, cầu tiến, lấy khách hàng làm trọng tâm',
+    eja: '初回訪問から納品後まで顧客に寄り添い、営業チームの育成と日英のSOP作成も行いました。', een: 'I stay with clients from the first meeting to after handover, and trained the sales team and wrote SOPs in Japanese and English.', evi: 'Tôi theo sát khách từ lần gặp đầu tới sau bàn giao, đào tạo đội kinh doanh và soạn SOP tiếng Nhật, tiếng Anh.' },
+  { t: 'must', r: 'm6', go: [['#lang-ja', 'Languages'], ['#team-top', 'Team Management']],
+    ja: '誠実さ、責任感、チームワーク', en: 'Sincerity, responsibility, teamwork', vi: 'Chân thành, trách nhiệm, làm việc nhóm',
+    eja: '報連相を欠かさず、毎日のレビューでメンバーを支えてきました。', een: 'I keep up hourensou (report, contact, consult) with managers and review and coach the team every day.', evi: 'Tôi giữ hourensou với cấp trên, rà soát và kèm cặp đội mỗi ngày.' },
+  { t: 'lang', r: 'l1 l2', go: [['#lang-ja', 'Japanese'], ['#lang-en', 'English']],
+    ja: '日本語N2以上、英語4技能', en: 'Japanese N2+, English in 4 skills', vi: 'Tiếng Nhật N2+, tiếng Anh 4 kỹ năng',
+    eja: 'JLPT N2。ASEAN会議で英語の発表をし、欧州企業のCEOと英語で交渉しました。', een: 'JLPT N2; I presented in English at an ASEAN meeting and negotiated with a European CEO.', evi: 'JLPT N2; tôi thuyết trình tiếng Anh ở hội nghị ASEAN và đàm phán với CEO châu Âu.' },
+  { t: 'edu', r: 'e1', go: [['#profile', 'My Profile']],
+    ja: '関連分野の大学卒業', en: 'Relevant university degree', vi: 'Tốt nghiệp đại học chuyên ngành phù hợp',
+    eja: 'ホーチミン市経済大学で経営管理を学び、大学院（財務、管理）を修了しました。', een: 'I studied business administration and finished a master\'s course in finance and management at UEH.', evi: 'Cử nhân Quản trị kinh doanh, cao học Tài chính, Quản lý, Đại học Kinh tế TP.HCM.' },
+  { t: 'nice', r: 'n1', go: [['#team-top', 'Team Management'], ['#w-jil', 'Career']],
+    ja: 'チーム管理', en: 'Team management', vi: 'Quản lý đội nhóm',
+    eja: '支店で5～6名を率い、人事チームを1名から5名に広げました。', een: 'I managed 5 to 6 people at a branch and grew the HR team from 1 to 5.', evi: 'Tôi quản lý 5 đến 6 người ở chi nhánh, mở rộng đội Nhân sự từ 1 lên 5 người.' },
+  { t: 'nice', r: 'n2', go: [['#w-mycom', 'Career'], ['#lang-top', 'Languages']],
+    ja: '顧客との交渉', en: 'Negotiating with clients', vi: 'Đàm phán với khách hàng',
+    eja: '法人顧客との交渉とクレーム対応を、日本語でも行ってきました。', een: 'I negotiated and handled complaints with corporate clients, also in Japanese.', evi: 'Tôi đàm phán và xử lý khiếu nại với khách doanh nghiệp, cả bằng tiếng Nhật.' },
+];
+const covered = ROWS.flatMap((o) => o.r.split(' '));
+if (covered.length !== REQ_N || new Set(covered).size !== REQ_N) throw new Error('bảng đối chiếu phải phủ đủ, không trùng ' + REQ_N + ' yêu cầu');
+const WHY = [
+  { ja: '自ら営業に出て、技術者と一緒に提案、説明してきました。', en: 'I have sold on my own and presented proposals with engineers.', vi: 'Tôi từng tự đi sales, đề xuất và thuyết trình cùng kỹ sư.' },
+  { ja: '仕様書、UAT、SOPの作成と新人研修を担ってきました。', en: 'I wrote specs, ran UAT, wrote SOPs and trained new staff.', vi: 'Tôi viết đặc tả, chạy UAT, soạn SOP và đào tạo người mới.' },
+  { ja: '工場、日本本社、開発チームと連携し、顧客の課題を解決しました。', en: 'I worked with the factory, Japan HQ and dev teams to fix client issues.', vi: 'Tôi phối hợp nhà máy, trụ sở Nhật và đội dev để gỡ vấn đề cho khách.' },
+  { ja: '納品後もフォローを続け、顧客を訪問してきました。', en: 'I follow clients after handover and visit them on site.', vi: 'Tôi theo sát khách sau bàn giao và đến thăm khách tận nơi.' },
+];
+if (WHY.length !== STAGES.length) throw new Error('mỗi chặng 1 lý do');
+
+function matchRadar() {
+  const rings = [1, 2, 3, 4, 5].map((k) => `<polygon class="jd-ring" points="${AX.map((_, i) => pt(i, R * k / 5).map(f1).join(',')).join(' ')}"/>`).join('');
+  const axes = AX.map((_, i) => { const [x, y] = pt(i, R); return `<line class="jd-ax" x1="${CX}" y1="${CY}" x2="${f1(x)}" y2="${f1(y)}"/>`; }).join('');
+  const layer = (k, vals, tip) => `<polygon class="jm-area jm-area--${k}" points="${vals.map((v, i) => pt(i, R * v / 5).map(f1).join(',')).join(' ')}"/>`
+    + vals.map((v, i) => { const [x, y] = pt(i, R * v / 5); return `<circle class="jm-pt jm-pt--${k}" data-v="${v}" cx="${f1(x)}" cy="${f1(y)}" r="${k === 'me' ? 4.5 : 3.5}" style="--i:${i}"><title>${esc(AX[i].vi.replace('|', ' '))}: ${tip(i, v)}</title></circle>`; }).join('');
+  const jd = layer('jd', AX.map((a) => a.v), (i, v) => `JD ${v}/5`);
+  const me = layer('me', ME.map((m) => m.v), (i, v) => `tôi ${v}/5 (${esc(ME[i].why)})`);
+  const labels = AX.map((a, i) => {
+    const ang = -90 + i * 40, c = Math.cos(ang * Math.PI / 180);
+    const [x, y] = pt(i, R + 14);
+    const anchor = Math.abs(c) < 0.2 ? 'middle' : c > 0 ? 'start' : 'end';
+    const dy = ang === -90 ? -4 : (ang > 20 && ang < 160 ? 10 : 4);
+    return ['ja', 'en', 'vi'].map((l) => {
+      const parts = a[l].split('|');
+      const tsp = parts.map((t, k) => `<tspan x="${f1(x)}"${k ? ' dy="15"' : ''}>${esc(t)}${k === parts.length - 1 ? ` <tspan class="jm-vj">${a.v}</tspan><tspan class="jm-vm" dx="5">${ME[i].v}</tspan>` : ''}</tspan>`).join('');
+      const shift = parts.length > 1 && dy < 6 ? dy - 6 : dy;
+      return `<text data-l="${l}" x="${f1(x)}" y="${f1(y + shift)}" text-anchor="${anchor}">${tsp}</text>`;
+    }).join('');
+  }).join('');
+  return `<svg class="jd-radar jm-radar" viewBox="-74 -14 486 322" role="img" aria-labelledby="jm-radar-t"><title id="jm-radar-t">Radar 9 năng lực: mức JD cần và mức của tôi</title>`
+    + `<g class="jd-grid">${rings}${axes}</g><g class="jm-shape">${jd}${me}</g><g class="jd-lbs">${labels}</g></svg>`;
+}
+
+function matchHtml() {
+  const nums = [
+    { k: 'axes', v: `${MEET}/${AX.length}`, ja: 'JDの水準以上の能力', en: 'skills at or above the JD level', vi: 'năng lực đạt hoặc vượt mức JD' },
+    { k: 'req', v: `${REQ_N}/${REQ_N}`, ja: '経験で裏付けられる要件', en: 'requirements backed by experience', vi: 'yêu cầu có kinh nghiệm đối chiếu' },
+    { k: 'yrs', v: '11', ja: '日系企業での年数（約）', en: 'years at Japanese companies (about)', vi: 'năm ở công ty Nhật (khoảng)' },
+  ].map((o, i) => `<li style="--i:${i}"><b class="jm-num" data-k="${o.k}">${o.v}</b>${L3('span', o)}</li>`).join('');
+  const tag = Object.fromEntries(COMP.map((c) => [c.k, c]));
+  const rows = ROWS.map((o, i) => `<li class="jm-row" data-t="${o.t}" data-r="${o.r}" style="--i:${i}"><i class="jm-tag jd-seg--${o.t}" title="${tag[o.t].vi}"></i><div class="jm-txt">${L3('b', o, ' class="jm-req"')}${L3('span', { ja: o.eja, en: o.een, vi: o.evi }, ' class="jm-ev"')}</div><span class="jd-go">${o.go.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</span></li>`).join('');
+  const why = STAGES.map((s, i) => `<li class="jm-why" style="--i:${i}"><img src="assets/gx/${s.ic}.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div>${L3('h3', s)}${L3('p', WHY[i])}</div></li>`).join('');
+  const leg = COMP.map((c) => `<li><i class="jd-sw jd-seg--${c.k}"></i>${L3('span', c)}</li>`).join('');
+  return `<section class="pg" data-chap="III" id="jd-match">
+  <span class="eb rv">02　<b>SKILL MATCH</b></span>
+  <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">求人票の要件と、<br /><i>私の経験を照らし合わせる。</i></span><span data-l="en">The job requirements,<br /><i>matched with my experience.</i></span><span data-l="vi">Yêu cầu của JD,<br /><i>đối chiếu với kinh nghiệm của tôi.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">${REQ_N}項目の要件を、このポートフォリオ各ページの経験と照らし合わせました（私の水準は自己評価です）。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I matched all ${REQ_N} requirements with experience shown on the pages of this portfolio (my levels are self-assessed).</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi đối chiếu đủ ${REQ_N} yêu cầu của JD với kinh nghiệm ở các trang trong portfolio (mức của tôi là tự đánh giá).</p>
+  <div class="jm-g rv" style="--d:180ms">
+    <div class="jd-col">
+      <figure class="card jd-c jm-c--radar">
+        <figcaption><span class="lbl">Skill match</span>${L3('h3', { ja: 'JDが求める水準と私の水準', en: 'Level the JD asks for, and mine', vi: 'Mức JD cần và mức của tôi' })}</figcaption>
+        ${matchRadar()}
+        <ul class="jm-key"><li><i class="jm-sw jm-sw--jd"></i>${L3('span', { ja: 'JDが求める水準', en: 'JD level', vi: 'Mức JD cần' })}</li><li><i class="jm-sw jm-sw--me"></i>${L3('span', { ja: '私の水準（自己評価）', en: 'My level (self-assessed)', vi: 'Mức của tôi (tự đánh giá)' })}</li></ul>
+        <ul class="jm-nums">${nums}</ul>
+        ${L3('p', { ja: 'IT 4/5：ERP/CRMの導入は未経験のため、まずANDPADの製品を深く学びます。', en: 'IT 4/5: I have not run an ERP/CRM rollout yet, so I will learn the ANDPAD product first.', vi: 'IT 4/5: tôi chưa trực tiếp triển khai ERP/CRM, nên sẽ học kỹ sản phẩm ANDPAD trước.' }, ' class="jd-note"')}
+      </figure>
+      <figure class="card jd-c jm-life">
+        <figcaption><span class="lbl">Why me</span>${L3('h3', { ja: '私が適任である理由：顧客対応の4段階をすべて経験', en: 'Why I fit: I have done all 4 stages with a customer', vi: 'Lý do tôi phù hợp: đã làm đủ 4 chặng đồng hành khách hàng' })}</figcaption>
+        <ol class="jm-whys">${why}</ol>
+      </figure>
+    </div>
+    <figure class="card jd-c jm-c--tbl">
+      <figcaption><span class="lbl">Evidence</span>${L3('h3', { ja: `要件${REQ_N}項目と、裏付けのページ`, en: `The ${REQ_N} requirements and where to see them`, vi: `${REQ_N} yêu cầu và trang chứng minh` })}</figcaption>
+      <ul class="jm-tbl">${rows}</ul>
+      <ul class="jd-leg">${leg}</ul>
+    </figure>
+  </div>
+  <div class="jm-end rv" style="--d:260ms">${L3('p', { ja: '日系企業で約11年、法人営業、ITの橋渡し、チーム管理を経験してきたので、Customer Success Staffとしてすぐに貢献し、将来はリーダーを目指します。', en: 'About 11 years of B2B sales, IT bridging and team management at Japanese companies let me start as Customer Success Staff right away and grow into the Leader role.', vi: 'Khoảng 11 năm làm kinh doanh B2B, cầu nối IT và quản lý đội ngũ ở công ty Nhật giúp tôi làm Customer Success Staff được ngay và sẵn sàng lên Leader.' })}</div>
+</section>`;
+}
+
 function fitHtml() {
   const comp = COMP.map((c, i) => `<span class="jd-seg jd-seg--${c.k}" data-n="${c.n}" style="flex:${c.n}" title="${c.vi}: ${c.n}/${total}"><b>${c.n}</b></span>`).join('');
   const leg = COMP.map((c) => `<li><i class="jd-sw jd-seg--${c.k}"></i>${L3('span', c)} <b>${c.n}</b></li>`).join('');
@@ -184,6 +307,7 @@ const main = `<!-- jd:start -->
   </div><!-- /jd-doc -->
 </section>
 ${fitHtml()}
+${matchHtml()}
 </main>
 <!-- jd:end -->
 `;
@@ -259,6 +383,37 @@ const css = `<!-- jd-css:start -->
 .jd-rd{display:grid;grid-template-columns:66px 1fr;align-items:center;gap:8px}
 .jd-rd b{font:800 11px 'Space Grotesk',sans-serif;color:#fff;background:#14396b;border-radius:8px;padding:6px 0;text-align:center}
 .jd-rd span{font:500 10.5px/1.4 'Noto Sans JP',sans-serif;color:#2b2735}
+/* #jd-match (task yt50): radar chồng JD (xanh nét đứt) và tôi (cam), số tóm tắt, bảng 12 yêu cầu + link bằng chứng, 4 lý do theo chặng, câu kết */
+.jm-g{display:grid;grid-template-columns:1fr 1.22fr;gap:10px}
+.jm-area--jd{fill:rgba(42,111,192,.07);stroke:#2a6fc0;stroke-width:1.6;stroke-dasharray:5 4;stroke-linejoin:round}
+.jm-area--me{fill:rgba(246,130,9,.2);stroke:#F68209;stroke-width:2.2;stroke-linejoin:round}
+.jm-pt--jd{fill:#2a6fc0;stroke:#fff;stroke-width:1.5}
+.jm-pt--me{fill:#F68209;stroke:#fff;stroke-width:2}
+.jm-shape{transform-origin:160px 150px;transform-box:view-box}
+.jd-lbs .jm-vj{font:800 14px 'Space Grotesk',sans-serif;fill:#2a6fc0}
+.jd-lbs .jm-vm{font:800 14px 'Space Grotesk',sans-serif;fill:#d96f00}
+.jm-key{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:4px 14px;font:500 10.5px/1.4 'Noto Sans JP',sans-serif;color:#2b2735}
+.jm-key li{display:flex;align-items:center;gap:5px}
+.jm-sw{display:inline-block;width:16px;height:0;border-top:2px dashed #2a6fc0}
+.jm-sw--me{height:8px;border:2px solid #F68209;border-radius:2px;background:rgba(246,130,9,.2)}
+.jm-nums{list-style:none;margin:8px 0 4px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.jm-nums li{background:#f6f4fb;border-radius:10px;padding:6px 6px 5px;text-align:center}
+.jm-num{display:block;font:800 22px/1.1 'Space Grotesk',sans-serif;color:#14396b}
+.jm-nums span{display:block;font:500 9.8px/1.35 'Noto Sans JP',sans-serif;color:#3d3849;text-wrap:pretty}
+.jm-tbl{list-style:none;margin:0 0 6px;padding:0;display:grid;gap:3px}
+.jm-row{display:grid;grid-template-columns:4px minmax(0,1fr) auto;gap:8px;align-items:center;padding:2px 0 3px;border-bottom:1px dashed #ece8f3}
+.jm-tag{align-self:stretch;border-radius:2px}
+.jm-txt{display:grid;gap:1px;min-width:0}
+.jm-req{font:700 10.5px/1.35 'Noto Sans JP',sans-serif;color:#16141d}
+.jm-ev{font:400 9.9px/1.45 'Noto Sans JP',sans-serif;color:#3d3849;text-wrap:pretty}
+.jm-row .jd-go{flex-direction:column;align-items:flex-end;max-width:none}
+.jm-whys{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.jm-why{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;align-items:start;background:#faf9fd;border:1px solid #efeaf8;border-radius:10px;padding:6px 8px}
+.jm-why img{width:34px;height:34px;display:block}
+.jm-why h3{margin:0;font:700 11.5px/1.35 'Noto Sans JP',sans-serif}
+.jm-why p{margin:1px 0 0;font:400 10px/1.45 'Noto Sans JP',sans-serif;color:#3d3849;text-wrap:pretty}
+.jm-end{margin:10px 0 0;padding:10px 16px;border-radius:12px;background:#14396b;color:#fff}
+.jm-end p{margin:0;font:600 12.5px/1.6 'Noto Sans JP',sans-serif;text-wrap:pretty}
 @keyframes jdGrow{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:none}}
 @keyframes jdBar{from{transform:scaleX(0)}to{transform:none}}
 @keyframes jdRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -267,8 +422,10 @@ html.sr .jd-g.sr-in .jd-shape{animation:jdGrow .9s cubic-bezier(.2,.7,.2,1) .25s
 html.sr .jd-g.sr-in .jd-comp{animation:jdBar .8s cubic-bezier(.2,.7,.2,1) .3s both}
 html.sr .jd-g.sr-in .jd-bar i{animation:jdBar .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 350ms)}
 html.sr .jd-life.sr-in .jd-st,html.sr .jd-g2.sr-in .jd-per li,html.sr .jd-g2.sr-in .jd-rd{animation:jdRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*110ms + 200ms)}
+html.sr .jm-g.sr-in .jm-shape{animation:jdGrow .9s cubic-bezier(.2,.7,.2,1) .25s both}
+html.sr .jm-g.sr-in .jm-row,html.sr .jm-g.sr-in .jm-nums li,html.sr .jm-g.sr-in .jm-why{animation:jdRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 200ms)}
 html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{animation:jdDash .5s ease both;animation-delay:calc(var(--i,0)*110ms + 420ms)}
-@media screen and (max-width:900px){.jd-g,.jd-g2{grid-template-columns:1fr}}
+@media screen and (max-width:900px){.jd-g,.jd-g2,.jm-g{grid-template-columns:1fr}.jm-whys{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media screen and (max-width:700px){
   .jd-doc{columns:1;font-size:11.5px}
   .jd-sts{grid-template-columns:1fr;--g:24px}
@@ -280,9 +437,12 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
   .jd-st:not(:last-child)::before{top:auto;bottom:calc(0px - var(--g) + 6px);left:16px;border:5px solid transparent;border-top:6px solid #9a87f0;border-bottom:0}
   .jd-per li{flex-direction:column;align-items:flex-start}
   .jd-go{justify-content:flex-start;max-width:none}
+  .jm-whys{grid-template-columns:1fr}
+  .jm-row{grid-template-columns:4px minmax(0,1fr)}
+  .jm-row .jd-go{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start}
 }
-@media (prefers-reduced-motion:reduce){.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}}
-@media print{.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}.jd-doc{font-size:9.2px}}
+@media (prefers-reduced-motion:reduce){.jm-shape,.jm-row,.jm-nums li,.jm-why,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}}
+@media print{.jm-shape,.jm-row,.jm-nums li,.jm-why,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}.jd-doc{font-size:9.2px}}
 </style>
 <!-- jd-css:end -->
 `;
@@ -291,6 +451,7 @@ const nav = `<a href="#jd-top" data-view="jd">JD ANDPAD</a>\n      `;
 const sbnav = `<nav class="sb-nav" data-for="jd" hidden>
       <a href="#jd-top" data-sec="jd-top"><em>TOP</em><span data-l="ja">求人票（原文）</span><span data-l="en">Job description</span><span data-l="vi">JD nguyên văn</span></a>
       <a href="#jd-fit" data-sec="jd-fit"><em>01</em><span data-l="ja">求められる人物像</span><span data-l="en">Candidate profile</span><span data-l="vi">Chân dung ứng viên</span></a>
+      <a href="#jd-match" data-sec="jd-match"><em>02</em><span data-l="ja">スキルの照合</span><span data-l="en">Skill match</span><span data-l="vi">Đối chiếu kỹ năng</span></a>
     </nav>
     `;
 
@@ -307,19 +468,19 @@ h = cut(h, '<!-- jd-css:start -->', '<!-- jd-css:end -->\n');
 h = cut(h, '<!-- jd:start -->', '<!-- jd:end -->\n');
 h = cut(h, '<a href="#jd-top" data-view="jd">', '\n      ');
 h = cut(h, '<nav class="sb-nav" data-for="jd" hidden>', '</nav>\n    ');
-h = h.replace(/'jd-top','jd-fit',/, '');
+h = h.replace(/'jd-top','jd-fit',('jd-match',)?/, '');
 const ins = (s, before, add) => { const i = s.indexOf(before); if (i < 0) throw new Error('không thấy mốc: ' + before.slice(0, 50)); return s.slice(0, i) + add + s.slice(i); };
 h = ins(h, '</head>', css);
 h = ins(h, '<a href="#sw-top" data-view="sw">', nav);
 h = ins(h, '<nav class="sb-nav" data-for="sw" hidden>', sbnav);
 h = ins(h, '<main class="wrap" data-view="sw" hidden>', main);
-h = ins(h, "'sw-top','sw-remote'", "'jd-top','jd-fit',");
+h = ins(h, "'sw-top','sw-remote'", "'jd-top','jd-fit','jd-match',");
 // Kiểm an toàn trước khi ghi: đúng 1 <html>, 1 </head>, số main chỉ tăng đúng 1 (tab jd) so với lúc đọc (trừ main jd cũ).
 const cnt = (re) => (h.match(re) || []).length;
 const nJd = (raw.match(/<main class="wrap" data-view="jd"/g) || []).length;
 if (cnt(/^<html /gm) !== 1 || cnt(/<\/head>/g) !== 1 || cnt(/<main class="wrap"/g) !== n0 - nJd + 1 || cnt(/data-view="jd"/g) !== 2)
   throw new Error('kết quả bất thường, không ghi file');
-for (const m of ['<!-- jd-css:start -->', '<!-- jd-css:end -->', '<!-- jd:start -->', '<!-- jd:end -->', '<nav class="sb-nav" data-for="jd"', "'jd-top','jd-fit',"])
+for (const m of ['<!-- jd-css:start -->', '<!-- jd-css:end -->', '<!-- jd:start -->', '<!-- jd:end -->', '<nav class="sb-nav" data-for="jd"', "'jd-top','jd-fit','jd-match',"])
   if (h.split(m).length !== 2) throw new Error('mốc phải có đúng 1 lần: ' + m);
 if (statSync(FILE).mtimeMs !== t0) throw new Error('index.html vừa bị lượt khác sửa, chạy lại');
 writeFileSync(FILE, CRLF ? h.replace(/\n/g, '\r\n') : h);

@@ -25,14 +25,14 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 let checks = 0;
-const PAGES = ['jd-top', 'jd-fit'];
+const PAGES = ['jd-top', 'jd-fit', 'jd-match']; // task yt50 thêm #jd-match
 
 const PROBE = `(() => {
   const vis = (e) => { const s = getComputedStyle(e); return s.display !== 'none' && s.visibility !== 'hidden' && e.getClientRects().length > 0; };
   const inside = (e, box) => { const r = e.getBoundingClientRect(), b = box.getBoundingClientRect(); return r.left >= b.left - 1 && r.right <= b.right + 1 && r.top >= b.top - 1 && r.bottom <= b.bottom + 1; };
   const main = document.querySelector('main[data-view="jd"]');
   const over = [], bottom = [];
-  for (const [sel, boxSel] of [['.jd-c h3,.jd-c p,.jd-c .lbl,.jd-kw,.jd-leg li,.jd-per li,.jd-rd,.jd-comp', '.jd-c'], ['.jd-radar text', '.jd-c'], ['.jd-st h3,.jd-st p,.jd-st img', '.jd-st'], ['.jd-go a', '.jd-per li'], ['.jd-doc li,.jd-doc p,.jd-doc h4', '.jd-doc']])
+  for (const [sel, boxSel] of [['.jd-c h3,.jd-c p,.jd-c .lbl,.jd-kw,.jd-leg li,.jd-per li,.jd-rd,.jd-comp', '.jd-c'], ['.jd-radar text', '.jd-c'], ['.jd-st h3,.jd-st p,.jd-st img', '.jd-st'], ['.jd-go a', '.jd-per li'], ['.jm-row .jd-go a,.jm-req,.jm-ev', '.jm-row'], ['.jm-why h3,.jm-why p,.jm-why img', '.jm-why'], ['.jm-nums b,.jm-nums span', '.jm-nums li'], ['.jd-doc li,.jd-doc p,.jd-doc h4', '.jd-doc']])
     for (const e of main.querySelectorAll(sel)) { if (!vis(e)) continue; const box = e.closest(boxSel); if (box && !inside(e, box)) over.push(sel.split(',')[0] + ': ' + e.textContent.trim().slice(0, 30)); }
   const heights = {};
   for (const pg of main.querySelectorAll('.pg')) {
@@ -54,7 +54,7 @@ const PROBE = `(() => {
     sb: !document.querySelector('.sb-nav[data-for="jd"]').hidden,
     anim: document.getAnimations().filter((a) => /^jd/.test(a.animationName || '') && main.contains(a.effect && a.effect.target)).length,
     pages: [...main.querySelectorAll('.pg')].filter(vis).length, over, bottom, heights, links,
-    hidden: [...main.querySelectorAll('.jd-c,.jd-st,.jd-per li,.jd-rd,.jd-doc')].filter((e) => +getComputedStyle(e).opacity < 0.95).length,
+    hidden: [...main.querySelectorAll('.jd-c,.jd-st,.jd-per li,.jd-rd,.jd-doc,.jm-row,.jm-why,.jm-end')].filter((e) => +getComputedStyle(e).opacity < 0.95).length,
     overflowX: document.documentElement.scrollWidth - innerWidth };
 })()`;
 
@@ -104,7 +104,7 @@ async function main() {
       await reveal('main[data-view="jd"] .pg');
       const r = await evaluate(PROBE); checks++;
       ok(r.view === 'jd' && r.on === 'jd' && r.sb, `${tag}: tab JD chưa bật (view ${r.view}, menu ${r.on}, sidebar ${r.sb})`);
-      ok(r.pages === 2, `${tag}: cần 2 trang JD, đang ${r.pages}`);
+      ok(r.pages === 3, `${tag}: cần 3 trang JD, đang ${r.pages}`);
       ok(r.anim === 0, `${tag}: reduced-motion còn ${r.anim} chuyển động trong tab JD`);
       ok(!r.over.length, `${tag}: chữ tràn thẻ ${r.over.slice(0, 4).join(' | ')}`);
       ok(!r.bottom.length, `${tag}: khối vượt đáy tờ ${r.bottom.slice(0, 4).join(' | ')}`);
@@ -141,6 +141,14 @@ async function main() {
   await sleep(2200);
   const m3 = await evaluate(`[...document.querySelectorAll('#jd-fit .jd-st,#jd-fit .jd-per li,#jd-fit .jd-rd,#jd-fit .jd-shape')].filter((e) => +getComputedStyle(e).opacity < 0.99).length`); checks++;
   ok(m3 === 0, `chuyển động: sau khi chạy còn ${m3} phần tử chưa hiện đủ`);
+  // #jd-match: radar chồng mọc ra, 10 dòng bảng + 3 số + 4 lý do (cùng khối .jm-g) nảy lên, rồi hiện đủ
+  await evaluate(`(document.querySelector('#jd-match .jm-g').scrollIntoView({ block: 'center' }), new Promise((r) => setTimeout(r, 450)))`);
+  const m4 = await evaluate(`(() => { const g = document.querySelector('#jd-match .jm-g'); const an = document.getAnimations().filter((a) => g.contains(a.effect && a.effect.target));
+    return { inn: g.classList.contains('sr-in'), grow: an.filter((a) => a.animationName === 'jdGrow').length, rise: an.filter((a) => a.animationName === 'jdRise').length }; })()`); checks++;
+  ok(m4.inn && m4.grow === 1 && m4.rise === 17, `chuyển động #jd-match: radar / bảng chưa chạy (${JSON.stringify(m4)})`);
+  await evaluate(`(document.querySelector('#jd-match .jm-life').scrollIntoView({ block: 'center' }), new Promise((r) => setTimeout(r, 2400)))`);
+  const m5 = await evaluate(`[...document.querySelectorAll('#jd-match .jm-shape,#jd-match .jm-row,#jd-match .jm-nums li,#jd-match .jm-why')].filter((e) => +getComputedStyle(e).opacity < 0.99).length`); checks++;
+  ok(m5 === 0, `chuyển động #jd-match: sau khi chạy còn ${m5} phần tử chưa hiện đủ`);
   ok(errors.length === 0, `lỗi JS/console: ${errors.slice(0, 5).join(' | ')}`);
   ws.close();
 }
@@ -150,7 +158,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-jd-tab (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-jd-tab: ${checks} lượt (3 ngôn ngữ x 3 bề rộng + in A4 + chuyển động): tab JD 2 trang vừa 1 tờ A4 mỗi trang, chữ không tràn, nét đứt không chồng icon, in A4 trọn tờ, radar / thanh / chặng chạy rồi hiện đủ, 0 lỗi JS`);
+    console.log(`PASS browser-jd-tab: ${checks} lượt (3 ngôn ngữ x 3 bề rộng + in A4 + chuyển động): tab JD 3 trang vừa 1 tờ A4 mỗi trang, chữ không tràn, nét đứt không chồng icon, in A4 trọn tờ, radar / thanh / chặng chạy rồi hiện đủ, 0 lỗi JS`);
     process.exit(0);
   }, 300);
 });

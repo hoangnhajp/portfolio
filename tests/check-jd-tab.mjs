@@ -27,15 +27,15 @@ ok(order.indexOf('jd') === order.indexOf('sw') - 1, `tab JD phải đứng ngay 
 const main = (html.match(/<main class="wrap" data-view="jd" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 ok(main, 'thiếu <main class="wrap" data-view="jd" hidden>');
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([\w-]+)"/g)].map((m) => m[1]);
-ok(ids.join(',') === 'jd-top,jd-fit', `section tab JD: ${ids.join(',')}`);
+ok(ids.join(',') === 'jd-top,jd-fit,jd-match', `section tab JD: ${ids.join(',')}`); // task yt50 thêm #jd-match (tests/check-jd-match.mjs)
 const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\\s\\S]*?<\\/section>`)) || [''])[0];
 
 // 2) Sidebar: TOP + 01, đủ 3 ngôn ngữ; nhãn eb khớp số
 const sb = (html.match(/<nav class="sb-nav" data-for="jd" hidden>([\s\S]*?)<\/nav>/) || [])[1] || '';
 ok(sb, 'thiếu <nav class="sb-nav" data-for="jd" hidden>');
 const nums = [...sb.matchAll(/href="#([\w-]+)" data-sec="\1"><em>(\w+)<\/em>/g)].map((m) => `${m[1]}:${m[2]}`).join(' ');
-ok(nums === 'jd-top:TOP jd-fit:01', `sidebar JD: ${nums}`);
-for (const l of ['ja', 'en', 'vi']) ok((sb.match(new RegExp(`data-l="${l}"`, 'g')) || []).length === 2, `sidebar JD thiếu nhãn ${l}`);
+ok(nums === 'jd-top:TOP jd-fit:01 jd-match:02', `sidebar JD: ${nums}`);
+for (const l of ['ja', 'en', 'vi']) ok((sb.match(new RegExp(`data-l="${l}"`, 'g')) || []).length === 3, `sidebar JD thiếu nhãn ${l}`);
 ok(/<span class="eb rv">01　<b>/.test(sec('jd-fit')), '#jd-fit: nhãn eb phải bắt đầu 01');
 
 // 3) Ảnh nền pganh mỗi trang
