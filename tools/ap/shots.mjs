@@ -29,17 +29,19 @@ export const SHOTS = [
 ];
 const url = (k) => (k === 'app_market' ? 'https://appmarket.andpad.jp/' : `https://andpad.jp/products/${k}`);
 
-export function pageShots({ L3, T, head, src }) {
-  const tiles = SHOTS.map(([k, ja, en, vi, w, h], i) => `    <figure class="ap-sh" style="--i:${i}"><img src="assets/ap/${k}.webp" alt="ANDPAD ${ja}（${en}）" width="${w}" height="${h}" loading="lazy" decoding="async"><figcaption><a href="${url(k)}" target="_blank" rel="noopener">ANDPAD ${ja}</a>${L3('span', T(en, en, vi))}</figcaption></figure>`).join('\n');
+// b = bộ trích dẫn của trang (tools/ap/refs.mjs, task 4n9v): mỗi ảnh ghi số nguồn = trang sản phẩm có ảnh đó
+export function pageShots({ L3, T, head, b }) {
+  const subC = b.c('products');
+  const tiles = SHOTS.map(([k, ja, en, vi, w, h], i) => `    <figure class="ap-sh" style="--i:${i}"><img src="assets/ap/${k}.webp" alt="ANDPAD ${ja}（${en}）" width="${w}" height="${h}" loading="lazy" decoding="async"><figcaption><a href="${url(k)}" target="_blank" rel="noopener">ANDPAD ${ja}</a>${L3('span', T(en, en, vi))}${b.c(k === 'app_market' ? 'appmarket' : `p_${k}`)}</figcaption></figure>`).join('\n');
   return `<section class="pg" data-chap="II" id="ap-shots">
 ${head('IMG　<b>PRODUCT VISUALS</b>', T('実際の画面で<br /><i>製品を見る。</i>', 'See each product<br /><i>on its real screens.</i>', 'Xem từng sản phẩm<br /><i>qua màn hình thật.</i>'),
     'Official images ／ andpad.jp ／ Click to zoom',
     T('andpad.jpの製品ページに載っている公式の画像です。画像を押すと拡大し、製品名から公式ページを開けます。',
       'Official images from the product pages on andpad.jp. Click an image to zoom in, or a product name to open its page.',
-      'Ảnh chính thức trên trang sản phẩm của andpad.jp. Bấm vào ảnh để phóng to, bấm tên sản phẩm để mở trang gốc.'))}
+      'Ảnh chính thức trên trang sản phẩm của andpad.jp. Bấm vào ảnh để phóng to, bấm tên sản phẩm để mở trang gốc.'), subC)}
   <div class="ap-shs rv" style="--d:180ms">
 ${tiles}
   </div>
-${src([['https://andpad.jp/products', 'andpad.jp/products'], ['https://appmarket.andpad.jp/', 'appmarket.andpad.jp']])}
+${b.list()}
 </section>`;
 }

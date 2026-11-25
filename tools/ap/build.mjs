@@ -6,34 +6,39 @@
 // Chạy (từ thư mục repo): node tools/ap/build.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { pageShots } from './shots.mjs'; // task ls8q: trang #ap-shots (ảnh sản phẩm chính thức)
+import { pageShots, SHOTS } from './shots.mjs'; // task ls8q: trang #ap-shots (ảnh sản phẩm chính thức)
 import { pageMarket } from './market.mjs'; // task m07v bổ sung: trang #ap-market (ngành, thị trường, case, hỗ trợ)
 import { pageVn } from './vn.mjs'; // task 04fj: trang #ap-vn (sản phẩm và dịch vụ ANDPAD tại Việt Nam, ảnh chính thức)
+import { pageRole } from './role.mjs'; // task 97rs: trang #ap-role (dự báo việc, chỉ sản phẩm và dịch vụ tại Việt Nam)
+import { book } from './refs.mjs'; // task 4n9v: nguồn tham khảo cuối trang + số trích dẫn
 
 const FILE = fileURLToPath(new URL('../../index.html', import.meta.url));
 const L3 = (tag, o, attrs = '') => ['ja', 'en', 'vi'].map((l) => `<${tag}${attrs} data-l="${l}">${o[l]}</${tag}>`).join('');
 const T = (ja, en, vi) => ({ ja, en, vi });
 const ico = (f, s = 34) => `<img src="assets/gx/${f}.webp" alt="" width="${s}" height="${s}" loading="lazy" decoding="async">`;
-const link = (u, t) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
-const head = (eb, h2, en, sub) => [
+// cite = số trích dẫn (task 4n9v) gắn cuối câu dẫn
+const head = (eb, h2, en, sub, cite = '') => [
   `  <span class="eb rv">${eb}</span>`,
   `  <h2 class="kw ap-kw rv" style="--d:60ms">${L3('span', h2)}</h2>`,
   `  <span class="kw-en rv" style="--d:100ms">${en}</span>`,
   `  <div class="kwbar rv" style="--d:120ms"><span></span></div>`,
-  ...['ja', 'en', 'vi'].map((l) => `  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="${l}">${sub[l]}</p>`),
+  ...['ja', 'en', 'vi'].map((l) => `  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="${l}">${sub[l]}${cite}</p>`),
 ].join('\n');
-const SRC_LBL = T('出典（2026年11月25日に確認）：', 'Sources (checked 25 Nov 2026): ', 'Nguồn (tra cứu 25/11/2026): ');
-const src = (links) => `  <p class="ap-src rv" style="--d:260ms">${L3('span', SRC_LBL)}${links.map(([u, t]) => link(u, t)).join(' ／ ')}</p>`;
+// Task 4n9v: mỗi trang có bộ trích dẫn riêng (số [n] sau mỗi thông tin) và mục "Nguồn tham khảo" cuối trang (tools/ap/refs.mjs)
+const bk = (page) => book(page, L3);
 
 // ---------- Trang TOP: tổng quan công ty ----------
+// [icon, nhãn, giá trị, nguồn (khoá trong tools/ap/refs.mjs)]
 const FACTS = [
-  ['office-building', T('設立', 'Founded', 'Thành lập'), T('2012年9月', 'September 2012', 'Tháng 9/2012')],
-  ['manager', T('代表取締役CEO', 'CEO', 'CEO'), T('稲田 武夫（Takeo Inada）', 'Takeo Inada', 'Takeo Inada (稲田 武夫)')],
-  ['key', T('本社', 'Head office', 'Trụ sở'), T('東京都港区三田', 'Mita, Minato-ku, Tokyo', 'Mita, Minato-ku, Tokyo')],
-  ['team-group', T('社員数', 'Employees', 'Nhân viên'), T('1,072名（2026年11月1日）', '1,072 (1 Nov 2026)', '1.072 người (1/11/2026)')],
-  ['building-blocks', T('利用', 'In use at', 'Đang dùng'), T('27.9万社、81.8万ユーザー', '279,000 companies, 818,000 users', '279.000 công ty, 818.000 người dùng')],
-  ['report-chart', T('ARR', 'ARR', 'ARR'), T('100億円を突破（2026年）', 'Passed ¥10 billion (2026)', 'Vượt 10 tỷ yên (2026)')],
+  ['office-building', T('設立', 'Founded', 'Thành lập'), T('2012年9月', 'September 2012', 'Tháng 9/2012'), ['profile']],
+  ['manager', T('代表取締役CEO', 'CEO', 'CEO'), T('稲田 武夫（Takeo Inada）', 'Takeo Inada', 'Takeo Inada (稲田 武夫)'), ['company']],
+  ['key', T('本社', 'Head office', 'Trụ sở'), T('東京都港区三田', 'Mita, Minato-ku, Tokyo', 'Mita, Minato-ku, Tokyo'), ['company']],
+  ['team-group', T('社員数', 'Employees', 'Nhân viên'), T('1,072名（2026年11月1日）', '1,072 (1 Nov 2026)', '1.072 người (1/11/2026)'), ['company']],
+  ['building-blocks', T('利用', 'In use at', 'Đang dùng'), T('27.9万社、81.8万人', '279,000 companies, 818,000 users', '279.000 công ty, 818.000 người dùng'), ['top']],
+  // task 4n9v: đối chiếu nguồn, ARR vượt 100 億円 là năm 2025 (trước ghi nhầm 2026)
+  ['report-chart', T('ARR', 'ARR', 'ARR'), T('100億円を突破（2025年）', 'Passed ¥10 billion (2025)', 'Vượt 10 tỷ yên (2025)'), ['arr', 'hot100']],
 ];
+const VN_REF = [['vnHanoiPr', 'newsHanoi'], ['vnCareers'], ['vnCareers', 'jdVn'], ['newsEn', 'newsVi']]; // nguồn từng dòng của VN (cùng thứ tự)
 const VN = [
   ['office-building', T('本社はホーチミン市（90 Nguyen Dinh Chieu）。ハノイ事務所は2025年5月に開設し、2026年4月にTaisei Square Hanoiへ移転。',
     'Head office in Ho Chi Minh City (90 Nguyen Dinh Chieu). The Hanoi office opened in May 2025 and moved to Taisei Square Hanoi in April 2026.',
@@ -49,18 +54,19 @@ const VN = [
     'Ra bản tiếng Anh tháng 2/2025, bản tiếng Việt tháng 6/2025 (Quản lý thi công, Chat, Bản vẽ).')],
 ];
 function pageTop() {
+  const b = bk('ap-top');
   return `<section class="pg" data-chap="I" id="ap-top">
 ${head('COMPANY　<b>ANDPAD</b>', T('建設業界のための<br /><i>クラウド施工管理。</i>', 'Cloud project management<br /><i>for construction.</i>', 'Quản lý thi công trên đám mây<br /><i>cho ngành xây dựng.</i>'),
     'Vertical SaaS ／ Construction DX ／ Japan and Vietnam',
     T('株式会社アンドパッドは建設業界向けのVertical SaaS企業です。現場の写真、図面、工程、受発注までを一つのクラウドで管理できます。',
       'ANDPAD Inc. is a vertical SaaS company for construction. Its cloud keeps site photos, drawings, schedules and orders in one place.',
-      'ANDPAD Inc. là công ty Vertical SaaS cho ngành xây dựng Nhật Bản. Nền tảng gom ảnh hiện trường, bản vẽ, tiến độ và đơn đặt hàng vào một chỗ trên đám mây.'))}
+      'ANDPAD Inc. là công ty Vertical SaaS cho ngành xây dựng Nhật Bản. Nền tảng gom ảnh hiện trường, bản vẽ, tiến độ và đơn đặt hàng vào một chỗ trên đám mây.'), b.c('top'))}
   <ul class="ap-kv rv" style="--d:180ms">
-${FACTS.map(([ic, k, v], i) => `    <li style="--i:${i}">${ico(ic, 36)}<div>${L3('span', k, ' class="ap-k"')}${L3('b', v)}</div></li>`).join('\n')}
+${FACTS.map(([ic, k, v, r], i) => `    <li style="--i:${i}">${ico(ic, 36)}<div>${L3('span', k, ' class="ap-k"')}${L3('b', b.t(v, ...r))}</div></li>`).join('\n')}
   </ul>
   <div class="card ap-ms rv" style="--d:200ms">
     <span class="lbl">MISSION ／ VALUES</span>
-    <h3>「幸せを築く人を、幸せに。」</h3>
+    <h3>「幸せを築く人を、幸せに。」${b.c('mission')}</h3>
     ${L3('p', T('家を建てる人、街をつくる人の働き方を、テクノロジーで良くすることを目指しています。',
       'Make the people who build happiness, happy: better working lives for everyone who builds homes and towns.',
       'Mang hạnh phúc đến những người kiến tạo hạnh phúc: cải thiện cách làm việc của người xây nhà, xây phố bằng công nghệ.'))}
@@ -70,12 +76,10 @@ ${FACTS.map(([ic, k, v], i) => `    <li style="--i:${i}">${ico(ic, 36)}<div>${L3
     <span class="lbl">ANDPAD VIETNAM</span>
     ${L3('h3', T('ANDPAD Vietnam（ホーチミン、ハノイ）', 'ANDPAD Vietnam (Ho Chi Minh City and Hanoi)', 'ANDPAD Vietnam (TP.HCM và Hà Nội)'))}
     <ul>
-${VN.map(([ic, t]) => `      <li>${ico(ic, 30)}${L3('span', t)}</li>`).join('\n')}
+${VN.map(([ic, t], i) => `      <li>${ico(ic, 30)}${L3('span', b.t(t, ...VN_REF[i]))}</li>`).join('\n')}
     </ul>
   </div>
-${src([['https://andpad.co.jp/company', 'andpad.co.jp/company'], ['https://andpad.co.jp/mission/', 'andpad.co.jp/mission'], ['https://andpad.jp/', 'andpad.jp'],
-    ['https://careers.andpad.vn/jobs', 'careers.andpad.vn'], ['https://vietnamnews.vn/media-outreach/1778975/hanoi-office-at-andpad-vietnam-relocated.html', 'Vietnam News 2026'],
-    ['https://thebridge.jp/2026/04/andpad-stellarc-ai-agent-construction-hot100', 'THE BRIDGE 2026']])}
+${b.list()}
 </section>`;
 }
 
@@ -96,7 +100,7 @@ const GROUPS = [
     ['ボード', 'Board', T('工程表を関係者で共有', 'Shared site schedule', 'Bảng tiến độ dùng chung')],
     ['レポート', 'Report', T('今の帳票をそのまま電子化', 'Existing forms, digitised as they are', 'Số hoá biểu mẫu, giữ nguyên bố cục')],
     ['資料承認', 'Document Approval', T('書類の提出と承認', 'Submit and approve documents', 'Nộp và duyệt hồ sơ')],
-    ['電子納品', 'e-Delivery', T('公共工事の電子納品', 'Electronic delivery for public works', 'Nộp hồ sơ điện tử công trình công')],
+    ['電子納品', 'e-Delivery', T('写真を整理して電子納品データを作成', 'Sort photos into e-delivery data', 'Sắp xếp ảnh thành dữ liệu nộp hồ sơ điện tử')], // task 4n9v: trang sản phẩm không ghi 'công trình công'
     ['BIM', 'BIM', T('BIMモデルをクラウドで閲覧', 'Cloud BIM viewer', 'Xem mô hình BIM trên đám mây')],
   ]],
   ['funnel', 'MONEY', T('営業とお金', 'Sales and back office', 'Kinh doanh và kế toán'), [
@@ -118,13 +122,18 @@ const GROUPS = [
     ['AI-BPO', 'AI-BPO', T('AIと専門スタッフが積算などを代行', 'AI plus experts handle work like estimating', 'AI cùng chuyên viên làm thay việc như dự toán')],
   ]],
 ];
-const LEG = `<span class="ap-leg"><em class="ap-vi">VI</em>${L3('span', T('ベトナム語に対応（2025年6月）', 'Available in Vietnamese (June 2025)', 'Đã có bản tiếng Việt (6/2025)'))}</span>`;
+const LEG = (t) => `<span class="ap-leg"><em class="ap-vi">VI</em>${L3('span', t(T('ベトナム語に対応（2025年6月）', 'Available in Vietnamese (June 2025)', 'Đã có bản tiếng Việt (6/2025)')))}</span>`;
+// task 4n9v: nguồn của từng sản phẩm = trang sản phẩm chính thức (khoá p_<key> trong refs.mjs); không có trang sản phẩm thì dùng thông cáo
+const PREF = Object.fromEntries(SHOTS.map(([k, ja]) => [ja, k === 'app_market' ? 'appmarket' : `p_${k}`]));
+Object.assign(PREF, { '早受取': 'earlypay', 'ナレッジAI': 'knowledgeAi', 'AI-BPO': 'aiBpo' });
 function pageProducts() {
+  const b = bk('ap-products');
+  const subC = b.c('top'); // đánh số theo thứ tự hiện trên trang: câu dẫn trước
   let n = 0;
   const groups = GROUPS.map(([ic, en, name, items]) => `    <div class="ap-grp">
-      <div class="ap-gh">${ico(ic, 22)}<span class="lbl">${en}</span>${L3('h3', name)}${en === 'SITE' ? LEG : ''}</div>
+      <div class="ap-gh">${ico(ic, 22)}<span class="lbl">${en}</span>${L3('h3', name)}${en === 'SITE' ? LEG((o) => b.t(o, 'newsVi')) : ''}</div>
       <ul class="ap-pds">
-${items.map(([nm, enm, d, vi]) => `        <li class="ap-pd" style="--i:${n++}"><b>ANDPAD ${nm}</b><i>${enm}</i>${L3('span', d)}${vi ? '<em class="ap-vi">VI</em>' : ''}</li>`).join('\n')}
+${items.map(([nm, enm, d, vi]) => `        <li class="ap-pd" style="--i:${n++}"><b>ANDPAD ${nm}</b><i>${enm}</i>${L3('span', b.t(d, PREF[nm]))}${vi ? '<em class="ap-vi">VI</em>' : ''}</li>`).join('\n')}
       </ul>
     </div>`).join('\n');
   return `<section class="pg" data-chap="II" id="ap-products">
@@ -132,125 +141,67 @@ ${head('01　<b>PRODUCTS</b>', T('現場から経営までを<br /><i>一つの�
     'Site ／ Documents ／ Money ／ Owners ／ AI',
     T('製品は20を超え、現場、書類、お金、施主、連携とAIの5つの分野に分かれます。',
       'More than 20 products in five areas: site work, documents, money, homeowners, and integrations with AI.',
-      'Hơn 20 sản phẩm, chia thành 5 nhóm: hiện trường, hồ sơ, tài chính, chủ nhà, kết nối và AI.'))}
+      'Hơn 20 sản phẩm, chia thành 5 nhóm: hiện trường, hồ sơ, tài chính, chủ nhà, kết nối và AI.'), subC)}
   <div class="ap-grps rv" style="--d:180ms">
 ${groups}
   </div>
-${src([['https://andpad.jp/', 'andpad.jp'], ['https://appmarket.andpad.jp/', 'appmarket.andpad.jp'], ['https://andpad.co.jp/', 'andpad.co.jp'],
-    ['https://vietnamnews.vn/media-outreach/1720265/andpad-launches-vietnamese-language-support-for-its-cloud-based-construction-project-management-service.html', 'Vietnam News 2025']])}
+${b.list()}
 </section>`;
 }
 
 // ---------- Trang 02: hoạt động, event ----------
 const TAGS = { co: T('会社', 'Company', 'Công ty'), ev: T('イベント', 'Event', 'Sự kiện'), ai: T('AI', 'AI', 'AI'), vn: T('ベトナム', 'Vietnam', 'Việt Nam') };
+// [mốc, loại, nội dung, nguồn (khoá refs.mjs)]. Task 4n9v: đối chiếu từng mốc với nguồn 25/11/2026 và sửa mốc lệch
+// (bỏ tên "Oct" lúc thành lập vì chưa có nguồn; ARR là 2025; AWARD 2025 là công bố 3/2025; NextGen Tech 30 công bố 9/2026;
+// dự án MLIT là AI số hoá 建築計画概要書, không phải ANDPAD BM).
 const EVENTS = [
-  ['2012.09', 'co', T('株式会社オクトとして設立', 'Founded as Oct Inc.', 'Thành lập với tên Oct Inc.')],
-  ['2016', 'co', T('施工管理サービスANDPADを開始', 'ANDPAD service launched', 'Ra mắt dịch vụ ANDPAD')],
-  ['2019.12', 'ev', T('第1回 工務店支援EXPO（東京ビッグサイト）に出展', 'Booth at the 1st Builder Support EXPO, Tokyo Big Sight', 'Tham gia triển lãm Builder Support EXPO lần 1 (Tokyo Big Sight)')],
-  ['2020.05', 'co', T('社名を株式会社アンドパッドに変更', 'Renamed ANDPAD Inc.', 'Đổi tên thành ANDPAD Inc.')],
-  ['2024.02', 'co', T('Comvex社（Digima）を完全子会社化', 'Acquired Comvex (Digima)', 'Mua lại toàn bộ Comvex (Digima)')],
-  ['2022.09', 'co', T('Series Dで約122億円を調達（借入を含む）', 'Series D: about ¥12.2 billion, loans included', 'Gọi vốn Series D khoảng 12,2 tỷ yên (gồm vốn vay)')],
-  ['2024.02', 'vn', T('JETROの事業として、ベトナムの建設現場で実証を開始', 'JETRO-backed pilot starts on Vietnamese construction sites', 'Bắt đầu thí điểm tại công trường Việt Nam trong chương trình của JETRO')],
-  ['2025.06', 'vn', T('ベトナム語版を公開', 'Vietnamese version released', 'Ra mắt bản tiếng Việt')],
-  ['2025.06', 'ev', T('ANDPAD AWARD 2025 授賞式', 'ANDPAD AWARD 2025 ceremony', 'Lễ trao giải ANDPAD AWARD 2025')],
-  ['2025.10', 'vn', T('ベトナム実証の完了を発表。現場の作業時間は30〜50％減り、紙の記録が不要に', 'Pilot results: on-site work time down 30 to 50%, no more paper records', 'Công bố kết quả thí điểm: giờ làm tại hiện trường giảm 30 đến 50%, bỏ hồ sơ giấy')],
-  ['2025.12', 'ai', T('建設に特化したAIプロジェクト「ANDPAD Stellarc」を開始', 'ANDPAD Stellarc, an AI project for construction, begins', 'Khởi động dự án AI chuyên ngành xây dựng ANDPAD Stellarc')],
-  ['2026.04', 'vn', T('ハノイ事務所をTaisei Square Hanoiへ移転', 'Hanoi office moves to Taisei Square Hanoi', 'Dời văn phòng Hà Nội về Taisei Square Hanoi')],
-  ['2025.12', 'co', T('インドネシア語、タイ語、繁体字中国語、スペイン語に対応', 'Adds Indonesian, Thai, Traditional Chinese and Spanish', 'Thêm tiếng Indonesia, Thái, Hoa phồn thể, Tây Ban Nha')],
-  ['2026.04', 'co', T('ARRが100億円を突破', 'ARR passes ¥10 billion', 'ARR vượt 10 tỷ yên')],
-  ['2026.05', 'ai', T('ANDPAD ナレッジAIと、図面の測定箇所を自動で拾うAIを公開', 'ANDPAD Knowledge AI, plus AI that finds measuring points on drawings', 'Ra mắt ANDPAD Knowledge AI và AI tự tìm điểm đo trên bản vẽ')],
-  ['2026.06', 'ev', T('ANDPAD AWARD 2026。新部門「DX Project」を設置', 'ANDPAD AWARD 2026 adds a DX Project category', 'ANDPAD AWARD 2026 thêm hạng mục DX Project')],
-  ['2026.08', 'co', T('東京ガス、ダイキン、カインズと資本業務提携', 'Capital and business tie-ups with Tokyo Gas, Daikin and Cainz', 'Hợp tác vốn và kinh doanh với Tokyo Gas, Daikin, Cainz')],
-  ['2026.05', 'co', T('設備と建物の維持管理「ANDPAD BM」を公開、国交省の建築行政DX事業に採択', 'Launched ANDPAD BM; selected for an MLIT building-admin DX project', 'Ra mắt ANDPAD BM; được Bộ MLIT chọn vào dự án DX hành chính xây dựng')],
-  ['2026.09', 'co', T('ANDPAD レポートを公開、AWARD 2027の募集を開始', 'ANDPAD Report launched; AWARD 2027 entries open', 'Ra mắt ANDPAD Report; mở nhận hồ sơ AWARD 2027')],
-  ['2026.10', 'ai', T('ANDPAD AI-BPOを開始（電気工事の積算から）', 'ANDPAD AI-BPO starts, first with estimating for electrical work', 'Ra mắt ANDPAD AI-BPO, bắt đầu với dự toán cho thầu điện')],
-  ['2026.10', 'ev', T('「NextGen Tech 30 2026」に選出', 'Named to NextGen Tech 30 2026', 'Lọt danh sách NextGen Tech 30 2026')],
+  ['2012.09', 'co', T('会社を設立', 'Company founded', 'Thành lập công ty'), ['prBm']],
+  ['2016', 'co', T('施工管理サービスANDPADを開始', 'ANDPAD service launched', 'Ra mắt dịch vụ ANDPAD'), ['prBm']],
+  ['2019.12', 'ev', T('第1回 工務店支援EXPO（東京ビッグサイト）に出展', 'Booth at the 1st Builder Support EXPO, Tokyo Big Sight', 'Tham gia triển lãm Builder Support EXPO lần 1 (Tokyo Big Sight)'), ['mynavi']],
+  ['2020.05', 'co', T('社名を株式会社アンドパッドに変更', 'Renamed ANDPAD Inc.', 'Đổi tên thành ANDPAD Inc.'), ['registry']],
+  ['2024.02', 'co', T('Comvex社（Digima）を完全子会社化', 'Acquired Comvex (Digima)', 'Mua lại toàn bộ Comvex (Digima)'), ['comvex']],
+  ['2022.09', 'co', T('Series Dで約122億円を調達（借入を含む）', 'Series D: about ¥12.2 billion, loans included', 'Gọi vốn Series D khoảng 12,2 tỷ yên (gồm vốn vay)'), ['seriesD']],
+  ['2024.02', 'vn', T('JETROの事業として、ベトナムの建設現場で実証を開始', 'JETRO-backed pilot starts on Vietnamese construction sites', 'Bắt đầu thí điểm tại công trường Việt Nam trong chương trình của JETRO'), ['vnPilotPr']],
+  ['2025.06', 'vn', T('ベトナム語版を公開', 'Vietnamese version released', 'Ra mắt bản tiếng Việt'), ['newsVi']],
+  ['2025.03', 'ev', T('ANDPAD AWARD 2025 DXカンパニー部門を発表（授賞式は6月13日予定）', 'ANDPAD AWARD 2025 DX Company honourees announced (ceremony set for 13 June)', 'Công bố hạng mục DX Company của ANDPAD AWARD 2025 (lễ trao giải dự kiến 13/6)'), ['award25']],
+  ['2025.10', 'vn', T('ベトナム実証の完了を発表。現場の作業時間は30〜50％減り、紙の記録が不要に', 'Pilot results: on-site work time down 30 to 50%, no more paper records', 'Công bố kết quả thí điểm: giờ làm tại hiện trường giảm 30 đến 50%, bỏ hồ sơ giấy'), ['vnPilotPr']],
+  ['2025.12', 'ai', T('建設に特化したAIプロジェクト「ANDPAD Stellarc」を開始', 'ANDPAD Stellarc, an AI project for construction, begins', 'Khởi động dự án AI chuyên ngành xây dựng ANDPAD Stellarc'), ['hot100']],
+  ['2026.04', 'vn', T('ハノイ事務所をTaisei Square Hanoiへ移転', 'Hanoi office moves to Taisei Square Hanoi', 'Dời văn phòng Hà Nội về Taisei Square Hanoi'), ['newsHanoi']],
+  ['2025.12', 'co', T('インドネシア語、タイ語、繁体字中国語、スペイン語に対応', 'Adds Indonesian, Thai, Traditional Chinese and Spanish', 'Thêm tiếng Indonesia, Thái, Hoa phồn thể, Tây Ban Nha'), ['newsLang6']],
+  ['2025', 'co', T('ARRが100億円を突破', 'ARR passes ¥10 billion', 'ARR vượt 10 tỷ yên'), ['arr']],
+  ['2026.05', 'ai', T('ANDPAD ナレッジAIと、図面の測定箇所を自動で拾うAIを公開', 'ANDPAD Knowledge AI, plus AI that finds measuring points on drawings', 'Ra mắt ANDPAD Knowledge AI và AI tự tìm điểm đo trên bản vẽ'), ['profile', 'drawAi']],
+  ['2026.06', 'ev', T('ANDPAD AWARD 2026。新部門「DX Project」を設置', 'ANDPAD AWARD 2026 adds a DX Project category', 'ANDPAD AWARD 2026 thêm hạng mục DX Project'), ['award26']],
+  ['2026.08', 'co', T('東京ガス、ダイキン、カインズと資本業務提携', 'Capital and business tie-ups with Tokyo Gas, Daikin and Cainz', 'Hợp tác vốn và kinh doanh với Tokyo Gas, Daikin, Cainz'), ['tieups']],
+  ['2026.05', 'co', T('設備と建物の維持管理「ANDPAD BM」を公開。国交省の建築行政DX事業に採択', 'Launched ANDPAD BM; selected for an MLIT building-admin DX project', 'Ra mắt ANDPAD BM; được Bộ MLIT chọn vào dự án DX hành chính xây dựng'), ['prBm', 'mlit']],
+  ['2026.09', 'co', T('ANDPAD レポートを公開、AWARD 2027の募集を開始', 'ANDPAD Report launched; AWARD 2027 entries open', 'Ra mắt ANDPAD Report; mở nhận hồ sơ AWARD 2027'), ['prReport', 'award27']],
+  ['2026.10', 'ai', T('ANDPAD AI-BPOを開始（電気工事の積算から）', 'ANDPAD AI-BPO starts, first with estimating for electrical work', 'Ra mắt ANDPAD AI-BPO, bắt đầu với dự toán cho thầu điện'), ['prAiBpo']],
+  ['2026.09', 'ev', T('「NextGen Tech 30 2026」に選出', 'Named to NextGen Tech 30 2026', 'Lọt danh sách NextGen Tech 30 2026'), ['nextgen']],
 ];
 EVENTS.sort((a, b) => a[0].localeCompare(b[0])); // task m07v bổ sung: mốc mới chen giữa, luôn hiện theo thời gian
 const ACTS = [
-  ['milestone-report', 'ANDPAD AWARD', T('ANDPADでDXの成果を出した会社を毎年表彰しています。', 'Yearly awards for customers who got results with ANDPAD.', 'Giải thưởng hằng năm cho doanh nghiệp chuyển đổi số thành công với ANDPAD.')],
-  ['team-group', 'ANDPAD ONE', T('建設業界の人と情報が集まるコミュニティとメディアです。', 'A community and media site for people in construction.', 'Cộng đồng và kênh tin tức cho người trong ngành xây dựng.')],
-  ['interview', 'EXPO ／ SEMINAR', T('住宅と建設の展示会に出展し、利用者向けの説明会も開いています。', 'Booths at housing and construction shows, plus briefings for users.', 'Tham gia triển lãm nhà ở, xây dựng và mở buổi hướng dẫn cho người dùng.')],
-  ['roadmap', 'NEXT', T('ベトナムの主要都市、その後は近隣国へ広げる計画です。', 'Plan: major Vietnamese cities first, then neighbouring countries.', 'Kế hoạch: mở rộng ra các thành phố lớn của Việt Nam, sau đó tới nước lân cận.')],
+  ['milestone-report', 'ANDPAD AWARD', T('ANDPADでDXの成果を出した会社を毎年表彰しています。', 'Yearly awards for customers who got results with ANDPAD.', 'Giải thưởng hằng năm cho doanh nghiệp chuyển đổi số thành công với ANDPAD.'), ['award25', 'awardSite']],
+  ['team-group', 'ANDPAD ONE', T('ユーザーの活用事例とノウハウが集まるコミュニティサイトです。', 'A community site of user cases and know-how.', 'Trang cộng đồng chia sẻ case và kinh nghiệm dùng ANDPAD.'), ['one']],
+  ['interview', 'EXPO ／ SEMINAR', T('住宅と建設の展示会に出展し、利用者向けのセミナーも配信しています。', 'Booths at housing and construction shows, plus webinars for users.', 'Tham gia triển lãm nhà ở, xây dựng và phát hội thảo trực tuyến cho người dùng.'), ['mynavi', 'asb']],
+  ['roadmap', 'NEXT', T('ベトナムの主要都市、その後は近隣国へ広げる計画です。', 'Plan: major Vietnamese cities first, then neighbouring countries.', 'Kế hoạch: mở rộng ra các thành phố lớn của Việt Nam, sau đó tới nước lân cận.'), ['vnPilotPr']],
 ];
 function pageNews() {
+  const b = bk('ap-news');
+  const subC = b.c('newsLang6', 'hot100'); // câu dẫn: tin AI và Việt Nam tăng từ 2025
+  const tl = EVENTS.map(([d, t, x, r], i) => `    <li class="ap-ev" data-t="${t}" style="--i:${i}"><time>${d}</time><i aria-hidden="true"></i>${L3('em', TAGS[t])}${L3('span', b.t(x, ...r))}</li>`).join('\n');
+  const acts = ACTS.map(([ic, t, x, r]) => `    <div class="card ap-act">${ico(ic, 34)}<div><span class="lbl">${t}</span>${L3('p', b.t(x, ...r))}</div></div>`).join('\n');
   return `<section class="pg" data-chap="III" id="ap-news">
 ${head('02　<b>ACTIVITIES ／ EVENTS</b>', T('資金調達、AI、<br /><i>そしてベトナムへ。</i>', 'Funding, AI,<br /><i>and Vietnam.</i>', 'Gọi vốn, AI<br /><i>và Việt Nam.</i>'),
     'Timeline ／ Award ／ AI ／ Vietnam',
     T('主な出来事を年ごとに並べました。2025年からはAIとベトナムの動きが増えています。',
       'Key moves by year. Since 2025 most news is about AI and Vietnam.',
-      'Các mốc chính theo năm. Từ 2025, tin về AI và Việt Nam tăng rõ.'))}
+      'Các mốc chính theo năm. Từ 2025, tin về AI và Việt Nam tăng rõ.'), subC)}
   <ol class="ap-tl rv" style="--d:180ms">
-${EVENTS.map(([d, t, x], i) => `    <li class="ap-ev" data-t="${t}" style="--i:${i}"><time>${d}</time><i aria-hidden="true"></i>${L3('em', TAGS[t])}${L3('span', x)}</li>`).join('\n')}
+${tl}
   </ol>
   <div class="ap-acts rv" style="--d:220ms">
-${ACTS.map(([ic, t, x]) => `    <div class="card ap-act">${ico(ic, 34)}<div><span class="lbl">${t}</span>${L3('p', x)}</div></div>`).join('\n')}
+${acts}
   </div>
-${src([['https://prtimes.jp/main/html/rd/p/000000198.000018154.html', 'PR TIMES（AWARD 2026）'], ['https://thebridge.jp/2022/09/andpad-series-d-round-funding/', 'THE BRIDGE 2022'],
-    ['https://vietnamnews.vn/media-outreach/1726656/andpad-completes-the-vietnam-demonstration-project-under-jetro-s-japan-asean-asia-digital-transformation-promotion-program.html', 'JETRO pilot'],
-    ['https://thebridge.jp/2026/05/andpad-launches-knowledge-ai-powered-by-stellarc', 'Knowledge AI'], ['https://sogyotecho.jp/news/20260820andpad/', 'Tie-ups 2026'],
-    ['https://kyodonewsprwire.jp/release/202610238598', 'NextGen Tech 30'], ['https://thebridge.jp/2024/02/andpad-acquires-comvex', 'Comvex'],
-    ['https://prtimes.jp/main/html/rd/p/000000194.000018154.html', 'ANDPAD BM'], ['https://prtimes.jp/main/html/rd/p/000000196.000018154.html', 'MLIT DX'],
-    ['https://prtimes.jp/main/html/rd/p/000000203.000018154.html', 'ANDPAD Report'], ['https://prtimes.jp/main/html/rd/p/000000205.000018154.html', 'AI-BPO'],
-    ['https://www.malaymail.com/news/money/mediaoutreach/2025/12/16/the-andpad-cloud-based-construction-project-management-service-adds-supporting-indonesian-thai-traditional-chinese-taiwan-and-spanish-languages/436179', '4 languages'], ['https://andpad.co.jp/', 'andpad.co.jp']])}
-</section>`;
-}
-
-// ---------- Trang 04: dự báo công việc của vị trí ----------
-const STEPS = [
-  ['interview', T('Salesとデモ', 'Demo with Sales', 'Demo cùng Sales'),
-    T('顧客の現場に合わせてANDPADをデモし、導入の効果を説明します。', 'I demo ANDPAD on the client\'s own site cases and explain the benefits for their sites.', 'Tôi demo ANDPAD theo đúng tình huống công trình của khách và nói rõ hiệu quả.')],
-  ['checklist', T('導入と研修', 'Onboarding and training', 'Triển khai và đào tạo'),
-    T('案件、権限、黒板、検査表を設定し、現場監督と協力会社に研修をします。', 'I set up projects, permissions, photo boards and checklists, then train supervisors and subcontractors.', 'Tôi thiết lập dự án, phân quyền, bảng đen, checklist rồi đào tạo giám sát và thầu phụ.')],
-  ['report-chart', T('定着の確認', 'Adoption check', 'Theo dõi mức dùng'),
-    T('利用状況を数字で確認し、フォローアップ会議で課題を聞いて解決策を出します。', 'I track usage in numbers, hear problems in follow-up meetings and propose fixes.', 'Tôi theo dõi mức sử dụng bằng số liệu, họp follow-up để nghe khó khăn và đề xuất giải pháp.')],
-  ['roadmap', T('活用の拡大', 'Expansion', 'Mở rộng'),
-    T('成果を共有し、他の現場や受発注、Analyticsなどの製品へ広げます。', 'I share results and extend use to more sites and products such as Ordering or Analytics.', 'Tôi chia sẻ kết quả, mở rộng sang công trình khác và sản phẩm như Đặt hàng (受発注), Analytics.')],
-];
-const ROWS = [
-  ['building-blocks', T('施工管理 ／ チャット', 'Construction Mgmt ／ Chat', 'Quản lý thi công ／ Chat'), T('案件のひな形と権限を設定し、現場監督と職人に使い方を研修。日本語とベトナム語の操作マニュアルも作ります。',
-    'Set up project templates and permissions, train supervisors and trades, and write user guides in Japanese and Vietnamese.',
-    'Thiết lập mẫu dự án, phân quyền; đào tạo giám sát và thợ; viết tài liệu hướng dẫn bằng tiếng Nhật và tiếng Việt.')],
-  ['checklist', T('図面 ／ 黒板 ／ 検査', 'Drawings ／ Blackboard ／ Inspection', 'Bản vẽ ／ Bảng đen ／ Kiểm tra'), T('顧客の基準に合わせて黒板と検査表のテンプレートを作り、図面への記録を現場で一緒に練習します。',
-    'Build photo-board and inspection templates to the client\'s standards, and practise recording on drawings together on site.',
-    'Tạo mẫu bảng đen và checklist kiểm tra theo tiêu chuẩn của khách; cùng tập ghi nhận trên bản vẽ tại công trình.')],
-  ['funnel', T('受発注 ／ 請求管理 ／ 引合粗利管理', 'Ordering ／ Billing ／ Leads and Profit', 'Đặt hàng ／ Hoá đơn ／ Cơ hội và lãi gộp'), T('今の業務（AsIs）を聞き取り、あるべき流れ（ToBe）を設計して、マスタデータの移行を管理します。',
-    'Map the current flow (AsIs), design the target flow (ToBe) and manage the master-data migration.',
-    'Khảo sát quy trình hiện tại (AsIs), thiết kế quy trình mới (ToBe), quản lý việc chuyển dữ liệu master.')],
-  ['report-chart', T('Analytics ／ レポート', 'Analytics ／ Report', 'Analytics ／ Báo cáo'), T('利用状況と現場の数字を定例レポートにまとめ、改善を提案します。',
-    'Turn usage and site numbers into a regular report and suggest improvements.',
-    'Tổng hợp mức sử dụng và số liệu công trình thành báo cáo định kỳ, đề xuất cải tiến.')],
-  ['workflow-gears', T('API連携 ／ アプリマーケット', 'API ／ App Market', 'API ／ Chợ ứng dụng'), T('基幹システムとの連携の要望を整理し、ソリューションエンジニアやベトナムの開発チームにつなぎます。',
-    'Collect integration needs with core systems and pass them to solution engineers and the Vietnam dev team.',
-    'Tổng hợp nhu cầu kết nối với hệ thống lõi, chuyển cho Solution Engineer và đội phát triển tại Việt Nam.')],
-  ['lightbulb', T('ナレッジAI ／ AI-BPO', 'Knowledge AI ／ AI-BPO', 'Knowledge AI ／ AI-BPO'), T('新しいAI機能をデモし、顧客の声を製品チームに届けます。',
-    'Demo new AI features and bring client feedback to the product team.',
-    'Demo tính năng AI mới, gom phản hồi của khách gửi đội sản phẩm.')],
-  ['briefcase', T('説明会 ／ 出張', 'Briefings ／ Site visits', 'Hướng dẫn ／ Công tác'), T('顧客の現場や事務所に出向き、利用説明会やセミナーを開きます。',
-    'Visit client sites and offices to run user briefings and seminars.',
-    'Đi công tác tới công trình, văn phòng khách để tổ chức buổi hướng dẫn và hội thảo.')],
-];
-function pageRole() {
-  const nm = (x) => (typeof x === 'string' ? `<b>${x}</b>` : L3('b', x));
-  return `<section class="pg" data-chap="V" id="ap-role">
-${head('04　<b>FORECAST</b>', T('このポジションで<br /><i>担うと予想する仕事。</i>', 'What I expect<br /><i>this role to do.</i>', 'Dự báo công việc<br /><i>của vị trí này.</i>'),
-    'Customer Success ／ Onboarding ／ Product by product',
-    T('求人票（Customer Success Staff、IT）と公開情報をもとにした予想です。顧客はANDPADを使う日系の建設会社と、そのベトナム法人が中心になると考えます。',
-      'This is my forecast from the job description (Customer Success Staff, IT) and public information. I expect most clients to be Japanese construction companies using ANDPAD and their Vietnamese subsidiaries.',
-      'Đây là dự báo của tôi dựa trên JD (Customer Success Staff, IT) và thông tin công khai. Tôi cho rằng khách hàng chính là các công ty xây dựng Nhật dùng ANDPAD và công ty con của họ tại Việt Nam.'))}
-  <ol class="ap-jr rv" style="--d:180ms">
-${STEPS.map(([ic, h, p], i) => `    <li class="ap-js" style="--i:${i}">${ico(ic, 34)}<span class="ap-n" aria-hidden="true">0${i + 1}</span>${L3('h3', h)}${L3('p', p)}</li>`).join('\n')}
-  </ol>
-  <div class="card ap-rws rv" style="--d:200ms">
-    <span class="lbl">PRODUCT × TASK</span>
-    ${L3('h3', T('製品ごとに予想する仕事', 'Expected tasks, product by product', 'Dự báo việc cần làm theo từng sản phẩm'))}
-    <ul>
-${ROWS.map(([ic, p, t], i) => `      <li class="ap-rw" style="--i:${i}">${ico(ic, 28)}<div class="ap-rp">${nm(p)}</div>${L3('span', t)}</li>`).join('\n')}
-    </ul>
-  </div>
-  <p class="ap-go rv" style="--d:240ms"><a href="#jd-match">${L3('span', T('私のスキルとの照合は「スキルの照合」ページへ →', 'How my skills match: see the Skill match page →', 'Kỹ năng của tôi khớp thế nào: xem trang Đối chiếu kỹ năng →'))}</a></p>
-${src([['https://careers.andpad.vn/jobs/8693932-customer-success-staff-hcm-it-n2-eng-leader-candidate', 'careers.andpad.vn（Customer Success Staff）'],
-    ['https://hrmos.co/pages/andpad/jobs/biz0000411', 'ANDPAD Customer Success（Japan）'], ['https://andpad.jp/', 'andpad.jp']])}
+${b.list()}
 </section>`;
 }
 
@@ -259,11 +210,11 @@ const main = `<!-- ap:start -->
 <main class="wrap" data-view="ap" hidden>
 ${pageTop()}
 ${pageProducts()}
-${pageShots({ L3, T, head, src })}
-${pageVn({ L3, T, head, src })}
+${pageShots({ L3, T, head, b: bk('ap-shots') })}
+${pageVn({ L3, T, head, b: bk('ap-vn') })}
 ${pageNews()}
-${pageMarket({ L3, T, head, src })}
-${pageRole()}
+${pageMarket({ L3, T, head, b: bk('ap-market') })}
+${pageRole({ L3, head, b: bk('ap-role') })}
 </main>
 <!-- ap:end -->`;
 

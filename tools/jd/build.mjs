@@ -298,7 +298,7 @@ ${matchHtml()}
 
 const css = `<!-- jd-css:start -->
 <style id="jd-css">
-/* Tab JD ANDPAD (task wp5x): #jd-top nguyên văn JD (2 cột chữ nhỏ cho vừa 1 trang A4), #jd-fit biểu đồ chân dung ứng viên:
+/* Tab JD ANDPAD: #jd-top nguyên văn JD (2 cột chữ nhỏ cho vừa 1 trang A4), #jd-fit biểu đồ chân dung ứng viên:
    radar 9 năng lực (SVG), thanh cơ cấu yêu cầu, thanh tần suất từ khoá, 4 chặng đồng hành (nối nét đứt từng cặp icon, luật 3b),
    chân dung + 3 vòng phỏng vấn. Số liệu đếm từ JD (tests/fixtures/jd-andpad.txt, tests/check-jd-tab.mjs).
    Màu nhóm yêu cầu đã chạy validate_palette (light): #2a6fc0 / #1FB6A6 / #6d5bd0 / #F68209, kèm số và chú giải.
@@ -367,7 +367,7 @@ const css = `<!-- jd-css:start -->
 .jd-rd{display:grid;grid-template-columns:66px 1fr;align-items:center;gap:8px}
 .jd-rd b{font:800 11px 'Space Grotesk',sans-serif;color:#fff;background:#14396b;border-radius:8px;padding:6px 0;text-align:center}
 .jd-rd span{font:500 10.5px/1.4 'Noto Sans JP',sans-serif;color:#2b2735}
-/* #jd-match (task yt50): radar chồng JD (xanh nét đứt) và tôi (cam), số tóm tắt, bảng 12 yêu cầu + link bằng chứng, câu kết (task 6vya: bỏ câu dẫn + khối WHY ME) */
+/* #jd-match: radar chồng JD (xanh nét đứt) và tôi (cam), số tóm tắt, bảng 12 yêu cầu + link bằng chứng, câu kết */
 .jm-g{display:grid;grid-template-columns:1fr 1.22fr;gap:10px}
 .jm-area--jd{fill:rgba(42,111,192,.07);stroke:#2a6fc0;stroke-width:1.6;stroke-dasharray:5 4;stroke-linejoin:round}
 .jm-area--me{fill:rgba(246,130,9,.2);stroke:#F68209;stroke-width:2.2;stroke-linejoin:round}
