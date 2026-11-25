@@ -32,7 +32,7 @@ const PROBE = `(() => {
   const inside = (e, box) => { const r = e.getBoundingClientRect(), b = box.getBoundingClientRect(); return r.left >= b.left - 1 && r.right <= b.right + 1 && r.top >= b.top - 1 && r.bottom <= b.bottom + 1; };
   const main = document.querySelector('main[data-view="jd"]');
   const over = [], bottom = [];
-  for (const [sel, boxSel] of [['.jd-c h3,.jd-c p,.jd-c .lbl,.jd-kw,.jd-leg li,.jd-per li,.jd-rd,.jd-comp', '.jd-c'], ['.jd-radar text', '.jd-c'], ['.jd-st h3,.jd-st p,.jd-st img', '.jd-st'], ['.jd-go a', '.jd-per li'], ['.jm-row .jd-go a,.jm-req,.jm-ev', '.jm-row'], ['.jm-why h3,.jm-why p,.jm-why img', '.jm-why'], ['.jm-nums b,.jm-nums span', '.jm-nums li'], ['.jd-doc li,.jd-doc p,.jd-doc h4', '.jd-doc']])
+  for (const [sel, boxSel] of [['.jd-c h3,.jd-c p,.jd-c .lbl,.jd-kw,.jd-leg li,.jd-per li,.jd-rd,.jd-comp', '.jd-c'], ['.jd-radar text', '.jd-c'], ['.jd-st h3,.jd-st p,.jd-st img', '.jd-st'], ['.jd-go a', '.jd-per li'], ['.jm-row .jd-go a,.jm-req,.jm-ev', '.jm-row'], ['.jm-nums b,.jm-nums span', '.jm-nums li'], ['.jd-doc li,.jd-doc p,.jd-doc h4', '.jd-doc']])
     for (const e of main.querySelectorAll(sel)) { if (!vis(e)) continue; const box = e.closest(boxSel); if (box && !inside(e, box)) over.push(sel.split(',')[0] + ': ' + e.textContent.trim().slice(0, 30)); }
   const heights = {};
   for (const pg of main.querySelectorAll('.pg')) {
@@ -54,7 +54,7 @@ const PROBE = `(() => {
     sb: !document.querySelector('.sb-nav[data-for="jd"]').hidden,
     anim: document.getAnimations().filter((a) => /^jd/.test(a.animationName || '') && main.contains(a.effect && a.effect.target)).length,
     pages: [...main.querySelectorAll('.pg')].filter(vis).length, over, bottom, heights, links,
-    hidden: [...main.querySelectorAll('.jd-c,.jd-st,.jd-per li,.jd-rd,.jd-doc,.jm-row,.jm-why,.jm-end')].filter((e) => +getComputedStyle(e).opacity < 0.95).length,
+    hidden: [...main.querySelectorAll('.jd-c,.jd-st,.jd-per li,.jd-rd,.jd-doc,.jm-row,.jm-end')].filter((e) => +getComputedStyle(e).opacity < 0.95).length,
     overflowX: document.documentElement.scrollWidth - innerWidth };
 })()`;
 
@@ -141,13 +141,13 @@ async function main() {
   await sleep(2200);
   const m3 = await evaluate(`[...document.querySelectorAll('#jd-fit .jd-st,#jd-fit .jd-per li,#jd-fit .jd-rd,#jd-fit .jd-shape')].filter((e) => +getComputedStyle(e).opacity < 0.99).length`); checks++;
   ok(m3 === 0, `chuyển động: sau khi chạy còn ${m3} phần tử chưa hiện đủ`);
-  // #jd-match: radar chồng mọc ra, 10 dòng bảng + 3 số + 4 lý do (cùng khối .jm-g) nảy lên, rồi hiện đủ
+  // #jd-match: radar chồng mọc ra, 10 dòng bảng + 3 số (cùng khối .jm-g) nảy lên, rồi hiện đủ (task 6vya: bỏ khối WHY ME 4 lý do)
   await evaluate(`(document.querySelector('#jd-match .jm-g').scrollIntoView({ block: 'center' }), new Promise((r) => setTimeout(r, 450)))`);
   const m4 = await evaluate(`(() => { const g = document.querySelector('#jd-match .jm-g'); const an = document.getAnimations().filter((a) => g.contains(a.effect && a.effect.target));
     return { inn: g.classList.contains('sr-in'), grow: an.filter((a) => a.animationName === 'jdGrow').length, rise: an.filter((a) => a.animationName === 'jdRise').length }; })()`); checks++;
-  ok(m4.inn && m4.grow === 1 && m4.rise === 17, `chuyển động #jd-match: radar / bảng chưa chạy (${JSON.stringify(m4)})`);
-  await evaluate(`(document.querySelector('#jd-match .jm-life').scrollIntoView({ block: 'center' }), new Promise((r) => setTimeout(r, 2400)))`);
-  const m5 = await evaluate(`[...document.querySelectorAll('#jd-match .jm-shape,#jd-match .jm-row,#jd-match .jm-nums li,#jd-match .jm-why')].filter((e) => +getComputedStyle(e).opacity < 0.99).length`); checks++;
+  ok(m4.inn && m4.grow === 1 && m4.rise === 13, `chuyển động #jd-match: radar / bảng chưa chạy (${JSON.stringify(m4)})`);
+  await evaluate(`(document.querySelector('#jd-match .jm-end').scrollIntoView({ block: 'center' }), new Promise((r) => setTimeout(r, 2400)))`);
+  const m5 = await evaluate(`[...document.querySelectorAll('#jd-match .jm-shape,#jd-match .jm-row,#jd-match .jm-nums li')].filter((e) => +getComputedStyle(e).opacity < 0.99).length`); checks++;
   ok(m5 === 0, `chuyển động #jd-match: sau khi chạy còn ${m5} phần tử chưa hiện đủ`);
   ok(errors.length === 0, `lỗi JS/console: ${errors.slice(0, 5).join(' | ')}`);
   ws.close();

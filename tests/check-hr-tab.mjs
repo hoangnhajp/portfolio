@@ -14,9 +14,9 @@ const strip = (s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const topNav = (html.match(/<nav class="top-nav"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
 ok(/<a href="#hr-top" data-view="hr">HR<\/a>/.test(topNav), 'top-nav thiếu <a href="#hr-top" data-view="hr">HR</a>');
 // task g6pn: tab Software Products (sw) đứng cuối, kiểm riêng ở check-sw-tab.mjs; task g9d5: tab IT Knowledge (it) ở check-it-tab.mjs
-const order = [...topNav.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]).filter((v) => v !== 'sw' && v !== 'it' && v !== 'jd').join(',');
+const order = [...topNav.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]).filter((v) => v !== 'sw' && v !== 'it' && v !== 'jd' && v !== 'wv').join(',');
 ok(order === 'profile,sales,hr,team,ai,lang', `thứ tự tab menu trên: ${order}`);
-const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]).filter((v) => v !== 'sw' && v !== 'it' && v !== 'jd').join(',');
+const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]).filter((v) => v !== 'sw' && v !== 'it' && v !== 'jd' && v !== 'wv').join(',');
 ok(views === 'profile,sales,hr,team,ai,lang', `thứ tự main view: ${views}`);
 
 // 2) Main + 4 trang (3~4 trang theo yêu cầu)

@@ -45,6 +45,15 @@ SHOTS = {
     'crm-kanban': (LD + 'crm-kanban.jpg', LD_COMMON, CROP_1568),
     'crm-calendar': (LD + 'crm-calendar.jpg', LD_COMMON, CROP_1568),
     'crm-report': (LD + 'crm-report.jpg', LD_COMMON, CROP_1568),
+    # Task 8uat: trang con #sw-leads2, thêm 6 màn English (đã blur dữ liệu cá nhân + chữ Việt trên trình duyệt trước khi chụp)
+    'crm-add-customer': (LD + 'crm-add-customer.jpg', LD_COMMON, CROP_1568),
+    # màn nhập bằng AI không có thanh bên / header: che tiêu đề trang và ô chọn model
+    'crm-ai-import': (LD + 'crm-ai-import.jpg', [(4, 20, 266, 60), (1226, 6, 1396, 70)], CROP_1568),
+    'crm-categories': (LD + 'crm-categories.jpg', LD_COMMON, CROP_1568),
+    'crm-permissions': (LD + 'crm-permissions.jpg', LD_COMMON, CROP_1568),
+    'crm-ai-agent': (LD + 'crm-ai-agent.jpg', LD_COMMON, CROP_1568),
+    # che thêm dòng tài khoản email đã kết nối trên thẻ lịch
+    'crm-connectors': (LD + 'crm-connectors.jpg', LD_COMMON + [(1240, 222, 1505, 250)], CROP_1568),
     # Quản lý tuyển dụng (task ve3p): chụp lại ở giao diện English thay bộ ảnh tiếng Việt cũ
     'recruit-dashboard': (TL + 'recruit-dashboard.jpg', TL_COMMON + [(262, 84, 400, 106)], CROP_1568),
     'recruit-cv': (TL + 'recruit-cv.jpg', TL_COMMON, CROP_1568),
@@ -54,7 +63,7 @@ SHOTS = {
 }
 
 # Nền trang: (id section, ảnh đã che, tâm cắt theo tỉ lệ ngang 0..1). Chỉ cắt từ ảnh giao diện tiếng Anh (task ve3p).
-BACKS = [('sw-top', 'staff-dashboard', 0.62), ('sw-remote', 'staff-calendar', 0.55), ('sw-talent', 'recruit-matching', 0.6), ('sw-leads', 'crm-list', 0.6)]
+BACKS = [('sw-top', 'staff-dashboard', 0.62), ('sw-remote', 'staff-calendar', 0.55), ('sw-talent', 'recruit-matching', 0.6), ('sw-leads', 'crm-list', 0.6), ('sw-leads2', 'crm-categories', 0.55)]
 # Trang chưa có ảnh app tiếng Anh: lấy ảnh nền có sẵn của trang khác (lật ngang, chỉ đổi định dạng). Hiện không còn trang nào.
 PHOTO_BACKS = []
 

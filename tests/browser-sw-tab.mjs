@@ -1,5 +1,5 @@
-// Task g6pn: tab "Software Products" (4 trang) đo trên Chrome headless thật (CDP).
-// 1) 3 ngôn ngữ x 3 bề rộng (reduced-motion): vào #sw-top thì tab SW sáng, 4 trang hiện, mọi ảnh chụp màn hình tải được,
+// Task g6pn: tab "Software Products" (5 trang, task 8uat thêm #sw-leads2) đo trên Chrome headless thật (CDP).
+// 1) 3 ngôn ngữ x 3 bề rộng (reduced-motion): vào #sw-top thì tab SW sáng, 5 trang hiện, mọi ảnh chụp màn hình tải được,
 //    khối nội dung không vượt đáy tờ, chữ / ảnh không tràn thẻ, thẻ cùng hàng thẳng mép trên, không tràn ngang.
 // 2) Có chuyển động (1280): khối ảnh vào khung thì chạy swRise rồi hiện đủ (opacity 1).
 // 3) 0 lỗi JS.
@@ -23,7 +23,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 let checks = 0;
-const PAGES = ['sw-top', 'sw-remote', 'sw-talent', 'sw-leads'];
+const PAGES = ['sw-top', 'sw-remote', 'sw-talent', 'sw-leads', 'sw-leads2'];
 
 const PROBE = `(() => {
   const vis = (e) => { const s = getComputedStyle(e); return s.display !== 'none' && s.visibility !== 'hidden' && e.getClientRects().length > 0; };
@@ -102,7 +102,7 @@ async function main() {
       const r = await evaluate(PROBE); checks++;
       ok(r.imgs >= 22  /* task ve3p: 3 thẻ + 4 icon + 3 sản phẩm x 5 ảnh app English */ && !r.broken.length, `${tag}: ảnh không tải được (${r.imgs} ảnh) ${r.broken.slice(0, 4).join(' | ')}`);
       ok(r.view === 'sw' && r.on === 'sw' && r.sb, `${tag}: tab SW chưa bật (view ${r.view}, menu ${r.on}, sidebar ${r.sb})`);
-      ok(r.pages === 4, `${tag}: cần 4 trang SW, đang ${r.pages}`);
+      ok(r.pages === PAGES.length, `${tag}: cần ${PAGES.length} trang SW, đang ${r.pages}`);
       ok(!r.over.length, `${tag}: chữ tràn thẻ ${r.over.slice(0, 4).join(' | ')}`);
       ok(!r.bottom.length, `${tag}: khối vượt đáy tờ ${r.bottom.slice(0, 4).join(' | ')}`);
       ok(!r.rows.length, `${tag}: thẻ cùng hàng lệch mép trên ${r.rows.slice(0, 3).join(' | ')}`);
@@ -129,7 +129,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-sw-tab (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-sw-tab: ${checks} lượt (3 ngôn ngữ x 3 bề rộng + chuyển động): tab SW 4 trang, ảnh tải đủ, chữ / ảnh không tràn thẻ, không vượt đáy tờ, thẻ cùng hàng thẳng mép, chạy khi vào khung, 0 lỗi JS`);
+    console.log(`PASS browser-sw-tab: ${checks} lượt (3 ngôn ngữ x 3 bề rộng + chuyển động): tab SW ${PAGES.length} trang, ảnh tải đủ, chữ / ảnh không tràn thẻ, không vượt đáy tờ, thẻ cùng hàng thẳng mép, chạy khi vào khung, 0 lỗi JS`);
     process.exit(0);
   }, 300);
 });

@@ -122,7 +122,7 @@ const ME = [
   { v: 5, why: 'Khách doanh nghiệp ở MAYEKAWA và JILNESTA' },
   { v: 5, why: 'Đào tạo đội kinh doanh, 2 nhân viên tuyển dụng; SOP tiếng Nhật, tiếng Anh' },
   { v: 5, why: 'Xử lý khiếu nại, sự cố giao hàng; phân tích nguyên nhân' },
-  { v: 4, why: 'Đặc tả, UAT 3 phần mềm; chưa trực tiếp triển khai ERP/CRM' },
+  { v: 5, why: 'Đặc tả, UAT, bàn giao 3 phần mềm theo yêu cầu khách hàng' },
   { v: 4, why: 'JLPT N2, báo cáo lãnh đạo người Nhật' },
   { v: 4, why: 'Thuyết trình ở hội nghị ASEAN, đàm phán với CEO châu Âu' },
   { v: 5, why: 'Khoảng 11 năm ở công ty Nhật' },
@@ -167,13 +167,6 @@ const ROWS = [
 ];
 const covered = ROWS.flatMap((o) => o.r.split(' '));
 if (covered.length !== REQ_N || new Set(covered).size !== REQ_N) throw new Error('bảng đối chiếu phải phủ đủ, không trùng ' + REQ_N + ' yêu cầu');
-const WHY = [
-  { ja: '自ら営業に出て、技術者と一緒に提案、説明してきました。', en: 'I have sold on my own and presented proposals with engineers.', vi: 'Tôi từng tự đi sales, đề xuất và thuyết trình cùng kỹ sư.' },
-  { ja: '仕様書、UAT、SOPの作成と新人研修を担ってきました。', en: 'I wrote specs, ran UAT, wrote SOPs and trained new staff.', vi: 'Tôi viết đặc tả, chạy UAT, soạn SOP và đào tạo người mới.' },
-  { ja: '工場、日本本社、開発チームと連携し、顧客の課題を解決しました。', en: 'I worked with the factory, Japan HQ and dev teams to fix client issues.', vi: 'Tôi phối hợp nhà máy, trụ sở Nhật và đội dev để gỡ vấn đề cho khách.' },
-  { ja: '納品後もフォローを続け、顧客を訪問してきました。', en: 'I follow clients after handover and visit them on site.', vi: 'Tôi theo sát khách sau bàn giao và đến thăm khách tận nơi.' },
-];
-if (WHY.length !== STAGES.length) throw new Error('mỗi chặng 1 lý do');
 
 function matchRadar() {
   const rings = [1, 2, 3, 4, 5].map((k) => `<polygon class="jd-ring" points="${AX.map((_, i) => pt(i, R * k / 5).map(f1).join(',')).join(' ')}"/>`).join('');
@@ -206,15 +199,11 @@ function matchHtml() {
   ].map((o, i) => `<li style="--i:${i}"><b class="jm-num" data-k="${o.k}">${o.v}</b>${L3('span', o)}</li>`).join('');
   const tag = Object.fromEntries(COMP.map((c) => [c.k, c]));
   const rows = ROWS.map((o, i) => `<li class="jm-row" data-t="${o.t}" data-r="${o.r}" style="--i:${i}"><i class="jm-tag jd-seg--${o.t}" title="${tag[o.t].vi}"></i><div class="jm-txt">${L3('b', o, ' class="jm-req"')}${L3('span', { ja: o.eja, en: o.een, vi: o.evi }, ' class="jm-ev"')}</div><span class="jd-go">${o.go.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</span></li>`).join('');
-  const why = STAGES.map((s, i) => `<li class="jm-why" style="--i:${i}"><img src="assets/gx/${s.ic}.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div>${L3('h3', s)}${L3('p', WHY[i])}</div></li>`).join('');
   const leg = COMP.map((c) => `<li><i class="jd-sw jd-seg--${c.k}"></i>${L3('span', c)}</li>`).join('');
   return `<section class="pg" data-chap="III" id="jd-match">
   <span class="eb rv">02　<b>SKILL MATCH</b></span>
   <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">求人票の要件と、<br /><i>私の経験を照らし合わせる。</i></span><span data-l="en">The job requirements,<br /><i>matched with my experience.</i></span><span data-l="vi">Yêu cầu của JD,<br /><i>đối chiếu với kinh nghiệm của tôi.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">${REQ_N}項目の要件を、このポートフォリオ各ページの経験と照らし合わせました（私の水準は自己評価です）。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">I matched all ${REQ_N} requirements with experience shown on the pages of this portfolio (my levels are self-assessed).</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi đối chiếu đủ ${REQ_N} yêu cầu của JD với kinh nghiệm ở các trang trong portfolio (mức của tôi là tự đánh giá).</p>
   <div class="jm-g rv" style="--d:180ms">
     <div class="jd-col">
       <figure class="card jd-c jm-c--radar">
@@ -222,11 +211,6 @@ function matchHtml() {
         ${matchRadar()}
         <ul class="jm-key"><li><i class="jm-sw jm-sw--jd"></i>${L3('span', { ja: 'JDが求める水準', en: 'JD level', vi: 'Mức JD cần' })}</li><li><i class="jm-sw jm-sw--me"></i>${L3('span', { ja: '私の水準（自己評価）', en: 'My level (self-assessed)', vi: 'Mức của tôi (tự đánh giá)' })}</li></ul>
         <ul class="jm-nums">${nums}</ul>
-        ${L3('p', { ja: 'IT 4/5：ERP/CRMの導入は未経験のため、まずANDPADの製品を深く学びます。', en: 'IT 4/5: I have not run an ERP/CRM rollout yet, so I will learn the ANDPAD product first.', vi: 'IT 4/5: tôi chưa trực tiếp triển khai ERP/CRM, nên sẽ học kỹ sản phẩm ANDPAD trước.' }, ' class="jd-note"')}
-      </figure>
-      <figure class="card jd-c jm-life">
-        <figcaption><span class="lbl">Why me</span>${L3('h3', { ja: '私が適任である理由：顧客対応の4段階をすべて経験', en: 'Why I fit: I have done all 4 stages with a customer', vi: 'Lý do tôi phù hợp: đã làm đủ 4 chặng đồng hành khách hàng' })}</figcaption>
-        <ol class="jm-whys">${why}</ol>
       </figure>
     </div>
     <figure class="card jd-c jm-c--tbl">
@@ -297,11 +281,11 @@ const main = `<!-- jd:start -->
 <main class="wrap" data-view="jd" hidden>
 <section class="pg" data-chap="I" id="jd-top">
   <span class="eb rv">JOB DESCRIPTION　<b>ANDPAD</b></span>
-  <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">ANDPAD Vietnamの求人票を、<br /><i>原文のまま載せる。</i></span><span data-l="en">The ANDPAD Vietnam job description,<br /><i>word for word.</i></span><span data-l="vi">Thông tin tuyển dụng ANDPAD Vietnam,<br /><i>giữ nguyên văn.</i></span></h2>
+  <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">ANDPAD Vietnamの<br /><i>求人情報。</i></span><span data-l="en">ANDPAD Vietnam<br /><i>job description.</i></span><span data-l="vi">Thông tin tuyển dụng<br /><i>ANDPAD Vietnam.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">Customer Success Staffの求人票を、ベトナム語の原文のまま掲載しています。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">The Customer Success Staff job description, shown in its original Vietnamese.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">JD vị trí Customer Success Staff, giữ nguyên văn bản gốc tiếng Việt.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">Customer Success Staff（IT／リーダー候補）の募集です。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Position: Customer Success Staff (IT, with a path to Leader).</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Vị trí Customer Success Staff (IT, ứng viên tiềm năng cho vị trí Leader).</p>
   <div class="jd-doc rv" lang="vi" style="--d:180ms">
     ${jdHtml()}
   </div><!-- /jd-doc -->
@@ -383,7 +367,7 @@ const css = `<!-- jd-css:start -->
 .jd-rd{display:grid;grid-template-columns:66px 1fr;align-items:center;gap:8px}
 .jd-rd b{font:800 11px 'Space Grotesk',sans-serif;color:#fff;background:#14396b;border-radius:8px;padding:6px 0;text-align:center}
 .jd-rd span{font:500 10.5px/1.4 'Noto Sans JP',sans-serif;color:#2b2735}
-/* #jd-match (task yt50): radar chồng JD (xanh nét đứt) và tôi (cam), số tóm tắt, bảng 12 yêu cầu + link bằng chứng, 4 lý do theo chặng, câu kết */
+/* #jd-match (task yt50): radar chồng JD (xanh nét đứt) và tôi (cam), số tóm tắt, bảng 12 yêu cầu + link bằng chứng, câu kết (task 6vya: bỏ câu dẫn + khối WHY ME) */
 .jm-g{display:grid;grid-template-columns:1fr 1.22fr;gap:10px}
 .jm-area--jd{fill:rgba(42,111,192,.07);stroke:#2a6fc0;stroke-width:1.6;stroke-dasharray:5 4;stroke-linejoin:round}
 .jm-area--me{fill:rgba(246,130,9,.2);stroke:#F68209;stroke-width:2.2;stroke-linejoin:round}
@@ -407,11 +391,6 @@ const css = `<!-- jd-css:start -->
 .jm-req{font:700 10.5px/1.35 'Noto Sans JP',sans-serif;color:#16141d}
 .jm-ev{font:400 9.9px/1.45 'Noto Sans JP',sans-serif;color:#3d3849;text-wrap:pretty}
 .jm-row .jd-go{flex-direction:column;align-items:flex-end;max-width:none}
-.jm-whys{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
-.jm-why{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;align-items:start;background:#faf9fd;border:1px solid #efeaf8;border-radius:10px;padding:6px 8px}
-.jm-why img{width:34px;height:34px;display:block}
-.jm-why h3{margin:0;font:700 11.5px/1.35 'Noto Sans JP',sans-serif}
-.jm-why p{margin:1px 0 0;font:400 10px/1.45 'Noto Sans JP',sans-serif;color:#3d3849;text-wrap:pretty}
 .jm-end{margin:10px 0 0;padding:10px 16px;border-radius:12px;background:#14396b;color:#fff}
 .jm-end p{margin:0;font:600 12.5px/1.6 'Noto Sans JP',sans-serif;text-wrap:pretty}
 @keyframes jdGrow{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:none}}
@@ -423,9 +402,9 @@ html.sr .jd-g.sr-in .jd-comp{animation:jdBar .8s cubic-bezier(.2,.7,.2,1) .3s bo
 html.sr .jd-g.sr-in .jd-bar i{animation:jdBar .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 350ms)}
 html.sr .jd-life.sr-in .jd-st,html.sr .jd-g2.sr-in .jd-per li,html.sr .jd-g2.sr-in .jd-rd{animation:jdRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*110ms + 200ms)}
 html.sr .jm-g.sr-in .jm-shape{animation:jdGrow .9s cubic-bezier(.2,.7,.2,1) .25s both}
-html.sr .jm-g.sr-in .jm-row,html.sr .jm-g.sr-in .jm-nums li,html.sr .jm-g.sr-in .jm-why{animation:jdRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 200ms)}
+html.sr .jm-g.sr-in .jm-row,html.sr .jm-g.sr-in .jm-nums li{animation:jdRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 200ms)}
 html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{animation:jdDash .5s ease both;animation-delay:calc(var(--i,0)*110ms + 420ms)}
-@media screen and (max-width:900px){.jd-g,.jd-g2,.jm-g{grid-template-columns:1fr}.jm-whys{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media screen and (max-width:900px){.jd-g,.jd-g2,.jm-g{grid-template-columns:1fr}}
 @media screen and (max-width:700px){
   .jd-doc{columns:1;font-size:11.5px}
   .jd-sts{grid-template-columns:1fr;--g:24px}
@@ -437,19 +416,18 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
   .jd-st:not(:last-child)::before{top:auto;bottom:calc(0px - var(--g) + 6px);left:16px;border:5px solid transparent;border-top:6px solid #9a87f0;border-bottom:0}
   .jd-per li{flex-direction:column;align-items:flex-start}
   .jd-go{justify-content:flex-start;max-width:none}
-  .jm-whys{grid-template-columns:1fr}
   .jm-row{grid-template-columns:4px minmax(0,1fr)}
   .jm-row .jd-go{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start}
 }
-@media (prefers-reduced-motion:reduce){.jm-shape,.jm-row,.jm-nums li,.jm-why,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}}
-@media print{.jm-shape,.jm-row,.jm-nums li,.jm-why,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}.jd-doc{font-size:9.2px}}
+@media (prefers-reduced-motion:reduce){.jm-shape,.jm-row,.jm-nums li,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}}
+@media print{.jm-shape,.jm-row,.jm-nums li,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}.jd-doc{font-size:9.2px}}
 </style>
 <!-- jd-css:end -->
 `;
 
 const nav = `<a href="#jd-top" data-view="jd">JD ANDPAD</a>\n      `;
 const sbnav = `<nav class="sb-nav" data-for="jd" hidden>
-      <a href="#jd-top" data-sec="jd-top"><em>TOP</em><span data-l="ja">求人票（原文）</span><span data-l="en">Job description</span><span data-l="vi">JD nguyên văn</span></a>
+      <a href="#jd-top" data-sec="jd-top"><em>TOP</em><span data-l="ja">求人票</span><span data-l="en">Job description</span><span data-l="vi">Thông tin tuyển dụng</span></a>
       <a href="#jd-fit" data-sec="jd-fit"><em>01</em><span data-l="ja">求められる人物像</span><span data-l="en">Candidate profile</span><span data-l="vi">Chân dung ứng viên</span></a>
       <a href="#jd-match" data-sec="jd-match"><em>02</em><span data-l="ja">スキルの照合</span><span data-l="en">Skill match</span><span data-l="vi">Đối chiếu kỹ năng</span></a>
     </nav>

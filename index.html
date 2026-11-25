@@ -1208,6 +1208,115 @@ html.sr .it-sys.sr-in .it-ly::after{animation:itLit 6s linear infinite;animation
 @media print{.it-k,.it-run,.it-ly::after{animation:none!important}.it-rail{display:none}}
 </style>
 <!-- it-css:end -->
+<!-- wv-css:start -->
+<style id="wv-css">
+/* Tab Work Philosophy (task wxw5): 3 trang quan điểm công việc.
+   #wv-kaizen vòng 6 bước sáng lần lượt + thang 5 Why có chấm khoan xuống; #wv-data thẻ cảm tính bị gạch, thanh số liệu mọc,
+   biểu đồ cột trước / sau; #wv-people vòng AI quay quanh con người, 3 thẻ giá trị sáng lần lượt, 4 bước giữa người với người.
+   Chỉ transform / opacity, chỉ chạy khi khối đã hiện (.sr-in). Tắt JS, reduced-motion, bản in: tĩnh, hiện đủ. */
+.wv-kz{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
+.wv-cy,.wv-ps,.wv-fl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;--t:6s}
+.wv-ps,.wv-fl{grid-template-columns:repeat(4,1fr);margin-top:12px;--t:4s}
+.wv-st{position:relative;background:#fff;border:1px solid #ece8f3;border-radius:14px;padding:12px 13px 11px}
+.wv-st img{width:38px;height:38px;display:block}
+.wv-n{position:absolute;top:11px;right:13px;font:800 11px 'Manrope',sans-serif;letter-spacing:.14em;color:#c9c2da}
+.wv-st h3{margin:7px 0 3px;font:700 13.5px/1.45 'Noto Sans JP',sans-serif;color:#16141d}
+.wv-st p{margin:0;font:400 11.8px/1.7 'Noto Sans JP',sans-serif;color:#3d3849}
+.wv-st::after,.wv-v::after,.wv-w::after{content:"";position:absolute;inset:-1px;border-radius:inherit;border:2px solid #F68209;opacity:0;pointer-events:none}
+.wv-ps .wv-st:not(:first-child)::before,.wv-fl .wv-st:not(:first-child)::before{content:"›";position:absolute;left:-10px;top:24px;width:10px;text-align:center;font:800 16px/1 'Manrope',sans-serif;color:#c9c2da}
+.wv-loop{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin:0;font:700 12px/1.5 'Noto Sans JP',sans-serif;color:#3b2f86;background:#f6f3fb;border:1px dashed #c9c2da;border-radius:999px;padding:7px 14px}
+.wv-loop b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;flex:none;border-radius:50%;background:#fff;color:#F68209;font:800 15px/1 'Manrope',sans-serif}
+.card.wv-why{position:relative;padding:14px 16px}
+.wv-why h3{margin:4px 0 0}
+.wv-wlw{position:relative;margin-top:10px}
+.wv-wl{list-style:none;margin:0;padding:0 0 0 20px;position:relative;display:grid;gap:6px}
+.wv-wl::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;width:2px;background:repeating-linear-gradient(#c9c2da 0 5px,transparent 5px 9px)}
+.wv-dr{position:absolute;left:0;top:10px;bottom:10px;width:12px;pointer-events:none}
+.wv-dr i{position:absolute;left:0;top:-6px;width:12px;height:12px;border-radius:50%;background:#F68209;box-shadow:0 0 0 4px rgba(246,130,9,.22)}
+.wv-w{position:relative;margin-left:calc(var(--i,0)*5px);background:#faf8fd;border:1px solid #ece8f3;border-radius:10px;padding:5px 10px;font:400 11.8px/1.5 'Noto Sans JP',sans-serif;color:#3d3849}
+.wv-w b{font:800 10.5px 'Manrope',sans-serif;letter-spacing:.08em;color:#6d5bd0;margin-right:8px}
+.wv-w.wv-root{background:#fff4e8;border-color:#FBA65A;color:#16141d;font-weight:700}
+.wv-w.wv-root b{color:#F68209}
+.wv-pr{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.card.wv-p{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.wv-p img{width:46px;height:46px;flex:none;border-radius:13px;background:#f6f3fb;padding:4px;box-sizing:border-box}
+.wv-p h3,.wv-p p{margin:0}
+.wv-p h3{margin-bottom:4px}
+.wv-vs{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:10px;align-items:center;margin-top:14px}
+.card.wv-ng,.card.wv-ok{padding:14px 16px;align-self:stretch}
+.wv-ng h3,.wv-ok h3{margin:4px 0 8px}
+.wv-q{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.wv-q li{position:relative;display:flex;gap:10px;align-items:center;background:#faf8fd;border:1px solid #ece8f3;border-radius:10px;padding:6px 10px;font:400 12px/1.55 'Noto Sans JP',sans-serif;color:#8a8496}
+.wv-q li img{width:28px;height:28px;flex:none;opacity:.55}
+.wv-q li::after{content:"";position:absolute;left:46px;right:12px;top:50%;height:2px;margin-top:-1px;background:#c14343;transform-origin:left center;opacity:.75}
+.wv-arw{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FBA65A,#F68209);color:#fff;font:800 20px/1 'Manrope',sans-serif;box-shadow:0 8px 18px -8px rgba(246,130,9,.7)}
+.wv-arw i{display:block;font-style:normal}
+.wv-m{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.wv-m li{display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:10px;row-gap:4px;align-items:center;font:600 12px/1.5 'Noto Sans JP',sans-serif;color:#16141d}
+.wv-m li img{width:28px;height:28px;grid-row:1/3}
+.wv-bar{display:block;height:8px;border-radius:8px;background:#ece8f3;overflow:hidden}
+.wv-bar i{display:block;height:100%;width:var(--w,60%);border-radius:8px;background:linear-gradient(90deg,#26B3F4,#6d5bd0);transform-origin:left center}
+.card.wv-ch{margin-top:14px;padding:14px 16px}
+.wv-ch h3{margin:4px 0 10px}
+.wv-cols{position:relative;display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 4px;border-bottom:2px solid #ece8f3}
+.wv-cols i{flex:1;height:var(--h,50%);border-radius:6px 6px 0 0;background:linear-gradient(180deg,#c9c2da,#a99fc6);transform-origin:center bottom}
+.wv-cols i.wv-af{background:linear-gradient(180deg,#26B3F4,#6d5bd0)}
+.wv-mk{flex:none;align-self:stretch;width:0;border-left:2px dashed #F68209;position:relative}
+.wv-mk span{position:absolute;top:-2px;left:6px;white-space:nowrap;font:700 10.5px/1.4 'Noto Sans JP',sans-serif;color:#F68209}
+.wv-lg{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:8px;font:600 11px/1.5 'Noto Sans JP',sans-serif;color:#3d3849}
+.wv-lg span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:#a99fc6}
+.wv-lg span.wv-af::before{background:#6d5bd0}
+.wv-lg em{font-style:normal;color:#8a8496;margin-left:auto}
+.wv-pp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:14px;margin-top:14px;align-items:stretch}
+.card.wv-orb{position:relative;min-height:300px;padding:0;overflow:hidden;background:radial-gradient(circle at 50% 46%,#fff 0,#f6f3fb 70%)}
+.wv-ring{position:absolute;left:50%;top:46%;width:230px;height:230px;margin:-115px 0 0 -115px;border:2px dashed #c9c2da;border-radius:50%}
+.wv-ai{position:absolute;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:#fff;box-shadow:0 6px 16px -6px rgba(59,47,134,.45)}
+.wv-ai img{width:46px;height:46px;display:block;padding:6px;box-sizing:border-box}
+.wv-ai:nth-child(1){left:50%;top:0}
+.wv-ai:nth-child(2){left:6.7%;top:75%}
+.wv-ai:nth-child(3){left:93.3%;top:75%}
+.wv-core{position:absolute;left:50%;top:46%;width:112px;height:112px;margin:-56px 0 0 -56px;border-radius:50%;background:#fff;box-shadow:0 14px 30px -14px rgba(246,130,9,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;font:800 12px/1.3 'Noto Sans JP',sans-serif;color:#16141d}
+.wv-core img{width:54px;height:54px;display:block}
+.wv-core::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid #FBA65A;opacity:0}
+.wv-cap{position:absolute;left:12px;right:12px;bottom:10px;margin:0;text-align:center;font:600 11.5px/1.5 'Noto Sans JP',sans-serif;color:#3b2f86}
+.wv-vals{display:grid;gap:10px}
+.card.wv-v{position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px 14px}
+.wv-v img{width:44px;height:44px;flex:none;border-radius:12px;background:#f6f3fb;padding:4px;box-sizing:border-box}
+.wv-v h3,.wv-v p{margin:0}
+.wv-v h3{margin-bottom:3px}
+.card.wv-hh{margin-top:14px;padding:14px 16px}
+.wv-hh h3{margin:4px 0 0}
+@keyframes wvRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes wvPop{0%{transform:scale(.6)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes wvLit{0%,100%{opacity:0}4%{opacity:1}20%{opacity:0}}
+@keyframes wvDrill{0%,8%{transform:translateY(0);opacity:0}14%{opacity:1}78%,92%{transform:translateY(100%);opacity:1}100%{transform:translateY(100%);opacity:0}}
+@keyframes wvStrike{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes wvGrowX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes wvGrowY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes wvNudge{0%,100%{transform:translateX(-3px)}50%{transform:translateX(4px)}}
+@keyframes wvSpin{to{transform:rotate(360deg)}}
+@keyframes wvUnspin{to{transform:rotate(-360deg)}}
+@keyframes wvPulse{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
+html.sr .wv-kz.sr-in .wv-cy .wv-st,html.sr .wv-hh.sr-in .wv-ps .wv-st,html.sr .wv-fl.sr-in .wv-st,html.sr .wv-pr.sr-in .wv-p,html.sr .wv-pp.sr-in .wv-vals .wv-v{animation:wvRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*90ms + 200ms)}
+html.sr .wv-kz.sr-in .wv-cy .wv-st img,html.sr .wv-hh.sr-in .wv-ps .wv-st img,html.sr .wv-fl.sr-in .wv-st img,html.sr .wv-pr.sr-in .wv-p img{animation:wvPop .5s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--i,0)*90ms + 380ms)}
+html.sr .wv-kz.sr-in .wv-cy .wv-st::after,html.sr .wv-hh.sr-in .wv-ps .wv-st::after,html.sr .wv-fl.sr-in .wv-st::after{animation:wvLit var(--t) linear infinite;animation-delay:calc(var(--i,0)*1s + 1s)}
+html.sr .wv-kz.sr-in .wv-dr{animation:wvDrill 6s ease-in-out 1s infinite}
+html.sr .wv-kz.sr-in .wv-w::after{animation:wvLit 6s linear infinite;animation-delay:calc(var(--i,0)*.76s + 1.5s)}
+html.sr .wv-vs.sr-in .wv-q li::after{animation:wvStrike .5s cubic-bezier(.6,0,.3,1) both;animation-delay:calc(var(--i,0)*.35s + .6s)}
+html.sr .wv-vs.sr-in .wv-arw i{animation:wvNudge 1.6s ease-in-out 1.6s infinite}
+html.sr .wv-vs.sr-in .wv-bar i{animation:wvGrowX .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*.25s + 1.8s)}
+html.sr .wv-ch.sr-in .wv-cols i{animation:wvGrowY .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*90ms + 300ms)}
+html.sr .wv-pp.sr-in .wv-ring{animation:wvSpin 24s linear infinite}
+html.sr .wv-pp.sr-in .wv-ai img{animation:wvUnspin 24s linear infinite}
+html.sr .wv-pp.sr-in .wv-core::before{animation:wvPulse 2.4s ease-out .6s infinite}
+html.sr .wv-pp.sr-in .wv-v::after{animation:wvLit 6s linear infinite;animation-delay:calc(var(--i,0)*2s + 1s)}
+@media (max-width:900px){.wv-kz,.wv-pp{grid-template-columns:1fr}.wv-ps,.wv-fl{grid-template-columns:1fr 1fr}.wv-ps .wv-st::before,.wv-fl .wv-st::before{display:none}}
+@media (max-width:700px){.wv-cy,.wv-pr{grid-template-columns:1fr 1fr}.wv-vs{grid-template-columns:1fr}.wv-arw{margin:0 auto;transform:rotate(90deg)}}
+@media (max-width:520px){.wv-cy,.wv-pr,.wv-ps,.wv-fl{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.wv-st,.wv-st img,.wv-st::after,.wv-p,.wv-p img,.wv-v,.wv-v::after,.wv-w::after,.wv-dr,.wv-q li::after,.wv-arw i,.wv-bar i,.wv-cols i,.wv-ring,.wv-ai img,.wv-core::before{animation:none!important}.wv-dr{display:none}}
+@media print{.wv-st,.wv-st img,.wv-st::after,.wv-p,.wv-p img,.wv-v,.wv-v::after,.wv-w::after,.wv-dr,.wv-q li::after,.wv-arw i,.wv-bar i,.wv-cols i,.wv-ring,.wv-ai img,.wv-core::before{animation:none!important}.wv-dr{display:none}}
+</style>
+<!-- wv-css:end -->
 <!-- sw-css:start -->
 <style id="sw-css">
 /* Tab Software Products (task g6pn): 3 phần mềm làm theo yêu cầu khách hàng, chỉ gọi theo chức năng.
@@ -1221,6 +1330,7 @@ html.sr .it-sys.sr-in .it-ly::after{animation:itLit 6s linear infinite;animation
 .sw-gal{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 0;padding:0}
 .sw-shot{margin:0;background:#fff;border:1px solid #ece8f3;border-radius:12px;padding:8px;box-shadow:0 6px 18px rgba(40,30,90,.08)}
 .sw-shot:first-child{grid-column:1/-1}
+.sw-g6 .sw-shot:first-child{grid-column:auto}
 .sw-shot img{width:100%;height:auto;display:block;border-radius:8px}
 .sw-shot figcaption{font:600 11.5px/1.5 'Noto Sans JP',sans-serif;color:#3d3849;padding:7px 4px 1px}
 .sw-fn{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -1306,7 +1416,7 @@ html.sr .sw-pr.sr-in .sw-p,html.sr .sw-gal.sr-in .sw-shot,html.sr .sw-fn.sr-in l
 .jd-rd{display:grid;grid-template-columns:66px 1fr;align-items:center;gap:8px}
 .jd-rd b{font:800 11px 'Space Grotesk',sans-serif;color:#fff;background:#14396b;border-radius:8px;padding:6px 0;text-align:center}
 .jd-rd span{font:500 10.5px/1.4 'Noto Sans JP',sans-serif;color:#2b2735}
-/* #jd-match (task yt50): radar chồng JD (xanh nét đứt) và tôi (cam), số tóm tắt, bảng 12 yêu cầu + link bằng chứng, 4 lý do theo chặng, câu kết */
+/* #jd-match (task yt50): radar chồng JD (xanh nét đứt) và tôi (cam), số tóm tắt, bảng 12 yêu cầu + link bằng chứng, câu kết (task 6vya: bỏ câu dẫn + khối WHY ME) */
 .jm-g{display:grid;grid-template-columns:1fr 1.22fr;gap:10px}
 .jm-area--jd{fill:rgba(42,111,192,.07);stroke:#2a6fc0;stroke-width:1.6;stroke-dasharray:5 4;stroke-linejoin:round}
 .jm-area--me{fill:rgba(246,130,9,.2);stroke:#F68209;stroke-width:2.2;stroke-linejoin:round}
@@ -1330,11 +1440,6 @@ html.sr .sw-pr.sr-in .sw-p,html.sr .sw-gal.sr-in .sw-shot,html.sr .sw-fn.sr-in l
 .jm-req{font:700 10.5px/1.35 'Noto Sans JP',sans-serif;color:#16141d}
 .jm-ev{font:400 9.9px/1.45 'Noto Sans JP',sans-serif;color:#3d3849;text-wrap:pretty}
 .jm-row .jd-go{flex-direction:column;align-items:flex-end;max-width:none}
-.jm-whys{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
-.jm-why{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;align-items:start;background:#faf9fd;border:1px solid #efeaf8;border-radius:10px;padding:6px 8px}
-.jm-why img{width:34px;height:34px;display:block}
-.jm-why h3{margin:0;font:700 11.5px/1.35 'Noto Sans JP',sans-serif}
-.jm-why p{margin:1px 0 0;font:400 10px/1.45 'Noto Sans JP',sans-serif;color:#3d3849;text-wrap:pretty}
 .jm-end{margin:10px 0 0;padding:10px 16px;border-radius:12px;background:#14396b;color:#fff}
 .jm-end p{margin:0;font:600 12.5px/1.6 'Noto Sans JP',sans-serif;text-wrap:pretty}
 @keyframes jdGrow{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:none}}
@@ -1346,9 +1451,9 @@ html.sr .jd-g.sr-in .jd-comp{animation:jdBar .8s cubic-bezier(.2,.7,.2,1) .3s bo
 html.sr .jd-g.sr-in .jd-bar i{animation:jdBar .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 350ms)}
 html.sr .jd-life.sr-in .jd-st,html.sr .jd-g2.sr-in .jd-per li,html.sr .jd-g2.sr-in .jd-rd{animation:jdRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*110ms + 200ms)}
 html.sr .jm-g.sr-in .jm-shape{animation:jdGrow .9s cubic-bezier(.2,.7,.2,1) .25s both}
-html.sr .jm-g.sr-in .jm-row,html.sr .jm-g.sr-in .jm-nums li,html.sr .jm-g.sr-in .jm-why{animation:jdRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 200ms)}
+html.sr .jm-g.sr-in .jm-row,html.sr .jm-g.sr-in .jm-nums li{animation:jdRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 200ms)}
 html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{animation:jdDash .5s ease both;animation-delay:calc(var(--i,0)*110ms + 420ms)}
-@media screen and (max-width:900px){.jd-g,.jd-g2,.jm-g{grid-template-columns:1fr}.jm-whys{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media screen and (max-width:900px){.jd-g,.jd-g2,.jm-g{grid-template-columns:1fr}}
 @media screen and (max-width:700px){
   .jd-doc{columns:1;font-size:11.5px}
   .jd-sts{grid-template-columns:1fr;--g:24px}
@@ -1360,12 +1465,11 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
   .jd-st:not(:last-child)::before{top:auto;bottom:calc(0px - var(--g) + 6px);left:16px;border:5px solid transparent;border-top:6px solid #9a87f0;border-bottom:0}
   .jd-per li{flex-direction:column;align-items:flex-start}
   .jd-go{justify-content:flex-start;max-width:none}
-  .jm-whys{grid-template-columns:1fr}
   .jm-row{grid-template-columns:4px minmax(0,1fr)}
   .jm-row .jd-go{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start}
 }
-@media (prefers-reduced-motion:reduce){.jm-shape,.jm-row,.jm-nums li,.jm-why,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}}
-@media print{.jm-shape,.jm-row,.jm-nums li,.jm-why,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}.jd-doc{font-size:9.2px}}
+@media (prefers-reduced-motion:reduce){.jm-shape,.jm-row,.jm-nums li,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}}
+@media print{.jm-shape,.jm-row,.jm-nums li,.jd-shape,.jd-comp,.jd-bar i,.jd-st,.jd-st::after,.jd-st::before,.jd-per li,.jd-rd{animation:none!important}.jd-doc{font-size:9.2px}}
 </style>
 <!-- jd-css:end -->
 </head>
@@ -1382,6 +1486,7 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
       <a href="#ai-top" data-view="ai">AI Skills</a>
       <a href="#it-top" data-view="it">IT Knowledge</a>
       <a href="#lang-top" data-view="lang">Languages<span class="flgs"><svg class="flg flg--jp" viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#flg-jp"/></svg><svg class="flg flg--uk" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#flg-uk"/></svg></span></a>
+      <a href="#wv-kaizen" data-view="wv">Work Philosophy</a>
       <a href="#jd-top" data-view="jd">JD ANDPAD</a>
       <a href="#sw-top" data-view="sw">Software Products</a>
     </nav>
@@ -1446,8 +1551,13 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
       <a href="#lang-en" data-sec="lang-en"><em>02</em><span data-l="ja">英語で発表、交渉</span><span data-l="en">English on stage</span><span data-l="vi">Tiếng Anh: thuyết trình, đàm phán</span></a>
       <a href="#lang-bridge" data-sec="lang-bridge"><em>03</em><span data-l="ja">CEOとチームの橋渡し</span><span data-l="en">Bridging CEO and team</span><span data-l="vi">Cầu nối CEO và đội ngũ</span></a>
     </nav>
+    <nav class="sb-nav" data-for="wv" hidden>
+      <a href="#wv-kaizen" data-sec="wv-kaizen"><em>01</em><span data-l="ja">問題分析と改善</span><span data-l="en">Problems and kaizen</span><span data-l="vi">Phân tích vấn đề và kaizen</span></a>
+      <a href="#wv-data" data-sec="wv-data"><em>02</em><span data-l="ja">数字で判断する</span><span data-l="en">Decisions by data</span><span data-l="vi">Nhận định bằng số liệu</span></a>
+      <a href="#wv-people" data-sec="wv-people"><em>03</em><span data-l="ja">AI時代の人の仕事</span><span data-l="en">People in the AI era</span><span data-l="vi">Con người thời AI</span></a>
+    </nav>
     <nav class="sb-nav" data-for="jd" hidden>
-      <a href="#jd-top" data-sec="jd-top"><em>TOP</em><span data-l="ja">求人票（原文）</span><span data-l="en">Job description</span><span data-l="vi">JD nguyên văn</span></a>
+      <a href="#jd-top" data-sec="jd-top"><em>TOP</em><span data-l="ja">求人票</span><span data-l="en">Job description</span><span data-l="vi">Thông tin tuyển dụng</span></a>
       <a href="#jd-fit" data-sec="jd-fit"><em>01</em><span data-l="ja">求められる人物像</span><span data-l="en">Candidate profile</span><span data-l="vi">Chân dung ứng viên</span></a>
       <a href="#jd-match" data-sec="jd-match"><em>02</em><span data-l="ja">スキルの照合</span><span data-l="en">Skill match</span><span data-l="vi">Đối chiếu kỹ năng</span></a>
     </nav>
@@ -1456,6 +1566,7 @@ html.sr .jd-life.sr-in .jd-st::after,html.sr .jd-life.sr-in .jd-st::before{anima
       <a href="#sw-remote" data-sec="sw-remote"><em>01</em><span data-l="ja">リモート社員管理</span><span data-l="en">Remote staff management</span><span data-l="vi">Quản lý nhân viên từ xa</span></a>
       <a href="#sw-talent" data-sec="sw-talent"><em>02</em><span data-l="ja">採用管理</span><span data-l="en">Recruiting management</span><span data-l="vi">Quản lý tuyển dụng</span></a>
       <a href="#sw-leads" data-sec="sw-leads"><em>03</em><span data-l="ja">顧客管理</span><span data-l="en">Customer management</span><span data-l="vi">Quản lý khách hàng</span></a>
+      <a href="#sw-leads2" data-sec="sw-leads2"><em>03+</em><span data-l="ja">顧客管理：設定とAI</span><span data-l="en">Customers: setup and AI</span><span data-l="vi">Khách hàng: thiết lập và AI</span></a>
     </nav>
     <a class="sb-pdf" href="Rirekisho_ThaiTranHoangNha.pdf" target="_blank" rel="noopener"><span data-l="ja">履歴書（PDF）を開く</span><span data-l="en">Open CV (PDF, Japanese)</span><span data-l="vi">Mở CV (PDF, tiếng Nhật)</span></a>
   </div>
@@ -2974,16 +3085,148 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
 </section>
 </main>
 
+<!-- ═══════ Work Philosophy (task wxw5, quan điểm công việc: kaizen, số liệu, con người thời AI) ═══════ -->
+<main class="wrap" data-view="wv" hidden>
+<section class="pg" data-chap="I" id="wv-kaizen">
+  <span class="eb rv">01　<b>KAIZEN</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">問題は現象で止めず、<br /><i>原因から改善する。</i></span><span data-l="en">Fix the cause,<br /><i>not just the symptom.</i></span><span data-l="vi">Không dừng ở hiện tượng,<br /><i>sửa từ nguyên nhân gốc.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Problem ／ Root cause ／ Kaizen</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">問題を数字で捉え、根本原因を探り、対策を試して効果を測り、標準化するまでを一つの流れで進めます。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I handle each problem as one loop: describe it in numbers, find the root cause, test a countermeasure, measure the effect and standardise.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi xử lý mỗi vấn đề theo một vòng kaizen: mô tả bằng số liệu, tìm nguyên nhân gốc, thử đối sách, đo hiệu quả rồi chuẩn hoá.</p>
+  <div class="kw1 rv" style="margin:8px 0 10px">
+    <div class="chips" data-l="ja"><span class="chip">現象と原因を分ける</span><span class="chip">なぜなぜ分析</span><span class="chip">PDCA</span><span class="chip">標準化</span></div>
+    <div class="chips" data-l="en"><span class="chip">symptom vs cause</span><span class="chip">5 Whys</span><span class="chip">PDCA</span><span class="chip">standardise</span></div>
+    <div class="chips" data-l="vi"><span class="chip">tách hiện tượng và nguyên nhân</span><span class="chip">5 Why</span><span class="chip">PDCA</span><span class="chip">chuẩn hoá</span></div>
+  </div>
+  <div class="wv-kz rv" style="--d:180ms">
+    <ol class="wv-cy">
+      <li class="wv-st" style="--i:0"><img src="assets/gx/magnifier.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">01</span><h3 data-l="ja">問題の特定</h3><h3 data-l="en">Define the problem</h3><h3 data-l="vi">Xác định vấn đề</h3><p data-l="ja">起きていることを事実で書き出します。</p><p data-l="en">I write down what is happening as facts.</p><p data-l="vi">Tôi ghi lại điều đang xảy ra bằng sự việc.</p></li>
+      <li class="wv-st" style="--i:1"><img src="assets/gx/report-chart.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">02</span><h3 data-l="ja">現状の数字</h3><h3 data-l="en">Measure the baseline</h3><h3 data-l="vi">Đo hiện trạng</h3><p data-l="ja">件数、時間、比率で現状を測ります。</p><p data-l="en">I measure the current state in counts, time and rates.</p><p data-l="vi">Tôi đo hiện trạng bằng số lần, thời gian và tỉ lệ.</p></li>
+      <li class="wv-st" style="--i:2"><img src="assets/gx/bottleneck.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">03</span><h3 data-l="ja">根本原因</h3><h3 data-l="en">Find the root cause</h3><h3 data-l="vi">Tìm nguyên nhân gốc</h3><p data-l="ja">なぜを5回重ねて原因を絞ります。</p><p data-l="en">I ask why five times to narrow down the cause.</p><p data-l="vi">Tôi hỏi tại sao 5 lần để khoanh vùng nguyên nhân.</p></li>
+      <li class="wv-st" style="--i:3"><img src="assets/gx/lightbulb.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">04</span><h3 data-l="ja">対策の実行</h3><h3 data-l="en">Test a countermeasure</h3><h3 data-l="vi">Thử đối sách</h3><p data-l="ja">原因に合わせた対策を小さく試します。</p><p data-l="en">I try a fix that matches the cause, small scale first.</p><p data-l="vi">Tôi thử đối sách đúng nguyên nhân, làm nhỏ trước.</p></li>
+      <li class="wv-st" style="--i:4"><img src="assets/gx/stopwatch.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">05</span><h3 data-l="ja">効果の確認</h3><h3 data-l="en">Measure the effect</h3><h3 data-l="vi">Đo lại hiệu quả</h3><p data-l="ja">同じ指標、同じ測り方で前後を比べます。</p><p data-l="en">I compare before and after with the same metric and method.</p><p data-l="vi">Tôi so trước và sau bằng cùng chỉ số, cùng cách đo.</p></li>
+      <li class="wv-st" style="--i:5"><img src="assets/gx/checklist.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">06</span><h3 data-l="ja">標準化</h3><h3 data-l="en">Standardise</h3><h3 data-l="vi">Chuẩn hoá</h3><p data-l="ja">効果があった方法を手順書に残します。</p><p data-l="en">What works goes into the SOP for the whole team.</p><p data-l="vi">Cách làm hiệu quả được đưa vào SOP cho cả đội.</p></li>
+      <li class="wv-loop"><b aria-hidden="true">↻</b><span data-l="ja">標準化の後は、次の問題で01に戻る</span><span data-l="en">After standardising, back to 01 with the next problem</span><span data-l="vi">Chuẩn hoá xong, quay lại bước 01 với vấn đề kế tiếp</span></li>
+    </ol>
+    <div class="card wv-why">
+      <span class="lbl">5 WHYS</span>
+      <h3 data-l="ja">なぜを5回くり返す</h3><h3 data-l="en">Ask why five times</h3><h3 data-l="vi">Hỏi tại sao 5 lần</h3>
+      <div class="wv-wlw">
+      <ol class="wv-wl">
+        <li class="wv-w" style="--i:0"><b>WHY 1</b><span data-l="ja">起きた現象</span><span data-l="en">What happened</span><span data-l="vi">Hiện tượng xảy ra</span></li>
+        <li class="wv-w" style="--i:1"><b>WHY 2</b><span data-l="ja">起きる条件</span><span data-l="en">When it happens</span><span data-l="vi">Điều kiện xảy ra</span></li>
+        <li class="wv-w" style="--i:2"><b>WHY 3</b><span data-l="ja">関わる手順</span><span data-l="en">Which process</span><span data-l="vi">Quy trình liên quan</span></li>
+        <li class="wv-w" style="--i:3"><b>WHY 4</b><span data-l="ja">ルールと道具</span><span data-l="en">Rules and tools</span><span data-l="vi">Quy định và công cụ</span></li>
+        <li class="wv-w" style="--i:4"><b>WHY 5</b><span data-l="ja">仕組みの穴</span><span data-l="en">Gap in the system</span><span data-l="vi">Lỗ hổng trong cơ chế</span></li>
+        <li class="wv-w wv-root" style="--i:5"><b>ROOT</b><span data-l="ja">根本原因と対策</span><span data-l="en">Root cause and fix</span><span data-l="vi">Nguyên nhân gốc và đối sách</span></li>
+      </ol>
+      <span class="wv-dr" aria-hidden="true"><i></i></span>
+      </div>
+    </div>
+  </div>
+  <div class="wv-pr rv" style="--d:220ms">
+    <div class="card wv-p" style="--i:0"><img src="assets/gx/magnifier-person.webp" alt="" width="46" height="46" loading="lazy" decoding="async"><div><h3 data-l="ja">人ではなく仕組みを見る</h3><h3 data-l="en">Look at the system, not the person</h3><h3 data-l="vi">Nhìn vào cơ chế, không quy lỗi cho người</h3><p data-l="ja">くり返す問題は手順や道具にあることが多いため、人を責めずに仕組みを直します。</p><p data-l="en">Repeated problems usually sit in the process or tools, so I fix the system instead of blaming people.</p><p data-l="vi">Vấn đề lặp lại thường nằm ở quy trình hoặc công cụ, nên tôi sửa cơ chế thay vì trách người.</p></div></div>
+    <div class="card wv-p" style="--i:1"><img src="assets/gx/milestone-report.webp" alt="" width="46" height="46" loading="lazy" decoding="async"><div><h3 data-l="ja">小さく試して測る</h3><h3 data-l="en">Test small, then measure</h3><h3 data-l="vi">Thử nhỏ rồi đo</h3><p data-l="ja">対策は一部で試し、数字で効果を確かめてから広げます。</p><p data-l="en">I try a fix in one area and roll it out only after the numbers confirm it.</p><p data-l="vi">Tôi thử đối sách ở phạm vi nhỏ, có số liệu xác nhận rồi mới mở rộng.</p></div></div>
+    <div class="card wv-p" style="--i:2"><img src="assets/gx/workflow-gears.webp" alt="" width="46" height="46" loading="lazy" decoding="async"><div><h3 data-l="ja">改善を仕組みに残す</h3><h3 data-l="en">Keep the improvement in the process</h3><h3 data-l="vi">Giữ cải tiến trong quy trình</h3><p data-l="ja">効果があった方法は手順書とチェックリストにして、誰でも同じ結果を出せるようにします。</p><p data-l="en">Fixes that work become SOPs and checklists, so anyone gets the same result.</p><p data-l="vi">Cách làm hiệu quả được viết thành SOP và checklist để ai làm cũng ra cùng kết quả.</p></div></div>
+  </div>
+</section>
+<section class="pg" data-chap="II" id="wv-data">
+  <span class="eb rv">02　<b>DATA FIRST</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">判断は感覚ではなく、<br /><i>数字で行う。</i></span><span data-l="en">Decisions by numbers,<br /><i>not by feelings.</i></span><span data-l="vi">Nhận định bằng số liệu,<br /><i>không bằng cảm tính.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Metric ／ Baseline ／ Before and after</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">仕事の数字は改善の前提で、前と後を同じ数字で比べなければ効果は分からないため、最初に数字をそろえます。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Work data is the prerequisite for kaizen: without the same numbers before and after, no one can tell whether a change worked.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Số liệu công việc là điều kiện đầu tiên của kaizen: không có cùng một số liệu trước và sau thì không biết cải tiến có hiệu quả hay không.</p>
+  <div class="kw1 rv" style="margin:8px 0 10px">
+    <div class="chips" data-l="ja"><span class="chip">数字が先</span><span class="chip">同じ指標で前後を比べる</span><span class="chip">事実と意見を分ける</span></div>
+    <div class="chips" data-l="en"><span class="chip">data first</span><span class="chip">same metric before and after</span><span class="chip">facts vs opinions</span></div>
+    <div class="chips" data-l="vi"><span class="chip">số liệu trước tiên</span><span class="chip">cùng chỉ số trước và sau</span><span class="chip">tách sự việc và ý kiến</span></div>
+  </div>
+  <div class="wv-vs rv" style="--d:180ms">
+    <div class="card wv-ng">
+      <span class="lbl">FEELING</span>
+      <h3 data-l="ja">感覚による判断</h3><h3 data-l="en">Judging by feeling</h3><h3 data-l="vi">Nhận định cảm tính</h3>
+      <ul class="wv-q">
+        <li style="--i:0"><img src="assets/gx/stopwatch.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><span data-l="ja">「最近、遅い気がする」</span><span data-l="en">"It feels slow lately."</span><span data-l="vi">"Hình như dạo này chậm."</span></li>
+        <li style="--i:1"><img src="assets/gx/person-bust.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><span data-l="ja">「お客様は気に入っていないようだ」</span><span data-l="en">"The client probably doesn't like it."</span><span data-l="vi">"Chắc khách không thích."</span></li>
+        <li style="--i:2"><img src="assets/gx/checklist.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><span data-l="ja">「もう十分だと思う」</span><span data-l="en">"I think it's good enough."</span><span data-l="vi">"Tôi thấy vậy là ổn rồi."</span></li>
+      </ul>
+    </div>
+    <span class="wv-arw" aria-hidden="true"><i>→</i></span>
+    <div class="card wv-ok">
+      <span class="lbl">DATA</span>
+      <h3 data-l="ja">数字による判断</h3><h3 data-l="en">Judging by data</h3><h3 data-l="vi">Nhận định bằng số liệu</h3>
+      <ul class="wv-m">
+        <li><img src="assets/gx/calendar.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><span><span data-l="ja">平均処理日数</span><span data-l="en">Average lead time in days</span><span data-l="vi">Thời gian xử lý trung bình (ngày)</span></span><span class="wv-bar"><i style="--w:72%;--i:0"></i></span></li>
+        <li><img src="assets/gx/funnel.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><span><span data-l="ja">月別の成約率</span><span data-l="en">Conversion rate by month</span><span data-l="vi">Tỉ lệ chốt theo tháng</span></span><span class="wv-bar"><i style="--w:54%;--i:1"></i></span></li>
+        <li><img src="assets/gx/shield-check.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><span><span data-l="ja">100件あたりのミス件数</span><span data-l="en">Errors per 100 cases</span><span data-l="vi">Số lỗi trên 100 hồ sơ</span></span><span class="wv-bar"><i style="--w:36%;--i:2"></i></span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card wv-ch rv" style="--d:200ms">
+    <span class="lbl">BEFORE ／ AFTER</span>
+    <h3 data-l="ja">対策の前と後を、同じ指標で比べる</h3><h3 data-l="en">The same metric, before and after the fix</h3><h3 data-l="vi">So trước và sau đối sách bằng cùng một chỉ số</h3>
+    <div class="wv-cols" aria-hidden="true"><i style="--h:82%;--i:0"></i><i style="--h:90%;--i:1"></i><i style="--h:78%;--i:2"></i><i style="--h:86%;--i:3"></i><span class="wv-mk"><span data-l="ja">対策</span><span data-l="en">Fix</span><span data-l="vi">Đối sách</span></span><i class="wv-af" style="--h:64%;--i:4"></i><i class="wv-af" style="--h:52%;--i:5"></i><i class="wv-af" style="--h:44%;--i:6"></i><i class="wv-af" style="--h:40%;--i:7"></i></div>
+    <div class="wv-lg"><span data-l="ja">対策前</span><span data-l="en">Before</span><span data-l="vi">Trước đối sách</span><span class="wv-af" data-l="ja">対策後</span><span class="wv-af" data-l="en">After</span><span class="wv-af" data-l="vi">Sau đối sách</span><em data-l="ja">考え方を示す図です</em><em data-l="en">Illustration of the method</em><em data-l="vi">Hình minh hoạ cách đo</em></div>
+  </div>
+  <ol class="wv-fl rv" style="--d:220ms">
+    <li class="wv-st" style="--i:0"><img src="assets/gx/key.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">01</span><h3 data-l="ja">指標を決める</h3><h3 data-l="en">Define the metric</h3><h3 data-l="vi">Chọn chỉ số</h3><p data-l="ja">何を測るかを作業の前に決めます。</p><p data-l="en">I decide what to measure before the work starts.</p><p data-l="vi">Tôi chọn chỉ số cần đo trước khi bắt tay làm.</p></li>
+    <li class="wv-st" style="--i:1"><img src="assets/gx/stopwatch.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">02</span><h3 data-l="ja">現状を記録する</h3><h3 data-l="en">Record the baseline</h3><h3 data-l="vi">Ghi hiện trạng</h3><p data-l="ja">対策の前の数字を残します。</p><p data-l="en">I record the numbers before any change.</p><p data-l="vi">Tôi ghi lại số liệu trước khi thay đổi.</p></li>
+    <li class="wv-st" style="--i:2"><img src="assets/gx/report-chart.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">03</span><h3 data-l="ja">前後を比べる</h3><h3 data-l="en">Compare</h3><h3 data-l="vi">So sánh trước và sau</h3><p data-l="ja">同じ測り方で対策の後を測ります。</p><p data-l="en">I measure after the change in the same way.</p><p data-l="vi">Tôi đo lại sau thay đổi theo cùng cách đo.</p></li>
+    <li class="wv-st" style="--i:3"><img src="assets/gx/survey-clipboard.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">04</span><h3 data-l="ja">共有して決める</h3><h3 data-l="en">Share and decide</h3><h3 data-l="vi">Chia sẻ và quyết định</h3><p data-l="ja">数字をチームに共有し、続けるか見直すかを決めます。</p><p data-l="en">I share the numbers with the team and decide to keep or revise.</p><p data-l="vi">Tôi chia sẻ số liệu cho đội rồi quyết định giữ hay điều chỉnh.</p></li>
+  </ol>
+</section>
+<section class="pg" data-chap="III" id="wv-people">
+  <span class="eb rv">03　<b>PEOPLE × AI</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">作業はAIに任せ、<br /><i>人は責任と関係を担う。</i></span><span data-l="en">AI takes the tasks,<br /><i>people own responsibility and relationships.</i></span><span data-l="vi">AI làm tác vụ,<br /><i>con người giữ trách nhiệm và quan hệ.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Responsibility ／ Relationships ／ People</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">調べもの、要約、報告をAIが担う時代だからこそ、より大きな責任を持つこと、関係をつくること、その関係を保つことに時間を使います。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Now that AI handles searching, summaries and reports, I spend my time on taking on more responsibility, building relationships and keeping them.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Khi AI đã làm được việc tìm kiếm, tóm tắt và báo cáo, tôi dành thời gian để nhận thêm trách nhiệm, tạo quan hệ và giữ quan hệ lâu dài.</p>
+  <div class="kw1 rv" style="margin:8px 0 10px">
+    <div class="chips" data-l="ja"><span class="chip">責任を持つ</span><span class="chip">関係をつくる</span><span class="chip">関係を保つ</span><span class="chip">人と人の問題解決</span></div>
+    <div class="chips" data-l="en"><span class="chip">ownership</span><span class="chip">building relationships</span><span class="chip">keeping relationships</span><span class="chip">people problems</span></div>
+    <div class="chips" data-l="vi"><span class="chip">trách nhiệm</span><span class="chip">tạo quan hệ</span><span class="chip">giữ quan hệ</span><span class="chip">vấn đề giữa người với người</span></div>
+  </div>
+  <div class="wv-pp rv" style="--d:180ms">
+    <div class="card wv-orb">
+      <div class="wv-ring" aria-hidden="true"><span class="wv-ai"><img src="assets/gx/workflow-gears.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span><span class="wv-ai"><img src="assets/gx/magnifier.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span><span class="wv-ai"><img src="assets/gx/report-chart.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span></div>
+      <div class="wv-core"><img src="assets/gx/team-group.webp" alt="" width="54" height="54" loading="lazy" decoding="async"><span data-l="ja">人</span><span data-l="en">People</span><span data-l="vi">Con người</span></div>
+      <p class="wv-cap"><span data-l="ja">AIの担当：検索、要約、報告</span><span data-l="en">AI handles search, summaries and reports</span><span data-l="vi">AI đảm nhận: tìm kiếm, tóm tắt, báo cáo</span></p>
+    </div>
+    <div class="wv-vals">
+      <div class="card wv-v" style="--i:0"><img src="assets/gx/shield-check.webp" alt="" width="44" height="44" loading="lazy" decoding="async"><div><h3 data-l="ja">責任を持つ</h3><h3 data-l="en">Own the outcome</h3><h3 data-l="vi">Nhận trách nhiệm</h3><p data-l="ja">AIが作ったものも最後は自分が確認し、結果に責任を持ちます。</p><p data-l="en">Even when AI drafts the work, I check the final result and own it.</p><p data-l="vi">Việc AI làm ra, tôi vẫn kiểm tra lần cuối và chịu trách nhiệm về kết quả.</p></div></div>
+      <div class="card wv-v" style="--i:1"><img src="assets/gx/handshake.webp" alt="" width="44" height="44" loading="lazy" decoding="async"><div><h3 data-l="ja">関係をつくる</h3><h3 data-l="en">Build relationships</h3><h3 data-l="vi">Tạo quan hệ</h3><p data-l="ja">顧客や同僚と直接会い、相手の目標と困りごとを聞きます。</p><p data-l="en">I meet clients and colleagues in person and listen to their goals and problems.</p><p data-l="vi">Tôi gặp trực tiếp khách hàng, đồng nghiệp và lắng nghe mục tiêu, khó khăn của họ.</p></div></div>
+      <div class="card wv-v" style="--i:2"><img src="assets/gx/chat-bubbles.webp" alt="" width="44" height="44" loading="lazy" decoding="async"><div><h3 data-l="ja">関係を保つ</h3><h3 data-l="en">Keep relationships</h3><h3 data-l="vi">Giữ quan hệ</h3><p data-l="ja">約束を守り、定期的に連絡し、小さな問題も早めに伝えます。</p><p data-l="en">I keep promises, follow up regularly and raise small issues early.</p><p data-l="vi">Tôi giữ lời hứa, liên lạc định kỳ và báo sớm cả những vấn đề nhỏ.</p></div></div>
+    </div>
+  </div>
+  <div class="card wv-hh rv" style="--d:220ms">
+    <span class="lbl">PEOPLE PROBLEMS</span>
+    <h3 data-l="ja">人と人の問題を解く4つの手順</h3><h3 data-l="en">Four steps for problems between people</h3><h3 data-l="vi">4 bước giải quyết vấn đề giữa người với người</h3>
+    <ol class="wv-ps">
+      <li class="wv-st" style="--i:0"><img src="assets/gx/interview.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">01</span><h3 data-l="ja">双方から聞く</h3><h3 data-l="en">Hear both sides</h3><h3 data-l="vi">Nghe từng bên</h3><p data-l="ja">一人ずつ話を聞き、起きたことを記録します。</p><p data-l="en">I listen to each person separately and record what happened.</p><p data-l="vi">Tôi nghe riêng từng người và ghi lại sự việc.</p></li>
+      <li class="wv-st" style="--i:1"><img src="assets/gx/magnifier.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">02</span><h3 data-l="ja">事実と感情を分ける</h3><h3 data-l="en">Separate facts from feelings</h3><h3 data-l="vi">Tách sự việc và cảm xúc</h3><p data-l="ja">起きたことと受け止め方を分け、記録と数字で確かめます。</p><p data-l="en">I separate what happened from how it felt, and check it against records.</p><p data-l="vi">Tôi tách điều đã xảy ra khỏi cảm nhận, đối chiếu bằng ghi chép và số liệu.</p></li>
+      <li class="wv-st" style="--i:2"><img src="assets/gx/puzzle-fit.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">03</span><h3 data-l="ja">共通の目標をそろえる</h3><h3 data-l="en">Agree on a shared goal</h3><h3 data-l="vi">Thống nhất mục tiêu chung</h3><p data-l="ja">同じ席で目標と役割を確認し、合意を文書に残します。</p><p data-l="en">Together we confirm the goal and roles, and put the agreement in writing.</p><p data-l="vi">Cùng ngồi lại xác nhận mục tiêu, vai trò và ghi thoả thuận thành văn bản.</p></li>
+      <li class="wv-st" style="--i:3"><img src="assets/gx/calendar.webp" alt="" width="38" height="38" loading="lazy" decoding="async"><span class="wv-n" aria-hidden="true">04</span><h3 data-l="ja">合意の後も追う</h3><h3 data-l="en">Follow up</h3><h3 data-l="vi">Theo dõi sau thoả thuận</h3><p data-l="ja">振り返りの日を決め、関係が元に戻らないようにします。</p><p data-l="en">I set a review date so the relationship does not slip back.</p><p data-l="vi">Tôi hẹn ngày xem lại để quan hệ không quay về điểm cũ.</p></li>
+    </ol>
+  </div>
+</section>
+</main>
+
 <!-- ═══════ Software Products (task g6pn, phần mềm làm theo yêu cầu khách hàng, chỉ gọi theo chức năng) ═══════ -->
 <!-- jd:start -->
 <main class="wrap" data-view="jd" hidden>
 <section class="pg" data-chap="I" id="jd-top">
   <span class="eb rv">JOB DESCRIPTION　<b>ANDPAD</b></span>
-  <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">ANDPAD Vietnamの求人票を、<br /><i>原文のまま載せる。</i></span><span data-l="en">The ANDPAD Vietnam job description,<br /><i>word for word.</i></span><span data-l="vi">Thông tin tuyển dụng ANDPAD Vietnam,<br /><i>giữ nguyên văn.</i></span></h2>
+  <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">ANDPAD Vietnamの<br /><i>求人情報。</i></span><span data-l="en">ANDPAD Vietnam<br /><i>job description.</i></span><span data-l="vi">Thông tin tuyển dụng<br /><i>ANDPAD Vietnam.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">Customer Success Staffの求人票を、ベトナム語の原文のまま掲載しています。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">The Customer Success Staff job description, shown in its original Vietnamese.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">JD vị trí Customer Success Staff, giữ nguyên văn bản gốc tiếng Việt.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">Customer Success Staff（IT／リーダー候補）の募集です。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Position: Customer Success Staff (IT, with a path to Leader).</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Vị trí Customer Success Staff (IT, ứng viên tiềm năng cho vị trí Leader).</p>
   <div class="jd-doc rv" lang="vi" style="--d:180ms">
     <h3 class="jd-h1">THÔNG TIN TUYỂN DỤNG – ANDPAD VIETNAM</h3>
     <p><b>Tên công ty:</b></p>
@@ -3051,7 +3294,6 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <li>Được trang bị MacBook Pro hoặc laptop phục vụ công việc.</li>
     </ul>
     <p><b>Thời gian làm việc:</b> Thứ Hai – Thứ Sáu, 09:00 – 18:00.</p>
-    <p><b>Hình thức làm việc:</b> Full-time, làm việc trực tiếp tại văn phòng (Onsite).</p>
     <p><b>Ngày nghỉ:</b> Thứ Bảy và Chủ Nhật.</p>
     <h4>6. Quy trình tuyển dụng</h4>
     <ol>
@@ -3119,21 +3361,13 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <span class="eb rv">02　<b>SKILL MATCH</b></span>
   <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">求人票の要件と、<br /><i>私の経験を照らし合わせる。</i></span><span data-l="en">The job requirements,<br /><i>matched with my experience.</i></span><span data-l="vi">Yêu cầu của JD,<br /><i>đối chiếu với kinh nghiệm của tôi.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">12項目の要件を、このポートフォリオ各ページの経験と照らし合わせました（私の水準は自己評価です）。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">I matched all 12 requirements with experience shown on the pages of this portfolio (my levels are self-assessed).</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi đối chiếu đủ 12 yêu cầu của JD với kinh nghiệm ở các trang trong portfolio (mức của tôi là tự đánh giá).</p>
   <div class="jm-g rv" style="--d:180ms">
     <div class="jd-col">
       <figure class="card jd-c jm-c--radar">
         <figcaption><span class="lbl">Skill match</span><h3 data-l="ja">JDが求める水準と私の水準</h3><h3 data-l="en">Level the JD asks for, and mine</h3><h3 data-l="vi">Mức JD cần và mức của tôi</h3></figcaption>
-        <svg class="jd-radar jm-radar" viewBox="-74 -14 486 322" role="img" aria-labelledby="jm-radar-t"><title id="jm-radar-t">Radar 9 năng lực: mức JD cần và mức của tôi</title><g class="jd-grid"><polygon class="jd-ring" points="160,128 174.1,133.1 181.7,146.2 179.1,161 167.5,170.7 152.5,170.7 140.9,161 138.3,146.2 145.9,133.1"/><polygon class="jd-ring" points="160,106 188.3,116.3 203.3,142.4 198.1,172 175,191.3 145,191.3 121.9,172 116.7,142.4 131.7,116.3"/><polygon class="jd-ring" points="160,84 202.4,99.4 225,138.5 217.2,183 182.6,212 137.4,212 102.8,183 95,138.5 117.6,99.4"/><polygon class="jd-ring" points="160,62 216.6,82.6 246.7,134.7 236.2,194 190.1,232.7 129.9,232.7 83.8,194 73.3,134.7 103.4,82.6"/><polygon class="jd-ring" points="160,40 230.7,65.7 268.3,130.9 255.3,205 197.6,253.4 122.4,253.4 64.7,205 51.7,130.9 89.3,65.7"/><line class="jd-ax" x1="160" y1="150" x2="160" y2="40"/><line class="jd-ax" x1="160" y1="150" x2="230.7" y2="65.7"/><line class="jd-ax" x1="160" y1="150" x2="268.3" y2="130.9"/><line class="jd-ax" x1="160" y1="150" x2="255.3" y2="205"/><line class="jd-ax" x1="160" y1="150" x2="197.6" y2="253.4"/><line class="jd-ax" x1="160" y1="150" x2="122.4" y2="253.4"/><line class="jd-ax" x1="160" y1="150" x2="64.7" y2="205"/><line class="jd-ax" x1="160" y1="150" x2="51.7" y2="130.9"/><line class="jd-ax" x1="160" y1="150" x2="89.3" y2="65.7"/></g><g class="jm-shape"><polygon class="jm-area jm-area--jd" points="160,40 230.7,65.7 268.3,130.9 255.3,205 190.1,232.7 129.9,232.7 83.8,194 95,138.5 117.6,99.4"/><circle class="jm-pt jm-pt--jd" data-v="5" cx="160" cy="40" r="3.5" style="--i:0"><title>Khách hàng B2B: JD 5/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="5" cx="230.7" cy="65.7" r="3.5" style="--i:1"><title>Đào tạo, tài liệu: JD 5/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="5" cx="268.3" cy="130.9" r="3.5" style="--i:2"><title>Giải quyết vấn đề: JD 5/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="5" cx="255.3" cy="205" r="3.5" style="--i:3"><title>IT, triển khai hệ thống: JD 5/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="4" cx="190.1" cy="232.7" r="3.5" style="--i:4"><title>Tiếng Nhật N2+: JD 4/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="4" cx="129.9" cy="232.7" r="3.5" style="--i:5"><title>Tiếng Anh 4 kỹ năng: JD 4/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="4" cx="83.8" cy="194" r="3.5" style="--i:6"><title>Công ty Nhật: JD 4/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="3" cx="95" cy="138.5" r="3.5" style="--i:7"><title>Quản lý đội nhóm: JD 3/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="3" cx="117.6" cy="99.4" r="3.5" style="--i:8"><title>Đàm phán: JD 3/5</title></circle><polygon class="jm-area jm-area--me" points="160,40 230.7,65.7 268.3,130.9 236.2,194 190.1,232.7 129.9,232.7 64.7,205 73.3,134.7 103.4,82.6"/><circle class="jm-pt jm-pt--me" data-v="5" cx="160" cy="40" r="4.5" style="--i:0"><title>Khách hàng B2B: tôi 5/5 (Khách doanh nghiệp ở MAYEKAWA và JILNESTA)</title></circle><circle class="jm-pt jm-pt--me" data-v="5" cx="230.7" cy="65.7" r="4.5" style="--i:1"><title>Đào tạo, tài liệu: tôi 5/5 (Đào tạo đội kinh doanh, 2 nhân viên tuyển dụng; SOP tiếng Nhật, tiếng Anh)</title></circle><circle class="jm-pt jm-pt--me" data-v="5" cx="268.3" cy="130.9" r="4.5" style="--i:2"><title>Giải quyết vấn đề: tôi 5/5 (Xử lý khiếu nại, sự cố giao hàng; phân tích nguyên nhân)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="236.2" cy="194" r="4.5" style="--i:3"><title>IT, triển khai hệ thống: tôi 4/5 (Đặc tả, UAT 3 phần mềm; chưa trực tiếp triển khai ERP/CRM)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="190.1" cy="232.7" r="4.5" style="--i:4"><title>Tiếng Nhật N2+: tôi 4/5 (JLPT N2, báo cáo lãnh đạo người Nhật)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="129.9" cy="232.7" r="4.5" style="--i:5"><title>Tiếng Anh 4 kỹ năng: tôi 4/5 (Thuyết trình ở hội nghị ASEAN, đàm phán với CEO châu Âu)</title></circle><circle class="jm-pt jm-pt--me" data-v="5" cx="64.7" cy="205" r="4.5" style="--i:6"><title>Công ty Nhật: tôi 5/5 (Khoảng 11 năm ở công ty Nhật)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="73.3" cy="134.7" r="4.5" style="--i:7"><title>Quản lý đội nhóm: tôi 4/5 (Quản lý 5 đến 6 người ở chi nhánh, đội Nhân sự từ 1 lên 5 người)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="103.4" cy="82.6" r="4.5" style="--i:8"><title>Đàm phán: tôi 4/5 (Đàm phán, xử lý khiếu nại với khách doanh nghiệp)</title></circle></g><g class="jd-lbs"><text data-l="ja" x="160" y="22" text-anchor="middle"><tspan x="160">B2B顧客対応 <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="160" y="22" text-anchor="middle"><tspan x="160">B2B clients <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="160" y="22" text-anchor="middle"><tspan x="160">Khách hàng B2B <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="239.7" y="59" text-anchor="start"><tspan x="239.7">研修、資料作成 <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="239.7" y="59" text-anchor="start"><tspan x="239.7">Training, manuals <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="239.7" y="59" text-anchor="start"><tspan x="239.7">Đào tạo, tài liệu <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="282.1" y="132.5" text-anchor="start"><tspan x="282.1">課題解決 <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="282.1" y="126.5" text-anchor="start"><tspan x="282.1">Problem</tspan><tspan x="282.1" dy="15">solving <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="282.1" y="126.5" text-anchor="start"><tspan x="282.1">Giải quyết</tspan><tspan x="282.1" dy="15">vấn đề <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="267.4" y="222" text-anchor="start"><tspan x="267.4">IT、システム導入 <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="267.4" y="222" text-anchor="start"><tspan x="267.4">IT, system</tspan><tspan x="267.4" dy="15">rollout <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="267.4" y="222" text-anchor="start"><tspan x="267.4">IT, triển khai</tspan><tspan x="267.4" dy="15">hệ thống <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="ja" x="202.4" y="276.5" text-anchor="start"><tspan x="202.4">日本語 N2以上 <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="202.4" y="276.5" text-anchor="start"><tspan x="202.4">Japanese N2+ <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="202.4" y="276.5" text-anchor="start"><tspan x="202.4">Tiếng Nhật N2+ <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="ja" x="117.6" y="276.5" text-anchor="end"><tspan x="117.6">英語4技能 <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="117.6" y="276.5" text-anchor="end"><tspan x="117.6">English, 4 skills <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="117.6" y="276.5" text-anchor="end"><tspan x="117.6">Tiếng Anh 4 kỹ năng <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="ja" x="52.6" y="222" text-anchor="end"><tspan x="52.6">日系企業の経験 <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="52.6" y="222" text-anchor="end"><tspan x="52.6">Japanese</tspan><tspan x="52.6" dy="15">company <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="52.6" y="222" text-anchor="end"><tspan x="52.6">Công ty Nhật <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="37.9" y="132.5" text-anchor="end"><tspan x="37.9">チーム管理 <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="37.9" y="132.5" text-anchor="end"><tspan x="37.9">Team lead <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="37.9" y="126.5" text-anchor="end"><tspan x="37.9">Quản lý</tspan><tspan x="37.9" dy="15">đội nhóm <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="ja" x="80.3" y="59" text-anchor="end"><tspan x="80.3">交渉 <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="80.3" y="59" text-anchor="end"><tspan x="80.3">Negotiation <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="80.3" y="59" text-anchor="end"><tspan x="80.3">Đàm phán <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text></g></svg>
+        <svg class="jd-radar jm-radar" viewBox="-74 -14 486 322" role="img" aria-labelledby="jm-radar-t"><title id="jm-radar-t">Radar 9 năng lực: mức JD cần và mức của tôi</title><g class="jd-grid"><polygon class="jd-ring" points="160,128 174.1,133.1 181.7,146.2 179.1,161 167.5,170.7 152.5,170.7 140.9,161 138.3,146.2 145.9,133.1"/><polygon class="jd-ring" points="160,106 188.3,116.3 203.3,142.4 198.1,172 175,191.3 145,191.3 121.9,172 116.7,142.4 131.7,116.3"/><polygon class="jd-ring" points="160,84 202.4,99.4 225,138.5 217.2,183 182.6,212 137.4,212 102.8,183 95,138.5 117.6,99.4"/><polygon class="jd-ring" points="160,62 216.6,82.6 246.7,134.7 236.2,194 190.1,232.7 129.9,232.7 83.8,194 73.3,134.7 103.4,82.6"/><polygon class="jd-ring" points="160,40 230.7,65.7 268.3,130.9 255.3,205 197.6,253.4 122.4,253.4 64.7,205 51.7,130.9 89.3,65.7"/><line class="jd-ax" x1="160" y1="150" x2="160" y2="40"/><line class="jd-ax" x1="160" y1="150" x2="230.7" y2="65.7"/><line class="jd-ax" x1="160" y1="150" x2="268.3" y2="130.9"/><line class="jd-ax" x1="160" y1="150" x2="255.3" y2="205"/><line class="jd-ax" x1="160" y1="150" x2="197.6" y2="253.4"/><line class="jd-ax" x1="160" y1="150" x2="122.4" y2="253.4"/><line class="jd-ax" x1="160" y1="150" x2="64.7" y2="205"/><line class="jd-ax" x1="160" y1="150" x2="51.7" y2="130.9"/><line class="jd-ax" x1="160" y1="150" x2="89.3" y2="65.7"/></g><g class="jm-shape"><polygon class="jm-area jm-area--jd" points="160,40 230.7,65.7 268.3,130.9 255.3,205 190.1,232.7 129.9,232.7 83.8,194 95,138.5 117.6,99.4"/><circle class="jm-pt jm-pt--jd" data-v="5" cx="160" cy="40" r="3.5" style="--i:0"><title>Khách hàng B2B: JD 5/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="5" cx="230.7" cy="65.7" r="3.5" style="--i:1"><title>Đào tạo, tài liệu: JD 5/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="5" cx="268.3" cy="130.9" r="3.5" style="--i:2"><title>Giải quyết vấn đề: JD 5/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="5" cx="255.3" cy="205" r="3.5" style="--i:3"><title>IT, triển khai hệ thống: JD 5/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="4" cx="190.1" cy="232.7" r="3.5" style="--i:4"><title>Tiếng Nhật N2+: JD 4/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="4" cx="129.9" cy="232.7" r="3.5" style="--i:5"><title>Tiếng Anh 4 kỹ năng: JD 4/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="4" cx="83.8" cy="194" r="3.5" style="--i:6"><title>Công ty Nhật: JD 4/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="3" cx="95" cy="138.5" r="3.5" style="--i:7"><title>Quản lý đội nhóm: JD 3/5</title></circle><circle class="jm-pt jm-pt--jd" data-v="3" cx="117.6" cy="99.4" r="3.5" style="--i:8"><title>Đàm phán: JD 3/5</title></circle><polygon class="jm-area jm-area--me" points="160,40 230.7,65.7 268.3,130.9 255.3,205 190.1,232.7 129.9,232.7 64.7,205 73.3,134.7 103.4,82.6"/><circle class="jm-pt jm-pt--me" data-v="5" cx="160" cy="40" r="4.5" style="--i:0"><title>Khách hàng B2B: tôi 5/5 (Khách doanh nghiệp ở MAYEKAWA và JILNESTA)</title></circle><circle class="jm-pt jm-pt--me" data-v="5" cx="230.7" cy="65.7" r="4.5" style="--i:1"><title>Đào tạo, tài liệu: tôi 5/5 (Đào tạo đội kinh doanh, 2 nhân viên tuyển dụng; SOP tiếng Nhật, tiếng Anh)</title></circle><circle class="jm-pt jm-pt--me" data-v="5" cx="268.3" cy="130.9" r="4.5" style="--i:2"><title>Giải quyết vấn đề: tôi 5/5 (Xử lý khiếu nại, sự cố giao hàng; phân tích nguyên nhân)</title></circle><circle class="jm-pt jm-pt--me" data-v="5" cx="255.3" cy="205" r="4.5" style="--i:3"><title>IT, triển khai hệ thống: tôi 5/5 (Đặc tả, UAT, bàn giao 3 phần mềm theo yêu cầu khách hàng)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="190.1" cy="232.7" r="4.5" style="--i:4"><title>Tiếng Nhật N2+: tôi 4/5 (JLPT N2, báo cáo lãnh đạo người Nhật)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="129.9" cy="232.7" r="4.5" style="--i:5"><title>Tiếng Anh 4 kỹ năng: tôi 4/5 (Thuyết trình ở hội nghị ASEAN, đàm phán với CEO châu Âu)</title></circle><circle class="jm-pt jm-pt--me" data-v="5" cx="64.7" cy="205" r="4.5" style="--i:6"><title>Công ty Nhật: tôi 5/5 (Khoảng 11 năm ở công ty Nhật)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="73.3" cy="134.7" r="4.5" style="--i:7"><title>Quản lý đội nhóm: tôi 4/5 (Quản lý 5 đến 6 người ở chi nhánh, đội Nhân sự từ 1 lên 5 người)</title></circle><circle class="jm-pt jm-pt--me" data-v="4" cx="103.4" cy="82.6" r="4.5" style="--i:8"><title>Đàm phán: tôi 4/5 (Đàm phán, xử lý khiếu nại với khách doanh nghiệp)</title></circle></g><g class="jd-lbs"><text data-l="ja" x="160" y="22" text-anchor="middle"><tspan x="160">B2B顧客対応 <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="160" y="22" text-anchor="middle"><tspan x="160">B2B clients <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="160" y="22" text-anchor="middle"><tspan x="160">Khách hàng B2B <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="239.7" y="59" text-anchor="start"><tspan x="239.7">研修、資料作成 <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="239.7" y="59" text-anchor="start"><tspan x="239.7">Training, manuals <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="239.7" y="59" text-anchor="start"><tspan x="239.7">Đào tạo, tài liệu <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="282.1" y="132.5" text-anchor="start"><tspan x="282.1">課題解決 <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="282.1" y="126.5" text-anchor="start"><tspan x="282.1">Problem</tspan><tspan x="282.1" dy="15">solving <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="282.1" y="126.5" text-anchor="start"><tspan x="282.1">Giải quyết</tspan><tspan x="282.1" dy="15">vấn đề <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="267.4" y="222" text-anchor="start"><tspan x="267.4">IT、システム導入 <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="267.4" y="222" text-anchor="start"><tspan x="267.4">IT, system</tspan><tspan x="267.4" dy="15">rollout <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="267.4" y="222" text-anchor="start"><tspan x="267.4">IT, triển khai</tspan><tspan x="267.4" dy="15">hệ thống <tspan class="jm-vj">5</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="202.4" y="276.5" text-anchor="start"><tspan x="202.4">日本語 N2以上 <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="202.4" y="276.5" text-anchor="start"><tspan x="202.4">Japanese N2+ <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="202.4" y="276.5" text-anchor="start"><tspan x="202.4">Tiếng Nhật N2+ <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="ja" x="117.6" y="276.5" text-anchor="end"><tspan x="117.6">英語4技能 <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="117.6" y="276.5" text-anchor="end"><tspan x="117.6">English, 4 skills <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="117.6" y="276.5" text-anchor="end"><tspan x="117.6">Tiếng Anh 4 kỹ năng <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="ja" x="52.6" y="222" text-anchor="end"><tspan x="52.6">日系企業の経験 <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="en" x="52.6" y="222" text-anchor="end"><tspan x="52.6">Japanese</tspan><tspan x="52.6" dy="15">company <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="vi" x="52.6" y="222" text-anchor="end"><tspan x="52.6">Công ty Nhật <tspan class="jm-vj">4</tspan><tspan class="jm-vm" dx="5">5</tspan></tspan></text><text data-l="ja" x="37.9" y="132.5" text-anchor="end"><tspan x="37.9">チーム管理 <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="37.9" y="132.5" text-anchor="end"><tspan x="37.9">Team lead <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="37.9" y="126.5" text-anchor="end"><tspan x="37.9">Quản lý</tspan><tspan x="37.9" dy="15">đội nhóm <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="ja" x="80.3" y="59" text-anchor="end"><tspan x="80.3">交渉 <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="en" x="80.3" y="59" text-anchor="end"><tspan x="80.3">Negotiation <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text><text data-l="vi" x="80.3" y="59" text-anchor="end"><tspan x="80.3">Đàm phán <tspan class="jm-vj">3</tspan><tspan class="jm-vm" dx="5">4</tspan></tspan></text></g></svg>
         <ul class="jm-key"><li><i class="jm-sw jm-sw--jd"></i><span data-l="ja">JDが求める水準</span><span data-l="en">JD level</span><span data-l="vi">Mức JD cần</span></li><li><i class="jm-sw jm-sw--me"></i><span data-l="ja">私の水準（自己評価）</span><span data-l="en">My level (self-assessed)</span><span data-l="vi">Mức của tôi (tự đánh giá)</span></li></ul>
-        <ul class="jm-nums"><li style="--i:0"><b class="jm-num" data-k="axes">8/9</b><span data-l="ja">JDの水準以上の能力</span><span data-l="en">skills at or above the JD level</span><span data-l="vi">năng lực đạt hoặc vượt mức JD</span></li><li style="--i:1"><b class="jm-num" data-k="req">12/12</b><span data-l="ja">経験で裏付けられる要件</span><span data-l="en">requirements backed by experience</span><span data-l="vi">yêu cầu có kinh nghiệm đối chiếu</span></li><li style="--i:2"><b class="jm-num" data-k="yrs">11</b><span data-l="ja">日系企業での年数（約）</span><span data-l="en">years at Japanese companies (about)</span><span data-l="vi">năm ở công ty Nhật (khoảng)</span></li></ul>
-        <p class="jd-note" data-l="ja">IT 4/5：ERP/CRMの導入は未経験のため、まずANDPADの製品を深く学びます。</p><p class="jd-note" data-l="en">IT 4/5: I have not run an ERP/CRM rollout yet, so I will learn the ANDPAD product first.</p><p class="jd-note" data-l="vi">IT 4/5: tôi chưa trực tiếp triển khai ERP/CRM, nên sẽ học kỹ sản phẩm ANDPAD trước.</p>
-      </figure>
-      <figure class="card jd-c jm-life">
-        <figcaption><span class="lbl">Why me</span><h3 data-l="ja">私が適任である理由：顧客対応の4段階をすべて経験</h3><h3 data-l="en">Why I fit: I have done all 4 stages with a customer</h3><h3 data-l="vi">Lý do tôi phù hợp: đã làm đủ 4 chặng đồng hành khách hàng</h3></figcaption>
-        <ol class="jm-whys"><li class="jm-why" style="--i:0"><img src="assets/gx/chat-bubbles.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div><h3 data-l="ja">営業支援</h3><h3 data-l="en">Sales support</h3><h3 data-l="vi">Hỗ trợ Sales</h3><p data-l="ja">自ら営業に出て、技術者と一緒に提案、説明してきました。</p><p data-l="en">I have sold on my own and presented proposals with engineers.</p><p data-l="vi">Tôi từng tự đi sales, đề xuất và thuyết trình cùng kỹ sư.</p></div></li><li class="jm-why" style="--i:1"><img src="assets/gx/checklist.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div><h3 data-l="ja">導入</h3><h3 data-l="en">Rollout</h3><h3 data-l="vi">Triển khai</h3><p data-l="ja">仕様書、UAT、SOPの作成と新人研修を担ってきました。</p><p data-l="en">I wrote specs, ran UAT, wrote SOPs and trained new staff.</p><p data-l="vi">Tôi viết đặc tả, chạy UAT, soạn SOP và đào tạo người mới.</p></div></li><li class="jm-why" style="--i:2"><img src="assets/gx/workflow-gears.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div><h3 data-l="ja">定着支援</h3><h3 data-l="en">Follow-up</h3><h3 data-l="vi">Đồng hành</h3><p data-l="ja">工場、日本本社、開発チームと連携し、顧客の課題を解決しました。</p><p data-l="en">I worked with the factory, Japan HQ and dev teams to fix client issues.</p><p data-l="vi">Tôi phối hợp nhà máy, trụ sở Nhật và đội dev để gỡ vấn đề cho khách.</p></div></li><li class="jm-why" style="--i:3"><img src="assets/gx/handshake.webp" alt="" width="34" height="34" loading="lazy" decoding="async"><div><h3 data-l="ja">関係維持</h3><h3 data-l="en">Long-term</h3><h3 data-l="vi">Gắn bó</h3><p data-l="ja">納品後もフォローを続け、顧客を訪問してきました。</p><p data-l="en">I follow clients after handover and visit them on site.</p><p data-l="vi">Tôi theo sát khách sau bàn giao và đến thăm khách tận nơi.</p></div></li></ol>
+        <ul class="jm-nums"><li style="--i:0"><b class="jm-num" data-k="axes">9/9</b><span data-l="ja">JDの水準以上の能力</span><span data-l="en">skills at or above the JD level</span><span data-l="vi">năng lực đạt hoặc vượt mức JD</span></li><li style="--i:1"><b class="jm-num" data-k="req">12/12</b><span data-l="ja">経験で裏付けられる要件</span><span data-l="en">requirements backed by experience</span><span data-l="vi">yêu cầu có kinh nghiệm đối chiếu</span></li><li style="--i:2"><b class="jm-num" data-k="yrs">11</b><span data-l="ja">日系企業での年数（約）</span><span data-l="en">years at Japanese companies (about)</span><span data-l="vi">năm ở công ty Nhật (khoảng)</span></li></ul>
       </figure>
     </div>
     <figure class="card jd-c jm-c--tbl">
@@ -3238,6 +3472,22 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <li style="--i:4"><h3 data-l="ja">メール</h3><h3 data-l="en">Email</h3><h3 data-l="vi">Email</h3><p data-l="ja">1対1のメールと、テンプレートを使った配信ができます。</p><p data-l="en">One-to-one emails and template-based campaigns.</p><p data-l="vi">Gửi email 1-1 và chiến dịch theo mẫu.</p></li>
     <li style="--i:5"><h3 data-l="ja">売上レポート</h3><h3 data-l="en">Sales reports</h3><h3 data-l="vi">Báo cáo doanh thu</h3><p data-l="ja">担当者別の売上と月ごとの成約率を確認できます。</p><p data-l="en">Revenue by salesperson and monthly conversion rates.</p><p data-l="vi">Xem doanh thu theo nhân viên và tỉ lệ chốt theo tháng.</p></li>
   </ul>
+</section>
+<section class="pg" data-chap="IV" id="sw-leads2">
+  <span class="eb rv">03+　<b>CUSTOMERS / SETUP AND AI</b></span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">入力はAIに任せ、<br /><i>権限と連携は現場に合わせる。</i></span><span data-l="en">AI fills in the data,<br /><i>access fits each team.</i></span><span data-l="vi">AI lo phần nhập liệu,<br /><i>phân quyền và kết nối theo cách đội vận hành.</i></span></h2>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">顧客の登録フォーム、AIによる入力、顧客分類と役職別の表示列、閲覧権限、AIアシスタント、外部サービスとの連携まで、設定画面もお客様の運用に合わせて作りました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">Behind the lists sit the setup screens: a customer form, AI-assisted entry, a category tree with columns shown by role, view permissions by position, an AI assistant and links to email, calendar and file storage.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Phía sau danh sách là các màn thiết lập: form thêm khách, nhập liệu bằng AI, cây phân loại khách và cột hiển thị theo vai trò, quyền xem theo chức vụ, trợ lý AI và kết nối email, lịch, kho tài liệu.</p>
+  <div class="sw-gal sw-g6 rv" style="--d:180ms">
+    <figure class="sw-shot" style="--i:0"><img src="assets/sw/crm-add-customer.webp" alt="" width="1280" height="558" loading="lazy" decoding="async"><figcaption><span data-l="ja">顧客の登録フォーム：社名、税番号、代表者、電話、メール、メモ</span><span data-l="en">Add customer form: name, tax code, legal representative, contacts and memo</span><span data-l="vi">Form thêm khách: tên, mã số thuế, người đại diện, liên hệ và ghi chú</span></figcaption></figure>
+    <figure class="sw-shot" style="--i:1"><img src="assets/sw/crm-ai-import.webp" alt="" width="1280" height="558" loading="lazy" decoding="async"><figcaption><span data-l="ja">AIで登録：Webサイトのリンクや名刺の画像からフォームを自動入力</span><span data-l="en">AI import: paste a website link or a business card photo, AI pre-fills the form</span><span data-l="vi">Nhập bằng AI: dán link website hoặc ảnh danh thiếp, AI điền sẵn form</span></figcaption></figure>
+    <figure class="sw-shot" style="--i:2"><img src="assets/sw/crm-categories.webp" alt="" width="1280" height="558" loading="lazy" decoding="async"><figcaption><span data-l="ja">顧客分類のツリーと、役職ごとに見せる列の設定</span><span data-l="en">Customer category tree and visible columns by role</span><span data-l="vi">Cây phân loại khách và cột hiển thị theo vai trò</span></figcaption></figure>
+    <figure class="sw-shot" style="--i:3"><img src="assets/sw/crm-permissions.webp" alt="" width="1280" height="558" loading="lazy" decoding="async"><figcaption><span data-l="ja">閲覧権限：役職ごとに見られる範囲と編集できる範囲を決める</span><span data-l="en">View permissions: what each position can see and edit</span><span data-l="vi">Phân quyền: mỗi chức vụ được xem, sửa dữ liệu của ai</span></figcaption></figure>
+    <figure class="sw-shot" style="--i:4"><img src="assets/sw/crm-ai-agent.webp" alt="" width="1280" height="558" loading="lazy" decoding="async"><figcaption><span data-l="ja">AIアシスタント：担当範囲の顧客データをもとに答える</span><span data-l="en">AI assistant answering from the customer data in each user's scope</span><span data-l="vi">Trợ lý AI trả lời dựa trên dữ liệu khách trong phạm vi của từng người</span></figcaption></figure>
+    <figure class="sw-shot" style="--i:5"><img src="assets/sw/crm-connectors.webp" alt="" width="1280" height="558" loading="lazy" decoding="async"><figcaption><span data-l="ja">外部サービス連携：メール、カレンダー、ファイル保存先を個別に接続</span><span data-l="en">Connectors: email, calendar and file storage linked one by one</span><span data-l="vi">Kết nối email, lịch và kho tài liệu, từng dịch vụ riêng</span></figcaption></figure>
+  </div>
 </section>
 </main>
 
@@ -4241,7 +4491,8 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     'team-top','team-records','team-skills','team-daily','ai-top','ai-pyramid','ai-approach','ai-uses','ai-people','ai-tools',
     'it-top','it-stack','it-arch','it-change',
     'lang-top','lang-ja','lang-en','lang-bridge',
-    'jd-top','jd-fit','jd-match','sw-top','sw-remote','sw-talent','sw-leads'];
+    'wv-kaizen','wv-data','wv-people',
+    'jd-top','jd-fit','jd-match','sw-top','sw-remote','sw-talent','sw-leads','sw-leads2'];
   var layers=[];
   IDS.forEach(function(id){
     var pg=document.getElementById(id);if(!pg||!pg.classList.contains('pg')||pg.querySelector(':scope>.pganh'))return;

@@ -1,7 +1,7 @@
 // Task yt50: tab JD ANDPAD thêm trang #jd-match (mục 02 SKILL MATCH): đối chiếu kỹ năng trong portfolio với JD và nói lý do phù hợp.
 //   radar chồng 2 lớp (mức JD cần = đúng điểm radar #jd-fit, mức của tôi = tự đánh giá), số tóm tắt TÍNH từ dữ liệu trên trang,
 //   bảng đối chiếu phủ ĐỦ 12 yêu cầu của JD (7 bắt buộc, 2 ngoại ngữ, 1 học vấn, 2 ưu tiên; đếm lại từ fixture), mỗi dòng có link
-//   sang trang bằng chứng có thật, 4 lý do theo đúng 4 chặng đồng hành ở #jd-fit, câu kết.
+//   sang trang bằng chứng có thật, câu kết (task 6vya: bỏ câu dẫn kw-sub và khối WHY ME 4 lý do).
 // Chạy: node tests/check-jd-match.mjs   (thoát 0 = đạt)
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -45,6 +45,9 @@ const layer = (k) => {
 const vJd = layer('jd'), vMe = layer('me');
 ok(vJd.length === 9 && vJd.join() === fitV.join(), `lớp JD phải trùng radar #jd-fit: ${vJd} / ${fitV}`);
 ok(vMe.length === 9 && vMe.every((x) => x >= 1 && x <= 5), `lớp "tôi" cần 9 điểm 1..5: ${vMe}`);
+// task mkos: người vận hành chốt trục 4 "IT, triển khai hệ thống" (yêu cầu quan tâm IT, ưu tiên ERP/CRM) mức của tôi = 5, bỏ ghi chú "IT 4/5 ... chưa triển khai ERP/CRM"
+ok(vMe[3] === 5, `trục IT, triển khai hệ thống: mức của tôi phải là 5, thấy ${vMe[3]}`);
+ok(!/IT 4\/5|chưa trực tiếp triển khai ERP|未経験のため|have not run an ERP/.test(mt), '#jd-match còn ghi chú IT 4/5 / chưa triển khai ERP/CRM');
 for (const l of ['ja', 'en', 'vi']) ok((radar.match(new RegExp(`<text[^>]*data-l="${l}"`, 'g')) || []).length === 9, `nhãn trục radar #jd-match thiếu ${l}`);
 ok((radar.match(/<title>/g) || []).length === 18, 'radar #jd-match: 18 điểm (9 JD + 9 tôi) mỗi điểm cần <title> (tooltip)');
 ok(/tự đánh giá/.test(mt) && /自己評価/.test(mt) && /self-assess/.test(mt), '#jd-match phải ghi rõ mức của tôi là tự đánh giá (3 ngôn ngữ)');
@@ -74,11 +77,9 @@ for (const [, t, r, body] of rows) {
 }
 ok([...seen].sort().join() === [...all].sort().join(), `bảng phải phủ mỗi yêu cầu đúng 1 lần: có ${seen.sort()}, cần ${all}`);
 
-// 4) Lý do phù hợp theo đúng 4 chặng đồng hành của #jd-fit
-const stages = [...fit.matchAll(/<li class="jd-st"[\s\S]*?<h3 data-l="vi">([^<]+)<\/h3>/g)].map((m) => m[1]);
-const why = [...mt.matchAll(/<li class="jm-why"[\s\S]*?<h3 data-l="vi">([^<]+)<\/h3>[\s\S]*?<\/li>/g)];
-ok(why.length === 4 && why.map((m) => m[1]).join('|') === stages.join('|'), `4 lý do phải theo 4 chặng ${stages}: ${why.map((m) => m[1])}`);
-for (const m of why) ok(/<p data-l="vi">Tôi /.test(m[0]), `lý do "${m[1]}" cần câu ngôi thứ nhất (Tôi ...)`);
+// 4) Task 6vya: người vận hành bỏ câu dẫn "Tôi đối chiếu đủ 12 yêu cầu..." (cả 3 ngôn ngữ) và khối thẻ WHY ME (4 lý do theo chặng)
+ok(!/<p class="kw-sub/.test(mt) && !/đối chiếu đủ|照らし合わせました|I matched all/.test(mt), '#jd-match còn câu dẫn "Tôi đối chiếu đủ ... yêu cầu"');
+ok(!/jm-why|jm-life|>Why me</.test(mt), '#jd-match còn khối thẻ WHY ME');
 ok(/<div class="jm-end rv"[^>]*>(<p data-l="(ja|en|vi)">[^<]+<\/p>){3}<\/div>/.test(mt), '#jd-match thiếu câu kết .jm-end đủ 3 ngôn ngữ');
 
 // 5) Chữ: 3 ngôn ngữ cân nhau, không gạch ngang dài, không tên công cụ AI, không tự nhận "IT communicator", không TOEIC

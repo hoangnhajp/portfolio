@@ -1,6 +1,6 @@
-// Task g6pn: tab menu "Software Products" (sản phẩm phần mềm làm theo yêu cầu khách hàng), cuối menu, 4 trang:
+// Task g6pn: tab menu "Software Products" (sản phẩm phần mềm làm theo yêu cầu khách hàng), cuối menu, 5 trang:
 // #sw-top (tổng quan 3 sản phẩm), #sw-remote (quản lý nhân viên làm từ xa), #sw-talent (quản lý tuyển dụng),
-// #sw-leads (quản lý khách hàng). KHÔNG nêu tên sản phẩm, ảnh chụp màn hình đã che thông tin cá nhân / đường link
+// #sw-leads (quản lý khách hàng), #sw-leads2 (task 8uat: quản lý khách hàng phần 2, thiết lập + AI). KHÔNG nêu tên sản phẩm, ảnh chụp màn hình đã che thông tin cá nhân / đường link
 // (sinh bằng tools/sw/build-shots.py, nguồn ảnh gốc không nằm trong repo).
 // Chạy: node tests/check-sw-tab.mjs   (thoát 0 = đạt)
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
@@ -27,7 +27,7 @@ for (const v of ['profile', 'sales', 'hr', 'team', 'ai', 'lang']) ok(order.inclu
 const main = (html.match(/<main class="wrap" data-view="sw" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 ok(main, 'thiếu <main class="wrap" data-view="sw" hidden>');
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([\w-]+)"/g)].map((m) => m[1]);
-ok(ids.join(',') === 'sw-top,sw-remote,sw-talent,sw-leads', `section tab SW: ${ids.join(',')}`);
+ok(ids.join(',') === 'sw-top,sw-remote,sw-talent,sw-leads,sw-leads2', `section tab SW: ${ids.join(',')}`);
 const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\\s\\S]*?<\\/section>`)) || [''])[0];
 
 // 3) Sidebar
@@ -35,7 +35,7 @@ const sb = (html.match(/<nav class="sb-nav" data-for="sw" hidden>([\s\S]*?)<\/na
 ok(sb, 'thiếu <nav class="sb-nav" data-for="sw" hidden>');
 const sbIds = [...sb.matchAll(/href="#([\w-]+)" data-sec="([\w-]+)"/g)].filter((m) => m[1] === m[2]).map((m) => m[1]).join(',');
 ok(sbIds === ids.join(','), `sidebar SW trỏ: ${sbIds}`);
-for (const l of ['ja', 'en', 'vi']) ok((sb.match(new RegExp(`data-l="${l}"`, 'g')) || []).length === 4, `sidebar SW thiếu nhãn ${l}`);
+for (const l of ['ja', 'en', 'vi']) ok((sb.match(new RegExp(`data-l="${l}"`, 'g')) || []).length === ids.length, `sidebar SW thiếu nhãn ${l}`);
 
 // 4) Ảnh nền pganh mỗi trang
 const IDS = (html.match(/var IDS=\[([^\]]*)\]/) || [])[1] || '';
@@ -50,10 +50,12 @@ ok(build, 'thiếu tools/sw/build-shots.py (nguồn sinh ảnh đã che)');
 const shotsOf = (s) => [...s.matchAll(/<img\b[^>]*src="(assets\/sw\/[\w-]+\.webp)"/g)].map((m) => m[1]);
 // Task ve3p: ảnh minh hoạ app phải là giao diện tiếng Anh (kiểm ở tests/check-sw-english.mjs). Cả 3 sản phẩm có ảnh
 // English: #sw-remote 5 ảnh, #sw-talent 5 ảnh, #sw-leads 5 ảnh; mỗi thẻ ở #sw-top dùng ảnh app của sản phẩm đó.
-const MIN = { 'sw-remote': 5, 'sw-talent': 5, 'sw-leads': 5 };
+const MIN = { 'sw-remote': 5, 'sw-talent': 5, 'sw-leads': 5, 'sw-leads2': 6 };
 const NEED = {
   'sw-talent': ['recruit-dashboard', 'recruit-cv', 'recruit-jd', 'recruit-process', 'recruit-matching'],
   'sw-leads': ['crm-dashboard', 'crm-list', 'crm-kanban', 'crm-calendar', 'crm-report'],
+  // Task 8uat: trang con thêm 6 màn của app khách hàng (thêm khách, nhập bằng AI, phân loại, phân quyền, trợ lý AI, kết nối)
+  'sw-leads2': ['crm-add-customer', 'crm-ai-import', 'crm-categories', 'crm-permissions', 'crm-ai-agent', 'crm-connectors'],
 };
 for (const [id, list] of Object.entries(NEED)) for (const s of list) ok(shotsOf(sec(id)).includes(`assets/sw/${s}.webp`), `#${id} thiếu ảnh assets/sw/${s}.webp`);
 const card = (href) => (sec('sw-top').match(new RegExp(`<a class="card sw-p" href="#${href}"[\\s\\S]*?<\\/a>`)) || [''])[0];
@@ -126,10 +128,10 @@ ok(/yêu cầu khách hàng|yêu cầu của khách hàng/.test(txt(sec('sw-top'
 
 // 9) Tầng giọng JA: h2 常体 kết 「。」, kw-sub です・ます
 const h2ja = [...main.matchAll(/<h2 class="kw[^"]*"[^>]*><span data-l="ja">([\s\S]*?)<\/span><span data-l="en">/g)].map((m) => strip(m[1]).replace(/\s/g, ''));
-ok(h2ja.length === 4, `cần 4 tiêu đề h2 JA, thấy ${h2ja.length}`);
+ok(h2ja.length === ids.length, `cần ${ids.length} tiêu đề h2 JA, thấy ${h2ja.length}`);
 for (const s of h2ja) ok(/。$/.test(s) && !/(です|ます)。$/.test(s), `h2 JA sai tầng giọng: "${s}"`);
 const subja = [...main.matchAll(/<p class="kw-sub[^"]*"[^>]*data-l="ja">([\s\S]*?)<\/p>/g)].map((m) => strip(m[1]));
-ok(subja.length === 4, `cần 4 câu dẫn kw-sub JA, thấy ${subja.length}`);
+ok(subja.length === ids.length, `cần ${ids.length} câu dẫn kw-sub JA, thấy ${subja.length}`);
 for (const s of subja) ok(/(ます|ました|です)。$/.test(s), `kw-sub JA không kết です・ます: "${s.slice(0, 40)}"`);
 
 // 10) CSS riêng trong khối đánh dấu; chuyển động chỉ transform / opacity; reduced-motion + in tĩnh
@@ -140,4 +142,4 @@ for (const kf of css.matchAll(/@keyframes\s+[\w-]+\s*\{([\s\S]*?)\}\s*\}/g))
 ok(/prefers-reduced-motion:reduce/.test(css) && /@media print/.test(css), 'sw-css thiếu nhánh reduced-motion / print');
 
 if (fails.length) { console.error(`FAIL check-sw-tab (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-sw-tab: tab Software Products 4 trang, ${shotsOf(main).length} ảnh đã che, đủ JA/EN/VI, không tên sản phẩm`);
+console.log(`PASS check-sw-tab: tab Software Products ${ids.length} trang, ${shotsOf(main).length} ảnh đã che, đủ JA/EN/VI, không tên sản phẩm`);

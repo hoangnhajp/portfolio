@@ -9,6 +9,8 @@ const p = (rel) => fileURLToPath(new URL(`../${rel}`, import.meta.url));
 const EN_UI = ['staff-dashboard', 'staff-activity', 'staff-calendar', 'staff-calc', 'staff-alert',
   // app quản lý khách hàng: chụp lại ở giao diện English (task ve3p)
   'crm-dashboard', 'crm-list', 'crm-kanban', 'crm-calendar', 'crm-report',
+  // app quản lý khách hàng, trang con #sw-leads2 (task 8uat): chụp ở giao diện English, dữ liệu cá nhân đã blur
+  'crm-add-customer', 'crm-ai-import', 'crm-categories', 'crm-permissions', 'crm-ai-agent', 'crm-connectors',
   // app tuyển dụng: chụp lại ở giao diện English (task ve3p)
   'recruit-dashboard', 'recruit-cv', 'recruit-jd', 'recruit-process', 'recruit-matching'];
 const html = readFileSync(p('index.html'), 'utf8');
@@ -19,7 +21,7 @@ const ok = (c, m) => { if (!c) fails.push(m); };
 // 1) Ảnh app dùng trên trang (mọi tab) chỉ thuộc EN_UI
 const used = [...new Set([...html.matchAll(/assets\/sw\/([\w-]+)\.webp/g)].map((m) => m[1]))];
 for (const n of used) ok(EN_UI.includes(n), `trang dùng ảnh app chưa xác nhận tiếng Anh: assets/sw/${n}.webp`);
-ok(used.length >= 15, `cần >= 15 ảnh app tiếng Anh trên trang, thấy ${used.length}`);
+ok(used.length >= 21, `cần >= 21 ảnh app tiếng Anh trên trang, thấy ${used.length}`);
 
 // 2) Thư mục assets/sw (được phát hành công khai) không còn ảnh ngoài EN_UI
 for (const f of existsSync(p('assets/sw')) ? readdirSync(p('assets/sw')) : []) {
