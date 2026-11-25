@@ -44,9 +44,10 @@ ok(cnt('ja') >= 30 && cnt('ja') === cnt('en') && cnt('en') === cnt('vi'), `số 
 const txt = { ja: strip(only(main, 'ja')), en: strip(only(main, 'en')), vi: strip(only(main, 'vi')) };
 for (const l of ['en', 'vi']) { const m = txt[l].match(new RegExp(`.{0,20}${JP.source}.{0,20}`)); ok(!m, `lang/${l}: còn chữ Nhật "${m && m[0]}"`); }
 const FACTS = {
-  ja: ['JLPT N2', '2016年8月', 'TOEIC 680', '2011年10月', '母語', '日本人社長', '報告', '会議', '交渉', 'ASEAN', '英語で発表', '欧州企業のCEO', '通訳', '翻訳', '仕様書', 'メール'],
-  en: ['JLPT N2', 'Aug 2016', 'TOEIC 680', 'Oct 2011', 'native', 'Japanese president', 'report', 'meeting', 'negotiat', 'ASEAN', 'presented in English', 'European company', 'interpret', 'translat', 'spec', 'email'],
-  vi: ['JLPT N2', '08/2016', 'TOEIC 680', '10/2011', 'bản ngữ', 'Tổng giám đốc người Nhật', 'báo cáo', 'họp', 'đàm phán', 'ASEAN', 'thuyết trình bằng tiếng Anh', 'công ty châu Âu', 'thông dịch', 'dịch', 'đặc tả', 'email'],
+  // task bg9f: bỏ ngày tháng cạnh bằng cấp và bỏ TOEIC 680 (xem tests/check-lang-no-cert-dates.mjs)
+  ja: ['JLPT N2', 'ビジネス英語', '母語', '日本人社長', '報告', '会議', '交渉', 'ASEAN', '英語で発表', '欧州企業のCEO', '通訳', '翻訳', '仕様書', 'メール'],
+  en: ['JLPT N2', 'Business English', 'native', 'Japanese president', 'report', 'meeting', 'negotiat', 'ASEAN', 'presented in English', 'European company', 'interpret', 'translat', 'spec', 'email'],
+  vi: ['JLPT N2', 'Tiếng Anh công việc', 'bản ngữ', 'Tổng giám đốc người Nhật', 'báo cáo', 'họp', 'đàm phán', 'ASEAN', 'thuyết trình bằng tiếng Anh', 'công ty châu Âu', 'thông dịch', 'dịch', 'đặc tả', 'email'],
 };
 // task ila7: so không phân biệt hoa thường (dữ kiện dịch / đặc tả nằm ở thẻ #lang-top); tab Languages không còn Sesame
 for (const [l, keys] of Object.entries(FACTS)) for (const k of keys) ok(txt[l].toLowerCase().includes(k.toLowerCase()), `lang/${l}: thiếu dữ kiện "${k}"`);
