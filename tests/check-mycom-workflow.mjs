@@ -47,8 +47,9 @@ zz.forEach((z, k) => {
     for (const l of ['ja', 'en', 'vi']) {
       const t = strip((n[3].match(new RegExp(`<span data-l="${l}">([^<]*)</span>`)) || ['', ''])[1]);
       ok(!!t, `workflow ${k + 1} bước ${i + 1}: thiếu nhãn ${l}`);
-      if (l === 'ja') ok(t.length <= 13, `workflow ${k + 1} bước ${i + 1} JA "${t}" dài quá 13 ký tự`);
-      else { const w = t.split(' ').length; ok(w >= 2 && w <= 5, `workflow ${k + 1} bước ${i + 1} ${l.toUpperCase()} "${t}": ${w} từ (cần 2 đến 5)`); }
+      // task a94u: bước 01 HR theo chữ người vận hành chốt (10 từ VI) nên trần nới lên JA 17 ký tự, EN/VI 10 từ
+      if (l === 'ja') ok(t.length <= 17, `workflow ${k + 1} bước ${i + 1} JA "${t}" dài quá 17 ký tự`);
+      else { const w = t.split(' ').length; ok(w >= 2 && w <= 10, `workflow ${k + 1} bước ${i + 1} ${l.toUpperCase()} "${t}": ${w} từ (cần 2 đến 10)`); }
     }
   });
   ok(icons.size === ns.length, `workflow ${k + 1}: icon bị lặp giữa các bước`);
