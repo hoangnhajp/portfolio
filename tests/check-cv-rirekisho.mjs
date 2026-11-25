@@ -28,7 +28,8 @@ ok(new RegExp(`class="sb-pdf" href="${CV}"`).test(html), 'link sidebar chưa tr�
 // 3. View Profile + Sales (bỏ Finance / HR / JD / Matching / Management cũ vì không có trong CV mới)
 //    + Team Management, AI Skills (task cg5a, người vận hành yêu cầu, nội dung theo hồ sơ gốc: check-team-ai-tabs.mjs)
 const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]);
-ok(views.join(',') === 'profile,sales,hr,team,ai,lang', `view phải là profile,sales,hr,team,ai,lang (task a9f4 thêm tab Languages, task 4ubf thêm Task: HR); đang ${views.join(',')}`);
+ok(views.filter((v) => v !== 'sw' && v !== 'it' && v !== 'jd').join(',') // task g6pn: sw kiểm ở check-sw-tab; task g9d5: it kiểm ở check-it-tab
+ === 'profile,sales,hr,team,ai,lang', `view phải là profile,sales,hr,team,ai,lang (task a9f4 thêm tab Languages, task 4ubf thêm Task: HR); đang ${views.join(',')}`);
 const tops = [...html.matchAll(/<a href="#[\w-]+" data-view="(\w+)"/g)].map((m) => m[1]);
 ok(tops.every((v) => views.includes(v)), `menu trên trỏ tới view không tồn tại: ${tops.join(',')}`);
 

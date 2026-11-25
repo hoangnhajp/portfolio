@@ -10,12 +10,13 @@ const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 const strip = (s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 
-// 1) Menu trên: "Task: HR" ngay sau "Task: Sales"
+// 1) Menu trên: "HR" ngay sau "Sales" (task g9d5 bỏ chữ "Task:" trên menu)
 const topNav = (html.match(/<nav class="top-nav"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
-ok(/<a href="#hr-top" data-view="hr">Task: HR<\/a>/.test(topNav), 'top-nav thiếu <a href="#hr-top" data-view="hr">Task: HR</a>');
-const order = [...topNav.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]).join(',');
+ok(/<a href="#hr-top" data-view="hr">HR<\/a>/.test(topNav), 'top-nav thiếu <a href="#hr-top" data-view="hr">HR</a>');
+// task g6pn: tab Software Products (sw) đứng cuối, kiểm riêng ở check-sw-tab.mjs; task g9d5: tab IT Knowledge (it) ở check-it-tab.mjs
+const order = [...topNav.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]).filter((v) => v !== 'sw' && v !== 'it' && v !== 'jd').join(',');
 ok(order === 'profile,sales,hr,team,ai,lang', `thứ tự tab menu trên: ${order}`);
-const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]).join(',');
+const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]).filter((v) => v !== 'sw' && v !== 'it' && v !== 'jd').join(',');
 ok(views === 'profile,sales,hr,team,ai,lang', `thứ tự main view: ${views}`);
 
 // 2) Main + 4 trang (3~4 trang theo yêu cầu)
@@ -81,4 +82,4 @@ for (const kf of css.matchAll(/@keyframes\s+[\w-]+\s*\{([\s\S]*?)\}\s*\}/g))
 ok(/prefers-reduced-motion/.test(css), 'CSS HR thiếu prefers-reduced-motion');
 
 if (fails.length) { console.error(`FAIL check-hr-tab (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-hr-tab: tab "Task: HR" 4 trang (${ids.join(', ')}), ja/en/vi ${cnt('ja')} khối mỗi thứ tiếng, đủ dữ kiện`);
+console.log(`PASS check-hr-tab: tab "HR" 4 trang (${ids.join(', ')}), ja/en/vi ${cnt('ja')} khối mỗi thứ tiếng, đủ dữ kiện`);

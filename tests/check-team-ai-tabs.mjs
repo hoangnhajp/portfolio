@@ -50,7 +50,8 @@ for (const [v, t] of Object.entries(TABS)) {
   ok(!/(^|[\s,.(])bạn(?! bè)([\s,.!?)]|$)/i.test(txt.vi), `${v}/vi: còn gọi người đọc là "bạn"`);
 }
 // Nút ngôn ngữ, PDF: tab mới không đổi luật router (main nào không phải profile thì ẩn link PDF)
-ok((html.match(/<main class="wrap" data-view=/g) || []).length === 6, 'số view khác 6 (profile, sales, hr, team, ai, lang; tab Languages task a9f4 kiểm ở check-lang-tab.mjs, tab HR task 4ubf ở check-hr-tab.mjs)');
+ok((html.match(/<main class="wrap" data-view=(?!"sw"|"it"|"jd")/g) || []).length === 6, // task g6pn: tab sw kiểm ở check-sw-tab.mjs; task g9d5: tab it ở check-it-tab.mjs; task wp5x: tab jd ở check-jd-tab.mjs
+ 'số view khác 6 (profile, sales, hr, team, ai, lang; tab Languages task a9f4 kiểm ở check-lang-tab.mjs, tab HR task 4ubf ở check-hr-tab.mjs)');
 
 if (fails.length) { console.error(`FAIL check-team-ai-tabs (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
 console.log('PASS check-team-ai-tabs: 2 tab mới (team, ai) có link top-nav, mục lục TOP..03 x3 ngôn ngữ, đủ JA/EN/VI, EN/VI không sót chữ Nhật, đủ dữ kiện hồ sơ gốc, giọng ứng viên');
