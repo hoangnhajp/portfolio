@@ -43,7 +43,8 @@ try {
   cpSync(join(root, 'assets', 'pg', 'ai-pyramid.webp'), join(dir, 'assets', 'pg', 'ai-pyramid.webp'));
   const tests = readdirSync(join(dir, 'tests')).filter((f) => /^check-.*\.mjs$/.test(f) && f !== 'check-ai-pyramid-isolated.mjs');
   for (const f of tests) {
-    try { execFileSync(process.execPath, [join(dir, 'tests', f)], { cwd: dir, stdio: 'pipe' }); }
+    // GIT_DIR: bản tạm không phải repo, test cần `git show <commit>:<file>` (như check-team-flow-pdca) vẫn đọc được lịch sử thật
+    try { execFileSync(process.execPath, [join(dir, 'tests', f)], { cwd: dir, stdio: 'pipe', env: { ...process.env, GIT_DIR: join(root, '.git') } }); }
     catch (e) { fails++; out.push(`FAIL ${f}: ${String(e.stderr || e.stdout).trim().split('\n').slice(0, 4).join(' | ')}`); }
   }
   if (fails) { console.error(`FAIL check-ai-pyramid-isolated: ${fails}/${tests.length} test đỏ trên HEAD + edof\n` + out.join('\n')); process.exitCode = 1; }

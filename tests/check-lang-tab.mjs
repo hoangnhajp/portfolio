@@ -93,7 +93,8 @@ for (const id of [...SECS, 'ai-tools']) {
 const ai = (html.match(/<main class="wrap" data-view="ai" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 const tools = (ai.match(/<section class="pg"[^>]*id="ai-tools"[\s\S]*?<\/section>/) || [''])[0];
 ok(tools, 'tab AI thiếu trang #ai-tools');
-for (const k of ['Excel', 'PowerPoint', 'ChatGPT', 'Claude', 'Sesame', '設計と開発を主導', 'led the design and development', 'chủ trì thiết kế'])
+// task 22v8: không nêu tên công cụ AI (ChatGPT / Claude / Sesame), thay bằng mô tả chung
+for (const k of ['Excel', 'PowerPoint', '生成AI', 'Generative AI', 'AI tạo sinh', 'AI conversation practice', '設計と開発を主導', 'led the design and development', 'chủ trì thiết kế'])
   ok(tools.includes(k), `#ai-tools thiếu "${k}"`);
 ok(/href="#ai-tools" data-sec="ai-tools"><em>05<\/em>/.test(html), 'mục lục AI thiếu 05 #ai-tools');
 

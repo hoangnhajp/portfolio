@@ -29,7 +29,8 @@ const trios = [...body.matchAll(/(<div class="kw1"[\s\S]*?<\/div>\s*<\/div>\s*)?
   .filter((m) => !/<p><b>/.test(m[2]));
 // task p0r6: thẻ Sales #w-mycom thành workflow zigzag 7 bước (không còn keyword + câu), nên ngưỡng 11 / 16
 // task pt2m: thẻ HR #w-mycom thành workflow 4 bước có icon (không còn keyword + câu), nên ngưỡng 10
-ok(trios.length >= 10,`chỉ thấy ${trios.length} danh sách kinh nghiệm`);
+ok(trios.length >= 9, // task zvhs bỏ thẻ Example #ai-approach
+  `chỉ thấy ${trios.length} danh sách kinh nghiệm`);
 for (const m of trios) {
   const n = [m[2], m[3], m[4]].map((s) => (s.match(/<p>/g) || []).length);
   ok(n.every((x) => x === 1), `danh sách "${strip(m[3]).slice(0, 40)}" phải còn 1 câu mỗi ngôn ngữ, đang ${n.join('/')}`);
@@ -38,7 +39,8 @@ for (const m of trios) {
 
 // 3. Hàng keyword: 3 đến 5 chip mỗi ngôn ngữ, số chip ja/en/vi bằng nhau, chip ngắn, không 「・」
 const rows = [...body.matchAll(/<div class="kw1[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<\/div>/g)];
-ok(rows.length >= 16,`chỉ thấy ${rows.length} hàng keyword`);
+ok(rows.length >= 15, // task zvhs bỏ thẻ Example #ai-approach
+  `chỉ thấy ${rows.length} hàng keyword`);
 for (const [, r] of rows) {
   const n = ['ja', 'en', 'vi'].map((l) => ((r.match(new RegExp(`<div class="chips" data-l="${l}">([\\s\\S]*?)(?:</div>|$)`)) || ['', ''])[1].match(/class="chip"/g) || []).length);
   ok(n[0] >= 3 && n[0] <= 5 && n[0] === n[1] && n[1] === n[2], `hàng keyword lệch / sai số chip: ${n.join('/')} (${strip(r).slice(0, 40)})`);

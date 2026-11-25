@@ -56,7 +56,7 @@ zz.forEach((z, k) => {
 });
 
 // 4. Giữ dữ kiện cũ
-for (const s of ['クレーム', 'complaint', 'khiếu nại', '提案書', 'ASEAN', 'ChatGPT', '未経験', 'no experience', 'chưa có kinh nghiệm', 'Horenso'])
+for (const s of ['クレーム', 'complaint', 'khiếu nại', '提案書', 'ASEAN', 'AIエージェント', '未経験', 'no experience', 'chưa có kinh nghiệm', 'Horenso'])
   ok(sec.includes(s), `#w-mycom mất dữ kiện "${s}"`);
 
 // 5. CSS icon + workflow 4 bước có trong khối zz-css, có reduced-motion

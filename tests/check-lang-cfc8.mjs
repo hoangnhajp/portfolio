@@ -21,7 +21,8 @@ ok(!/lg-chat|lg-msg|lg-bub|lg-typing|lgB[1-4]|lgType|lgDot/.test(css), 'lang-css
 ok(!/class="lg-two/.test(ja), '#lang-ja: còn lưới 2 cột lg-two (hội thoại + tiến trình)');
 ok((ja.match(/class="lg-tk"/g) || []).length === 6 && /class="card lg-track lg-anim rv"/.test(ja), '#lang-ja: cần 1 thẻ .lg-track trải ngang gồm 6 bước');
 ok(/grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/.test(rule('.lg-tks')), '.lg-tks: màn rộng phải là lưới 6 cột đều');
-ok(/lgFillX/.test(css) && /\.lg-tks::after\{animation:lgFillX 7s linear infinite\}/.test(css.replace(/html\.js \.lg-track /g, '')), 'đường nối tiến trình phải chạy tuyến tính (linear) để khớp nhịp icon');
+// task dom5: vạch liền lgFillX xuyên icon đã thay bằng đoạn nét đứt từng cặp icon; vẫn phải tuyến tính và khớp nhịp icon (chi tiết: check-lang-dom5)
+ok(/\.lg-tk:not\(:last-child\)::after,\.lg-tk:not\(:last-child\)::before\{animation:lgSeg 7s linear infinite backwards/.test(css.replace(/html\.js \.lg-track /g, '')),'đường nối tiến trình phải chạy tuyến tính (linear) để khớp nhịp icon');
 
 // 2) #lang-bridge: hình học tam giác
 const br = sec('lang-bridge');

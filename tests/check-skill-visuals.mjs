@@ -16,14 +16,14 @@ const used = [...html.matchAll(/<use href="#(ic-[\w-]+)"/g)].map((m) => m[1]);
 ok(symbols.size >= 12, `sprite icon quá ít: ${symbols.size} symbol (cần >= 12)`);
 for (const u of used) ok(symbols.has(u), `icon #${u} không có symbol`);
 
-// 2) Workflow sống: 2 chuỗi 4 bước, mỗi bước 1 icon, mũi tên có lớp animation
-for (const id of ['team-daily', 'ai-approach']) {
+// 2) Workflow sống: #team-daily 4 bước, #ai-approach 3 bước (task wx0j bỏ bước "Giao cho AI"), mỗi bước 1 icon, mũi tên có lớp animation
+for (const [id, n] of [['team-daily', 4], ['ai-approach', 3]]) {
   const s = sec(id);
-  ok(/<div class="cyc cyc--live rv"/.test(s), `${id}: chuỗi workflow chưa có lớp cyc--live`);
+  ok(/<div class="cyc cyc--live[\w -]*rv"/.test(s), `${id}: chuỗi workflow chưa có lớp cyc--live`);
   const steps = s.match(/<div class="card cyc-c"[\s\S]*?<\/div>\s*(?=<span class="cyc-a"|<\/div>)/g) || [];
-  ok(steps.length === 4, `${id}: cần 4 bước, thấy ${steps.length}`);
+  ok(steps.length === n, `${id}: cần ${n} bước, thấy ${steps.length}`);
   steps.forEach((st, i) => ok(/<span class="sv-ib"[^>]*><svg class="sv-ic"[^>]*><use href="#ic-[\w-]+"/.test(st), `${id}: bước ${i + 1} thiếu icon`));
-  ok((s.match(/<span class="cyc-a"/g) || []).length === 3, `${id}: cần 3 mũi tên nối bước`);
+  ok((s.match(/<span class="cyc-a"/g) || []).length === n - 1, `${id}: cần ${n - 1} mũi tên nối bước`);
 }
 
 // 3) Icon cho 4 thẻ vai trò (team-records) và 2 thẻ AI / People (ai-people)
@@ -55,4 +55,4 @@ ok(/@media print\{[^}]*\.sv-hero[^}]*\.sv-spot[^}]*display:none/.test(html), 'b�
 ok(!/<img[^>]+src="https?:/i.test(sec('team-top') + sec('ai-top') + sec('team-skills') + sec('ai-uses')), 'không dùng hình ngoài (http)');
 
 if (fails.length) { console.error(`FAIL check-skill-visuals (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-skill-visuals: workflow sống 2x4 bước có icon, ${symbols.size} icon, 12 minh hoạ động .gxs từ icon video (12 kỹ năng, không còn hình đầu tab), reduced-motion + bản in an toàn`);
+console.log(`PASS check-skill-visuals: workflow sống (team 4 bước, AI 3 bước) có icon, ${symbols.size} icon, 12 minh hoạ động .gxs từ icon video (12 kỹ năng, không còn hình đầu tab), reduced-motion + bản in an toàn`);

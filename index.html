@@ -104,6 +104,18 @@ p{margin:0}
 .meta span{display:block;font:800 9px 'Manrope',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8a83a0;margin-bottom:5px}
 .meta b{display:block;font:700 12.5px/1.55 'Noto Sans JP',sans-serif;color:#16141d}
 
+/* Task 3v6v: nguyên tắc AI ở #ai-top, 2 cột giao AI / người quyết định + 1 dòng nguyên tắc */
+.aip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:4px 0 14px}
+.aip-col{border:1px solid #ece8f3;border-radius:14px;padding:11px 14px 10px;background:#fff;border-top:3px solid #26B3F4}
+.aip-hu{border-top-color:#FBA65A}
+.aip-hd{display:block;font:800 12.5px/1.45 'Noto Sans JP',sans-serif;color:#0f5a8c;margin-bottom:5px}
+.aip-hu .aip-hd{color:#DD6417}
+.aip-col ul{margin:0;padding-left:16px}
+.aip-col li{font:500 12px/1.6 'Noto Sans JP',sans-serif;color:#413c4d}
+.aip-rule{grid-column:1/-1;margin:0;padding:8px 14px;border-radius:12px;background:#f3f0fa;font:600 12.5px/1.6 'Noto Sans JP',sans-serif;color:#16141d}
+.aip-rule b{font-family:'Manrope',sans-serif;font-size:9px;letter-spacing:.2em;color:#8a83a0;margin-right:8px}
+@media screen and (max-width:700px){.aip{grid-template-columns:1fr}}
+
 /* Số lớn */
 .num,.card .num{font:700 46px/1 'Space Grotesk',sans-serif;letter-spacing:-2px}
 .num small{font:700 15px 'Noto Sans JP',sans-serif;letter-spacing:0;margin-left:3px}
@@ -200,6 +212,8 @@ nav.toc.grow{display:flex;flex-direction:column;justify-content:space-between}
 
 /* vòng quy trình .cyc (#team-daily) */
 .cyc{display:grid;grid-template-columns:1fr 18px 1fr 18px 1fr 18px 1fr;align-items:stretch;gap:0}
+/* task wx0j: chuỗi 3 bước (#ai-approach) */
+.cyc--3{grid-template-columns:1fr 18px 1fr 18px 1fr}
 .cyc-c{padding:14px 12px}
 .cyc-c h3{font-size:13.5px;margin:4px 0 4px}
 .card .cyc-c p,.cyc-c p{font-size:11.2px;line-height:1.65}
@@ -1006,20 +1020,23 @@ html.js .lg-meter .lg-bar>i{animation:lgSheen 3.4s ease-in-out infinite;animatio
 .lg-hr p{margin:0;font-size:12.5px;line-height:1.6}
 html.js .lg-hrs .lg-hr{animation:lgRise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*.16s)}
 html.js .lg-hrs .lg-hr-k{animation:lgPop .55s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--i,0)*.16s + .25s)}
-/* Tiến trình 6 bước trải ngang: 6 cột bằng nhau, đường nối đi qua đúng tâm icon (đầu = tâm cột 1, cuối = tâm cột 6:
-   (100% - 5 khe) / 12 mỗi bên); vệt màu chạy TUYẾN TÍNH 0 -> 70% chu kỳ nên chạm icon thứ i đúng lúc i*0.98s = lúc icon đó bắt đầu nảy (lgTk, delay i*0.98s). */
+/* Tiến trình 6 bước trải ngang: 6 cột bằng nhau. Task dom5: KHÔNG kẻ 1 vạch liền xuyên qua icon; mỗi cặp icon kề nhau có
+   1 đoạn NÉT ĐỨT riêng + mũi tên như workflow. Icon 42px ở tâm cột (50%), khe --g, hở 6px mỗi đầu:
+   đoạn đi từ 50% + 21 + 6 = 50% + 27px tới tâm cột kế - 27px => width = 100% + g - 54px; mũi tên chạm đầu cuối đoạn.
+   Đoạn i sáng đúng lúc icon i nảy rồi mờ khi tới icon kế (lgTk và lgSeg cùng 7s, trễ i*0.98s; chỉ opacity), nên luồng chạy lần lượt như workflow. */
 .lg-track{margin-top:16px}
 .lg-tks{--g:12px;position:relative;list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--g)}
-.lg-tks::before,.lg-tks::after{content:'';position:absolute;top:20px;left:calc((100% - 5*var(--g))/12);right:calc((100% - 5*var(--g))/12);height:2px;border-radius:2px;background:#ece8f3}
-.lg-tks::after{background:linear-gradient(90deg,#3b2f86,#26B3F4 60%,#F68209);transform-origin:left center}
-.lg-tk{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.lg-tk{--lc:#6d5bd0;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.lg-tk:nth-child(1){--lc:#3b2f86}.lg-tk:nth-child(2){--lc:#5a4fc4}.lg-tk:nth-child(3){--lc:#2f8fdc}.lg-tk:nth-child(4){--lc:#26B3F4}.lg-tk:nth-child(5){--lc:#F68209}
+.lg-tk:not(:last-child)::after{content:'';position:absolute;top:20px;left:calc(50% + 27px);width:calc(100% + var(--g) - 54px);height:2px;background:repeating-linear-gradient(90deg,var(--lc) 0 6px,transparent 6px 11px)}
+.lg-tk:not(:last-child)::before{content:'';position:absolute;top:17px;left:calc(150% + var(--g) - 37px);width:6px;height:6px;border:solid var(--lc);border-width:2px 2px 0 0;transform:rotate(45deg)}
 .lg-tk>img{position:relative;z-index:1;flex:none;width:42px;height:42px;padding:5px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #e5e0f1;box-sizing:border-box}
 .lg-tk-n{display:block;font:700 9.5px 'Space Grotesk',sans-serif;letter-spacing:.08em;color:#6d5bd0}
 .lg-tk h3{margin:0 0 4px;font-size:13px;line-height:1.4}
 .lg-tk p{margin:0;font-size:11.5px;line-height:1.55}
-@keyframes lgFillX{0%{opacity:1;transform:scaleX(0)}70%,90%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
 @keyframes lgTk{0%,14%,100%{transform:scale(1)}7%{transform:scale(1.14)}}
-html.js .lg-track .lg-tks::after{animation:lgFillX 7s linear infinite}
+@keyframes lgSeg{0%{opacity:.4}3%,14%{opacity:1}22%,100%{opacity:.4}}
+html.js .lg-track .lg-tk:not(:last-child)::after,html.js .lg-track .lg-tk:not(:last-child)::before{animation:lgSeg 7s linear infinite backwards;animation-delay:calc(var(--i,0)*.98s)}
 html.js .lg-track .lg-tk{animation:lgRise .55s ease-out both;animation-delay:calc(var(--i,0)*.14s + .2s)}
 html.js .lg-track .lg-tk>img{animation:lgTk 7s ease-in-out infinite;animation-delay:calc(var(--i,0)*.98s)}
 
@@ -1094,11 +1111,12 @@ html:not(.js) .lg-stage .lg-sl:not(:first-child){opacity:0}
 html:not(.js) .lg-bar>i{display:none}
 @media screen and (max-width:900px){
   .lg-meter,.lg-hrs{grid-template-columns:1fr}
-  /* tiến trình dọc: mỗi bước icon trái, chữ phải; đoạn nối từ đáy icon bước này tới đỉnh icon bước sau (đúng trục tâm icon x = 21px) */
+  /* tiến trình dọc: mỗi bước icon trái, chữ phải; đoạn NÉT ĐỨT từ đáy icon (42 + hở 6 = 48px) tới đỉnh icon bước sau
+     (100% + khe 14px - hở 6px), đúng trục tâm icon x = 21px; mũi tên chỉ xuống chạm cuối đoạn */
   .lg-tks{grid-template-columns:1fr;gap:14px}
-  .lg-tks::before,.lg-tks::after{display:none}
   .lg-tk{flex-direction:row;align-items:flex-start;text-align:left;gap:12px}
-  .lg-tk:not(:last-child)::before{content:'';position:absolute;left:20px;top:42px;width:2px;height:calc(100% - 42px + 14px);background:linear-gradient(180deg,#cfc6ef,#bfe6fb)}
+  .lg-tk:not(:last-child)::after{left:20px;top:48px;width:2px;height:calc(100% + 14px - 54px);background:repeating-linear-gradient(180deg,var(--lc) 0 5px,transparent 5px 9px)}
+  .lg-tk:not(:last-child)::before{left:17px;top:calc(100% + 14px - 16px);transform:rotate(135deg)}
   .tk{grid-template-columns:1fr}
   .lg-st-in{grid-template-columns:84px 1fr;gap:10px}
   .lg-spk{height:96px}.lg-spk img{width:56px;height:56px}
@@ -1437,9 +1455,9 @@ html:not(.js) .lg-bar>i{display:none}
       <div data-l="vi"><h3>Ngoại ngữ</h3><p>Tôi dùng tiếng Nhật (JLPT N2) và tiếng Anh (TOEIC 680) trong họp, đàm phán.</p></div>
     </div>
     <div class="card"><p class="num" style="font-size:26px;color:#1FB6A6">07</p>
-      <div data-l="ja"><h3>AI活用</h3><p>ChatGPTとClaudeで、3～4名分の業務を担います。</p></div>
-      <div data-l="en"><h3>Using AI</h3><p>I use ChatGPT and Claude to handle work once done by 3 to 4 people.</p></div>
-      <div data-l="vi"><h3>Ứng dụng AI</h3><p>Tôi dùng ChatGPT, Claude để tự xử lý khối lượng việc trước đây cần 3 đến 4 người.</p></div>
+      <div data-l="ja"><h3>AI活用</h3><p>生成AIで、3～4名分の業務を担います。</p></div>
+      <div data-l="en"><h3>Using AI</h3><p>I use generative AI to handle work once done by 3 to 4 people.</p></div>
+      <div data-l="vi"><h3>Ứng dụng AI</h3><p>Tôi dùng AI tạo sinh để tự xử lý khối lượng việc trước đây cần 3 đến 4 người.</p></div>
     </div>
     <div class="card"><p class="num" style="font-size:26px;color:#2a7de1">08</p>
       <div data-l="ja"><h3>ビジネス分析、市場調査</h3><p>売上とKPI、市場動向を分析し、ASEAN会議で発表しました。</p></div>
@@ -1556,7 +1574,7 @@ html:not(.js) .lg-bar>i{display:none}
 
   <div class="card rv" style="--d:220ms">
     <span class="lbl">HR ／ <span data-l="ja">人事、総務部門：社内研修と制度整備</span><span data-l="en">HR and general affairs: training and building systems</span><span data-l="vi">Nhân sự, hành chính: đào tạo nội bộ, xây dựng chế độ</span></span>
-    <p class="zz-lead"><span data-l="ja">ChatGPTとAIエージェントを報告書作成とデータ照合に活用しました。未経験の採用担当2名を育成し、人事チームを5名に広げました。</span><span data-l="en">I brought ChatGPT and AI agents into reports and data checks. I trained two recruiters with no experience and grew HR to five people.</span><span data-l="vi">Tôi đưa ChatGPT và AI agent vào báo cáo, đối chiếu số liệu. Tôi đào tạo 2 nhân viên tuyển dụng chưa có kinh nghiệm và mở rộng đội lên 5 người.</span></p>
+    <p class="zz-lead"><span data-l="ja">生成AIとAIエージェントを報告書作成とデータ照合に活用しました。未経験の採用担当2名を育成し、人事チームを5名に広げました。</span><span data-l="en">I brought generative AI and AI agents into reports and data checks. I trained two recruiters with no experience and grew HR to five people.</span><span data-l="vi">Tôi đưa AI tạo sinh và AI agent vào báo cáo, đối chiếu số liệu. Tôi đào tạo 2 nhân viên tuyển dụng chưa có kinh nghiệm và mở rộng đội lên 5 người.</span></p>
     <!-- zz:wf (task pt2m): việc HR tại MAYEKAWA = workflow zigzag 4 bước có icon, dùng chung khối zz-css / zz -->
     <div class="zz zz--4" data-zz>
       <svg class="zz-svg" aria-hidden="true" focusable="false"><path class="zz-base" d="" /><path class="zz-lit" d="" /></svg>
@@ -2188,14 +2206,31 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">繰り返しの作業はAIに任せ、<br /><i>考え、判断する時間を生み出す。</i></span><span data-l="en">I hand repetitive work to AI<br /><i>and spend the time on thinking and deciding.</i></span><span data-l="vi">Tôi giao việc lặp lại cho AI<br /><i>để dành thời gian suy nghĩ và quyết định.</i></span></h2>
   <span class="kw-en rv" style="--d:100ms">AI Skills &amp; Workflow</span>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">ChatGPTとClaudeで繰り返し作業を効率化し、空いた時間を原因分析や問題解決に充てています。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">I use ChatGPT and Claude to streamline routine work and spend the time saved on analysis and problem solving.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi dùng ChatGPT và Claude để tinh gọn việc lặp lại, dành thời gian tiết kiệm cho phân tích và giải quyết vấn đề.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">生成AIで繰り返し作業を効率化し、空いた時間を原因分析や問題解決に充てています。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I use generative AI to streamline routine work and spend the time saved on analysis and problem solving.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi dùng AI tạo sinh để tinh gọn việc lặp lại, dành thời gian tiết kiệm cho phân tích và giải quyết vấn đề.</p>
   <div class="kw1 rv" style="margin:8px 0 10px">
-    <div class="chips" data-l="ja"><span class="chip">ChatGPT</span><span class="chip">Claude</span><span class="chip">業務効率化</span><span class="chip">原因分析</span></div>
-    <div class="chips" data-l="en"><span class="chip">ChatGPT</span><span class="chip">Claude</span><span class="chip">workflow automation</span><span class="chip">root cause analysis</span></div>
-    <div class="chips" data-l="vi"><span class="chip">ChatGPT</span><span class="chip">Claude</span><span class="chip">tự động hóa quy trình</span><span class="chip">phân tích nguyên nhân</span></div>
+    <div class="chips" data-l="ja"><span class="chip">AI fluency</span><span class="chip">human-in-the-loop</span><span class="chip">AIエージェント</span><span class="chip">業務効率化</span><span class="chip">原因分析</span></div>
+    <div class="chips" data-l="en"><span class="chip">AI fluency</span><span class="chip">human-in-the-loop</span><span class="chip">AI agents</span><span class="chip">workflow automation</span><span class="chip">root cause analysis</span></div>
+    <div class="chips" data-l="vi"><span class="chip">AI fluency</span><span class="chip">human-in-the-loop</span><span class="chip">AI agent</span><span class="chip">tự động hóa quy trình</span><span class="chip">phân tích nguyên nhân</span></div>
   </div>
+  <div class="aip rv" style="--d:145ms">
+    <div class="aip-col aip-ai">
+      <b class="aip-hd" data-l="ja">AIに任せる：最初の下書き</b><b class="aip-hd" data-l="en">AI takes: the first draft</b><b class="aip-hd" data-l="vi">Giao cho AI: bản nháp đầu tiên</b>
+      <ul data-l="ja"><li>週次報告、会議の要約、メール、数字の照合など、繰り返す具体的な作業。</li><li>情報の収集と整理、最初の下書きづくり。</li></ul>
+      <ul data-l="en"><li>Specific repeat tasks: weekly reports, meeting notes, emails, cross-checking figures</li><li>Collecting and sorting information, writing the first draft</li></ul>
+      <ul data-l="vi"><li>Việc lặp lại cụ thể: báo cáo tuần, tóm tắt cuộc họp, email, đối chiếu số liệu</li><li>Thu thập, sắp xếp thông tin, soạn bản nháp đầu tiên</li></ul>
+    </div>
+    <div class="aip-col aip-hu">
+      <b class="aip-hd" data-l="ja">人が決める：最終版</b><b class="aip-hd" data-l="en">I decide: the final version</b><b class="aip-hd" data-l="vi">Con người quyết định: bản cuối</b>
+      <ul data-l="ja"><li>数字を検証し、顧客と会社に合う表現に整える。</li><li>専門知識で判断し、AIの誤りを見抜く。</li><li>顧客データや社内資料は公開AIに入れない。</li><li>結果への最終責任を負う。</li></ul>
+      <ul data-l="en"><li>Verify the figures and set the tone for the customer and company</li><li>Use domain judgment to spot where AI is wrong</li><li>Keep customer data and internal files out of public AI tools</li><li>Own the result in the end</li></ul>
+      <ul data-l="vi"><li>Kiểm chứng số liệu, chỉnh văn phong hợp với khách hàng và công ty</li><li>Phán đoán bằng chuyên môn, nhìn ra AI sai ở đâu</li><li>Dữ liệu khách hàng, tài liệu nội bộ: không đưa lên AI công cộng</li><li>Chịu trách nhiệm cuối cùng với kết quả</li></ul>
+    </div>
+    <p class="aip-rule" data-l="ja"><b>PRINCIPLE</b>AIが下書き、最終版の責任は私。私はAIを指揮し結果を検証する役で、効果は前後の時間で測ります。</p>
+    <p class="aip-rule" data-l="en"><b>PRINCIPLE</b>AI drafts, I own the final version: directing AI and verifying the output, measured in time before and after.</p>
+    <p class="aip-rule" data-l="vi"><b>PRINCIPLE</b>AI làm bản nháp, tôi chịu trách nhiệm bản cuối: điều phối AI và kiểm chứng kết quả, đo bằng thời gian trước và sau.</p>
+  </div><!-- /aip -->
   <figure class="mv rv" style="--d:150ms">
     <figcaption class="mv-head"><span class="mv-rec"></span><span class="mv-kick">WORKFLOW</span><span class="mv-tt" data-l="ja">繰り返しの作業をAIに任せる流れ</span><span class="mv-tt" data-l="en">How I hand repetitive work to AI</span><span class="mv-tt" data-l="vi">Cách tôi giao việc lặp lại cho AI</span><span class="mv-time" aria-hidden="true">4.8s</span><button class="mv-pp" type="button" aria-pressed="false"><i aria-hidden="true"></i><span class="mv-sr" data-l="ja">一時停止</span><span class="mv-sr" data-l="en">Pause animation</span><span class="mv-sr" data-l="vi">Tạm dừng chuyển động</span></button></figcaption>
     <div class="mv-track">
@@ -2203,7 +2238,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
       <div class="mv-run" aria-hidden="true"><span class="mv-tok"></span></div>
       <div class="mv-node mv-n1"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-pen"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-pen"/></svg></span></span><b class="mv-lb" data-l="ja">書き出す</b><b class="mv-lb" data-l="en">Write it out</b><b class="mv-lb" data-l="vi">Liệt kê</b><span class="mv-chip" data-l="ja">工程の分解</span><span class="mv-chip" data-l="en">Steps</span><span class="mv-chip" data-l="vi">Chia bước</span></div>
       <div class="mv-node mv-n2"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-repeat"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-repeat"/></svg></span></span><b class="mv-lb" data-l="ja">定型作業の<wbr>洗い出し</b><b class="mv-lb" data-l="en">Spot repetition</b><b class="mv-lb" data-l="vi">Tìm việc lặp</b><span class="mv-chip" data-l="ja">毎日、毎週</span><span class="mv-chip" data-l="en">Daily, weekly</span><span class="mv-chip" data-l="vi">Ngày, tuần</span></div>
-      <div class="mv-node mv-n3"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-chip"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-chip"/></svg></span></span><b class="mv-lb" data-l="ja">AIに<wbr>任せる</b><b class="mv-lb" data-l="en">Hand to AI</b><b class="mv-lb" data-l="vi">Giao cho AI</b><span class="mv-chip" data-l="ja">ChatGPT、Claude</span><span class="mv-chip" data-l="en">ChatGPT, Claude</span><span class="mv-chip" data-l="vi">ChatGPT, Claude</span></div>
+      <div class="mv-node mv-n3"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-chip"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-chip"/></svg></span></span><b class="mv-lb" data-l="ja">AIに<wbr>任せる</b><b class="mv-lb" data-l="en">Hand to AI</b><b class="mv-lb" data-l="vi">Giao cho AI</b><span class="mv-chip" data-l="ja">生成AI</span><span class="mv-chip" data-l="en">Generative AI</span><span class="mv-chip" data-l="vi">AI tạo sinh</span></div>
       <div class="mv-node mv-n4"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-check"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-check"/></svg></span></span><b class="mv-lb" data-l="ja">人が<wbr>確認</b><b class="mv-lb" data-l="en">A person checks</b><b class="mv-lb" data-l="vi">Người kiểm tra</b><span class="mv-chip" data-l="ja">最終判断</span><span class="mv-chip" data-l="en">Final call</span><span class="mv-chip" data-l="vi">Quyết định cuối</span></div>
       <div class="mv-node mv-end"><span class="mv-dot" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-heart"/></svg><span class="mv-lit"><svg class="sv-ic" focusable="false"><use href="#ic-heart"/></svg></span></span><b class="mv-lb" data-l="ja">人の<wbr>仕事へ</b><b class="mv-lb" data-l="en">Time for people</b><b class="mv-lb" data-l="vi">Việc của con người</b></div>
     </div>
@@ -2217,7 +2252,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <div class="mv-bar" aria-hidden="true"><span></span></div>
   </figure>
   <div class="meta rv" style="--d:180ms;margin-top:18px">
-    <div><span>Tools</span><b>ChatGPT, Claude, Sesame</b></div>
+    <div><span>Tools</span><b data-l="ja">生成AI、AIエージェント、AI会話練習</b><b data-l="en">Generative AI, AI agents, AI conversation practice</b><b data-l="vi">AI tạo sinh, AI agent, luyện hội thoại với AI</b></div>
     <div><span>Time</span><b data-l="ja">情報整理の時間 80～90%減（4年前比）</b><b data-l="en">80 to 90% less time organising information (vs four years ago)</b><b data-l="vi">Giảm 80 đến 90% thời gian xử lý thông tin (so với 4 năm trước)</b></div>
     <div><span>Output</span><b data-l="ja">生産性 約3～4倍</b><b data-l="en">About 3 to 4 times the productivity</b><b data-l="vi">Năng suất khoảng 3 đến 4 lần</b></div>
     <div><span>Rule</span><b data-l="ja">AIの結果は人が確認してから使う</b><b data-l="en">A person checks AI output before it is used</b><b data-l="vi">Con người kiểm tra kết quả AI trước khi dùng</b></div>
@@ -2254,31 +2289,12 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">繰り返しの作業は、次の流れでワークフロー化しています。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">This is how I turn repetitive work into a workflow.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi biến việc lặp lại thành quy trình theo các bước sau.</p>
-  <div class="cyc cyc--live rv" style="--d:180ms;margin-top:16px">
+  <div class="cyc cyc--live cyc--3 rv" style="--d:180ms;margin-top:16px">
     <div class="card cyc-c"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-pen"/></svg></span><span class="cyc-n">01</span><h3 data-l="ja">書き出す</h3><h3 data-l="en">Write it out</h3><h3 data-l="vi">Liệt kê</h3><p data-l="ja">業務を最初から最後まで工程に分解し、どこに時間がかかっているかを把握します。</p><p data-l="en">I split the job into steps from start to finish and see where the time goes.</p><p data-l="vi">Tôi chia công việc thành từng bước từ đầu đến cuối và xem thời gian tốn vào đâu.</p></div>
     <span class="cyc-a">→</span>
     <div class="card cyc-c"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-repeat"/></svg></span><span class="cyc-n">02</span><h3 data-l="ja">繰り返しを見つける</h3><h3 data-l="en">Spot the repetition</h3><h3 data-l="vi">Tìm việc lặp lại</h3><p data-l="ja">毎日、毎週発生する作業や、手順が定型化された作業を洗い出します。</p><p data-l="en">I pick out the tasks repeated every day or week and those that follow a fixed pattern.</p><p data-l="vi">Tôi chọn ra những việc lặp lại mỗi ngày, mỗi tuần và những việc có khuôn mẫu cố định.</p></div>
     <span class="cyc-a">→</span>
-    <div class="card cyc-c" style="border-color:#cfc6ef;background:linear-gradient(160deg,#fff,#f4f1fd)"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-chip"/></svg></span><span class="cyc-n">03</span><h3 data-l="ja">AIに任せる</h3><h3 data-l="en">Hand it to AI</h3><h3 data-l="vi">Giao cho AI</h3><p data-l="ja">プロンプトとテンプレートを用意し、要約、集計、データ入力、下書きをAIに任せます。</p><p data-l="en">I prepare prompts and templates and let AI do the summaries, totals, data entry and drafts.</p><p data-l="vi">Tôi chuẩn bị prompt và mẫu, giao cho AI tóm tắt, tổng hợp, nhập liệu và soạn nháp.</p></div>
-    <span class="cyc-a">→</span>
-    <div class="card cyc-c"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-check"/></svg></span><span class="cyc-n">04</span><h3 data-l="ja">人が確認して決める</h3><h3 data-l="en">A person checks and decides</h3><h3 data-l="vi">Con người kiểm tra, quyết định</h3><p data-l="ja">AIの結果は人が確認してから使い、判断と最終決定は人が担います。</p><p data-l="en">I check the AI output before using it and make the final call myself.</p><p data-l="vi">Tôi kiểm tra kết quả AI trước khi dùng, rồi tự đưa ra nhận định và quyết định cuối cùng.</p></div>
-  </div>
-  <div class="card rv" style="--d:220ms;margin-top:14px"><span class="lbl">Example</span>
-    <h3 data-l="ja">例：チームの日次報告</h3><h3 data-l="en">Example: the team's daily report</h3><h3 data-l="vi">Ví dụ: báo cáo ngày của đội</h3>
-    <div class="kw1" style="margin:8px 0 10px">
-      <div class="chips" data-l="ja"><span class="chip">日次報告</span><span class="chip">AI集計</span><span class="chip">原因確認</span><span class="chip">優先順位</span></div>
-      <div class="chips" data-l="en"><span class="chip">daily reports</span><span class="chip">AI summaries</span><span class="chip">cause review</span><span class="chip">priorities</span></div>
-      <div class="chips" data-l="vi"><span class="chip">báo cáo ngày</span><span class="chip">AI tổng hợp</span><span class="chip">xem xét nguyên nhân</span><span class="chip">thứ tự ưu tiên</span></div>
-    </div>
-    <div class="lines" data-l="ja">
-      <p>AIで工程別の時間や停滞を集計し、メンバーと原因や次の行動を決めます。</p>
-    </div>
-    <div class="lines" data-l="en">
-      <p>I use AI to summarise time and delays by step, then discuss causes and next actions with the team.</p>
-    </div>
-    <div class="lines" data-l="vi">
-      <p>Tôi dùng AI tổng hợp thời gian và việc đình trệ theo từng bước, rồi cùng đội xác định nguyên nhân và hành động tiếp theo.</p>
-    </div>
+    <div class="card cyc-c"><span class="sv-ib" aria-hidden="true"><svg class="sv-ic" focusable="false"><use href="#ic-check"/></svg></span><span class="cyc-n">03</span><h3 data-l="ja">人が確認して決める</h3><h3 data-l="en">A person checks and decides</h3><h3 data-l="vi">Con người kiểm tra, quyết định</h3><p data-l="ja">AIの結果は人が確認してから使い、判断と最終決定は人が担います。</p><p data-l="en">I check the AI output before using it and make the final call myself.</p><p data-l="vi">Tôi kiểm tra kết quả AI trước khi dùng, rồi tự đưa ra nhận định và quyết định cuối cùng.</p></div>
   </div>
 </section>
 <section class="pg" data-chap="IV" id="ai-uses">
@@ -2296,11 +2312,11 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <div class="card sv-card"><div class="sv-spot gxs gxs--orbit" data-k="a3-meetings" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:28.1;--d:42"></i><i class="gxs-ln" style="--x:16;--y:28.1;--a:0deg;--o:8.5cqw;--l:9.5cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:15.2;--a:159.2deg;--o:8.5cqw;--l:11.9cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:41.1;--a:-159.2deg;--o:8.5cqw;--l:11.9cqw;--i:3"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:28.1;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/calendar.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:16;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:15.2;--i:2"><span class="gx-pl"><img src="assets/gx/checklist.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/stopwatch.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="lbl">Meetings</span><h3 data-l="ja">議事録とチームの進捗</h3><h3 data-l="en">Minutes and team progress</h3><h3 data-l="vi">Biên bản họp, tiến độ đội</h3>
       <p data-l="ja">会議メモと議事録を作成し、チームの業務時間、タスク、進捗を管理しています。</p><p data-l="en">I write meeting notes and minutes and track the team's working hours, tasks and progress.</p><p data-l="vi">Tôi ghi chú, viết biên bản họp và quản lý giờ làm, task, tiến độ của đội.</p></div>
     <div class="card sv-card"><div class="sv-spot gxs gxs--orbit" data-k="a4-hr" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:28.1;--d:42"></i><i class="gxs-ln" style="--x:16;--y:28.1;--a:0deg;--o:8.5cqw;--l:9.5cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:15.2;--a:159.2deg;--o:8.5cqw;--l:11.9cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:41.1;--a:-159.2deg;--o:8.5cqw;--l:11.9cqw;--i:3"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:28.1;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/building-blocks.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:16;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/survey-clipboard.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:15.2;--i:2"><span class="gx-pl"><img src="assets/gx/envelope.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/profile-stack.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="lbl">HR &amp; Admin</span><h3 data-l="ja">人事、総務の社内ツール</h3><h3 data-l="en">Internal tools for HR and admin</h3><h3 data-l="vi">Công cụ nội bộ nhân sự, hành chính</h3>
-      <p data-l="ja">ChatGPTやAIエージェントを使い、人事、総務の管理ツールやレポートを作成しました。</p><p data-l="en">I used ChatGPT and AI agents to create HR and admin tools, reminders, reports and org charts.</p><p data-l="vi">Tôi dùng ChatGPT và AI agent để tạo công cụ nhân sự, hành chính, nhắc việc, báo cáo và sơ đồ tổ chức.</p></div>
+      <p data-l="ja">生成AIやAIエージェントを使い、人事、総務の管理ツールやレポートを作成しました。</p><p data-l="en">I used generative AI and AI agents to create HR and admin tools, reminders, reports and org charts.</p><p data-l="vi">Tôi dùng AI tạo sinh và AI agent để tạo công cụ nhân sự, hành chính, nhắc việc, báo cáo và sơ đồ tổ chức.</p></div>
     <div class="card sv-card"><div class="sv-spot gxs gxs--flow" data-k="a5-recruit" aria-hidden="true"><div class="gxs-in"><i class="gxs-ln" style="--x:18;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:0"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:50;--y:24.8;--a:0deg;--o:10.5cqw;--l:11cqw;--i:1"><i class="gx-cm"></i></i><span class="gxs-at" style="--x:18;--y:24.8;--i:0"><span class="gx-pl"><img src="assets/gx/cv-resume.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:50;--y:24.8;--i:1"><span class="gx-pl"><img src="assets/gx/funnel.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at is-hot" style="--x:82;--y:24.8;--i:2"><span class="gx-pl"><img src="assets/gx/shield-check.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at gxs-tx" style="--x:50;--y:38.3;--i:3"><em class="gx-chip gx-chip--o gxs-chip">JD ✓</em></span></div></div><!--/gxs--><span class="lbl">Recruiting</span><h3 data-l="ja">AIを活用した採用システム</h3><h3 data-l="en">AI recruiting systems</h3><h3 data-l="vi">Hệ thống tuyển dụng dùng AI</h3>
       <p data-l="ja">CV解析とJDマッチングシステム、採用AIエージェントの設計と開発を主導し、担当者が各判定を使用前に確認します。</p><p data-l="en">I led the design and development of a CV/JD matching system and an AI recruiting agent, with human review.</p><p data-l="vi">Tôi chủ trì thiết kế và phát triển hệ thống so khớp CV/JD và một AI agent tuyển dụng, có người kiểm tra từng quyết định trước khi dùng.</p></div>
     <div class="card sv-card"><div class="sv-spot gxs gxs--orbit" data-k="a6-learning" aria-hidden="true"><div class="gxs-in"><i class="gxs-ring" style="--x:50;--y:28.1;--d:42"></i><i class="gxs-ln" style="--x:16;--y:28.1;--a:0deg;--o:8.5cqw;--l:9.5cqw;--i:1"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:15.2;--a:159.2deg;--o:8.5cqw;--l:11.9cqw;--i:2"><i class="gx-cm"></i></i><i class="gxs-ln" style="--x:84;--y:41.1;--a:-159.2deg;--o:8.5cqw;--l:11.9cqw;--i:3"><i class="gx-cm"></i></i><span class="gxs-at gxs-core" style="--x:50;--y:28.1;--i:0"><span class="gx-orb"><span class="gx-pl gx-pl--l"><img src="assets/gx/lightbulb.webp" alt="" width="132" height="132" loading="lazy" decoding="async"></span></span></span><span class="gxs-at" style="--x:16;--y:28.1;--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:15.2;--i:2"><span class="gx-pl"><img src="assets/gx/key.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span><span class="gxs-at" style="--x:84;--y:41.1;--i:3"><span class="gx-pl"><img src="assets/gx/puzzle-fit.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span></span></div></div><!--/gxs--><span class="lbl">Learning</span><h3 data-l="ja">学習と語学</h3><h3 data-l="en">Learning and languages</h3><h3 data-l="vi">Học tập, ngoại ngữ</h3>
-      <p data-l="ja">AIで会計、人事、営業を学び、Sesameで日本語と英語の会話を練習しています。</p><p data-l="en">I use AI to learn accounting, HR and sales, and practise Japanese and English with Sesame.</p><p data-l="vi">Tôi dùng AI học kế toán, nhân sự, kinh doanh và luyện hội thoại tiếng Nhật, tiếng Anh với Sesame.</p></div>
+      <p data-l="ja">AIで会計、人事、営業を学び、AI会話アプリで日本語と英語の会話を練習しています。</p><p data-l="en">I use AI to learn accounting, HR and sales, and practise Japanese and English with an AI conversation app.</p><p data-l="vi">Tôi dùng AI học kế toán, nhân sự, kinh doanh và luyện hội thoại tiếng Nhật, tiếng Anh với ứng dụng hội thoại AI.</p></div>
   </div>
 </section>
 <section class="pg" data-chap="I" id="ai-people">
@@ -2333,7 +2349,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
       <p class="num" style="color:#8fd8ff">80～90<small>%</small></p><p class="num-l" style="color:rgba(255,255,255,.72)" data-l="ja">情報整理の時間を削減（4年前比）</p><p class="num-l" style="color:rgba(255,255,255,.72)" data-l="en">Less time organising information (vs four years ago)</p><p class="num-l" style="color:rgba(255,255,255,.72)" data-l="vi">Giảm thời gian xử lý thông tin (so với 4 năm trước)</p>
     </div>
     <div class="card"><span class="lbl">Team</span>
-      <p data-l="ja">チームにもChatGPTとAIエージェントの使い方を指導し、報告書の作成や数字の集計に活用できる体制を整えました。</p><p data-l="en">I also taught my team to use ChatGPT and AI agents for writing reports and compiling figures.</p><p data-l="vi">Tôi cũng hướng dẫn đội dùng ChatGPT, AI agent để làm báo cáo và tổng hợp số liệu.</p>
+      <p data-l="ja">チームにも生成AIとAIエージェントの使い方を指導し、報告書の作成や数字の集計に活用できる体制を整えました。</p><p data-l="en">I also taught my team to use generative AI and AI agents for writing reports and compiling figures.</p><p data-l="vi">Tôi cũng hướng dẫn đội dùng AI tạo sinh, AI agent để làm báo cáo và tổng hợp số liệu.</p>
     </div>
   </div>
 </section>
@@ -2346,9 +2362,9 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Đây là các công cụ tin học và AI tôi dùng trong công việc hằng ngày.</p>
   <div class="tk lg-anim rv" style="--d:180ms">
     <div class="card tk-c" style="--i:0"><span class="tk-ic" aria-hidden="true"><img src="assets/gx/report-chart.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span><h3 data-l="ja">Excel、PowerPoint</h3><h3 data-l="en">Excel, PowerPoint</h3><h3 data-l="vi">Excel, PowerPoint</h3><p data-l="ja">ExcelとPowerPointで数値を管理し、報告書や提案、研修資料を作成します。</p><p data-l="en">I use Excel and PowerPoint to track figures and prepare reports, proposals and training materials.</p><p data-l="vi">Tôi dùng Excel và PowerPoint để theo dõi số liệu, làm báo cáo, đề xuất và tài liệu đào tạo.</p></div>
-    <div class="card tk-c" style="--i:1"><span class="tk-ic" aria-hidden="true"><img src="assets/gx/chat-bubbles.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span><h3 data-l="ja">ChatGPT、Claude</h3><h3 data-l="en">ChatGPT, Claude</h3><h3 data-l="vi">ChatGPT, Claude</h3><p data-l="ja">ChatGPTとClaudeで情報整理時間を80～90%削減し、生産性を約3～4倍にしました。</p><p data-l="en">With ChatGPT and Claude, I spend 80 to 90% less time organising information than four years ago and am about 3 to 4 times as productive.</p><p data-l="vi">Tôi dùng ChatGPT và Claude, giảm 80 đến 90% thời gian xử lý thông tin, tăng khoảng 3 đến 4 lần năng suất so với 4 năm trước.</p></div>
+    <div class="card tk-c" style="--i:1"><span class="tk-ic" aria-hidden="true"><img src="assets/gx/chat-bubbles.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span><h3 data-l="ja">生成AI</h3><h3 data-l="en">Generative AI</h3><h3 data-l="vi">AI tạo sinh</h3><p data-l="ja">生成AIで情報整理時間を80～90%削減し、生産性を約3～4倍にしました。</p><p data-l="en">With generative AI, I spend 80 to 90% less time organising information than four years ago and am about 3 to 4 times as productive.</p><p data-l="vi">Tôi dùng AI tạo sinh, giảm 80 đến 90% thời gian xử lý thông tin, tăng khoảng 3 đến 4 lần năng suất so với 4 năm trước.</p></div>
     <div class="card tk-c" style="--i:2"><span class="tk-ic" aria-hidden="true"><img src="assets/gx/workflow-gears.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span><h3 data-l="ja">AIシステム</h3><h3 data-l="en">AI system</h3><h3 data-l="vi">Hệ thống AI</h3><p data-l="ja">AIを使ったCV解析、JDマッチングシステムの設計と開発を主導し、担当者が各判定を使用前に確認します。</p><p data-l="en">I led the design and development of AI CV/JD matching, with a person checking every decision before use.</p><p data-l="vi">Tôi chủ trì thiết kế và phát triển hệ thống AI phân tích CV, so khớp JD, với người phụ trách kiểm tra từng quyết định trước khi dùng.</p></div>
-    <div class="card tk-c" style="--i:3"><span class="tk-ic" aria-hidden="true"><img src="assets/gx/interview.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span><h3>Sesame</h3><p data-l="ja">Sesameで日本語と英語の会話を練習しています。</p><p data-l="en">I practise Japanese and English conversation with Sesame.</p><p data-l="vi">Tôi luyện hội thoại tiếng Nhật và tiếng Anh với Sesame.</p></div>
+    <div class="card tk-c" style="--i:3"><span class="tk-ic" aria-hidden="true"><img src="assets/gx/interview.webp" alt="" width="46" height="46" loading="lazy" decoding="async"></span><h3 data-l="ja">AI会話練習</h3><h3 data-l="en">AI conversation practice</h3><h3 data-l="vi">Luyện hội thoại với AI</h3><p data-l="ja">AI会話アプリで日本語と英語の会話を練習しています。</p><p data-l="en">I practise Japanese and English conversation with an AI conversation app.</p><p data-l="vi">Tôi luyện hội thoại tiếng Nhật và tiếng Anh với ứng dụng hội thoại AI.</p></div>
   </div>
   <div class="g2 rv" style="--d:220ms;margin-top:14px">
     <div class="card" style="background:linear-gradient(150deg,#0b1d3a,#14396b);border:0">
@@ -3575,5 +3591,211 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
 })();
 </script>
 <!-- lang:end -->
+<!-- sv-css:start -->
+<style id="sv-css">
+/* Task 93oy: hai chế độ xem. PDF view = cách trình bày cũ (các tờ xếp dọc, cuộn), không đổi gì.
+   Slide view (html.sv, khối JS sv bật): cố định đúng 1 tờ (.sv-cur) giữa màn, thu nhỏ vừa khung; khối con của tờ chia nhóm
+   (.sv-step, data-svg), mỗi cú bấm / phím hiện nhóm kế (.sv-in), hết nhóm thì sang tờ kế. Khối chưa hiện thì chuyển động
+   bên trong đứng yên, hiện ra mới chạy. Chỉ màn hình: bản in luôn ra đủ tờ như PDF view. Hiệu ứng chỉ transform / opacity. */
+@media screen{
+  #sv-mode{position:fixed;top:62px;right:18px;z-index:2147483000;display:flex;gap:2px;padding:5px;border-radius:999px;
+    background:rgba(11,28,56,.74);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 26px -10px rgba(10,25,55,.7)}
+  #sv-mode button,#sv-bar button{appearance:none;border:0;cursor:pointer;background:transparent;color:rgba(255,255,255,.76);
+    font:700 11.5px 'Manrope',sans-serif;letter-spacing:.06em;line-height:1;border-radius:999px;
+    display:inline-flex;align-items:center;gap:6px;transition:background .18s,color .18s}
+  #sv-mode button{padding:6px 11px}
+  #sv-mode svg,#sv-bar svg{width:13px;height:13px;flex:none}
+  #sv-mode button:hover,#sv-bar button:hover{color:#fff;background:rgba(255,255,255,.12)}
+  #sv-mode button[aria-pressed="true"]{color:#08152b;background:#F68209}
+  #sv-mode button:focus-visible,#sv-bar button:focus-visible{outline:2px solid #8fd8ff;outline-offset:2px}
+  #sv-bar{display:none}
+  html.sv #sv-bar{position:fixed;left:50%;bottom:16px;z-index:2147482998;translate:-50% 0;display:flex;align-items:center;gap:8px;
+    padding:5px 6px;border-radius:999px;background:rgba(11,28,56,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 26px -10px rgba(10,25,55,.7);color:#fff}
+  #sv-bar button{width:30px;height:30px;justify-content:center}
+  #sv-bar button:disabled{opacity:.3;cursor:default;background:transparent}
+  #sv-bar .sv-n{min-width:62px;text-align:center;font:700 12px 'Space Grotesk',sans-serif;letter-spacing:.12em}
+  #sv-bar .sv-pips{display:flex;gap:4px;padding-right:4px}
+  #sv-bar .sv-pips i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.28);transition:background .25s,scale .25s}
+  #sv-bar .sv-pips i.on{background:#F68209;scale:1.15}
+  /* Sân khấu cố định: main của tab đang mở phủ kín màn, không cuộn (overflow:clip cũng chặn scrollIntoView của router) */
+  html.sv,html.sv body{overflow:hidden}
+  html.sv body main.wrap:not([hidden]){position:fixed;inset:0;z-index:0;display:block;min-height:0;padding:0;overflow:clip}
+  html.sv body .wrap>.pg:not(.sv-cur){display:none!important}
+  html.sv body .wrap>.pg.sv-cur{position:absolute;left:50%;top:var(--svt,64px);margin:0;translate:-50% 0;scale:var(--svs,1);
+    transform-origin:50% 0;cursor:pointer}
+  /* Tờ quá cao so với khung (điện thoại, màn thấp): giữ cỡ chữ thật, cho cuộn dọc trong sân khấu */
+  html.sv body main.wrap.sv-scroll:not([hidden]){overflow-x:hidden;overflow-y:auto;padding:64px 12px 120px;overscroll-behavior:contain}
+  html.sv body main.wrap.sv-scroll>.pg.sv-cur{position:relative;left:auto;top:auto;margin:0 auto;translate:none;scale:none}
+  html.sv body .wrap>.pg.sv-cur.sv-go1{animation:svFromR .55s cubic-bezier(.2,.7,.2,1) both}
+  html.sv body .wrap>.pg.sv-cur.sv-go0{animation:svFromL .55s cubic-bezier(.2,.7,.2,1) both}
+  /* Nhóm chưa tới lượt: ẩn hẳn, chuyển động con đứng yên; tới lượt thì trượt lên + hiện dần, con .rv chạy lại hiệu ứng của nó */
+  html.sv .wrap>.pg>.sv-step:not(.sv-in),
+  html.sv .wrap>.pg>.sv-step:not(.sv-in) .rv{opacity:0!important;animation:none!important;transition:none!important}
+  html.sv .wrap>.pg>.sv-step:not(.sv-in){visibility:hidden}
+  html.sv .wrap>.pg>.sv-step:not(.sv-in) *{animation-play-state:paused!important}
+  html.sv .wrap>.pg>.sv-step.sv-in{opacity:1;animation:svIn .6s cubic-bezier(.2,.7,.2,1) backwards!important;
+    animation-delay:calc(var(--svk,0) * 60ms)!important}
+  @keyframes svIn{from{opacity:0;translate:0 24px}to{opacity:1;translate:0 0}}
+  @keyframes svFromR{from{opacity:0;transform:translateX(56px)}to{opacity:1;transform:none}}
+  @keyframes svFromL{from{opacity:0;transform:translateX(-56px)}to{opacity:1;transform:none}}
+}
+@media screen and (max-width:900px){
+  #sv-mode{top:auto;bottom:108px;right:12px}
+  #sv-mode button{padding:6px 9px;font-size:10.5px}
+  html.sv #sv-bar{left:12px;bottom:62px;translate:none}
+  html.sv #lp-i18n{bottom:18px}
+  html.sv body .wrap>.pg.sv-cur{width:min(794px,calc(100vw - 24px))}
+}
+@media screen and (prefers-reduced-motion:reduce){
+  html.sv body .wrap>.pg.sv-cur,html.sv .wrap>.pg>.sv-step.sv-in{animation:none!important}
+}
+@media print{#sv-mode,#sv-bar{display:none!important}}
+</style>
+<!-- sv-css:end -->
+<!-- sv:start -->
+<script id="sv-js">
+/* Task 93oy: nút chuyển "PDF view / Slide view" (nhớ bằng localStorage pfViewMode; ?mode=slide|pdf trên URL thắng).
+   Slide view: tờ của mục đang xem đứng yên giữa màn; mỗi cú bấm chuột / chạm vào tờ, phím → Space PageDown hiện nhóm khối kế
+   (nhóm 1 = tiêu đề, hiện sẵn), hết nhóm thì sang section kế, hết tab thì sang tab kế; ← PageUp lùi về tờ trước (hiện đủ);
+   Home / End về tờ đầu / cuối của tab. Bấm link, nút, video, khối slide riêng [data-deck] thì để chúng tự xử lý.
+   Đổi tờ thì ghi #id lên URL (replaceState) rồi phát hashchange để router tab cũ tự mở đúng tab; mục lục / menu tab đi qua hashchange.
+   reduced-motion: hiện đủ khối ngay, bấm là sang tờ kế. window.slideView để test đo. */
+(function(){
+  var KEY='pfViewMode',root=document.documentElement,RM=matchMedia('(prefers-reduced-motion: reduce)');
+  var mains=[].slice.call(document.querySelectorAll('main.wrap[data-view]'));
+  if(!mains.length)return;
+  function slidesOf(m){return [].filter.call(m.children,function(p){return p.classList.contains('pg')&&p.hasAttribute('data-slide')})}
+  var all=[];mains.forEach(function(m){all=all.concat(slidesOf(m))});
+  if(!all.length)return;
+  var HEAD=/(^|\s)(eb|kw|kw-en|kwbar|kw-sub|colg)(\s|$)/;
+  var mode='pdf',cur=null,groups=[],step=0;
+  function store(v){try{localStorage.setItem(KEY,v)}catch(e){}}
+  function stored(){try{return localStorage.getItem(KEY)}catch(e){return null}}
+  var ICON={pdf:'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 11h6M9 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    slide:'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 16v4M8 20h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10 8l4 2-4 2z" fill="currentColor"/></svg>'};
+  var sw=document.createElement('div');sw.id='sv-mode';sw.setAttribute('role','group');sw.setAttribute('aria-label','View mode');
+  [['pdf','PDF view'],['slide','Slide view']].forEach(function(o){var b=document.createElement('button');b.type='button';
+    b.setAttribute('data-mode',o[0]);b.innerHTML=ICON[o[0]]+'<span>'+o[1]+'</span>';
+    b.addEventListener('click',function(){setMode(o[0],true);b.blur()});sw.appendChild(b)});
+  var bar=document.createElement('div');bar.id='sv-bar';bar.setAttribute('role','group');bar.setAttribute('aria-label','Slide');
+  bar.innerHTML='<button type="button" data-go="-1" aria-label="Previous"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+
+    '<span class="sv-n" aria-live="polite"></span><span class="sv-pips" aria-hidden="true"></span>'+
+    '<button type="button" data-go="1" aria-label="Next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+  bar.addEventListener('click',function(e){var b=e.target.closest('button');if(b)b.getAttribute('data-go')==='1'?next():prev()});
+  document.body.appendChild(sw);document.body.appendChild(bar);
+  var nEl=bar.querySelector('.sv-n'),pips=bar.querySelector('.sv-pips'),bPrev=bar.querySelector('[data-go="-1"]'),bNext=bar.querySelector('[data-go="1"]');
+
+  function clear(p){if(!p)return;p.classList.remove('sv-cur','sv-go0','sv-go1');p.style.removeProperty('--svs');p.style.removeProperty('--svt');
+    [].forEach.call(p.querySelectorAll(':scope>.sv-step'),function(c){c.classList.remove('sv-step','sv-in');c.removeAttribute('data-svg');c.style.removeProperty('--svk')});
+    if(p.parentNode)p.parentNode.classList.remove('sv-scroll')}
+  function prepare(p){
+    var kids=[].filter.call(p.children,function(c){
+      if(/^(SCRIPT|STYLE|TEMPLATE|LINK)$/.test(c.tagName))return false;
+      if(c.classList.contains('deco')||c.classList.contains('pganh')||c.classList.contains('ft'))return false;
+      var ps=getComputedStyle(c).position;if(ps==='absolute'||ps==='fixed')return false;
+      return c.getClientRects().length>0});
+    groups=[];var head=[];
+    while(kids.length&&(HEAD.test(kids[0].className)||/^H[1-3]$/.test(kids[0].tagName)))head.push(kids.shift());
+    if(!head.length&&kids.length)head.push(kids.shift());
+    if(head.length)groups.push(head);
+    kids.forEach(function(c){groups.push([c])});
+    groups.forEach(function(g,i){g.forEach(function(c,k){c.classList.add('sv-step');c.setAttribute('data-svg',i);c.style.setProperty('--svk',k)})});
+  }
+  function show(g){(groups[g]||[]).forEach(function(c){c.classList.add('sv-in','sr-in');
+    [].forEach.call(c.querySelectorAll('.rv'),function(r){r.classList.add('sr-in')})})}
+  function paint(){
+    if(!cur)return;
+    nEl.textContent=cur.getAttribute('data-slide');
+    var h='';for(var i=0;i<groups.length;i++)h+='<i'+(i<step?' class="on"':'')+'></i>';pips.innerHTML=h;
+    var i0=all.indexOf(cur);bPrev.disabled=i0<=0;bNext.disabled=i0>=all.length-1&&step>=groups.length;
+  }
+  function fit(reset){
+    if(!cur||mode!=='slide')return;
+    var m=cur.parentNode,narrow=innerWidth<=900,top=narrow?64:66,bot=narrow?118:66;
+    var st=m.scrollTop;m.classList.remove('sv-scroll');cur.style.removeProperty('--svs');
+    var w=cur.offsetWidth,h=cur.offsetHeight,aw=m.clientWidth-24,ah=m.clientHeight-top-bot;
+    var s=Math.min(1,aw/w,ah/h);
+    if(s<(narrow?0.6:0.55)){m.classList.add('sv-scroll');m.scrollTop=reset?0:st;return}
+    cur.style.setProperty('--svs',s.toFixed(4));
+    cur.style.setProperty('--svt',Math.round(top+Math.max(0,(ah-h*s)/2))+'px');
+  }
+  function go(p,full,dir){
+    if(!p)return;
+    var same=p===cur;
+    if(!same)clear(cur);
+    cur=p;
+    var m=p.parentNode;
+    if(m.hidden){/* sang tab khác: để router cũ mở đúng tab qua hashchange */
+      history.replaceState(null,'','#'+p.id);window.dispatchEvent(new HashChangeEvent('hashchange'))}
+    else if(location.hash!=='#'+p.id)history.replaceState(null,'','#'+p.id);
+    p.classList.add('sv-cur');
+    if(!same||!groups.length){prepare(p);step=0}
+    var want=(full||RM.matches)?groups.length:Math.max(1,Math.min(step,groups.length));
+    for(var g=0;g<want;g++)show(g);step=want;
+    if(!same&&dir!=null&&!RM.matches){p.classList.remove('sv-go0','sv-go1');void p.offsetWidth;p.classList.add(dir>0?'sv-go1':'sv-go0')}
+    fit(!same);requestAnimationFrame(function(){fit(false)});paint();
+  }
+  function next(){if(!cur)return;
+    if(step<groups.length){show(step);step++;paint();
+      if(cur.parentNode.classList.contains('sv-scroll')){var c=groups[step-1][0];if(c&&c.scrollIntoView)c.scrollIntoView({block:'nearest',behavior:RM.matches?'auto':'smooth'})}
+      return}
+    var i=all.indexOf(cur);if(i<all.length-1)go(all[i+1],false,1)}
+  function prev(){if(!cur)return;var i=all.indexOf(cur);if(i>0)go(all[i-1],true,-1)}
+  function slideOfHash(){var id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return null}var el=id&&document.getElementById(id);
+    var p=el&&el.closest&&el.closest('main.wrap>.pg');return p&&all.indexOf(p)>=0?p:null}
+  function visibleMain(){return document.querySelector('main.wrap[data-view]:not([hidden])')||mains[0]}
+  function pick(boot){/* lúc tải trang: theo #hash; bấm chuyển chế độ: tờ đang ở giữa khung nhìn của PDF view; không có thì tờ đầu tab */
+    if(boot&&slideOfHash())return slideOfHash();
+    var ps=slidesOf(visibleMain()),best=null,bd=1e9;
+    ps.forEach(function(p){var r=p.getBoundingClientRect();if(r.bottom>innerHeight*0.3&&r.top<innerHeight*0.7){var d=Math.abs(r.top);if(d<bd){bd=d;best=p}}});
+    return best||slideOfHash()||ps[0]}
+  function sync(){[].forEach.call(sw.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-mode')===mode?'true':'false')})}
+  function setMode(v,save,boot){
+    if(v!=='slide')v='pdf';
+    if(save)store(v);
+    if(v===mode){sync();return}
+    if(v==='slide'){var p=pick(boot);mode='slide';root.classList.add('sv');go(p,false,null)}
+    else{var last=cur;mode='pdf';clear(last);cur=null;groups=[];step=0;root.classList.remove('sv');
+      if(last)last.scrollIntoView({block:'start'})}
+    sync();
+  }
+  window.addEventListener('hashchange',function(){if(mode!=='slide')return;
+    var p=slideOfHash();if(!p&&cur&&!cur.parentNode.hidden)return;/* #toc (ẩn) hay hash lạ: giữ tờ đang xem */
+    p=p||slidesOf(visibleMain())[0];if(p&&p!==cur)go(p,false,null)});
+  document.addEventListener('click',function(e){
+    if(mode!=='slide'||e.button!==0||e.defaultPrevented)return;
+    var t=e.target;if(!t.closest||!t.closest('main.wrap'))return;
+    if(t.closest('a,button,input,select,textarea,label,summary,video,audio,iframe,[contenteditable],[data-deck],[role="button"]'))return;
+    var sel=window.getSelection&&String(window.getSelection());if(sel)return;
+    next()});
+  window.addEventListener('keydown',function(e){
+    if(mode!=='slide'||e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey)return;
+    var t=e.target;if(t&&t.closest&&t.closest('input,textarea,select,[contenteditable],video,audio,[data-deck]'))return;
+    var k=e.key,act=null;
+    if((k==='ArrowRight'&&!e.shiftKey)||k==='PageDown'||(k===' '&&!e.shiftKey))act=next;
+    else if((k==='ArrowLeft'&&!e.shiftKey)||k==='PageUp'||(k===' '&&e.shiftKey))act=prev;
+    else if(k==='Home'||k==='End'){var ps=slidesOf(cur?cur.parentNode:visibleMain());act=function(){go(k==='Home'?ps[0]:ps[ps.length-1],k==='End',k==='Home'?-1:1)}}
+    if(!act)return;
+    if(k===' '&&t&&t.closest&&t.closest('a,button'))return;
+    e.preventDefault();e.stopPropagation();act()},true);
+  window.addEventListener('resize',function(){fit(false)});
+  if('ResizeObserver' in window){var ro=new ResizeObserver(function(){if(cur)fit(false)});all.forEach(function(p){ro.observe(p)})}
+  window.addEventListener('load',function(){fit(false)});
+  /* Đổi ngôn ngữ: khối hiện / ẩn theo ngôn ngữ đổi, chia nhóm lại nhưng giữ số nhóm đã hiện */
+  if('MutationObserver' in window)new MutationObserver(function(){if(mode!=='slide'||!cur)return;
+    var k=step;clear(cur);cur.classList.add('sv-cur');prepare(cur);step=Math.max(1,Math.min(k,groups.length));
+    for(var g=0;g<step;g++)show(g);fit();paint()}).observe(root,{attributes:true,attributeFilter:['lang']});
+  window.slideView={mode:function(){return mode},set:function(v){setMode(v,true)},next:next,prev:prev,
+    go:function(id){go(document.getElementById(id),false,null)},
+    state:function(){return {mode:mode,id:cur?cur.id:null,index:cur?slidesOf(cur.parentNode).indexOf(cur):-1,
+      total:cur?slidesOf(cur.parentNode).length:0,step:step,steps:groups.length,view:cur?cur.parentNode.dataset.view:null}}};
+  var q=(location.search.match(/[?&]mode=(slide|pdf)\b/)||[])[1];
+  setMode(q||stored()||'pdf',!!q,true);
+  sync();
+})();
+</script>
+<!-- sv:end -->
 </body>
 </html>
