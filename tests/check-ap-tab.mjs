@@ -14,6 +14,8 @@ const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 const strip = (s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const IDS4 = ['ap-top', 'ap-products', 'ap-news', 'ap-role'];
+// task ls8q: thêm trang #ap-shots (ảnh sản phẩm) sau #ap-products; nội dung trang đó do tests/check-ap-shots.mjs kiểm
+const ALL = ['ap-top', 'ap-products', 'ap-shots', 'ap-news', 'ap-market', 'ap-role']; // task m07v bổ sung: #ap-market do tests/check-ap-market.mjs kiểm nội dung
 
 // 1) Menu trên: "Andpad Info" ngay sau JD ANDPAD, thứ tự menu khớp thứ tự main
 const topNav = (html.match(/<nav class="top-nav"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
@@ -29,19 +31,19 @@ ok(main, 'thiếu <main class="wrap" data-view="ap" hidden>');
 const jdBlock = (html.match(/<!-- jd:start -->[\s\S]*?<!-- jd:end -->/) || [''])[0];
 ok(!jdBlock.includes('data-view="ap"'), 'tab ap không được nằm trong khối jd:start/end (build.mjs sẽ ghi đè)');
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([\w-]+)"/g)].map((m) => m[1]);
-ok(ids.join(',') === IDS4.join(','), `section tab ap: ${ids.join(',')}`);
+ok(ids.join(',') === ALL.join(','), `section tab ap: ${ids.join(',')}`);
 const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\\s\\S]*?<\\/section>`)) || [''])[0];
 
 // 3) Sidebar đủ 4 mục, 3 ngôn ngữ
 const sb = (html.match(/<nav class="sb-nav" data-for="ap" hidden>([\s\S]*?)<\/nav>/) || [])[1] || '';
 ok(sb, 'thiếu <nav class="sb-nav" data-for="ap" hidden>');
 const sbIds = [...sb.matchAll(/href="#([\w-]+)" data-sec="([\w-]+)"/g)].filter((m) => m[1] === m[2]).map((m) => m[1]).join(',');
-ok(sbIds === IDS4.join(','), `sidebar ap trỏ: ${sbIds}`);
-for (const l of ['ja', 'en', 'vi']) ok((sb.match(new RegExp(`data-l="${l}"`, 'g')) || []).length === 4, `sidebar ap thiếu nhãn ${l}`);
+ok(sbIds === ALL.join(','), `sidebar ap trỏ: ${sbIds}`);
+for (const l of ['ja', 'en', 'vi']) ok((sb.match(new RegExp(`data-l="${l}"`, 'g')) || []).length === ALL.length, `sidebar ap thiếu nhãn ${l}`);
 
 // 4) Ảnh nền riêng mỗi trang (pganh IDS + file có thật)
 const IDS = (html.match(/var IDS=\[([^\]]*)\]/) || [])[1] || '';
-for (const id of IDS4) {
+for (const id of ALL) {
   ok(IDS.includes(`'${id}'`), `pganh IDS thiếu '${id}'`);
   ok(existsSync(p(`assets/pg/${id}.webp`)), `thiếu assets/pg/${id}.webp`);
 }

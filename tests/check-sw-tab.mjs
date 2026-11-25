@@ -18,8 +18,9 @@ ok(/<a href="#sw-top" data-view="sw">Software Products<\/a>/.test(topNav), 'top-
 // Tab SW đứng cuối menu và cuối các main; các tab khác giữ nguyên (task song song có thể thêm tab, nên không ép chuỗi đủ)
 const order = [...topNav.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]);
 const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]);
-ok(order.at(-1) === 'sw' && order.indexOf('sw') === order.length - 1, `tab SW phải ở cuối menu trên: ${order}`);
-ok(views.at(-1) === 'sw' && views.indexOf('sw') === views.length - 1, `main SW phải ở cuối: ${views}`);
+// task 78z7: SW đứng ngay trước JD ANDPAD (menu và main)
+ok(order.indexOf('sw') >= 0 && order[order.indexOf('sw') + 1] === 'jd', `tab SW phải đứng ngay trước jd: ${order}`);
+ok(views.indexOf('sw') >= 0 && views[views.indexOf('sw') + 1] === 'jd', `main SW phải đứng ngay trước jd: ${views}`);
 ok(order.join(',') === views.join(','), `menu trên và main lệch nhau: ${order} / ${views}`);
 for (const v of ['profile', 'sales', 'hr', 'team', 'ai', 'lang']) ok(order.includes(v), `menu mất tab ${v}`);
 

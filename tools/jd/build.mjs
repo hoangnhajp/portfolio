@@ -449,9 +449,9 @@ h = cut(h, '<nav class="sb-nav" data-for="jd" hidden>', '</nav>\n    ');
 h = h.replace(/'jd-top','jd-fit',('jd-match',)?/, '');
 const ins = (s, before, add) => { const i = s.indexOf(before); if (i < 0) throw new Error('không thấy mốc: ' + before.slice(0, 50)); return s.slice(0, i) + add + s.slice(i); };
 h = ins(h, '</head>', css);
-h = ins(h, '<a href="#sw-top" data-view="sw">', nav);
+h = ins(h, '<a href="#ap-top" data-view="ap">', nav); // task 78z7: menu ... Software, JD ANDPAD, Andpad Info
 h = ins(h, '<nav class="sb-nav" data-for="sw" hidden>', sbnav);
-h = ins(h, '<main class="wrap" data-view="sw" hidden>', main);
+h = ins(h, '<!-- ap:start -->', main); // task 78z7: main jd nằm sau sw, ngay trước Andpad Info
 h = ins(h, "'sw-top','sw-remote'", "'jd-top','jd-fit','jd-match',");
 // Kiểm an toàn trước khi ghi: đúng 1 <html>, 1 </head>, số main chỉ tăng đúng 1 (tab jd) so với lúc đọc (trừ main jd cũ).
 const cnt = (re) => (h.match(re) || []).length;

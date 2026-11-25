@@ -20,7 +20,7 @@ const topNav = (html.match(/<nav class="top-nav"[^>]*>([\s\S]*?)<\/nav>/) || [])
 ok(/<a href="#wv-kaizen" data-view="wv">Work Philosophy<\/a>/.test(topNav), 'top-nav thiếu <a href="#wv-kaizen" data-view="wv">Work Philosophy</a>');
 const order = [...topNav.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]);
 const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]);
-ok(order.indexOf('wv') >= 0 && order[order.indexOf('wv') + 1] === 'jd', `tab wv phải đứng ngay trước jd: ${order}`);
+ok(order.indexOf('wv') >= 0 && order[order.indexOf('wv') + 1] === 'sw', `tab wv phải đứng ngay trước sw (task 78z7): ${order}`);
 ok(order.join(',') === views.join(','), `menu trên và main lệch nhau: ${order} / ${views}`);
 
 // 2) Main + đúng 3 trang

@@ -6,6 +6,8 @@
 // Chạy (từ thư mục repo): node tools/ap/build.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { pageShots } from './shots.mjs'; // task ls8q: trang #ap-shots (ảnh sản phẩm chính thức)
+import { pageMarket } from './market.mjs'; // task m07v bổ sung: trang #ap-market (ngành, thị trường, case, hỗ trợ)
 
 const FILE = fileURLToPath(new URL('../../index.html', import.meta.url));
 const L3 = (tag, o, attrs = '') => ['ja', 'en', 'vi'].map((l) => `<${tag}${attrs} data-l="${l}">${o[l]}</${tag}>`).join('');
@@ -145,6 +147,7 @@ const EVENTS = [
   ['2016', 'co', T('施工管理サービスANDPADを開始', 'ANDPAD service launched', 'Ra mắt dịch vụ ANDPAD')],
   ['2019.12', 'ev', T('第1回 工務店支援EXPO（東京ビッグサイト）に出展', 'Booth at the 1st Builder Support EXPO, Tokyo Big Sight', 'Tham gia triển lãm Builder Support EXPO lần 1 (Tokyo Big Sight)')],
   ['2020.05', 'co', T('社名を株式会社アンドパッドに変更', 'Renamed ANDPAD Inc.', 'Đổi tên thành ANDPAD Inc.')],
+  ['2024.02', 'co', T('Comvex社（Digima）を完全子会社化', 'Acquired Comvex (Digima)', 'Mua lại toàn bộ Comvex (Digima)')],
   ['2022.09', 'co', T('Series Dで約122億円を調達（借入を含む）', 'Series D: about ¥12.2 billion, loans included', 'Gọi vốn Series D khoảng 12,2 tỷ yên (gồm vốn vay)')],
   ['2024.02', 'vn', T('JETROの事業として、ベトナムの建設現場で実証を開始', 'JETRO-backed pilot starts on Vietnamese construction sites', 'Bắt đầu thí điểm tại công trường Việt Nam trong chương trình của JETRO')],
   ['2025.06', 'vn', T('ベトナム語版を公開', 'Vietnamese version released', 'Ra mắt bản tiếng Việt')],
@@ -152,12 +155,17 @@ const EVENTS = [
   ['2025.10', 'vn', T('ベトナム実証の完了を発表。現場の作業時間は30〜50％減り、紙の記録が不要に', 'Pilot results: on-site work time down 30 to 50%, no more paper records', 'Công bố kết quả thí điểm: giờ làm tại hiện trường giảm 30 đến 50%, bỏ hồ sơ giấy')],
   ['2025.12', 'ai', T('建設に特化したAIプロジェクト「ANDPAD Stellarc」を開始', 'ANDPAD Stellarc, an AI project for construction, begins', 'Khởi động dự án AI chuyên ngành xây dựng ANDPAD Stellarc')],
   ['2026.04', 'vn', T('ハノイ事務所をTaisei Square Hanoiへ移転', 'Hanoi office moves to Taisei Square Hanoi', 'Dời văn phòng Hà Nội về Taisei Square Hanoi')],
+  ['2025.12', 'co', T('インドネシア語、タイ語、繁体字中国語、スペイン語に対応', 'Adds Indonesian, Thai, Traditional Chinese and Spanish', 'Thêm tiếng Indonesia, Thái, Hoa phồn thể, Tây Ban Nha')],
   ['2026.04', 'co', T('ARRが100億円を突破', 'ARR passes ¥10 billion', 'ARR vượt 10 tỷ yên')],
   ['2026.05', 'ai', T('ANDPAD ナレッジAIと、図面の測定箇所を自動で拾うAIを公開', 'ANDPAD Knowledge AI, plus AI that finds measuring points on drawings', 'Ra mắt ANDPAD Knowledge AI và AI tự tìm điểm đo trên bản vẽ')],
   ['2026.06', 'ev', T('ANDPAD AWARD 2026。新部門「DX Project」を設置', 'ANDPAD AWARD 2026 adds a DX Project category', 'ANDPAD AWARD 2026 thêm hạng mục DX Project')],
   ['2026.08', 'co', T('東京ガス、ダイキン、カインズと資本業務提携', 'Capital and business tie-ups with Tokyo Gas, Daikin and Cainz', 'Hợp tác vốn và kinh doanh với Tokyo Gas, Daikin, Cainz')],
+  ['2026.05', 'co', T('設備と建物の維持管理「ANDPAD BM」を公開、国交省の建築行政DX事業に採択', 'Launched ANDPAD BM; selected for an MLIT building-admin DX project', 'Ra mắt ANDPAD BM; được Bộ MLIT chọn vào dự án DX hành chính xây dựng')],
+  ['2026.09', 'co', T('ANDPAD レポートを公開、AWARD 2027の募集を開始', 'ANDPAD Report launched; AWARD 2027 entries open', 'Ra mắt ANDPAD Report; mở nhận hồ sơ AWARD 2027')],
+  ['2026.10', 'ai', T('ANDPAD AI-BPOを開始（電気工事の積算から）', 'ANDPAD AI-BPO starts, first with estimating for electrical work', 'Ra mắt ANDPAD AI-BPO, bắt đầu với dự toán cho thầu điện')],
   ['2026.10', 'ev', T('「NextGen Tech 30 2026」に選出', 'Named to NextGen Tech 30 2026', 'Lọt danh sách NextGen Tech 30 2026')],
 ];
+EVENTS.sort((a, b) => a[0].localeCompare(b[0])); // task m07v bổ sung: mốc mới chen giữa, luôn hiện theo thời gian
 const ACTS = [
   ['milestone-report', 'ANDPAD AWARD', T('ANDPADでDXの成果を出した会社を毎年表彰しています。', 'Yearly awards for customers who got results with ANDPAD.', 'Giải thưởng hằng năm cho doanh nghiệp chuyển đổi số thành công với ANDPAD.')],
   ['team-group', 'ANDPAD ONE', T('建設業界の人と情報が集まるコミュニティとメディアです。', 'A community and media site for people in construction.', 'Cộng đồng và kênh tin tức cho người trong ngành xây dựng.')],
@@ -180,11 +188,14 @@ ${ACTS.map(([ic, t, x]) => `    <div class="card ap-act">${ico(ic, 34)}<div><spa
 ${src([['https://prtimes.jp/main/html/rd/p/000000198.000018154.html', 'PR TIMES（AWARD 2026）'], ['https://thebridge.jp/2022/09/andpad-series-d-round-funding/', 'THE BRIDGE 2022'],
     ['https://vietnamnews.vn/media-outreach/1726656/andpad-completes-the-vietnam-demonstration-project-under-jetro-s-japan-asean-asia-digital-transformation-promotion-program.html', 'JETRO pilot'],
     ['https://thebridge.jp/2026/05/andpad-launches-knowledge-ai-powered-by-stellarc', 'Knowledge AI'], ['https://sogyotecho.jp/news/20260820andpad/', 'Tie-ups 2026'],
-    ['https://kyodonewsprwire.jp/release/202610238598', 'NextGen Tech 30'], ['https://andpad.co.jp/', 'andpad.co.jp']])}
+    ['https://kyodonewsprwire.jp/release/202610238598', 'NextGen Tech 30'], ['https://thebridge.jp/2024/02/andpad-acquires-comvex', 'Comvex'],
+    ['https://prtimes.jp/main/html/rd/p/000000194.000018154.html', 'ANDPAD BM'], ['https://prtimes.jp/main/html/rd/p/000000196.000018154.html', 'MLIT DX'],
+    ['https://prtimes.jp/main/html/rd/p/000000203.000018154.html', 'ANDPAD Report'], ['https://prtimes.jp/main/html/rd/p/000000205.000018154.html', 'AI-BPO'],
+    ['https://www.malaymail.com/news/money/mediaoutreach/2025/12/16/the-andpad-cloud-based-construction-project-management-service-adds-supporting-indonesian-thai-traditional-chinese-taiwan-and-spanish-languages/436179', '4 languages'], ['https://andpad.co.jp/', 'andpad.co.jp']])}
 </section>`;
 }
 
-// ---------- Trang 03: dự báo công việc của vị trí ----------
+// ---------- Trang 04: dự báo công việc của vị trí ----------
 const STEPS = [
   ['interview', T('Salesとデモ', 'Demo with Sales', 'Demo cùng Sales'),
     T('顧客の現場に合わせてANDPADをデモし、導入の効果を説明します。', 'I demo ANDPAD on the client\'s own site cases and explain the benefits for their sites.', 'Tôi demo ANDPAD theo đúng tình huống công trình của khách và nói rõ hiệu quả.')],
@@ -220,8 +231,8 @@ const ROWS = [
 ];
 function pageRole() {
   const nm = (x) => (typeof x === 'string' ? `<b>${x}</b>` : L3('b', x));
-  return `<section class="pg" data-chap="IV" id="ap-role">
-${head('03　<b>FORECAST</b>', T('このポジションで<br /><i>担うと予想する仕事。</i>', 'What I expect<br /><i>this role to do.</i>', 'Dự báo công việc<br /><i>của vị trí này.</i>'),
+  return `<section class="pg" data-chap="V" id="ap-role">
+${head('04　<b>FORECAST</b>', T('このポジションで<br /><i>担うと予想する仕事。</i>', 'What I expect<br /><i>this role to do.</i>', 'Dự báo công việc<br /><i>của vị trí này.</i>'),
     'Customer Success ／ Onboarding ／ Product by product',
     T('求人票（Customer Success Staff、IT）と公開情報をもとにした予想です。顧客はANDPADを使う日系の建設会社と、そのベトナム法人が中心になると考えます。',
       'This is my forecast from the job description (Customer Success Staff, IT) and public information. I expect most clients to be Japanese construction companies using ANDPAD and their Vietnamese subsidiaries.',
@@ -247,7 +258,9 @@ const main = `<!-- ap:start -->
 <main class="wrap" data-view="ap" hidden>
 ${pageTop()}
 ${pageProducts()}
+${pageShots({ L3, T, head, src })}
 ${pageNews()}
+${pageMarket({ L3, T, head, src })}
 ${pageRole()}
 </main>
 <!-- ap:end -->`;
@@ -263,4 +276,4 @@ else {
   html = html.slice(0, end) + eol + block + html.slice(end);
 }
 writeFileSync(FILE, html);
-console.log('OK tools/ap/build.mjs: đã ghi tab Andpad Info (4 trang) vào index.html');
+console.log('OK tools/ap/build.mjs: đã ghi tab Andpad Info (6 trang) vào index.html');

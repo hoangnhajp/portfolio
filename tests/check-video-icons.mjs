@@ -30,7 +30,8 @@ ok(/const ICON_SRC = \(n\) => `\.\.\/\.\.\/assets\/gx\/\$\{n\}\.webp`/.test(eng)
 for (const n of engIcons) ok(existsSync(root + `assets/gx/${n}.webp`), `engine: thiếu assets/gx/${n}.webp`);
 // task p0r6: thêm assets/logos = logo thật của 4 công ty đã làm (người vận hành yêu cầu), không phải icon
 // task g6pn: thêm assets/sw = ảnh chụp màn hình thật (đã che) của phần mềm làm theo yêu cầu khách hàng
-for (const m of html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)) ok(/^assets\/(gx|sales|workflow|logos|sw)\//.test(m[1]), `ảnh lạ ngoài bộ icon video / ảnh thật: ${m[1]}`);
+// task ls8q: thêm assets/ap = ảnh sản phẩm chính thức tải từ andpad.jp (tools/ap/fetch-shots.py)
+for (const m of html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)) ok(/^assets\/(gx|sales|workflow|logos|sw|ap)\//.test(m[1]), `ảnh lạ ngoài bộ icon video / ảnh thật: ${m[1]}`);
 
 // 2) Cảnh động .gxs thay cho hình tĩnh
 const spots = [];
