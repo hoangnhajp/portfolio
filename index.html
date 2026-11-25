@@ -1181,7 +1181,7 @@ html.sr .hr-ar.sr-in .hr-ic,html.sr .hr-fl.sr-in .hr-st img{animation:hrPop .5s 
 <!-- it-css:start -->
 <style id="it-css">
 /* Tab IT Knowledge (task g9d5): lưới 8 thẻ ngôn ngữ, sơ đồ 4 tầng Frontend / API / Backend / Database có điểm request
-   chạy dọc (xuống rồi lên) và tầng sáng khi điểm đi qua. Thẻ mảng, tiến trình 6 bước, lưới 2 cột dùng lại lớp hr-* (hr-css).
+   chạy dọc (xuống rồi lên) và tầng sáng khi điểm đi qua. Tiến trình 6 bước, thẻ ví dụ dùng lại lớp hr-* (hr-css).
    Chuyển động chỉ khi khối đã hiện (.sr-in), chỉ transform/opacity; tắt JS, reduced-motion, bản in: tĩnh, hiện đủ. */
 .it-lg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
 .card.it-k{padding:14px 14px 12px}
@@ -1196,20 +1196,12 @@ html.sr .hr-ar.sr-in .hr-ic,html.sr .hr-fl.sr-in .hr-st img{animation:hrPop .5s 
 .it-ly b{font:800 14px 'Manrope',sans-serif;color:#16141d}
 .it-ly span{font:400 12px/1.6 'Noto Sans JP',sans-serif;color:#3d3849}
 .it-ly::after{content:"";position:absolute;inset:-1px;border-radius:14px;border:2px solid #6d5bd0;opacity:0;pointer-events:none}
-.it-pf{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
-.it-pf-h{margin:16px 0 0;font:700 12px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.08em;color:#5b4bc4}
-.card.it-p{position:relative;display:flex;flex-direction:column;gap:4px;padding:14px 34px 14px 14px;text-decoration:none;color:#16141d;transition:box-shadow .2s}
-.it-p .lbl{margin:0}
-.it-p b{font:700 13.5px/1.45 'Noto Sans JP',sans-serif}
-.it-p-t{font:400 11.8px/1.7 'Noto Sans JP',sans-serif;color:#3d3849}
-.it-p .lg-arr{position:absolute;right:12px;top:12px}
-.it-p:hover{box-shadow:0 0 0 2px #cfc6ef,0 18px 36px -28px rgba(60,50,90,.45)}
 @keyframes itRun{0%,4%{transform:translateY(0)}46%,54%{transform:translateY(100%)}96%,100%{transform:translateY(0)}}
 @keyframes itLit{0%,100%{opacity:0}5%{opacity:1}16%{opacity:0}}
 html.sr .it-lg.sr-in .it-k{animation:hrRise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 200ms)}
 html.sr .it-sys.sr-in .it-run{animation:itRun 6s linear .4s infinite}
 html.sr .it-sys.sr-in .it-ly::after{animation:itLit 6s linear infinite;animation-delay:calc(var(--i,0)*.84s + .34s)}
-@media (max-width:900px){.it-lg{grid-template-columns:1fr 1fr}.it-pf{grid-template-columns:1fr}}
+@media (max-width:900px){.it-lg{grid-template-columns:1fr 1fr}}
 @media (max-width:700px){.it-ly{grid-template-columns:40px 1fr;row-gap:4px}.it-ly span{grid-column:2}}
 @media (max-width:520px){.it-lg{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.it-k,.it-run,.it-ly::after{animation:none!important}}
@@ -2727,29 +2719,17 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
 <main class="wrap" data-view="it" hidden>
 <section class="pg" data-chap="II" id="it-top">
   <span class="eb rv">KNOWLEDGE　<b>IT</b></span>
-  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">システムの仕組みを知り、<br /><i>顧客と開発チームをつなぐ。</i></span><span data-l="en">Knowing how systems work<br /><i>to connect clients and developers.</i></span><span data-l="vi">Hiểu cách hệ thống vận hành<br /><i>để kết nối khách hàng và đội phát triển.</i></span></h2>
-  <span class="kw-en rv" style="--d:100ms">Languages ／ Architecture ／ Change impact ／ QA ／ BA</span>
+  <h2 class="kw rv" style="--d:60ms"><span data-l="ja">ITの仕事を、<br /><i>体制、言語、人材から理解する。</i></span><span data-l="en">Understanding IT work<br /><i>through projects, languages and people.</i></span><span data-l="vi">Hiểu ngành IT<br /><i>qua cơ cấu dự án, ngôn ngữ và con người.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Projects ／ Languages ／ IT talent ／ Architecture ／ Change impact</span>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">JILNESTAでは、ITプロジェクト、アウトソーシング、IT人材の管理を担当しました。言語ごとの特徴、システムの構成、仕様変更の影響範囲を理解したうえで、顧客の要望を開発チームに伝えてきました。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">At JILNESTA, I managed IT projects, outsourcing and IT staff. I relay client requests to developers with a working grasp of languages, system structure and the impact of spec changes.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tại công ty JILNESTA, tôi từng quản lý dự án IT, outsourcing và nhân sự ngành IT. Tôi truyền đạt yêu cầu của khách hàng cho đội phát triển dựa trên hiểu biết về ngôn ngữ lập trình, cấu trúc hệ thống và mức ảnh hưởng khi đổi đặc tả.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">JILNESTAでは、ITプロジェクト、アウトソーシング、IT人材の管理を担当しました。その中で、プロジェクトの体制、開発言語、IT人材の特徴を理解してきました。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">At JILNESTA, I managed IT projects, outsourcing and IT staff. That taught me how IT projects are structured, what each language is for and how IT talent works.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tại công ty JILNESTA, tôi từng quản lý dự án IT, outsourcing và nhân sự ngành IT. Từ đó tôi hiểu đặc tính của cơ cấu dự án, ngôn ngữ lập trình và nhân sự ngành IT.</p>
   <div class="kw1 rv" style="margin:8px 0 10px">
-    <div class="chips" data-l="ja"><span class="chip">言語と用途</span><span class="chip">システム構成</span><span class="chip">MVC</span><span class="chip">仕様変更の影響範囲</span><span class="chip">QA、BA</span></div>
-    <div class="chips" data-l="en"><span class="chip">languages and uses</span><span class="chip">system structure</span><span class="chip">MVC</span><span class="chip">change impact</span><span class="chip">QA, BA</span></div>
-    <div class="chips" data-l="vi"><span class="chip">ngôn ngữ và ứng dụng</span><span class="chip">cấu trúc hệ thống</span><span class="chip">MVC</span><span class="chip">ảnh hưởng khi đổi đặc tả</span><span class="chip">QA, BA</span></div>
+    <div class="chips" data-l="ja"><span class="chip">プロジェクトの体制</span><span class="chip">言語と用途</span><span class="chip">IT人材</span><span class="chip">システム構成</span><span class="chip">仕様変更の影響範囲</span></div>
+    <div class="chips" data-l="en"><span class="chip">project structure</span><span class="chip">languages and uses</span><span class="chip">IT talent</span><span class="chip">system structure</span><span class="chip">change impact</span></div>
+    <div class="chips" data-l="vi"><span class="chip">cơ cấu dự án</span><span class="chip">ngôn ngữ và ứng dụng</span><span class="chip">nhân sự ngành IT</span><span class="chip">cấu trúc hệ thống</span><span class="chip">ảnh hưởng khi đổi đặc tả</span></div>
   </div>
-  <div class="hr-ar rv" style="--d:180ms">
-    <div class="card hr-c" style="--i:0"><img class="hr-ic" src="assets/gx/building-blocks.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><div><span class="lbl">Languages</span><h3 data-l="ja">言語と案件の種類</h3><h3 data-l="en">Languages and project types</h3><h3 data-l="vi">Ngôn ngữ và loại dự án</h3><p data-l="ja">Python、.NET、Java、PHP、React、Angular、AI/ML、データ基盤の用途と特徴を把握しています。</p><p data-l="en">I know what Python, .NET, Java, PHP, React, Angular, AI/ML and data platforms are used for and how they differ.</p><p data-l="vi">Tôi nắm Python, .NET, Java, PHP, React, Angular, AI/ML và nền tảng dữ liệu dùng làm gì, khác nhau ra sao.</p></div></div>
-    <div class="card hr-c" style="--i:1"><img class="hr-ic" src="assets/gx/workflow-gears.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><div><span class="lbl">Architecture</span><h3 data-l="ja">システムの構成</h3><h3 data-l="en">System structure</h3><h3 data-l="vi">Cấu trúc hệ thống</h3><p data-l="ja">Frontend、API、Backend、Databaseの役割と、MVCでの処理の流れを説明できます。</p><p data-l="en">I can explain the roles of the frontend, API, backend and database, and how a request flows through MVC.</p><p data-l="vi">Tôi giải thích được vai trò của frontend, API, backend, database và luồng xử lý theo MVC.</p></div></div>
-    <div class="card hr-c" style="--i:2"><img class="hr-ic" src="assets/gx/puzzle-fit.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><div><span class="lbl">Change impact</span><h3 data-l="ja">仕様変更の影響範囲</h3><h3 data-l="en">Impact of spec changes</h3><h3 data-l="vi">Ảnh hưởng khi đổi đặc tả</h3><p data-l="ja">新しい仕様が入ったとき、画面、API、データ、テストのどこを直すかを整理します。</p><p data-l="en">When a new spec arrives, I map which screens, APIs, data and tests need to change.</p><p data-l="vi">Khi có đặc tả mới, tôi xác định cần sửa ở màn hình, API, dữ liệu hay kiểm thử nào.</p></div></div>
-    <div class="card hr-c" style="--i:3"><img class="hr-ic" src="assets/gx/checklist.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><div><span class="lbl">QA ／ BA</span><h3 data-l="ja">品質保証と業務分析</h3><h3 data-l="en">QA and business analysis</h3><h3 data-l="vi">QA và phân tích nghiệp vụ</h3><p data-l="ja">BAの要件定義、QAの手動テストと自動テストの違いを踏まえて、UATまで進めます。</p><p data-l="en">I work with BA requirements and with both manual and automated QA, through to UAT.</p><p data-l="vi">Tôi phối hợp với BA về yêu cầu, với QA về kiểm thử thủ công và tự động, tới bước UAT.</p></div></div>
-  </div>
-  <p class="it-pf-h rv" style="--d:200ms"><span data-l="ja">この知識を使った仕事</span><span data-l="en">Where I have used this knowledge</span><span data-l="vi">Nơi tôi đã dùng kiến thức này</span></p>
-  <div class="it-pf rv" style="--d:220ms">
-    <a class="card it-p" style="--i:0" href="#w-it"><span class="lbl">IT communication</span><b data-l="ja">JILNESTAのITコミュニケーター（2017～2019年）</b><b data-l="en">IT communicator at JILNESTA (2017 to 2019)</b><b data-l="vi">IT communicator tại JILNESTA (2017 đến 2019)</b><span class="it-p-t" data-l="ja">日本の顧客の要件や仕様を通訳、翻訳してベトナム人エンジニアに伝え、UATから不具合修正まで管理しました。</span><span class="it-p-t" data-l="en">I interpreted and translated Japanese clients' requirements and specs for Vietnamese engineers, then managed UAT and bug fixes.</span><span class="it-p-t" data-l="vi">Tôi phiên dịch, biên dịch yêu cầu và đặc tả của khách hàng Nhật cho kỹ sư Việt, rồi quản lý UAT và theo dõi sửa lỗi.</span><span class="lg-arr" aria-hidden="true">→</span></a>
-    <a class="card it-p" style="--i:1" href="#sw-top"><span class="lbl">Software ／ 3</span><b data-l="ja">顧客の要望から作った3つのシステム</b><b data-l="en">Three systems built from client requests</b><b data-l="vi">3 phần mềm làm theo yêu cầu khách hàng</b><span class="it-p-t" data-l="ja">要望を聞いて仕様書を書き、開発チームと仕上げてUATで確認しました。</span><span class="it-p-t" data-l="en">I gathered the needs, wrote the specs, built the systems with the developers and ran UAT.</span><span class="it-p-t" data-l="vi">Tôi lắng nghe nhu cầu, viết đặc tả, cùng đội phát triển hoàn thiện và chạy UAT.</span><span class="lg-arr" aria-hidden="true">→</span></a>
-    <a class="card it-p" style="--i:2" href="#ai-tools"><span class="lbl">AI ／ CV, JD</span><b data-l="ja">AIによるCV解析とJDマッチング</b><b data-l="en">AI CV analysis and JD matching</b><b data-l="vi">Hệ thống AI phân tích CV, so khớp JD</b><span class="it-p-t" data-l="ja">設計と開発を主導し、各判定は担当者が使用前に確認する運用にしました。</span><span class="it-p-t" data-l="en">I led the design and development, with a person checking every decision before use.</span><span class="it-p-t" data-l="vi">Tôi chủ trì thiết kế và phát triển, mọi kết quả đều được người phụ trách kiểm tra trước khi dùng.</span><span class="lg-arr" aria-hidden="true">→</span></a>
-  </div><!-- /it-pf -->
 </section>
 <section class="pg" data-chap="III" id="it-stack">
   <span class="eb rv">01　<b>LANGUAGES AND PROJECTS</b></span>
@@ -2802,29 +2782,23 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <span class="eb rv">03　<b>CHANGE REQUESTS</b></span>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">新しい仕様が入ったら、<br /><i>影響する層を一つずつ洗い出す。</i></span><span data-l="en">When a new spec arrives,<br /><i>trace every layer it touches.</i></span><span data-l="vi">Khi có đặc tả mới,<br /><i>rà từng tầng bị ảnh hưởng.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">仕様の追加や変更は、影響範囲と必要なテストを整理してから開発チームに渡します。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">I pass new or changed specs to developers after mapping their impact and the tests they need.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Với đặc tả mới hoặc thay đổi, tôi khoanh vùng ảnh hưởng và phần kiểm thử cần làm trước khi chuyển cho đội phát triển.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">影響範囲とテストを整理してから、開発チームに渡します。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">I map the impact and tests before handing it to developers.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">Khoanh vùng ảnh hưởng và kiểm thử trước khi giao đội phát triển.</p>
   <ol class="hr-fl rv" style="--d:180ms">
-    <li class="hr-st" style="--i:0"><img src="assets/gx/chat-bubbles.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">01</span><h3 data-l="ja">要件の確認（BA）</h3><h3 data-l="en">Clarify the need (BA)</h3><h3 data-l="vi">Làm rõ yêu cầu (BA)</h3><p data-l="ja">BAが顧客と話し、目的と受け入れ条件を仕様書にまとめます。</p><p data-l="en">The BA talks with the client and writes the goal and acceptance criteria into the spec.</p><p data-l="vi">BA trao đổi với khách hàng, ghi mục tiêu và tiêu chí nghiệm thu vào đặc tả.</p></li>
-    <li class="hr-st" style="--i:1"><img src="assets/gx/magnifier.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">02</span><h3 data-l="ja">影響範囲の調査</h3><h3 data-l="en">Impact analysis</h3><h3 data-l="vi">Phân tích ảnh hưởng</h3><p data-l="ja">画面、API、データ、権限、バッチのどこに影響するかを洗い出します。</p><p data-l="en">List the screens, APIs, data, permissions and batch jobs it affects.</p><p data-l="vi">Liệt kê màn hình, API, dữ liệu, phân quyền và batch bị ảnh hưởng.</p></li>
-    <li class="hr-st" style="--i:2"><img src="assets/gx/stopwatch.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">03</span><h3 data-l="ja">見積とスケジュール</h3><h3 data-l="en">Estimate and schedule</h3><h3 data-l="vi">Ước lượng và lên lịch</h3><p data-l="ja">工数を見積もり、リリース日と優先度を顧客と合意します。</p><p data-l="en">Estimate the effort and agree the release date and priority with the client.</p><p data-l="vi">Ước lượng công sức, thống nhất ngày phát hành và độ ưu tiên với khách hàng.</p></li>
-    <li class="hr-st" style="--i:3"><img src="assets/gx/workflow-gears.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">04</span><h3 data-l="ja">各層の修正</h3><h3 data-l="en">Change each layer</h3><h3 data-l="vi">Sửa từng tầng</h3><p data-l="ja">開発チームがDBの項目を足し、Backendのルール、APIの項目、画面の順に直します。</p><p data-l="en">The developers add the DB column, then update the backend rules, API fields and screen.</p><p data-l="vi">Đội phát triển thêm cột DB, rồi sửa quy tắc backend, trường API và màn hình.</p></li>
-    <li class="hr-st" style="--i:4"><img src="assets/gx/checklist.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">05</span><h3 data-l="ja">テスト（QA）</h3><h3 data-l="en">Test (QA)</h3><h3 data-l="vi">Kiểm thử (QA)</h3><p data-l="ja">QA Manualで新機能を確かめ、QA Autoの回帰テストで既存機能を確認します。</p><p data-l="en">Manual QA checks the new feature; automated regression tests confirm nothing else broke.</p><p data-l="vi">QA Manual kiểm tính năng mới; kiểm thử hồi quy QA Auto xác nhận tính năng cũ không hỏng.</p></li>
-    <li class="hr-st" style="--i:5"><img src="assets/gx/handshake.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">06</span><h3 data-l="ja">UATとリリース</h3><h3 data-l="en">UAT and release</h3><h3 data-l="vi">UAT và phát hành</h3><p data-l="ja">顧客がUATで確認し、承認を得てからリリースします。</p><p data-l="en">The client checks it in UAT, and it goes live after sign-off.</p><p data-l="vi">Khách hàng kiểm tra ở UAT, duyệt xong mới phát hành.</p></li>
+    <li class="hr-st" style="--i:0"><img src="assets/gx/chat-bubbles.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">01</span><h3 data-l="ja">要件の確認（BA）</h3><h3 data-l="en">Clarify the need (BA)</h3><h3 data-l="vi">Làm rõ yêu cầu (BA)</h3><p data-l="ja">目的と受け入れ条件を仕様にします。</p><p data-l="en">Goal and acceptance criteria into the spec.</p><p data-l="vi">Ghi mục tiêu, tiêu chí nghiệm thu vào đặc tả.</p></li>
+    <li class="hr-st" style="--i:1"><img src="assets/gx/magnifier.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">02</span><h3 data-l="ja">影響範囲の調査</h3><h3 data-l="en">Impact analysis</h3><h3 data-l="vi">Phân tích ảnh hưởng</h3><p data-l="ja">画面、API、データ、権限を洗い出します。</p><p data-l="en">Screens, APIs, data, permissions.</p><p data-l="vi">Màn hình, API, dữ liệu, phân quyền.</p></li>
+    <li class="hr-st" style="--i:2"><img src="assets/gx/stopwatch.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">03</span><h3 data-l="ja">見積とスケジュール</h3><h3 data-l="en">Estimate and schedule</h3><h3 data-l="vi">Ước lượng và lên lịch</h3><p data-l="ja">工数とリリース日を合意します。</p><p data-l="en">Agree effort and release date.</p><p data-l="vi">Thống nhất công sức, ngày phát hành.</p></li>
+    <li class="hr-st" style="--i:3"><img src="assets/gx/workflow-gears.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">04</span><h3 data-l="ja">各層の修正</h3><h3 data-l="en">Change each layer</h3><h3 data-l="vi">Sửa từng tầng</h3><p data-l="ja">DB、Backend、API、画面の順に直します。</p><p data-l="en">DB, backend, API, then screen.</p><p data-l="vi">DB, backend, API rồi màn hình.</p></li>
+    <li class="hr-st" style="--i:4"><img src="assets/gx/checklist.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">05</span><h3 data-l="ja">テスト（QA）</h3><h3 data-l="en">Test (QA)</h3><h3 data-l="vi">Kiểm thử (QA)</h3><p data-l="ja">QA Manualで新機能を、QA Autoの回帰テストで既存機能を確かめます。</p><p data-l="en">Manual QA for the new feature, QA Auto for regression.</p><p data-l="vi">QA Manual kiểm tính năng mới, QA Auto chạy hồi quy.</p></li>
+    <li class="hr-st" style="--i:5"><img src="assets/gx/handshake.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">06</span><h3 data-l="ja">UATとリリース</h3><h3 data-l="en">UAT and release</h3><h3 data-l="vi">UAT và phát hành</h3><p data-l="ja">顧客の承認後にリリースします。</p><p data-l="en">Goes live after client sign-off.</p><p data-l="vi">Khách hàng duyệt xong mới phát hành.</p></li>
   </ol>
-  <div class="g2 hr-g rv" style="--d:220ms">
+  <div class="hr-g rv" style="--d:220ms">
     <div class="card"><span class="lbl"><img src="assets/gx/jd-document.webp" alt="" width="22" height="22" loading="lazy" decoding="async">Example</span>
       <h3 data-l="ja">会員登録に電話番号を追加する場合</h3><h3 data-l="en">Adding a phone number to sign-up</h3><h3 data-l="vi">Thêm số điện thoại vào form đăng ký</h3>
-      <div class="lines" data-l="ja"><p>DBに列を足し、Backendに形式チェック、APIに項目、画面に入力欄とエラー文を加えます。既存の会員データの扱いと、関連する帳票やCSVも確認します。</p></div>
-      <div class="lines" data-l="en"><p>Add a column to the DB, a format check in the backend, a field in the API, and an input with error text on the screen. Then check existing member data and related reports or CSV exports.</p></div>
-      <div class="lines" data-l="vi"><p>Thêm cột trong DB, kiểm tra định dạng ở backend, trường trong API, ô nhập và thông báo lỗi trên màn hình; xem lại dữ liệu hội viên cũ và các báo cáo, file CSV liên quan.</p></div>
-    </div>
-    <div class="card"><span class="lbl"><img src="assets/gx/team-group.webp" alt="" width="22" height="22" loading="lazy" decoding="async">BA ／ QA</span>
-      <h3 data-l="ja">BA、QA Manual、QA Autoの違い</h3><h3 data-l="en">BA, manual QA and automated QA</h3><h3 data-l="vi">Khác nhau giữa BA, QA Manual, QA Auto</h3>
-      <div class="lines" data-l="ja"><p>BAは要望を仕様に落とし込みます。QA Manualはテストケースに沿って画面で確かめ、QA AutoはSeleniumやPlaywrightでテストを自動化して毎回の回帰テストを支えます。</p></div>
-      <div class="lines" data-l="en"><p>The BA turns needs into specs. Manual QA tests on screen against test cases, and automated QA writes Selenium or Playwright scripts that rerun the regression tests every release.</p></div>
-      <div class="lines" data-l="vi"><p>BA chuyển nhu cầu thành đặc tả; QA Manual kiểm trên màn hình theo test case, còn QA Auto viết kịch bản bằng Selenium hoặc Playwright để chạy hồi quy mỗi lần.</p></div>
+      <div class="lines" data-l="ja"><p>DBに列、Backendに形式チェック、APIに項目、画面に入力欄を加えます。</p></div>
+      <div class="lines" data-l="en"><p>A DB column, a backend format check, an API field and a screen input.</p></div>
+      <div class="lines" data-l="vi"><p>Thêm cột DB, kiểm tra định dạng ở backend, trường API và ô nhập trên màn hình.</p></div>
     </div>
   </div>
 </section>

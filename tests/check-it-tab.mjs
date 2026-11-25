@@ -1,5 +1,5 @@
 // Task g9d5: menu header bỏ chữ "Task:" trước tên từng mảng; thêm tab "IT Knowledge" (kiến thức ngành IT) 4 trang:
-// #it-top (tổng quan 4 mảng kiến thức), #it-stack (ngôn ngữ / loại dự án: Python, .NET, Java, PHP, ReactJS, Angular,
+// #it-top (câu dẫn + chips; task 8vs2 bỏ 4 thẻ mảng và khối .it-pf), #it-stack (ngôn ngữ / loại dự án: Python, .NET, Java, PHP, ReactJS, Angular,
 // AI/ML, Data engineering: dùng làm sản phẩm gì, đặc điểm), #it-arch (frontend, API, backend, database + MVC, sơ đồ
 // có điểm request chạy), #it-change (khách thêm đặc tả mới thì đổi gì ở từng tầng + vai trò BA, QA manual / auto).
 // Kiểm tĩnh: nhãn menu, vị trí tab, sidebar, ảnh nền, 3 ngôn ngữ cân nhau, đủ từ khoá, tầng giọng JA, CSS chuyển động.
@@ -50,9 +50,9 @@ for (const id of ids) {
 
 // 5) Đủ 3 ngôn ngữ, số khối bằng nhau, mỗi đơn vị tự đủ 3 ngôn ngữ, EN / VI không lẫn chữ Nhật
 const cnt = (l) => (main.match(new RegExp(`data-l="${l}"`, 'g')) || []).length;
-ok(cnt('ja') >= 60 && cnt('ja') === cnt('en') && cnt('en') === cnt('vi'), `số khối ja/en/vi: ${cnt('ja')}/${cnt('en')}/${cnt('vi')}`);
-const units = [...main.matchAll(/<div class="card hr-c"[\s\S]*?<\/div><\/div>|<li class="hr-st"[\s\S]*?<\/li>|<div class="it-ly"[\s\S]*?<\/div>|<div class="card it-k"[\s\S]*?<\/div>/g)].map((m) => m[0]);
-ok(units.length === 4 + 8 + 4 + 6, `số thẻ / tầng / bước: ${units.length} (cần 22: 4 mảng, 8 ngôn ngữ, 4 tầng, 6 bước)`);
+ok(cnt('ja') >= 40 && cnt('ja') === cnt('en') && cnt('en') === cnt('vi'), `số khối ja/en/vi: ${cnt('ja')}/${cnt('en')}/${cnt('vi')}`);
+const units = [...main.matchAll(/<li class="hr-st"[\s\S]*?<\/li>|<div class="it-ly"[\s\S]*?<\/div>|<div class="card it-k"[\s\S]*?<\/div>/g)].map((m) => m[0]);
+ok(units.length === 8 + 4 + 6, `số thẻ / tầng / bước: ${units.length} (cần 18: 8 ngôn ngữ, 4 tầng, 6 bước; 4 thẻ mảng đã bỏ ở task 8vs2)`);
 for (const u of units) { const c = ['ja', 'en', 'vi'].map((l) => (u.match(new RegExp(`data-l="${l}"`, 'g')) || []).length);
   ok(c[0] > 0 && c[0] === c[1] && c[1] === c[2], `khối thiếu ngôn ngữ (ja/en/vi ${c.join('/')}): ${strip(u).slice(0, 40)}`); }
 const only = (src, l) => [...src.matchAll(new RegExp(`<(\\w+)\\b[^>]*data-l="${l}"[^>]*>([\\s\\S]*?)<\\/\\1>`, 'g'))].map((m) => m[2]).join(' ');
@@ -71,25 +71,7 @@ const TOPIC = {
 };
 for (const [l, keys] of Object.entries(TOPIC)) for (const k of keys) ok(txt[l].toLowerCase().includes(k.toLowerCase()), `it/${l}: thiếu ý "${k}"`);
 
-// 6b) Task kudj (nhập vào g9d5): "làm sao mô tả được kiến thức của tôi": #it-top gắn kiến thức với bằng chứng thật,
-//     3 thẻ link sang trải nghiệm có trong portfolio (JILNESTA IT, 3 phần mềm làm theo yêu cầu, hệ thống AI CV/JD)
-const top = (main.match(/<section class="pg"[^>]*id="it-top">([\s\S]*?)<\/section>/) || [])[1] || '';
-const pf = (top.match(/<div class="it-pf[^"]*"[\s\S]*?<!-- \/it-pf -->/) || [])[0] || '';
-ok(pf, '#it-top thiếu khối bằng chứng .it-pf (kiến thức đã dùng ở đâu)');
-const pfLinks = [...pf.matchAll(/<a class="card it-p"[^>]*href="#([\w-]+)"[\s\S]*?<\/a>/g)];
-ok(pfLinks.map((m) => m[1]).join(',') === 'w-it,sw-top,ai-tools', `khối bằng chứng cần 3 link w-it,sw-top,ai-tools; đang ${pfLinks.map((m) => m[1]).join(',')}`);
-for (const m of pfLinks) {
-  ok(new RegExp(`id="${m[1]}"`).test(html), `link bằng chứng trỏ #${m[1]} không có trên trang`);
-  const c = ['ja', 'en', 'vi'].map((l) => (m[0].match(new RegExp(`data-l="${l}"`, 'g')) || []).length);
-  ok(c[0] >= 2 && c[0] === c[1] && c[1] === c[2], `thẻ bằng chứng #${m[1]} thiếu ngôn ngữ (${c.join('/')})`);
-}
-const pfTxt = { ja: strip(only(pf, 'ja')), en: strip(only(pf, 'en')), vi: strip(only(pf, 'vi')) };
-const PF = {
-  ja: ['JILNESTA', '2017', '2019', '翻訳', 'UAT', '3つ', '仕様書', 'CV', 'JD'],
-  en: ['JILNESTA', '2017', '2019', 'translat', 'UAT', 'Three', 'spec', 'CV', 'JD'],
-  vi: ['JILNESTA', '2017', '2019', 'dịch', 'UAT', '3 phần mềm', 'đặc tả', 'CV', 'JD'],
-};
-for (const [l, keys] of Object.entries(PF)) for (const k of keys) ok(pfTxt[l].includes(k), `bằng chứng/${l}: thiếu "${k}"`);
+// 6b) Task kudj (khối .it-pf "kiến thức đã dùng ở đâu") đã bỏ theo task 8vs2: #it-top chỉ nói hiểu biết; kiểm ở tests/check-it-knowledge-8vs2.mjs
 
 // 7) Ranh giới trung thực: không tự nhận số năm code / dự án tự bịa, không tên công cụ AI, không gạch ngang dài
 for (const bad of ['年の開発経験', 'years of coding', 'năm lập trình', '%']) ok(!all.includes(bad), `tab IT có cụm không được dùng "${bad}"`);
