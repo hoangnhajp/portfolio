@@ -42,7 +42,8 @@ const role = sec('ap-role');
 ok(/dự báo/i.test(lang(role, 'vi')) && /forecast/i.test(lang(role, 'en')) && /予想/.test(lang(role, 'ja')), '#ap-role phải ghi rõ là dự báo (3 ngôn ngữ)');
 const rows = [...role.matchAll(/<li class="ap-rw"[^>]*>([\s\S]*?)<\/li>/g)].map((m) => strip(m[1]));
 ok(rows.length >= 5, `#ap-role cần >= 5 dòng sản phẩm × việc, thấy ${rows.length}`);
-for (const w of ['施工管理', '図面', '受発注', 'Analytics']) ok(rows.some((r) => r.includes(w)), `#ap-role chưa gắn việc với sản phẩm ${w}`);
+// task 97rs: dự báo chỉ tính sản phẩm và dịch vụ đang có tại Việt Nam (受発注, Analytics không còn; xem tests/check-ap-role-vn.mjs)
+for (const w of ['施工管理', '図面', '黒板']) ok(rows.some((r) => r.includes(w)), `#ap-role chưa gắn việc với sản phẩm ${w}`);
 has(lang(role, 'vi'), ['đào tạo', 'follow-up', 'demo', 'tài liệu hướng dẫn'], '#ap-role (vi, việc theo JD)');
 
 // 5) Mỗi trang có nguồn (link ngoài) và đủ khối ja/en/vi; nội dung chữ nằm trong trang (không chỉ link)
