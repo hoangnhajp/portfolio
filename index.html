@@ -376,71 +376,49 @@ html[lang="ja"] [data-l]:not([data-l="ja"]),html[lang="en"] [data-l]:not([data-l
 @media print{
   /* in A4: ảnh Sales vốn tràn đáy trang từ bản cũ, thu nhỏ khi in */
   #sales-trips figure img{height:140px!important}}
-/* 03 Projects (task kfh1): những việc đã làm thành workflow 4 làn, mỗi bước chỉ icon + số + tên.
-   task mwuc: 4 làn nối thành MỘT đường ống ziczac (A trái -> phải, vòng xuống B phải -> trái, C trái -> phải, D phải -> trái),
-   một cục sáng chạy liên tục dọc ống, đi qua bước nào bước đó sáng (SVG .pjf-pipe + script pjf-js) */
-.pjf{position:relative;display:flex;flex-direction:column;gap:12px;margin-top:20px}
+/* 03 Projects (task kfh1): những việc đã làm thành workflow 4 làn, mỗi bước chỉ icon + số + tên; vệt sáng chạy dọc làn, từng bước sáng lần lượt */
+.pjf{display:flex;flex-direction:column;gap:12px;margin-top:20px}
 .pjf-ln{position:relative;padding:12px 14px 14px 16px;background:#fff;border:1px solid #ece8f3;border-radius:14px;box-shadow:0 10px 26px -22px rgba(59,47,134,.5)}
-.pjf.is-pipe .pjf-ln{padding-left:24px;padding-right:24px}
 .pjf-ln::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:14px 0 0 14px;background:linear-gradient(180deg,#3b2f86,#26B3F4)}
 .pjf-ln:nth-child(2)::before{background:linear-gradient(180deg,#0f8f83,#1FB6A6)}
 .pjf-ln:nth-child(3)::before{background:linear-gradient(180deg,#c14343,#F68209)}
 .pjf-ln:nth-child(4)::before{background:linear-gradient(180deg,#0f5a8c,#26B3F4)}
-.pjf-lb{display:flex;align-items:center;gap:8px;margin-bottom:10px;font:700 11px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a83a0}
-.pjf-lb em{font:700 11.5px 'Space Grotesk',sans-serif;font-style:normal;color:#fff;background:linear-gradient(90deg,#3b2f86,#6d5bd0);border-radius:999px;padding:2px 8px}
+.pjf-lb{display:flex;align-items:center;gap:8px;margin-bottom:10px;font:700 10px 'Manrope','Noto Sans JP',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a83a0}
+.pjf-lb em{font:700 10.5px 'Space Grotesk',sans-serif;font-style:normal;color:#fff;background:linear-gradient(90deg,#3b2f86,#6d5bd0);border-radius:999px;padding:2px 8px}
 .pjf-row{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
-.pjf-row>li{position:relative;z-index:2;min-width:0}
-/* đường nối tĩnh trong làn (khi chưa có JS); có JS thì SVG .pjf-pipe vẽ cả đường ống. Tâm cột k = 10% - 4px + k*(100% + 10px)/5.
-   task cogy: nét mảnh 1px, tâm dọc = nửa icon 54px */
-.pjf-row::before{content:'';position:absolute;top:26.5px;left:calc(10% - 4px);width:calc((var(--pjn) - 1)*(100% + 10px)/5);height:1px;background:repeating-linear-gradient(90deg,#cfc6ee 0 4px,transparent 4px 9px)}
-.pjf.is-pipe .pjf-row::before{display:none}
-.pjf-row>li+li::before{content:'';position:absolute;top:23.5px;left:-9px;width:5px;height:5px;border-top:1.2px solid #a89ddc;border-right:1.2px solid #a89ddc;transform:rotate(45deg);z-index:1}
-/* làn chẵn (B, D) chạy ngược: bước đầu ở cột phải ngoài cùng, mũi tên chỉ sang trái */
-@media screen and (min-width:701px){
-  .pjf-ln:nth-child(even) .pjf-row>li{grid-row:1}
-  .pjf-ln:nth-child(even) .pjf-row>li:nth-child(1){grid-column:5}.pjf-ln:nth-child(even) .pjf-row>li:nth-child(2){grid-column:4}
-  .pjf-ln:nth-child(even) .pjf-row>li:nth-child(3){grid-column:3}.pjf-ln:nth-child(even) .pjf-row>li:nth-child(4){grid-column:2}
-  .pjf-ln:nth-child(even) .pjf-row>li:nth-child(5){grid-column:1}
-  .pjf-ln:nth-child(even) .pjf-row::before{left:auto;right:calc(10% - 4px)}
-  .pjf-ln:nth-child(even) .pjf-row>li+li::before{left:auto;right:-9px;transform:rotate(-135deg)}
-}
-.pjf-row .pj-c{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;text-decoration:none;color:inherit;padding:0;border-radius:12px;transition:transform .2s}
+.pjf-row>li{position:relative;min-width:0}
+/* đường nối giữa các bước (qua tâm icon) + vệt sáng chạy theo; tâm cột k = 10% - 4px + k*(100% + 10px)/5 */
+.pjf-row::before{content:'';position:absolute;top:22px;left:calc(10% - 4px);width:calc((var(--pjn) - 1)*(100% + 10px)/5);height:2px;background:repeating-linear-gradient(90deg,#d6cff0 0 6px,transparent 6px 11px)}
+.pjf-row::after{content:'';position:absolute;top:19px;left:calc(10% - 8px);width:8px;height:8px;border-radius:50%;background:#F68209;box-shadow:0 0 0 4px rgba(246,130,9,.18);opacity:0;pointer-events:none;z-index:1}
+.pjf-row>li+li::before{content:'';position:absolute;top:18px;left:-10px;width:7px;height:7px;border-top:2px solid #8a7fd0;border-right:2px solid #8a7fd0;transform:rotate(45deg);z-index:1}
+.pjf-row .pj-c{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;text-decoration:none;color:inherit;padding:0 2px;border-radius:12px;transition:transform .2s}
 .pjf-row .pj-c:hover{transform:translateY(-3px)}
-.pjf-ic{flex:none;position:relative;z-index:2;display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#f3f0fa;border:1px solid #e5e0f1;transition:box-shadow .35s,background-color .35s,border-color .35s,transform .35s}
-.pjf-ic img{width:38px;height:38px;object-fit:contain}
+.pjf-ic{flex:none;position:relative;z-index:2;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#f3f0fa;border:1px solid #e5e0f1;transition:box-shadow .2s}
+.pjf-ic img{width:32px;height:32px;object-fit:contain}
 .pjf-row .pj-c:focus-visible{outline:2px solid #6d5bd0;outline-offset:3px}
 .pjf-row .pj-c:hover .pjf-ic,.pjf-row .pj-c:focus-visible .pjf-ic{box-shadow:0 0 0 4px rgba(109,91,208,.25)}
-.pjf-row>li.on .pjf-ic{background:#fff4e6;border-color:#F68209;box-shadow:0 0 0 4px rgba(246,130,9,.14),0 0 14px 1px rgba(246,130,9,.28);transform:scale(1.06)}
-.pjf-no{font:700 10.5px 'Space Grotesk',sans-serif;font-style:normal;letter-spacing:.06em;color:#6d5bd0}
-.pjf-row .pj-co{font:700 13px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;letter-spacing:-.01em;color:#16141d;text-wrap:balance;overflow-wrap:normal}
-/* đường ống: ống mờ + dòng chảy chấm gạch + vệt sáng đuôi sao chổi; cục sáng là .pjf-orb (vị trí do JS đặt). task cogy: mọi nét đều mảnh */
-.pjf-pipe{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1;display:none}
-.pjf.is-pipe .pjf-pipe{display:block}
-.pjf-pipe path{fill:none;stroke-linecap:round;stroke-linejoin:round}
-.pjf-tube{stroke:rgba(109,91,208,.08);stroke-width:3}
-.pjf-flow{stroke:#b3a6e6;stroke-width:1.2;stroke-dasharray:4 5}
-.pjf-lit{stroke:#F68209;stroke-width:1.8;filter:drop-shadow(0 0 3px rgba(246,130,9,.55));opacity:0;transition:opacity .4s}
-.pjf.is-run .pjf-flow{animation:pjfFlow .9s linear infinite}
-.pjf.is-run .pjf-lit{opacity:1}
-.pjf-orb{position:absolute;left:0;top:0;z-index:1;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;opacity:0;pointer-events:none;will-change:transform;transition:opacity .4s;
-  background:radial-gradient(circle,#fff 0 28%,#F68209 54%,rgba(246,130,9,0) 76%);box-shadow:0 0 10px 3px rgba(246,130,9,.4)}
-.pjf.is-run .pjf-orb{opacity:1}
-.pjf.is-hold .pjf-orb,.pjf.is-hold .pjf-lit{opacity:0}
-/* animation: bước hiện lần lượt khi khối vào khung nhìn */
+.pjf-no{font:700 9.5px 'Space Grotesk',sans-serif;font-style:normal;letter-spacing:.06em;color:#6d5bd0}
+.pjf-row .pj-co{font:700 12px/1.3 'Space Grotesk','Noto Sans JP',sans-serif;letter-spacing:-.01em;color:#16141d;text-wrap:balance;overflow-wrap:normal}
+/* animation: bước hiện lần lượt khi khối vào khung nhìn; sau đó vệt sáng chạy dọc làn và icon sáng lần lượt (lặp) */
 html.js .pg.in .pjf-row>li,html.sr .rv.sr-in .pjf-row>li{animation:pjfIn .55s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--l,0)*.15s + var(--i,0)*.12s + .2s)}
+html.js .pg.in .pjf-row::after,html.sr .rv.sr-in .pjf-row::after{animation:pjfRun calc(var(--pjn)*.8s) linear infinite;animation-delay:calc(var(--l,0)*.4s + 1s)}
+html.js .pg.in .pjf-ic,html.sr .rv.sr-in .pjf-ic{animation:pjfHi calc(var(--pjn)*.8s) ease-in-out infinite;animation-delay:calc(var(--l,0)*.4s + 1s + var(--i,0)*var(--pjn)*.8s/(var(--pjn) - 1))}
 @keyframes pjfIn{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
-@keyframes pjfFlow{to{stroke-dashoffset:-9}}
-/* màn hẹp: làn thành danh sách dọc, ống chạy dọc qua tâm icon và vòng qua mép trái sang làn sau */
+@keyframes pjfRun{0%{opacity:0;left:calc(10% - 8px)}8%,92%{opacity:1}100%{opacity:0;left:calc(10% - 8px + (var(--pjn) - 1)*(100% + 10px)/5)}}
+@keyframes pjfRunV{0%{opacity:0;top:19px}8%,92%{opacity:1}100%{opacity:0;top:calc(100% - 27px)}}
+@keyframes pjfHi{0%,34%,100%{background:#f3f0fa;border-color:#e5e0f1;box-shadow:0 0 0 0 rgba(246,130,9,0)}8%,22%{background:#fff4e6;border-color:#F68209;box-shadow:0 0 0 5px rgba(246,130,9,.16)}}
+/* màn hẹp: làn thành danh sách dọc, đường nối dọc qua tâm icon */
 @media screen and (max-width:700px){
   .pjf-row{grid-template-columns:1fr;gap:6px}
-  .pjf.is-pipe .pjf-ln{padding-right:14px}
-  .pjf-row::before{top:27px;bottom:27px;left:26.5px;width:1px;height:auto;background:repeating-linear-gradient(180deg,#cfc6ee 0 4px,transparent 4px 9px)}
+  .pjf-row::before{top:23px;bottom:23px;left:22px;width:2px;height:auto;background:repeating-linear-gradient(180deg,#d6cff0 0 6px,transparent 6px 11px)}
+  .pjf-row::after{left:19px}
+  html.js .pg.in .pjf-row::after,html.sr .rv.sr-in .pjf-row::after{animation-name:pjfRunV}
   .pjf-row>li+li::before{display:none}
   .pjf-row .pj-c{flex-direction:row;text-align:left;gap:10px;padding:0}
-  .pjf-no{min-width:20px}.pjf-row .pj-co{font-size:14px}
+  .pjf-no{min-width:18px}.pjf-row .pj-co{font-size:12.5px}
 }
-@media (prefers-reduced-motion:reduce){.pjf *,.pjf *::before,.pjf *::after{animation:none!important;transition:none!important}.pjf-orb,.pjf-lit{display:none}}
-@media print{.pjf{gap:6px;margin-top:12px}.pjf-ln,.pjf.is-pipe .pjf-ln{box-shadow:none;break-inside:avoid;padding:7px 10px 8px}.pjf-orb,.pjf .pjf-pipe{display:none!important}.pjf.is-pipe .pjf-row::before{display:block}.pjf-row>li.on .pjf-ic{background:#f3f0fa;border-color:#e5e0f1;box-shadow:none;transform:none}.pjf-row>li,.pjf-ic{animation:none!important;opacity:1!important}
+@media (prefers-reduced-motion:reduce){.pjf *,.pjf *::before,.pjf *::after{animation:none!important;transition:none!important}.pjf-row::after{display:none}}
+@media print{.pjf{gap:6px;margin-top:12px}.pjf-ln{box-shadow:none;break-inside:avoid;padding:7px 10px 8px}.pjf-row::after{display:none}.pjf-row>li,.pjf-ic{animation:none!important;opacity:1!important}
   .pjf-ic{width:34px;height:34px}.pjf-ic img{width:24px;height:24px}.pjf-row::before{top:16px}.pjf-row>li+li::before{top:12px}.pjf-row .pj-co{font-size:10.5px}}
 </style>
 <!-- lp-slide-css:start -->
@@ -1089,7 +1067,7 @@ html.js .lg-stage .lg-hd{animation:lgNod 2.2s ease-in-out infinite;animation-del
 .lg-arr{font:700 18px 'Space Grotesk',sans-serif;color:#5b4bc4}
 .lg-link:hover{box-shadow:0 0 0 2px #cfc6ef,0 18px 36px -28px rgba(60,50,90,.45)}
 
-/* Cầu nối 3 ngôn ngữ (#lang-bridge) */
+/* Cầu nối CEO và đội ngũ (#lang-bridge, task ila7) */
 .lg-bridge{position:relative;aspect-ratio:2/1;margin-top:16px;border-radius:18px;overflow:hidden;
   background:linear-gradient(160deg,#fff,#f4f1fd);border:1px solid #ece8f3;box-shadow:0 18px 36px -28px rgba(60,50,90,.45)}
 .lg-edge{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);width:calc(var(--l)*1%);height:0;
@@ -1101,7 +1079,6 @@ html.js .lg-bridge .lg-run{animation:lgRun 3.2s ease-in-out infinite;animation-d
 html.js .lg-bridge .lg-run--b{animation-direction:reverse;animation-delay:calc(var(--j,0)*.5s + 1.6s)}
 .lg-node{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:1}
 .lg-node .lg-flagb{width:clamp(44px,8vw,64px);height:clamp(44px,8vw,64px);margin:0}
-.lg-node .lg-flagb .flg{width:58%;height:auto;aspect-ratio:3/2}
 .lg-node .lg-flagb img{width:68%;height:68%;object-fit:contain}
 .lg-node b{font:700 12px 'Noto Sans JP',sans-serif;color:#16141d;background:rgba(255,255,255,.9);padding:2px 8px;border-radius:999px;white-space:nowrap}
 html.js .lg-bridge .lg-node{animation:lgRise .6s ease-out both;animation-delay:calc(var(--i,0)*.2s)}
@@ -1227,7 +1204,7 @@ html:not(.js) .lg-bar>i{display:none}
     </nav>
     <nav class="sb-nav" data-for="lang" hidden>
       <a href="#lang-top" data-sec="lang-top"><em>TOP</em><span data-l="ja">概要</span><span data-l="en">Overview</span><span data-l="vi">Tổng quan</span></a>
-      <a href="#lang-ja" data-sec="lang-ja"><em>01</em><span data-l="ja">日本語で報告、会議</span><span data-l="en">Japanese at work</span><span data-l="vi">Tiếng Nhật trong công việc</span></a>
+      <a href="#lang-ja" data-sec="lang-ja"><em>01</em><span data-l="ja">日本語で報連相</span><span data-l="en">Japanese at work</span><span data-l="vi">Tiếng Nhật trong công việc</span></a>
       <a href="#lang-en" data-sec="lang-en"><em>02</em><span data-l="ja">英語で発表、交渉</span><span data-l="en">English on stage</span><span data-l="vi">Tiếng Anh: thuyết trình, đàm phán</span></a>
       <a href="#lang-bridge" data-sec="lang-bridge"><em>03</em><span data-l="ja">CEOとチームの橋渡し</span><span data-l="en">Bridging CEO and team</span><span data-l="vi">Cầu nối CEO và đội ngũ</span></a>
     </nav>
@@ -1428,9 +1405,6 @@ html:not(.js) .lg-bar>i{display:none}
         <li style="--i:1"><a class="pj-c" href="#ai-uses"><span class="pjf-ic"><img src="assets/gx/bottleneck.webp" alt="" width="64" height="64" loading="lazy" decoding="async"></span><em class="pjf-no" aria-hidden="true">AI</em><b class="pj-co"><span data-l="ja">分析ダッシュボード（例）</span><span data-l="en">Analysis dashboard (sample)</span><span data-l="vi">Bảng phân tích (mẫu)</span></b></a></li>
       </ol>
     </div>
-    <!-- task mwuc: đường ống liền 4 làn + cục sáng (vẽ bằng script pjf-js) -->
-    <svg class="pjf-pipe" aria-hidden="true" focusable="false"><path class="pjf-tube" d="" /><path class="pjf-flow" d="" /><path class="pjf-lit" d="" /></svg>
-    <i class="pjf-orb" aria-hidden="true"></i>
   </div><!-- /pjf -->
 
   <div class="ft"><p>Thai Tran Hoang Nha ／ Portfolio</p><p>03 ／ 09</p></div>
@@ -2462,8 +2436,8 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">日本人の経営陣に、<br /><i>日本語で直接報告する。</i></span><span data-l="en">Reporting directly<br /><i>to Japanese management, in Japanese.</i></span><span data-l="vi">Báo cáo trực tiếp<br /><i>cho lãnh đạo người Nhật bằng tiếng Nhật.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">JLPT N2（2016年8月）。日本人の経営陣には報連相を主体的に行い、全体の進捗把握から期限、計画、進捗管理、結果の報告まで、主に日本語で進めてきました。</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="en">JLPT N2 (Aug 2016). I practise hourensou with Japanese management and stay proactive: from grasping overall progress, deadlines and plans to tracking work and reporting results, I work mainly in Japanese.</p>
-  <p class="kw-sub rv" style="--d:140ms" data-l="vi">JLPT N2 (08/2016). Tôi chủ động hourensou (báo cáo, liên lạc, xin ý kiến) với lãnh đạo người Nhật. Từ nắm tiến độ tổng thể, deadline, lập kế hoạch, theo dõi tiến độ đến báo cáo kết quả, tôi làm chủ yếu bằng tiếng Nhật.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="en">JLPT N2 (Aug 2016). I practise hourensou with Japanese management and stay proactive. I grasp overall progress, deadlines and plans, track the work and report results, mainly in Japanese.</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="vi">JLPT N2 (08/2016). Tôi chủ động thực hiện hourensou (báo cáo, liên lạc, xin ý kiến) với lãnh đạo người Nhật. Từ nắm tiến độ tổng thể, deadline, lập kế hoạch, theo dõi tiến độ đến báo cáo kết quả, tôi làm chủ yếu bằng tiếng Nhật.</p>
   <div class="lg-hrs lg-anim rv" style="--d:170ms">
     <div class="lg-hr" style="--i:0"><span class="lg-hr-k" aria-hidden="true">Hō</span><div><h3 data-l="ja">報告</h3><h3 data-l="en">Hō: report</h3><h3 data-l="vi">Hō: báo cáo</h3><p data-l="ja">経過と結果を、数字で自分から報告します。</p><p data-l="en">I report progress and results with figures, before being asked.</p><p data-l="vi">Tôi tự báo cáo diễn biến và kết quả bằng số liệu, không đợi hỏi.</p></div></div>
     <div class="lg-hr" style="--i:1"><span class="lg-hr-k" aria-hidden="true">Ren</span><div><h3 data-l="ja">連絡</h3><h3 data-l="en">Ren: update</h3><h3 data-l="vi">Ren: liên lạc</h3><p data-l="ja">予定の変更や問題は、すぐに関係者へ連絡します。</p><p data-l="en">I update everyone involved as soon as plans change or problems appear.</p><p data-l="vi">Có thay đổi hay vấn đề, tôi liên lạc ngay với người liên quan.</p></div></div>
@@ -2486,7 +2460,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
         <li class="lg-tk" style="--i:2"><img src="assets/gx/checklist.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">03</span><h3 data-l="ja">業務計画を立てる</h3><h3 data-l="en">Plan the work</h3><h3 data-l="vi">Lập kế hoạch công việc</h3><p data-l="ja">担当、手順、日程を計画にまとめます。</p><p data-l="en">I set owners, steps and dates in one plan.</p><p data-l="vi">Tôi lên kế hoạch gồm người phụ trách, các bước và lịch.</p></div></li>
         <li class="lg-tk" style="--i:3"><img src="assets/gx/stopwatch.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">04</span><h3 data-l="ja">進捗を追う</h3><h3 data-l="en">Track progress</h3><h3 data-l="vi">Theo dõi tiến độ</h3><p data-l="ja">計画との差を毎日確認します。</p><p data-l="en">I check the gap against the plan every day.</p><p data-l="vi">Tôi kiểm tra chênh lệch so với kế hoạch mỗi ngày.</p></div></li>
         <li class="lg-tk" style="--i:4"><img src="assets/gx/milestone-report.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">05</span><h3 data-l="ja">節目ごとに報告</h3><h3 data-l="en">Report at each milestone</h3><h3 data-l="vi">Báo cáo theo tiến trình</h3><p data-l="ja">進み具合を日本語で報告します。</p><p data-l="en">I report how the work is going, in Japanese.</p><p data-l="vi">Tôi báo cáo tiến độ bằng tiếng Nhật.</p></div></li>
-        <li class="lg-tk" style="--i:5"><img src="assets/gx/report-chart.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">06</span><h3 data-l="ja">結果を報告</h3><h3 data-l="en">Report results</h3><h3 data-l="vi">Báo cáo kết quả</h3><p data-l="ja">実施結果と次の課題を報告します。</p><p data-l="en">I report the results and the next issues.</p><p data-l="vi">Tôi báo cáo kết quả thực hiện và việc cần làm tiếp.</p></div></li>
+        <li class="lg-tk" style="--i:5"><img src="assets/gx/report-chart.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">06</span><h3 data-l="ja">結果を報告</h3><h3 data-l="en">Report results</h3><h3 data-l="vi">Báo cáo kết quả</h3><p data-l="ja">実施結果と次の課題を報告します。</p><p data-l="en">I report the results and the next steps.</p><p data-l="vi">Tôi báo cáo kết quả thực hiện và việc cần làm tiếp.</p></div></li>
       </ol>
     </div>
   </div>
@@ -2521,7 +2495,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <span class="eb rv">03　<b>BRIDGING CEO AND TEAM</b></span>
   <h2 class="kw rv" style="--d:60ms"><span data-l="ja">社長とチームの間に立ち、<br /><i>意図を伝えて成果につなげる。</i></span><span data-l="en">Standing between the CEO and the team,<br /><i>turning intent into results.</i></span><span data-l="vi">Cầu nối giữa CEO và đội ngũ,<br /><i>truyền đúng ý để ra kết quả.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">社長とベトナム人のチーム、各部署の間に立つ橋渡し役として、社長の言葉の選び方、考え方を常に学び、双方の意図を伝えています。目指すのは通訳だけでなく、仕事の成果です。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">社長とベトナム人のチーム、各部署の間に立つ橋渡し役として、社長の言葉の選び方、考え方を常に学び、双方の意図を伝えています。目指すのは単なる通訳ではなく、仕事の成果です。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">As the bridge between the CEO and the Vietnamese team and departments, I keep learning the CEO's choice of words, thinking and mindset, so I can carry the intent of both sides. The goal is results, not just translation.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Là cầu nối giữa CEO với đội ngũ và các phòng ban người Việt Nam, tôi luôn tìm hiểu, học hỏi cách dùng từ, cách suy nghĩ và tư duy của CEO để truyền tải đúng ý nghĩa thông điệp của hai bên, hướng tới kết quả công việc, không chỉ chuyển ngữ.</p>
   <div class="lg-bridge lg-anim rv" style="--d:180ms" aria-hidden="true">
@@ -3563,81 +3537,6 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
 })();
 </script>
 <!-- pganh:end -->
-<!-- pjf:start -->
-<script id="pjf-js">
-/* task mwuc: workflow "những việc đã làm" (#projects .pjf) thành MỘT đường ống liền: đi qua tâm icon theo thứ tự 01 -> 12,
-   hết làn thì vòng ở mép làn (không cắt chữ) xuống làn sau; làn chẵn chạy ngược (CSS). Cục sáng chạy đều tốc độ dọc ống, lặp liên tục,
-   đi qua bước nào bước đó sáng. Tâm icon đo bằng getBoundingClientRect so với khối; vẽ lại khi đổi cỡ
-   và khi mỗi bước trượt vào xong (pjfIn). Chỉ chạy khi khối trong khung nhìn; reduced-motion (kể cả bật giữa chừng): ống đứng yên, không cục sáng. */
-(function(){
-  var f=document.querySelector('#projects .pjf');if(!f||!f.querySelector('.pjf-pipe'))return;
-  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var SPEED=.26,HOLD=650,TAIL=150,R=14,NEAR=30;
-  var tube=f.querySelector('.pjf-tube'),flow=f.querySelector('.pjf-flow'),lit=f.querySelector('.pjf-lit'),orb=f.querySelector('.pjf-orb');
-  var lanes=[].slice.call(f.querySelectorAll('.pjf-ln')),items=[].slice.call(f.querySelectorAll('.pjf-row>li'));
-  var len=0,stops=[],travel=0,raf=0,t0=0;
-  f.classList.add('is-pipe');
-  function pos(el,cx){var r=el.getBoundingClientRect(),b=f.getBoundingClientRect();return r.width?[r.left-b.left+(cx?r.width/2:0),r.top-b.top+(cx?r.height/2:0)]:null}
-  function f1(n){return n.toFixed(1)}
-  function layout(){
-    if(!f.offsetWidth)return;
-    var wp=[],prev=[],ok=true;
-    lanes.forEach(function(ln,k){
-      var ps=[].slice.call(ln.querySelectorAll('.pjf-ic')).map(function(i){return pos(i,1)});
-      if(ps.some(function(p){return !p})||!ps.length){ok=false;return}
-      if(k){
-        /* chiều vòng theo hướng của chính làn trước (đầu -> cuối): làn ngang chạy sang phải thì vòng mép phải, còn lại (làn ngược, màn hẹp, làn 1 bước) vòng mép trái */
-        var P=prev[prev.length-1],Q=ps[0],pl=lanes[k-1],o=pos(pl,0),cs=getComputedStyle(pl);
-        var side=prev.length>1&&Math.abs(P[1]-prev[0][1])<6&&P[0]>prev[0][0]+2?1:-1;
-        var X=side>0?o[0]+pl.offsetWidth-parseFloat(cs.paddingRight)/2:o[0]+parseFloat(cs.paddingLeft)/2;
-        wp.push({p:[X,P[1]],r:1},{p:[X,Q[1]],r:1});
-      }
-      ps.forEach(function(p){wp.push({p:p,ic:1})});prev=ps;
-    });
-    if(!ok||wp.length<2)return;
-    /* bo góc ở chỗ vòng (không bo ở icon để ống đi đúng tâm icon) */
-    var d='M'+f1(wp[0].p[0])+' '+f1(wp[0].p[1]),pre=[];
-    for(var i=1;i<wp.length;i++){
-      var a=wp[i-1].p,b=wp[i].p,n=wp[i+1];
-      if(wp[i].r&&n){
-        var c=n.p,l1=Math.hypot(b[0]-a[0],b[1]-a[1]),l2=Math.hypot(c[0]-b[0],c[1]-b[1]),r=Math.min(R,l1/2,l2/2);
-        d+=' L'+f1(b[0]-(b[0]-a[0])/l1*r)+' '+f1(b[1]-(b[1]-a[1])/l1*r)+' Q'+f1(b[0])+' '+f1(b[1])+' '+f1(b[0]+(c[0]-b[0])/l2*r)+' '+f1(b[1]+(c[1]-b[1])/l2*r);
-      }else d+=' L'+f1(b[0])+' '+f1(b[1]);
-      if(wp[i].ic)pre.push(d);
-    }
-    stops=[0];pre.forEach(function(p){lit.setAttribute('d',p);stops.push(lit.getTotalLength())});
-    tube.setAttribute('d',d);flow.setAttribute('d',d);lit.setAttribute('d',d);
-    len=lit.getTotalLength();travel=len/SPEED;
-    lit.style.strokeDasharray=TAIL+' '+(len+TAIL);
-    draw(0);
-  }
-  function draw(at){
-    if(!len)return;
-    lit.style.strokeDashoffset=String(TAIL-at);
-    var p=lit.getPointAtLength(at);orb.style.transform='translate('+f1(p.x)+'px,'+f1(p.y)+'px)';
-    items.forEach(function(li,i){li.classList.toggle('on',raf&&Math.abs(at-stops[i])<NEAR)});
-  }
-  function frame(now){
-    if(!t0)t0=now;var e=(now-t0)%(travel+HOLD);
-    f.classList.toggle('is-hold',e>=travel);draw(Math.min(e,travel)*SPEED);
-    raf=requestAnimationFrame(frame);
-  }
-  function play(on){
-    if(RM)return;
-    if(on&&!raf){t0=0;f.classList.add('is-run');raf=requestAnimationFrame(frame)}
-    else if(!on&&raf){cancelAnimationFrame(raf);raf=0;f.classList.remove('is-run','is-hold');items.forEach(function(li){li.classList.remove('on')})}
-  }
-  layout();
-  if('ResizeObserver' in window){var ro=new ResizeObserver(layout);[f].concat(lanes).forEach(function(n){ro.observe(n)})}
-  else window.addEventListener('resize',layout);
-  f.addEventListener('animationend',function(e){if(e.animationName==='pjfIn')layout()});
-  var vis=!('IntersectionObserver' in window),mq=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq&&mq.addEventListener)mq.addEventListener('change',function(e){if(e.matches){play(false);RM=true}else{RM=false;play(vis)}});
-  if(!vis)new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;play(vis)})},{threshold:.1}).observe(f);
-  else play(true);
-})();
-</script>
-<!-- pjf:end -->
 <!-- zz:start -->
 <script id="zz-js">
 /* task p0r6: workflow zigzag. Đường nối vẽ theo tâm từng chấm (đo bằng offset, không lệch khi khối đang trượt vào),

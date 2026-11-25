@@ -1,8 +1,8 @@
 // Task a9f4: slide cuối My Profile (#pcai "語学、PC、AI") tách 2 ý.
 //  - Ý AI (Excel/PowerPoint, ChatGPT/Claude, hệ thống AI CV/JD, Sesame) chuyển sang tab Task: AI Skills, trang #ai-tools (05).
 //  - Ý ngoại ngữ thành tab mới "Languages" trên menu (2 lá cờ Nhật, Anh kế bên), 4 trang portfolio có chuyển động:
-//    #lang-top (tổng quan 3 ngôn ngữ), #lang-ja (tiếng Nhật: báo cáo, họp, đàm phán), #lang-en (tiếng Anh: ASEAN, đàm phán),
-//    #lang-bridge (cầu nối 3 ngôn ngữ: thông dịch, dịch đặc tả, email).
+//    #lang-top (tổng quan 3 ngôn ngữ), #lang-ja (tiếng Nhật: hourensou, làm chủ tiến độ, task ila7), #lang-en (tiếng Anh: ASEAN, đàm phán),
+//    #lang-bridge (task ila7: cầu nối giữa CEO và đội ngũ / phòng ban người Việt).
 //  - Tab My Profile còn 9 slide (cover + 01..08, #toc ẩn), không còn #pcai.
 // Chạy: node tests/check-lang-tab.mjs   (thoát 0 = đạt)
 import { readFileSync, existsSync } from 'node:fs';
@@ -44,11 +44,13 @@ ok(cnt('ja') >= 30 && cnt('ja') === cnt('en') && cnt('en') === cnt('vi'), `số 
 const txt = { ja: strip(only(main, 'ja')), en: strip(only(main, 'en')), vi: strip(only(main, 'vi')) };
 for (const l of ['en', 'vi']) { const m = txt[l].match(new RegExp(`.{0,20}${JP.source}.{0,20}`)); ok(!m, `lang/${l}: còn chữ Nhật "${m && m[0]}"`); }
 const FACTS = {
-  ja: ['JLPT N2', '2016年8月', 'TOEIC 680', '2011年10月', '母語', '日本人社長', '報告', '会議', '交渉', 'ASEAN', '英語で発表', '欧州企業のCEO', '通訳', '翻訳', '仕様書', 'メール', 'Sesame'],
-  en: ['JLPT N2', 'Aug 2016', 'TOEIC 680', 'Oct 2011', 'native', 'Japanese president', 'report', 'meeting', 'negotiat', 'ASEAN', 'presented in English', 'European company', 'interpret', 'translat', 'spec', 'email', 'Sesame'],
-  vi: ['JLPT N2', '08/2016', 'TOEIC 680', '10/2011', 'bản ngữ', 'Tổng giám đốc người Nhật', 'báo cáo', 'họp', 'đàm phán', 'ASEAN', 'thuyết trình bằng tiếng Anh', 'công ty châu Âu', 'thông dịch', 'dịch', 'đặc tả', 'email', 'Sesame'],
+  ja: ['JLPT N2', '2016年8月', 'TOEIC 680', '2011年10月', '母語', '日本人社長', '報告', '会議', '交渉', 'ASEAN', '英語で発表', '欧州企業のCEO', '通訳', '翻訳', '仕様書', 'メール'],
+  en: ['JLPT N2', 'Aug 2016', 'TOEIC 680', 'Oct 2011', 'native', 'Japanese president', 'report', 'meeting', 'negotiat', 'ASEAN', 'presented in English', 'European company', 'interpret', 'translat', 'spec', 'email'],
+  vi: ['JLPT N2', '08/2016', 'TOEIC 680', '10/2011', 'bản ngữ', 'Tổng giám đốc người Nhật', 'báo cáo', 'họp', 'đàm phán', 'ASEAN', 'thuyết trình bằng tiếng Anh', 'công ty châu Âu', 'thông dịch', 'dịch', 'đặc tả', 'email'],
 };
-for (const [l, keys] of Object.entries(FACTS)) for (const k of keys) ok(txt[l].includes(k), `lang/${l}: thiếu dữ kiện "${k}"`);
+// task ila7: so không phân biệt hoa thường (dữ kiện dịch / đặc tả nằm ở thẻ #lang-top); tab Languages không còn Sesame
+for (const [l, keys] of Object.entries(FACTS)) for (const k of keys) ok(txt[l].toLowerCase().includes(k.toLowerCase()), `lang/${l}: thiếu dữ kiện "${k}"`);
+ok(!/sesame/i.test(main), 'lang: còn "Sesame" (task ila7 bỏ)');
 ok((txt.en.match(/\bI\b/g) || []).length >= 8, 'lang/en: ít câu ngôi thứ nhất "I"');
 ok((txt.vi.match(/(^|\s)[Tt]ôi\s/g) || []).length >= 8, 'lang/vi: ít câu có chủ ngữ "tôi"');
 ok((txt.ja.match(/(ました|ます|でした|です)。/g) || []).length >= 8, 'lang/ja: ít câu です・ます');

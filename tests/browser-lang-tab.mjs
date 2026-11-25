@@ -29,7 +29,7 @@ const PROBE = `(() => {
   const vis = (e) => { const s = getComputedStyle(e); return s.display !== 'none' && s.visibility !== 'hidden' && e.getClientRects().length > 0; };
   const inside = (e, box) => { const r = e.getBoundingClientRect(), b = box.getBoundingClientRect(); return r.left >= b.left - 1 && r.right <= b.right + 1 && r.top >= b.top - 1 && r.bottom <= b.bottom + 1; };
   const over = [];
-  const pairs = [['.lg-lang .lg-name,.lg-lang .lg-cert,.lg-lang .lg-use', '.lg-lang'], ['.lg-bub', '.lg-chat'], ['.lg-step h3,.lg-step p', '.lg-step'],
+  const pairs = [['.lg-lang .lg-name,.lg-lang .lg-cert,.lg-lang .lg-use', '.lg-lang'], ['.lg-bub', '.lg-chat'], ['.lg-tk h3,.lg-tk p', '.lg-tk'], ['.lg-hr h3,.lg-hr p', '.lg-hr'],
     ['.lg-sl b', '.lg-screen'], ['.lg-node b,.lg-doc,.lg-hub', '.lg-bridge'], ['.lg-link-t', '.lg-link']];
   const main = document.querySelector('main[data-view="lang"]');
   for (const [sel, boxSel] of pairs) for (const e of main.querySelectorAll(sel)) { if (!vis(e)) continue; const box = e.closest(boxSel); if (box && !inside(e, box)) over.push(sel.split(',')[0] + ': ' + e.textContent.trim().slice(0, 24)); }
@@ -41,7 +41,7 @@ const PROBE = `(() => {
   const flags = [...document.querySelectorAll('.top-nav a[data-view="lang"] .flg')].map((f) => { const r = f.getBoundingClientRect(); return [Math.round(r.width), Math.round(r.height)]; });
   return { view: document.body.dataset.view, on: document.querySelector('.top-nav a.on')?.dataset.view, flags,
     pages: [...main.querySelectorAll('.pg')].filter(vis).length, over, hit,
-    hidden: [...main.querySelectorAll('.lg-lang,.lg-step,.lg-node,.lg-bub')].filter((e) => +getComputedStyle(e).opacity < 0.95).length,
+    hidden: [...main.querySelectorAll('.lg-lang,.lg-tk,.lg-hr,.lg-node,.lg-bub')].filter((e) => +getComputedStyle(e).opacity < 0.95).length,
     overflowX: document.documentElement.scrollWidth - innerWidth };
 })()`;
 const RUN = (sel) => `(() => { const b = document.querySelector('${sel}'); const an = document.getAnimations().filter((a) => a.effect && a.effect.target && b.contains(a.effect.target));

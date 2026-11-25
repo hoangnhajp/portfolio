@@ -57,7 +57,7 @@ const bt = txt(br);
 ok(!/IT communicator|ITコミュニケーター/.test(br), '#lang-bridge: còn nội dung IT communicator cũ');
 ok(!/仕様書|đặc tả|\bspecs?\b/i.test(strip(br)), '#lang-bridge: còn ý dịch đặc tả cũ');
 for (const [l, keys] of Object.entries({
-  ja: ['社長', 'チーム', '部署', '言葉の選び方', '考え方', '意図', '成果', '通訳だけ'],
+  ja: ['社長', 'チーム', '部署', '言葉の選び方', '考え方', '意図', '成果', '単なる通訳'],
   en: ['CEO', 'team', 'department', 'choice of words', 'thinking', 'intent', 'results', 'not just'],
   vi: ['CEO', 'đội ngũ', 'phòng ban', 'cách dùng từ', 'suy nghĩ', 'tư duy', 'ý nghĩa thông điệp', 'kết quả công việc', 'không chỉ chuyển ngữ'],
 })) for (const k of keys) ok(bt[l].includes(k), `#lang-bridge/${l}: thiếu "${k}"`);
