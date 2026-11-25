@@ -35,8 +35,7 @@ const NEW_JA = [
   '商談と顧客訪問を、時系列で紹介します。',
   'タイで開催されたMAYEKAWA ASEAN社員総会での発表、展示会「PROPAK ASIA」、「VIV ASIA」（バンコク）の視察、MYCOM KOREAへの訪問、ベトナムでの顧客訪問を写真で紹介します。',
   '担当した業務を、顧客対応の流れに沿って整理しました。',
-  '営業部では、販売プロセスの成果分析、販促施策の結果報告、月次報告を作成していました。',
-  '出張前に上司の承認を受け、帰着後3営業日以内に精算書と出張報告を提出する決まりでした。',
+  // Task 111x: thẻ #sales-reports chỉ còn tiêu đề, 2 câu nội dung (月次報告 / 出張) đã bỏ có chủ đích.
 ];
 for (const s of NEW_JA) {
   ok(html.includes(`>${s}<`), `HTML thiếu câu JA mới "${s.slice(0, 30)}..."`);

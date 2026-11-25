@@ -24,7 +24,7 @@ const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 let checks = 0;
 
-const TABS = { cover: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early', 'pcai'], // task ye4s bỏ aiops, aidash, pr
+const TABS = { cover: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early'], // task ye4s bỏ aiops, aidash, pr; task a9f4 bỏ trang cuối 語学、PC、AI
   'sales-top': ['sales-top', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi', 'sales-flow'], 'team-top': ['team-records'], 'ai-top': ['ai-people'] };
 
 // Đo 1 cảnh: phần tử nhìn thấy (đúng ngôn ngữ), độ hiện, khung, chồng lấn nhãn

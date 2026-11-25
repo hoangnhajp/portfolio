@@ -42,9 +42,6 @@ const S = {
   'w-early': { k: 'chart', bars: [[46], [70], [38], [62], [84, 1]], cap: L('数字で報告', 'Reports with numbers', 'Báo cáo bằng số liệu'),
     left: [['office-building', L('国際送金', 'International payments', 'Thanh toán quốc tế')], ['briefcase', L('部品の営業事務', 'Parts sales admin', 'Hành chính bán phụ tùng')]],
     right: [['manager', L('日本人上司へ報告', 'Reporting to Japanese managers', 'Báo cáo cấp trên người Nhật')]] },
-  pcai: { k: 'hub', core: { ic: 'lightbulb', chip: 'AI' },
-    left: [['chat-bubbles', L('日本語 N2', 'Japanese N2', 'Tiếng Nhật N2')], ['jd-document', L('英語 TOEIC 680', 'English TOEIC 680', 'Tiếng Anh TOEIC 680')]],
-    right: [['person-bust', L('ベトナム語 母語', 'Vietnamese, native', 'Tiếng Việt bản ngữ')], ['team-group', L('1人で3〜4人分', 'One person, work of 3 to 4', '1 người, việc của 3–4 người')]] },
   // task ye4s: bỏ 3 trang cuối tab Profile (aiops, aidash, pr) nên không còn cảnh của chúng
   // Tab Sales
   'sales-top': { k: 'grid', c: 4, mc: 2, tiles: [['roadmap', L('出張', 'Trips', 'Công tác'), L('5省13社', '5 provinces, 13 firms', '5 tỉnh, 13 công ty')],
@@ -71,7 +68,7 @@ const S = {
     left: [['workflow-gears', L('AIで要約、集計', 'AI: summaries, totals', 'AI: tóm tắt, tổng hợp')], ['jd-document', L('AIで報告書の下書き', 'AI: report drafts', 'AI: nháp báo cáo')]],
     right: [['magnifier', L('原因の分析と判断', 'Root cause, judgement', 'Phân tích, nhận định')], ['interview', L('対話とコーチ', 'Coaching members', 'Kèm cặp thành viên')]] },
 };
-const STEP = { profile: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early', 'pcai'],
+const STEP = { profile: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early'], // task a9f4: bỏ trang cuối 語学、PC、AI (ý AI sang #ai-tools, ngoại ngữ sang tab Languages)
   sales: ['sales-top', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi', 'sales-flow'] };
 const stepChip = (id) => { for (const ids of Object.values(STEP)) { const n = ids.indexOf(id); if (n >= 0) return `<span class="gx-step"><i></i><b>${String(n + 1).padStart(2, '0')}</b> / ${String(ids.length).padStart(2, '0')}</span>`; } return ''; };
 
@@ -113,12 +110,13 @@ function scene(id, s) {
 // k: orbit (lõi + vệ tinh nối nét), flow (3 bước nối nét), wf (workflow 3 bước có nhãn, task m3tn), chart (biểu đồ cột + kính lúp + icon bên). Chip chỉ chữ trung tính (KPI, SOP...).
 const SP = {
   // Task m3tn: 6 thẻ kỹ năng tab Team là workflow 3 bước có nhãn (wf), không còn icon to ở giữa / biểu đồ
-  't1-targets': { k: 'wf', steps: [['roadmap', L('目標', 'Goals', 'Mục tiêu')], ['team-group', L('役割', 'Roles', 'Vai trò')], ['report-chart', L('KPIと評価', 'KPI review', 'KPI, đánh giá')]] },
-  't2-steps': { k: 'wf', steps: [['jd-document', L('書き出す', 'Write out', 'Viết ra')], ['workflow-gears', L('標準化', 'Standardise', 'Chuẩn hóa')], ['checklist', L('完了の定義', 'Define done', 'Định nghĩa xong')]] },
-  't3-numbers': { k: 'wf', steps: [['calendar', L('毎日', 'Daily', 'Hằng ngày')], ['stopwatch', L('集計', 'Collect', 'Thu thập')], ['report-chart', L('数字で判断', 'Judge by data', 'Xét bằng số')]] },
-  't4-cause': { k: 'wf', steps: [['bottleneck', L('数字が低下', 'Numbers drop', 'Số liệu giảm')], ['magnifier', L('原因分析', 'Find the cause', 'Tìm nguyên nhân')], ['puzzle-fit', L('次の打ち手', 'Next action', 'Bước tiếp')]] },
-  't5-people': { k: 'wf', steps: [['survey-clipboard', L('SOPと型', 'SOP, templates', 'SOP, mẫu')], ['interview', L('コーチ', 'Coaching', 'Kèm cặp')], ['checklist', L('振り返り', 'Review', 'Rà soát')]] },
-  't6-connect': { k: 'wf', both: true, steps: [['office-building', L('各部門', 'Departments', 'Phòng ban')], ['chat-bubbles', L('調整', 'Coordinate', 'Phối hợp')], ['manager', L('日本語で報告', 'Report in JA', 'Báo cáo tiếng Nhật')]] },
+  // Task j2u3: 6 thẻ = 6 bước vòng PDCA (kế hoạch bằng số hành động -> thực hiện, báo cáo -> điểm nghẽn -> bàn giải pháp -> kaizen -> đo kaizen); giữ data-k cũ
+  't1-targets': { k: 'wf', steps: [['roadmap', L('目標', 'Goal', 'Mục tiêu')], ['calendar', L('行動数', 'Action counts', 'Số hành động')], ['checklist', L('計画', 'Plan', 'Kế hoạch')]] },
+  't2-steps': { k: 'wf', steps: [['workflow-gears', L('実行', 'Do', 'Thực hiện')], ['stopwatch', L('進捗管理', 'Track', 'Theo dõi')], ['report-chart', L('報告を分析', 'Analyse reports', 'Phân tích báo cáo')]] },
+  't3-numbers': { k: 'wf', steps: [['report-chart', L('数字', 'Numbers', 'Số liệu')], ['magnifier', L('深掘り', 'Dig in', 'Soi kỹ')], ['bottleneck', L('ボトルネック', 'Bottleneck', 'Điểm nghẽn')]] },
+  't4-cause': { k: 'wf', steps: [['team-group', L('メンバー', 'Team', 'Thành viên')], ['chat-bubbles', L('話し合い', 'Discuss', 'Thảo luận')], ['handshake', L('解決策', 'Agree a fix', 'Chốt cách gỡ')]] },
+  't5-people': { k: 'wf', steps: [['lightbulb', L('アイデア', 'Idea', 'Ý tưởng')], ['jd-document', L('改善案', 'Kaizen plan', 'Phương án')], ['manager', L('提案', 'Propose', 'Đề xuất')]] },
+  't6-connect': { k: 'wf', steps: [['workflow-gears', L('実行', 'Run', 'Thực hiện')], ['stopwatch', L('効果測定', 'Measure', 'Đo lường')], ['shield-check', L('次の計画へ', 'Next plan', 'Vòng tiếp')]] },
   'a1-read': { k: 'flow', steps: ['jd-document', 'lightbulb', 'milestone-report'], chip: 'AI' },
   'a2-numbers': { k: 'chart', bars: [70, 52, 84, 36, 62], hot: 3, side: ['report-chart', 'shield-check'] },
   'a3-meetings': { k: 'orbit', core: 'calendar', sats: ['chat-bubbles', 'checklist', 'stopwatch'] },

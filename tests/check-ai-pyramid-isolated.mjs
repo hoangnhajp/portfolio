@@ -38,7 +38,8 @@ try {
   execFileSync('tar', ['-xf', 'head.tar'], { cwd: dir });
   writeFileSync(join(dir, 'index.html'), h);
   // test + ảnh của edof (bản hiện tại); test cũ giữ bản HEAD trừ 2 file edof đã sửa
-  for (const f of ['check-ai-pyramid.mjs', 'check-team-ai-tabs.mjs']) cpSync(join(root, 'tests', f), join(dir, 'tests', f));
+  // edof đã vào HEAD thì giữ bản test của HEAD (task sau như a9f4 có thể đã sửa 2 file này cho cây hiện tại)
+  if (!inHead) for (const f of ['check-ai-pyramid.mjs', 'check-team-ai-tabs.mjs']) cpSync(join(root, 'tests', f), join(dir, 'tests', f));
   cpSync(join(root, 'assets', 'pg', 'ai-pyramid.webp'), join(dir, 'assets', 'pg', 'ai-pyramid.webp'));
   const tests = readdirSync(join(dir, 'tests')).filter((f) => /^check-.*\.mjs$/.test(f) && f !== 'check-ai-pyramid-isolated.mjs');
   for (const f of tests) {

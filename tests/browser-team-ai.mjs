@@ -73,7 +73,7 @@ async function main() {
         const r = await evaluate(probe(view, lang)); checks++;
         ok(r.view === view && !r.hidden && r.topOn === view, `${tag}: view không mở (${r.view}, top ${r.topOn})`);
         ok(r.navShown && r.otherNavs === 0, `${tag}: mục lục sidebar sai (navShown ${r.navShown}, khác đang hiện ${r.otherNavs})`);
-        ok(r.pages === (view === 'ai' ? 5 : 4), `${tag}: số trang ${r.pages}`); // task edof: tab AI thêm #ai-pyramid
+        ok(r.pages === (view === 'ai' ? 6 : 4), `${tag}: số trang ${r.pages}`); // task edof: tab AI thêm #ai-pyramid; task a9f4: thêm #ai-tools
         ok(r.lang === lang && r.wrong === 0, `${tag}: lang ${r.lang}, ${r.wrong} khối khác ngôn ngữ đang hiện`);
         ok(r.text.includes(EXPECT[view][lang]), `${tag}: thiếu "${EXPECT[view][lang]}"`);
         ok(r.overflowX <= 1, `${tag}: tràn ngang ${r.overflowX}px`);

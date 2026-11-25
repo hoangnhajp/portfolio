@@ -28,7 +28,7 @@ ok(new RegExp(`class="sb-pdf" href="${CV}"`).test(html), 'link sidebar chưa tr�
 // 3. View Profile + Sales (bỏ Finance / HR / JD / Matching / Management cũ vì không có trong CV mới)
 //    + Team Management, AI Skills (task cg5a, người vận hành yêu cầu, nội dung theo hồ sơ gốc: check-team-ai-tabs.mjs)
 const views = [...html.matchAll(/<main class="wrap" data-view="(\w+)"/g)].map((m) => m[1]);
-ok(views.join(',') === 'profile,sales,team,ai', `view phải là profile,sales,team,ai; đang ${views.join(',')}`);
+ok(views.join(',') === 'profile,sales,team,ai,lang', `view phải là profile,sales,team,ai,lang (task a9f4 thêm tab Languages); đang ${views.join(',')}`);
 const tops = [...html.matchAll(/<a href="#[\w-]+" data-view="(\w+)"/g)].map((m) => m[1]);
 ok(tops.every((v) => views.includes(v)), `menu trên trỏ tới view không tồn tại: ${tops.join(',')}`);
 
@@ -51,7 +51,7 @@ for (const s of FACTS) ok(html.includes(s), `thiếu nội dung CV mới: "${s}"
 // 6. Mỗi section của view Profile viết mới đủ 3 ngôn ngữ (khối data-l ja / en / vi cân nhau)
 const prof = (html.match(/<main class="wrap" data-view="profile">([\s\S]*?)<\/main>/) || [])[1] || '';
 const secs = [...prof.matchAll(/<section[^>]*id="([\w-]+)"[^>]*>([\s\S]*?)<\/section>/g)];
-ok(secs.length >= 11, `view Profile phải >= 11 section (task jofj bỏ Liên hệ, task ye4s bỏ 11~13), đang ${secs.length}`);
+ok(secs.length >= 10, `view Profile phải >= 10 section (task jofj bỏ Liên hệ, task ye4s bỏ 11~13, task a9f4 bỏ #pcai), đang ${secs.length}`);
 for (const [, id, body] of secs) {
   const n = (l) => (body.match(new RegExp(`data-l="${l}"`, 'g')) || []).length;
   ok(n('ja') > 0 && n('ja') === n('en') && n('ja') === n('vi'), `#${id}: khối ngôn ngữ lệch ja/en/vi = ${n('ja')}/${n('en')}/${n('vi')}`);

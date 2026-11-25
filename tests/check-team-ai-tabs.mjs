@@ -15,7 +15,7 @@ const TABS = {
   team: { top: 'team-top', secs: ['team-top', 'team-records', 'team-skills', 'team-daily'],
     facts: { ja: ['5～6名', '約27名', '2～3名', '1人', '5名', 'KPI', 'コーチ'], en: ['5 to 6', 'about 27', '2 to 3', 'five', 'KPI', 'coach'],
       vi: ['5 đến 6', 'khoảng 27', '2 đến 3', '5 người', 'KPI', 'kèm cặp'] } },
-  ai: { top: 'ai-top', secs: ['ai-top', 'ai-pyramid', 'ai-approach', 'ai-uses', 'ai-people'], // task edof: thêm 01 kim tự tháp
+  ai: { top: 'ai-top', secs: ['ai-top', 'ai-pyramid', 'ai-approach', 'ai-uses', 'ai-people', 'ai-tools'], // task edof: thêm 01 kim tự tháp; task a9f4: thêm 05 #ai-tools
     facts: { ja: ['ChatGPT', 'Claude', 'Sesame', '80～90%', '3～4', '繰り返し', '人が確認', '設計と開発を主導'],
       en: ['ChatGPT', 'Claude', 'Sesame', '80 to 90%', '3 to 4', 'repetitive', 'checks', 'led the design and development'],
       vi: ['ChatGPT', 'Claude', 'Sesame', '80 đến 90%', '3 đến 4', 'lặp lại', 'kiểm tra', 'chủ trì thiết kế'] } },
@@ -49,7 +49,7 @@ for (const [v, t] of Object.entries(TABS)) {
   ok(!/(^|[\s,.(])bạn(?! bè)([\s,.!?)]|$)/i.test(txt.vi), `${v}/vi: còn gọi người đọc là "bạn"`);
 }
 // Nút ngôn ngữ, PDF: tab mới không đổi luật router (main nào không phải profile thì ẩn link PDF)
-ok((html.match(/<main class="wrap" data-view=/g) || []).length === 4, 'số view khác 4 (profile, sales, team, ai)');
+ok((html.match(/<main class="wrap" data-view=/g) || []).length === 5, 'số view khác 5 (profile, sales, team, ai, lang; tab Languages task a9f4 kiểm ở check-lang-tab.mjs)');
 
 if (fails.length) { console.error(`FAIL check-team-ai-tabs (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
 console.log('PASS check-team-ai-tabs: 2 tab mới (team, ai) có link top-nav, mục lục TOP..03 x3 ngôn ngữ, đủ JA/EN/VI, EN/VI không sót chữ Nhật, đủ dữ kiện hồ sơ gốc, giọng ứng viên');

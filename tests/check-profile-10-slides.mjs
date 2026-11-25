@@ -1,18 +1,19 @@
 // Task ye4s: tab My Profile bỏ 3 slide thừa 11~13/13 (#aiops AI業務管理, #aidash AIダッシュボード, #pr 自己PR),
 // còn 10 slide: cover + 01..09 (#toc ẩn không đếm). Không còn link / dữ liệu nào trỏ tới 3 trang đã bỏ.
+// Task a9f4: trang cuối #pcai (語学、PC、AI) tách sang tab AI (#ai-tools) và tab Languages, Profile còn 9 slide (cover + 01..08), trang cuối #w-early.
 import { readFileSync, existsSync } from 'node:fs';
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const build = readFileSync(new URL('../tools/gx/build.mjs', import.meta.url), 'utf8');
 let fail = 0;
 const ok = (c, m) => { if (!c) { fail++; console.error('FAIL', m); } };
-const GONE = ['aiops', 'aidash', 'pr'];
+const GONE = ['aiops', 'aidash', 'pr', 'pcai'];
 
 const main = (html.match(/<main class="wrap" data-view="profile">[\s\S]*?<\/main>/) || [''])[0];
 ok(main, 'không thấy main data-view="profile"');
 const ids = [...main.matchAll(/<section[^>]*\bclass="pg"[^>]*\bid="([^"]+)"|<section[^>]*\bid="([^"]+)"[^>]*\bclass="pg"/g)].map((m) => m[1] || m[2]);
-const want = ['cover', 'toc', 'profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early', 'pcai'];
+const want = ['cover', 'toc', 'profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early'];
 ok(ids.join(',') === want.join(','), `section tab Profile phải là ${want.join(',')}, đang ${ids.join(',')}`);
-ok(ids.filter((i) => i !== 'toc').length === 10, 'tab Profile phải còn đúng 10 slide hiển thị');
+ok(ids.filter((i) => i !== 'toc').length === 9, 'tab Profile phải còn đúng 9 slide hiển thị');
 
 for (const id of GONE) {
   ok(!new RegExp(`id="${id}"`).test(html), `còn section id="${id}"`);
@@ -26,16 +27,16 @@ for (const id of GONE) {
 }
 
 const nums = [...main.matchAll(/data-num="(\d+)"/g)].map((m) => m[1]);
-ok(nums.join(',') === '01,02,03,04,05,06,07,08,09,10', `data-num phải 01..10, đang ${nums.join(',')}`);
+ok(nums.join(',') === '01,02,03,04,05,06,07,08,09', `data-num phải 01..09, đang ${nums.join(',')}`);
 const ft = [...main.matchAll(/<p>(\d+) ／ (\d+)<\/p>/g)];
-ok(ft.length === 10 && ft.every((m, i) => m[1] === nums[i] && m[2] === '10'), `footer phải 01..10 ／ 10, đang ${ft.map((m) => m[1] + '/' + m[2]).join(',')}`);
+ok(ft.length === 9 && ft.every((m, i) => m[1] === nums[i] && m[2] === '09'), `footer phải 01..09 ／ 09, đang ${ft.map((m) => m[1] + '/' + m[2]).join(',')}`);
 ok(!/／ 13<\/p>/.test(html), 'còn footer "／ 13"');
-ok(/href="#pcai" data-sec="pcai"><em>10<\/em>/.test(html), 'sidebar: mục cuối phải là 10 #pcai');
-ok(/#pcai>\.ft\{display:flex\}/.test(html), 'CSS desktop: trang cuối mới #pcai phải hiện chân trang (thay #pr>.ft)');
+ok(/href="#w-early" data-sec="w-early"><em>09<\/em>[^\n]*\r?\n\s*<\/nav>/.test(html), 'sidebar: mục cuối phải là 09 #w-early');
+ok(/#w-early>\.ft\{display:flex\}/.test(html), 'CSS desktop: trang cuối mới #w-early phải hiện chân trang (thay #pcai>.ft)');
 ok(/<a class="pj-c" href="#team-daily">/.test(html), '2 thẻ dự án AI phải trỏ sang #team-daily');
 ok(!/More ／ My Profile/.test(html), '#team-daily còn thẻ "More ／ My Profile" trỏ trang đã bỏ');
 const steps = [...main.matchAll(/gx-step"><i><\/i><b>(\d+)<\/b> \/ (\d+)/g)].map((m) => m[1] + '/' + m[2]);
-ok(steps.length === 9 && steps.every((s, i) => s === String(i + 1).padStart(2, '0') + '/09'), `chip bước gx tab Profile phải 01..09 / 09, đang ${steps.join(',')}`);
+ok(steps.length === 8 && steps.every((s, i) => s === String(i + 1).padStart(2, '0') + '/08'), `chip bước gx tab Profile phải 01..08 / 08, đang ${steps.join(',')}`);
 
 if (fail) { console.error(`check-profile-10-slides: ${fail} lỗi`); process.exit(1); }
-console.log('PASS check-profile-10-slides: tab My Profile còn 10 slide (bỏ #aiops, #aidash, #pr), đánh số 01..10, không còn link / ảnh / cảnh trỏ tới trang đã bỏ');
+console.log('PASS check-profile-10-slides: tab My Profile còn 9 slide (bỏ #aiops, #aidash, #pr, task a9f4 bỏ #pcai), đánh số 01..09, không còn link / ảnh / cảnh trỏ tới trang đã bỏ');

@@ -29,12 +29,13 @@ ok(/<section class="pg"[^>]*id="ai-pyramid"/.test(sec), '#ai-pyramid phải là 
 // 2) Mục lục tab AI + đánh số lại 01..04, ảnh nền riêng
 const nav = (html.match(/<nav class="sb-nav" data-for="ai"[\s\S]*?<\/nav>/) || [])[0] || '';
 const navIds = [...nav.matchAll(/data-sec="([^"]+)"/g)].map((m) => m[1]);
-ok(navIds.join(',') === 'ai-top,ai-pyramid,ai-approach,ai-uses,ai-people', `mục lục tab AI sai thứ tự: ${navIds.join(',')}`);
+ok(navIds.join(',') === 'ai-top,ai-pyramid,ai-approach,ai-uses,ai-people,ai-tools', // task a9f4 thêm 05 #ai-tools
+   `mục lục tab AI sai thứ tự: ${navIds.join(',')}`);
 const navNums = [...nav.matchAll(/<em>([^<]+)<\/em>/g)].map((m) => m[1]);
-ok(navNums.join(',') === 'TOP,01,02,03,04', `số mục lục tab AI phải TOP,01..04 (đang ${navNums.join(',')})`);
-const ebs = ['ai-pyramid', 'ai-approach', 'ai-uses', 'ai-people'].map((id) => {
+ok(navNums.join(',') === 'TOP,01,02,03,04,05', `số mục lục tab AI phải TOP,01..05 (đang ${navNums.join(',')})`);
+const ebs = ['ai-pyramid', 'ai-approach', 'ai-uses', 'ai-people', 'ai-tools'].map((id) => {
   const s = (html.match(new RegExp(`id="${id}"[\\s\\S]*?<span class="eb rv">(\\d\\d)`)) || [])[1]; return s; });
-ok(ebs.join(',') === '01,02,03,04', `nhãn số đầu section tab AI phải 01..04 (đang ${ebs.join(',')})`);
+ok(ebs.join(',') === '01,02,03,04,05', `nhãn số đầu section tab AI phải 01..05 (đang ${ebs.join(',')})`);
 ok(/var IDS=\[[^\]]*'ai-pyramid'/.test(html), 'khối pganh chưa có ảnh nền cho ai-pyramid');
 ok(existsSync(join(root, 'assets', 'pg', 'ai-pyramid.webp')), 'thiếu assets/pg/ai-pyramid.webp');
 

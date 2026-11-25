@@ -22,6 +22,7 @@ html[lang="ja"] .ttl{font-weight:900;letter-spacing:.02em}
 #flow{position:absolute;left:0;top:0}
 .lab{position:absolute;top:520px;width:218px;text-align:center}
 .lab .n{display:block;position:static;margin:0 auto;font:800 15px 'Manrope',sans-serif!important;letter-spacing:.2em;color:#6d5bd0;width:max-content}
+.lab .n b{font-weight:800}
 .lab .h{display:block;position:static;margin:8px auto 0;font-weight:800;font-size:21px;line-height:1.28;text-transform:uppercase;width:max-content;max-width:218px;text-wrap:balance}
 html[lang="vi"] .lab .h{font-size:19.5px}
 html[lang="ja"] .lab .h{font-weight:700;font-size:23px;letter-spacing:.02em}
@@ -64,18 +65,22 @@ html.m .res img{width:44px;height:44px}
   <div class="t res" data-box="result" id="res"></div>
 </div>
 <script>
-// ── Chữ trên clip (3 ngôn ngữ). Nội dung lấy từ chính tab Team Management (6 cách vận hành đội), không thêm số liệu mới.
+// ── Chữ trên clip (3 ngôn ngữ). 6 bước theo vòng PDCA của slide #team-skills (task j2u3 / s5tp), không thêm số liệu mới.
 const LABELS = {
-  ja: { title: 'チーム運営のワークフロー', result: '数字で見える化し、人を育てて成果へ',
-    steps: [['目標と役割', 'KPI・評価基準'], ['工程の標準化', 'SOP・完了の定義'], ['日々の数字', '時間・タスク・架電'],
-      ['原因分析と改善', 'データから次の打ち手'], ['人材の育成', '人事 1名から5名へ'], ['経営への報告', '日次・週次・月次']] },
-  en: { title: 'How I run a team', result: 'Visible numbers, growing people, results',
-    steps: [['Targets & roles', 'KPI, appraisal'], ['Standard steps', 'SOP, define "done"'], ['Daily numbers', 'Hours, tasks, calls'],
-      ['Cause & action', 'Data to next step'], ['Grow people', 'HR team 1 to 5'], ['Report up', 'Daily, weekly, monthly']] },
-  vi: { title: 'Cách tôi vận hành đội', result: 'Số liệu rõ ràng, đội ngũ trưởng thành, ra kết quả',
-    steps: [['Mục tiêu & vai trò', 'KPI, tiêu chí đánh giá'], ['Chuẩn hóa quy trình', 'SOP, định nghĩa "xong"'], ['Số liệu hằng ngày', 'Giờ làm, task, cuộc gọi'],
-      ['Tìm nguyên nhân', 'Từ dữ liệu ra hành động'], ['Phát triển con người', 'Đội nhân sự 1 lên 5'], ['Báo cáo lãnh đạo', 'Ngày, tuần, tháng']] },
+  ja: { title: 'PDCAで回すチーム運営', result: 'PDCAを回し続け、改善を積み重ねる',
+    steps: [['行動数で計画', '数字で目標を設定'], ['実行管理と報告分析', '日々の報告を分析'], ['ボトルネック発見', '詰まりを特定'],
+      ['話し合いで解決', '対策をチームで議論'], ['改善提案', 'カイゼン案を出す'], ['改善の効果測定', '実行・確認・測定']] },
+  en: { title: 'Running a team with PDCA', result: 'PDCA on repeat: steady kaizen',
+    steps: [['Plan in numbers', 'Action-count targets'], ['Run & track', 'Analyse the reports'], ['Find bottlenecks', 'Where work gets stuck'],
+      ['Solve together', 'Discuss the fix'], ['Propose kaizen', 'Improvement ideas'], ['Measure kaizen', 'Apply, check, measure']] },
+  vi: { title: 'Vận hành đội theo PDCA', result: 'Vòng PDCA lặp lại, cải tiến liên tục',
+    steps: [['Lập kế hoạch', 'Bằng số hành động'], ['Quản lý thực hiện', 'Phân tích báo cáo'], ['Tìm điểm nghẽn', 'Bottleneck'],
+      ['Thảo luận giải quyết', 'Gỡ điểm nghẽn'], ['Đề xuất kaizen', 'Cải tiến cách làm'], ['Đo lường kaizen', 'Thực hiện, kiểm tra']] },
 };
+// Pha PDCA của từng bước + màu pha (nhãn "01 · PLAN" dưới ô, cung lặp ACT -> PLAN sau bước 6)
+const PHASE = ['P', 'D', 'C', 'C', 'A', 'A'];
+const PH_NAME = { P: 'PLAN', D: 'DO', C: 'CHECK', A: 'ACT' };
+const PH_COL = { P: '#2E9BFF', D: '#6d5bd0', C: '#E8792B', A: '#12A58A' };
 const Q = new URLSearchParams(location.search);
 const LANG = LABELS[Q.get('lang')] ? Q.get('lang') : 'ja';
 document.documentElement.lang = LANG;
@@ -123,6 +128,24 @@ const lane = el('line', { x1: X(0), y1: Y(0), x2: X(N - 1), y2: Y(N - 1), stroke
 // chevron chỉ hướng giữa các ô
 for (let i = 0; i < N - 1; i++) { const x = (X(i) + X(i + 1)) / 2, y = (Y(i) + Y(i + 1)) / 2; el('path', { d: MOB ? `M${x - 8} ${y - 5} L${x} ${y + 4} L${x + 8} ${y - 5}` : `M${x - 5} ${y - 8} L${x + 4} ${y} L${x - 5} ${y + 8}`, fill: 'none', stroke: '#b9cfea', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'chev' }); }
 
+// cung lặp ACT -> PLAN: vẽ dần sau bước 6 (ngang: vòng phía trên hàng ô, có nhãn PDCA; dọc: vòng bên trái cột ô)
+const LOOP_D = MOB ? `M${X(N - 1) - TILE / 2 - 6} ${Y(N - 1)} C 26 ${Y(N - 1)}, 26 ${Y(0)}, ${X(0) - TILE / 2 - 6} ${Y(0)}`
+  : `M${X(N - 1)} ${Y(N - 1) - TILE / 2 - 14} C ${X(N - 1)} 206, ${X(0)} 206, ${X(0)} ${Y(0) - TILE / 2 - 14}`;
+const loopG = el('g', { opacity: 0 });
+const loop = el('path', { id: 'loop', d: LOOP_D, fill: 'none', stroke: PH_COL.A, 'stroke-width': 4, 'stroke-linecap': 'round' }, loopG);
+const LOOP_LEN = loop.getTotalLength();
+loop.setAttribute('stroke-dasharray', `${LOOP_LEN} ${LOOP_LEN + 20}`);
+const ex = X(0) - (MOB ? TILE / 2 + 6 : 0), ey = Y(0) - (MOB ? 0 : TILE / 2 + 14);
+const loopHead = el('path', { d: MOB ? `M${ex - 12} ${ey - 9} L${ex} ${ey} L${ex - 12} ${ey + 9}` : `M${ex - 9} ${ey - 12} L${ex} ${ey} L${ex + 9} ${ey - 12}`,
+  fill: 'none', stroke: PH_COL.A, 'stroke-width': 4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: 0 }, loopG);
+const loopTag = el('g', { opacity: MOB ? 0 : 1 }, loopG);
+if (!MOB) {
+  const cx = (X(0) + X(N - 1)) / 2, cy = 229.5;
+  el('rect', { x: cx - 58, y: cy - 18, width: 116, height: 36, rx: 18, fill: '#fff', stroke: PH_COL.A, 'stroke-width': 2 }, loopTag);
+  const tx = el('text', { x: cx, y: cy + 7, 'text-anchor': 'middle', 'font-family': 'Manrope, sans-serif', 'font-weight': 800, 'font-size': 19, 'letter-spacing': 3 }, loopTag);
+  ['P', 'D', 'C', 'A'].forEach((k) => { const ts = el('tspan', { fill: PH_COL[k] }, tx); ts.textContent = k; });
+}
+
 // Mỗi ô: lớp idle (xám, tĩnh) + lớp active (màu, hoạt hình theo thời gian cục bộ lt = t - TA[i]).
 // Icon đặt trong hộp cục bộ 120x120, gốc (cx-60, cy-60).
 const NODES = [];
@@ -138,7 +161,7 @@ for (let i = 0; i < N; i++) {
 const P = (i) => NODES[i].parts;
 
 // Icon 3D lấy từ bộ icon của video GPRFLEXEYE (task v3c1, dùng chung assets/gx với trang): lớp chờ = xám mờ, lớp bật = màu + nảy nhẹ.
-const ICONS = ['roadmap', 'checklist', 'report-chart', 'magnifier', 'team-group', 'chat-bubbles'];
+const ICONS = ['roadmap', 'report-chart', 'bottleneck', 'chat-bubbles', 'lightbulb', 'stopwatch'];   // kế hoạch, báo cáo, điểm nghẽn, thảo luận, kaizen, đo lường
 const ICON_SRC = (n) => `../../assets/gx/${n}.webp`;
 ICONS.forEach((name, i) => { const n = NODES[i];
   el('image', { href: ICON_SRC(name), x: -4, y: -4, width: 128, height: 128, filter: 'url(#gray)', opacity: .45 }, n.idle);
@@ -154,7 +177,7 @@ const labs = document.getElementById('labs'); const LABS = [];
 L.steps.forEach(([h, s], i) => {
   const d = document.createElement('div'); d.className = 'lab';
   d.style.left = (MOB ? X(i) + TILE / 2 + 44 : X(i) - 109) + 'px'; d.style.top = (MOB ? Y(i) : Y(i) + TILE / 2 + 50) + 'px';
-  d.innerHTML = `<span class="t n" data-box="n${i + 1}">${String(i + 1).padStart(2, '0')}</span><span class="t h" data-box="h${i + 1}"></span><span class="t s" data-box="s${i + 1}"></span>`;
+  d.innerHTML = `<span class="t n" data-box="n${i + 1}">${String(i + 1).padStart(2, '0')} · <b style="color:${PH_COL[PHASE[i]]}">${PH_NAME[PHASE[i]]}</b></span><span class="t h" data-box="h${i + 1}"></span><span class="t s" data-box="s${i + 1}"></span>`;
   d.querySelector('.h').textContent = h; d.querySelector('.s').textContent = s;
   labs.appendChild(d); LABS.push(d);
 });
@@ -193,6 +216,12 @@ function seek(t) {
   const shown = Math.max(1, count);
   stp.textContent = `STEP ${String(shown).padStart(2, '0')} / 06`;
   stp.style.opacity = t > HOLD_END ? (1 - bump((t - HOLD_END) / RESET) * 0.85).toFixed(4) : '1';
+  // cung lặp ACT -> PLAN: vẽ từ ô 6 về ô 1 ngay sau bước 6, mờ cùng lúc lặp
+  const lk = eio((t - (TA[N - 1] + 0.24)) / 0.5);
+  loop.setAttribute('stroke-dashoffset', (LOOP_LEN * (1 - lk)).toFixed(2));
+  loopG.setAttribute('opacity', (cl(lk * 6) * fo).toFixed(4));
+  loopHead.setAttribute('opacity', eo((lk - 0.85) / 0.15).toFixed(4));
+  if (!MOB) loopTag.setAttribute('opacity', eo((lk - 0.3) / 0.4).toFixed(4));
   // dòng kết quả: hiện sau bước 6, ẩn khi lặp
   const r = eo((t - RES_IN) / 0.3) * fo;
   resEl.style.opacity = r.toFixed(4);
