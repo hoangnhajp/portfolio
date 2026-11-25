@@ -48,8 +48,11 @@ for (const id of ids) {
 const build = existsSync(p('tools/sw/build-shots.py')) ? readFileSync(p('tools/sw/build-shots.py'), 'utf8') : '';
 ok(build, 'thiếu tools/sw/build-shots.py (nguồn sinh ảnh đã che)');
 const shotsOf = (s) => [...s.matchAll(/<img\b[^>]*src="(assets\/sw\/[\w-]+\.webp)"/g)].map((m) => m[1]);
-// sw-leads: chưa có ảnh app (leader không chụp được), tạm chỉ danh sách chức năng; thêm ảnh thì các kiểm bên dưới tự áp
-const MIN = { 'sw-remote': 4, 'sw-talent': 4 };
+// sw-leads (task tskl): 2 ảnh app quản lý khách hàng (danh sách + Kanban), thẻ 03 ở #sw-top dùng ảnh thật thay ảnh minh hoạ
+const MIN = { 'sw-remote': 4, 'sw-talent': 4, 'sw-leads': 2 };
+for (const s of ['crm-list', 'crm-kanban']) ok(shotsOf(sec('sw-leads')).includes(`assets/sw/${s}.webp`), `#sw-leads thiếu ảnh assets/sw/${s}.webp`);
+const card03 = (sec('sw-top').match(/<a class="card sw-p" href="#sw-leads"[\s\S]*?<\/a>/) || [''])[0];
+ok(/<img\b[^>]*src="assets\/sw\/crm-list\.webp"/.test(card03), 'thẻ 03 ở #sw-top phải dùng ảnh assets/sw/crm-list.webp');
 for (const [id, n] of Object.entries(MIN)) ok(shotsOf(sec(id)).length >= n, `#${id} cần >= ${n} ảnh chụp màn hình, thấy ${shotsOf(sec(id)).length}`);
 for (const src of shotsOf(main)) {
   ok(existsSync(p(src)), `thiếu file ${src}`);

@@ -24,6 +24,7 @@ LD = os.path.join(os.environ.get('SW_SRC_CRM', ''), '')
 # Vùng che chung của từng bộ ảnh: logo + tên sản phẩm, ô tài khoản / email ở header
 RM_COMMON = [(18, 18, 242, 72), (20, 152, 236, 202), (976, 30, 1172, 62)]
 TL_COMMON = [(6, 6, 58, 56), (74, 12, 244, 46), (344, 6, 512, 32)]
+LD_COMMON = [(4, 4, 48, 44), (60, 6, 250, 40), (280, 4, 430, 22), (1050, 8, 1390, 48)]
 
 SHOTS = {
     # Quản lý nhân viên làm từ xa
@@ -38,17 +39,18 @@ SHOTS = {
     'recruit-jd': (TL + '20-danhsach-jd.png', TL_COMMON + [(892, 10, 1116, 66), (446, 400, 502, 720), (896, 400, 1004, 720)]),
     'recruit-process': (TL + '16-tientrinh-mocphongvan-offer.png', TL_COMMON + [(892, 10, 1116, 66)]),
     'recruit-matching': (TL + '14-matching-diemtong-nhandinh.png', TL_COMMON + [(892, 10, 1116, 66), (782, 322, 1072, 347)]),
-    # Quản lý khách hàng: chưa có ảnh; khi có, điền vùng che (danh sách rỗng = không xuất)
-    'crm-list': (LD + 'list.png', []),
-    'crm-kanban': (LD + 'kanban.png', []),
+    # Quản lý khách hàng (task tskl): ảnh gốc 1568x698 đã che trên trình duyệt trước khi chụp; che thêm lớp 2 ở
+    # tên + logo sản phẩm, breadcrumb, ô tài khoản header. Lịch hẹn / báo cáo chưa có ảnh (danh sách rỗng = không xuất)
+    'crm-list': (LD + 'list.jpg', LD_COMMON),
+    'crm-kanban': (LD + 'kanban.jpg', LD_COMMON),
     'crm-calendar': (LD + 'calendar.png', []),
     'crm-report': (LD + 'report.png', []),
 }
 
 # Nền trang: (id section, ảnh đã che, tâm cắt theo tỉ lệ ngang 0..1)
 BACKS = [('sw-top', 'recruit-dashboard', 0.62), ('sw-remote', 'staff-calendar', 0.55), ('sw-talent', 'recruit-matching', 0.6), ('sw-leads', 'crm-list', 0.6)]
-# Chưa có ảnh app quản lý khách hàng: nền #sw-leads tạm lấy ảnh nền công việc Sales có sẵn (lật ngang + nén lại, chỉ đổi
-# định dạng, không sinh ảnh mới). Có ảnh ld-list thì BACKS ở trên tự thay.
+# Dự phòng khi thiếu crm-list.webp: nền #sw-leads lấy ảnh nền công việc Sales có sẵn (lật ngang + nén lại, chỉ đổi
+# định dạng, không sinh ảnh mới). Có crm-list.webp thì BACKS ở trên dùng ảnh đó.
 LEADS_FALLBACK = os.path.join(PG, 'sales-kpi.webp')
 
 

@@ -1217,11 +1217,11 @@ html.sr .it-sys.sr-in .it-ly::after{animation:itLit 6s linear infinite;animation
 .card.sw-p{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit}
 .sw-p img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:left top;border-radius:10px;border:1px solid #ece8f3;display:block}
 .sw-p h3,.sw-p p{margin:0}
-.sw-p img.sw-ph{object-fit:contain;object-position:center;background:#f6f3fb;padding:6% 30%;box-sizing:border-box}
 .sw-fl4{grid-template-columns:repeat(4,1fr)}
 .sw-gal{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 0;padding:0}
 .sw-shot{margin:0;background:#fff;border:1px solid #ece8f3;border-radius:12px;padding:8px;box-shadow:0 6px 18px rgba(40,30,90,.08)}
 .sw-shot:first-child{grid-column:1/-1}
+.sw-gal--2 .sw-shot:first-child{grid-column:auto}
 .sw-shot img{width:100%;height:auto;display:block;border-radius:8px}
 .sw-shot figcaption{font:600 11.5px/1.5 'Noto Sans JP',sans-serif;color:#3d3849;padding:7px 4px 1px}
 .sw-fn{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -3098,7 +3098,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <div class="sw-pr rv" style="--d:180ms">
     <a class="card sw-p" href="#sw-remote" style="--i:0"><img src="assets/sw/staff-dashboard.webp" alt="" width="1280" height="853" loading="lazy" decoding="async"><span class="lbl">01 Remote staff</span><h3 data-l="ja">リモート社員管理</h3><h3 data-l="en">Remote staff management</h3><h3 data-l="vi">Quản lý nhân viên làm việc từ xa</h3><p data-l="ja">勤務時間、進捗、勤怠、スコア、カレンダー、無操作時のメール通知をまとめて管理します。</p><p data-l="en">Working time, progress, timesheets, scores, calendar and email alerts when staff stop working.</p><p data-l="vi">Thời gian làm việc, tiến độ, chấm công, tính điểm, lịch và email cảnh báo khi nhân viên không làm việc.</p></a>
     <a class="card sw-p" href="#sw-talent" style="--i:1"><img src="assets/sw/recruit-matching.webp" alt="" width="1280" height="720" loading="lazy" decoding="async"><span class="lbl">02 Recruiting</span><h3 data-l="ja">採用管理</h3><h3 data-l="en">Recruiting management</h3><h3 data-l="vi">Quản lý tuyển dụng</h3><p data-l="ja">CVと求人票の管理、選考状況のチケット、AIによる評価とマッチングを備えています。</p><p data-l="en">CV and JD management, tickets for each candidate status, and AI evaluation and matching.</p><p data-l="vi">Quản lý CV, JD, ticket theo trạng thái ứng viên, đánh giá và matching ứng viên bằng AI.</p></a>
-    <a class="card sw-p" href="#sw-leads" style="--i:2"><img class="sw-ph" src="assets/gx/handshake.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"><span class="lbl">03 Customers</span><h3 data-l="ja">顧客管理</h3><h3 data-l="en">Customer management</h3><h3 data-l="vi">Quản lý khách hàng</h3><p data-l="ja">顧客台帳、重複チェック、商談のカンバン、商談予定、メール、売上レポートを一つにまとめます。</p><p data-l="en">Customer lists, duplicate checks, a Kanban pipeline, appointments, email and sales reports in one place.</p><p data-l="vi">Danh sách khách hàng, chống trùng, pipeline Kanban, lịch hẹn, email và báo cáo doanh thu trong một nơi.</p></a>
+    <a class="card sw-p" href="#sw-leads" style="--i:2"><img src="assets/sw/crm-list.webp" alt="" width="1280" height="570" loading="lazy" decoding="async"><span class="lbl">03 Customers</span><h3 data-l="ja">顧客管理</h3><h3 data-l="en">Customer management</h3><h3 data-l="vi">Quản lý khách hàng</h3><p data-l="ja">顧客台帳、重複チェック、商談のカンバン、商談予定、メール、売上レポートを一つにまとめます。</p><p data-l="en">Customer lists, duplicate checks, a Kanban pipeline, appointments, email and sales reports in one place.</p><p data-l="vi">Danh sách khách hàng, chống trùng, pipeline Kanban, lịch hẹn, email và báo cáo doanh thu trong một nơi.</p></a>
   </div>
   <ol class="hr-fl sw-fl4 rv" style="--d:220ms">
     <li class="hr-st" style="--i:0"><img src="assets/gx/interview.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span class="hr-n" aria-hidden="true">01</span><h3 data-l="ja">要望の聞き取り</h3><h3 data-l="en">Hearing the needs</h3><h3 data-l="vi">Lắng nghe nhu cầu</h3><p data-l="ja">現場の困りごとと目標を確認します。</p><p data-l="en">I learn the client's problems and goals.</p><p data-l="vi">Tôi tìm hiểu vấn đề và mục tiêu của khách hàng.</p></li>
@@ -3158,6 +3158,10 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   <p class="kw-sub rv" style="--d:140ms" data-l="ja">法人と個人の顧客台帳、重複チェック、商談のカンバン、商談予定、メール、売上レポートを備えた顧客管理システムです。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">A customer management system with company and contact lists, duplicate checks, a Kanban sales pipeline, appointments, email and sales reports.</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Phần mềm quản lý khách hàng: danh sách khách tổ chức và cá nhân, chống trùng dữ liệu, pipeline Kanban, lịch hẹn, email và báo cáo doanh thu.</p>
+  <div class="sw-gal sw-gal--2 rv" style="--d:180ms">
+    <figure class="sw-shot" style="--i:0"><img src="assets/sw/crm-list.webp" alt="" width="1280" height="570" loading="lazy" decoding="async"><figcaption><span data-l="ja">顧客台帳：区分とランクで絞り込み</span><span data-l="en">Customer list filtered by segment and rank</span><span data-l="vi">Danh sách khách hàng lọc theo nhóm và hạng</span></figcaption></figure>
+    <figure class="sw-shot" style="--i:1"><img src="assets/sw/crm-kanban.webp" alt="" width="1280" height="570" loading="lazy" decoding="async"><figcaption><span data-l="ja">顧客対応のカンバン：段階ごとにチケットを動かす</span><span data-l="en">Customer care Kanban: tickets move stage by stage</span><span data-l="vi">Kanban chăm sóc khách hàng: kéo ticket qua từng giai đoạn</span></figcaption></figure>
+  </div>
   <ul class="sw-fn rv" style="--d:220ms">
     <li style="--i:0"><h3 data-l="ja">顧客管理</h3><h3 data-l="en">Customer lists</h3><h3 data-l="vi">Quản lý khách hàng</h3><p data-l="ja">法人と個人を分けて管理し、列ごとに並べ替えと絞り込みができます。</p><p data-l="en">Companies and contacts are kept apart, with sorting and filtering on every column.</p><p data-l="vi">Tách khách tổ chức và cá nhân, sắp xếp và lọc theo từng cột.</p></li>
     <li style="--i:1"><h3 data-l="ja">AI入力と重複チェック</h3><h3 data-l="en">AI entry and duplicate checks</h3><h3 data-l="vi">Nhập liệu AI và chống trùng</h3><p data-l="ja">名刺や文章からAIで入力し、税番号、Webサイト、社名の順で重複を確かめます。</p><p data-l="en">AI fills records from business cards or text, then checks for duplicates by tax code, website and name.</p><p data-l="vi">AI nhập liệu từ danh thiếp hoặc văn bản, rồi chống trùng theo mã số thuế, website và tên.</p></li>
