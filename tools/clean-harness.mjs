@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 export const HARNESS_RX = new RegExp([
   String.raw`\btask\s*[:：]?\s*(?=[a-z]*\d)[0-9a-z]{4}\b`, // mã việc nội bộ kiểu "task 4n9v"
+  String.raw`\btask\s+[0-9a-z]{4}\s*[:：]`, // mã việc toàn chữ kiểu "Task edof:"
   String.raw`\b(?:harness|leader-flow|delegate\.mjs|executor|goal-gate|PROGRESS\.md|HANDOFF\.md|c\x6caude-worker\d*)\b`, // \x6c = "l": tránh tên công cụ AI ngay trong file (check-no-ai-brand-names)
   String.raw`người vận hành|người dùng (?:yêu cầu|muốn|nói|chốt)`,
   String.raw`\bskill [a-z0-9]+(?:-[a-z0-9]+)+`, // tên skill nội bộ
