@@ -15,7 +15,7 @@ const ok = (c, m) => { if (!c) fails.push(m); };
 const strip = (s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const IDS4 = ['ap-top', 'ap-products', 'ap-news', 'ap-role'];
 // task ls8q: thêm trang #ap-shots (ảnh sản phẩm) sau #ap-products; nội dung trang đó do tests/check-ap-shots.mjs kiểm
-const ALL = ['ap-top', 'ap-products', 'ap-shots', 'ap-news', 'ap-market', 'ap-role']; // task m07v bổ sung: #ap-market do tests/check-ap-market.mjs kiểm nội dung
+const ALL = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-role']; // task m07v bổ sung: #ap-market do tests/check-ap-market.mjs kiểm nội dung; task 04fj: #ap-vn do tests/check-ap-vn.mjs kiểm
 
 // 1) Menu trên: "Andpad Info" ngay sau JD ANDPAD, thứ tự menu khớp thứ tự main
 const topNav = (html.match(/<nav class="top-nav"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';

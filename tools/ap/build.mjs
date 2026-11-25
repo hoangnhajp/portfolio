@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { pageShots } from './shots.mjs'; // task ls8q: trang #ap-shots (ảnh sản phẩm chính thức)
 import { pageMarket } from './market.mjs'; // task m07v bổ sung: trang #ap-market (ngành, thị trường, case, hỗ trợ)
+import { pageVn } from './vn.mjs'; // task 04fj: trang #ap-vn (sản phẩm và dịch vụ ANDPAD tại Việt Nam, ảnh chính thức)
 
 const FILE = fileURLToPath(new URL('../../index.html', import.meta.url));
 const L3 = (tag, o, attrs = '') => ['ja', 'en', 'vi'].map((l) => `<${tag}${attrs} data-l="${l}">${o[l]}</${tag}>`).join('');
@@ -259,6 +260,7 @@ const main = `<!-- ap:start -->
 ${pageTop()}
 ${pageProducts()}
 ${pageShots({ L3, T, head, src })}
+${pageVn({ L3, T, head, src })}
 ${pageNews()}
 ${pageMarket({ L3, T, head, src })}
 ${pageRole()}
@@ -276,4 +278,4 @@ else {
   html = html.slice(0, end) + eol + block + html.slice(end);
 }
 writeFileSync(FILE, html);
-console.log('OK tools/ap/build.mjs: đã ghi tab Andpad Info (6 trang) vào index.html');
+console.log('OK tools/ap/build.mjs: đã ghi tab Andpad Info (7 trang) vào index.html');

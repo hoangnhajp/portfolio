@@ -1597,6 +1597,29 @@ html.sr .ap-shs.sr-in .ap-sh{animation:apUp .5s cubic-bezier(.2,.7,.2,1) both;an
 @media print{.ap-sh{animation:none!important}}
 </style>
 <!-- ap-shots-css:end -->
+<!-- ap-vn-css:start -->
+<style id="ap-vn-css">
+/* Task 04fj: #ap-vn (ANDPAD tại Việt Nam, HTML sinh bằng node tools/ap/build.mjs + tools/ap/vn.mjs): 2 khối tách riêng,
+   SẢN PHẨM có tại Việt Nam (.ap-vp) và DỊCH VỤ làm tại Việt Nam (.ap-vs); mỗi mục 1 ảnh chính thức assets/ap/vn-*.webp
+   (tải bằng tools/ap/fetch-vn.py), bấm ảnh phóng to (khối zoom), link trang gốc ở chú thích. Chỉ transform / opacity. */
+.ap-vgrp{margin-top:10px}
+.ap-vgrp>.ap-gh h3{margin:0;font-size:14px}
+.ap-vps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.ap-vps--3{grid-template-columns:repeat(3,1fr)}.ap-vps--5{grid-template-columns:repeat(5,1fr)}
+.ap-vp,.ap-vs{margin:0;background:#fff;border:1px solid #ece8f3;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s ease}
+.ap-vp:hover,.ap-vs:hover{transform:translateY(-2px)}
+.ap-vp img,.ap-vs img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#f6f4fa;border-bottom:1px solid #f0edf6}
+.ap-vp figcaption,.ap-vs figcaption{padding:6px 9px 8px;display:flex;flex-direction:column;gap:2px}
+.ap-vp b,.ap-vs b{font:700 11.4px/1.4 'Noto Sans JP',sans-serif;color:#16141d}
+.ap-vp time,.ap-vs time,.ap-vs .ap-vd{font:800 8.6px/1 'Manrope',sans-serif;letter-spacing:.08em;color:#F68209}
+.ap-vp span,.ap-vs span{font:400 10.2px/1.55 'Noto Sans JP',sans-serif;color:#4a4458}
+.ap-vp a,.ap-vs a{align-self:flex-start;margin-top:2px;font:600 8.8px/1.4 'Manrope','Noto Sans JP',sans-serif;color:#6d5bd0;text-decoration:none;border-bottom:1px dotted #c9c2da}
+html.sr .ap-vgrp.sr-in .ap-vp,html.sr .ap-vgrp.sr-in .ap-vs{animation:apUp .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms)}
+@media screen and (max-width:900px){.ap-vps,.ap-vps--3,.ap-vps--5{grid-template-columns:1fr 1fr}}
+@media screen and (max-width:600px){.ap-vps,.ap-vps--3,.ap-vps--5{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.ap-vp,.ap-vs{animation:none!important;transition:none}}
+@media print{.ap-vp,.ap-vs{animation:none!important;break-inside:avoid}}
+</style>
+<!-- ap-vn-css:end -->
 </head>
 <body>
 <svg class="flg-sprite" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><defs><symbol id="flg-jp" viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/></symbol><symbol id="flg-uk" viewBox="0 0 60 30"><clipPath id="flg-ukc"><path d="M0,0v30h60V0z"/></clipPath><clipPath id="flg-ukt"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#flg-ukc)"><path d="M0,0v30h60V0z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#flg-ukt)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></g></symbol><symbol id="flg-vn" viewBox="0 0 30 20"><rect width="30" height="20" fill="#da251d"/><polygon points="15.00,4.00 16.43,8.03 20.71,8.15 17.31,10.75 18.53,14.85 15.00,12.43 11.47,14.85 12.69,10.75 9.29,8.15 13.57,8.03" fill="#ff0"/></symbol></defs></svg>
@@ -1691,6 +1714,7 @@ html.sr .ap-shs.sr-in .ap-sh{animation:apUp .5s cubic-bezier(.2,.7,.2,1) both;an
       <a href="#ap-top" data-sec="ap-top"><em>TOP</em><span data-l="ja">会社の概要</span><span data-l="en">Company overview</span><span data-l="vi">Tổng quan công ty</span></a>
       <a href="#ap-products" data-sec="ap-products"><em>01</em><span data-l="ja">製品の一覧</span><span data-l="en">Product map</span><span data-l="vi">Các sản phẩm</span></a>
       <a href="#ap-shots" data-sec="ap-shots"><em>IMG</em><span data-l="ja">製品の画面</span><span data-l="en">Product visuals</span><span data-l="vi">Hình ảnh sản phẩm</span></a>
+      <a href="#ap-vn" data-sec="ap-vn"><em>VN</em><span data-l="ja">ベトナムでの展開</span><span data-l="en">ANDPAD in Vietnam</span><span data-l="vi">ANDPAD tại Việt Nam</span></a>
       <a href="#ap-news" data-sec="ap-news"><em>02</em><span data-l="ja">活動とイベント</span><span data-l="en">Activities and events</span><span data-l="vi">Hoạt động và sự kiện</span></a>
       <a href="#ap-market" data-sec="ap-market"><em>03</em><span data-l="ja">市場、事例、サポート</span><span data-l="en">Market, cases, support</span><span data-l="vi">Thị trường, khách hàng, hỗ trợ</span></a>
       <a href="#ap-role" data-sec="ap-role"><em>04</em><span data-l="ja">仕事の予想</span><span data-l="en">Role forecast</span><span data-l="vi">Dự báo công việc vị trí</span></a>
@@ -3757,6 +3781,34 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
   </div>
   <p class="ap-src rv" style="--d:260ms"><span data-l="ja">出典（2026年11月25日に確認）：</span><span data-l="en">Sources (checked 25 Nov 2026): </span><span data-l="vi">Nguồn (tra cứu 25/11/2026): </span><a href="https://andpad.jp/products" target="_blank" rel="noopener">andpad.jp/products</a> ／ <a href="https://appmarket.andpad.jp/" target="_blank" rel="noopener">appmarket.andpad.jp</a></p>
 </section>
+<section class="pg" data-chap="II" id="ap-vn">
+  <span class="eb rv">VN　<b>ANDPAD IN VIETNAM</b></span>
+  <h2 class="kw ap-kw rv" style="--d:60ms"><span data-l="ja">ベトナムでの<br /><i>製品とサービス。</i></span><span data-l="en">Products and services<br /><i>in Vietnam.</i></span><span data-l="vi">Sản phẩm và dịch vụ<br /><i>tại Việt Nam.</i></span></h2>
+  <span class="kw-en rv" style="--d:100ms">Products ／ Services ／ Official images</span>
+  <div class="kwbar rv" style="--d:120ms"><span></span></div>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="ja">ベトナム専用の製品はなく、同じANDPADにベトナム語と英語が加わりました。ANDPAD Vietnamは開発、実証、導入支援を担っています。</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="en">There is no Vietnam-only product: the same ANDPAD now speaks Vietnamese and English. ANDPAD Vietnam handles development, the pilot and onboarding.</p>
+  <p class="kw-sub ap-sub rv" style="--d:140ms" data-l="vi">ANDPAD không có sản phẩm riêng cho Việt Nam: vẫn là ANDPAD, có thêm tiếng Việt và tiếng Anh. ANDPAD Vietnam lo phát triển, thí điểm và triển khai.</p>
+  <div class="ap-vgrp rv" data-k="prod" style="--d:180ms">
+    <div class="ap-gh"><img src="assets/gx/building-blocks.webp" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="lbl">PRODUCTS</span><h3 data-l="ja">ベトナムで使える製品</h3><h3 data-l="en">Products available in Vietnam</h3><h3 data-l="vi">Sản phẩm dùng được tại Việt Nam</h3></div>
+    <div class="ap-vps ap-vps--3">
+      <figure class="ap-vp" style="--i:0"><img src="assets/ap/vn-vi-app.webp" alt="ANDPAD ベトナム語版の公式画像（タブレットとスマホのベトナム語画面）" width="540" height="304" loading="lazy" decoding="async"><figcaption><time>2025.06</time><b data-l="ja">ベトナム語版：施工管理、チャット、図面</b><b data-l="en">Vietnamese: Construction Management, Chat, Drawings</b><b data-l="vi">Bản tiếng Việt: Quản lý thi công, Chat, Bản vẽ</b><span data-l="ja">アプリの言語をベトナム語に切り替えられます。日本で働くベトナム人の職人とベトナムの現場向けで、既存ユーザーは無料です。</span><span data-l="en">The apps can switch to Vietnamese, for Vietnamese workers in Japan and for sites in Vietnam. Free for existing users.</span><span data-l="vi">App chuyển được sang tiếng Việt, dành cho thợ Việt tại Nhật và công trường ở Việt Nam. Miễn phí cho người đang dùng.</span><a href="https://andpad.jp/news/20250626" target="_blank" rel="noopener">andpad.jp/news/20250626</a></figcaption></figure>
+      <figure class="ap-vp" style="--i:1"><img src="assets/ap/vn-en-app.webp" alt="ANDPAD 英語版アプリの公式画像" width="540" height="304" loading="lazy" decoding="async"><figcaption><time>2025.02</time><b data-l="ja">英語版アプリ（施工管理）</b><b data-l="en">English app (Construction Management)</b><b data-l="vi">App tiếng Anh (Quản lý thi công)</b><span data-l="ja">多言語化の第1弾です。外国籍の職人と海外の現場で使えるようになりました。</span><span data-l="en">Step one of the multilingual plan, for foreign workers and overseas sites.</span><span data-l="vi">Bước đầu của kế hoạch đa ngôn ngữ, cho thợ nước ngoài và công trường ở nước ngoài.</span><a href="https://andpad.jp/news/20250226" target="_blank" rel="noopener">andpad.jp/news/20250226</a></figcaption></figure>
+      <figure class="ap-vp" style="--i:2"><img src="assets/ap/vn-en-web.webp" alt="ANDPAD ブラウザ版英語化の公式画像（ベトナム語の見出し付き）" width="540" height="304" loading="lazy" decoding="async"><figcaption><time>2025.10</time><b data-l="ja">ブラウザ版の英語化とタイムゾーン設定</b><b data-l="en">English web version and time-zone setting</b><b data-l="vi">Bản web tiếng Anh và cài đặt múi giờ</b><span data-l="ja">施工管理、チャット、図面をPCのブラウザでも英語で使え、現地時間で工程を管理できます。</span><span data-l="en">Construction Management, Chat and Drawings in English in the browser, with schedules in local time.</span><span data-l="vi">Quản lý thi công, Chat, Bản vẽ dùng được bằng tiếng Anh trên trình duyệt, tiến độ theo giờ địa phương.</span><a href="https://andpad.jp/news/20251014" target="_blank" rel="noopener">andpad.jp/news/20251014</a></figcaption></figure>
+    </div>
+  </div>
+  <div class="ap-vgrp rv" data-k="svc" style="--d:220ms">
+    <div class="ap-gh"><img src="assets/gx/handshake.webp" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="lbl">SERVICES</span><h3 data-l="ja">ベトナムでの事業とサービス</h3><h3 data-l="en">Work and services in Vietnam</h3><h3 data-l="vi">Hoạt động và dịch vụ tại Việt Nam</h3></div>
+    <div class="ap-vps ap-vps--5">
+      <figure class="ap-vs" style="--i:3"><img src="assets/ap/vn-jetro.webp" alt="ベトナムの建設DXを加速するJETRO事業の公式画像" width="540" height="304" loading="lazy" decoding="async"><figcaption><time>2023.12</time><b data-l="ja">JETROの事業に採択</b><b data-l="en">Selected for a JETRO programme</b><b data-l="vi">Được JETRO chọn</b><span data-l="ja">「日ASEANにおけるアジアDX促進事業」に採択。協力会社はPENTA-OCEAN CONSTRUCTION VIETNAMです。</span><span data-l="en">Chosen for the Japan-ASEAN Asia DX Promotion Program, with PENTA-OCEAN CONSTRUCTION VIETNAM as partner.</span><span data-l="vi">Được chọn vào chương trình thúc đẩy DX Nhật Bản và ASEAN của JETRO, đối tác là PENTA-OCEAN CONSTRUCTION VIETNAM.</span><a href="https://andpad.co.jp/news/4260/" target="_blank" rel="noopener">andpad.co.jp/news/4260</a></figcaption></figure>
+      <figure class="ap-vs" style="--i:4"><img src="assets/ap/vn-pilot.webp" alt="JETRO実証事業の完了を伝える公式画像（ベトナムの現場写真と地図）" width="540" height="304" loading="lazy" decoding="async"><figcaption><time>2024.02</time><b data-l="ja">ベトナムの現場で実証（2024年2月〜2025年5月）</b><b data-l="en">Pilot on Vietnamese sites (Feb 2024 to May 2025)</b><b data-l="vi">Thí điểm tại công trường Việt Nam (2/2024 tới 5/2025)</b><span data-l="ja">写真登録、電子黒板、帳票出力を使い、作業時間は最大50％減、紙の記録は不要に。ベトナム式の帳票も追加しました。</span><span data-l="en">Photo upload, digital signboard and form output cut work time by up to 50% and ended paper records. A Vietnamese form layout was added.</span><span data-l="vi">Dùng đăng ảnh, bảng đen điện tử, xuất biểu mẫu: giảm tới 50% giờ làm, bỏ ghi chép giấy. Có thêm mẫu biểu kiểu Việt Nam.</span><a href="https://andpad.jp/news/20251006" target="_blank" rel="noopener">andpad.jp/news/20251006</a></figcaption></figure>
+      <figure class="ap-vs" style="--i:5"><img src="assets/ap/vn-cs.webp" alt="ANDPAD VIETNAMのオフィスのロゴウォール" width="540" height="360" loading="lazy" decoding="async"><figcaption><time>2025.10</time><b data-l="ja">導入とサポート（Customer Success）</b><b data-l="en">Onboarding and support (Customer Success)</b><b data-l="vi">Triển khai và hỗ trợ (Customer Success)</b><span data-l="ja">ベトナム人スタッフを採用、育成し、導入から定着までをベトナム国内で支援できる体制にしました。</span><span data-l="en">Vietnamese staff were hired and trained so onboarding and ongoing support can be done inside Vietnam.</span><span data-l="vi">Tuyển và đào tạo nhân sự người Việt để triển khai và hỗ trợ khách hàng ngay tại Việt Nam.</span><a href="https://andpad.jp/news/20251006" target="_blank" rel="noopener">andpad.jp/news/20251006</a></figcaption></figure>
+      <figure class="ap-vs" style="--i:6"><img src="assets/ap/vn-dev.webp" alt="ANDPAD VIETNAMのエンジニアチーム" width="540" height="360" loading="lazy" decoding="async"><figcaption><em class="ap-vd">HCMC</em><b data-l="ja">開発拠点（ホーチミン）</b><b data-l="en">Development centre (Ho Chi Minh City)</b><b data-l="vi">Trung tâm phát triển (TP.HCM)</b><span data-l="ja">ANDPADの開発を行うエンジニアチーム（Go、Ruby on Rails、React、Kotlin、Swift、AWS）。オフィスは90 Nguyen Dinh Chieuです。</span><span data-l="en">Engineering teams that build ANDPAD (Go, Ruby on Rails, React, Kotlin, Swift, AWS). Office at 90 Nguyen Dinh Chieu.</span><span data-l="vi">Các đội kỹ sư phát triển ANDPAD (Go, Ruby on Rails, React, Kotlin, Swift, AWS). Trụ sở 90 Nguyễn Đình Chiểu, TP.HCM.</span><a href="https://careers.andpad.vn/" target="_blank" rel="noopener">careers.andpad.vn</a></figcaption></figure>
+      <figure class="ap-vs" style="--i:7"><img src="assets/ap/vn-hanoi.webp" alt="ANDPAD VIETNAM ハノイ事務所の移転を伝える公式画像（ビル、オフィス、社員）" width="540" height="304" loading="lazy" decoding="async"><figcaption><time>2026.04</time><b data-l="ja">ハノイ事務所</b><b data-l="en">Hanoi office</b><b data-l="vi">Văn phòng Hà Nội</b><span data-l="ja">2025年5月に開設し、2026年4月にTaisei Square Hanoiへ移転。東南アジアの建設DXに向けて体制を広げています。</span><span data-l="en">Opened May 2025, moved to Taisei Square Hanoi in April 2026 to grow construction DX work in Southeast Asia.</span><span data-l="vi">Mở tháng 5/2025, dời về Taisei Square Hanoi tháng 4/2026 để mở rộng việc DX xây dựng ở Đông Nam Á.</span><a href="https://andpad.jp/news/20260408" target="_blank" rel="noopener">andpad.jp/news/20260408</a></figcaption></figure>
+    </div>
+  </div>
+  <p class="ap-src rv" style="--d:260ms"><span data-l="ja">出典（2026年11月25日に確認）：</span><span data-l="en">Sources (checked 25 Nov 2026): </span><span data-l="vi">Nguồn (tra cứu 25/11/2026): </span><a href="https://vietnamnews.vn/media-outreach/1720265/andpad-launches-vietnamese-language-support-for-its-cloud-based-construction-project-management-service.html" target="_blank" rel="noopener">Vietnam News 2025</a> ／ <a href="https://vietnamnews.vn/media-outreach/1726656/andpad-completes-the-vietnam-demonstration-project-under-jetro-s-japan-asean-asia-digital-transformation-promotion-program.html" target="_blank" rel="noopener">JETRO pilot</a> ／ <a href="https://vietnamnews.vn/media-outreach/1778975/hanoi-office-at-andpad-vietnam-relocated.html" target="_blank" rel="noopener">Hanoi 2026</a> ／ <a href="https://andpad.jp/news/20251216" target="_blank" rel="noopener">6 languages</a></p>
+</section>
 <section class="pg" data-chap="III" id="ap-news">
   <span class="eb rv">02　<b>ACTIVITIES ／ EVENTS</b></span>
   <h2 class="kw ap-kw rv" style="--d:60ms"><span data-l="ja">資金調達、AI、<br /><i>そしてベトナムへ。</i></span><span data-l="en">Funding, AI,<br /><i>and Vietnam.</i></span><span data-l="vi">Gọi vốn, AI<br /><i>và Việt Nam.</i></span></h2>
@@ -4884,7 +4936,7 @@ html.js .gx-tag .gx-pl img,html.js .gx-tile .gx-pl img{animation:gxFloat 3.6s ea
     'it-top','it-stack','it-arch','it-change',
     'lang-top','lang-ja','lang-en','lang-bridge',
     'wv-kaizen','wv-data','wv-people',
-    'jd-top','jd-fit','jd-match','ap-top','ap-products','ap-shots','ap-news','ap-market','ap-role','sw-top','sw-remote','sw-talent','sw-leads','sw-leads2'];
+    'jd-top','jd-fit','jd-match','ap-top','ap-products','ap-shots','ap-vn','ap-news','ap-market','ap-role','sw-top','sw-remote','sw-talent','sw-leads','sw-leads2'];
   var layers=[];
   IDS.forEach(function(id){
     var pg=document.getElementById(id);if(!pg||!pg.classList.contains('pg')||pg.querySelector(':scope>.pganh'))return;
