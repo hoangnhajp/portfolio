@@ -66,13 +66,13 @@ for (const bad of ['予算', '23段階', '労働法', 'VND', 'USD', '%', 'budget
 ok(!/chat\s*-?gpt|\bclaude\b|copilot|gemini/i.test(main), 'tab HR nêu tên công cụ AI');
 ok(!main.includes('—'), 'tab HR có dấu gạch ngang dài');
 
-// 8) Tầng giọng JA: h2 常体 kết 「。」, kw-sub です・ます
+// 8) Tầng giọng JA: h2 常体 kết 「。」, kw-sub thể ngắn (task ykp6: không です・ます)
 const h2ja = [...main.matchAll(/<h2 class="kw[^"]*"[^>]*><span data-l="ja">([\s\S]*?)<\/span><span data-l="en">/g)].map((m) => strip(m[1]).replace(/\s/g, ''));
 ok(h2ja.length === 4, `cần 4 tiêu đề h2 JA, thấy ${h2ja.length}`);
 for (const s of h2ja) ok(/。$/.test(s) && !/(です|ます)。$/.test(s), `h2 JA sai tầng giọng: "${s}"`);
 const subja = [...main.matchAll(/<p class="kw-sub[^"]*"[^>]*data-l="ja">([\s\S]*?)<\/p>/g)].map((m) => strip(m[1]));
 ok(subja.length === 4, `cần 4 câu dẫn kw-sub JA, thấy ${subja.length}`);
-for (const s of subja) ok(/(ます|ました|です)。$/.test(s), `kw-sub JA không kết です・ます: "${s.slice(0, 40)}"`);
+for (const s of subja) ok(/。$/.test(s) && !/(です|でした|ます|ました|ません)/.test(s), `kw-sub JA phải thể ngắn, không です・ます: "${s.slice(0, 40)}"`);
 
 // 9) CSS riêng của tab trong khối đánh dấu; chuyển động chỉ transform / opacity, có reduced-motion
 const css = (html.match(/<!-- hr-css:start -->([\s\S]*?)<!-- hr-css:end -->/) || [])[1] || '';

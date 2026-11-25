@@ -36,7 +36,7 @@ export function pageShots({ L3, T, head, b }) {
   return `<section class="pg" data-chap="II" id="ap-shots">
 ${head('IMG　<b>PRODUCT VISUALS</b>', T('実際の画面で<br /><i>製品を見る。</i>', 'See each product<br /><i>on its real screens.</i>', 'Xem từng sản phẩm<br /><i>qua màn hình thật.</i>'),
     'Official images ／ andpad.jp ／ Click to zoom',
-    T('andpad.jpの製品ページに載っている公式の画像です。画像を押すと拡大し、製品名から公式ページを開けます。',
+    T('andpad.jpの製品ページに載っている公式画像。画像を押すと拡大、製品名から公式ページへ。',
       'Official images from the product pages on andpad.jp. Click an image to zoom in, or a product name to open its page.',
       'Ảnh chính thức trên trang sản phẩm của andpad.jp. Bấm vào ảnh để phóng to, bấm tên sản phẩm để mở trang gốc.'), subC)}
   <div class="ap-shs rv" style="--d:180ms">

@@ -7,9 +7,11 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { pageShots, SHOTS } from './shots.mjs'; // task ls8q: trang #ap-shots (ảnh sản phẩm chính thức)
-import { pageMarket } from './market.mjs'; // task m07v bổ sung: trang #ap-market (ngành, thị trường, case, hỗ trợ)
+import { pageMarket, pageCompete } from './market.mjs'; // task m07v bổ sung: trang #ap-market (ngành, thị trường, case, hỗ trợ); #ap-compete so sánh 5 đối thủ
 import { pageVn } from './vn.mjs'; // task 04fj: trang #ap-vn (sản phẩm và dịch vụ ANDPAD tại Việt Nam, ảnh chính thức)
 import { pageRole } from './role.mjs'; // task 97rs: trang #ap-role (dự báo việc, chỉ sản phẩm và dịch vụ tại Việt Nam)
+import { pageGuide, pagesGuideCards } from './guide.mjs'; // slide hướng dẫn chức năng (#ap-guide*), ngay sau #ap-vn
+import { pageApp, pageScope } from './app.mjs'; // #ap-app, #ap-scope: sản phẩm chủ lực tại Việt Nam, thị trường, khu vực
 import { book } from './refs.mjs'; // task 4n9v: nguồn tham khảo cuối trang + số trích dẫn
 
 const FILE = fileURLToPath(new URL('../../index.html', import.meta.url));
@@ -58,7 +60,7 @@ function pageTop() {
   return `<section class="pg" data-chap="I" id="ap-top">
 ${head('COMPANY　<b>ANDPAD</b>', T('建設業界のための<br /><i>クラウド施工管理。</i>', 'Cloud project management<br /><i>for construction.</i>', 'Quản lý thi công trên đám mây<br /><i>cho ngành xây dựng.</i>'),
     'Vertical SaaS ／ Construction DX ／ Japan and Vietnam',
-    T('株式会社アンドパッドは建設業界向けのVertical SaaS企業です。現場の写真、図面、工程、受発注までを一つのクラウドで管理できます。',
+    T('株式会社アンドパッド：建設業界向けのVertical SaaS企業。現場の写真、図面、工程、受発注までを一つのクラウドで管理。',
       'ANDPAD Inc. is a vertical SaaS company for construction. Its cloud keeps site photos, drawings, schedules and orders in one place.',
       'ANDPAD Inc. là công ty Vertical SaaS cho ngành xây dựng Nhật Bản. Nền tảng gom ảnh hiện trường, bản vẽ, tiến độ và đơn đặt hàng vào một chỗ trên đám mây.'), b.c('top'))}
   <ul class="ap-kv rv" style="--d:180ms">
@@ -139,7 +141,7 @@ ${items.map(([nm, enm, d, vi]) => `        <li class="ap-pd" style="--i:${n++}">
   return `<section class="pg" data-chap="II" id="ap-products">
 ${head('01　<b>PRODUCTS</b>', T('現場から経営までを<br /><i>一つのクラウドで。</i>', 'From the site to management,<br /><i>in one cloud.</i>', 'Từ công trường tới quản trị,<br /><i>trên một nền tảng.</i>'),
     'Site ／ Documents ／ Money ／ Owners ／ AI',
-    T('製品は20を超え、現場、書類、お金、施主、連携とAIの5つの分野に分かれます。',
+    T('20を超える製品を、現場、書類、お金、施主、連携とAIの5分野に分類。',
       'More than 20 products in five areas: site work, documents, money, homeowners, and integrations with AI.',
       'Hơn 20 sản phẩm, chia thành 5 nhóm: hiện trường, hồ sơ, tài chính, chủ nhà, kết nối và AI.'), subC)}
   <div class="ap-grps rv" style="--d:180ms">
@@ -192,7 +194,7 @@ function pageNews() {
   return `<section class="pg" data-chap="III" id="ap-news">
 ${head('02　<b>ACTIVITIES ／ EVENTS</b>', T('資金調達、AI、<br /><i>そしてベトナムへ。</i>', 'Funding, AI,<br /><i>and Vietnam.</i>', 'Gọi vốn, AI<br /><i>và Việt Nam.</i>'),
     'Timeline ／ Award ／ AI ／ Vietnam',
-    T('主な出来事を年ごとに並べました。2025年からはAIとベトナムの動きが増えています。',
+    T('主な出来事を年ごとに整理。2025年からはAIとベトナムの動きが増加。',
       'Key moves by year. Since 2025 most news is about AI and Vietnam.',
       'Các mốc chính theo năm. Từ 2025, tin về AI và Việt Nam tăng rõ.'), subC)}
   <ol class="ap-tl rv" style="--d:180ms">
@@ -212,8 +214,13 @@ ${pageTop()}
 ${pageProducts()}
 ${pageShots({ L3, T, head, b: bk('ap-shots') })}
 ${pageVn({ L3, T, head, b: bk('ap-vn') })}
+${pageGuide({ L3, head, b: bk('ap-guide'), ico })}
+${pagesGuideCards({ L3, head, bk })}
 ${pageNews()}
 ${pageMarket({ L3, T, head, b: bk('ap-market') })}
+${pageCompete({ L3, T, head, b: bk('ap-compete') })}
+${pageApp({ L3, T, head, b: bk('ap-app') })}
+${pageScope({ L3, T, head, b: bk('ap-scope') })}
 ${pageRole({ L3, head, b: bk('ap-role') })}
 </main>
 <!-- ap:end -->`;
@@ -229,4 +236,4 @@ else {
   html = html.slice(0, end) + eol + block + html.slice(end);
 }
 writeFileSync(FILE, html);
-console.log('OK tools/ap/build.mjs: đã ghi tab Andpad Info (7 trang) vào index.html');
+console.log('OK tools/ap/build.mjs: đã ghi tab Andpad Info (14 trang) vào index.html');

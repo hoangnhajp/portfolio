@@ -34,7 +34,7 @@ for (const [l, s] of [['ja', 'ANDPAD Vietnamの'], ['en', 'ANDPAD Vietnam'], ['v
 const subs = [...sec.matchAll(/<p class="kw-sub[^"]*"[^>]*data-l="(ja|en|vi)">([\s\S]*?)<\/p>/g)];
 ok(subs.length === 3 && subs.every((m) => /Customer Success Staff/.test(m[2])), `#jd-top cần 3 câu phụ (ja/en/vi) nêu vị trí Customer Success Staff, thấy ${subs.length}`);
 const ja = subs.find((m) => m[1] === 'ja');
-ok(ja && /(です|ます)。$/.test(ja[2].trim()), 'câu phụ JA phải kết です・ます');
+ok(ja && /。$/.test(ja[2].trim()) && !/(です|ます|ました)/.test(ja[2]), 'câu phụ JA phải thể ngắn kết 「。」, không です・ます (task ykp6)');
 const nav = [...html.matchAll(/<a href="#jd-top" data-sec="jd-top">([\s\S]*?)<\/a>/g)];
 ok(nav.length >= 1, 'không thấy link menu #jd-top');
 for (const m of nav) for (const l of ['ja', 'en', 'vi']) ok(new RegExp(`data-l="${l}">[^<]+<`).test(m[1]), `menu #jd-top thiếu nhãn ${l}`);

@@ -75,7 +75,7 @@ ${items.map(fig(cls)).join('\n')}
   return `<section class="pg" data-chap="II" id="ap-vn">
 ${head('VN　<b>ANDPAD IN VIETNAM</b>', T('ベトナムでの<br /><i>製品とサービス。</i>', 'Products and services<br /><i>in Vietnam.</i>', 'Sản phẩm và dịch vụ<br /><i>tại Việt Nam.</i>'),
     'Products ／ Services ／ Official images',
-    T('ベトナム専用の製品はなく、同じANDPADにベトナム語と英語が加わりました。ANDPAD Vietnamは開発、実証、導入支援を担っています。',
+    T('ベトナム専用の製品はなし。同じANDPADにベトナム語と英語を追加。ANDPAD Vietnamの役割は開発、実証、導入支援。',
       'There is no Vietnam-only product: the same ANDPAD now speaks Vietnamese and English. ANDPAD Vietnam handles development, the pilot and onboarding.',
       'ANDPAD không có sản phẩm riêng cho Việt Nam: vẫn là ANDPAD, có thêm tiếng Việt và tiếng Anh. ANDPAD Vietnam lo phát triển, thí điểm và triển khai.'), subC)}
 ${grp('prod', 'building-blocks', 'PRODUCTS', T('ベトナムで使える製品', 'Products available in Vietnam', 'Sản phẩm dùng được tại Việt Nam'), PRODUCTS, 'ap-vp')}

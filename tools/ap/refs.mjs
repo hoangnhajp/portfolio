@@ -83,11 +83,17 @@ export const REFS = {
   iCon: ['https://www.mlit.go.jp/report/press/kanbo08_hh_001085.html', T('国交省：i-Construction 2.0の策定（2040年度までに省人化3割）', 'MLIT: i-Construction 2.0 (30% fewer labour hours by FY2040)', 'Bộ MLIT: công bố i-Construction 2.0')],
   share: [N('20251218'), T('ANDPAD ニュース：ミック経済研究所の調査で導入企業数1位、8年連続（2025年12月）', 'ANDPAD news: first by adopting companies in MIC survey, 8 years running (Dec 2025)', 'Tin ANDPAD: đứng đầu khảo sát MIC 8 năm liền (12/2025)')],
   pricing: ['https://andpad.jp/help/pricing/', T('ANDPAD 料金について（個別見積もり）', 'ANDPAD pricing (quote only)', 'Giá ANDPAD (báo giá riêng)')],
-  spider: ['https://spider-plus.com/', T('SPIDERPLUS 公式サイト', 'SPIDERPLUS official site', 'Trang chính thức SPIDERPLUS')],
-  kanna: ['https://lp.kanna4u.com/pricing/', T('KANNA 料金プラン', 'KANNA pricing plans', 'Bảng giá KANNA')],
-  photoruction: ['https://www.photoruction.com/', T('Photoruction 公式サイト', 'Photoruction official site', 'Trang chính thức Photoruction')],
-  dandori: ['https://dandori-work.com/', T('ダンドリワーク 公式サイト', 'Dandori Work official site', 'Trang chính thức Dandori Work')],
-  buildee: ['https://service.buildee.jp/', T('Buildee 公式サイト', 'Buildee official site', 'Trang chính thức Buildee')],
+  mic: ['https://mic-r.co.jp/micit/2025/', T('ミック経済研究所：ミックITリポート2025（建設業マネジメントクラウド市場、導入企業数シェア2022〜2025年度見込）', 'MIC Research: MIC IT Report 2025 (construction management cloud, share by adopting companies FY2022 to FY2025 est.)', 'MIC Research: báo cáo MIC IT 2025 (thị trường cloud quản lý xây dựng, thị phần theo số doanh nghiệp sử dụng năm tài khóa 2022 đến 2025 ước tính)')],
+  boxil: ['https://boxil.jp/service/4916/reviews/', T('BOXIL：ANDPADの利用者の口コミ', 'BOXIL: ANDPAD user reviews', 'BOXIL: đánh giá của người dùng ANDPAD')],
+  // Đối thủ: mỗi nguồn là trang chính thức của CHÍNH công ty vận hành sản phẩm đó (đối chiếu 25/11/2026)
+  spider: ['https://spider-plus.com/', T('SPIDERPLUS 公式サイト（スパイダープラス株式会社、導入社数、機能）', 'SPIDERPLUS official site (SpiderPlus & Co., adoption, features)', 'Trang chính thức SPIDERPLUS (SpiderPlus & Co., số công ty dùng, chức năng)')],
+  kanna: ['https://lp.kanna4u.com/pricing/', T('KANNA 料金プラン（初期費用0円、料金は見積もり）', 'KANNA pricing plans (no setup fee, quote-based)', 'Bảng giá KANNA (phí ban đầu 0 yên, giá theo báo giá)')],
+  kannaFree: ['https://lp.kanna4u.com/news/iak83pyr8pz1/', T('KANNA ニュース：協力会社IDの無料無制限発行、無料プラン、6言語（2026年11月）', 'KANNA news: free unlimited partner IDs, free plan, 6 languages (Nov 2026)', 'Tin KANNA: ID đối tác miễn phí không giới hạn, gói miễn phí, 6 ngôn ngữ (11/2026)')],
+  kannaScale: ['https://lp.kanna4u.com/news/c3rgh_zk-6j/', T('KANNA ニュース：株式会社アルダグラム、利用10万社突破（無料の協力会社を含む、2026年8月）', 'KANNA news: Aldagram Inc. passes 100,000 companies (incl. free partners, Aug 2026)', 'Tin KANNA: Aldagram Inc. vượt 100.000 công ty (gồm đối tác dùng miễn phí, 8/2026)')],
+  photoruction: ['https://www.photoruction.com/', T('Photoruction 公式サイト（株式会社フォトラクション、SaaSとAI-BPO）', 'Photoruction official site (Photoruction Inc., SaaS and AI-BPO)', 'Trang chính thức Photoruction (Photoruction Inc., SaaS và AI-BPO)')],
+  dandori: ['https://dandori-work.com/', T('ダンドリワーク 公式サイト（対象、導入支援、サポート）', 'Dandori Work official site (target users, onboarding, support)', 'Trang chính thức Dandori Work (đối tượng, hỗ trợ triển khai)')],
+  dandoriPlan: ['https://dandori-work.com/plan/', T('ダンドリワーク 料金プラン（初期費用、月額）', 'Dandori Work pricing (setup fee, monthly fee)', 'Bảng giá Dandori Work (phí ban đầu, phí tháng)')],
+  buildee: ['https://service.buildee.jp/', T('Buildee 公式サイト（運営：株式会社リバスタ、料金、導入数）', 'Buildee official site (run by RVSTA, Inc.; pricing, adoption)', 'Trang chính thức Buildee (RVSTA, Inc. vận hành; giá, số lượng dùng)')],
   cBeaver: ['https://andpad.jp/cases/beaver-reform', T('導入事例：ビーバーリフォーム', 'Case study: Beaver Reform', 'Case Beaver Reform')],
   cKasuke: ['https://andpad.jp/cases/kasuke', T('導入事例：カスケホーム', 'Case study: Kasuke Home', 'Case Kasuke Home')],
   cHiramatsu: ['https://andpad.jp/cases/hiramatsu-kenchiku02', T('導入事例：平松建築', 'Case study: Hiramatsu Kenchiku', 'Case Hiramatsu Kenchiku')],
@@ -101,6 +107,16 @@ export const REFS = {
 };
 for (const [k, [ja, en, vi]] of Object.entries(PROD))
   REFS[`p_${k}`] = [P(k), T(`${ja} 製品ページ`, `${en} product page`, `Sản phẩm ${vi}`)];
+// Trang #ap-app, #ap-scope (tools/ap/app.mjs): app chính thức, thị trường, khu vực. Đã mở và đối chiếu ngày 26/11/2026.
+Object.assign(REFS, {
+  appIos: ['https://apps.apple.com/jp/app/id1067643333', T('App Store：ANDPAD - カンタン施工管理アプリ（ANDPAD Inc.、評価2.7、257件）', 'App Store: ANDPAD - カンタン施工管理アプリ (ANDPAD Inc., 2.7 stars, 257 ratings)', 'App Store: ANDPAD - カンタン施工管理アプリ (ANDPAD Inc., 2,7 sao, 257 đánh giá)')],
+  appPlay: ['https://play.google.com/store/apps/details?id=jp.andpad.android', T('Google Play：ANDPAD（jp.andpad.android、10万回以上ダウンロード）', 'Google Play: ANDPAD (jp.andpad.android, 100K+ downloads)', 'Google Play: ANDPAD (jp.andpad.android, hơn 100.000 lượt tải)')],
+  cases: ['https://andpad.jp/cases', T('ANDPAD 導入事例（業界から選ぶ：住宅、専門工事、ゼネコン、土木など）', 'ANDPAD case studies (by industry: housing, trades, general contractors, civil)', 'Case ANDPAD (lọc theo ngành: nhà ở, thầu chuyên ngành, tổng thầu, hạ tầng)')],
+  yano: ['https://www.yano.co.jp/press-release/show/press_id/3789', T('矢野経済研究所：建築分野の建設テック市場（2023年度1,845億円、2030年度予測3,043億円）', 'Yano Research: construction tech market, building sector (FY2023 ¥184.5bn, FY2030 forecast ¥304.3bn)', 'Yano Research: thị trường công nghệ xây dựng, mảng kiến trúc (FY2023 184,5 tỷ yên, dự báo FY2030 304,3 tỷ yên)')],
+  mlitKyoka: ['https://www.mlit.go.jp/report/press/content/002000768.pdf', T('国交省：建設業許可業者数調査（2026年3月末、483,823業者、都道府県別）', 'MLIT: licensed construction companies (end of March 2026, 483,823, by prefecture)', 'Bộ MLIT: số doanh nghiệp xây dựng có giấy phép (cuối 3/2026, 483.823, theo tỉnh)')],
+  mordorVn: ['https://www.mordorintelligence.com/industry-reports/vietnam-construction-market', T('Mordor Intelligence：ベトナム建設市場（2026年806.1億ドル、ホーチミン市が2025年の36.88％）', 'Mordor Intelligence: Vietnam construction market (USD 80.61bn in 2026; HCMC 36.88% of 2025 value)', 'Mordor Intelligence: thị trường xây dựng Việt Nam (80,61 tỷ USD năm 2026; TP.HCM chiếm 36,88% giá trị 2025)')],
+  misaAmis: ['https://amis.misa.vn/285355/phan-mem-quan-ly-cong-viec-cho-doanh-nghiep-xay-dung/', T('MISA：AMIS Công việc（建設会社向け、プロジェクト、工事、工種、施工班ごとの管理）', 'MISA: AMIS Công việc for construction firms (work by project, site, work item, crew)', 'MISA: AMIS Công việc cho doanh nghiệp xây dựng (quản lý theo dự án, công trình, hạng mục, đội thi công)')],
+});
 
 export const REF_HEAD = T('参考文献', 'References', 'Nguồn tham khảo');
 const NOTE = T('（2026年11月25日に確認）', ' (checked 25 Nov 2026)', ' (tra cứu 25/11/2026)');

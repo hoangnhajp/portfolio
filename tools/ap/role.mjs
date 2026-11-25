@@ -74,7 +74,7 @@ export function pageRole({ L3, head, b }) {
   return `<section class="pg" data-chap="V" id="ap-role">
 ${head('04　<b>FORECAST</b>', T('このポジションで<br /><i>担うと予想する仕事。</i>', 'What I expect<br /><i>this role to do.</i>', 'Dự báo công việc<br /><i>của vị trí này.</i>'),
     'Customer Success ／ Vietnam ／ Products and services',
-    T('求人票（Customer Success Staff、IT）と公開情報をもとにした予想で、ベトナムで提供中の製品とサービスだけを対象にしています。顧客はベトナムに現場を持つ日系の建設会社が中心になると考えます。',
+    T('求人票（Customer Success Staff、IT）と公開情報をもとにした予想。対象はベトナムで提供中の製品とサービスのみ。顧客の中心はベトナムに現場を持つ日系の建設会社と想定。',
       'This is my forecast from the job description (Customer Success Staff, IT) and public information, covering only the products and services ANDPAD offers in Vietnam. I expect most clients to be Japanese construction companies with sites in Vietnam.',
       'Đây là dự báo của tôi dựa trên JD (Customer Success Staff, IT) và thông tin công khai, chỉ tính các sản phẩm và dịch vụ ANDPAD đang có tại Việt Nam. Tôi cho rằng khách hàng chính là các công ty xây dựng Nhật có công trình tại Việt Nam.'), subC)}
   <ol class="ap-jr rv" style="--d:180ms">

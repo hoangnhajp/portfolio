@@ -127,13 +127,13 @@ ok(/顧客の要望|お客様の要望/.test(txt(sec('sw-top'), 'ja')), 'sw-top/
 ok(/client requirements|clients' requirements|client request/i.test(txt(sec('sw-top'), 'en')), 'sw-top/en thiếu ý "client requirements"');
 ok(/yêu cầu khách hàng|yêu cầu của khách hàng/.test(txt(sec('sw-top'), 'vi')), 'sw-top/vi thiếu ý "yêu cầu khách hàng"');
 
-// 9) Tầng giọng JA: h2 常体 kết 「。」, kw-sub です・ます
+// 9) Tầng giọng JA: h2 常体 kết 「。」, kw-sub thể ngắn (task ykp6: không です・ます)
 const h2ja = [...main.matchAll(/<h2 class="kw[^"]*"[^>]*><span data-l="ja">([\s\S]*?)<\/span><span data-l="en">/g)].map((m) => strip(m[1]).replace(/\s/g, ''));
 ok(h2ja.length === ids.length, `cần ${ids.length} tiêu đề h2 JA, thấy ${h2ja.length}`);
 for (const s of h2ja) ok(/。$/.test(s) && !/(です|ます)。$/.test(s), `h2 JA sai tầng giọng: "${s}"`);
 const subja = [...main.matchAll(/<p class="kw-sub[^"]*"[^>]*data-l="ja">([\s\S]*?)<\/p>/g)].map((m) => strip(m[1]));
 ok(subja.length === ids.length, `cần ${ids.length} câu dẫn kw-sub JA, thấy ${subja.length}`);
-for (const s of subja) ok(/(ます|ました|です)。$/.test(s), `kw-sub JA không kết です・ます: "${s.slice(0, 40)}"`);
+for (const s of subja) ok(/。$/.test(s) && !/(です|でした|ます|ました|ません)/.test(s), `kw-sub JA phải thể ngắn, không です・ます: "${s.slice(0, 40)}"`);
 
 // 10) CSS riêng trong khối đánh dấu; chuyển động chỉ transform / opacity; reduced-motion + in tĩnh
 const css = (html.match(/<!-- sw-css:start -->([\s\S]*?)<!-- sw-css:end -->/) || [])[1] || '';

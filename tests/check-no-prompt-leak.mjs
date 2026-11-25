@@ -31,7 +31,7 @@ ok(!/(giấu|ẩn) tên (công ty|khách)/i.test(html), 'VI còn câu kiểu "gi
 // (2) Câu JA viết lại phải có mục trong từ điển dịch (window.__D2 / D2 / D, khoá = câu JA)
 const D = html.slice(html.indexOf('window.__D2='));
 const NEW_JA = [
-  'MAYEKAWA VIETNAM（MYCOM、産業用冷凍機）における営業活動の記録です。2022年2月から2026年6月まで、営業部のアシスタントマネージャー（人事部長を兼務）を務めました。',
+  'MAYEKAWA VIETNAM（MYCOM、産業用冷凍機）における営業活動の記録です。2022年2月から2026年6月まで、営業部のアシスタントマネージャー（人事部長を兼務）を務めました。見込み客の調査から営業提案、基本的な技術提案、エンジニアチームとの機種選定、交渉、納品まで、営業サイクル全体を担当。',
   '商談と顧客訪問を、時系列で紹介します。',
   'タイで開催されたMAYEKAWA ASEAN社員総会での発表、展示会「PROPAK ASIA」、「VIV ASIA」（バンコク）の視察、MYCOM KOREAへの訪問、ベトナムでの顧客訪問を写真で紹介します。',
   '担当した業務を、顧客対応の流れに沿って整理しました。',

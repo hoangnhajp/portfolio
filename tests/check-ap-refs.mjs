@@ -10,7 +10,7 @@ const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 const main = (html.match(/<main class="wrap" data-view="ap" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 ok(main, 'thiếu main data-view="ap"');
-const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-role'];
+const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-compete', 'ap-app', 'ap-scope', 'ap-role'];
 const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\\s\\S]*?<\\/section>`)) || [''])[0];
 // Từng mục thông tin phải có số trích dẫn, kiểm RIÊNG từng mục và RIÊNG từng ngôn ngữ (bỏ khối của 2 ngôn ngữ kia rồi
 // vẫn phải còn <sup class="ap-c">): [vùng chứa (tuỳ chọn), regex mục]
@@ -24,6 +24,8 @@ const CLAIMS = {
   'ap-news': [[null, /<li class="ap-ev"[\s\S]*?<\/li>/g], [null, /<div class="card ap-act">[\s\S]*?<\/div><\/div>/g]],
   'ap-market': [[/<ul class="ap-ctx[\s\S]*?<\/ul>/, LI], [null, /<li class="ap-cp">[\s\S]*?<\/li>/g], [null, /<li class="ap-cs"[\s\S]*?<\/li>/g],
     [/<div class="ap-mk-l">[\s\S]*?<\/div>/, L3P('h3')], [/<div class="ap-mk-l">[\s\S]*?<\/div>/, L3P('p')], [/<ol class="ap-sps">[\s\S]*?<\/ol>/, LI], [null, /<p class="ap-sp-p"[\s\S]*?<\/p>/g]],
+  'ap-app': [[/<div class="card ap-an[\s\S]*?<div class="ap-ftw/, LI], [null, /<li class="ap-ft"[\s\S]*?<\/li>/g], [/<ul class="ap-pb[\s\S]*?<\/ul>/, LI]],
+  'ap-scope': [[/<div class="ap-mkt[\s\S]*?<div class="ap-rgw/, LI], [/<div class="ap-rgs">[\s\S]*?<div class="card ap-swc/, LI], [null, /<li class="ap-sw-\w"[\s\S]*?<\/li>/g]],
   'ap-role': [[null, /<li class="ap-js"[\s\S]*?<\/li>/g], [null, /<li class="ap-rw"[\s\S]*?<\/li>/g]],
 };
 const only = (e, l) => e.replace(new RegExp(`<(\\w+)\\b[^>]*data-l="(?!${l}")\\w+"[^>]*>[\\s\\S]*?<\\/\\1>`, 'g'), '');
@@ -77,4 +79,4 @@ const css = (html.match(/<!-- ap-css:start -->([\s\S]*?)<!-- ap-css:end -->/) ||
 ok(/\.ap-refs\b/.test(css) && /\.ap-c\b/.test(css), 'thiếu CSS .ap-refs / .ap-c trong ap-css');
 
 if (fails.length) { console.error(`FAIL check-ap-refs (${fails.length}):\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-console.log(`OK check-ap-refs: 7 trang, ${refsTotal} nguồn có tiêu đề JA/EN/VI + link, ${total} trích dẫn, mọi thông tin / ảnh có nguồn`);
+console.log(`OK check-ap-refs: ${IDS.length} trang, ${refsTotal} nguồn có tiêu đề JA/EN/VI + link, ${total} trích dẫn, mọi thông tin / ảnh có nguồn`);

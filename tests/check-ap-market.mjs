@@ -15,7 +15,8 @@ const strip = (s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const main = (html.match(/<main class="wrap" data-view="ap" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([\w-]+)"/g)].map((m) => m[1]);
 ok(ids.includes('ap-market'), `thiếu section #ap-market (đang: ${ids})`);
-ok(ids.indexOf('ap-market') === ids.indexOf('ap-role') - 1, `#ap-market phải đứng ngay trước #ap-role: ${ids}`);
+// #ap-app, #ap-scope (sản phẩm chủ lực tại VN, thị trường, khu vực; tests/check-ap-app.mjs) chen giữa #ap-compete và #ap-role
+ok(ids.indexOf('ap-compete') === ids.indexOf('ap-market') + 1 && ids.slice(ids.indexOf('ap-compete') + 1, ids.indexOf('ap-role')).every((x) => ['ap-app', 'ap-scope'].includes(x)), `#ap-market rồi #ap-compete (so sánh đối thủ) phải đứng trước #ap-role, giữa chỉ có #ap-app, #ap-scope: ${ids}`);
 const s = (main.match(/<section class="pg"[^>]*id="ap-market"[\s\S]*?<\/section>/) || [''])[0];
 
 // sidebar + ảnh nền + đánh số mục: market 03, role 04

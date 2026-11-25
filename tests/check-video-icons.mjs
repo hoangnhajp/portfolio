@@ -31,6 +31,7 @@ for (const n of engIcons) ok(existsSync(root + `assets/gx/${n}.webp`), `engine: 
 // task p0r6: thêm assets/logos = logo thật của 4 công ty đã làm (người vận hành yêu cầu), không phải icon
 // task g6pn: thêm assets/sw = ảnh chụp màn hình thật (đã che) của phần mềm làm theo yêu cầu khách hàng
 // task ls8q: thêm assets/ap = ảnh sản phẩm chính thức tải từ andpad.jp (tools/ap/fetch-shots.py)
+// task 2nov: icon kho lạnh / cá / tôm của bản đồ công tác ở assets/sales/map, cảnh người que ở assets/sales/cycle
 for (const m of html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)) ok(/^assets\/(gx|sales|workflow|logos|sw|ap)\//.test(m[1]), `ảnh lạ ngoài bộ icon video / ảnh thật: ${m[1]}`);
 
 // 2) Cảnh động .gxs thay cho hình tĩnh

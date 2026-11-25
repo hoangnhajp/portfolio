@@ -106,7 +106,7 @@ if (STAGES.reduce((a, s) => a + s.n, 0) !== duties) throw new Error('tổng đ�
 const PERSONA = [
   { ja: '日系企業で法人顧客を担当してきた人', en: 'Has served B2B clients at a Japanese company', vi: 'Từng phụ trách khách hàng doanh nghiệp ở công ty Nhật', go: [['#sales-top', 'Sales'], ['#career', 'Career']] },
   { ja: '日本語N2以上と英語で仕事ができる人', en: 'Works in Japanese (N2+) and English', vi: 'Làm việc bằng tiếng Nhật (N2+) và tiếng Anh', go: [['#lang-top', 'Languages']] },
-  { ja: 'システムを理解し、導入を経験した人', en: 'Understands systems and has seen rollouts', vi: 'Hiểu hệ thống, từng tham gia triển khai', go: [['#it-top', 'IT Knowledge'], ['#sw-top', 'Software Products']] },
+  { ja: 'システムを理解し、導入を経験した人', en: 'Understands systems and has seen rollouts', vi: 'Hiểu hệ thống, từng tham gia triển khai', go: [['#sw-top', 'Software Products']] },
   { ja: '研修、資料、デモで使い方を伝えられる人', en: 'Teaches through training, manuals and demos', vi: 'Truyền đạt bằng đào tạo, tài liệu, demo', go: [['#hr-top', 'HR'], ['#team-top', 'Team Management']] },
   { ja: '将来チームを率いる意欲がある人', en: 'Ready to lead a team later', vi: 'Sẵn sàng dẫn dắt đội nhóm sau này', go: [['#team-top', 'Team Management']] },
 ];
@@ -140,7 +140,7 @@ const ROWS = [
   { t: 'must', r: 'm2', go: [['#career', 'Career']],
     ja: '日系企業での勤務', en: 'Work at a Japanese company', vi: 'Làm việc tại công ty Nhật',
     eja: '日系企業で約11年、日本人上司に直接報告してきました。', een: 'About 11 years at Japanese companies, reporting directly to Japanese managers.', evi: 'Khoảng 11 năm ở công ty Nhật, báo cáo trực tiếp lãnh đạo người Nhật.' },
-  { t: 'must', r: 'm3 m7', go: [['#sw-top', 'Software Products'], ['#it-top', 'IT Knowledge']],
+  { t: 'must', r: 'm3 m7', go: [['#sw-top', 'Software Products']],
     ja: 'IT、システム導入、コンサルへの関心', en: 'IT, system rollout, consulting', vi: 'Quan tâm IT, triển khai hệ thống, tư vấn',
     eja: '顧客の要望から仕様書を書き、UATを経て3つのソフトを納品しました。', een: 'I wrote specs, ran UAT and delivered 3 software products for clients.', evi: 'Tôi viết đặc tả, chạy UAT và bàn giao 3 phần mềm theo yêu cầu khách hàng.' },
   { t: 'must', r: 'm4', go: [['#w-mycom', 'Career'], ['#sales-kpi', 'Sales']],
@@ -234,7 +234,7 @@ function fitHtml() {
   <span class="eb rv">01　<b>CANDIDATE PROFILE</b></span>
   <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">求人票の要件から、<br /><i>合う人物像を描く。</i></span><span data-l="en">From the job requirements<br /><i>to the right candidate.</i></span><span data-l="vi">Từ yêu cầu công việc<br /><i>đến chân dung ứng viên phù hợp.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">求人票の要件と業務を数え、能力ごとに求められる水準を図にしました（水準は私の読み方です）。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">求人票の要件と業務を数え、能力ごとに求められる水準を図示（水準は私の読み方）。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">I counted the requirements and duties in the JD and charted the level each skill calls for (levels are my reading).</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Tôi đếm các yêu cầu và đầu việc trong JD rồi vẽ mức cần có của từng năng lực (mức điểm theo cách đọc của tôi).</p>
   <div class="kw1 rv" style="margin:6px 0 8px">
@@ -283,7 +283,7 @@ const main = `<!-- jd:start -->
   <span class="eb rv">JOB DESCRIPTION　<b>ANDPAD</b></span>
   <h2 class="kw jd-kw-s rv" style="--d:60ms"><span data-l="ja">ANDPAD Vietnamの<br /><i>求人情報。</i></span><span data-l="en">ANDPAD Vietnam<br /><i>job description.</i></span><span data-l="vi">Thông tin tuyển dụng<br /><i>ANDPAD Vietnam.</i></span></h2>
   <div class="kwbar rv" style="--d:120ms"><span></span></div>
-  <p class="kw-sub rv" style="--d:140ms" data-l="ja">Customer Success Staff（IT／リーダー候補）の募集です。</p>
+  <p class="kw-sub rv" style="--d:140ms" data-l="ja">募集職種：Customer Success Staff（IT／リーダー候補）。</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="en">Position: Customer Success Staff (IT, with a path to Leader).</p>
   <p class="kw-sub rv" style="--d:140ms" data-l="vi">Vị trí Customer Success Staff (IT, ứng viên tiềm năng cho vị trí Leader).</p>
   <div class="jd-doc rv" lang="vi" style="--d:180ms">

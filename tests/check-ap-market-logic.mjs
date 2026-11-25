@@ -31,7 +31,7 @@ for (const l of ['ja', 'en', 'vi']) {
 const pos = (re) => s.search(re);
 const q = (d) => s.indexOf(`<span class="lbl ap-q" data-l="ja"><i>${d}</i>`);
 ok(q(1) > 0 && q(1) < pos(/<ul class="ap-ctx/), 'nhãn 1 phải đứng trước 3 thẻ bối cảnh');
-ok(q(2) > pos(/<ul class="ap-ctx/) && q(2) < pos(/<h3 data-l="ja">ミック/), 'nhãn 2 phải nằm ở khối thị trường');
+ok(q(2) > pos(/<ul class="ap-ctx/) && q(2) < pos(/<h3 data-l="ja">製品：ANDPAD/), 'nhãn 2 phải nằm ở khối thị trường');
 ok(q(3) > pos(/<div class="ap-css-cases/) && q(3) < pos(/<ul class="ap-cslist/), 'nhãn 3 phải nằm ở khối case');
 ok(q(4) > pos(/<div class="card ap-sp/) && q(4) < pos(/<ol class="ap-sps/), 'nhãn 4 phải nằm ở khối hỗ trợ');
 const viQ = qs.filter((m) => m[1] === 'vi').map((m) => m[3].toLowerCase());
