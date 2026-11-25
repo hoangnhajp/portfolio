@@ -35,13 +35,11 @@ for (const [a, id] of steps) {
 }
 ok(!/pj-pt|pj-tags|pj-go|詳しく見る|View details|Xem chi tiết/.test(pj), '#projects còn câu kể / nhãn / "Xem chi tiết"');
 
-// 3. Có animation và tắt được khi giảm chuyển động.
-// task mwuc: 4 làn thành 1 đường ống ziczac liền (làn chẵn chạy phải -> trái), 1 cục sáng chạy liên tục dọc ống (script pjf-js)
-ok(/<svg class="pjf-pipe"[^>]*>[\s\S]*?class="pjf-tube"[\s\S]*?<\/svg>/.test(flow), 'thiếu SVG đường ống .pjf-pipe (path .pjf-tube) trong khối .pjf');
-ok(/<i class="pjf-orb"/.test(flow), 'thiếu cục sáng .pjf-orb');
-ok(/<script id="pjf-js">[\s\S]*?getPointAtLength[\s\S]*?<\/script>/.test(html), 'thiếu script pjf-js cho cục sáng chạy dọc ống');
-ok(html.includes('.pjf-ln:nth-child(even) .pjf-row>li:nth-child(1){grid-column:5'), 'làn chẵn (B, D) chưa đảo chiều phải -> trái');
-ok(!/@keyframes pjfRun|@keyframes pjfHi/.test(html), 'còn vệt sáng riêng từng làn (pjfRun / pjfHi) thay vì 1 đường ống liền');
+// 3. Có animation (chạy dọc làn + nhấn sáng lần lượt) và tắt được khi giảm chuyển động
+ok(/@keyframes pjfRun/.test(html) && /@keyframes pjfHi/.test(html), 'thiếu @keyframes pjfRun / pjfHi');
+// task fvwa: người vận hành chốt về bản đầu tiên (kfh1), KHÔNG có đường ống nối giữa các làn (bản mwuc / cogy đã bỏ)
+ok(!/pjf-pipe|pjf-orb|id="pjf-js"|pjf:start/.test(html), 'còn đường ống nối giữa các làn (.pjf-pipe / .pjf-orb / script pjf-js)');
+ok(!/\.pjf-ln:nth-child\(even\) \.pjf-row>li/.test(html), 'làn chẵn còn bị đảo chiều ziczac (bản mwuc)');
 ok(/prefers-reduced-motion:reduce\)\{\.pjf/.test(html), 'thiếu tắt animation .pjf khi prefers-reduced-motion');
 ok(!/<div class="pj[ "]/.test(pj), 'còn lưới thẻ .pj cũ');
 ok(!/[—]/.test(pj), 'có dấu gạch ngang dài');
