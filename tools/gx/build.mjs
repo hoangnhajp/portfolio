@@ -163,7 +163,7 @@ function spot(key, s) {
   return `<div class="${s.hero ? '' : 'sv-spot '}gxs gxs--${s.k}${s.hero ? ' gxs--hero' : ''}" data-k="${key}" aria-hidden="true"><div class="gxs-in">${body}</div></div><!--/gxs-->`;
 }
 const SPOT_CSS = `
-/* ── Cảnh nhỏ .gxs (task v3c1): thay hình tĩnh ở thẻ kỹ năng / đầu tab, cùng chất liệu và nhịp chuyển động với video ── */
+/* ── Cảnh nhỏ .gxs: thay hình tĩnh ở thẻ kỹ năng / đầu tab, cùng chất liệu và nhịp chuyển động với video ── */
 .gx,.gxs{--gx-blue:#25A1DB;--gx-or:#F47E2A;--gx-ort:#DD6417;--gx-ink:#1E293B;--gx-body:#475569;
   --gx-edge:linear-gradient(135deg,rgba(244,126,42,.55),rgba(255,255,255,.2) 45%,rgba(37,161,219,.6));--gx-card:linear-gradient(180deg,#FFFFFF 0%,#F6F9FC 100%);
   --gx-sh:inset 0 1px 0 rgba(255,255,255,.95),0 1px 2px rgba(15,23,42,.06),0 10px 20px -8px rgba(15,23,42,.14),0 28px 56px -22px rgba(27,127,176,.38),0 22px 44px -30px rgba(244,126,42,.40);
@@ -202,7 +202,7 @@ html.js .gxs:not(.is-in),html.js .gxs:not(.is-in) *,html.js .gxs:not(.is-in) *::
 @keyframes gxsDraw{0%{opacity:0;transform:rotate(var(--a)) translateX(var(--o)) scaleX(0)}100%{opacity:1;transform:rotate(var(--a)) translateX(var(--o)) scaleX(1)}}
 @keyframes gxsSpin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
 @keyframes gxsIc{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-3px) rotate(-4deg) scale(1.06)}}
-/* workflow 3 bước (task m3tn): mũi tên ở đầu nét, nhãn đánh số, quầng sáng + nhãn sáng lần lượt bước 1 > 2 > 3 */
+/* workflow 3 bước: mũi tên ở đầu nét, nhãn đánh số, quầng sáng + nhãn sáng lần lượt bước 1 > 2 > 3 */
 .sv-spot.gxs--wf{flex:none} /* thẻ flex cột: không cho khung co theo độ dài chữ (co thì cắt nhãn) */
 .gxs--wf .gxs-ln::after{content:'';position:absolute;right:0;top:50%;width:7px;height:7px;margin-top:-4.5px;border:solid rgba(37,161,219,.85);border-width:2px 2px 0 0;transform:rotate(45deg)}
 .gxs-hl{position:absolute;left:50%;top:50%;z-index:-1;width:24cqw;height:24cqw;margin:-12cqw 0 0 -12cqw;border-radius:50%;opacity:0;pointer-events:none;
@@ -307,7 +307,7 @@ const CSS = `<style id="gx-css">
 .gx-tile::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.8) 50%,transparent 65%);transform:translateX(-130%)}
 .gx-no{margin-top:10px}
 .gx--big .gx-lb{font-size:13.5px}
-/* chips (task d704): ô ngang icon trái + nhãn phải, nhãn 1 dòng không ngắt giữa từ, cùng nhịp với thẻ nhãn .gx-tag */
+/* chips: ô ngang icon trái + nhãn phải, nhãn 1 dòng không ngắt giữa từ, cùng nhịp với thẻ nhãn .gx-tag */
 .gx.gx--chips{padding-left:22px;padding-right:22px;container-type:inline-size}
 .gx--chips .gx-in{gap:10px}
 .gx--grid.gx--chips:not(.gx--big) .gx-tile{flex-direction:row;align-items:center;gap:8px;padding:8px 10px 8px 8px;border-radius:16px;text-align:left}

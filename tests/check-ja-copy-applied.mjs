@@ -20,7 +20,8 @@ ok(ja.length > 150, `chỉ thấy ${ja.length} khối JA`);
 // Lấy chữ JA của từng phần tử: cả phần tử mang data-l="ja", hoặc <span data-l="ja"> con trực tiếp.
 const jaOf = (open, inner) => /data-l="ja"/.test(open) ? txt(inner)
   : /data-l="(en|vi)"/.test(open) ? '' : txt((inner.match(/<span data-l="ja">([\s\S]*?)<\/span>(?=<span data-l=|$)/) || [])[1] || '');
-const subs = [...html.matchAll(/(<p class="kw-sub[^"]*"[^>]*>)([\s\S]*?)<\/p>/g)].map((m) => jaOf(m[1], m[2])).filter(Boolean);
+// task 4n9v: bỏ số trích dẫn nguồn <sup class="ap-c">n</sup> (không phải chữ của câu) trước khi xét đuôi câu
+const subs = [...html.matchAll(/(<p class="kw-sub[^"]*"[^>]*>)([\s\S]*?)<\/p>/g)].map((m) => jaOf(m[1], m[2].replace(/<sup class="ap-c">[^<]*<\/sup>/g, ''))).filter(Boolean);
 ok(subs.length >= 12, `chỉ thấy ${subs.length} câu dẫn kw-sub JA`);
 for (const s of subs) ok(/(ます|ました|です)(（[^）]*）)?。$/.test(s), `kw-sub JA không kết です・ます: "${s.slice(0, 40)}"`);
 // Tiêu đề h2.kw (trừ tên riêng ở trang hồ sơ).
