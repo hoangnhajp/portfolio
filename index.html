@@ -210,6 +210,9 @@ nav.toc.grow{display:flex;flex-direction:column;justify-content:space-between}
 @media screen and (max-width:900px){
   .cyc{grid-template-columns:1fr}
   .cyc-a{transform:rotate(90deg);margin:2px 0}
+  /* task cfc8: hàng 3 thẻ + mũi tên ⇄ (#w-it) xếp dọc ở khung hẹp, không tràn tờ */
+  .x3{grid-template-columns:1fr!important}
+  .x3>p{transform:rotate(90deg);margin:2px 0}
 }
 
 /* Hiệu ứng xuất hiện khi cuộn tới */
@@ -968,12 +971,6 @@ html.js .lg-anim:not(.lg-on) *,html.js .lg-anim:not(.lg-on) *::before,html.js .l
 @keyframes lgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @keyframes lgSheen{0%{transform:translateX(-120%)}60%,100%{transform:translateX(320%)}}
 @keyframes lgPulse{0%{opacity:.75;transform:scale(.55)}100%{opacity:0;transform:scale(1.7)}}
-@keyframes lgDot{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
-@keyframes lgB1{0%,3%{opacity:0;transform:translateY(10px) scale(.96)}8%,90%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lgB2{0%,20%{opacity:0;transform:translateY(10px) scale(.96)}25%,90%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lgB3{0%,40%{opacity:0;transform:translateY(10px) scale(.96)}45%,90%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lgB4{0%,57%{opacity:0;transform:translateY(10px) scale(.96)}62%,90%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
-@keyframes lgType{0%,10%{opacity:0}12%,19%{opacity:1}21%,30%{opacity:0}32%,39%{opacity:1}41%,49%{opacity:0}51%,56%{opacity:1}58%,100%{opacity:0}}
 @keyframes lgSlide{0%{opacity:0;transform:translateX(12px)}5%,30%{opacity:1;transform:none}35%,100%{opacity:0;transform:translateX(-12px)}}
 @keyframes lgNod{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @keyframes lgRun{0%{opacity:0;transform:translateX(0)}12%,88%{opacity:1}100%{opacity:0;transform:translateX(100%)}}
@@ -998,26 +995,7 @@ html.js .lg-meter .lg-flagb{animation:lgPop .6s cubic-bezier(.34,1.56,.64,1) bot
 html.js .lg-meter .lg-use{animation:lgRise .5s ease-out both;animation-delay:calc(var(--i,0)*.18s + var(--j,0)*.16s + .6s)}
 html.js .lg-meter .lg-bar>i{animation:lgSheen 3.4s ease-in-out infinite;animation-delay:calc(var(--i,0)*.5s + 1.2s)}
 
-/* Hội thoại báo cáo (#lang-ja) */
-.lg-two{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;margin-top:16px;align-items:stretch}
-.lg-chat{display:flex;flex-direction:column;gap:10px;background:linear-gradient(160deg,#fff,#f6f3fd)}
-.lg-msg{display:flex;align-items:flex-end;gap:8px;max-width:92%}
-.lg-msg--me{align-self:flex-end;flex-direction:row-reverse}
-.lg-av{width:34px;height:34px;flex:none;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #ece8f3;display:grid;place-items:center}
-.lg-av img{width:28px;height:28px}
-.lg-bub{padding:9px 13px;border-radius:14px 14px 14px 4px;background:#fff;box-shadow:0 0 0 1px #e5e0f1;
-  font:500 12.4px/1.6 'Noto Sans JP',sans-serif;color:#2b2540}
-.lg-bub>small{display:block;font:800 8.5px 'Manrope',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#8a83a0;margin-bottom:2px}
-.lg-msg--me .lg-bub{border-radius:14px 14px 4px 14px;background:linear-gradient(135deg,#3b2f86,#5b4bc4);color:#fff;box-shadow:none}
-.lg-msg--me .lg-bub>small{color:rgba(255,255,255,.7)}
-.lg-typing{display:flex;gap:4px;padding:2px 0 0 42px;height:10px}
-.lg-typing>i{width:6px;height:6px;border-radius:50%;background:#b8b0d6}
-html.js .lg-chat .lg-b1{animation:lgB1 12s ease-out infinite}
-html.js .lg-chat .lg-b2{animation:lgB2 12s ease-out infinite}
-html.js .lg-chat .lg-b3{animation:lgB3 12s ease-out infinite}
-html.js .lg-chat .lg-b4{animation:lgB4 12s ease-out infinite}
-html.js .lg-chat .lg-typing{animation:lgType 12s linear infinite}
-html.js .lg-chat .lg-typing>i{animation:lgDot 1s ease-in-out infinite;animation-delay:calc(var(--j,0)*.15s)}
+/* #lang-ja (task cfc8: bỏ khối hội thoại giả; còn dải hourensou + tiến trình 6 bước trải ngang) */
 /* task ila7: dải hourensou (Hō / Ren / Sō) + dòng tiến trình 6 bước: nắm tổng thể, deadline, kế hoạch, theo dõi, báo cáo theo mốc, kết quả */
 .lg-hrs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
 .lg-hr{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:#fff;border:1px solid #ece8f3;border-radius:16px;box-shadow:0 14px 30px -26px rgba(60,50,90,.5)}
@@ -1028,18 +1006,20 @@ html.js .lg-chat .lg-typing>i{animation:lgDot 1s ease-in-out infinite;animation-
 .lg-hr p{margin:0;font-size:12.5px;line-height:1.6}
 html.js .lg-hrs .lg-hr{animation:lgRise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*.16s)}
 html.js .lg-hrs .lg-hr-k{animation:lgPop .55s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--i,0)*.16s + .25s)}
-.lg-track{display:flex;flex-direction:column}
-.lg-tks{position:relative;list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
-.lg-tks::before,.lg-tks::after{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:2px;border-radius:2px;background:#ece8f3}
-.lg-tks::after{background:linear-gradient(180deg,#3b2f86,#26B3F4 60%,#F68209);transform-origin:top}
-.lg-tk{position:relative;display:flex;gap:12px;align-items:center}
-.lg-tk>img{position:relative;z-index:1;flex:none;width:40px;height:40px;padding:5px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #e5e0f1}
+/* Tiến trình 6 bước trải ngang: 6 cột bằng nhau, đường nối đi qua đúng tâm icon (đầu = tâm cột 1, cuối = tâm cột 6:
+   (100% - 5 khe) / 12 mỗi bên); vệt màu chạy TUYẾN TÍNH 0 -> 70% chu kỳ nên chạm icon thứ i đúng lúc i*0.98s = lúc icon đó bắt đầu nảy (lgTk, delay i*0.98s). */
+.lg-track{margin-top:16px}
+.lg-tks{--g:12px;position:relative;list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--g)}
+.lg-tks::before,.lg-tks::after{content:'';position:absolute;top:20px;left:calc((100% - 5*var(--g))/12);right:calc((100% - 5*var(--g))/12);height:2px;border-radius:2px;background:#ece8f3}
+.lg-tks::after{background:linear-gradient(90deg,#3b2f86,#26B3F4 60%,#F68209);transform-origin:left center}
+.lg-tk{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.lg-tk>img{position:relative;z-index:1;flex:none;width:42px;height:42px;padding:5px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #e5e0f1;box-sizing:border-box}
 .lg-tk-n{display:block;font:700 9.5px 'Space Grotesk',sans-serif;letter-spacing:.08em;color:#6d5bd0}
-.lg-tk h3{margin:0;font-size:13.5px}
-.lg-tk p{margin:0;font-size:12px;line-height:1.5}
-@keyframes lgFill{0%{opacity:1;transform:scaleY(0)}70%,90%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(1)}}
+.lg-tk h3{margin:0 0 4px;font-size:13px;line-height:1.4}
+.lg-tk p{margin:0;font-size:11.5px;line-height:1.55}
+@keyframes lgFillX{0%{opacity:1;transform:scaleX(0)}70%,90%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
 @keyframes lgTk{0%,14%,100%{transform:scale(1)}7%{transform:scale(1.14)}}
-html.js .lg-track .lg-tks::after{animation:lgFill 7s ease-in-out infinite}
+html.js .lg-track .lg-tks::after{animation:lgFillX 7s linear infinite}
 html.js .lg-track .lg-tk{animation:lgRise .55s ease-out both;animation-delay:calc(var(--i,0)*.14s + .2s)}
 html.js .lg-track .lg-tk>img{animation:lgTk 7s ease-in-out infinite;animation-delay:calc(var(--i,0)*.98s)}
 
@@ -1077,17 +1057,20 @@ html.js .lg-stage .lg-hd{animation:lgNod 2.2s ease-in-out infinite;animation-del
 .lg-run--b .lg-tok{background:#26B3F4;box-shadow:0 0 0 4px rgba(38,179,244,.18)}
 html.js .lg-bridge .lg-run{animation:lgRun 3.2s ease-in-out infinite;animation-delay:calc(var(--j,0)*.5s)}
 html.js .lg-bridge .lg-run--b{animation-direction:reverse;animation-delay:calc(var(--j,0)*.5s + 1.6s)}
-.lg-node{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:1}
-.lg-node .lg-flagb{width:clamp(44px,8vw,64px);height:clamp(44px,8vw,64px);margin:0}
+/* task cfc8: căn giữa bằng THUỘC TÍNH translate (không phải transform) nên keyframe lgRise / lgPop (animate transform)
+   cộng dồn chứ không ghi đè; khung nút = đúng hình tròn icon (nhãn đặt tuyệt đối bên dưới) nên tâm icon = đỉnh tam giác;
+   hub ở trọng tâm, nhãn cạnh ở trung điểm mỗi cạnh. Kiểm: tests/check-lang-cfc8.mjs, tests/browser-visual-balance.mjs */
+.lg-node{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);translate:-50% -50%;width:clamp(44px,8vw,64px);height:clamp(44px,8vw,64px);z-index:2}
+.lg-node .lg-flagb{width:100%;height:100%;margin:0}
 .lg-node .lg-flagb img{width:68%;height:68%;object-fit:contain}
-.lg-node b{font:700 12px 'Noto Sans JP',sans-serif;color:#16141d;background:rgba(255,255,255,.9);padding:2px 8px;border-radius:999px;white-space:nowrap}
+.lg-node b{position:absolute;top:calc(100% + 6px);left:50%;translate:-50% 0;font:700 12px 'Noto Sans JP',sans-serif;color:#16141d;background:rgba(255,255,255,.9);padding:2px 8px;border-radius:999px;white-space:nowrap}
 html.js .lg-bridge .lg-node{animation:lgRise .6s ease-out both;animation-delay:calc(var(--i,0)*.2s)}
 html.js .lg-bridge .lg-node .lg-flagb{animation:lgFloat 3.6s ease-in-out infinite;animation-delay:calc(var(--i,0)*.5s)}
-.lg-hub{position:absolute;left:50%;top:42.7%;transform:translate(-50%,-50%);display:grid;place-items:center;z-index:1}
-.lg-hub img{position:relative;z-index:1;width:clamp(40px,7vw,58px);height:clamp(40px,7vw,58px)}
-.lg-hub::before{content:'';position:absolute;width:150%;height:150%;border-radius:50%;border:2px solid rgba(244,126,42,.45)}
+.lg-hub{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);translate:-50% -50%;display:grid;place-items:center;z-index:1}
+.lg-hub img{position:relative;z-index:1;width:clamp(38px,6vw,50px);height:clamp(38px,6vw,50px)}
+.lg-hub::before{content:'';position:absolute;width:136%;height:136%;border-radius:50%;border:2px solid rgba(244,126,42,.45)}
 html.js .lg-bridge .lg-hub::before{animation:lgPulse 2.6s ease-out infinite}
-.lg-doc{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);transform:translate(-50%,-50%);z-index:1;
+.lg-doc{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);translate:-50% -50%;z-index:2;
   font:700 10.5px 'Noto Sans JP',sans-serif;color:#3b2f86;background:#fff;border:1px solid #e5e0f1;border-radius:999px;padding:3px 10px;white-space:nowrap}
 html.js .lg-bridge .lg-doc{animation:lgPop .5s ease-out both;animation-delay:calc(var(--i,0)*.2s + .8s)}
 
@@ -1107,10 +1090,15 @@ html.js .tk .tk-c{animation:lgRise .6s cubic-bezier(.2,.8,.2,1) both;animation-d
 html.js .tk .tk-ic{animation:lgPop .55s cubic-bezier(.34,1.56,.64,1) both,lgFloat 3.4s ease-in-out infinite;animation-delay:calc(var(--i,0)*.15s + .25s),calc(var(--i,0)*.4s + .9s)}
 html.js .tk .tk-c::after{opacity:1;animation:lgSheen 4.2s ease-in-out infinite;animation-delay:calc(var(--i,0)*.6s + 1s)}
 
-html:not(.js) .lg-stage .lg-sl:not(:first-child),html:not(.js) .lg-typing{opacity:0}
+html:not(.js) .lg-stage .lg-sl:not(:first-child){opacity:0}
 html:not(.js) .lg-bar>i{display:none}
 @media screen and (max-width:900px){
-  .lg-meter,.lg-two,.lg-hrs{grid-template-columns:1fr}
+  .lg-meter,.lg-hrs{grid-template-columns:1fr}
+  /* tiến trình dọc: mỗi bước icon trái, chữ phải; đoạn nối từ đáy icon bước này tới đỉnh icon bước sau (đúng trục tâm icon x = 21px) */
+  .lg-tks{grid-template-columns:1fr;gap:14px}
+  .lg-tks::before,.lg-tks::after{display:none}
+  .lg-tk{flex-direction:row;align-items:flex-start;text-align:left;gap:12px}
+  .lg-tk:not(:last-child)::before{content:'';position:absolute;left:20px;top:42px;width:2px;height:calc(100% - 42px + 14px);background:linear-gradient(180deg,#cfc6ef,#bfe6fb)}
   .tk{grid-template-columns:1fr}
   .lg-st-in{grid-template-columns:84px 1fr;gap:10px}
   .lg-spk{height:96px}.lg-spk img{width:56px;height:56px}
@@ -1121,26 +1109,25 @@ html:not(.js) .lg-bar>i{display:none}
 @media screen and (max-width:600px){
   /* khung hẹp: sơ đồ vuông, đặt lại toạ độ 3 nút / 3 cạnh / tài liệu (góc cạnh tính cho tỉ lệ 1:1) */
   .lg-bridge{aspect-ratio:1/1}
+  /* nút (18,22) (82,22) (50,80); hub ở trọng tâm (50, 41.333); nhãn cạnh ở trung điểm (50,22) (66,51) (34,51) */
   .lg-bridge>i:nth-of-type(1){--y:22!important}
   .lg-bridge>i:nth-of-type(2){--y:22!important;--l:66.24!important;--a:118.89deg!important}
   .lg-bridge>i:nth-of-type(3){--y:80!important;--l:66.24!important;--a:241.11deg!important}
-  .lg-bridge>span:nth-of-type(1),.lg-bridge>span:nth-of-type(2){--y:22!important}
-  .lg-bridge>span:nth-of-type(3){--y:80!important}
-  .lg-bridge>.lg-hub{top:41.3%}
-  .lg-bridge>span:nth-of-type(5){--y:12!important}
-  .lg-bridge>span:nth-of-type(6){--x:78!important;--y:54!important}
-  .lg-bridge>span:nth-of-type(7){--x:22!important;--y:54!important}
+  .lg-bridge>.lg-node:nth-of-type(1),.lg-bridge>.lg-node:nth-of-type(2){--y:22!important}
+  .lg-bridge>.lg-node:nth-of-type(3){--y:80!important}
+  .lg-bridge>.lg-hub{--y:41.333!important}
+  .lg-bridge>.lg-doc:nth-of-type(5){--y:22!important}
+  .lg-bridge>.lg-doc:nth-of-type(6){--x:66!important;--y:51!important}
+  .lg-bridge>.lg-doc:nth-of-type(7){--x:34!important;--y:51!important}
 }
 @media (prefers-reduced-motion:reduce){
   .lg-anim *,.lg-anim *::before,.lg-anim *::after{animation:none!important}
   .lg-stage .lg-sl{opacity:0!important}.lg-stage .lg-sl:first-child{opacity:1!important}
-  .lg-chat .lg-typing{opacity:0!important}
   .tk-c::after,.lg-bar>i{display:none}
 }
 @media print{
   .lg-anim *,.lg-anim *::before,.lg-anim *::after{animation:none!important}
   .lg-stage .lg-sl{opacity:0!important}.lg-stage .lg-sl:first-child{opacity:1!important}
-  .lg-chat .lg-typing{display:none}
   .tk-c::after,.lg-bar>i{display:none}
   .lg-stage{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
@@ -1654,7 +1641,7 @@ html:not(.js) .lg-bar>i{display:none}
   <div class="kwbar rv" style="--d:110ms"><span></span></div>
   <figure class="gx gx--flow gx--both" aria-hidden="true"><span class="gx-step"><i></i><b>07</b> / 08</span><div class="gx-in"><div class="gx-st" style="--i:0"><span class="gx-pl"><img src="assets/gx/office-building.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">日本の顧客</span><span data-l="en">Japanese clients</span><span data-l="vi">Khách hàng Nhật</span></b></div><i class="gx-ln" style="--i:0"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><div class="gx-st is-hot" style="--i:1"><span class="gx-pl"><img src="assets/gx/chat-bubbles.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">通訳と翻訳</span><span data-l="en">Interpreting</span><span data-l="vi">Phiên dịch</span></b><em class="gx-chip gx-chip--o">JA · EN · VI</em></div><i class="gx-ln" style="--i:1"><i class="gx-cm"></i><i class="gx-cm gx-cm--r"></i></i><div class="gx-st" style="--i:2"><span class="gx-pl"><img src="assets/gx/workflow-gears.webp" alt="" width="88" height="88" loading="lazy" decoding="async"></span><b class="gx-lb"><span data-l="ja">ベトナム人技術者</span><span data-l="en">Vietnamese engineers</span><span data-l="vi">Kỹ sư Việt Nam</span></b></div></div></figure>
 
-  <div class="rv" style="--d:140ms;display:grid;grid-template-columns:1fr 46px 1fr 46px 1fr;align-items:stretch">
+  <div class="rv x3" style="--d:140ms;display:grid;grid-template-columns:1fr 46px 1fr 46px 1fr;align-items:stretch">
     <div class="card" style="text-align:center;display:flex;flex-direction:column;justify-content:center"><span class="lbl">Client</span><h3 style="margin:0"><span data-l="ja">日本の顧客、上司</span><span data-l="en">Japanese clients and manager</span><span data-l="vi">Khách hàng, cấp trên người Nhật</span></h3><p><span data-l="ja">要件、仕様、質問</span><span data-l="en">Requirements, specs, questions</span><span data-l="vi">Yêu cầu, đặc tả, câu hỏi</span></p></div>
     <p style="align-self:center;text-align:center;font:700 22px 'Space Grotesk';color:#6d5bd0">⇄</p>
     <div class="card" style="text-align:center;border-color:#cfc6ef;display:flex;flex-direction:column;justify-content:center"><span class="lbl">Me</span><h3 style="margin:0"><span data-l="ja">通訳、翻訳、管理</span><span data-l="en">Interpret, translate, manage</span><span data-l="vi">Phiên dịch, biên dịch, quản lý</span></h3><p><span data-l="ja">日英越の3言語</span><span data-l="en">Japanese, English, Vietnamese</span><span data-l="vi">3 thứ tiếng Nhật, Anh, Việt</span></p></div>
@@ -2443,16 +2430,7 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <div class="lg-hr" style="--i:1"><span class="lg-hr-k" aria-hidden="true">Ren</span><div><h3 data-l="ja">連絡</h3><h3 data-l="en">Ren: update</h3><h3 data-l="vi">Ren: liên lạc</h3><p data-l="ja">予定の変更や問題は、すぐに関係者へ連絡します。</p><p data-l="en">I update everyone involved as soon as plans change or problems appear.</p><p data-l="vi">Có thay đổi hay vấn đề, tôi liên lạc ngay với người liên quan.</p></div></div>
     <div class="lg-hr" style="--i:2"><span class="lg-hr-k" aria-hidden="true">Sō</span><div><h3 data-l="ja">相談</h3><h3 data-l="en">Sō: consult</h3><h3 data-l="vi">Sō: xin ý kiến</h3><p data-l="ja">判断に迷う点は、選択肢を用意して早めに相談します。</p><p data-l="en">When a decision is unclear, I consult early with options ready.</p><p data-l="vi">Việc cần quyết, tôi xin ý kiến sớm, kèm sẵn phương án.</p></div></div>
   </div>
-  <div class="lg-two rv" style="--d:200ms">
-    <div class="card lg-chat lg-anim">
-      <span class="lbl"><span data-l="ja">例：日本語での報連相</span><span data-l="en">Example: hourensou in Japanese</span><span data-l="vi">Ví dụ: hourensou bằng tiếng Nhật</span></span>
-      <div class="lg-msg lg-b1"><span class="lg-av" aria-hidden="true"><img src="assets/gx/manager.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>President</small><span data-l="ja">今月の案件、期限に間に合いますか。</span><span data-l="en">Will this month's project make the deadline?</span><span data-l="vi">Dự án tháng này có kịp deadline không?</span></p></div>
-      <div class="lg-msg lg-msg--me lg-b2"><span class="lg-av" aria-hidden="true"><img src="assets/gx/person-bust.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>Me</small><span data-l="ja">全体の進捗と遅れている作業を、数字でご報告します。</span><span data-l="en">Let me report overall progress and the late tasks, with figures.</span><span data-l="vi">Tôi xin báo cáo tiến độ tổng thể và các việc đang chậm bằng số liệu.</span></p></div>
-      <div class="lg-msg lg-b3"><span class="lg-av" aria-hidden="true"><img src="assets/gx/manager.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>President</small><span data-l="ja">対策はどうしますか。</span><span data-l="en">What is the plan?</span><span data-l="vi">Hướng xử lý thế nào?</span></p></div>
-      <div class="lg-msg lg-msg--me lg-b4"><span class="lg-av" aria-hidden="true"><img src="assets/gx/person-bust.webp" alt="" width="28" height="28" loading="lazy" decoding="async"></span><p class="lg-bub"><small>Me</small><span data-l="ja">計画を組み直しました。節目ごとに進捗をご報告します。</span><span data-l="en">I have re-planned the work and will report progress at each milestone.</span><span data-l="vi">Tôi đã lập lại kế hoạch và sẽ báo cáo tiến độ theo từng mốc.</span></p></div>
-      <div class="lg-typing" aria-hidden="true"><i style="--j:0"></i><i style="--j:1"></i><i style="--j:2"></i></div>
-    </div>
-    <div class="card lg-track lg-anim">
+  <div class="card lg-track lg-anim rv" style="--d:200ms">
       <span class="lbl"><span data-l="ja">仕事の進め方</span><span data-l="en">How I run the work</span><span data-l="vi">Cách tôi làm chủ công việc</span></span>
       <ol class="lg-tks">
         <li class="lg-tk" style="--i:0"><img src="assets/gx/roadmap.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">01</span><h3 data-l="ja">全体の進捗を把握</h3><h3 data-l="en">Grasp overall progress</h3><h3 data-l="vi">Nắm tiến độ tổng thể</h3><p data-l="ja">仕事全体と各工程の状況をつかみます。</p><p data-l="en">I keep the whole picture and each step in view.</p><p data-l="vi">Tôi nắm bức tranh chung và tình trạng từng bước.</p></div></li>
@@ -2462,7 +2440,6 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
         <li class="lg-tk" style="--i:4"><img src="assets/gx/milestone-report.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">05</span><h3 data-l="ja">節目ごとに報告</h3><h3 data-l="en">Report at each milestone</h3><h3 data-l="vi">Báo cáo theo tiến trình</h3><p data-l="ja">進み具合を日本語で報告します。</p><p data-l="en">I report how the work is going, in Japanese.</p><p data-l="vi">Tôi báo cáo tiến độ bằng tiếng Nhật.</p></div></li>
         <li class="lg-tk" style="--i:5"><img src="assets/gx/report-chart.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><div><span class="lg-tk-n">06</span><h3 data-l="ja">結果を報告</h3><h3 data-l="en">Report results</h3><h3 data-l="vi">Báo cáo kết quả</h3><p data-l="ja">実施結果と次の課題を報告します。</p><p data-l="en">I report the results and the next steps.</p><p data-l="vi">Tôi báo cáo kết quả thực hiện và việc cần làm tiếp.</p></div></li>
       </ol>
-    </div>
   </div>
 </section>
 <section class="pg" data-chap="IV" id="lang-en">
@@ -2505,10 +2482,10 @@ document.addEventListener('DOMContentLoaded',function(){if(!('IntersectionObserv
     <span class="lg-node" style="--x:18;--y:28;--i:0"><span class="lg-flagb"><img src="assets/gx/manager.webp" alt="" width="40" height="40" loading="lazy" decoding="async"></span><b><span data-l="ja">社長</span><span data-l="en">CEO</span><span data-l="vi">CEO</span></b></span>
     <span class="lg-node" style="--x:82;--y:28;--i:1"><span class="lg-flagb"><img src="assets/gx/team-group.webp" alt="" width="40" height="40" loading="lazy" decoding="async"></span><b><span data-l="ja">チーム、各部署</span><span data-l="en">Team, departments</span><span data-l="vi">Đội ngũ, phòng ban</span></b></span>
     <span class="lg-node" style="--x:50;--y:72;--i:2"><span class="lg-flagb"><img src="assets/gx/report-chart.webp" alt="" width="40" height="40" loading="lazy" decoding="async"></span><b><span data-l="ja">仕事の成果</span><span data-l="en">Work results</span><span data-l="vi">Kết quả công việc</span></b></span>
-    <span class="lg-hub"><img src="assets/gx/person-bust.webp" alt="" width="58" height="58" loading="lazy" decoding="async"></span>
-    <span class="lg-doc" style="--x:50;--y:19;--i:0"><span data-l="ja">双方の意図</span><span data-l="en">Intent, both ways</span><span data-l="vi">Ý nghĩa thông điệp</span></span>
-    <span class="lg-doc" style="--x:77;--y:56;--i:1"><span data-l="ja">実行</span><span data-l="en">Action</span><span data-l="vi">Hành động</span></span>
-    <span class="lg-doc" style="--x:23;--y:56;--i:2"><span data-l="ja">考え方</span><span data-l="en">Thinking</span><span data-l="vi">Tư duy</span></span>
+    <span class="lg-hub" style="--x:50;--y:42.667"><img src="assets/gx/person-bust.webp" alt="" width="58" height="58" loading="lazy" decoding="async"></span>
+    <span class="lg-doc" style="--x:50;--y:28;--i:0"><span data-l="ja">双方の意図</span><span data-l="en">Intent, both ways</span><span data-l="vi">Ý nghĩa thông điệp</span></span>
+    <span class="lg-doc" style="--x:66;--y:50;--i:1"><span data-l="ja">実行</span><span data-l="en">Action</span><span data-l="vi">Hành động</span></span>
+    <span class="lg-doc" style="--x:34;--y:50;--i:2"><span data-l="ja">考え方</span><span data-l="en">Thinking</span><span data-l="vi">Tư duy</span></span>
   </div>
   <div class="g3 rv" style="--d:220ms;margin-top:16px">
     <div class="card"><span class="lbl">Learn</span><h3 data-l="ja">社長の言葉を学ぶ</h3><h3 data-l="en">Learning the CEO's language</h3><h3 data-l="vi">Học cách CEO dùng từ</h3><p data-l="ja">社長の言葉の選び方、考え方、判断の軸を常に学んでいます。</p><p data-l="en">I keep learning how the CEO chooses words, thinks and decides.</p><p data-l="vi">Tôi luôn học cách CEO dùng từ, cách suy nghĩ và tư duy khi ra quyết định.</p></div>

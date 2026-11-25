@@ -42,7 +42,7 @@ for (const [l, keys] of Object.entries({
 })) for (const k of keys) ok(jt[l].toLowerCase().includes(k.toLowerCase()), `#lang-ja/${l}: thiếu "${k}"`);
 ok(/class="[^"]*\blg-hrs\b/.test(ja) && (ja.match(/class="lg-hr"/g) || []).length === 3, '#lang-ja: cần dải hourensou .lg-hrs gồm 3 ô .lg-hr');
 ok(/class="[^"]*\blg-track\b[^"]*\blg-anim\b/.test(ja) && (ja.match(/class="lg-tk"/g) || []).length === 6, '#lang-ja: cần dòng tiến trình .lg-track (lg-anim) gồm 6 bước .lg-tk');
-ok((ja.match(/class="lg-msg[^"]*"/g) || []).length === 4, '#lang-ja: hội thoại phải còn 4 bong bóng');
+ok(!/class="lg-msg/.test(ja), '#lang-ja: task cfc8 đã bỏ khối hội thoại, không được còn bong bóng .lg-msg');
 ok(/proactive|chủ động|主体的/.test(jt.en + jt.vi + jt.ja) && /chủ động/.test(jt.vi) && /proactive/i.test(jt.en) && /主体的/.test(jt.ja), '#lang-ja: thiếu ý "chủ động trong công việc"');
 
 // 4) #lang-en: không còn nhãn Slide 01/02/03
