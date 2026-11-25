@@ -65,7 +65,7 @@ ${CTX.map(([ic, h, p, r], i) => `    <li style="--i:${i}"${OPS[i] ? ` data-op="$
   <div class="card ap-mk rv" style="--d:200ms">
     <div class="ap-mk-l">
       ${Q(2)}
-      ${L3('h3', T('ミック経済研究所の調査で導入企業数1位（8年連続）', 'Ranked first by adopting companies in a MIC Research survey (8 years running)', 'Đứng đầu về số doanh nghiệp sử dụng theo khảo sát MIC (8 năm liền)'))}
+      ${L3('h3', b.t(T('ミック経済研究所の調査で導入企業数1位（8年連続）', 'Ranked first by adopting companies in a MIC Research survey (8 years running)', 'Đứng đầu về số doanh nghiệp sử dụng theo khảo sát MIC (8 năm liền)'), 'share'))}
       ${L3('p', b.t(T('建設業マネジメントクラウドサービス市場の調査（デロイト トーマツ ミック経済研究所、2025年12月）。強みは製品の幅と利用者の多さで、料金は公開せず個別見積もりです。',
         'Construction management cloud market survey by Deloitte Tohmatsu MIC Research (December 2025). Its edge is the breadth of products and the user base; pricing is quote-only.',
         'Khảo sát thị trường cloud quản lý ngành xây dựng của Deloitte Tohmatsu MIC (12/2025). Lợi thế là bộ sản phẩm rộng và số người dùng lớn; giá không công khai, báo giá theo từng khách.'), 'share', 'top', 'pricing'))}

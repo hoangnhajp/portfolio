@@ -67,10 +67,10 @@ ${FACTS.map(([ic, k, v, r], i) => `    <li style="--i:${i}">${ico(ic, 36)}<div>$
   <div class="card ap-ms rv" style="--d:200ms">
     <span class="lbl">MISSION ／ VALUES</span>
     <h3>「幸せを築く人を、幸せに。」${b.c('mission')}</h3>
-    ${L3('p', T('家を建てる人、街をつくる人の働き方を、テクノロジーで良くすることを目指しています。',
+    ${L3('p', b.t(T('家を建てる人、街をつくる人の働き方を、テクノロジーで良くすることを目指しています。',
       'Make the people who build happiness, happy: better working lives for everyone who builds homes and towns.',
-      'Mang hạnh phúc đến những người kiến tạo hạnh phúc: cải thiện cách làm việc của người xây nhà, xây phố bằng công nghệ.'))}
-    <div class="chips"><span class="chip">Professional</span><span class="chip">Mission Driven</span><span class="chip">Reality</span><span class="chip">Customer Success</span><span class="chip">Technology First</span><span class="chip">Love ANDPAD</span></div>
+      'Mang hạnh phúc đến những người kiến tạo hạnh phúc: cải thiện cách làm việc của người xây nhà, xây phố bằng công nghệ.'), 'mission'))}
+    <div class="chips"><span class="chip">Professional</span><span class="chip">Mission Driven</span><span class="chip">Reality</span><span class="chip">Customer Success</span><span class="chip">Technology First</span><span class="chip">Love ANDPAD</span>${b.c('mission')}</div>
   </div>
   <div class="card ap-vn rv" style="--d:220ms">
     <span class="lbl">ANDPAD VIETNAM</span>
@@ -206,7 +206,7 @@ ${b.list()}
 }
 
 const main = `<!-- ap:start -->
-<!-- ═══════ Andpad Info (task m07v: công ty, sản phẩm, hoạt động, dự báo công việc; sinh bằng node tools/ap/build.mjs) ═══════ -->
+<!-- ═══════ Andpad Info: công ty, sản phẩm, hoạt động, dự báo công việc; sinh bằng node tools/ap/build.mjs ═══════ -->
 <main class="wrap" data-view="ap" hidden>
 ${pageTop()}
 ${pageProducts()}

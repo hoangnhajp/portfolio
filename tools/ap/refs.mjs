@@ -81,7 +81,7 @@ export const REFS = {
   mhlw: ['https://kensetsu-roudou-jikan.mhlw.go.jp/kensetsu_overtime.html', T('厚生労働省：建設業の時間外労働の上限規制（2024年4月から）', 'MHLW: overtime cap for construction (from Apr 2024)', 'Bộ MHLW: trần giờ làm thêm ngành xây dựng')],
   cao: ['https://www5.cao.go.jp/keizai-shimon/kaigi/special/reform/wg6/2026/0422shiryou1-1.pdf', T('内閣府WG資料（国交省、2026年4月）：建設業の就業者の年齢構成', 'Cabinet Office WG deck (MLIT, Apr 2026): age of construction workers', 'Tài liệu WG Nội các (MLIT, 4/2026): tuổi lao động xây dựng')],
   iCon: ['https://www.mlit.go.jp/report/press/kanbo08_hh_001085.html', T('国交省：i-Construction 2.0の策定（2040年度までに省人化3割）', 'MLIT: i-Construction 2.0 (30% fewer labour hours by FY2040)', 'Bộ MLIT: công bố i-Construction 2.0')],
-  share: [N('20251218'), T('ANDPAD ニュース：ミック経済研究所の市場調査で導入企業数1位（2025年12月）', 'ANDPAD news: first by adopting companies in MIC Research market survey (Dec 2025)', 'Tin ANDPAD: đứng đầu khảo sát MIC (12/2025)')],
+  share: [N('20251218'), T('ANDPAD ニュース：ミック経済研究所の調査で導入企業数1位、8年連続（2025年12月）', 'ANDPAD news: first by adopting companies in MIC survey, 8 years running (Dec 2025)', 'Tin ANDPAD: đứng đầu khảo sát MIC 8 năm liền (12/2025)')],
   pricing: ['https://andpad.jp/help/pricing/', T('ANDPAD 料金について（個別見積もり）', 'ANDPAD pricing (quote only)', 'Giá ANDPAD (báo giá riêng)')],
   spider: ['https://spider-plus.com/', T('SPIDERPLUS 公式サイト', 'SPIDERPLUS official site', 'Trang chính thức SPIDERPLUS')],
   kanna: ['https://lp.kanna4u.com/pricing/', T('KANNA 料金プラン', 'KANNA pricing plans', 'Bảng giá KANNA')],
@@ -114,12 +114,13 @@ export function book(page, L3) {
       if (!order.includes(k)) order.push(k);
       return order.indexOf(k) + 1;
     });
-    return `<sup class="ap-c">${nums.join(',')}</sup>`;
+    return `<sup class="ap-c">[${nums.join(',')}]</sup>`;
   };
   // t(): gắn số trích dẫn vào CUỐI chữ của cả 3 ngôn ngữ (nằm trong dòng chữ, không thành ô riêng trong flex / grid)
   const t = (o, ...keys) => { const s = c(...keys); return { ja: o.ja + s, en: o.en + s, vi: o.vi + s }; };
   // Nhãn link: bỏ https:// và www., cắt gọn đường dẫn dài
-  const show = (u) => { const s = u.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, ''); return s.length > 31 ? s.slice(0, 29) + '…' : s; };
+  // dài thì giữ tên miền + đuôi đường dẫn (các link cùng trang báo vẫn phân biệt được)
+  const show = (u) => { const s = u.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, ''); if (s.length <= 31) return s; const h = s.split('/')[0]; return `${h}/…${s.slice(-Math.max(14, 30 - h.length))}`; };
   const list = () => `  <div class="ap-src ap-refs rv" style="--d:260ms">
     <p class="ap-rh">${L3('b', REF_HEAD)}${L3('span', NOTE)}</p>
     <ol>

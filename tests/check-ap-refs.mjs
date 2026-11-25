@@ -12,18 +12,22 @@ const main = (html.match(/<main class="wrap" data-view="ap" hidden>([\s\S]*?)<\/
 ok(main, 'thiếu main data-view="ap"');
 const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-role'];
 const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\\s\\S]*?<\\/section>`)) || [''])[0];
-// Phần tử mang thông tin phải có số trích dẫn: [selector lớp, mô tả]
+// Từng mục thông tin phải có số trích dẫn, kiểm RIÊNG từng mục và RIÊNG từng ngôn ngữ (bỏ khối của 2 ngôn ngữ kia rồi
+// vẫn phải còn <sup class="ap-c">): [vùng chứa (tuỳ chọn), regex mục]
+const LI = /<li\b[\s\S]*?<\/li>/g;
+const L3P = (tag) => new RegExp(`<${tag} data-l="ja"[^>]*>[\\s\\S]*?<\\/${tag}><${tag} data-l="en"[^>]*>[\\s\\S]*?<\\/${tag}><${tag} data-l="vi"[^>]*>[\\s\\S]*?<\\/${tag}>`, 'g');
 const CLAIMS = {
-  'ap-top': [/<li style="--i:\d+">[\s\S]*?<\/li>/g, /<div class="card ap-ms\b[\s\S]*?<\/div>\s*<\/div>/g, /<div class="card ap-vn\b[\s\S]*?<\/ul>/g],
-  'ap-products': [/<li class="ap-pd"[\s\S]*?<\/li>/g],
-  'ap-shots': [/<figure class="ap-sh"[\s\S]*?<\/figure>/g],
-  'ap-vn': [/<figure class="ap-v[ps]"[\s\S]*?<\/figure>/g],
-  'ap-news': [/<li class="ap-ev"[\s\S]*?<\/li>/g, /<div class="card ap-act">[\s\S]*?<\/div><\/div>/g],
-  'ap-market': [/<ul class="ap-ctx[\s\S]*?<\/ul>/g, /<li class="ap-cp">[\s\S]*?<\/li>/g, /<li class="ap-cs"[\s\S]*?<\/li>/g, /<div class="ap-mk-l">[\s\S]*?<\/div>/g, /<ol class="ap-sps">[\s\S]*?<\/ol>/g, /<p class="ap-sp-p"[\s\S]*?<\/p>/g],
-  'ap-role': [/<li class="ap-js"[\s\S]*?<\/li>/g, /<li class="ap-rw"[\s\S]*?<\/li>/g],
+  'ap-top': [[/<ul class="ap-kv[\s\S]*?<\/ul>/, LI], [/<div class="card ap-ms\b[\s\S]*?<div class="chips">/, L3P('p')], [/<div class="card ap-ms\b[\s\S]*?<\/div>\s*<\/div>/, /<h3>[\s\S]*?<\/h3>/g], [/<div class="chips">[\s\S]*?<\/div>/, /[\s\S]+/g], [/<div class="card ap-vn\b[\s\S]*?<\/ul>/, LI]],
+  'ap-products': [[null, /<li class="ap-pd"[\s\S]*?<\/li>/g]],
+  'ap-shots': [[null, /<figure class="ap-sh"[\s\S]*?<\/figure>/g]],
+  'ap-vn': [[null, /<figure class="ap-v[ps]"[\s\S]*?<\/figure>/g]],
+  'ap-news': [[null, /<li class="ap-ev"[\s\S]*?<\/li>/g], [null, /<div class="card ap-act">[\s\S]*?<\/div><\/div>/g]],
+  'ap-market': [[/<ul class="ap-ctx[\s\S]*?<\/ul>/, LI], [null, /<li class="ap-cp">[\s\S]*?<\/li>/g], [null, /<li class="ap-cs"[\s\S]*?<\/li>/g],
+    [/<div class="ap-mk-l">[\s\S]*?<\/div>/, L3P('h3')], [/<div class="ap-mk-l">[\s\S]*?<\/div>/, L3P('p')], [/<ol class="ap-sps">[\s\S]*?<\/ol>/, LI], [null, /<p class="ap-sp-p"[\s\S]*?<\/p>/g]],
+  'ap-role': [[null, /<li class="ap-js"[\s\S]*?<\/li>/g], [null, /<li class="ap-rw"[\s\S]*?<\/li>/g]],
 };
-const cites = (s) => [...s.matchAll(/<sup class="ap-c">([\d,]+)<\/sup>/g)].flatMap((m) => m[1].split(',').map(Number));
-let total = 0, refsTotal = 0;
+const only = (e, l) => e.replace(new RegExp(`<(\\w+)\\b[^>]*data-l="(?!${l}")\\w+"[^>]*>[\\s\\S]*?<\\/\\1>`, 'g'), '');
+const cites = (s) => [...s.matchAll(/<sup class="ap-c">\[([\d,]+)\]<\/sup>/g)].flatMap((m) => m[1].split(',').map(Number));let total = 0, refsTotal = 0;
 for (const id of IDS) {
   const s = sec(id);
   ok(s, `thiếu #${id}`);
@@ -54,15 +58,20 @@ for (const id of IDS) {
   // câu dẫn đầu trang có nguồn (3 ngôn ngữ)
   for (const l of ['ja', 'en', 'vi']) ok(new RegExp(`<p class="kw-sub[^>]*data-l="${l}">[^]*?<sup class="ap-c">`).test(s), `#${id} câu dẫn ${l} thiếu trích dẫn`);
   // mọi phần tử thông tin có trích dẫn
-  for (const re of CLAIMS[id] || []) {
-    const els = body.match(re) || [];
-    ok(els.length > 0, `#${id}: không thấy phần tử ${re.source.slice(0, 30)}`);
-    els.forEach((e) => ok(/<sup class="ap-c">/.test(e), `#${id}: phần tử thiếu trích dẫn: ${e.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60)}`));
+  for (const [box, re] of CLAIMS[id] || []) {
+    const scope = box ? (body.match(box) || [''])[0] : body;
+    const els = scope.match(re) || [];
+    ok(els.length > 0, `#${id}: không thấy phần tử ${(box || re).source.slice(0, 30)}`);
+    // mục tự mang data-l (vd 3 đoạn <p data-l> riêng) chỉ xét đúng ngôn ngữ của nó
+    for (const e of els) for (const l of ((e.match(/^<\w+[^>]*\bdata-l="(\w+)"/) || [])[1] ? [e.match(/^<\w+[^>]*\bdata-l="(\w+)"/)[1]] : ['ja', 'en', 'vi']))
+      ok(/<sup class="ap-c">/.test(only(e, l)), `#${id} (${l}): mục thiếu trích dẫn: ${only(e, l).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60)}`);
   }
   // mọi ảnh nội dung (assets/ap) nằm trong figure có trích dẫn
   for (const f of body.match(/<figure\b[\s\S]*?<\/figure>/g) || []) if (/assets\/ap\//.test(f)) ok(/<sup class="ap-c">/.test(f), `#${id}: ảnh thiếu nguồn: ${(f.match(/assets\/ap\/[\w-]+/) || [''])[0]}`);
 }
 ok(!main.includes('—'), 'có dấu gạch ngang dài');
+// số trích dẫn có ngoặc ngay trong markup (đọc màn hình / chép chữ vẫn thấy [n]), không ghép dính vào chữ số trước nó
+ok(!/<sup class="ap-c">\d/.test(main), 'số trích dẫn phải viết [n] trong markup');
 // CSS khối nguồn
 const css = (html.match(/<!-- ap-css:start -->([\s\S]*?)<!-- ap-css:end -->/) || [])[1] || '';
 ok(/\.ap-refs\b/.test(css) && /\.ap-c\b/.test(css), 'thiếu CSS .ap-refs / .ap-c trong ap-css');
