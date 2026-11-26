@@ -16,7 +16,7 @@ const strip = (s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const IDS4 = ['ap-top', 'ap-products', 'ap-news', 'ap-role'];
 // task ls8q: thêm trang #ap-shots (ảnh sản phẩm) sau #ap-products; nội dung trang đó do tests/check-ap-shots.mjs kiểm
 const GUIDE = ['ap-guide', 'ap-guide-site', 'ap-guide-docs', 'ap-guide-money']; // slide hướng dẫn chức năng: nội dung do tests/check-ap-guide.mjs kiểm
-const ALL = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', ...GUIDE, 'ap-news', 'ap-market', 'ap-compete', 'ap-app', 'ap-scope', 'ap-role']; // #ap-app, #ap-scope do tests/check-ap-app.mjs kiểm; task m07v bổ sung: #ap-market do tests/check-ap-market.mjs kiểm nội dung; task 04fj: #ap-vn do tests/check-ap-vn.mjs kiểm
+const ALL = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', ...GUIDE, 'ap-news', 'ap-market', 'ap-compete', 'ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope', 'ap-role']; // #ap-app, #ap-scope do tests/check-ap-app.mjs kiểm; task m07v bổ sung: #ap-market do tests/check-ap-market.mjs kiểm nội dung; task 04fj: #ap-vn do tests/check-ap-vn.mjs kiểm
 
 // 1) Menu trên: "Andpad Info" ngay sau JD ANDPAD, thứ tự menu khớp thứ tự main
 const topNav = (html.match(/<nav class="top-nav"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';

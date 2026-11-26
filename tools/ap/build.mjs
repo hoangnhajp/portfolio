@@ -12,6 +12,7 @@ import { pageVn } from './vn.mjs'; // task 04fj: trang #ap-vn (sản phẩm và 
 import { pageRole } from './role.mjs'; // task 97rs: trang #ap-role (dự báo việc, chỉ sản phẩm và dịch vụ tại Việt Nam)
 import { pageGuide, pagesGuideCards } from './guide.mjs'; // slide hướng dẫn chức năng (#ap-guide*), ngay sau #ap-vn
 import { pageApp, pageScope } from './app.mjs'; // #ap-app, #ap-scope: sản phẩm chủ lực tại Việt Nam, thị trường, khu vực
+import { pageVsScale, pageVsMap, pageVsWin } from './vs.mjs'; // 3 slide chart tóm gọn đối thủ (#ap-vs-*), ngay sau #ap-compete
 import { book } from './refs.mjs'; // task 4n9v: nguồn tham khảo cuối trang + số trích dẫn
 
 const FILE = fileURLToPath(new URL('../../index.html', import.meta.url));
@@ -88,38 +89,38 @@ ${b.list()}
 // ---------- Trang 01: sản phẩm ----------
 // [tên chính thức, tên tiếng Anh, mô tả, có bản tiếng Việt]
 const GROUPS = [
-  ['checklist', 'SITE', T('現場の管理', 'Site work', 'Quản lý hiện trường'), [
-    ['施工管理', 'Construction Management', T('案件ごとに写真、工程、資料、連絡を一元管理', 'Photos, schedules, files and messages per project', 'Gom ảnh, tiến độ, tài liệu, liên lạc theo từng công trình'), 1],
-    ['チャット', 'Chat', T('現場関係者とのグループチャット', 'Group chat with everyone on site', 'Chat nhóm với mọi người ở công trình'), 1],
-    ['図面', 'Drawings', T('図面の上に指示と写真を記録', 'Notes and photos pinned on drawings', 'Ghi chỉ thị và ảnh ngay trên bản vẽ'), 1],
-    ['黒板', 'Blackboard', T('電子黒板付きで工事写真を撮影', 'Site photos with a digital signboard', 'Chụp ảnh thi công kèm bảng đen điện tử')],
-    ['検査', 'Inspection', T('紙を使わず、漏れのない検査', 'Paperless inspections, nothing missed', 'Kiểm tra không giấy, không sót hạng mục')],
-    ['遠隔臨場', 'Remote Inspection', T('現場に行かずに立会検査', 'Witness inspections without travelling', 'Nghiệm thu từ xa, không cần tới công trình')],
-    ['入退場管理', 'Site Entry', T('入退場と安全書類の管理', 'Entry, exit and safety records', 'Quản lý ra vào và hồ sơ an toàn')],
-    ['3Dスキャン', '3D Scan', T('現場の3D計測データを共有', 'Share 3D scans of the site', 'Chia sẻ dữ liệu quét 3D hiện trường')],
+  ['checklist', 'SITE', T('現場管理', 'Site work', 'Quản lý hiện trường'), [
+    ['施工管理', 'Construction Management', T('情報を集約、共有し施工管理を効率化', 'Photos, schedules, files and messages per project', 'Gom ảnh, tiến độ, tài liệu, liên lạc theo từng công trình'), 1],
+    ['チャット', 'Chat', T('現場関係者へ素早く、漏れなく一括連絡', 'Group chat with everyone on site', 'Chat nhóm với mọi người ở công trình'), 1],
+    ['図面', 'Drawings', T('依頼事項と工事写真を図面上で一元管理', 'Notes and photos pinned on drawings', 'Ghi chỉ thị và ảnh ngay trên bản vẽ'), 1],
+    ['黒板', 'Blackboard', T('電子黒板付き写真を簡単、迅速に', 'Site photos with a digital signboard', 'Chụp ảnh thi công kèm bảng đen điện tử')],
+    ['検査', 'Inspection', T('ペーパーレス化で抜け漏れを防止', 'Paperless inspections, nothing missed', 'Kiểm tra không giấy, không sót hạng mục')],
+    ['遠隔臨場', 'Remote Inspection', T('現場カメラとビデオ通話で遠隔指示', 'Check the site and give instructions remotely', 'Xem hiện trường và chỉ đạo từ xa qua camera')],
+    ['入退場管理', 'Site Entry', T('安全衛生と入退場をCCUS連携で管理', 'Entry, exit and safety records', 'Quản lý ra vào và hồ sơ an toàn')],
+    ['3Dスキャン', '3D Scan', T('現調情報を3Dで保存、共有', 'Share 3D scans of the site', 'Chia sẻ dữ liệu quét 3D hiện trường')],
   ]],
   ['calendar', 'DOCUMENTS', T('工程と書類', 'Schedules and documents', 'Tiến độ và hồ sơ'), [
-    ['ボード', 'Board', T('工程表を関係者で共有', 'Shared site schedule', 'Bảng tiến độ dùng chung')],
-    ['レポート', 'Report', T('今の帳票をそのまま電子化', 'Existing forms, digitised as they are', 'Số hoá biểu mẫu, giữ nguyên bố cục')],
-    ['資料承認', 'Document Approval', T('書類の提出と承認', 'Submit and approve documents', 'Nộp và duyệt hồ sơ')],
-    ['電子納品', 'e-Delivery', T('写真を整理して電子納品データを作成', 'Sort photos into e-delivery data', 'Sắp xếp ảnh thành dữ liệu nộp hồ sơ điện tử')], // task 4n9v: trang sản phẩm không ghi 'công trình công'
-    ['BIM', 'BIM', T('BIMモデルをクラウドで閲覧', 'Cloud BIM viewer', 'Xem mô hình BIM trên đám mây')],
+    ['ボード', 'Board', T('現場カレンダーで手配と情報共有', 'Site calendar for crew booking and updates', 'Lịch công trường để phân công thợ, chia sẻ thông tin')],
+    ['レポート', 'Report', T('いつもの帳票や報告書をそのまま電子化', 'Existing forms, digitised as they are', 'Số hoá biểu mẫu, giữ nguyên bố cục')],
+    ['資料承認', 'Document Approval', T('資料の申請と承認を漏れなく', 'Submit and approve documents', 'Nộp và duyệt hồ sơ')],
+    ['電子納品', 'e-Delivery', T('黒板作成から写真整理、データ出力まで', 'Sort photos into e-delivery data', 'Sắp xếp ảnh thành dữ liệu nộp hồ sơ điện tử')], // task 4n9v: trang sản phẩm không ghi 'công trình công'
+    ['BIM', 'BIM', T('クラウドのBIMビュワー', 'Cloud BIM viewer', 'Xem mô hình BIM trên đám mây')],
   ]],
-  ['funnel', 'MONEY', T('営業とお金', 'Sales and back office', 'Kinh doanh và kế toán'), [
-    ['引合粗利管理', 'Leads and Gross Profit', T('引合から粗利までを見える化', 'From lead to gross profit in one view', 'Theo dõi từ cơ hội bán tới lãi gộp')],
-    ['受発注', 'Ordering', T('元請と協力会社の受発注を電子化', 'Paperless orders with subcontractors', 'Số hoá đặt hàng giữa tổng thầu và thầu phụ')],
-    ['請求管理', 'Billing', T('建設業向けの請求管理', 'Billing built for construction', 'Quản lý hoá đơn cho ngành xây dựng')],
-    ['歩掛管理', 'Labour Productivity', T('日報から工数と原価を集計', 'Hours and cost from daily reports', 'Tổng hợp công và chi phí từ báo cáo ngày')],
-    ['早受取', 'Early Pay', T('売掛金を早く受け取る', 'Get paid for receivables early', 'Nhận tiền công nợ sớm')],
+  ['funnel', 'MONEY', T('営業と経理', 'Sales and back office', 'Kinh doanh và kế toán'), [
+    ['引合粗利管理', 'Leads and Gross Profit', T('顧客管理から粗利、原価まで一元管理', 'From lead to gross profit in one view', 'Theo dõi từ cơ hội bán tới lãi gộp')],
+    ['受発注', 'Ordering', T('受発注業務を丸ごとペーパーレス化', 'Paperless orders with subcontractors', 'Số hoá đặt hàng giữa tổng thầu và thầu phụ')],
+    ['請求管理', 'Billing', T('建設業界に特化した請求管理システム', 'Billing built for construction', 'Quản lý hoá đơn cho ngành xây dựng')],
+    ['歩掛管理', 'Labour Productivity', T('日報から労務費や経費を原価集計', 'Labour and expense costs from daily reports', 'Tổng hợp công và chi phí từ báo cáo ngày')],
+    ['早受取', 'Early Pay', T('売掛金を早期に資金化', 'Get paid for receivables early', 'Nhận tiền công nợ sớm')],
   ]],
-  ['person-bust', 'OWNERS', T('施主と経営', 'Owners and management', 'Chủ nhà và quản trị'), [
-    ['おうちノート', 'Ouchi Note', T('施主とのやり取りをアプリで', 'App for talking with homeowners', 'Trao đổi với chủ nhà qua app')],
-    ['Analytics', 'Analytics', T('経営の数字をリアルタイムで可視化', 'Real-time business dashboard', 'Dashboard số liệu kinh doanh theo thời gian thực')],
-    ['BM', 'Building Maintenance', T('建物と設備の維持管理', 'Building and facility maintenance', 'Bảo trì toà nhà và thiết bị')],
+  ['person-bust', 'OWNERS', T('お施主様と経営', 'Owners and management', 'Chủ nhà và quản trị'), [
+    ['おうちノート', 'Ouchi Note', T('お施主様との連絡を一元管理', 'App for talking with homeowners', 'Trao đổi với chủ nhà qua app')],
+    ['Analytics', 'Analytics', T('経営状態の「今」が見える', 'Real-time business dashboard', 'Dashboard số liệu kinh doanh theo thời gian thực')],
+    ['BM', 'Building Maintenance', T('建物、設備の保全クラウド', 'Cloud upkeep for buildings and equipment', 'Bảo trì toà nhà và thiết bị')],
   ]],
   ['workflow-gears', 'CONNECT ／ AI', T('連携とAI', 'Integrations and AI', 'Kết nối và AI'), [
     ['API連携', 'API', T('自社システムとANDPADをつなぐ', 'Connect in-house systems to ANDPAD', 'Kết nối hệ thống nội bộ với ANDPAD')],
-    ['アプリマーケット', 'App Market', T('他社サービスとの連携アプリ', 'Partner integrations marketplace', 'Chợ ứng dụng tích hợp của đối tác')],
+    ['アプリマーケット', 'App Market', T('外部サービスとの連携', 'Partner integrations marketplace', 'Chợ ứng dụng tích hợp của đối tác')],
     ['ナレッジAI', 'Knowledge AI', T('社内の知識から答えるAI', 'AI that answers from company know-how', 'AI trả lời từ kho tri thức công ty')],
     ['AI-BPO', 'AI-BPO', T('AIと専門スタッフが積算などを代行', 'AI plus experts handle work like estimating', 'AI cùng chuyên viên làm thay việc như dự toán')],
   ]],
@@ -141,9 +142,9 @@ ${items.map(([nm, enm, d, vi]) => `        <li class="ap-pd" style="--i:${n++}">
   return `<section class="pg" data-chap="II" id="ap-products">
 ${head('01　<b>PRODUCTS</b>', T('現場から経営までを<br /><i>一つのクラウドで。</i>', 'From the site to management,<br /><i>in one cloud.</i>', 'Từ công trường tới quản trị,<br /><i>trên một nền tảng.</i>'),
     'Site ／ Documents ／ Money ／ Owners ／ AI',
-    T('20を超える製品を、現場、書類、お金、施主、連携とAIの5分野に分類。',
-      'More than 20 products in five areas: site work, documents, money, homeowners, and integrations with AI.',
-      'Hơn 20 sản phẩm, chia thành 5 nhóm: hiện trường, hồ sơ, tài chính, chủ nhà, kết nối và AI.'), subC)}
+    T('20を超える製品を、現場、書類、営業と経理、お施主様と経営、連携とAIの5分野に分類。',
+      'More than 20 products in five areas: site work, documents, back office, homeowners, and integrations with AI.',
+      'Hơn 20 sản phẩm, chia thành 5 nhóm: hiện trường, hồ sơ, kế toán, chủ nhà, kết nối và AI.'), subC)}
   <div class="ap-grps rv" style="--d:180ms">
 ${groups}
   </div>
@@ -174,7 +175,7 @@ const EVENTS = [
   ['2026.05', 'ai', T('ANDPAD ナレッジAIと、図面の測定箇所を自動で拾うAIを公開', 'ANDPAD Knowledge AI, plus AI that finds measuring points on drawings', 'Ra mắt ANDPAD Knowledge AI và AI tự tìm điểm đo trên bản vẽ'), ['profile', 'drawAi']],
   ['2026.06', 'ev', T('ANDPAD AWARD 2026。新部門「DX Project」を設置', 'ANDPAD AWARD 2026 adds a DX Project category', 'ANDPAD AWARD 2026 thêm hạng mục DX Project'), ['award26']],
   ['2026.08', 'co', T('東京ガス、ダイキン、カインズと資本業務提携', 'Capital and business tie-ups with Tokyo Gas, Daikin and Cainz', 'Hợp tác vốn và kinh doanh với Tokyo Gas, Daikin, Cainz'), ['tieups']],
-  ['2026.05', 'co', T('設備と建物の維持管理「ANDPAD BM」を公開。国交省の建築行政DX事業に採択', 'Launched ANDPAD BM; selected for an MLIT building-admin DX project', 'Ra mắt ANDPAD BM; được Bộ MLIT chọn vào dự án DX hành chính xây dựng'), ['prBm', 'mlit']],
+  ['2026.05', 'co', T('建物、設備の保全クラウド「ANDPAD BM」を公開。国交省の建築行政DX事業に採択', 'Launched ANDPAD BM; selected for an MLIT building-admin DX project', 'Ra mắt ANDPAD BM; được Bộ MLIT chọn vào dự án DX hành chính xây dựng'), ['prBm', 'mlit']],
   ['2026.09', 'co', T('ANDPAD レポートを公開、AWARD 2027の募集を開始', 'ANDPAD Report launched; AWARD 2027 entries open', 'Ra mắt ANDPAD Report; mở nhận hồ sơ AWARD 2027'), ['prReport', 'award27']],
   ['2026.10', 'ai', T('ANDPAD AI-BPOを開始（電気工事の積算から）', 'ANDPAD AI-BPO starts, first with estimating for electrical work', 'Ra mắt ANDPAD AI-BPO, bắt đầu với dự toán cho thầu điện'), ['prAiBpo']],
   ['2026.09', 'ev', T('「NextGen Tech 30 2026」に選出', 'Named to NextGen Tech 30 2026', 'Lọt danh sách NextGen Tech 30 2026'), ['nextgen']],
@@ -219,6 +220,9 @@ ${pagesGuideCards({ L3, head, bk })}
 ${pageNews()}
 ${pageMarket({ L3, T, head, b: bk('ap-market') })}
 ${pageCompete({ L3, T, head, b: bk('ap-compete') })}
+${pageVsScale({ L3, head, b: bk('ap-vs-scale') })}
+${pageVsMap({ L3, head, b: bk('ap-vs-map') })}
+${pageVsWin({ L3, head, b: bk('ap-vs-win') })}
 ${pageApp({ L3, T, head, b: bk('ap-app') })}
 ${pageScope({ L3, T, head, b: bk('ap-scope') })}
 ${pageRole({ L3, head, b: bk('ap-role') })}

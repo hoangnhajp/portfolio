@@ -27,8 +27,8 @@ const citedTo = (s, id, needle, dom) => {
 // ---------- vị trí, sidebar, ảnh nền ----------
 const main = (html.match(/<main class="wrap" data-view="ap" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([\w-]+)"/g)].map((m) => m[1]);
-const at = ids.indexOf('ap-compete');
-ok(at >= 0 && ids[at + 1] === 'ap-app' && ids[at + 2] === 'ap-scope' && ids[at + 3] === 'ap-role', `cần thứ tự ap-compete, ap-app, ap-scope, ap-role: ${ids}`);
+const at = ids.indexOf('ap-compete') + 3; // 3 slide chart đối thủ #ap-vs-* (tests/check-ap-vs.mjs) đứng ngay sau #ap-compete
+ok(at >= 3 && ids[at - 3] === 'ap-compete' && ids[at] === 'ap-vs-win' && ids[at + 1] === 'ap-app' && ids[at + 2] === 'ap-scope' && ids[at + 3] === 'ap-role', `cần thứ tự ap-compete, ap-app, ap-scope, ap-role: ${ids}`);
 const sb = (html.match(/<nav class="sb-nav" data-for="ap" hidden>([\s\S]*?)<\/nav>/) || [])[1] || '';
 const sbIds = [...sb.matchAll(/data-sec="([\w-]+)"/g)].map((m) => m[1]);
 ok(sbIds.join(',') === ids.join(','), `sidebar lệch thứ tự trang: ${sbIds}`);

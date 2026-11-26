@@ -49,12 +49,8 @@ const S = {
     ['milestone-report', L('週次報告と出張報告', 'Weekly and trip reports', 'Báo cáo tuần, công tác')]] },
   'sales-trips': { k: 'flow', steps: [['roadmap', L('訪問計画', 'Visit plan', 'Kế hoạch gặp khách')], ['checklist', L('出張の承認', 'Trip approval', 'Duyệt công tác')],
     ['interview', L('顧客訪問', 'Client visit', 'Gặp khách')], ['milestone-report', L('出張報告', 'Trip report', 'Báo cáo công tác'), L('3営業日以内', 'Within 3 days', 'Trong 3 ngày'), true]] },
-  'sales-pr': { k: 'hub', core: { ic: 'chat-bubbles', chip: 'English' },
-    left: [['cand-man', L('ASEAN社員総会', 'ASEAN staff meeting', 'Hội nghị ASEAN')], ['cand-woman', L('各国の同僚', 'Colleagues across ASEAN', 'Đồng nghiệp các nước')]],
-    right: [['magnifier', 'PROPAK · VIV ASIA'], ['office-building', 'MYCOM KOREA']] },
-  // task lbbd: bỏ vòng số "khoảng 30 buổi họp CRM" (không có trong CV), chỉ còn 4 loại báo cáo / họp
-  'sales-reports': { k: 'grid', c: 4, mc: 2, tiles: [['calendar', L('週次の予定と結果', 'Weekly plans and results', 'Kế hoạch, kết quả tuần')], ['milestone-report', L('月次報告', 'Monthly reports', 'Báo cáo tháng')],
-    ['roadmap', L('出張報告', 'Trip reports', 'Báo cáo công tác')], ['team-group', L('3拠点合同の朝会', 'Three-site morning meeting', 'Họp sáng 3 chi nhánh')]] },
+  // 'sales-pr': cảnh tĩnh đã thay bằng phim từng bước (tools/film/films.mjs, key 'pr')
+  // 'sales-reports': cảnh tĩnh đã thay bằng 6 thẻ salaryman động (khối <!-- srep --> trong index.html, tests/check-sales-reports-anim.mjs)
   'sales-kpi': { k: 'chart', bars: [[52], [38], [66], [48], [80, 1]], cap: L('見積と訪問を記録', 'Quotes and visits logged', 'Ghi báo giá, lượt gặp'),
     left: [['jd-document', L('見積件数', 'Quotations', 'Số báo giá')]],
     right: [['interview', L('訪問回数', 'Client visits', 'Lượt gặp khách')], ['survey-clipboard', L('評価シート', 'Evaluation sheet', 'Phiếu đánh giá')]] },

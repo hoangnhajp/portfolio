@@ -47,7 +47,7 @@ const SITE = [
     T('紙を使わずに検査し、結果をすぐ共有して漏れを防ぎます。', 'Paperless inspections; results are shared at once so nothing is missed.', 'Kiểm tra không giấy, chia sẻ kết quả ngay, không sót hạng mục.'),
     [F('検査報告書', T('テンプレートに写真とコメント', 'Report templates with photos and comments', 'Mẫu biên bản có ảnh, nhận xét')),
       F('是正指摘管理', T('担当者に是正を依頼し、承認まで追う', 'Send fixes to the assignee and track them to approval', 'Giao việc sửa lỗi cho người phụ trách, theo dõi tới lúc được duyệt')),
-      F('出力', T('ワンクリックでPDFにして施主へ', 'One-click PDF for the client', '1 cú bấm ra PDF gửi chủ nhà'))],
+      F('出力', T('ワンクリックでPDFにしてお施主様へ', 'One-click PDF for the client', '1 cú bấm ra PDF gửi chủ nhà'))],
     T('事例：西鉄建設は移動と残業の時間を約50％削減', 'Case 西鉄建設: travel and overtime cut by about 50%', 'Case 西鉄建設: giảm khoảng 50% thời gian đi lại và làm thêm'),
     T('検査担当、現場監督、職人', 'Inspectors, supervisors, crews', 'Người kiểm tra, giám sát, thợ')],
   ['remote_presence',
@@ -56,7 +56,7 @@ const SITE = [
       F('ビデオ通話', T('スマホ、タブレット、PCでポインター付き', 'Video calls on phone, tablet or PC, with a pointer', 'Gọi video trên điện thoại, máy tính bảng, PC, có con trỏ chỉ')),
       F('360度画像', T('図面の上に置いて現場を確認', '360° photos placed on the drawing', 'Ảnh 360 độ đặt trên bản vẽ để xem hiện trường'))],
     T('移動の工数が減り、監督1人がより多くの現場を担当できる', 'Less travel, so each supervisor can cover more sites', 'Bớt công đi lại, mỗi giám sát quản lý được nhiều công trình hơn'),
-    T('現場監督、職人、施主', 'Site supervisors, crews, owners', 'Giám sát, thợ, chủ nhà')],
+    T('現場監督、職人、お施主様', 'Site supervisors, crews, owners', 'Giám sát, thợ, chủ nhà')],
 ];
 const DOCS = [
   ['safety_management',
@@ -146,14 +146,14 @@ const MONEY = [
     T('課題を早く見つけ、どこを改善するかが分かる', 'Spot problems early and see where to improve', 'Phát hiện vấn đề sớm, biết cần cải thiện ở khâu nào'),
     T('経営と営業の管理者', 'Management and sales leads', 'Ban lãnh đạo, quản lý kinh doanh')],
   ['ouchi_note',
-    T('契約前から引き渡しまで、施主とのやり取りを一つにまとめます。', 'All talks with the homeowner, from before the contract to handover, in one place.', 'Gom mọi trao đổi với chủ nhà từ trước hợp đồng tới bàn giao.'),
-    [F('メッセージ', T('工事ごとに施主と担当者のルーム', 'A room per job with the owner and staff', 'Mỗi công trình một phòng chat với chủ nhà')),
+    T('契約前から引き渡しまで、お施主様とのやり取りを一元管理します。', 'All talks with the homeowner, from before the contract to handover, in one place.', 'Gom mọi trao đổi với chủ nhà từ trước hợp đồng tới bàn giao.'),
+    [F('メッセージ', T('工事ごとにお施主様と担当者のルーム', 'A room per job with the owner and staff', 'Mỗi công trình một phòng chat với chủ nhà')),
       F('報告、資料共有', T('写真つきの進捗、図面や契約書のフォルダ', 'Photo progress reports; folders for drawings and contracts', 'Báo cáo tiến độ có ảnh; thư mục bản vẽ, hợp đồng')),
-      F('資料の施主承認', T('追加見積などを施主が承認', 'The owner approves documents such as extra estimates', 'Chủ nhà duyệt tài liệu như báo giá phát sinh'))],
+      F('資料の施主承認', T('追加見積などをお施主様が承認', 'The owner approves documents such as extra estimates', 'Chủ nhà duyệt tài liệu như báo giá phát sinh'))],
     T('「言った言わない」を防ぎ、顧客満足と紹介受注につながる', 'Prevents disputes, raises satisfaction and brings referrals', 'Tránh tranh cãi "đã nói hay chưa", tăng hài lòng và đơn giới thiệu'),
-    T('工務店の営業、設計、工事、施主', 'Builders\' sales, design and site staff, and owners', 'Sales, thiết kế, thi công của nhà thầu và chủ nhà')],
+    T('工務店の営業、設計、工事、お施主様', 'Builders\' sales, design and site staff, and owners', 'Sales, thiết kế, thi công của nhà thầu và chủ nhà')],
   ['bm',
-    T('工場や店舗の建物と設備の維持管理。事後保全から予防保全へ。', 'Upkeep of buildings and equipment in factories and stores, from reactive to preventive.', 'Bảo trì toà nhà, thiết bị ở nhà máy, cửa hàng; chuyển từ hỏng mới sửa sang bảo trì phòng ngừa.'),
+    T('工場の設備保全、店舗や施設のメンテナンスをDX。事後保全から予防保全へ。', 'Upkeep of buildings and equipment in factories and stores, from reactive to preventive.', 'Bảo trì toà nhà, thiết bị ở nhà máy, cửa hàng; chuyển từ hỏng mới sửa sang bảo trì phòng ngừa.'),
     [F('施設、設備情報のカルテ化', T('図面、仕様、台帳と修繕履歴を一か所に', 'Drawings, specs, registers and repair history in one record', 'Bản vẽ, thông số, sổ thiết bị và lịch sử sửa ở một chỗ')),
       F('写真による不具合報告', T('設備と緊急度をつけて報告', 'Defect reports tied to equipment and urgency', 'Báo lỗi bằng ảnh, gắn thiết bị và mức khẩn')),
       F('点検報告はスマホで完結', T('チェックリストを自動で集計', 'Checklists roll up automatically', 'Danh sách kiểm tra tự tổng hợp'))],
@@ -170,7 +170,7 @@ const MONEY = [
 
 // Luồng 5 bước: [icon, tiêu đề, việc ở bước này, sản phẩm]
 const FLOW = [
-  ['funnel', T('営業と契約', 'Sales and contract', 'Bán hàng, ký hợp đồng'), T('引合から見積、契約まで。施主との連絡もここから。', 'From inquiry to estimate and contract; owner contact starts here.', 'Từ hỏi giá tới báo giá, ký hợp đồng; bắt đầu trao đổi với chủ nhà.'), ['引合粗利管理', 'Analytics', 'おうちノート']],
+  ['funnel', T('営業と契約', 'Sales and contract', 'Bán hàng, ký hợp đồng'), T('引合から見積、契約まで。お施主様との連絡もここから。', 'From inquiry to estimate and contract; owner contact starts here.', 'Từ hỏi giá tới báo giá, ký hợp đồng; bắt đầu trao đổi với chủ nhà.'), ['引合粗利管理', 'Analytics', 'おうちノート']],
   ['calendar', T('着工準備', 'Planning', 'Chuẩn bị khởi công'), T('図面、工程、職人の手配、発注をそろえる。', 'Line up drawings, schedules, crews and orders.', 'Chuẩn bị bản vẽ, lịch, phân công thợ, đặt hàng.'), ['図面', 'BIM', '3Dスキャン', 'ボード', '受発注']],
   ['checklist', T('施工', 'Building', 'Thi công'), T('写真、連絡、安全、日報を現場で記録。', 'Photos, messages, safety and daily reports, recorded on site.', 'Ghi ảnh, trao đổi, an toàn, báo cáo ngày ngay tại công trường.'), ['施工管理', 'チャット', '黒板', '入退場管理', '歩掛管理']],
   ['shield-check', T('検査と書類', 'Inspection and documents', 'Kiểm tra, hồ sơ'), T('検査、是正、承認、納品データ。', 'Inspections, fixes, approvals and delivery data.', 'Kiểm tra, sửa lỗi, phê duyệt, dữ liệu nộp.'), ['検査', '遠隔臨場', 'レポート', '資料承認', '電子納品']],
@@ -256,9 +256,9 @@ const PAGES = [
   ['ap-guide-docs', DOCS, 'GUIDE 2　<b>PLANNING ／ DOCUMENTS</b>', T('段取りと書類を<br /><i>紙なしで。</i>', 'Planning and paperwork,<br /><i>without paper.</i>', 'Kế hoạch và hồ sơ<br /><i>không cần giấy.</i>'),
     'Site Entry ／ 3D Scan ／ Board ／ Report ／ Approval ／ e-Delivery ／ BIM',
     T('安全の記録、予定、帳票、承認、納品データをクラウドで作り、回し、残す。', 'Safety records, schedules, forms, approvals and delivery data are made, routed and kept in the cloud.', 'Hồ sơ an toàn, lịch, biểu mẫu, phê duyệt và dữ liệu nộp được tạo, chuyển và lưu trên đám mây.')],
-  ['ap-guide-money', MONEY, 'GUIDE 3　<b>MONEY ／ OWNERS ／ CONNECT</b>', T('お金、施主、経営を<br /><i>同じデータで。</i>', 'Money, owners and management,<br /><i>on the same data.</i>', 'Tiền, chủ nhà và quản trị<br /><i>trên cùng một dữ liệu.</i>'),
+  ['ap-guide-money', MONEY, 'GUIDE 3　<b>MONEY ／ OWNERS ／ CONNECT</b>', T('お金、お施主様、経営を<br /><i>同じデータで。</i>', 'Money, owners and management,<br /><i>on the same data.</i>', 'Tiền, chủ nhà và quản trị<br /><i>trên cùng một dữ liệu.</i>'),
     'Gross Profit ／ Ordering ／ Billing ／ Labour ／ Analytics ／ Ouchi Note ／ BM ／ API',
-    T('見積から入金、施主とのやり取り、建物の維持管理まで、同じ案件のデータでつながる。', 'From estimates to receipts, homeowner talks and building upkeep, everything links through the same project data.', 'Từ báo giá tới thu tiền, trao đổi với chủ nhà và bảo trì toà nhà, mọi thứ nối với nhau qua cùng dữ liệu công trình.')],
+    T('見積から入金、お施主様とのやり取り、建物と設備の保全まで、同じ案件のデータでつながる。', 'From estimates to receipts, homeowner talks and building upkeep, everything links through the same project data.', 'Từ báo giá tới thu tiền, trao đổi với chủ nhà và bảo trì toà nhà, mọi thứ nối với nhau qua cùng dữ liệu công trình.')],
 ];
 
 // bk = hàm tạo bộ trích dẫn theo trang (build.mjs); mỗi slide có mục nguồn riêng

@@ -56,11 +56,11 @@ const SECTIONS = {
   const evCss = (html.match(/^\.evrow\{([^}]*)\}/m) || [])[1] || '';
   ok(/display:grid/.test(evCss) && !/overflow-x:(auto|scroll)/.test(evCss), `.evrow phải là lưới hiện hết, không cuộn ngang: {${evCss}}`);
   ok(!/scroll-snap/.test(html.match(/^\.evrow[^\n]*$/gm)?.join('\n') || ''), '.evrow còn scroll-snap (kiểu băng chuyền cuộn)');
-  ok(!/<img\b/.test(sec.replace(/<ol class="evrow"[\s\S]*?<\/ol>/, '').replace(/<figure class="gx [\s\S]*?<\/figure>/g, '')), '#sales-pr còn ảnh ngoài dòng sự kiện (lưới ảnh cũ; icon cảnh .gx không tính)');
+  ok(!/<img\b/.test(sec.replace(/<ol class="evrow"[\s\S]*?<\/ol>/, '').replace(/<figure class="gx [\s\S]*?<\/figure>/g, '').replace(/<figure class="mv sf [\s\S]*?<\/figure>/g, '').replace(/<p class="colg colg--co[^"]*">[\s\S]*?<\/p>/g, '')), '#sales-pr còn ảnh ngoài dòng sự kiện (lưới ảnh cũ; icon cảnh .gx và phim từng bước .sf không tính)');
 }
 const navSales = (html.match(/<nav class="sb-nav" data-for="sales"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
 const navNums = [...navSales.matchAll(/data-sec="([\w-]+)"><em>(\w+)<\/em>/g)].map((m) => `${m[1]}:${m[2]}`).join(' ');
-ok(navNums === 'sales-top:TOP sales-map:01 sales-cycle:02 sales-pain:03 sales-trips:04 sales-pr:05 sales-reports:06 sales-kpi:07 sales-flow:08', `mục lục Sales sai thứ tự / số: ${navNums}`);
+ok(navNums === 'sales-top:TOP sales-map:01 sales-cycle:02 sales-pain:03 sales-trips:04 sales-pr:05 sales-reports:06 sales-kpi:07 sales-flow:08 sales-jil-hcm:09 sales-jil-offshore:10 sales-jil-flow:11', `mục lục Sales sai thứ tự / số: ${navNums}`);
 let total = 0;
 for (const [id, WANT] of Object.entries(SECTIONS)) {
   const sec = secOf(id);

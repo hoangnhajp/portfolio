@@ -10,7 +10,7 @@ const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 const main = (html.match(/<main class="wrap" data-view="ap" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 ok(main, 'thiếu main data-view="ap"');
-const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-compete', 'ap-app', 'ap-scope', 'ap-role'];
+const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-compete', 'ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope', 'ap-role'];
 const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\\s\\S]*?<\\/section>`)) || [''])[0];
 // Từng mục thông tin phải có số trích dẫn, kiểm RIÊNG từng mục và RIÊNG từng ngôn ngữ (bỏ khối của 2 ngôn ngữ kia rồi
 // vẫn phải còn <sup class="ap-c">): [vùng chứa (tuỳ chọn), regex mục]

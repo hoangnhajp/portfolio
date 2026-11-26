@@ -1,5 +1,5 @@
 // Cảnh minh hoạ động kiểu video GPRFLEXEYE cho từng section (task kzo4), kiểm tĩnh trên index.html:
-// 1) đúng 16 section (20 trước task ye4s, 17 trước task a9f4) có đúng 1 cảnh <figure class="gx gx--<kiểu>" aria-hidden="true">, chèn sau phần tiêu đề, trước nội dung;
+// 1) đúng 15 section (20 trước task ye4s, 17 trước task a9f4, 16 trước khi #sales-pr đổi sang phim từng bước, 15 trước khi #sales-reports đổi sang thẻ salaryman động) có đúng 1 cảnh <figure class="gx gx--<kiểu>" aria-hidden="true">, chèn sau phần tiêu đề, trước nội dung;
 // 2) kiểu cảnh nằm trong flow / hub / ring / chart / grid và 2 cảnh liền kề trong cùng tab không trùng kiểu;
 // 3) mỗi cảnh >= 3 icon 3D assets/gx/*.webp có thật, alt="", loading="lazy", width/height; mọi nhãn đủ ja / en / vi;
 // 4) CSS #gx-css: bảng màu xanh #25A1DB / cam #F47E2A, bóng 3D, keyframes gx* chỉ đổi transform / opacity
@@ -16,7 +16,7 @@ const ok = (c, m) => { if (!c) fails.push(m); };
 
 const TABS = {
   profile: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early'], // task ye4s bỏ aiops, aidash, pr; task a9f4 bỏ trang cuối 語学、PC、AI
-  sales: ['sales-top', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi', 'sales-flow'],
+  sales: ['sales-top', 'sales-trips', 'sales-kpi', 'sales-flow'], // sales-pr: phim từng bước .sf (tests/check-sales-pr-film.mjs); sales-reports: thẻ salaryman .srp (tests/check-sales-reports-anim.mjs)
   team: ['team-records'],
   ai: ['ai-people'],
 };
@@ -76,10 +76,10 @@ for (const [tab, ids] of Object.entries(TABS)) {
     if (kind === 'flow') ok(nSt >= 3 && nLn === nSt - 1, `${id}: cảnh flow cần >= 3 bước và số đường nối = số bước - 1 (${nSt} bước, ${nLn} nối)`);
   }
 }
-// task ye4s bỏ 3 cảnh của #aiops / #aidash / #pr: còn 17; task a9f4 bỏ cảnh trang cuối Profile: còn 16
-ok(scenes === 16, `cần 16 cảnh, có ${scenes}`);
+// task ye4s bỏ 3 cảnh của #aiops / #aidash / #pr: còn 17; task a9f4 bỏ cảnh trang cuối Profile: còn 16; #sales-pr đổi sang phim từng bước .sf: còn 15; #sales-reports đổi sang thẻ salaryman động .srp: còn 14
+ok(scenes === 14, `cần 14 cảnh, có ${scenes}`);
 ok(usedIcons.size >= 20, `icon phải đa dạng (>= 20 loại), đang dùng ${usedIcons.size}`);
-ok((html.match(/<figure class="gx /g) || []).length === 16, 'có cảnh .gx nằm ngoài 16 section đã định');
+ok((html.match(/<figure class="gx /g) || []).length === 14, 'có cảnh .gx nằm ngoài 14 section đã định');
 
 // CSS
 const css = (html.match(/<style id="gx-css">([\s\S]*?)<\/style>/) || [])[1] || '';

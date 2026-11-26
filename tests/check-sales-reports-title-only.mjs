@@ -10,16 +10,15 @@ const ok = (c, m) => { if (!c) fails.push(m); };
 
 const sec = (html.match(/<section [^>]*\bid="sales-reports"[^>]*>([\s\S]*?)<\/section>/) || [])[1] || '';
 ok(sec, 'không thấy section #sales-reports');
-const grid = (sec.match(/<div class="g3[^"]*"[^>]*>([\s\S]*?)\n  <\/div>/) || [])[1] || '';
-const cards = grid.match(/<div class="card">[\s\S]*?<\/div>/g) || [];
+// Lưới .g3 cũ đã thay bằng 6 thẻ salaryman động .srp-c (tests/check-sales-reports-anim.mjs), tiêu đề 3 ngôn ngữ bằng data-l
+const cards = sec.match(/<div class="card srp-c"[\s\S]*?<\/h3><\/div>/g) || [];
 ok(cards.length === 6, `cần 6 thẻ, thấy ${cards.length}`);
-const D = html.slice(html.indexOf('window.__D2='));
 for (const c of cards) {
-  const h = (c.match(/<h3>([^<]+)<\/h3>/) || [])[1];
+  const h = (c.match(/<h3><span data-l="ja">([^<]+)<\/span>/) || [])[1];
   ok(h, `thẻ thiếu tiêu đề: ${c.slice(0, 80)}`);
   ok(/<span class="lbl">/.test(c), `thẻ "${h}" thiếu nhãn .lbl`);
   ok(!/<p[\s>]/.test(c), `thẻ "${h}" vẫn còn đoạn nội dung <p>`);
-  if (h) ok(D.includes(`"${h}":[`), `tiêu đề "${h}" thiếu bản dịch VI/EN`);
+  ok(/<span data-l="en">[^<]+<\/span><span data-l="vi">[^<]+<\/span><\/h3>/.test(c), `tiêu đề "${h}" thiếu bản dịch VI/EN`);
 }
 
 if (fails.length) { console.error(`FAIL check-sales-reports-title-only (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
