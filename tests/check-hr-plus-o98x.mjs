@@ -1,6 +1,6 @@
 // Tab HR thêm 4 trang (04 nghiên cứu nghiệp vụ phòng ban, 05 kiểm tra và cải tiến chất lượng, 06 theo dõi, review định kỳ,
-// 07 tính lương và C&B) kèm animation theo giai đoạn làm nhân sự tại Mayekawa. Mốc theo CV Rirekisho trong repo:
-// 2022年2月～2026年6月 営業部アシスタントマネージャー 兼 人事部長 (check-cv-rirekisho cấm mốc 03/2024).
+// 07 tính lương và C&B) kèm animation theo giai đoạn làm nhân sự tại Mayekawa. Người vận hành chốt (26/11/2026):
+// "không cần để mốc" => 4 trang mới không ghi mốc ngày tháng; thước tháng giữ 53 vạch (giai đoạn theo CV Rirekisho) nhưng không nhãn.
 // Kiểm tĩnh: đúng thứ tự 8 trang, sidebar, ảnh nền, đủ JA / EN / VI từng khối, dữ kiện, ranh giới trung thực, CSS chuyển động.
 // Chạy: node tests/check-hr-plus-o98x.mjs   (thoát 0 = đạt)
 import { readFileSync, existsSync } from 'node:fs';
@@ -44,14 +44,14 @@ for (const l of ['en', 'vi']) { const m = txt[l].match(new RegExp(`.{0,20}${JP.s
 
 // 4) Dữ kiện (theo master-profile §4.1 mảng HR, H1-H5, §9.7, §9.10, §9.15)
 const FACTS = {
-  ja: ['営業', '技術', 'サービス', '経理', '人件費', '役割の定義', '手順書', '評価シート', '内定承諾率', '試用期間', '社員アンケート', '7日目', '3週目', '6週目', 'KPI', '昇給', '昇格', '個人所得税', '社会保険', '2022年2月', '2026年6月', '5名', '中秋節'],
-  en: ['sales', 'engineering', 'service', 'accounting', 'labour cost', 'role definitions', 'SOP', 'scorecard', 'offer acceptance', 'probation', 'staff survey', 'day 7', 'week 3', 'week 6', 'KPI', 'pay rise', 'promotion', 'income tax', 'social insurance', 'February 2022', 'June 2026', 'five', 'Mid-Autumn'],
-  vi: ['Kinh doanh', 'Kỹ thuật', 'Dịch vụ', 'Kế toán', 'chi phí nhân sự', 'định nghĩa vai trò', 'SOP', 'phiếu đánh giá', 'nhận offer', 'thử việc', 'khảo sát nhân viên', 'ngày 7', 'tuần 3', 'tuần 6', 'KPI', 'tăng lương', 'thăng chức', 'thuế TNCN', 'BHXH', '02/2022', '06/2026', '5 người', 'Trung thu'],
+  ja: ['営業', '技術', 'サービス', '経理', '人件費', '役割の定義', '手順書', '評価シート', '内定承諾率', '試用期間', '社員アンケート', '7日目', '3週目', '6週目', 'KPI', '昇給', '昇格', '個人所得税', '社会保険', '5名', '中秋節'],
+  en: ['sales', 'engineering', 'service', 'accounting', 'labour cost', 'role definitions', 'SOP', 'scorecard', 'offer acceptance', 'probation', 'staff survey', 'day 7', 'week 3', 'week 6', 'KPI', 'pay rise', 'promotion', 'income tax', 'social insurance', 'five', 'Mid-Autumn'],
+  vi: ['Kinh doanh', 'Kỹ thuật', 'Dịch vụ', 'Kế toán', 'chi phí nhân sự', 'định nghĩa vai trò', 'SOP', 'phiếu đánh giá', 'nhận offer', 'thử việc', 'khảo sát nhân viên', 'ngày 7', 'tuần 3', 'tuần 6', 'KPI', 'tăng lương', 'thăng chức', 'thuế TNCN', 'BHXH', '5 người', 'Trung thu'],
 };
 for (const [l, keys] of Object.entries(FACTS)) for (const k of keys) ok(txt[l].toLowerCase().includes(k.toLowerCase()), `hr-plus/${l}: thiếu dữ kiện "${k}"`);
-for (const id of ['hr-dept']) ok(sec(id).includes('02.2022 – 06.2026'), `#${id} thiếu mốc 02.2022 – 06.2026`);
+ok(!/hx-ya/.test(blk), 'không còn nhãn năm dưới thước tháng (người vận hành: không cần để mốc)');
 
-// 5) Hình động khớp dữ kiện: 4 phòng ban + 4 tia, 4 nút PDCA, 6 mốc theo dõi, 5 bước lương, 53 vạch = 53 tháng 02/2022..06/2026, 5 chấm người
+// 5) Hình động khớp dữ kiện: 4 phòng ban + 4 tia, 4 nút PDCA, 6 mốc theo dõi, 5 bước lương, 53 vạch tháng (không nhãn mốc), 5 chấm người
 const n = (s, re) => (s.match(re) || []).length;
 ok(n(sec('hr-dept'), /class="hx-dp"/g) === 4 && n(sec('hr-dept'), /class="hx-sp"/g) === 4, '#hr-dept cần 4 phòng ban + 4 tia');
 ok(n(sec('hr-qa'), /class="hx-rn"/g) === 4 && n(sec('hr-qa'), /class="hx-orb"/g) === 1, '#hr-qa cần 4 nút PDCA + 1 chấm chạy vòng');
@@ -62,7 +62,8 @@ ok(n((sec('hr-cb').match(/<div class="hx-mo"[^>]*>([\s\S]*?)<\/div>/) || ['', ''
 ok(n((sec('hr-cb').match(/<span class="hx-pp"[^>]*>([\s\S]*?)<\/span>/) || ['', ''])[1], /<i /g) === 5, '#hr-cb cần 5 chấm người (1 lên 5)');
 
 // 6) Ranh giới trung thực + văn phong
-for (const bad of ['予算', 'ngân sách', 'budget', 'VND', 'USD', '%', '23段階', 'マエカワ', '—', '2024年3月', '03/2024', '03.2024', 'Mar 2024', 'March 2024', 'を行い', 'head of HR alongside sales', 'Nhân sự kiêm Kinh doanh', 'monthly payroll</small>']) ok(!blk.includes(bad), `hr-plus có cụm không được dùng "${bad}"`);
+for (const bad of ['予算', 'ngân sách', 'budget', 'VND', 'USD', '%', '23段階', 'マエカワ', '—', '2024年3月', '03/2024', '03.2024', 'Mar 2024', 'March 2024', 'を行い', 'head of HR alongside sales', 'Nhân sự kiêm Kinh doanh', 'monthly payroll</small>',
+  '2022', '2023', '2024', '2025', '2026', 'February', 'June', '02/', '06/', '02.', '06.']) ok(!blk.includes(bad), `hr-plus có cụm không được dùng "${bad}"`);
 ok(!/chat\s*-?gpt|\bclaude\b|copilot|gemini/i.test(blk), 'hr-plus nêu tên công cụ AI');
 const h2ja = [...blk.matchAll(/<h2 class="kw[^"]*"[^>]*><span data-l="ja">([\s\S]*?)<\/span><span data-l="en">/g)].map((m) => strip(m[1]).replace(/\s/g, ''));
 ok(h2ja.length === 4, `cần 4 tiêu đề h2 JA, thấy ${h2ja.length}`);
@@ -82,4 +83,4 @@ for (const r of css.matchAll(/([^{}]+)\{[^{}]*\banimation:(?!none)[^{}]*\}/g))
 ok(/prefers-reduced-motion/.test(css) && /@media print/.test(css), 'CSS hr-plus thiếu prefers-reduced-motion / print');
 
 if (fails.length) { console.error(`FAIL check-hr-plus-o98x (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-hr-plus-o98x: tab HR 8 trang, 4 trang mới (${NEW.join(', ')}), ${units.length} khối đủ 3 ngôn ngữ, ${months} vạch tháng 02/2022-06/2026, ${kfs.length} keyframes`);
+console.log(`PASS check-hr-plus-o98x: tab HR 8 trang, 4 trang mới (${NEW.join(', ')}), ${units.length} khối đủ 3 ngôn ngữ, ${months} vạch tháng, không ghi mốc ngày, ${kfs.length} keyframes`);

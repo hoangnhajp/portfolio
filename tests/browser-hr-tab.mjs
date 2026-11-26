@@ -33,9 +33,6 @@ const PROBE = `(() => {
   for (const [sel, boxSel] of [['.hr-c h3,.hr-c p,.hr-ic', '.hr-c'], ['.hr-st h3,.hr-st p,.hr-st img', '.hr-st'], ['.hr-g .card h3,.hr-g .lines', '.card'], ['.meta b', '.meta>div'],
     ['.hx-dp b,.hx-dp p,.hx-dp img', '.hx-dp'], ['.hx-out b,.hx-out small,.hx-pd b,.hx-pd small,.hx-ck b,.hx-ck small,.hx-tl b,.hx-tl small,.hx-pay b', 'li']])
     for (const e of main.querySelectorAll(sel)) { if (!vis(e)) continue; const box = e.closest(boxSel); if (box && !inside(e, box)) over.push(sel.split(',')[0] + ': ' + e.textContent.trim().slice(0, 30)); }
-  // nhãn năm dưới thước tháng (#hr-cb) không chồng nhau
-  const ya = [...main.querySelectorAll('.hx-ya span')].filter(vis).map((e) => e.getBoundingClientRect()).sort((a, b) => a.left - b.left);
-  for (let k = 1; k < ya.length; k++) if (ya[k].left < ya[k - 1].right + 4) over.push('.hx-ya: nhãn năm chồng nhau');
   for (const pg of main.querySelectorAll('.pg')) {
     const pb = pg.getBoundingClientRect().bottom;
     for (const c of pg.children) { const s = getComputedStyle(c); if (!vis(c) || s.position === 'absolute' || s.position === 'fixed' || c.classList.contains('deco')) continue;
@@ -126,7 +123,7 @@ async function main() {
   await sleep(2200);
   const m2 = await evaluate(`[...document.querySelectorAll('#hr-hire .hr-st')].filter((e) => +getComputedStyle(e).opacity > 0.99).length`); checks++;
   ok(m2 === 6, `chuyển động: sau khi chạy còn bước chưa hiện đủ (${m2}/6)`);
-  // 3) task o98x: 4 trang mới, khối vào khung thì chạy đúng hình động (tia phòng ban, vòng PDCA, mốc theo dõi, 53 vạch tháng 02/2022-06/2026)
+  // 3) task o98x: 4 trang mới, khối vào khung thì chạy đúng hình động (tia phòng ban, vòng PDCA, mốc theo dõi, 53 vạch tháng)
   const WANT = [['#hr-dept .hx-hub', { hxGrow: 4, hxRun: 4 }], ['#hr-qa .hx-qa', { hxSpin: 1, hxLit: 8 }],
     ['#hr-care .hx-tl', { hxFill: 1, hxTrack: 1, hrPop: 6 }], ['#hr-cb .hx-yr', { hxTick: 53, hrPop: 5 }], ['#hr-cb .hx-pay', { hxWave: 5 }]];
   for (const [sel, want] of WANT) {

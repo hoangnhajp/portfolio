@@ -68,7 +68,7 @@ for (const [k, qs] of Object.entries(QUOTES)) {
   ok(REFS[k], `quotes.mjs có khoá "${k}" không nằm trong REFS`);
   for (const q of qs) ok(typeof q === 'string' && q.length >= 8 && q.length <= 320, `đoạn trích "${k}" dài bất thường (${q.length}): ${String(q).slice(0, 40)}`);
 }
-ok(existsSync(QUOTES_JS) && readFileSync(QUOTES_JS, 'utf8') === quotesJs(), 'assets/ap/quotes.js lệch tools/ap/quotes.mjs: chạy node tools/ap/build.mjs');
+ok(existsSync(QUOTES_JS) && readFileSync(QUOTES_JS, 'utf8').replace(/\r\n/g, '\n') === quotesJs().replace(/\r\n/g, '\n'), 'assets/ap/quotes.js lệch tools/ap/quotes.mjs: chạy node tools/ap/build.mjs');
 
 // 2) cổng chống số bịa
 // Ngoại lệ: số là tên riêng / phiên bản / số đếm nội bộ trang, hoặc số do ứng viên tự tính (ghi phép tính)
