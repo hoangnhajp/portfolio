@@ -72,4 +72,4 @@ for (const m of sec('ap-vs-win').matchAll(/data-v="quote" style="--w:([\d.]+)%"/
 ok(/<!-- ap-vs-css:start -->[\s\S]*?<!-- ap-vs-css:end -->/.test(html), 'thiếu khối <!-- ap-vs-css:start/end -->');
 
 if (fails.length) { console.error(`FAIL check-ap-vs (${fails.length}):\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log('OK check-ap-vs: 3 slide chart đối thủ (quy mô, bản đồ định vị, ai thắng ở đâu), ít chữ, 1 câu kết, số khớp nguồn');
+console.log('OK check-ap-vs: 3 slide chart đối thủ (quy mô, bản đồ định vị, thế mạnh theo tiêu chí), ít chữ, 1 câu kết, số khớp nguồn');

@@ -38,7 +38,7 @@ ok((s.match(/<a\b[^>]*href="https?:/g) || []).length >= 4, '#ap-market cần >= 
 
 // nội dung: bối cảnh ngành, đối thủ, case khách hàng, hỗ trợ khách hàng
 const vi = strip([...s.matchAll(/<(\w+)\b[^>]*data-l="vi"[^>]*>([\s\S]*?)<\/\1>/g)].map((m) => m[2]).join(' '));
-for (const k of ['thiếu lao động', '2024', 'đối thủ', 'khách hàng', 'hỗ trợ']) ok(vi.toLowerCase().includes(k), `#ap-market (vi) thiếu ý "${k}"`);
+for (const k of ['thiếu lao động', '2024', 'cạnh tranh', 'khách hàng', 'hỗ trợ'] /* task yfw8: "đối thủ" thành "sản phẩm cạnh tranh" */) ok(vi.toLowerCase().includes(k), `#ap-market (vi) thiếu ý "${k}"`);
 ok((s.match(/class="ap-cs"/g) || []).length >= 3, '#ap-market cần >= 3 thẻ case khách hàng .ap-cs');
 ok((s.match(/class="ap-cp"/g) || []).length >= 3, '#ap-market cần >= 3 đối thủ .ap-cp');
 const ja = strip([...s.matchAll(/<(\w+)[^>]*data-l="ja"[^>]*>([\s\S]*?)<\/>/g)].map((m) => m[2]).join(' '));

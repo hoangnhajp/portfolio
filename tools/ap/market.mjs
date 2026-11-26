@@ -63,14 +63,14 @@ ${CTX.map(([ic, h, p, r], i) => `    <li style="--i:${i}"${OPS[i] ? ` data-op="$
       ${L3('h3', b.t(T('製品：ANDPAD（クラウド型建設プロジェクト管理サービス）', 'Product: ANDPAD, a cloud construction project management service', 'Sản phẩm: ANDPAD, dịch vụ cloud quản lý dự án xây dựng'), 'top'))}
       ${L3('p', b.t(T('シェア：建設業マネジメントクラウド市場で導入企業数1位、8年連続（デロイト トーマツ ミック経済研究所、2025年12月、2022〜2025年度見込）。％は非公開。利用27.9万社、81.8万人。',
         'Share: first by number of adopting companies in the construction management cloud market, 8 years running (Deloitte Tohmatsu MIC Research, Dec 2025, FY2022 to FY2025 est.). The % share is not published. In use at 279,000 companies by 818,000 people.',
-        'Thị phần: đứng đầu về số doanh nghiệp sử dụng trong thị trường cloud quản lý ngành xây dựng, 8 năm liền (Deloitte Tohmatsu MIC, 12/2025, năm tài khóa 2022 đến 2025 ước tính). Tỷ lệ % không công bố. Đang dùng: 279.000 công ty, 818.000 người.'), 'share', 'mic', 'top'))}
+        'Thị phần: xếp thứ nhất về số doanh nghiệp sử dụng trong thị trường cloud quản lý ngành xây dựng, 8 năm liên tiếp (Deloitte Tohmatsu MIC, 12/2025, năm tài khóa 2022 đến 2025 ước tính). Tỷ lệ % không công bố. Đang dùng: 279.000 công ty, 818.000 người.'), 'share', 'mic', 'top'))}
     </div>
     <div class="ap-mk-r">
-      ${L3('span', T('主な競合（製品と運営会社）', 'Main competitors (product, company)', 'Đối thủ chính (sản phẩm, công ty)'), ' class="ap-k"')}
+      ${L3('span', T('主な競合製品（製品と運営会社）', 'Main competitors (product, company)', 'Sản phẩm cạnh tranh chính (sản phẩm, công ty vận hành)'), ' class="ap-k"')}
       <ul>
 ${COMP.map(([n, co, , rp]) => `        <li class="ap-cp">${typeof n === 'string' ? `<b>${n}</b>` : L3('b', n)}${L3('span', b.t(co, rp[0]))}</li>`).join('\n')}
       </ul>
-      <a class="ap-more" href="#ap-compete">${L3('span', T('強みと弱みの比較は次のページ', 'Strengths and weak points compared on the next page', 'So sánh ưu, nhược điểm và lợi thế: trang kế tiếp'))}</a>
+      <a class="ap-more" href="#ap-compete">${L3('span', T('強みと留意点の比較は次のページ', 'Strengths and weak points compared on the next page', 'So sánh thế mạnh và hạn chế: xem trang kế tiếp'))}</a>
     </div>
   </div>
   <div class="ap-css-cases rv" style="--d:220ms">
@@ -93,52 +93,52 @@ ${b.list()}
 </section>`;
 }
 
-// Trang #ap-compete ngay sau #ap-market: ANDPAD và 5 đối thủ, công ty vận hành, ưu / nhược, ai đang có lợi thế gì.
+// Trang #ap-compete ngay sau #ap-market: ANDPAD và 5 sản phẩm cạnh tranh, công ty vận hành, thế mạnh / hạn chế mỗi bên (task yfw8: không dùng từ thắng thua).
 // Mỗi dòng đối thủ chỉ dẫn nguồn là trang chính thức của chính công ty đó (tests/check-ap-compete.mjs kiểm).
 export function pageCompete({ L3, T, head, b }) {
   const { PROS, CONS, COMP } = rivals(T);
   const sub = b.c('share', 'mic');
   const li = ([p, r]) => `        <li>${L3('span', b.t(p, ...r))}</li>`;
   return `<section class="pg" data-chap="IV" id="ap-compete">
-${head('VS　<b>COMPETITION</b>', T('競合と比べた<br /><i>ANDPADの強みと弱み。</i>', 'Against its rivals:<br /><i>ANDPAD\'s strengths and weak points.</i>', 'So với đối thủ:<br /><i>ưu và nhược điểm của ANDPAD.</i>'),
-    'Product ／ Competitors ／ Pros and cons ／ Edge',
-    T('ANDPADと主な競合5製品を、運営会社、強み、弱みで比較。各行の出典は、その製品を運営する会社の公式ページ。',
-      'ANDPAD and its five main rivals, compared by operating company, strengths and weak points. Each row cites the official site of the company that runs that product.',
-      'So sánh ANDPAD với 5 sản phẩm cạnh tranh chính theo công ty vận hành, ưu điểm và hạn chế. Mỗi dòng dẫn nguồn từ trang chính thức của chính công ty vận hành sản phẩm đó.'), sub)}
+${head('VS　<b>COMPETITION</b>', T('競合と比べた<br /><i>ANDPADの強みと留意点。</i>', 'Compared with competitors:<br /><i>ANDPAD\'s strengths and limitations.</i>', 'Thế mạnh và hạn chế<br /><i>so với sản phẩm cạnh tranh.</i>'),
+    'Product ／ Competitors ／ Strengths ／ Limitations',
+    T('ANDPADと主な競合5製品を、運営会社、強み、留意点で比較。各行の出典は、その製品を運営する会社の公式ページ。',
+      'ANDPAD and five main competing products, compared by operating company, strengths and limitations. Each row cites the official site of the company that runs that product.',
+      'So sánh ANDPAD với 5 sản phẩm cạnh tranh chính theo công ty vận hành, thế mạnh và hạn chế. Mỗi dòng dẫn nguồn từ trang chính thức của chính công ty vận hành sản phẩm đó.'), sub)}
   <div class="card ap-me rv" style="--d:180ms">
     ${L3('h3', b.t(T('ANDPAD（株式会社アンドパッド）', 'ANDPAD (ANDPAD Inc.)', 'ANDPAD (ANDPAD Inc., 株式会社アンドパッド)'), 'company'))}
     <div>
-      ${L3('span', T('強み', 'Strengths', 'Lợi thế của ANDPAD'), ' class="ap-k"')}
+      ${L3('span', T('強み', 'Strengths', 'Thế mạnh của ANDPAD'), ' class="ap-k"')}
       <ul class="ap-pros">
 ${PROS.map(li).join('\n')}
       </ul>
     </div>
     <div>
-      ${L3('span', T('弱み', 'Weak points', 'Hạn chế của ANDPAD'), ' class="ap-k"')}
+      ${L3('span', T('留意点', 'Limitations', 'Hạn chế của ANDPAD'), ' class="ap-k"')}
       <ul class="ap-cons">
 ${CONS.map(li).join('\n')}
       </ul>
     </div>
   </div>
   <div class="card ap-rival rv" style="--d:200ms">
-    <p class="ap-rival-h">${L3('span', T('競合（製品と運営会社）', 'Rival (product, company)', 'Đối thủ (sản phẩm, công ty)'))}${L3('span', T('競合の強み', 'Their strengths', 'Lợi thế của đối thủ'))}${L3('span', T('弱み', 'Weak points', 'Hạn chế'))}</p>
+    <p class="ap-rival-h">${L3('span', T('競合製品（製品と運営会社）', 'Competitor (product, company)', 'Sản phẩm cạnh tranh (công ty vận hành)'))}${L3('span', T('強み', 'Strengths', 'Thế mạnh'))}${L3('span', T('留意点', 'Limitations', 'Hạn chế'))}</p>
     <ul>
 ${COMP.map(([n, co, plus, rp, minus, rm]) => `      <li class="ap-rv"><span class="ap-cn">${typeof n === 'string' ? `<b>${n}</b>` : L3('b', n)}${L3('small', co)}</span><span class="ap-plus">${L3('span', b.t(plus, ...rp))}</span><span class="ap-minus">${L3('span', b.t(minus, ...rm))}</span></li>`).join('\n')}
     </ul>
   </div>
   <div class="ap-edge rv" style="--d:220ms">
     <div class="card ap-edge-r">
-      ${L3('span', T('競合が有利な点', 'Where rivals lead', 'Đối thủ đang có lợi thế'), ' class="ap-k"')}
+      ${L3('span', T('他社製品の強み', 'Where other products stand out', 'Thế mạnh của các sản phẩm khác'), ' class="ap-k"')}
       ${L3('p', b.t(T('始めやすい料金：KANNAは初期費用0円で協力会社IDも無料、BuildeeとダンドリワークはWebで料金を公開。1つの工程に絞った深さ：SPIDERPLUSは検査、Buildeeは調整会議と安全書類、Photoructionは検査準備などの業務代行。',
         'Easier entry pricing: KANNA has no setup fee and free partner IDs; Buildee and Dandori Work publish their prices. Depth in one task: SPIDERPLUS in inspections, Buildee in coordination and safety papers, Photoruction in outsourced inspection prep.',
-        'Giá dễ bắt đầu: KANNA phí ban đầu 0 yên, ID đối tác miễn phí; Buildee và Dandori Work công khai giá trên web. Chuyên sâu một khâu: SPIDERPLUS về kiểm tra, Buildee về họp điều phối và hồ sơ an toàn, Photoruction nhận làm thay khâu chuẩn bị kiểm tra.'),
+        'Chi phí khởi đầu thấp: KANNA miễn phí khởi tạo, cấp ID đối tác miễn phí; Buildee và Dandori Work công khai bảng giá trên website. Chuyên sâu theo nghiệp vụ: SPIDERPLUS về nghiệm thu, kiểm tra; Buildee về họp điều phối và hồ sơ an toàn; Photoruction cung cấp dịch vụ thực hiện thay khâu chuẩn bị kiểm tra.'),
         'kanna', 'kannaFree', 'buildee', 'dandoriPlan', 'spider', 'photoruction'), ' class="ap-edge-p"')}
     </div>
     <div class="card ap-edge-a">
-      ${L3('span', T('ANDPADが有利な点', 'Where ANDPAD leads', 'ANDPAD có lợi thế'), ' class="ap-k"')}
+      ${L3('span', T('ANDPADの強み', 'ANDPAD\'s strengths', 'Thế mạnh của ANDPAD'), ' class="ap-k"')}
       ${L3('p', b.t(T('規模：導入企業数1位が8年連続、27.9万社が利用。幅：現場の施工管理から図面、検査、受発注、請求までを1つの基盤でつなぎ、日本語のほか6つの海外言語に対応。',
         'Scale: first by adopting companies for 8 years, used by 279,000 companies. Breadth: one platform links site management, drawings and inspections to ordering and billing, in Japanese plus six foreign languages.',
-        'Quy mô: đứng đầu về số doanh nghiệp sử dụng 8 năm liền, 279.000 công ty đang dùng. Độ rộng: một nền tảng nối quản lý thi công, bản vẽ, kiểm tra với đặt hàng, hóa đơn, có tiếng Nhật và 6 ngoại ngữ.'),
+        'Quy mô: xếp thứ nhất về số doanh nghiệp sử dụng 8 năm liên tiếp, 279.000 công ty đang sử dụng. Phạm vi: một nền tảng kết nối quản lý thi công, bản vẽ, kiểm tra với đặt hàng, hóa đơn; hỗ trợ tiếng Nhật và 6 ngoại ngữ.'),
         'share', 'top', 'products', 'newsLang6'), ' class="ap-edge-p"')}
     </div>
   </div>
@@ -146,7 +146,7 @@ ${b.list()}
 </section>`;
 }
 
-// Dữ liệu so sánh ANDPAD với đối thủ (dùng chung cho #ap-market và #ap-compete). Đối chiếu trang chính thức 25/11/2026.
+// Dữ liệu so sánh ANDPAD với sản phẩm cạnh tranh (dùng chung cho #ap-market và #ap-compete). Đối chiếu trang chính thức 25/11/2026.
 function rivals(T) {
   // ANDPAD: ưu / nhược [chữ, nguồn]
   const PROS = [
@@ -157,35 +157,35 @@ function rivals(T) {
   ];
   const CONS = [
     [T('料金は非公開で個別見積もり', 'Pricing is not public; quote only', 'Giá không công khai, báo giá riêng từng khách'), ['pricing']],
-    [T('BOXILの一部の口コミ：初期費用が少し高い、機能が多く慣れるまで時間がかかる、高齢の職人には覚えにくい', 'Some BOXIL reviews: setup cost a bit high, many features take time to learn, hard for older trades', 'Một số ý kiến người dùng trên BOXIL: phí ban đầu hơi cao, nhiều chức năng nên lâu quen, thợ lớn tuổi khó học'), ['boxil']],
+    [T('BOXILの一部の口コミ：初期費用が少し高い、機能が多く慣れるまで時間がかかる、高齢の職人には覚えにくい', 'Some BOXIL reviews: setup cost somewhat high, many features take time to learn, hard for older trades', 'Một số đánh giá của người dùng trên BOXIL: phí khởi tạo khá cao, nhiều chức năng nên cần thời gian làm quen, thợ lớn tuổi khó tiếp cận'), ['boxil']],
   ];
   // Đối thủ: [sản phẩm, công ty vận hành, lợi thế, nguồn lợi thế, hạn chế, nguồn hạn chế]; nguồn luôn là trang của chính công ty đó
   const COMP = [
     ['SPIDERPLUS', T('スパイダープラス株式会社', 'SpiderPlus & Co.', 'SpiderPlus & Co.'),
       T('建築、設備、電気工事向けに図面と検査が強い。配筋検査の準備の8割をAIで。2,300社以上、8万人以上（2026年9月末）',
         'Strong in drawings and inspections for building, MEP and electrical trades; AI does 80% of rebar-inspection prep. 2,300+ companies, 80,000+ users (end of Sep 2026)',
-        'Mạnh về bản vẽ và kiểm tra cho xây dựng, cơ điện, điện; AI làm 80% khâu chuẩn bị kiểm tra cốt thép. Hơn 2.300 công ty, 80.000 người dùng (cuối 9/2026)'), ['spider'],
-      T('現場の記録と検査が中心。料金は非公開', 'Centred on site records and inspections; pricing not public', 'Xoay quanh hồ sơ và kiểm tra tại công trường; giá không công khai'), ['spider']],
+        'Thế mạnh về bản vẽ và kiểm tra cho xây dựng, cơ điện, điện; AI đảm nhận 80% khâu chuẩn bị kiểm tra cốt thép. Hơn 2.300 công ty, 80.000 người dùng (cuối 9/2026)'), ['spider'],
+      T('現場の記録と検査が中心。料金は非公開', 'Centred on site records and inspections; pricing not public', 'Tập trung vào hồ sơ và kiểm tra tại công trường; giá không công khai'), ['spider']],
     ['KANNA', T('株式会社アルダグラム', 'Aldagram Inc.', 'Aldagram Inc.'),
       T('初期費用0円、協力会社IDは無料で無制限、無料プランあり。日本語を含む6言語。10万社超（無料の協力会社を含む）',
         'No setup fee, free unlimited partner IDs, a free plan; 6 languages incl. Japanese. 100,000+ companies (incl. free partners)',
         'Phí ban đầu 0 yên, ID đối tác miễn phí không giới hạn, có gói miễn phí; 6 ngôn ngữ kể cả tiếng Nhật. Hơn 100.000 công ty (gồm cả đối tác dùng miễn phí)'), ['kanna', 'kannaFree', 'kannaScale'],
-      T('建設、不動産、製造など多業種向けで建設専業ではない。有料プランの料金は非公開', 'Built for many industries (construction, real estate, manufacturing), not construction only; paid-plan prices not public', 'Làm cho nhiều ngành (xây dựng, bất động sản, sản xuất), không chuyên riêng xây dựng; giá gói trả phí không công khai'), ['kannaScale', 'kanna']],
+      T('建設、不動産、製造など多業種向けで建設専業ではない。有料プランの料金は非公開', 'Built for many industries (construction, real estate, manufacturing), not construction only; paid-plan prices not public', 'Phục vụ nhiều ngành (xây dựng, bất động sản, sản xuất), không chuyên riêng xây dựng; giá gói trả phí không công khai'), ['kannaScale', 'kanna']],
     ['Photoruction', T('株式会社フォトラクション', 'Photoruction Inc.', 'Photoruction Inc.'),
       T('写真、図面、工程、検査のSaaSに、検査用の電子黒板や検査シートの作成、施工計画書づくりを代行するAI-BPOを組み合わせる。ゼネコンなど向け',
         'SaaS for photos, drawings, schedules and inspections, plus AI-BPO that prepares inspection boards and sheets and drafts construction plans; for general contractors and others',
-        'SaaS cho ảnh, bản vẽ, tiến độ, kiểm tra, kèm AI-BPO làm thay khâu soạn bảng đen điện tử, phiếu kiểm tra và kế hoạch thi công; cho tổng thầu và các nhóm khác'), ['photoruction'],
+        'SaaS cho ảnh, bản vẽ, tiến độ, kiểm tra, kèm dịch vụ AI-BPO soạn thay bảng đen điện tử, phiếu kiểm tra và kế hoạch thi công; hướng tới tổng thầu và các doanh nghiệp khác'), ['photoruction'],
       T('利用社数は非公開（公表は40万超の建設プロジェクト）。料金は非公開', 'No public company count (it cites 400,000+ projects); pricing not public', 'Không công bố số công ty dùng (chỉ nêu hơn 400.000 dự án); giá không công khai'), ['photoruction']],
     [T('ダンドリワーク', 'Dandori Work', 'Dandori Work'), T('株式会社ダンドリワーク', 'DANDORI WORK', 'DANDORI WORK'),
       T('工務店、リフォーム店、専門工事向け。利用100,000社、170,000人。説明会とアフターフォローが年1,700回以上、チャットは24時間受付',
         'For home builders, renovators and specialist trades. 100,000 companies, 170,000 users. 1,700+ briefings and follow-ups a year; chat open 24 hours',
-        'Cho nhà thầu nhà ở, cải tạo, thầu chuyên ngành. 100.000 công ty, 170.000 người dùng. Hơn 1.700 buổi hướng dẫn và chăm sóc mỗi năm; chat nhận 24 giờ'), ['dandori'],
-      T('有料で、初期費用20万円から、月額1.5万円から', 'Paid: setup fee from ¥200,000, from ¥15,000 a month', 'Có phí: phí ban đầu từ 200.000 yên, từ 15.000 yên/tháng'), ['dandoriPlan']],
+        'Dành cho nhà thầu nhà ở, đơn vị cải tạo, thầu chuyên ngành. 100.000 công ty, 170.000 người dùng. Hơn 1.700 buổi hướng dẫn và chăm sóc mỗi năm; chat nhận 24 giờ'), ['dandori'],
+      T('有料で、初期費用20万円から、月額1.5万円から', 'Paid: setup fee from ¥200,000, from ¥15,000 a month', 'Trả phí: phí khởi tạo từ 200.000 yên, phí tháng từ 15.000 yên'), ['dandoriPlan']],
     ['Buildee', T('株式会社リバスタ', 'RVSTA, Inc.', 'RVSTA, Inc.'),
       T('ゼネコン向けの調整会議、労務安全、入退場（CCUS連携）。協力会社は無料。元請1,061社、累計42,190現場（2026年10月末）',
         'For general contractors: coordination meetings, labour safety papers, site entry (CCUS link). Free for subcontractors. 1,061 prime contractors, 42,190 sites in total (Oct 2026)',
-        'Cho tổng thầu: họp điều phối, hồ sơ an toàn lao động, ra vào công trường (nối CCUS). Thầu phụ dùng miễn phí. 1.061 tổng thầu, tổng cộng 42.190 công trường (10/2026)'), ['buildee'],
-      T('元請の調整と安全管理が中心。料金は支店ごと（月3万円、初回登録5万円）と現場ごと', 'Centred on prime contractors\' coordination and safety; billed per branch (¥30,000 a month, ¥50,000 sign-up) and per site', 'Xoay quanh điều phối và an toàn của tổng thầu; tính phí theo chi nhánh (30.000 yên/tháng, đăng ký lần đầu 50.000 yên) và từng công trường'), ['buildee']],
+        'Dành cho tổng thầu: họp điều phối, hồ sơ an toàn lao động, quản lý ra vào công trường (liên kết CCUS). Thầu phụ sử dụng miễn phí. 1.061 tổng thầu, tổng cộng 42.190 công trường (10/2026)'), ['buildee'],
+      T('元請の調整と安全管理が中心。料金は支店ごと（月3万円、初回登録5万円）と現場ごと', 'Centred on prime contractors\' coordination and safety; billed per branch (¥30,000 a month, ¥50,000 sign-up) and per site', 'Tập trung vào điều phối và quản lý an toàn của tổng thầu; tính phí theo chi nhánh (30.000 yên/tháng, đăng ký lần đầu 50.000 yên) và từng công trường'), ['buildee']],
   ];
   return { PROS, CONS, COMP };
 }

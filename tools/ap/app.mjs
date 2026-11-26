@@ -57,7 +57,7 @@ ${head('APP　<b>MAIN PRODUCT</b>', T('ベトナムでの主力製品：<br /><i
           'Google Play: "ANDPAD" (jp.andpad.android), hơn 100.000 lượt tải'), 'appPlay'))}</li>
         <li>${L3('span', b.t(T('会社の説明：クラウド型建設プロジェクト管理サービス。導入企業数1位の根拠はMICの調査',
           'How ANDPAD describes it: a cloud construction project management service; its first place by adopting companies comes from the MIC survey',
-          'Hãng tự giới thiệu: dịch vụ cloud quản lý dự án xây dựng; vị trí số 1 về số doanh nghiệp sử dụng dựa trên khảo sát của MIC'), 'top', 'mic'))}</li>
+          'Doanh nghiệp tự giới thiệu: dịch vụ cloud quản lý dự án xây dựng; việc xếp thứ nhất về số doanh nghiệp sử dụng căn cứ theo khảo sát của MIC'), 'top', 'mic'))}</li>
       </ul>
     </div>
     <div>
@@ -96,7 +96,7 @@ export function pageScope({ L3, T, head, b }) {
     [T('シェア', 'Share', 'Thị phần'),
       T('建設業マネジメントクラウド市場で導入企業数1位、8年連続（MIC、2025年12月）。％は非公開',
         'First by adopting companies in the construction management cloud market, 8 years running (MIC, Dec 2025). No % published',
-        'Đứng đầu về số doanh nghiệp sử dụng trong thị trường cloud quản lý ngành xây dựng, 8 năm liền (MIC, 12/2025). Tỷ lệ % không công bố'), ['share', 'mic']],
+        'Xếp thứ nhất về số doanh nghiệp sử dụng trong thị trường cloud quản lý ngành xây dựng, 8 năm liên tiếp (MIC, 12/2025). Tỷ lệ % không công bố'), ['share', 'mic']],
     [T('利用規模', 'Scale', 'Quy mô dùng'),
       T('27.9万社、81.8万人', '279,000 companies, 818,000 users', '279.000 công ty, 818.000 người dùng'), ['top']],
   ];
@@ -127,7 +127,7 @@ export function pageScope({ L3, T, head, b }) {
   ];
   const SW = [
     ['ap-sw-s', T('強み', 'Strength', 'Điểm mạnh'), T('1つのアプリで写真、工程、チャット、報告。ベトナム語と実証の数字あり', 'One app for photos, schedules, chat and reports; Vietnamese UI and pilot numbers', 'Một app gom ảnh, tiến độ, chat, báo cáo; đã có tiếng Việt và số liệu thí điểm'), ['p_construction_management', 'newsPilot']],
-    ['ap-sw-w', T('弱み', 'Weakness', 'Điểm yếu'), T('App Storeの評価2.7。料金は非公開', 'App Store rating 2.7; pricing not public', 'App Store chỉ 2,7 sao; giá không công khai'), ['appIos', 'pricing']],
+    ['ap-sw-w', T('留意点', 'Limitations', 'Hạn chế'), T('App Storeの評価2.7。料金は非公開', 'App Store rating 2.7; pricing not public', 'App Store chỉ 2,7 sao; giá không công khai'), ['appIos', 'pricing']],
     ['ap-sw-o', T('機会', 'Opportunity', 'Cơ hội'), T('建設市場は年7.51％成長。ホーチミン市とハノイの日系企業から始めやすい', 'Market grows 7.51% a year; Japanese firms in HCMC and Hanoi are an easy first segment', 'Thị trường tăng 7,51%/năm; doanh nghiệp Nhật ở TP.HCM, Hà Nội là nhóm khách dễ bắt đầu'), ['mordorVn', 'newsPilot']],
     ['ap-sw-t', T('リスク', 'Risk', 'Rủi ro'), T('国内勢（MISA AMISなど）がなじみのある選択肢。ベトナムの顧客数はまだ非公開', 'Local tools such as MISA AMIS are familiar choices; no Vietnam customer count yet', 'Công cụ nội địa như MISA AMIS quen thuộc với doanh nghiệp Việt; chưa có số khách công bố tại Việt Nam'), ['misaAmis', 'newsPilot']],
   ];

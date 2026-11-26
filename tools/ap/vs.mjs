@@ -1,6 +1,6 @@
 // 3 slide hình tóm gọn đối thủ ANDPAD, ngay sau #ap-compete: ít chữ, chủ yếu chart, mỗi slide 1 câu kết.
 // #ap-vs-scale = quy mô (thanh số công ty, số người dùng); #ap-vs-map = bản đồ định vị 6 sản phẩm (phạm vi x cách bắt đầu);
-// #ap-vs-win = phí ban đầu công khai + ai đang thắng ở tiêu chí nào.
+// #ap-vs-win = phí ban đầu công khai + thế mạnh theo từng tiêu chí (task yfw8: chỉ so sánh thế mạnh / hạn chế, không dùng từ thắng thua).
 // Số liệu CHỈ lấy từ dữ liệu đã dẫn nguồn ở #ap-compete (tools/ap/market.mjs, refs.mjs); không thêm số mới.
 // build.mjs gọi; kiểm tra: node tests/check-ap-vs.mjs, node tests/browser-ap-vs.mjs
 const T = (ja, en, vi) => ({ ja, en, vi });
@@ -26,10 +26,10 @@ ${rows.map(([n, v, lab, d, r, me]) => `      <div class="ap-vb-r${me ? ' is-me' 
 export function pageVsScale({ L3, head, b }) {
   const sub = b.c('share', 'mic');
   return `<section class="pg" data-chap="IV" id="ap-vs-scale">
-${head('VS 1　<b>SCALE</b>', T('規模は<br /><i>ANDPADが首位。</i>', 'On scale,<br /><i>ANDPAD leads.</i>', 'Về quy mô,<br /><i>ANDPAD dẫn đầu.</i>'),
-    'Companies ／ Users ／ No.1', T('導入企業数で8年連続1位。', 'No.1 by adopting companies, 8 years running.', 'Số 1 về số doanh nghiệp dùng, 8 năm liền.'), sub)}
+${head('VS 1　<b>SCALE</b>', T('利用規模の<br /><i>比較。</i>', 'Scale of use,<br /><i>compared.</i>', 'So sánh<br /><i>quy mô sử dụng.</i>'),
+    'Companies ／ Users ／ MIC survey', T('導入企業数は8年連続1位（ミック経済研究所調べ）。', 'Ranked first by adopting companies for 8 years (MIC Research).', 'Xếp thứ nhất về số doanh nghiệp sử dụng 8 năm liên tiếp (khảo sát của MIC).'), sub)}
   <div class="ap-vs-hero rv" style="--d:160ms">
-    <div class="card ap-vs-no1">${ico('milestone-report', 54)}<b>No.1</b>${L3('span', T('8年連続', '8 years running', '8 năm liền'))}</div>
+    <div class="card ap-vs-no1">${ico('milestone-report', 54)}<b>8</b>${L3('span', T('年連続 導入企業数1位', 'years ranked first by companies', 'năm liên tiếp xếp thứ nhất'))}</div>
     <div class="card ap-vs-c">
       <div class="ap-vs-ch">${ico('office-building', 26)}${L3('h3', T('利用企業数', 'Companies using it', 'Số công ty đang dùng'))}</div>
     ${bars(L3, b, CO, 279000, 'Companies using it: ANDPAD 279,000; KANNA 100,000+ incl. free partners; Dandori Work 100,000; SPIDERPLUS 2,300+')}
@@ -44,7 +44,7 @@ ${head('VS 1　<b>SCALE</b>', T('規模は<br /><i>ANDPADが首位。</i>', 'On 
     <li>${ico('magnifier', 22)}<b>Buildee</b>${L3('span', b.t(T('元請1,061社（単位が異なる）', '1,061 prime contractors (other unit)', '1.061 tổng thầu (khác đơn vị)'), 'buildee'))}</li>
     <li>${ico('magnifier', 22)}<b>Photoruction</b>${L3('span', b.t(T('40万超の建設プロジェクト（単位が異なる）', '400,000+ projects (other unit)', 'Hơn 400.000 dự án (khác đơn vị)'), 'photoruction'))}</li>
   </ul>
-${endLine(L3, T('利用企業数もユーザー数もANDPADが首位。', 'ANDPAD leads on both companies and users.', 'ANDPAD dẫn đầu cả số công ty lẫn số người dùng.'))}
+${endLine(L3, T('利用企業数とユーザー数の厚さは、ANDPADの強みの一つ。', 'A large base of companies and users is one of ANDPAD\'s strengths.', 'Quy mô doanh nghiệp và người dùng lớn là một thế mạnh của ANDPAD.'))}
 ${b.list()}
 </section>`;
 }
@@ -58,7 +58,7 @@ const PTS = [
   ['SPIDERPLUS', 30, 86, T('図面、検査', 'Drawings, inspections', 'Bản vẽ, kiểm tra')],
   ['KANNA', 40, 10, T('初期0円、無料プラン', 'No setup fee, free plan', '0 yên, gói miễn phí')],
   ['Dandori Work', 36, 24, T('住宅、リフォーム', 'Homes, renovation', 'Nhà ở, cải tạo')],
-  ['Buildee', 12, 44, T('安全書類、元請', 'Safety papers, primes', 'An toàn, tổng thầu')],
+  ['Buildee', 12, 44, T('安全書類、元請', 'Safety papers, primes', 'Hồ sơ an toàn, tổng thầu')],
 ];
 export function pageVsMap({ L3, head, b }) {
   const sub = b.c('products', 'pricing');
@@ -71,24 +71,24 @@ export function pageVsMap({ L3, head, b }) {
     return `      <g class="ap-vm-p${me ? ' is-me' : ''}"><title>${n}: ${tag.en}</title><circle cx="${cx}" cy="${cy}" r="${r + 10}" class="ap-vm-hit"/><circle cx="${cx}" cy="${cy}" r="${r}"/><text x="${tx}" y="${cy - (me ? 6 : 4)}" class="ap-vm-n" text-anchor="${an}">${n}</text>${txt(tx, cy + 15, tag, 'ap-vm-t', an)}</g>`;
   }).join('\n');
   return `<section class="pg" data-chap="IV" id="ap-vs-map">
-${head('VS 2　<b>POSITIONING</b>', T('一つの工程か、<br /><i>全体か。</i>', 'One task,<br /><i>or the whole flow?</i>', 'Một khâu<br /><i>hay trọn quy trình?</i>'),
-    'Scope ／ Entry price ／ Map', T('範囲と始めやすさで6製品を配置。', 'Six products by scope and ease of entry.', '6 sản phẩm theo phạm vi và độ dễ bắt đầu.'), sub)}
+${head('VS 2　<b>POSITIONING</b>', T('特化型か、<br /><i>統合型か。</i>', 'Specialised<br /><i>or integrated?</i>', 'Chuyên sâu<br /><i>hay tích hợp?</i>'),
+    'Scope ／ Entry cost ／ Map', T('対応範囲と導入のしやすさで6製品を配置。', 'Six products by scope and ease of adoption.', 'Định vị 6 sản phẩm theo phạm vi chức năng và chi phí khởi đầu.'), sub)}
   <div class="card ap-vs-c ap-vm rv" style="--d:160ms">
-    <svg class="ap-vs-chart ap-vm-svg" role="img" aria-label="Positioning map: only ANDPAD covers the whole flow (quote-only pricing); SPIDERPLUS and Photoruction are quote-only and narrower; KANNA, Dandori Work and Buildee are easier to start with" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+    <svg class="ap-vs-chart ap-vm-svg" role="img" aria-label="Positioning map: ANDPAD is an integrated platform for the whole workflow (quote-based pricing); SPIDERPLUS and Photoruction are quote-based and more specialised; KANNA, Dandori Work and Buildee have lower entry costs" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
       <rect x="${X(50)}" y="${P}" width="${X(100) - X(50)}" height="${Y(50) - P}" class="ap-vm-q is-me"/>
       <line x1="${P}" y1="${Y(50)}" x2="${W - P}" y2="${Y(50)}" class="ap-vm-ax"/><line x1="${X(50)}" y1="${P}" x2="${X(50)}" y2="${Y(0)}" class="ap-vm-ax"/>
-      ${txt(P, H - 12, T('← 一つの工程', '← One task', '← Một khâu'), 'ap-vm-al', 'start')}${txt(W - P, H - 12, T('工程全体 →', 'Whole flow →', 'Trọn quy trình →'), 'ap-vm-al', 'end')}
-      ${txt(P + 4, P - 14, T('↑ 個別見積もりのみ', '↑ Quote only', '↑ Chỉ báo giá riêng'), 'ap-vm-al', 'start')}${txt(P + 4, Y(0) + 22, T('↓ 始めやすい（料金公開、初期0円）', '↓ Easy entry (public price, no setup fee)', '↓ Dễ bắt đầu (giá công khai, 0 yên)'), 'ap-vm-al', 'start')}
+      ${txt(P, H - 12, T('← 特定工程に特化', '← Specialised', '← Chuyên sâu'), 'ap-vm-al', 'start')}${txt(W - P, H - 12, T('工程全体を統合 →', 'Integrated →', 'Tích hợp toàn quy trình →'), 'ap-vm-al', 'end')}
+      ${txt(P + 4, P - 14, T('↑ 個別見積もりのみ', '↑ Quote only', '↑ Báo giá theo từng khách hàng'), 'ap-vm-al', 'start')}${txt(P + 4, Y(0) + 22, T('↓ 導入しやすい（料金公開、初期0円）', '↓ Low entry cost (public price, no setup fee)', '↓ Chi phí khởi đầu thấp (giá công khai, 0 yên)'), 'ap-vm-al', 'start')}
 ${dots}
     </svg>
     ${L3('p', b.t(T('位置は前ページの比較データからの推定', 'Positions estimated from the comparison page', 'Vị trí ước lượng từ trang so sánh'), 'spider', 'photoruction', 'kanna', 'kannaFree', 'dandori', 'dandoriPlan', 'buildee'), ' class="ap-vs-note"')}
   </div>
-${endLine(L3, T('ANDPADは全体型で独走。競合は安さか一工程の深さで勝負。', 'ANDPAD alone covers the whole flow; rivals compete on low entry price or depth in one task.', 'ANDPAD một mình phủ trọn quy trình; đối thủ chọn giá dễ vào hoặc sâu một khâu.'))}
+${endLine(L3, T('ANDPADは工程全体を一つの基盤で扱う統合型。他社製品は導入しやすい料金や特定工程の専門性に強みを持つ。', 'ANDPAD is an integrated platform for the whole workflow; other products focus on low entry cost or depth in a specific process.', 'ANDPAD theo hướng tích hợp toàn quy trình; các sản phẩm khác tập trung vào chi phí khởi đầu thấp hoặc chuyên sâu nghiệp vụ.'))}
 ${b.list()}
 </section>`;
 }
 
-// ---------- Slide 3: giá bắt đầu + ai thắng ở đâu ----------
+// ---------- Slide 3: giá bắt đầu + thế mạnh theo tiêu chí ----------
 // [tên, phí ban đầu (yên) hoặc null = báo giá riêng, nhãn, phí tháng, nguồn]
 const FEE = [
   ['KANNA', 0, T('0円', '¥0', '0 yên'), T('無料プランあり', 'free plan', 'có gói miễn phí'), ['kanna', 'kannaFree']],
@@ -98,35 +98,35 @@ const FEE = [
   ['SPIDERPLUS', null, T('個別見積もり', 'quote only', 'báo giá riêng'), null, ['spider']],
   ['Photoruction', null, T('個別見積もり', 'quote only', 'báo giá riêng'), null, ['photoruction']],
 ];
-// [icon, tiêu chí, ANDPAD thắng?, đối thủ thắng (tên) hoặc '', nguồn]
-const WIN = [
+// [icon, tiêu chí, ANDPAD có thế mạnh?, sản phẩm khác có thế mạnh (tên) hoặc '', nguồn]
+const STR = [
   ['team-group', T('規模', 'Scale', 'Quy mô'), 1, '', ['share']],
-  ['building-blocks', T('製品の幅', 'Product breadth', 'Độ rộng sản phẩm'), 1, '', ['products']],
+  ['building-blocks', T('製品の幅', 'Product breadth', 'Phạm vi sản phẩm'), 1, '', ['products']],
   ['chat-bubbles', T('言語（日本語＋6言語、KANNAは計6言語）', 'Languages (JA + 6; KANNA 6 in all)', 'Ngôn ngữ (Nhật + 6; KANNA tổng 6)'), 1, '', ['newsLang6', 'kannaScale']],
-  ['key', T('始めやすい料金', 'Easy entry price', 'Giá dễ bắt đầu'), 0, 'KANNA · Buildee · Dandori Work', ['kanna', 'buildee', 'dandoriPlan']],
-  ['checklist', T('一工程の深さ', 'Depth in one task', 'Sâu một khâu'), 0, 'SPIDERPLUS · Buildee · Photoruction', ['spider', 'buildee', 'photoruction']],
+  ['key', T('導入しやすい料金', 'Low entry cost', 'Chi phí khởi đầu'), 0, 'KANNA · Buildee · Dandori Work', ['kanna', 'buildee', 'dandoriPlan']],
+  ['checklist', T('特定工程の専門性', 'Depth in a specific process', 'Chuyên sâu nghiệp vụ'), 0, 'SPIDERPLUS · Buildee · Photoruction', ['spider', 'buildee', 'photoruction']],
 ];
 export function pageVsWin({ L3, head, b }) {
   const sub = b.c('pricing');
   const max = 200000;
   const fee = FEE.map(([n, v, lab, mo, r, me]) => `      <div class="ap-vb-r${me ? ' is-me' : ''}${v === null ? ' is-q' : ''}" title="${n}: ${lab.en}${mo ? `, ${mo.en}` : ''}"><b>${n}</b><span class="ap-vb-t"><i data-v="${v ?? 'quote'}" style="--w:${v === null ? 0 : Math.max(1.5, v / max * 100).toFixed(1)}%"></i></span>${L3('em', b.t(lab, ...r))}${mo ? L3('small', mo) : '<small></small>'}</div>`).join('\n');
-  const win = WIN.map(([ic, k, me, rv, r]) => `      <li class="ap-vw-r" title="${k.en}: ${me && rv ? 'ANDPAD = ' + rv : me ? 'ANDPAD' : rv}">${ico(ic, 26)}${L3('b', b.t(k, ...r))}<span class="ap-vw-a${me ? ' on' : ''}">ANDPAD</span><span class="ap-vw-v${rv ? ' on' : ''}">${rv || '·'}</span></li>`).join('\n');
+  const str = STR.map(([ic, k, me, rv, r]) => `      <li class="ap-vw-r" title="${k.en}: ${me && rv ? 'ANDPAD = ' + rv : me ? 'ANDPAD' : rv}">${ico(ic, 26)}${L3('b', b.t(k, ...r))}<span class="ap-vw-a${me ? ' on' : ''}">ANDPAD</span><span class="ap-vw-v${rv ? ' on' : ''}">${rv || '·'}</span></li>`).join('\n');
   return `<section class="pg" data-chap="IV" id="ap-vs-win">
-${head('VS 3　<b>WHO WINS WHERE</b>', T('どこで勝ち、<br /><i>どこで負けるか。</i>', 'Where it wins,<br /><i>where it does not.</i>', 'Thắng ở đâu,<br /><i>thua ở đâu.</i>'),
-    'Entry price ／ Scorecard', T('初期費用と5つの観点で比較。', 'Setup fee and five criteria.', 'So phí ban đầu và 5 tiêu chí.'), sub)}
+${head('VS 3　<b>STRENGTHS BY CRITERION</b>', T('観点ごとの<br /><i>強みを比較。</i>', 'Strengths<br /><i>by criterion.</i>', 'Thế mạnh<br /><i>theo từng tiêu chí.</i>'),
+    'Entry cost ／ Strengths', T('初期費用と5つの観点で比較。', 'Setup fee and five criteria.', 'So sánh phí khởi tạo và 5 tiêu chí.'), sub)}
   <div class="card ap-vs-c rv" style="--d:160ms">
-    <div class="ap-vs-ch">${ico('funnel', 26)}${L3('h3', T('初期費用（公開価格）', 'Setup fee (public price)', 'Phí ban đầu (giá công khai)'))}</div>
+    <div class="ap-vs-ch">${ico('funnel', 26)}${L3('h3', T('初期費用（公開価格）', 'Setup fee (public price)', 'Phí khởi tạo (giá công khai)'))}</div>
     <div class="ap-vs-chart ap-vb ap-vb-fee" role="img" aria-label="Setup fee: KANNA 0 yen; Buildee 50,000 yen; Dandori Work from 200,000 yen; ANDPAD, SPIDERPLUS, Photoruction quote only">
 ${fee}
     </div>
   </div>
   <div class="card ap-vs-c rv" style="--d:200ms">
-    <p class="ap-vw-h"><i></i>${L3('span', T('観点', 'Criterion', 'Tiêu chí'))}<span>ANDPAD</span>${L3('span', T('競合', 'Rival', 'Đối thủ'))}</p>
+    <p class="ap-vw-h"><i></i>${L3('span', T('観点', 'Criterion', 'Tiêu chí'))}<span>ANDPAD</span>${L3('span', T('他社製品', 'Other products', 'Sản phẩm khác'))}</p>
     <ul class="ap-vw">
-${win}
+${str}
     </ul>
   </div>
-${endLine(L3, T('ANDPADは規模と幅で勝ち、始めやすさと一工程の深さで追われる。', 'ANDPAD wins on scale and breadth; rivals press on entry price and depth.', 'ANDPAD thắng ở quy mô và độ rộng; bị đuổi ở giá dễ vào và độ sâu một khâu.'))}
+${endLine(L3, T('ANDPADの強みは規模と製品の幅。導入しやすい料金と特定工程の専門性では、他社製品に強みがある。', 'ANDPAD\'s strengths are scale and product breadth; other products stand out on entry cost and process depth.', 'Thế mạnh của ANDPAD là quy mô và phạm vi sản phẩm; các sản phẩm khác nổi bật về chi phí khởi đầu và tính chuyên sâu nghiệp vụ.'))}
 ${b.list()}
 </section>`;
 }

@@ -46,7 +46,7 @@ ok(m, 'thiếu #ap-market');
 const left = (m.match(/<div class="ap-mk-l">[\s\S]*?<\/div>/) || [''])[0];
 ok(/ANDPAD/.test(lang(left, 'ja')) && /クラウド型建設プロジェクト管理サービス/.test(lang(left, 'ja')), 'JA phải nêu tên sản phẩm ANDPAD + loại sản phẩm theo lời hãng');
 ok(/^Sản phẩm: ANDPAD/.test(lang(left.match(/<h3 data-l="vi"[\s\S]*?<\/h3>/)?.[0] || '', 'vi')), 'VI: tiêu đề phải bắt đầu "Sản phẩm: ANDPAD"');
-for (const [l, rx] of [['ja', /導入企業数[\s\S]*8年連続/], ['en', /adopting companies[\s\S]*8 years/i], ['vi', /số doanh nghiệp sử dụng[\s\S]*8 năm liền/]])
+for (const [l, rx] of [['ja', /導入企業数[\s\S]*8年連続/], ['en', /adopting companies[\s\S]*8 years/i], ['vi', /số doanh nghiệp sử dụng[\s\S]*8 năm liên tiếp/]])
   ok(rx.test(lang(left, l)), `thị phần (${l}) phải ghi đúng thước đo số doanh nghiệp sử dụng, 8 năm liền`);
 ok(/Thị phần/.test(lang(left, 'vi')) && /MIC/.test(lang(left, 'vi')) && /12\/2025/.test(lang(left, 'vi')), 'VI phải có nhãn "Thị phần", nguồn MIC, 12/2025');
 ok(/không công bố/.test(lang(left, 'vi')) && !/\d+\s?%/.test(lang(left, 'vi')), 'VI: không bịa tỷ lệ %, phải ghi rõ % không được công bố');
@@ -80,7 +80,7 @@ COMP.forEach(([prod, , , , facts], i) => {
 });
 for (const x of [m, s]) ok(!/MCデータプラス|MC Data Plus|グリーンサイト|Green Site/i.test(x), 'Buildee không thuộc MCデータプラス / グリーンサイト: không được ghi tên này');
 // 2 ô: đối thủ đang có lợi thế gì, ANDPAD có lợi thế gì (có nguồn, 3 ngôn ngữ)
-for (const [cls, vi] of [['ap-edge-r', 'Đối thủ đang có lợi thế'], ['ap-edge-a', 'ANDPAD có lợi thế']]) {
+for (const [cls, vi] of [['ap-edge-r', 'Thế mạnh của các sản phẩm khác'], ['ap-edge-a', 'Thế mạnh của ANDPAD']]) { // task yfw8: bỏ cách nói thắng thua / "đối thủ"
   const box = (s.match(new RegExp(`<div class="card ${cls}">[\\s\\S]*?<\\/div>`)) || [''])[0];
   ok(lang(box, 'vi').startsWith(vi), `ô ${cls} phải mở đầu bằng "${vi}"`);
   for (const l of ['ja', 'en', 'vi']) ok(new RegExp(`<p class="ap-edge-p" data-l="${l}">[^<]{20,}<sup class="ap-c">`).test(box), `ô ${cls} thiếu đoạn ${l} hoặc nguồn`);
