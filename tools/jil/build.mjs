@@ -77,7 +77,7 @@ const legend = '<div class="jl-leg">'
   + `<span><i class="jl-lgd"></i>${L('JILNESTAの拠点', 'JILNESTA office', 'Văn phòng JILNESTA')}</span></div>`;
 
 const SEC_HCM = '<section class="pg" data-chap="III" id="sales-jil-hcm">\n  ' + LOGO.jil + '\n'
-  + top('09', 'JILNESTA CLIENT MAP',
+  + top('08', 'JILNESTA CLIENT MAP',
     ['ホーチミン市の拠点から、<br /><i>IT企業と店舗を訪ねる。</i>', 'From the Ho Chi Minh City office<br /><i>to IT companies and shops.</i>', 'Từ văn phòng tại TP.HCM,<br /><i>tỏa đi gặp công ty IT và cửa hàng.</i>'],
     ['JILNESTAのホーチミン市の拠点から市内のIT企業や店舗を訪ね、ソフトウェアと開発チームの需要を聞き取る。',
       'From the JILNESTA office in Ho Chi Minh City I visited IT companies and shops across the city to hear their software and dev team needs.',
@@ -116,7 +116,7 @@ const bridge = '<div class="jl-br" aria-hidden="true"><span class="jl-bi">' + im
   + '<span class="jl-line">' + Array.from({ length: 6 }, (_, i) => `<i class="jl-dot" style="--j:${i}"></i>`).join('') + '</span></div>';
 
 const SEC_OFF = '<section class="pg" data-chap="IV" id="sales-jil-offshore">\n  ' + LOGO.jil + '\n'
-  + top('10', 'OFFSHORE',
+  + top('09', 'OFFSHORE',
     ['ベトナムの開発チームと、<br /><i>日本の顧客をつなぐ。</i>', 'A dev team in Vietnam,<br /><i>clients in Japan.</i>', 'Đội dev tại Việt Nam,<br /><i>khách hàng tại Nhật Bản.</i>'],
     ['ベトナムの開発チームがJILNESTAを通じてオンラインで日本の顧客とつながり、オフショアで製品を開発。',
       'Our dev team in Vietnam worked online with Japanese clients through JILNESTA, building their products offshore.',
@@ -142,7 +142,7 @@ const SEC_OFF = '<section class="pg" data-chap="IV" id="sales-jil-offshore">\n  
 const list = '  <ol class="sc-list rv" style="--d:200ms" data-no-zoom>' + JIL_FILM.steps.map((s, i) => `<li>${img(s.img, 44)}<div><em>${String(i + 1).padStart(2, '0')}</em>`
   + L(s.t.ja, s.t.en, s.t.vi, 'b') + L(s.d.ja, s.d.en, s.d.vi, 'p') + '</div></li>').join('') + '</ol>\n';
 const SEC_FLOW = '<section class="pg" data-chap="V" id="sales-jil-flow">\n  ' + LOGO.jil + '\n'
-  + top('11', 'OFFSHORE SALES FLOW',
+  + top('10', 'OFFSHORE SALES FLOW',
     ['要望を聞き、仕様にして、<br /><i>顧客に合わせて作り込む。</i>', 'Hear the needs, write the spec,<br /><i>customize for each client.</i>', 'Lắng nghe, viết đặc tả,<br /><i>tùy chỉnh theo từng khách hàng.</i>'],
     ['ITオフショアの営業として、資料準備から提案、聞き取り、仕様書、開発、調整、納品、請求までの8段階を担当。',
       'In IT offshore sales I handled eight steps, from materials and calls to specs, development, customization, handover and billing.',
@@ -269,28 +269,28 @@ const BLOCK = `<!-- sales-jil:start -->\n${SEC_HCM}${SEC_OFF}${SEC_FLOW}<!-- sal
 const reBlock = /<!-- sales-jil:start -->[\s\S]*?<!-- sales-jil:end -->\r?\n/;
 if (reBlock.test(html)) html = html.replace(reBlock, () => fix(BLOCK));
 else {
-  const s = html.indexOf('id="sales-flow"'); if (s < 0) throw new Error('không thấy #sales-flow');
+  const s = html.indexOf('id="sales-kpi"'); if (s < 0) throw new Error('không thấy #sales-kpi');
   const e = html.indexOf('</section>', s) + '</section>'.length;
   const ls = html.indexOf('\n', e) + 1;
   html = html.slice(0, ls) + fix(BLOCK) + html.slice(ls);
 }
 
-// Mục lục tab Sales 09-11
-const NAV = [['sales-jil-hcm', '09', 'JILNESTA 顧客マップ', 'JILNESTA client map', 'JILNESTA bản đồ khách hàng'],
-  ['sales-jil-offshore', '10', 'オフショア開発', 'Offshore', 'Offshore Việt Nam - Nhật Bản'],
-  ['sales-jil-flow', '11', 'ITオフショア営業', 'IT offshore sales', 'Kinh doanh IT offshore']]
+// Mục lục tab Sales 08-10 (trang 08 FLOW #sales-flow đã bỏ, JILNESTA nối ngay sau #sales-kpi)
+const NAV = [['sales-jil-hcm', '08', 'JILNESTA 顧客マップ', 'JILNESTA client map', 'JILNESTA bản đồ khách hàng'],
+  ['sales-jil-offshore', '09', 'オフショア開発', 'Offshore', 'Offshore Việt Nam - Nhật Bản'],
+  ['sales-jil-flow', '10', 'ITオフショア営業', 'IT offshore sales', 'Kinh doanh IT offshore']]
   .map(([id, n, ja, en, vi]) => `      <a href="#${id}" data-sec="${id}"><em>${n}</em>${L(ja, en, vi)}</a>\n`).join('');
 html = html.replace(/[ \t]*<a href="#sales-jil-[^\n]*\n/g, '');
-const nf = html.indexOf('<a href="#sales-flow" data-sec="sales-flow">'); if (nf < 0) throw new Error('không thấy mục lục sales-flow');
+const nf = html.indexOf('<a href="#sales-kpi" data-sec="sales-kpi">'); if (nf < 0) throw new Error('không thấy mục lục sales-kpi');
 const nl = html.indexOf('\n', nf) + 1;
 html = html.slice(0, nl) + fix(NAV) + html.slice(nl);
 
 // Ảnh nền section (khối pganh): thêm id vào mảng IDS
-if (!html.includes("'sales-jil-hcm'")) html = html.replace(/(var IDS=\[[^\]]*?)'sales-flow',/, "$1'sales-flow','sales-jil-hcm','sales-jil-offshore','sales-jil-flow',");
+if (!html.includes("'sales-jil-hcm'")) html = html.replace(/(var IDS=\[[^\]]*?)'sales-kpi',/, "$1'sales-kpi','sales-jil-hcm','sales-jil-offshore','sales-jil-flow',");
 if (!html.includes("'sales-jil-hcm'")) throw new Error('không thêm được id vào mảng IDS');
 
 // Badge logo MAYEKAWA ở đầu mỗi trang Sales của MAYEKAWA (chèn 1 dòng sau thẻ mở section, không đụng nội dung khác)
-for (const id of ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi', 'sales-flow']) {
+for (const id of ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi']) {
   const a = html.indexOf(`id="${id}"`); if (a < 0) throw new Error('không thấy #' + id);
   const ls = html.indexOf('\n', a) + 1, le = html.indexOf('\n', ls);
   if (html.slice(ls, le).includes('colg--co')) continue;
@@ -300,4 +300,4 @@ for (const id of ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-
 html = html.replace('<p class="colg colg--hero rv"><img src="assets/logos/mayekawa.svg"', '<p class="colg rv"><img src="assets/logos/mayekawa.svg"');
 
 writeFileSync(file, html);
-console.log('sales-jil: 3 trang (#sales-jil-hcm, #sales-jil-offshore, #sales-jil-flow), badge logo 9 trang Sales MAYEKAWA, logo #w-mycom lớn hơn');
+console.log('sales-jil: 3 trang (#sales-jil-hcm, #sales-jil-offshore, #sales-jil-flow), badge logo 8 trang Sales MAYEKAWA, logo #w-mycom lớn hơn');

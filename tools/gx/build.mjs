@@ -54,8 +54,7 @@ const S = {
   'sales-kpi': { k: 'chart', bars: [[52], [38], [66], [48], [80, 1]], cap: L('見積と訪問を記録', 'Quotes and visits logged', 'Ghi báo giá, lượt gặp'),
     left: [['jd-document', L('見積件数', 'Quotations', 'Số báo giá')]],
     right: [['interview', L('訪問回数', 'Client visits', 'Lượt gặp khách')], ['survey-clipboard', L('評価シート', 'Evaluation sheet', 'Phiếu đánh giá')]] },
-  'sales-flow': { k: 'flow', steps: [['envelope', L('引き合い受付', 'Enquiry', 'Tiếp nhận yêu cầu')], ['roadmap', L('訪問計画', 'Visit plan', 'Lên lịch gặp')], ['checklist', L('出張申請', 'Trip request', 'Xin công tác')],
-    ['jd-document', L('見積の記録', 'Log quotes', 'Ghi báo giá')], ['chat-bubbles', L('見込みの共有', 'Share forecasts', 'Chia sẻ dự báo')], ['milestone-report', L('定例報告', 'Regular reports', 'Báo cáo định kỳ'), null, true]] },
+  // #sales-flow (08 FLOW): đã bỏ cả trang theo yêu cầu người vận hành
   // Tab Team / AI
   'team-records': { k: 'hub', core: { ic: 'manager', chip: L('役職ごとの記録', 'Role by role', 'Theo từng vai trò') },
     left: [['team-group', L('営業チーム', 'Sales teams', 'Đội kinh doanh')], ['survey-clipboard', L('人事チーム 1→5名', 'HR team 1 → 5', 'Đội nhân sự 1 → 5')]],
@@ -65,7 +64,7 @@ const S = {
     right: [['magnifier', L('原因の分析と判断', 'Root cause, judgement', 'Phân tích, nhận định')], ['interview', L('対話とコーチ', 'Coaching members', 'Kèm cặp thành viên')]] },
 };
 const STEP = { profile: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early'], // task a9f4: bỏ trang cuối 語学、PC、AI (ý AI sang #ai-tools, ngoại ngữ sang tab Languages)
-  sales: ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi', 'sales-flow'] };
+  sales: ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi'] };
 const stepChip = (id) => { for (const ids of Object.values(STEP)) { const n = ids.indexOf(id); if (n >= 0) return `<span class="gx-step"><i></i><b>${String(n + 1).padStart(2, '0')}</b> / ${String(ids.length).padStart(2, '0')}</span>`; } return ''; };
 
 const tag = ([ic, t], i) => `<span class="gx-tag" style="--i:${i}">${plate(ic, '', 64)}<b class="gx-lb">${T(t)}</b></span>`;

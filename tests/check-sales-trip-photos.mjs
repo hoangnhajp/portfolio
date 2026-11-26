@@ -60,7 +60,7 @@ const SECTIONS = {
 }
 const navSales = (html.match(/<nav class="sb-nav" data-for="sales"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
 const navNums = [...navSales.matchAll(/data-sec="([\w-]+)"><em>(\w+)<\/em>/g)].map((m) => `${m[1]}:${m[2]}`).join(' ');
-ok(navNums === 'sales-top:TOP sales-map:01 sales-cycle:02 sales-pain:03 sales-trips:04 sales-pr:05 sales-reports:06 sales-kpi:07 sales-flow:08 sales-jil-hcm:09 sales-jil-offshore:10 sales-jil-flow:11', `mục lục Sales sai thứ tự / số: ${navNums}`);
+ok(navNums === 'sales-top:TOP sales-map:01 sales-cycle:02 sales-pain:03 sales-trips:04 sales-pr:05 sales-reports:06 sales-kpi:07 sales-jil-hcm:08 sales-jil-offshore:09 sales-jil-flow:10', `mục lục Sales sai thứ tự / số: ${navNums}`);
 let total = 0;
 for (const [id, WANT] of Object.entries(SECTIONS)) {
   const sec = secOf(id);
