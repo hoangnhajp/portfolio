@@ -110,6 +110,7 @@ export const QUOTES = {
     "The necessity of recording information on paper and by hand was eliminated",
     "along with support for unique form layouts",
     "Future efforts will include activities such as further deployment in Vietnam's major northern and southern cities, and preparation of expansion to neighboring countries with similar needs.",
+    "February 2024 to May 2025",
   ],
   vnCareersTop: [
     "Software engineers and development team in ANDPAD Vietnam enjoy dynamic roles of SaaS product development",

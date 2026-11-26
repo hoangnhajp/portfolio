@@ -21,7 +21,7 @@ const has = (s, words, what) => { for (const w of words) ok(s.includes(w), `${wh
 // 1) Công ty: tên, số người dùng, nhân sự, sứ mệnh, ANDPAD Vietnam (thông tin CEO đã bỏ theo yêu cầu, xem check-ap-no-ceo.mjs)
 const top = sec('ap-top');
 has(strip(top), ['1,072', '27.9万社', '幸せを築く人を、幸せに。'], '#ap-top (công ty)');
-has(lang(top, 'vi'), ['Vertical SaaS', 'ANDPAD Vietnam', 'Hà Nội', 'Customer Success'], '#ap-top (vi)');
+has(lang(top, 'vi'), ['quản lý dự án xây dựng', 'ANDPAD Vietnam', 'Hà Nội', 'Customer Success'], '#ap-top (vi)');
 
 // 2) Sản phẩm: trình bày ngay trong trang, >= 15 sản phẩm có tên + mô tả 3 ngôn ngữ
 const prod = sec('ap-products');

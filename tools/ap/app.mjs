@@ -26,9 +26,9 @@ export function pageApp({ L3, T, head, b }) {
         'Many builders in Vietnam and Southeast Asia have not yet used DX; site records are mostly on paper. Over 4.5 million construction workers.',
         'Nhiều doanh nghiệp xây dựng ở Việt Nam và Đông Nam Á chưa dùng DX, hồ sơ công trường chủ yếu trên giấy. Hơn 4,5 triệu lao động xây dựng.'), ['newsJetro', 'newsPilot']],
     ['checklist', T('解き方', 'How the app solves it', 'Cách app giải quyết'),
-      T('写真管理、電子黒板、帳票出力を現場で使用。独自の帳票レイアウトにも対応。',
-        'Photo management, a digital signboard and form output on site, with support for custom form layouts.',
-        'Dùng quản lý ảnh, bảng đen điện tử, xuất biểu mẫu ngay tại công trường; hỗ trợ cả bố cục biểu mẫu riêng.'), ['newsPilot']],
+      T('写真登録、電子黒板、帳票出力を現場で使用。独自の帳票レイアウトにも対応。',
+        'Photo registration, a digital blackboard and form output on site, with support for custom form layouts.',
+        'Dùng đăng ảnh, bảng đen điện tử, xuất biểu mẫu ngay tại công trường; hỗ trợ cả bố cục biểu mẫu riêng.'), ['newsPilot']],
     ['report-chart', T('効果（実証）', 'Result (pilot)', 'Hiệu quả (thí điểm)'),
       T('日系建設企業の現場で2024年2月〜2025年5月に実証。現場作業の時間が30〜50％減り、紙の記録が不要に。',
         'Piloted with Japanese builders in Vietnam, Feb 2024 to May 2025: on-site work time down 30 to 50%, no more paper records.',
@@ -39,7 +39,7 @@ export function pageApp({ L3, T, head, b }) {
         'Nhân sự tại chỗ hỗ trợ từ triển khai tới vận hành ngay tại Việt Nam; người đang dùng được dùng bản tiếng Việt miễn phí.'), ['newsPilot', 'newsVi']],
   ];
   return `<section class="pg" data-chap="IV" id="ap-app">
-${head('APP　<b>MAIN PRODUCT</b>', T('ベトナムでの主力製品：<br /><i>ANDPAD 施工管理アプリ。</i>', 'The main product in Vietnam:<br /><i>the ANDPAD site app.</i>', 'Sản phẩm chủ lực tại Việt Nam:<br /><i>app ANDPAD Quản lý thi công.</i>'),
+${head('APP　<b>MAIN PRODUCT</b>', T('ベトナムでの主力製品：<br /><i>ANDPAD 施工管理アプリ。</i>', 'The main product in Vietnam:<br /><i>the ANDPAD construction management app.</i>', 'Sản phẩm chủ lực tại Việt Nam:<br /><i>app ANDPAD Quản lý thi công.</i>'),
     'Official name ／ Features ／ Problem ／ Support',
     T('正式なアプリ名、機能、解決する課題、企業への支援。ベトナム語版は施工管理、チャット、図面の3つ（2025年6月）。',
       'Official app name, features, the problem it solves and how it supports companies. The Vietnamese version covers three parts: Construction Management, Chat, Drawings (June 2025).',
@@ -69,7 +69,7 @@ ${head('APP　<b>MAIN PRODUCT</b>', T('ベトナムでの主力製品：<br /><i
       </ul>
       ${L3('p', b.t(T('ストアの関連アプリ：ANDPAD CHAT、ANDPAD 図面、検査、ボード、受発注、3Dスキャン、BM、おうちノートなど。',
         'Related apps in the store: ANDPAD CHAT, ANDPAD 図面 (Drawings), Inspection, Board, Ordering, 3D Scan, BM, Ouchi Note and more.',
-        'App liên quan trên store: ANDPAD CHAT, ANDPAD 図面 (Bản vẽ), Kiểm tra, ANDPAD ボード (điều phối nhân công việc ngắn ngày), Đặt hàng, Quét 3D, BM, App chủ nhà và các app khác.'), 'appIos'), ' class="ap-an-p"')}
+        'App liên quan trên store: ANDPAD CHAT, ANDPAD 図面 (Bản vẽ), Kiểm tra, ANDPAD ボード (Lịch điều phối thợ), Đặt hàng, Quét 3D, BM, Ouchi Note (app cho chủ nhà) và các app khác.'), 'appIos'), ' class="ap-an-p"')}
     </div>
   </div>
   <div class="ap-ftw rv" style="--d:200ms">
@@ -94,9 +94,9 @@ export function pageScope({ L3, T, head, b }) {
         'Construction tech, building sector: ¥184.5bn in FY2023 (+11.7%), forecast ¥304.3bn in FY2030 (7.4% a year)',
         'Công nghệ xây dựng mảng kiến trúc: 184,5 tỷ yên năm tài khóa 2023 (+11,7%), dự báo 304,3 tỷ yên năm tài khóa 2030 (tăng 7,4%/năm)'), ['yano']],
     [T('シェア', 'Share', 'Thị phần'),
-      T('建設業マネジメントクラウド市場で導入企業数1位、8年連続（MIC、2025年12月）。％は非公開',
-        'First by adopting companies in the construction management cloud market, 8 years running (MIC, Dec 2025). No % published',
-        'Xếp thứ nhất về số doanh nghiệp sử dụng trong thị trường cloud quản lý ngành xây dựng, 8 năm liên tiếp (MIC, 12/2025). Tỷ lệ % không công bố'), ['share', 'mic']],
+      T('建設業マネジメントクラウドサービス市場で導入企業数1位、8年連続（MIC、2025年12月）。％は非公開',
+        'First by adopting companies in the construction management cloud service market, 8 years running (MIC, Dec 2025). No % published',
+        'Xếp thứ nhất về số doanh nghiệp sử dụng trong thị trường dịch vụ cloud quản lý ngành xây dựng, 8 năm liên tiếp (MIC, 12/2025). Tỷ lệ % không công bố'), ['share', 'mic']],
     [T('利用規模', 'Scale', 'Quy mô dùng'),
       T('27.9万社、81.8万人', '279,000 companies, 818,000 users', '279.000 công ty, 818.000 người dùng'), ['top']],
   ];
@@ -122,7 +122,7 @@ export function pageScope({ L3, T, head, b }) {
       [T('本社はホーチミン市、ハノイにも事務所（2026年4月移転）', 'Head office in Ho Chi Minh City, plus a Hanoi office (moved April 2026)', 'Trụ sở TP.HCM, thêm văn phòng Hà Nội (dời 4/2026)'), ['newsHanoi', 'vnHanoiPr']],
       [T('ホーチミン市が2025年の建設市場の36.88％', 'Ho Chi Minh City made up 36.88% of 2025 construction value', 'TP.HCM chiếm 36,88% giá trị thị trường xây dựng 2025'), ['mordorVn']],
       [T('JETRO事業（2023年12月採択）の現地パートナーはPENTA-OCEAN CONSTRUCTION VIETNAM。実証は日系建設企業の協力で実施', 'JETRO project (selected Dec 2023) with local partner PENTA-OCEAN CONSTRUCTION VIETNAM; the pilot ran with help from Japanese builders', 'Dự án JETRO (được chọn 12/2023) có đối tác tại chỗ PENTA-OCEAN CONSTRUCTION VIETNAM; thí điểm làm cùng doanh nghiệp xây dựng Nhật'), ['newsJetro', 'newsPilot']],
-      [T('今後の計画：南北の主要都市で導入拠点を広げ、その後は周辺国へ', 'Plan: more sites in major cities in the north and south, then neighbouring countries', 'Kế hoạch: mở rộng ở các thành phố lớn miền Bắc, miền Nam, rồi tới nước lân cận'), ['newsPilot']],
+      [T('今後の計画：南北の主要都市で導入拠点を広げ、周辺国への展開も準備', 'Plan: more sites in major cities in the north and south, and preparing to expand to neighbouring countries', 'Kế hoạch: mở rộng ở các thành phố lớn miền Bắc, miền Nam và chuẩn bị mở rộng sang nước lân cận'), ['newsPilot']],
     ]],
   ];
   const SW = [

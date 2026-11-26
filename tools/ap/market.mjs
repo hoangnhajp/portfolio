@@ -10,7 +10,7 @@ export function pageMarket({ L3, T, head, b }) {
   const subC = b.c('mhlw', 'cao');
   const { COMP } = rivals(T);
   const CTX = [
-    ['stopwatch', T('残業の上限（2024年4月から）', 'Overtime cap (from April 2024)', 'Giới hạn làm thêm (từ 4/2024)'),
+    ['stopwatch', T('時間外労働の上限規制（2024年4月から）', 'Overtime cap (from April 2024)', 'Giới hạn làm thêm (từ 4/2024)'),
       T('原則は月45時間、年360時間。特別条項でも年720時間までです。',
         'Standard cap: 45 h a month, 360 h a year; 720 h a year at most by special agreement.',
         'Nguyên tắc 45 giờ/tháng, 360 giờ/năm; thỏa thuận đặc biệt tối đa 720 giờ/năm.'), ['mhlw']],
@@ -19,7 +19,7 @@ export function pageMarket({ L3, T, head, b }) {
     ['roadmap', T('i-Construction 2.0（国交省）', 'i-Construction 2.0 (MLIT)', 'i-Construction 2.0 (Bộ MLIT)'),
       T('2040年度までに建設現場の省人化3割以上（生産性1.5倍）。',
         'By FY2040: at least 30% fewer workers on site (1.5x productivity).',
-        'Năm tài khóa 2040: công trường bớt ít nhất 30% nhân công (năng suất x1,5).'), ['iCon']],
+        'Đến năm tài khóa 2040: công trường bớt ít nhất 30% nhân công (năng suất x1,5).'), ['iCon']],
   ];
   // [công ty, loại, sản phẩm, kết quả, nguồn]
   const CASES = [
@@ -27,13 +27,13 @@ export function pageMarket({ L3, T, head, b }) {
       T('現場監督の残業が年250〜300時間から150時間に', 'Supervisor overtime: 250 to 300 h a year down to 150 h', 'Giờ làm thêm của giám sát: 250 đến 300 giờ/năm còn 150 giờ'), 'cBeaver'],
     ['カスケホーム', T('リフォーム', 'Renovation', 'Cải tạo nhà'), T('施工管理', 'Construction Mgmt', 'Quản lý thi công'),
       T('一人あたりの残業が月10時間以上減少', 'Overtime down 10+ h per person a month', 'Làm thêm giảm hơn 10 giờ/người/tháng'), 'cKasuke'],
-    ['平松建築', T('工務店', 'Home builder', 'Nhà thầu nhà ở'), T('遠隔臨場', 'Remote Inspection', 'Nghiệm thu từ xa'),
+    ['平松建築', T('工務店', 'Home builder', 'Nhà thầu nhà ở'), T('遠隔臨場', 'Remote Inspection', 'Giám sát hiện trường từ xa'),
       T('現場訪問が毎週から、工事全体で2〜3回に', 'Site visits: weekly down to 2 or 3 per build', 'Đi công trường: từ hằng tuần còn 2 đến 3 lần cho cả công trình'), 'cHiramatsu'],
     ['大勝', T('マンション施工', 'Condominiums', 'Thi công chung cư'), T('図面', 'Drawings', 'Bản vẽ'),
       T('是正指示台帳の作成が1〜2時間から約10分に', 'Correction log: 1 to 2 h down to about 10 min', 'Lập sổ chỉ thị sửa: 1 đến 2 giờ còn khoảng 10 phút'), 'cDaikatsu'],
     ['エイコーエナジオ', T('太陽光', 'Solar', 'Điện mặt trời'), T('施工管理', 'Construction Mgmt', 'Quản lý thi công'),
       T('図面と工程の確認、現地調査と検査の手間が約50％減少', 'Drawing and schedule checks, surveys and inspections: about 50% less effort', 'Công kiểm bản vẽ, tiến độ, khảo sát và kiểm tra giảm khoảng 50%'), 'cEnergio'],
-    ['渡正配管工業', T('設備配管', 'Piping', 'Đường ống'), T('ボード', 'Board', 'Bảng tiến độ'),
+    ['渡正配管工業', T('設備配管', 'Piping', 'Đường ống'), T('ボード', 'Board', 'Lịch điều phối thợ'),
       T('粗利率が約10％向上', 'Gross margin up about 10%', 'Tỷ suất lãi gộp tăng khoảng 10%'), 'cWatasho'],
   ];
   const SUP = [
@@ -61,9 +61,9 @@ ${CTX.map(([ic, h, p, r], i) => `    <li style="--i:${i}"${OPS[i] ? ` data-op="$
     <div class="ap-mk-l">
       ${Q(2)}
       ${L3('h3', b.t(T('製品：ANDPAD（クラウド型建設プロジェクト管理サービス）', 'Product: ANDPAD, a cloud construction project management service', 'Sản phẩm: ANDPAD, dịch vụ cloud quản lý dự án xây dựng'), 'top'))}
-      ${L3('p', b.t(T('シェア：建設業マネジメントクラウド市場で導入企業数1位、8年連続（デロイト トーマツ ミック経済研究所、2025年12月、2022〜2025年度見込）。％は非公開。利用27.9万社、81.8万人。',
-        'Share: first by number of adopting companies in the construction management cloud market, 8 years running (Deloitte Tohmatsu MIC Research, Dec 2025, FY2022 to FY2025 est.). The % share is not published. In use at 279,000 companies by 818,000 people.',
-        'Thị phần: xếp thứ nhất về số doanh nghiệp sử dụng trong thị trường cloud quản lý ngành xây dựng, 8 năm liên tiếp (Deloitte Tohmatsu MIC, 12/2025, năm tài khóa 2022 đến 2025 ước tính). Tỷ lệ % không công bố. Đang dùng: 279.000 công ty, 818.000 người.'), 'share', 'mic', 'top'))}
+      ${L3('p', b.t(T('シェア：建設業マネジメントクラウドサービス市場で導入企業数1位、8年連続（デロイト トーマツ ミック経済研究所、2025年12月、2022〜2025年度見込）。％は非公開。利用27.9万社、81.8万人。',
+        'Share: first by number of adopting companies in the construction management cloud service market, 8 years running (Deloitte Tohmatsu MIC Research, Dec 2025, FY2022 to FY2025 est.). The % share is not published. In use at 279,000 companies by 818,000 people.',
+        'Thị phần: xếp thứ nhất về số doanh nghiệp sử dụng trong thị trường dịch vụ cloud quản lý ngành xây dựng, 8 năm liên tiếp (Deloitte Tohmatsu MIC, 12/2025, năm tài khóa 2022 đến 2025 ước tính). Tỷ lệ % không công bố. Đang dùng: 279.000 công ty, 818.000 người.'), 'share', 'mic', 'top'))}
     </div>
     <div class="ap-mk-r">
       ${L3('span', T('主な競合製品（製品と運営会社）', 'Main competitors (product, company)', 'Sản phẩm cạnh tranh chính (sản phẩm, công ty vận hành)'), ' class="ap-k"')}
@@ -131,14 +131,14 @@ ${COMP.map(([n, co, plus, rp, minus, rm]) => `      <li class="ap-rv"><span clas
       ${L3('span', T('他社製品の強み', 'Where other products stand out', 'Thế mạnh của các sản phẩm khác'), ' class="ap-k"')}
       ${L3('p', b.t(T('始めやすい料金：KANNAは初期費用0円で協力会社IDも無料、BuildeeとダンドリワークはWebで料金を公開。1つの工程に絞った深さ：SPIDERPLUSは検査、Buildeeは調整会議と安全書類、Photoructionは検査準備などの業務代行。',
         'Easier entry pricing: KANNA has no setup fee and free partner IDs; Buildee and Dandori Work publish their prices. Depth in one task: SPIDERPLUS in inspections, Buildee in coordination and safety papers, Photoruction in outsourced inspection prep.',
-        'Chi phí khởi đầu thấp: KANNA miễn phí khởi tạo, cấp ID đối tác miễn phí; Buildee và Dandori Work công khai bảng giá trên website. Chuyên sâu theo nghiệp vụ: SPIDERPLUS về nghiệm thu, kiểm tra; Buildee về họp điều phối và hồ sơ an toàn; Photoruction cung cấp dịch vụ thực hiện thay khâu chuẩn bị kiểm tra.'),
+        'Chi phí khởi đầu thấp: KANNA miễn phí khởi tạo, cấp ID đối tác miễn phí; Buildee và Dandori Work công khai bảng giá trên website. Chuyên sâu theo nghiệp vụ: SPIDERPLUS về kiểm tra; Buildee về họp điều phối và hồ sơ an toàn; Photoruction cung cấp dịch vụ thực hiện thay khâu chuẩn bị kiểm tra.'),
         'kanna', 'kannaFree', 'buildee', 'dandoriPlan', 'spider', 'photoruction'), ' class="ap-edge-p"')}
     </div>
     <div class="card ap-edge-a">
       ${L3('span', T('ANDPADの強み', 'ANDPAD\'s strengths', 'Thế mạnh của ANDPAD'), ' class="ap-k"')}
-      ${L3('p', b.t(T('規模：導入企業数1位が8年連続、27.9万社が利用。幅：現場の施工管理から図面、検査、受発注、請求までを1つの基盤でつなぎ、日本語のほか6つの海外言語に対応。',
-        'Scale: first by adopting companies for 8 years, used by 279,000 companies. Breadth: one platform links site management, drawings and inspections to ordering and billing, in Japanese plus six foreign languages.',
-        'Quy mô: xếp thứ nhất về số doanh nghiệp sử dụng 8 năm liên tiếp, 279.000 công ty đang sử dụng. Phạm vi: một nền tảng kết nối quản lý thi công, bản vẽ, kiểm tra với đặt hàng, hóa đơn; hỗ trợ tiếng Nhật và 6 ngoại ngữ.'),
+      ${L3('p', b.t(T('規模：導入企業数1位が8年連続、27.9万社が利用。幅：現場の施工管理から図面、検査、受発注、請求までを1つの基盤でつなぐ。施工管理機能は日本語のほか6つの海外言語に対応。',
+        'Scale: first by adopting companies for 8 years, used by 279,000 companies. Breadth: one platform links site management, drawings and inspections to ordering and billing; site management also runs in six foreign languages besides Japanese.',
+        'Quy mô: xếp thứ nhất về số doanh nghiệp sử dụng 8 năm liên tiếp, 279.000 công ty đang sử dụng. Phạm vi: một nền tảng kết nối quản lý thi công, bản vẽ, kiểm tra với đặt hàng, hóa đơn; chức năng quản lý thi công hỗ trợ thêm 6 ngoại ngữ ngoài tiếng Nhật.'),
         'share', 'top', 'products', 'newsLang6'), ' class="ap-edge-p"')}
     </div>
   </div>
@@ -152,7 +152,7 @@ function rivals(T) {
   const PROS = [
     [T('施工管理から図面、検査、受発注、請求、BIMまで20以上の製品を1つの基盤で', '20+ products on one platform, from site management and drawings to ordering, billing and BIM', 'Hơn 20 sản phẩm trên một nền tảng: từ quản lý thi công, bản vẽ, kiểm tra tới đặt hàng, hóa đơn, BIM'), ['products']],
     [T('アプリマーケットで外部サービスと連携', 'App Market links partner services', 'Chợ ứng dụng kết nối dịch vụ đối tác'), ['products']],
-    [T('日本語のほか6つの海外言語に対応（2025年12月から）', 'Japanese plus six foreign languages (since December 2025)', 'Ngoài tiếng Nhật còn 6 ngoại ngữ (từ 12/2025)'), ['newsLang6']],
+    [T('施工管理機能が日本語のほか6つの海外言語に対応（2025年12月から）', 'Construction management in Japanese plus six foreign languages (since December 2025)', 'Chức năng quản lý thi công có thêm 6 ngoại ngữ ngoài tiếng Nhật (từ 12/2025)'), ['newsLang6']],
     [T('導入4ステップをCSとサポートが伴走', 'CS and Support guide a four-step rollout', 'CS và đội hỗ trợ đi cùng 4 bước triển khai'), ['support']],
   ];
   const CONS = [
@@ -164,7 +164,7 @@ function rivals(T) {
     ['SPIDERPLUS', T('スパイダープラス株式会社', 'SpiderPlus & Co.', 'SpiderPlus & Co.'),
       T('建築、設備、電気工事向けに図面と検査が強い。配筋検査の準備の8割をAIで。2,300社以上、8万人以上（2026年9月末）',
         'Strong in drawings and inspections for building, MEP and electrical trades; AI does 80% of rebar-inspection prep. 2,300+ companies, 80,000+ users (end of Sep 2026)',
-        'Thế mạnh về bản vẽ và kiểm tra cho xây dựng, cơ điện, điện; AI đảm nhận 80% khâu chuẩn bị kiểm tra cốt thép. Hơn 2.300 công ty, 80.000 người dùng (cuối 9/2026)'), ['spider'],
+        'Thế mạnh về bản vẽ và kiểm tra cho xây dựng, cơ điện, điện; AI đảm nhận 80% khâu chuẩn bị kiểm tra cốt thép. Hơn 2.300 công ty, hơn 80.000 người dùng (cuối 9/2026)'), ['spider'],
       T('現場の記録と検査が中心。料金は非公開', 'Centred on site records and inspections; pricing not public', 'Tập trung vào hồ sơ và kiểm tra tại công trường; giá không công khai'), ['spider']],
     ['KANNA', T('株式会社アルダグラム', 'Aldagram Inc.', 'Aldagram Inc.'),
       T('初期費用0円、協力会社IDは無料で無制限、無料プランあり。日本語を含む6言語。10万社超（無料の協力会社を含む）',

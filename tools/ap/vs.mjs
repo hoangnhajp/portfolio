@@ -72,7 +72,7 @@ export function pageVsMap({ L3, head, b }) {
   }).join('\n');
   return `<section class="pg" data-chap="IV" id="ap-vs-map">
 ${head('VS 2　<b>POSITIONING</b>', T('特化型か、<br /><i>統合型か。</i>', 'Specialised<br /><i>or integrated?</i>', 'Chuyên sâu<br /><i>hay tích hợp?</i>'),
-    'Scope ／ Entry cost ／ Map', T('対応範囲と導入のしやすさで6製品を配置。', 'Six products by scope and ease of adoption.', 'Định vị 6 sản phẩm theo phạm vi chức năng và chi phí khởi đầu.'), sub)}
+    'Scope ／ Entry cost ／ Map', T('対応範囲と導入のしやすさで6製品を配置。', 'Six products by scope and ease of adoption.', 'Định vị 6 sản phẩm theo phạm vi chức năng và mức độ dễ triển khai.'), sub)}
   <div class="card ap-vs-c ap-vm rv" style="--d:160ms">
     <svg class="ap-vs-chart ap-vm-svg" role="img" aria-label="Positioning map: ANDPAD is an integrated platform for the whole workflow (quote-based pricing); SPIDERPLUS and Photoruction are quote-based and more specialised; KANNA, Dandori Work and Buildee have lower entry costs" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
       <rect x="${X(50)}" y="${P}" width="${X(100) - X(50)}" height="${Y(50) - P}" class="ap-vm-q is-me"/>
@@ -103,7 +103,7 @@ const STR = [
   ['team-group', T('規模', 'Scale', 'Quy mô'), 1, '', ['share']],
   ['building-blocks', T('製品の幅', 'Product breadth', 'Phạm vi sản phẩm'), 1, '', ['products']],
   ['chat-bubbles', T('言語（日本語＋6言語、KANNAは計6言語）', 'Languages (JA + 6; KANNA 6 in all)', 'Ngôn ngữ (Nhật + 6; KANNA tổng 6)'), 1, '', ['newsLang6', 'kannaScale']],
-  ['key', T('導入しやすい料金', 'Low entry cost', 'Chi phí khởi đầu'), 0, 'KANNA · Buildee · Dandori Work', ['kanna', 'buildee', 'dandoriPlan']],
+  ['key', T('導入しやすい料金', 'Low entry cost', 'Chi phí khởi đầu thấp'), 0, 'KANNA · Buildee · Dandori Work', ['kanna', 'buildee', 'dandoriPlan']],
   ['checklist', T('特定工程の専門性', 'Depth in a specific process', 'Chuyên sâu nghiệp vụ'), 0, 'SPIDERPLUS · Buildee · Photoruction', ['spider', 'buildee', 'photoruction']],
 ];
 export function pageVsWin({ L3, head, b }) {

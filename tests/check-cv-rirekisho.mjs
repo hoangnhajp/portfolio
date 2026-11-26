@@ -38,7 +38,9 @@ const STALE = ['支店長', 'Branch manager', 'Branch Manager', 'Giám đốc ch
   '人事、採用担当', '23段階', '労働法', '代表代行', '2022年2月 ～ 現在', '2024 ～ 現在', 'BRANCH OPERATIONS',
   '予算', 'S&amp;A Expense', '修士（財務、管理）',
   '約5名のチーム', '5名分の日次報告', 'European CEOs', 'Japanese presidents'];
-for (const s of STALE) ok(!html.includes(s), `còn nội dung cũ trái CV mới: "${s}"`);
+// '予算' trong tab Andpad Info là tên chức năng của ANDPAD (実行予算), không phải việc của Nhã: chỉ quét ngoài khối ap
+const htmlCv = html.replace(/<!-- ap:start -->[\s\S]*?<!-- ap:end -->/, '');
+for (const s of STALE) ok(!(s === '予算' ? htmlCv : html).includes(s), `còn nội dung cũ trái CV mới: "${s}"`);
 
 // 5. Sự thật cốt lõi của CV mới có mặt (JA)
 const FACTS = ['MAYEKAWA VIETNAM CO., LTD.（MYCOM）', '営業部 アシスタントマネージャー 兼 人事部長', '2022年2月 ～ 2026年6月',
