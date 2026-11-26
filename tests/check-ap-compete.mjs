@@ -19,7 +19,7 @@ const cites = (x) => [...x.matchAll(/<sup class="ap-c">\[([\d,]+)\]<\/sup>/g)].f
 const refsOf = (s, id) => Object.fromEntries([...s.matchAll(new RegExp(`<li id="${id}-r(\\d+)">[\\s\\S]*?<a href="([^"]+)"`, 'g'))].map((m) => [Number(m[1]), m[2]]));
 
 const COMP = [
-  ['SPIDERPLUS', 'スパイダープラス株式会社', 'SpiderPlus', 'spider-plus.com', [/2\.3万社|23,000/, /80万人|800,000/]],
+  ['SPIDERPLUS', 'スパイダープラス株式会社', 'SpiderPlus', 'spider-plus.com', [/2,300社以上/, /8万人以上/]], // spider-plus.com: 導入社数 2300社以上 / 利用者数 80000人以上 (data-to), không phải 2.3万 / 80万
   ['KANNA', '株式会社アルダグラム', 'Aldagram', 'kanna4u.com', [/初期費用0円/, /無料/]],
   ['Photoruction', '株式会社フォトラクション', 'Photoruction Inc', 'photoruction.com', [/AI-BPO/]],
   ['ダンドリワーク', '株式会社ダンドリワーク', 'DANDORI WORK', 'dandori-work.com', [/1,700/, /20万円/]],
@@ -87,7 +87,7 @@ for (const [cls, vi] of [['ap-edge-r', 'Đối thủ đang có lợi thế'], ['
 }
 // trang mới đủ khung của tab: sidebar, ảnh nền riêng, dấu câu
 const sb = (html.match(/<nav class="sb-nav" data-for="ap" hidden>([\s\S]*?)<\/nav>/) || [])[1] || '';
-ok(/href="#ap-market"[\s\S]*?href="#ap-compete" data-sec="ap-compete"><em>VS<\/em>[\s\S]*?href="#ap-role"/.test(sb), 'sidebar: mục VS #ap-compete phải nằm giữa #ap-market và #ap-role');
+ok(/href="#ap-market"[\s\S]*?href="#ap-compete" data-sec="ap-compete"><em>VS<\/em>/.test(sb), 'sidebar: mục VS #ap-compete phải đứng sau #ap-market');
 ok(((html.match(/var IDS=\[([^\]]*)\]/) || [])[1] || '').includes("'ap-compete'") && existsSync(p('assets/pg/ap-compete.webp')), 'thiếu ảnh nền assets/pg/ap-compete.webp trong IDS');
 for (const x of [m, s]) { ok(!/[—–―]/.test(strip(x)), 'có dấu gạch dài'); ok(!lang(x, 'ja').includes('・'), 'JA có dấu "・"'); ok(!/No\.?\s?1|ナンバーワン/.test(strip(x)), 'không tự khen kiểu No.1'); }
 

@@ -47,7 +47,7 @@ for (const k of ['Before a sales team existed', 'IT project needs', 'basic specs
 for (const k of ['営業チームがない', '自ら営業', 'ニーズ', '基本仕様', '開発チーム', 'アプリとWeb', '1名から5〜6名']) ok(lang(rest, 'ja').includes(k), `chữ JA thiếu ý "${k}"`);
 const lists = { ja: [], en: [], vi: [] };
 for (const m of sec.matchAll(/<ol class="jil-sk"[^>]*data-l="(ja|en|vi)">([\s\S]*?)<\/ol>/g)) lists[m[1]] = m[2].match(/<li>[\s\S]*?<\/li>/g) || [];
-for (const l of ['ja', 'en', 'vi']) ok(lists[l].length === 5, `danh sách kỹ năng ${l} cần đúng 5 mục, có ${lists[l].length}`);
+for (const l of ['ja', 'en', 'vi']) ok(lists[l].length === 6, `danh sách kỹ năng ${l} cần đúng 6 mục (task 6vyj thêm báo giá, hợp đồng, HDSD), có ${lists[l].length}`);
 const sv = lists.vi.map(text).join(' | ').toLowerCase();
 for (const k of ['hiểu ý khách hàng', 'nhu cầu', 'thuật ngữ it', 'excel', 'hình', 'tuyển dụng', 'team dev']) ok(sv.includes(k), `kỹ năng VI thiếu "${k}"`);
 const se = lists.en.map(text).join(' | ').replace('Recruit', 'recruit');
@@ -55,4 +55,4 @@ for (const k of ['Excel', 'terminology', 'recruit']) ok(se.includes(k), `kỹ n�
 ok(/<style[^>]*>[^]*?\.jil-sk\{/.test(html), 'thiếu CSS .jil-sk cho danh sách kỹ năng');
 
 if (fails.length) { console.error(`FAIL check-jil-startup (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log('PASS check-jil-startup: tiêu đề mới 3 ngôn ngữ, workflow 6 bước (bước cuối nổi bật), thẻ Startup đủ ý, 5 kỹ năng x 3 ngôn ngữ');
+console.log('PASS check-jil-startup: tiêu đề mới 3 ngôn ngữ, workflow 6 bước (bước cuối nổi bật), thẻ Startup đủ ý, 6 kỹ năng x 3 ngôn ngữ');

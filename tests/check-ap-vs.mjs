@@ -43,8 +43,10 @@ for (const id of PAGES) {
 
 // 5) Số liệu khớp nguồn đã kiểm (không bịa)
 const S = vi(sec('ap-vs-scale')), M = vi(sec('ap-vs-map')), W = vi(sec('ap-vs-win'));
-for (const k of ['279.000', '100.000', '23.000', '818.000', '800.000', '8 năm']) ok(S.includes(k), `#ap-vs-scale thiếu số "${k}"`);
-ok(/data-v="279000"/.test(sec('ap-vs-scale')) && /data-v="100000"/.test(sec('ap-vs-scale')) && /data-v="23000"/.test(sec('ap-vs-scale')), '#ap-vs-scale: thanh phải mang đúng giá trị data-v');
+// SPIDERPLUS: spider-plus.com ghi 2300社以上 / 80000人以上 (2026年9月末); bản cũ ghi nhầm 23.000 / 800.000 (gấp 10)
+for (const k of ['279.000', '100.000', 'Hơn 2.300', '818.000', '170.000', 'Hơn 80.000', '400.000', '8 năm']) ok(S.includes(k), `#ap-vs-scale thiếu số "${k}"`);
+for (const v of [279000, 100000, 2300, 818000, 170000, 80000]) ok(new RegExp(`data-v="${v}"`).test(sec('ap-vs-scale')), `#ap-vs-scale: thiếu thanh data-v="${v}"`);
+ok(!/23\.000|800\.000|ngang SPIDERPLUS/.test(S), '#ap-vs-scale còn số SPIDERPLUS sai (23.000 / 800.000) hoặc câu "ngang SPIDERPLUS"');
 for (const k of ['ANDPAD', 'SPIDERPLUS', 'KANNA', 'Photoruction', 'Dandori Work', 'Buildee']) ok(M.includes(k), `#ap-vs-map thiếu "${k}"`);
 for (const k of ['0 yên', '50.000', '200.000', 'báo giá']) ok(W.includes(k), `#ap-vs-win thiếu "${k}"`);
 // Không ghi % thị phần (ANDPAD không công bố)
@@ -55,7 +57,7 @@ for (const d of ['spider-plus.com', 'kanna4u.com', 'dandori-work.com', 'buildee.
 
 // Số trên 3 slide phải là số đã dẫn nguồn ở trang so sánh (tools/ap/market.mjs), không thêm số mới
 const mk = readFileSync(p('tools/ap/market.mjs'), 'utf8');
-for (const k of ['23.000', '100.000', '800.000', '50.000', '200.000', '15.000', '30.000', '1.061', '279.000']) ok(mk.includes(k), `số "${k}" không có trong dữ liệu đã dẫn nguồn`);
+for (const k of ['2.300', '100.000', '80.000', '170.000', '400.000', '50.000', '200.000', '15.000', '30.000', '1.061', '279.000']) ok(mk.includes(k), `số "${k}" không có trong dữ liệu đã dẫn nguồn`);
 // Bản đồ: chỉ ANDPAD ở nửa "trọn quy trình" (khớp câu kết), không vẽ vùng nhận định không có nguồn
 const map = sec('ap-vs-map');
 const mid = +((map.match(/class="ap-vm-ax"\/><line x1="([\d.]+)"/) || [])[1]);

@@ -1,5 +1,5 @@
 // Task m07v (phần bổ sung y5cp: "bổ sung và tìm kiếm thêm thông tin trên internet"): tab Andpad Info thêm trang #ap-market,
-// đặt ngay trước #ap-role (dự báo công việc, giờ là mục 04). Nội dung tra cứu web 25/11/2026: bối cảnh ngành (thiếu lao động,
+// từng đặt trước #ap-role (task orn3 đã bỏ trang dự báo công việc). Nội dung tra cứu web 25/11/2026: bối cảnh ngành (thiếu lao động,
 // luật giới hạn làm thêm 4/2024), vị thế thị trường + đối thủ, case khách hàng có kết quả, cách ANDPAD hỗ trợ khách hàng.
 // Đủ JA / EN / VI, có nguồn, ảnh nền riêng, icon 3D, chuyển động chỉ transform/opacity (dùng chung khối ap-css).
 // Chạy: node tests/check-ap-market.mjs   (thoát 0 = đạt)
@@ -15,15 +15,13 @@ const strip = (s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const main = (html.match(/<main class="wrap" data-view="ap" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([\w-]+)"/g)].map((m) => m[1]);
 ok(ids.includes('ap-market'), `thiếu section #ap-market (đang: ${ids})`);
-// #ap-app, #ap-scope (sản phẩm chủ lực tại VN, thị trường, khu vực; tests/check-ap-app.mjs) chen giữa #ap-compete và #ap-role (sau 3 slide chart #ap-vs-*)
-ok(ids.indexOf('ap-compete') === ids.indexOf('ap-market') + 1 && ids.slice(ids.indexOf('ap-compete') + 1, ids.indexOf('ap-role')).every((x) => ['ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope'].includes(x)), `#ap-market rồi #ap-compete (so sánh đối thủ) phải đứng trước #ap-role, giữa chỉ có #ap-vs-*, #ap-app, #ap-scope: ${ids}`);
+// #ap-app, #ap-scope (sản phẩm chủ lực tại VN, thị trường, khu vực; tests/check-ap-app.mjs) đứng sau #ap-compete (sau 3 slide chart #ap-vs-*); task orn3 bỏ #ap-role nên #ap-scope là trang cuối
+ok(ids.indexOf('ap-compete') === ids.indexOf('ap-market') + 1 && ids.slice(ids.indexOf('ap-compete') + 1).every((x) => ['ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope'].includes(x)), `#ap-market rồi #ap-compete (so sánh đối thủ) rồi tới cuối tab chỉ có #ap-vs-*, #ap-app, #ap-scope: ${ids}`);
 const s = (main.match(/<section class="pg"[^>]*id="ap-market"[\s\S]*?<\/section>/) || [''])[0];
 
-// sidebar + ảnh nền + đánh số mục: market 03, role 04
+// sidebar + ảnh nền + đánh số mục: market 03 (task orn3: bỏ #ap-role 04 FORECAST)
 const sb = (html.match(/<nav class="sb-nav" data-for="ap" hidden>([\s\S]*?)<\/nav>/) || [])[1] || '';
 ok(/href="#ap-market" data-sec="ap-market"><em>03<\/em>/.test(sb), 'sidebar thiếu mục 03 #ap-market');
-ok(/href="#ap-role" data-sec="ap-role"><em>04<\/em>/.test(sb), 'sidebar #ap-role phải đánh số 04');
-ok(/id="ap-role"[\s\S]{0,80}04　<b>FORECAST<\/b>/.test(main), '#ap-role phải mang nhãn 04 FORECAST');
 ok(((html.match(/var IDS=\[([^\]]*)\]/) || [])[1] || '').includes("'ap-market'"), "pganh IDS thiếu 'ap-market'");
 ok(existsSync(p('assets/pg/ap-market.webp')), 'thiếu assets/pg/ap-market.webp');
 

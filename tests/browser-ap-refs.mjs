@@ -13,7 +13,7 @@ const CANDIDATES = [process.env.CHROME, 'C:/Program Files/Google/Chrome/Applicat
 const chromePath = CANDIDATES.find((p) => existsSync(p));
 if (!chromePath) { console.error('FAIL: không tìm thấy Chrome (đặt biến CHROME)'); process.exit(1); }
 const pageUrl = pathToFileURL(fileURLToPath(new URL('../index.html', import.meta.url))).href;
-const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-compete', 'ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope', 'ap-role'];
+const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-compete', 'ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope'];
 const dir = mkdtempSync(join(tmpdir(), 'apr-'));
 const chrome = spawn(chromePath, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run',
   '--no-default-browser-check', '--disable-gpu', '--allow-file-access-from-files', 'about:blank'], { stdio: 'ignore' });

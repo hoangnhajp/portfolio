@@ -34,7 +34,7 @@ const PROD = {
 
 export const REFS = {
   // ---- công ty ----
-  company: ['https://andpad.co.jp/company', T('ANDPAD 会社概要（代表者、所在地、社員数）', 'ANDPAD company profile (CEO, address, headcount)', 'Hồ sơ công ty ANDPAD (CEO, địa chỉ, số nhân viên)')],
+  company: ['https://andpad.co.jp/company', T('ANDPAD 会社概要（所在地、社員数）', 'ANDPAD company profile (address, headcount)', 'Hồ sơ công ty ANDPAD (địa chỉ, số nhân viên)')],
   mission: ['https://andpad.co.jp/mission/', T('ANDPAD ミッションとバリュー', 'ANDPAD mission and values', 'Sứ mệnh và giá trị của ANDPAD')],
   top: ['https://andpad.jp/', T('ANDPAD 製品サイト（利用社数、ユーザー数、製品一覧）', 'ANDPAD product site (companies, users, product list)', 'Trang ANDPAD (số công ty, người dùng, sản phẩm)')],
   profile: [PRT('000000193'), T('PR TIMES：ナレッジAI公開の発表（会社概要に設立2012年9月）', 'PR TIMES: Knowledge AI release, with company profile (founded Sep 2012)', 'PR TIMES: thông cáo Knowledge AI, kèm hồ sơ công ty (thành lập 9/2012)')],
@@ -52,7 +52,7 @@ export const REFS = {
   newsJetro: ['https://andpad.co.jp/news/4260/', T('ANDPAD ニュース：JETRO「日ASEANにおけるアジアDX促進事業」に採択（2023年12月）', 'ANDPAD news: selected for JETRO Japan-ASEAN Asia DX programme (Dec 2023)', 'Tin ANDPAD: được chọn vào chương trình DX Nhật Bản và ASEAN của JETRO (12/2023)')],
   newsPilot: [N('20251006'), T('ANDPAD ニュース：ベトナム実証の完了と結果（2025年10月6日）', 'ANDPAD news: Vietnam pilot completed, results (6 Oct 2025)', 'Tin ANDPAD: hoàn tất thí điểm tại Việt Nam và kết quả (6/10/2025)')],
   newsHanoi: [N('20260408'), T('ANDPAD ニュース：ハノイ事務所の移転と拡大（2026年4月8日）', 'ANDPAD news: Hanoi office moved and expanded (8 Apr 2026)', 'Tin ANDPAD: dời và mở rộng văn phòng Hà Nội (8/4/2026)')],
-  newsLang6: [N('20251216'), T('ANDPAD ニュース：4言語を追加し計6言語に（2025年12月16日）', 'ANDPAD news: 4 more languages, 6 in total (16 Dec 2025)', 'Tin ANDPAD: thêm 4 ngôn ngữ, tổng 6 ngôn ngữ (16/12/2025)')],
+  newsLang6: [N('20251216'), T('ANDPAD ニュース：4言語を追加し海外の言語は計6言語に（2025年12月16日）', 'ANDPAD news: 4 more languages, 6 foreign languages in total (16 Dec 2025)', 'Tin ANDPAD: thêm 4 ngôn ngữ, tổng 6 ngoại ngữ (16/12/2025)')],
   // ---- sản phẩm ----
   products: ['https://andpad.jp/products', T('ANDPAD 製品一覧（各製品の公式画像とページ）', 'ANDPAD product list (official image and page for each product)', 'Danh sách sản phẩm ANDPAD (ảnh chính thức và trang của từng sản phẩm)')],
   appmarket: ['https://appmarket.andpad.jp/', T('ANDPAD アプリマーケット（外部サービス連携）', 'ANDPAD App Market (partner integrations)', 'Chợ ứng dụng ANDPAD (kết nối dịch vụ đối tác)')],
@@ -76,7 +76,7 @@ export const REFS = {
   nextgen: ['https://kyodonewsprwire.jp/release/202610238598', T('共同通信PRワイヤー：NextGen Tech 30 2026に選出', 'Kyodo PR Wire: named to NextGen Tech 30 2026', 'Kyodo PR Wire: lọt danh sách NextGen Tech 30 2026')],
   awardSite: ['https://page.andpad.jp/andpad_award/latest/', T('ANDPAD AWARD 公式サイト', 'ANDPAD AWARD official site', 'Trang chính thức ANDPAD AWARD')],
   one: ['https://one.andpad.jp/', T('ANDPAD ONE：ユーザーの活用事例とノウハウのコミュニティサイト', 'ANDPAD ONE: community site of user cases and know-how', 'ANDPAD ONE: trang cộng đồng chia sẻ case và kinh nghiệm của người dùng')],
-  asb: ['https://asb.andpad.jp/', T('ANDPADセミナー放送局（ライブとオンデマンドのセミナー）', 'ANDPAD Seminar TV (live and on-demand webinars)', 'ANDPAD Seminar TV (webinar)')],
+  asb: ['https://one.andpad.jp/events/', T('ANDPAD ONE イベントとセミナーの案内（オンライン、無料）', 'ANDPAD ONE events and seminars (online, free)', 'ANDPAD ONE: sự kiện và hội thảo (trực tuyến, miễn phí)')],
   // ---- thị trường, khách hàng ----
   mhlw: ['https://kensetsu-roudou-jikan.mhlw.go.jp/kensetsu_overtime.html', T('厚生労働省：建設業の時間外労働の上限規制（2024年4月から）', 'MHLW: overtime cap for construction (from Apr 2024)', 'Bộ MHLW: trần giờ làm thêm ngành xây dựng')],
   cao: ['https://www5.cao.go.jp/keizai-shimon/kaigi/special/reform/wg6/2026/0422shiryou1-1.pdf', T('内閣府WG資料（国交省、2026年4月）：建設業の就業者の年齢構成', 'Cabinet Office WG deck (MLIT, Apr 2026): age of construction workers', 'Tài liệu WG Nội các (MLIT, 4/2026): tuổi lao động xây dựng')],

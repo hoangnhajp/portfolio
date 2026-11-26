@@ -19,7 +19,7 @@ const SITE = [
     T('案件ごとに工程、写真、図面、報告をクラウドで共有します。', 'Keeps schedules, photos, drawings and reports for each project in the cloud.', 'Gom tiến độ, ảnh, bản vẽ, báo cáo của từng công trình lên đám mây.'),
     [F('工程表', T('変更すると担当者に自動で通知', 'Changes notify the people assigned', 'Đổi lịch là người phụ trách nhận thông báo')),
       F('写真', T('スマホで撮影して写真台帳に', 'Shoot on a phone, build the photo ledger', 'Chụp bằng điện thoại, ra sổ ảnh')),
-      F('多言語対応', T('英語、ベトナム語など6言語に翻訳', 'Translates into six languages, incl. English and Vietnamese', 'Dịch sang 6 ngôn ngữ, có tiếng Anh, tiếng Việt'))],
+      F('多言語対応', T('日本語から英語、ベトナム語など6言語に切り替え', 'Switches from Japanese to six languages, incl. English and Vietnamese', 'Chuyển từ tiếng Nhật sang 6 ngôn ngữ, có tiếng Anh, tiếng Việt'))],
     T('事例：松田組は写真整理の時間が半減', 'Case 松田組: photo-sorting time cut in half', 'Case 松田組: thời gian sắp xếp ảnh giảm một nửa'),
     T('営業、現場監督、職人', 'Sales, site supervisors, crews', 'Sales, giám sát, thợ')],
   ['chat',

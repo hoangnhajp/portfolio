@@ -10,7 +10,7 @@ const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 const main = (html.match(/<main class="wrap" data-view="ap" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 ok(main, 'thiếu main data-view="ap"');
-const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-compete', 'ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope', 'ap-role'];
+const IDS = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', 'ap-news', 'ap-market', 'ap-compete', 'ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope'];
 const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\\s\\S]*?<\\/section>`)) || [''])[0];
 // Từng mục thông tin phải có số trích dẫn, kiểm RIÊNG từng mục và RIÊNG từng ngôn ngữ (bỏ khối của 2 ngôn ngữ kia rồi
 // vẫn phải còn <sup class="ap-c">): [vùng chứa (tuỳ chọn), regex mục]
@@ -26,7 +26,6 @@ const CLAIMS = {
     [/<div class="ap-mk-l">[\s\S]*?<\/div>/, L3P('h3')], [/<div class="ap-mk-l">[\s\S]*?<\/div>/, L3P('p')], [/<ol class="ap-sps">[\s\S]*?<\/ol>/, LI], [null, /<p class="ap-sp-p"[\s\S]*?<\/p>/g]],
   'ap-app': [[/<div class="card ap-an[\s\S]*?<div class="ap-ftw/, LI], [null, /<li class="ap-ft"[\s\S]*?<\/li>/g], [/<ul class="ap-pb[\s\S]*?<\/ul>/, LI]],
   'ap-scope': [[/<div class="ap-mkt[\s\S]*?<div class="ap-rgw/, LI], [/<div class="ap-rgs">[\s\S]*?<div class="card ap-swc/, LI], [null, /<li class="ap-sw-\w"[\s\S]*?<\/li>/g]],
-  'ap-role': [[null, /<li class="ap-js"[\s\S]*?<\/li>/g], [null, /<li class="ap-rw"[\s\S]*?<\/li>/g]],
 };
 const only = (e, l) => e.replace(new RegExp(`<(\\w+)\\b[^>]*data-l="(?!${l}")\\w+"[^>]*>[\\s\\S]*?<\\/\\1>`, 'g'), '');
 const cites = (s) => [...s.matchAll(/<sup class="ap-c">\[([\d,]+)\]<\/sup>/g)].flatMap((m) => m[1].split(',').map(Number));let total = 0, refsTotal = 0;

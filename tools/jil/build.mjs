@@ -144,10 +144,10 @@ const list = '  <ol class="sc-list rv" style="--d:200ms" data-no-zoom>' + JIL_FI
 const SEC_FLOW = '<section class="pg" data-chap="V" id="sales-jil-flow">\n  ' + LOGO.jil + '\n'
   + top('10', 'OFFSHORE SALES FLOW',
     ['要望を聞き、仕様にして、<br /><i>顧客に合わせて作り込む。</i>', 'Hear the needs, write the spec,<br /><i>customize for each client.</i>', 'Lắng nghe, viết đặc tả,<br /><i>tùy chỉnh theo từng khách hàng.</i>'],
-    ['ITオフショアの営業として、資料準備から提案、聞き取り、仕様書、開発、調整、納品、請求までの8段階を担当。',
-      'In IT offshore sales I handled eight steps, from materials and calls to specs, development, customization, handover and billing.',
-      'Kinh doanh IT outsourcing, offshore: tôi đi trọn 8 bước, từ chuẩn bị tài liệu, tư vấn, viết đặc tả, giao đội dev, customize, bàn giao đến thanh toán.'])
-  + '  ' + chips(['8つの段階', '要望の聞き取り', '仕様書', '開発チームへの伝達', 'カスタマイズ'], ['eight steps', 'hearing needs', 'specs', 'briefing the dev team', 'customization'], ['8 bước', 'lắng nghe nhu cầu', 'đặc tả', 'giao đội dev', 'customize']) + '\n'
+    ['ITオフショアの営業として、資料準備から提案、仕様書、見積と契約、開発、調整、操作マニュアルを添えた納品、請求までの8段階を担当。',
+      'In IT offshore sales I handled eight steps, from calls and specs to quotes, contracts, development, handover with user guides and billing.',
+      'Kinh doanh IT offshore: tôi đi trọn 8 bước, từ tư vấn, đặc tả, báo giá, hợp đồng, giao đội dev, bàn giao kèm hướng dẫn sử dụng đến thanh toán.'])
+  + '  ' + chips(['8つの段階', '要望の聞き取り', '仕様書', '見積と契約', '開発チームへの伝達', 'カスタマイズ', '操作マニュアル'], ['eight steps', 'hearing needs', 'specs', 'quotes and contracts', 'briefing the dev team', 'customization', 'user guides'], ['8 bước', 'lắng nghe nhu cầu', 'đặc tả', 'báo giá, hợp đồng', 'giao đội dev', 'customize', 'hướng dẫn sử dụng']) + '\n'
   + '  ' + figure(JIL_FILM) + '\n' + list
   + '</section>\n';
 

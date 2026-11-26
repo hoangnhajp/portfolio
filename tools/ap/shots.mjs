@@ -32,7 +32,7 @@ const url = (k) => (k === 'app_market' ? 'https://appmarket.andpad.jp/' : `https
 // b = bộ trích dẫn của trang (tools/ap/refs.mjs, task 4n9v): mỗi ảnh ghi số nguồn = trang sản phẩm có ảnh đó
 export function pageShots({ L3, T, head, b }) {
   const subC = b.c('products');
-  const tiles = SHOTS.map(([k, ja, en, vi, w, h], i) => `    <figure class="ap-sh" style="--i:${i}"><img src="assets/ap/${k}.webp" alt="ANDPAD ${ja}（${en}）" width="${w}" height="${h}" loading="lazy" decoding="async"><figcaption><a href="${url(k)}" target="_blank" rel="noopener">ANDPAD ${ja}</a>${L3('span', T(en, en, vi))}${b.c(k === 'app_market' ? 'appmarket' : `p_${k}`)}</figcaption></figure>`).join('\n');
+  const tiles = SHOTS.map(([k, ja, en, vi, w, h], i) => `    <figure class="ap-sh" style="--i:${i}"><img src="assets/ap/${k}.webp" alt="ANDPAD ${ja}（${en}）" width="${w}" height="${h}" loading="lazy" decoding="async"><figcaption><a href="${url(k)}" target="_blank" rel="noopener">ANDPAD ${ja}</a>${L3('span', T(en, en, vi))}${b.c(k === 'app_market' ? 'products' : `p_${k}`)}</figcaption></figure>`).join('\n');
   return `<section class="pg" data-chap="II" id="ap-shots">
 ${head('IMG　<b>PRODUCT VISUALS</b>', T('実際の画面で<br /><i>製品を見る。</i>', 'See each product<br /><i>on its real screens.</i>', 'Xem từng sản phẩm<br /><i>qua màn hình thật.</i>'),
     'Official images ／ andpad.jp ／ Click to zoom',

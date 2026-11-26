@@ -1,7 +1,7 @@
 // Task m07v: sinh tab "Andpad Info" (main data-view="ap", 4 trang) vào index.html, giữa khối jd:end và main sw.
 // Chạy lại được (idempotent): thay nội dung giữa <!-- ap:start --> và <!-- ap:end -->; lần đầu chèn ngay sau <!-- jd:end -->.
 // Số liệu công ty, sản phẩm, mốc thời gian lấy từ nguồn công khai, tra cứu 25/11/2026 (link ghi trên từng trang).
-// Trang #ap-role là DỰ BÁO của ứng viên (ghi rõ trên trang), dựa trên JD + tin tuyển dụng công khai.
+// Task orn3: đã bỏ trang 04 FORECAST (#ap-role, dự báo công việc); tools/ap/role.mjs không còn được gọi.
 // Menu trên, sidebar, CSS (khối ap-css) và mảng IDS của pganh sửa tay trong index.html (không do script này).
 // Chạy (từ thư mục repo): node tools/ap/build.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -9,11 +9,11 @@ import { fileURLToPath } from 'node:url';
 import { pageShots, SHOTS } from './shots.mjs'; // task ls8q: trang #ap-shots (ảnh sản phẩm chính thức)
 import { pageMarket, pageCompete } from './market.mjs'; // task m07v bổ sung: trang #ap-market (ngành, thị trường, case, hỗ trợ); #ap-compete so sánh 5 đối thủ
 import { pageVn } from './vn.mjs'; // task 04fj: trang #ap-vn (sản phẩm và dịch vụ ANDPAD tại Việt Nam, ảnh chính thức)
-import { pageRole } from './role.mjs'; // task 97rs: trang #ap-role (dự báo việc, chỉ sản phẩm và dịch vụ tại Việt Nam)
 import { pageGuide, pagesGuideCards } from './guide.mjs'; // slide hướng dẫn chức năng (#ap-guide*), ngay sau #ap-vn
 import { pageApp, pageScope } from './app.mjs'; // #ap-app, #ap-scope: sản phẩm chủ lực tại Việt Nam, thị trường, khu vực
 import { pageVsScale, pageVsMap, pageVsWin } from './vs.mjs'; // 3 slide chart tóm gọn đối thủ (#ap-vs-*), ngay sau #ap-compete
 import { book } from './refs.mjs'; // task 4n9v: nguồn tham khảo cuối trang + số trích dẫn
+import { tipBlock, writeQuotesJs } from './tip.mjs'; // tooltip nguyên văn nguồn khi rê chuột lên thông tin có số [n]
 
 const FILE = fileURLToPath(new URL('../../index.html', import.meta.url));
 const L3 = (tag, o, attrs = '') => ['ja', 'en', 'vi'].map((l) => `<${tag}${attrs} data-l="${l}">${o[l]}</${tag}>`).join('');
@@ -34,7 +34,6 @@ const bk = (page) => book(page, L3);
 // [icon, nhãn, giá trị, nguồn (khoá trong tools/ap/refs.mjs)]
 const FACTS = [
   ['office-building', T('設立', 'Founded', 'Thành lập'), T('2012年9月', 'September 2012', 'Tháng 9/2012'), ['profile']],
-  ['manager', T('代表取締役CEO', 'CEO', 'CEO'), T('稲田 武夫（Takeo Inada）', 'Takeo Inada', 'Takeo Inada (稲田 武夫)'), ['company']],
   ['key', T('本社', 'Head office', 'Trụ sở'), T('東京都港区三田', 'Mita, Minato-ku, Tokyo', 'Mita, Minato-ku, Tokyo'), ['company']],
   ['team-group', T('社員数', 'Employees', 'Nhân viên'), T('1,072名（2026年11月1日）', '1,072 (1 Nov 2026)', '1.072 người (1/11/2026)'), ['company']],
   ['building-blocks', T('利用', 'In use at', 'Đang dùng'), T('27.9万社、81.8万人', '279,000 companies, 818,000 users', '279.000 công ty, 818.000 người dùng'), ['top']],
@@ -49,9 +48,9 @@ const VN = [
   ['workflow-gears', T('開発部門：ANDPADを開発する拠点（Go、Ruby on Rails、React、Vue、Kotlin、Swift、AWS）。',
     'Development Division: builds the ANDPAD service (Go, Ruby on Rails, React, Vue, Kotlin, Swift, AWS).',
     'Khối Phát triển: phát triển dịch vụ ANDPAD (Go, Ruby on Rails, React, Vue, Kotlin, Swift, AWS).')],
-  ['handshake', T('ビジネス部門：導入、研修、サポートを担うCustomer Successチーム。今回の募集はこのチームです。',
-    'Business Division: the Customer Success team for onboarding, training and support. This opening is in this team.',
-    'Khối Kinh doanh: đội Customer Success lo triển khai, đào tạo, hỗ trợ khách hàng. Vị trí đang tuyển thuộc đội này.')],
+  ['handshake', T('ビジネス部門：導入後の研修とサポートを担うCustomer Successの職種があり、今回の募集はこの職種です。',
+    'Business Division: home of this Customer Success role, which trains and supports clients after go-live.',
+    'Khối Kinh doanh: nơi có vị trí Customer Success đang tuyển, lo đào tạo và hỗ trợ khách sau khi đưa vào dùng.')],
   ['chat-bubbles', T('2025年2月に英語版、6月にベトナム語版（施工管理、チャット、図面）を公開。',
     'English version in February 2025, Vietnamese in June 2025 (Construction Management, Chat, Drawings).',
     'Ra bản tiếng Anh tháng 2/2025, bản tiếng Việt tháng 6/2025 (Quản lý thi công, Chat, Bản vẽ).')],
@@ -127,7 +126,7 @@ const GROUPS = [
 ];
 const LEG = (t) => `<span class="ap-leg"><em class="ap-vi">VI</em>${L3('span', t(T('ベトナム語に対応（2025年6月）', 'Available in Vietnamese (June 2025)', 'Đã có bản tiếng Việt (6/2025)')))}</span>`;
 // task 4n9v: nguồn của từng sản phẩm = trang sản phẩm chính thức (khoá p_<key> trong refs.mjs); không có trang sản phẩm thì dùng thông cáo
-const PREF = Object.fromEntries(SHOTS.map(([k, ja]) => [ja, k === 'app_market' ? 'appmarket' : `p_${k}`]));
+const PREF = Object.fromEntries(SHOTS.map(([k, ja]) => [ja, k === 'app_market' ? 'products' : `p_${k}`]));
 Object.assign(PREF, { '早受取': 'earlypay', 'ナレッジAI': 'knowledgeAi', 'AI-BPO': 'aiBpo' });
 function pageProducts() {
   const b = bk('ap-products');
@@ -195,9 +194,9 @@ function pageNews() {
   return `<section class="pg" data-chap="III" id="ap-news">
 ${head('02　<b>ACTIVITIES ／ EVENTS</b>', T('資金調達、AI、<br /><i>そしてベトナムへ。</i>', 'Funding, AI,<br /><i>and Vietnam.</i>', 'Gọi vốn, AI<br /><i>và Việt Nam.</i>'),
     'Timeline ／ Award ／ AI ／ Vietnam',
-    T('主な出来事を年ごとに整理。2025年からはAIとベトナムの動きが増加。',
-      'Key moves by year. Since 2025 most news is about AI and Vietnam.',
-      'Các mốc chính theo năm. Từ 2025, tin về AI và Việt Nam tăng rõ.'), subC)}
+    T('主な出来事を年ごとに整理。2025年からはAIと海外（ベトナム、多言語）の動きが目立つ。',
+      'Key moves by year. Since 2025, AI and overseas moves (Vietnam, more languages) stand out.',
+      'Các mốc chính theo năm. Từ 2025, nổi bật là AI và mở rộng ra nước ngoài (Việt Nam, thêm ngôn ngữ).'), subC)}
   <ol class="ap-tl rv" style="--d:180ms">
 ${tl}
   </ol>
@@ -209,7 +208,7 @@ ${b.list()}
 }
 
 const main = `<!-- ap:start -->
-<!-- ═══════ Andpad Info: công ty, sản phẩm, hoạt động, dự báo công việc; sinh bằng node tools/ap/build.mjs ═══════ -->
+<!-- ═══════ Andpad Info: công ty, sản phẩm, hoạt động, thị trường, đối thủ; sinh bằng node tools/ap/build.mjs ═══════ -->
 <main class="wrap" data-view="ap" hidden>
 ${pageTop()}
 ${pageProducts()}
@@ -225,8 +224,8 @@ ${pageVsMap({ L3, head, b: bk('ap-vs-map') })}
 ${pageVsWin({ L3, head, b: bk('ap-vs-win') })}
 ${pageApp({ L3, T, head, b: bk('ap-app') })}
 ${pageScope({ L3, T, head, b: bk('ap-scope') })}
-${pageRole({ L3, head, b: bk('ap-role') })}
 </main>
+${tipBlock()}
 <!-- ap:end -->`;
 
 let html = readFileSync(FILE, 'utf8');
@@ -240,4 +239,5 @@ else {
   html = html.slice(0, end) + eol + block + html.slice(end);
 }
 writeFileSync(FILE, html);
+writeQuotesJs();
 console.log('OK tools/ap/build.mjs: đã ghi tab Andpad Info (14 trang) vào index.html');

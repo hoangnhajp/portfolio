@@ -1,6 +1,6 @@
 // Task m07v: tab menu "Andpad Info" (thông tin công ty ANDPAD), đứng ngay sau JD ANDPAD, 4 trang riêng:
 // #ap-top (tổng quan công ty + ANDPAD Vietnam), #ap-products (bản đồ sản phẩm theo nhóm), #ap-news (hoạt động, event,
-// mốc thời gian, AI), #ap-role (dự báo việc của vị trí Customer Success gắn với từng sản phẩm).
+// mốc thời gian, AI). Task orn3: đã bỏ trang #ap-role (04 FORECAST), xem tests/check-ap-no-role.mjs.
 // Số liệu lấy từ nguồn công khai (andpad.co.jp, andpad.jp, PR Times, báo), mỗi trang ghi nguồn + ngày tra cứu; phần dự báo ghi rõ là dự báo.
 // Mỗi trang có ảnh nền riêng (assets/pg/ap-*.webp, ChatGPT worker), icon 3D assets/gx, chuyển động chỉ transform/opacity,
 // tắt khi reduced-motion và bản in. Đủ JA / EN / VI.
@@ -13,10 +13,10 @@ const html = readFileSync(p('index.html'), 'utf8');
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 const strip = (s) => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-const IDS4 = ['ap-top', 'ap-products', 'ap-news', 'ap-role'];
+const IDS4 = ['ap-top', 'ap-products', 'ap-news'];
 // task ls8q: thêm trang #ap-shots (ảnh sản phẩm) sau #ap-products; nội dung trang đó do tests/check-ap-shots.mjs kiểm
 const GUIDE = ['ap-guide', 'ap-guide-site', 'ap-guide-docs', 'ap-guide-money']; // slide hướng dẫn chức năng: nội dung do tests/check-ap-guide.mjs kiểm
-const ALL = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', ...GUIDE, 'ap-news', 'ap-market', 'ap-compete', 'ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope', 'ap-role']; // #ap-app, #ap-scope do tests/check-ap-app.mjs kiểm; task m07v bổ sung: #ap-market do tests/check-ap-market.mjs kiểm nội dung; task 04fj: #ap-vn do tests/check-ap-vn.mjs kiểm
+const ALL = ['ap-top', 'ap-products', 'ap-shots', 'ap-vn', ...GUIDE, 'ap-news', 'ap-market', 'ap-compete', 'ap-vs-scale', 'ap-vs-map', 'ap-vs-win', 'ap-app', 'ap-scope']; // #ap-app, #ap-scope do tests/check-ap-app.mjs kiểm; task m07v bổ sung: #ap-market do tests/check-ap-market.mjs kiểm nội dung; task 04fj: #ap-vn do tests/check-ap-vn.mjs kiểm
 
 // 1) Menu trên: "Andpad Info" ngay sau JD ANDPAD, thứ tự menu khớp thứ tự main
 const topNav = (html.match(/<nav class="top-nav"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
@@ -67,9 +67,9 @@ for (const a of main.match(/<a\b[^>]*href="https?:[^>]*>/g) || []) ok(/target="_
 ok((main.match(/href="https:\/\/(andpad\.co\.jp|andpad\.jp|prtimes\.jp|careers\.andpad\.vn)/g) || []).length >= 4, 'cần dẫn nguồn chính thức (andpad.co.jp / andpad.jp / prtimes.jp / careers.andpad.vn)');
 
 const vi = (id) => strip([...sec(id).matchAll(/<(\w+)\b[^>]*data-l="vi"[^>]*>([\s\S]*?)<\/\1>/g)].map((m) => m[2]).join(' '));
-const T = vi('ap-top'), P = vi('ap-products'), N = vi('ap-news'), R = vi('ap-role');
+const T = vi('ap-top'), P = vi('ap-products'), N = vi('ap-news');
 // Tổng quan: thông tin công ty đã tra cứu
-for (const k of ['2012', 'Takeo Inada', 'ANDPAD Vietnam', 'Hà Nội', 'TP.HCM']) ok((T + strip(sec('ap-top'))).includes(k), `#ap-top thiếu "${k}"`);
+for (const k of ['2012', '1,072', 'ANDPAD Vietnam', 'Hà Nội', 'TP.HCM']) ok((T + strip(sec('ap-top'))).includes(k), `#ap-top thiếu "${k}"`);
 // Sản phẩm: đủ nhóm và các sản phẩm lõi
 const prodCards = (sec('ap-products').match(/class="ap-pd"/g) || []).length;
 ok(prodCards >= 16, `#ap-products cần >= 16 thẻ sản phẩm .ap-pd, thấy ${prodCards}`);
@@ -78,9 +78,6 @@ for (const k of ['施工管理', '図面', '黒板', '検査', '受発注', '引
 // Hoạt động, event: mốc thời gian + event + AI + Việt Nam
 ok((sec('ap-news').match(/class="ap-ev"/g) || []).length >= 8, '#ap-news cần >= 8 mốc .ap-ev');
 for (const k of ['ANDPAD AWARD', 'JETRO', 'AI', 'tiếng Việt', 'Series D']) ok((N + strip(sec('ap-news'))).includes(k), `#ap-news thiếu "${k}"`);
-// Vị trí: dự báo việc theo sản phẩm, ghi rõ là dự báo
-ok((sec('ap-role').match(/class="ap-rw"/g) || []).length >= 6, '#ap-role cần >= 6 dòng việc theo sản phẩm .ap-rw');
-for (const k of ['dự báo', 'Customer Success', 'đào tạo', 'tài liệu hướng dẫn', 'demo']) ok(R.toLowerCase().includes(k.toLowerCase()), `#ap-role (vi) thiếu ý "${k}"`);
 ok(!main.includes('—'), 'có dấu gạch ngang dài');
 
 // 6) CSS: khối riêng, chỉ animate transform / opacity, reduced-motion + in tĩnh

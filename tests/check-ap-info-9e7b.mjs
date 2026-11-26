@@ -18,9 +18,9 @@ const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\
 const lang = (s, l) => strip([...s.matchAll(new RegExp(`<(\\w+)\\b[^>]*data-l="${l}"[^>]*>([\\s\\S]*?)<\\/\\1>`, 'g'))].map((m) => m[2]).join(' '));
 const has = (s, words, what) => { for (const w of words) ok(s.includes(w), `${what} thiếu "${w}"`); };
 
-// 1) Công ty: tên, CEO, số người dùng, nhân sự, sứ mệnh, ANDPAD Vietnam
+// 1) Công ty: tên, số người dùng, nhân sự, sứ mệnh, ANDPAD Vietnam (thông tin CEO đã bỏ theo yêu cầu, xem check-ap-no-ceo.mjs)
 const top = sec('ap-top');
-has(strip(top), ['稲田', '1,072', '27.9万社', '幸せを築く人を、幸せに。'], '#ap-top (công ty)');
+has(strip(top), ['1,072', '27.9万社', '幸せを築く人を、幸せに。'], '#ap-top (công ty)');
 has(lang(top, 'vi'), ['Vertical SaaS', 'ANDPAD Vietnam', 'Hà Nội', 'Customer Success'], '#ap-top (vi)');
 
 // 2) Sản phẩm: trình bày ngay trong trang, >= 15 sản phẩm có tên + mô tả 3 ngôn ngữ
@@ -37,17 +37,10 @@ ok(evs.length >= 10, `#ap-news cần >= 10 mốc có ngày, thấy ${evs.length}
 ok(evs.filter((d) => d >= '2025').length >= 5, `#ap-news cần >= 5 mốc từ 2025 trở đi: ${evs.join(',')}`);
 has(strip(news), ['ANDPAD AWARD', 'Stellarc', 'JETRO', 'Tokyo Gas'], '#ap-news');
 
-// 4) Dự báo công việc của vị trí: ghi rõ là dự báo, gắn với từng sản phẩm
-const role = sec('ap-role');
-ok(/dự báo/i.test(lang(role, 'vi')) && /forecast/i.test(lang(role, 'en')) && /予想/.test(lang(role, 'ja')), '#ap-role phải ghi rõ là dự báo (3 ngôn ngữ)');
-const rows = [...role.matchAll(/<li class="ap-rw"[^>]*>([\s\S]*?)<\/li>/g)].map((m) => strip(m[1]));
-ok(rows.length >= 5, `#ap-role cần >= 5 dòng sản phẩm × việc, thấy ${rows.length}`);
-// task 97rs: dự báo chỉ tính sản phẩm và dịch vụ đang có tại Việt Nam (受発注, Analytics không còn; xem tests/check-ap-role-vn.mjs)
-for (const w of ['施工管理', '図面', '黒板']) ok(rows.some((r) => r.includes(w)), `#ap-role chưa gắn việc với sản phẩm ${w}`);
-has(lang(role, 'vi'), ['đào tạo', 'follow-up', 'demo', 'tài liệu hướng dẫn'], '#ap-role (vi, việc theo JD)');
+// 4) Task orn3: đã bỏ trang #ap-role (dự báo công việc), xem tests/check-ap-no-role.mjs.
 
 // 5) Mỗi trang có nguồn (link ngoài) và đủ khối ja/en/vi; nội dung chữ nằm trong trang (không chỉ link)
-for (const id of ['ap-top', 'ap-products', 'ap-news', 'ap-role']) {
+for (const id of ['ap-top', 'ap-products', 'ap-news']) {
   const s = sec(id);
   ok(s, `thiếu trang #${id}`);
   ok((s.match(/<a href="https:\/\/[^"]+" target="_blank" rel="noopener">/g) || []).length >= 1, `#${id} thiếu link nguồn`);

@@ -85,9 +85,9 @@ ${CASES.map(([n, t, pr, r, k], i) => `      <li class="ap-cs" style="--i:${i}"><
     <ol class="ap-sps">
 ${SUP.map(([ic, h, p], i) => `      <li style="--i:${i}">${ico(ic, 26)}<span class="ap-n" aria-hidden="true">0${i + 1}</span>${L3('b', h)}${L3('span', b.t(p, 'support'))}</li>`).join('\n')}
     </ol>
-    ${((c) => L3('p', T('説明会は年間10,000回以上。電話（平日10〜19時）、チャット、フォームで受け付け、職人や協力会社も直接問い合わせできます。セミナー動画は「ANDPADセミナー放送局」で公開しています。' + c,
-      'Over 10,000 briefings a year. Phone (weekdays 10:00 to 19:00), chat and web form; trades and subcontractors can contact support directly. Webinars run on ANDPAD Seminar TV.' + c,
-      'Hơn 10.000 buổi hướng dẫn mỗi năm. Hỗ trợ qua điện thoại (T2 đến T6, 10h đến 19h), chat và form; thợ và thầu phụ được liên hệ trực tiếp. Webinar phát trên kênh ANDPAD Seminar TV.' + c), ' class="ap-sp-p"'))(b.c('support', 'asb'))}
+    ${((c) => L3('p', T('説明会は年間10,000回以上。電話（平日10〜19時）、チャット、フォームで受け付け、職人や協力会社も直接問い合わせできます。オンラインセミナーはANDPAD ONEのイベント情報で案内しています。' + c,
+      'Over 10,000 briefings a year. Phone (weekdays 10:00 to 19:00), chat and web form; trades and subcontractors can contact support directly. Online seminars are listed on ANDPAD ONE events.' + c,
+      'Hơn 10.000 buổi hướng dẫn mỗi năm. Hỗ trợ qua điện thoại (T2 đến T6, 10h đến 19h), chat và form; thợ và thầu phụ được liên hệ trực tiếp. Hội thảo trực tuyến được thông báo trên trang sự kiện ANDPAD ONE.' + c), ' class="ap-sp-p"'))(b.c('support', 'asb'))}
   </div>
 ${b.list()}
 </section>`;
@@ -129,16 +129,16 @@ ${COMP.map(([n, co, plus, rp, minus, rm]) => `      <li class="ap-rv"><span clas
   <div class="ap-edge rv" style="--d:220ms">
     <div class="card ap-edge-r">
       ${L3('span', T('競合が有利な点', 'Where rivals lead', 'Đối thủ đang có lợi thế'), ' class="ap-k"')}
-      ${L3('p', b.t(T('始めやすい料金：KANNAは初期費用0円で協力会社IDも無料、BuildeeとダンドリワークはWebで料金を公開。1つの工程に絞った深さ：SPIDERPLUSは検査、Buildeeは安全書類、Photoructionは検査などの業務代行。',
-        'Easier entry pricing: KANNA has no setup fee and free partner IDs; Buildee and Dandori Work publish their prices. Depth in one task: SPIDERPLUS in inspections, Buildee in safety papers, Photoruction in outsourced work such as inspections.',
-        'Giá dễ bắt đầu: KANNA phí ban đầu 0 yên, ID đối tác miễn phí; Buildee và Dandori Work công khai giá trên web. Chuyên sâu một khâu: SPIDERPLUS về kiểm tra, Buildee về hồ sơ an toàn, Photoruction nhận làm thay các phần việc như kiểm tra.'),
+      ${L3('p', b.t(T('始めやすい料金：KANNAは初期費用0円で協力会社IDも無料、BuildeeとダンドリワークはWebで料金を公開。1つの工程に絞った深さ：SPIDERPLUSは検査、Buildeeは調整会議と安全書類、Photoructionは検査準備などの業務代行。',
+        'Easier entry pricing: KANNA has no setup fee and free partner IDs; Buildee and Dandori Work publish their prices. Depth in one task: SPIDERPLUS in inspections, Buildee in coordination and safety papers, Photoruction in outsourced inspection prep.',
+        'Giá dễ bắt đầu: KANNA phí ban đầu 0 yên, ID đối tác miễn phí; Buildee và Dandori Work công khai giá trên web. Chuyên sâu một khâu: SPIDERPLUS về kiểm tra, Buildee về họp điều phối và hồ sơ an toàn, Photoruction nhận làm thay khâu chuẩn bị kiểm tra.'),
         'kanna', 'kannaFree', 'buildee', 'dandoriPlan', 'spider', 'photoruction'), ' class="ap-edge-p"')}
     </div>
     <div class="card ap-edge-a">
       ${L3('span', T('ANDPADが有利な点', 'Where ANDPAD leads', 'ANDPAD có lợi thế'), ' class="ap-k"')}
-      ${L3('p', b.t(T('規模：導入企業数1位が8年連続、27.9万社が利用。幅：現場の施工管理から図面、検査、受発注、請求までを1つの基盤でつなぎ、6言語に対応。',
-        'Scale: first by adopting companies for 8 years, used by 279,000 companies. Breadth: one platform links site management, drawings and inspections to ordering and billing, in six languages.',
-        'Quy mô: đứng đầu về số doanh nghiệp sử dụng 8 năm liền, 279.000 công ty đang dùng. Độ rộng: một nền tảng nối quản lý thi công, bản vẽ, kiểm tra với đặt hàng, hóa đơn, dùng được 6 ngôn ngữ.'),
+      ${L3('p', b.t(T('規模：導入企業数1位が8年連続、27.9万社が利用。幅：現場の施工管理から図面、検査、受発注、請求までを1つの基盤でつなぎ、日本語のほか6つの海外言語に対応。',
+        'Scale: first by adopting companies for 8 years, used by 279,000 companies. Breadth: one platform links site management, drawings and inspections to ordering and billing, in Japanese plus six foreign languages.',
+        'Quy mô: đứng đầu về số doanh nghiệp sử dụng 8 năm liền, 279.000 công ty đang dùng. Độ rộng: một nền tảng nối quản lý thi công, bản vẽ, kiểm tra với đặt hàng, hóa đơn, có tiếng Nhật và 6 ngoại ngữ.'),
         'share', 'top', 'products', 'newsLang6'), ' class="ap-edge-p"')}
     </div>
   </div>
@@ -151,8 +151,8 @@ function rivals(T) {
   // ANDPAD: ưu / nhược [chữ, nguồn]
   const PROS = [
     [T('施工管理から図面、検査、受発注、請求、BIMまで20以上の製品を1つの基盤で', '20+ products on one platform, from site management and drawings to ordering, billing and BIM', 'Hơn 20 sản phẩm trên một nền tảng: từ quản lý thi công, bản vẽ, kiểm tra tới đặt hàng, hóa đơn, BIM'), ['products']],
-    [T('アプリマーケットで外部サービスと連携', 'App Market links partner services', 'Chợ ứng dụng kết nối dịch vụ đối tác'), ['appmarket']],
-    [T('6言語に対応（2025年12月から）', 'Six languages (since December 2025)', 'Dùng được 6 ngôn ngữ (từ 12/2025)'), ['newsLang6']],
+    [T('アプリマーケットで外部サービスと連携', 'App Market links partner services', 'Chợ ứng dụng kết nối dịch vụ đối tác'), ['products']],
+    [T('日本語のほか6つの海外言語に対応（2025年12月から）', 'Japanese plus six foreign languages (since December 2025)', 'Ngoài tiếng Nhật còn 6 ngoại ngữ (từ 12/2025)'), ['newsLang6']],
     [T('導入4ステップをCSとサポートが伴走', 'CS and Support guide a four-step rollout', 'CS và đội hỗ trợ đi cùng 4 bước triển khai'), ['support']],
   ];
   const CONS = [
@@ -162,29 +162,29 @@ function rivals(T) {
   // Đối thủ: [sản phẩm, công ty vận hành, lợi thế, nguồn lợi thế, hạn chế, nguồn hạn chế]; nguồn luôn là trang của chính công ty đó
   const COMP = [
     ['SPIDERPLUS', T('スパイダープラス株式会社', 'SpiderPlus & Co.', 'SpiderPlus & Co.'),
-      T('建築、設備、電気工事向けに図面と検査が強い。配筋検査の準備の8割をAIで。2.3万社超、80万人超（2026年9月末）',
-        'Strong in drawings and inspections for building, MEP and electrical trades; AI does 80% of rebar-inspection prep. 23,000+ companies, 800,000+ users (Sep 2026)',
-        'Mạnh về bản vẽ và kiểm tra cho xây dựng, cơ điện, điện; AI làm 80% khâu chuẩn bị kiểm tra cốt thép. Hơn 23.000 công ty, 800.000 người dùng (9/2026)'), ['spider'],
+      T('建築、設備、電気工事向けに図面と検査が強い。配筋検査の準備の8割をAIで。2,300社以上、8万人以上（2026年9月末）',
+        'Strong in drawings and inspections for building, MEP and electrical trades; AI does 80% of rebar-inspection prep. 2,300+ companies, 80,000+ users (end of Sep 2026)',
+        'Mạnh về bản vẽ và kiểm tra cho xây dựng, cơ điện, điện; AI làm 80% khâu chuẩn bị kiểm tra cốt thép. Hơn 2.300 công ty, 80.000 người dùng (cuối 9/2026)'), ['spider'],
       T('現場の記録と検査が中心。料金は非公開', 'Centred on site records and inspections; pricing not public', 'Xoay quanh hồ sơ và kiểm tra tại công trường; giá không công khai'), ['spider']],
     ['KANNA', T('株式会社アルダグラム', 'Aldagram Inc.', 'Aldagram Inc.'),
-      T('初期費用0円、協力会社IDは無料で無制限、無料プランあり。6言語。10万社超（無料の協力会社を含む）',
-        'No setup fee, free unlimited partner IDs, a free plan; 6 languages. 100,000+ companies (incl. free partners)',
-        'Phí ban đầu 0 yên, ID đối tác miễn phí không giới hạn, có gói miễn phí; 6 ngôn ngữ. Hơn 100.000 công ty (gồm cả đối tác dùng miễn phí)'), ['kanna', 'kannaFree', 'kannaScale'],
+      T('初期費用0円、協力会社IDは無料で無制限、無料プランあり。日本語を含む6言語。10万社超（無料の協力会社を含む）',
+        'No setup fee, free unlimited partner IDs, a free plan; 6 languages incl. Japanese. 100,000+ companies (incl. free partners)',
+        'Phí ban đầu 0 yên, ID đối tác miễn phí không giới hạn, có gói miễn phí; 6 ngôn ngữ kể cả tiếng Nhật. Hơn 100.000 công ty (gồm cả đối tác dùng miễn phí)'), ['kanna', 'kannaFree', 'kannaScale'],
       T('建設、不動産、製造など多業種向けで建設専業ではない。有料プランの料金は非公開', 'Built for many industries (construction, real estate, manufacturing), not construction only; paid-plan prices not public', 'Làm cho nhiều ngành (xây dựng, bất động sản, sản xuất), không chuyên riêng xây dựng; giá gói trả phí không công khai'), ['kannaScale', 'kanna']],
     ['Photoruction', T('株式会社フォトラクション', 'Photoruction Inc.', 'Photoruction Inc.'),
-      T('写真、図面、工程、検査のSaaSに、検査や施工計画書づくりなどを代行するAI-BPOを組み合わせる。ゼネコンなど向け',
-        'SaaS for photos, drawings, schedules and inspections, plus AI-BPO that takes over work such as inspections and construction plans; for general contractors and others',
-        'SaaS cho ảnh, bản vẽ, tiến độ, kiểm tra, kèm AI-BPO nhận làm thay việc như kiểm tra, soạn kế hoạch thi công; cho tổng thầu và các nhóm khác'), ['photoruction'],
-      T('利用社数を公開していない。料金は非公開', 'No public user count; pricing not public', 'Không công bố số công ty dùng; giá không công khai'), ['photoruction']],
+      T('写真、図面、工程、検査のSaaSに、検査用の電子黒板や検査シートの作成、施工計画書づくりを代行するAI-BPOを組み合わせる。ゼネコンなど向け',
+        'SaaS for photos, drawings, schedules and inspections, plus AI-BPO that prepares inspection boards and sheets and drafts construction plans; for general contractors and others',
+        'SaaS cho ảnh, bản vẽ, tiến độ, kiểm tra, kèm AI-BPO làm thay khâu soạn bảng đen điện tử, phiếu kiểm tra và kế hoạch thi công; cho tổng thầu và các nhóm khác'), ['photoruction'],
+      T('利用社数は非公開（公表は40万超の建設プロジェクト）。料金は非公開', 'No public company count (it cites 400,000+ projects); pricing not public', 'Không công bố số công ty dùng (chỉ nêu hơn 400.000 dự án); giá không công khai'), ['photoruction']],
     [T('ダンドリワーク', 'Dandori Work', 'Dandori Work'), T('株式会社ダンドリワーク', 'DANDORI WORK', 'DANDORI WORK'),
-      T('工務店、リフォーム店、専門工事向け。説明会とアフターフォローが年1,700回以上、チャットは24時間受付',
-        'For home builders, renovators and specialist trades. 1,700+ briefings and follow-ups a year; chat open 24 hours',
-        'Cho nhà thầu nhà ở, cải tạo, thầu chuyên ngành. Hơn 1.700 buổi hướng dẫn và chăm sóc mỗi năm; chat nhận 24 giờ'), ['dandori'],
+      T('工務店、リフォーム店、専門工事向け。利用100,000社、170,000人。説明会とアフターフォローが年1,700回以上、チャットは24時間受付',
+        'For home builders, renovators and specialist trades. 100,000 companies, 170,000 users. 1,700+ briefings and follow-ups a year; chat open 24 hours',
+        'Cho nhà thầu nhà ở, cải tạo, thầu chuyên ngành. 100.000 công ty, 170.000 người dùng. Hơn 1.700 buổi hướng dẫn và chăm sóc mỗi năm; chat nhận 24 giờ'), ['dandori'],
       T('有料で、初期費用20万円から、月額1.5万円から', 'Paid: setup fee from ¥200,000, from ¥15,000 a month', 'Có phí: phí ban đầu từ 200.000 yên, từ 15.000 yên/tháng'), ['dandoriPlan']],
     ['Buildee', T('株式会社リバスタ', 'RVSTA, Inc.', 'RVSTA, Inc.'),
-      T('ゼネコン向けの調整会議、労務安全、入退場（CCUS連携）。協力会社は無料。元請1,061社、42,190現場（2026年10月末）',
-        'For general contractors: coordination meetings, labour safety papers, site entry (CCUS link). Free for subcontractors. 1,061 prime contractors, 42,190 sites (Oct 2026)',
-        'Cho tổng thầu: họp điều phối, hồ sơ an toàn lao động, ra vào công trường (nối CCUS). Thầu phụ dùng miễn phí. 1.061 tổng thầu, 42.190 công trường (10/2026)'), ['buildee'],
+      T('ゼネコン向けの調整会議、労務安全、入退場（CCUS連携）。協力会社は無料。元請1,061社、累計42,190現場（2026年10月末）',
+        'For general contractors: coordination meetings, labour safety papers, site entry (CCUS link). Free for subcontractors. 1,061 prime contractors, 42,190 sites in total (Oct 2026)',
+        'Cho tổng thầu: họp điều phối, hồ sơ an toàn lao động, ra vào công trường (nối CCUS). Thầu phụ dùng miễn phí. 1.061 tổng thầu, tổng cộng 42.190 công trường (10/2026)'), ['buildee'],
       T('元請の調整と安全管理が中心。料金は支店ごと（月3万円、初回登録5万円）と現場ごと', 'Centred on prime contractors\' coordination and safety; billed per branch (¥30,000 a month, ¥50,000 sign-up) and per site', 'Xoay quanh điều phối và an toàn của tổng thầu; tính phí theo chi nhánh (30.000 yên/tháng, đăng ký lần đầu 50.000 yên) và từng công trường'), ['buildee']],
   ];
   return { PROS, CONS, COMP };

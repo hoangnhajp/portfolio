@@ -12,11 +12,13 @@ const endLine = (L3, o) => `  <p class="ap-vs-end rv" style="--d:240ms">${ico('l
 const CO = [
   ['ANDPAD', 279000, T('27.9万社', '279,000', '279.000'), '', ['top'], 1],
   ['KANNA', 100000, T('10万社超*', '100,000+*', 'Hơn 100.000*'), '2026.08', ['kannaScale']],
-  ['SPIDERPLUS', 23000, T('2.3万社超', '23,000+', 'Hơn 23.000'), '2026.09', ['spider']],
+  ['Dandori Work', 100000, T('10万社', '100,000', '100.000'), '', ['dandori']],
+  ['SPIDERPLUS', 2300, T('2,300社以上', '2,300+', 'Hơn 2.300'), '2026.09', ['spider']],
 ];
 const US = [
   ['ANDPAD', 818000, T('81.8万人', '818,000', '818.000'), '', ['top'], 1],
-  ['SPIDERPLUS', 800000, T('80万人超', '800,000+', 'Hơn 800.000'), '2026.09', ['spider']],
+  ['Dandori Work', 170000, T('17万人', '170,000', '170.000'), '', ['dandori']],
+  ['SPIDERPLUS', 80000, T('8万人以上', '80,000+', 'Hơn 80.000'), '2026.09', ['spider']],
 ];
 const bars = (L3, b, rows, max, aria) => `<div class="ap-vs-chart ap-vb" role="img" aria-label="${aria}">
 ${rows.map(([n, v, lab, d, r, me]) => `      <div class="ap-vb-r${me ? ' is-me' : ''}" title="${n}: ${lab.en}${d ? ` (${d})` : ''}"><b>${n}</b><span class="ap-vb-t"><i data-v="${v}" style="--w:${(v / max * 100).toFixed(1)}%"></i></span>${L3('em', b.t(lab, ...r))}${d ? `<small>${d}</small>` : '<small></small>'}</div>`).join('\n')}
@@ -30,19 +32,19 @@ ${head('VS 1　<b>SCALE</b>', T('規模は<br /><i>ANDPADが首位。</i>', 'On 
     <div class="card ap-vs-no1">${ico('milestone-report', 54)}<b>No.1</b>${L3('span', T('8年連続', '8 years running', '8 năm liền'))}</div>
     <div class="card ap-vs-c">
       <div class="ap-vs-ch">${ico('office-building', 26)}${L3('h3', T('利用企業数', 'Companies using it', 'Số công ty đang dùng'))}</div>
-    ${bars(L3, b, CO, 279000, 'Companies using it: ANDPAD 279,000; KANNA 100,000+ incl. free partners; SPIDERPLUS 23,000+')}
+    ${bars(L3, b, CO, 279000, 'Companies using it: ANDPAD 279,000; KANNA 100,000+ incl. free partners; Dandori Work 100,000; SPIDERPLUS 2,300+')}
       ${L3('p', T('各社の公表値（数え方は各社で異なる場合あり）。＊無料の協力会社を含む', 'Figures as published by each company; counting may differ. * incl. free partners', 'Số do từng hãng tự công bố, cách đếm có thể khác. * gồm cả đối tác dùng miễn phí'), ' class="ap-vs-note"')}
     </div>
   </div>
   <div class="card ap-vs-c rv" style="--d:200ms">
     <div class="ap-vs-ch">${ico('team-group', 26)}${L3('h3', T('ユーザー数', 'Users', 'Số người dùng'))}</div>
-    ${bars(L3, b, US, 818000, 'Users: ANDPAD 818,000; SPIDERPLUS 800,000+')}
+    ${bars(L3, b, US, 818000, 'Users: ANDPAD 818,000; Dandori Work 170,000; SPIDERPLUS 80,000+')}
   </div>
   <ul class="ap-vs-na rv" style="--d:220ms">
     <li>${ico('magnifier', 22)}<b>Buildee</b>${L3('span', b.t(T('元請1,061社（単位が異なる）', '1,061 prime contractors (other unit)', '1.061 tổng thầu (khác đơn vị)'), 'buildee'))}</li>
-    <li>${ico('magnifier', 22)}<b>Photoruction</b>${L3('span', b.t(T('社数は非公開', 'No public count', 'Không công bố số công ty'), 'photoruction'))}</li>
+    <li>${ico('magnifier', 22)}<b>Photoruction</b>${L3('span', b.t(T('40万超の建設プロジェクト（単位が異なる）', '400,000+ projects (other unit)', 'Hơn 400.000 dự án (khác đơn vị)'), 'photoruction'))}</li>
   </ul>
-${endLine(L3, T('利用企業数は首位、ユーザー数はSPIDERPLUSと並ぶ。', 'Most companies by far; users on par with SPIDERPLUS.', 'Nhiều công ty dùng nhất; số người dùng ngang SPIDERPLUS.'))}
+${endLine(L3, T('利用企業数もユーザー数もANDPADが首位。', 'ANDPAD leads on both companies and users.', 'ANDPAD dẫn đầu cả số công ty lẫn số người dùng.'))}
 ${b.list()}
 </section>`;
 }
@@ -100,7 +102,7 @@ const FEE = [
 const WIN = [
   ['team-group', T('規模', 'Scale', 'Quy mô'), 1, '', ['share']],
   ['building-blocks', T('製品の幅', 'Product breadth', 'Độ rộng sản phẩm'), 1, '', ['products']],
-  ['chat-bubbles', T('言語（6言語）', 'Languages (6)', 'Ngôn ngữ (6)'), 1, 'KANNA', ['newsLang6', 'kannaFree']],
+  ['chat-bubbles', T('言語（日本語＋6言語、KANNAは計6言語）', 'Languages (JA + 6; KANNA 6 in all)', 'Ngôn ngữ (Nhật + 6; KANNA tổng 6)'), 1, '', ['newsLang6', 'kannaScale']],
   ['key', T('始めやすい料金', 'Easy entry price', 'Giá dễ bắt đầu'), 0, 'KANNA · Buildee · Dandori Work', ['kanna', 'buildee', 'dandoriPlan']],
   ['checklist', T('一工程の深さ', 'Depth in one task', 'Sâu một khâu'), 0, 'SPIDERPLUS · Buildee · Photoruction', ['spider', 'buildee', 'photoruction']],
 ];

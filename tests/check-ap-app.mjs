@@ -3,7 +3,7 @@
 //   chức năng theo trang sản phẩm, bài toán giải quyết và cách hỗ trợ doanh nghiệp (kết quả thí điểm tại Việt Nam).
 // - #ap-scope: thị trường và ngành sản phẩm cùng loại (quy mô Nhật, Việt Nam), thị phần (không bịa %), khu vực tập trung
 //   khách hàng (Nhật: văn phòng + phân bố doanh nghiệp xây dựng; Việt Nam: TP.HCM, Hà Nội), nhận định của ứng viên.
-// Hai trang đứng sau #ap-compete, trước #ap-role; mỗi số liệu có số trích dẫn trỏ về nguồn ở cuối trang.
+// Hai trang đứng sau #ap-compete, cuối tab (task orn3 bỏ #ap-role); mỗi số liệu có số trích dẫn trỏ về nguồn ở cuối trang.
 // Chạy: node tests/check-ap-app.mjs   (thoát 0 = đạt)
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -28,7 +28,7 @@ const citedTo = (s, id, needle, dom) => {
 const main = (html.match(/<main class="wrap" data-view="ap" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([\w-]+)"/g)].map((m) => m[1]);
 const at = ids.indexOf('ap-compete') + 3; // 3 slide chart đối thủ #ap-vs-* (tests/check-ap-vs.mjs) đứng ngay sau #ap-compete
-ok(at >= 3 && ids[at - 3] === 'ap-compete' && ids[at] === 'ap-vs-win' && ids[at + 1] === 'ap-app' && ids[at + 2] === 'ap-scope' && ids[at + 3] === 'ap-role', `cần thứ tự ap-compete, ap-app, ap-scope, ap-role: ${ids}`);
+ok(at >= 3 && ids[at - 3] === 'ap-compete' && ids[at] === 'ap-vs-win' && ids[at + 1] === 'ap-app' && ids[at + 2] === 'ap-scope' && at + 3 === ids.length, `cần thứ tự ap-compete, ap-app, ap-scope (trang cuối, task orn3 bỏ ap-role): ${ids}`);
 const sb = (html.match(/<nav class="sb-nav" data-for="ap" hidden>([\s\S]*?)<\/nav>/) || [])[1] || '';
 const sbIds = [...sb.matchAll(/data-sec="([\w-]+)"/g)].map((m) => m[1]);
 ok(sbIds.join(',') === ids.join(','), `sidebar lệch thứ tự trang: ${sbIds}`);

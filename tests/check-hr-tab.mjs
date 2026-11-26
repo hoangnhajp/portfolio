@@ -23,14 +23,15 @@ ok(views === 'profile,sales,hr,team,ai,lang', `thứ tự main view: ${views}`);
 const main = (html.match(/<main class="wrap" data-view="hr" hidden>([\s\S]*?)<\/main>/) || [])[1] || '';
 ok(main, 'thiếu <main class="wrap" data-view="hr" hidden>');
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([\w-]+)"/g)].map((m) => m[1]);
-ok(ids.join(',') === 'hr-top,hr-hire,hr-people,hr-ops', `section tab HR: ${ids.join(',')}`);
+// task o98x: thêm 4 trang 04-07 (hr-dept, hr-qa, hr-care, hr-cb), kiểm chi tiết ở check-hr-plus-o98x.mjs
+ok(ids.join(',') === 'hr-top,hr-hire,hr-people,hr-ops,hr-dept,hr-qa,hr-care,hr-cb', `section tab HR: ${ids.join(',')}`);
 
-// 3) Sidebar: đủ 4 mục trỏ đúng section, có 3 ngôn ngữ
+// 3) Sidebar: đủ 8 mục trỏ đúng section, có 3 ngôn ngữ
 const sb = (html.match(/<nav class="sb-nav" data-for="hr" hidden>([\s\S]*?)<\/nav>/) || [])[1] || '';
 ok(sb, 'thiếu <nav class="sb-nav" data-for="hr" hidden>');
 const sbIds = [...sb.matchAll(/href="#([\w-]+)" data-sec="([\w-]+)"/g)].filter((m) => m[1] === m[2]).map((m) => m[1]).join(',');
 ok(sbIds === ids.join(','), `sidebar HR trỏ: ${sbIds}`);
-for (const l of ['ja', 'en', 'vi']) ok((sb.match(new RegExp(`data-l="${l}"`, 'g')) || []).length === 4, `sidebar HR thiếu nhãn ${l}`);
+for (const l of ['ja', 'en', 'vi']) ok((sb.match(new RegExp(`data-l="${l}"`, 'g')) || []).length === ids.length, `sidebar HR thiếu nhãn ${l}`);
 
 // 4) Ảnh nền mỗi trang (pganh) + file có thật
 const IDS = (html.match(/var IDS=\[([^\]]*)\]/) || [])[1] || '';
@@ -68,10 +69,10 @@ ok(!main.includes('—'), 'tab HR có dấu gạch ngang dài');
 
 // 8) Tầng giọng JA: h2 常体 kết 「。」, kw-sub thể ngắn (task ykp6: không です・ます)
 const h2ja = [...main.matchAll(/<h2 class="kw[^"]*"[^>]*><span data-l="ja">([\s\S]*?)<\/span><span data-l="en">/g)].map((m) => strip(m[1]).replace(/\s/g, ''));
-ok(h2ja.length === 4, `cần 4 tiêu đề h2 JA, thấy ${h2ja.length}`);
+ok(h2ja.length === ids.length, `cần ${ids.length} tiêu đề h2 JA, thấy ${h2ja.length}`);
 for (const s of h2ja) ok(/。$/.test(s) && !/(です|ます)。$/.test(s), `h2 JA sai tầng giọng: "${s}"`);
 const subja = [...main.matchAll(/<p class="kw-sub[^"]*"[^>]*data-l="ja">([\s\S]*?)<\/p>/g)].map((m) => strip(m[1]));
-ok(subja.length === 4, `cần 4 câu dẫn kw-sub JA, thấy ${subja.length}`);
+ok(subja.length === ids.length, `cần ${ids.length} câu dẫn kw-sub JA, thấy ${subja.length}`);
 for (const s of subja) ok(/。$/.test(s) && !/(です|でした|ます|ました|ません)/.test(s), `kw-sub JA phải thể ngắn, không です・ます: "${s.slice(0, 40)}"`);
 
 // 9) CSS riêng của tab trong khối đánh dấu; chuyển động chỉ transform / opacity, có reduced-motion
@@ -82,4 +83,4 @@ for (const kf of css.matchAll(/@keyframes\s+[\w-]+\s*\{([\s\S]*?)\}\s*\}/g))
 ok(/prefers-reduced-motion/.test(css), 'CSS HR thiếu prefers-reduced-motion');
 
 if (fails.length) { console.error(`FAIL check-hr-tab (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log(`PASS check-hr-tab: tab "HR" 4 trang (${ids.join(', ')}), ja/en/vi ${cnt('ja')} khối mỗi thứ tiếng, đủ dữ kiện`);
+console.log(`PASS check-hr-tab: tab "HR" ${ids.length} trang (${ids.join(', ')}), ja/en/vi ${cnt('ja')} khối mỗi thứ tiếng, đủ dữ kiện`);

@@ -23,21 +23,25 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 let checks = 0;
-const PAGES = ['hr-top', 'hr-hire', 'hr-people', 'hr-ops'];
+const PAGES = ['hr-top', 'hr-hire', 'hr-people', 'hr-ops', 'hr-dept', 'hr-qa', 'hr-care', 'hr-cb']; // task o98x: thêm 4 trang 04-07
 
 const PROBE = `(() => {
   const vis = (e) => { const s = getComputedStyle(e); return s.display !== 'none' && s.visibility !== 'hidden' && e.getClientRects().length > 0; };
   const inside = (e, box) => { const r = e.getBoundingClientRect(), b = box.getBoundingClientRect(); return r.left >= b.left - 1 && r.right <= b.right + 1 && r.top >= b.top - 1 && r.bottom <= b.bottom + 1; };
   const main = document.querySelector('main[data-view="hr"]');
   const over = [], bottom = [], rows = [];
-  for (const [sel, boxSel] of [['.hr-c h3,.hr-c p,.hr-ic', '.hr-c'], ['.hr-st h3,.hr-st p,.hr-st img', '.hr-st'], ['.hr-g .card h3,.hr-g .lines', '.card'], ['.meta b', '.meta>div']])
+  for (const [sel, boxSel] of [['.hr-c h3,.hr-c p,.hr-ic', '.hr-c'], ['.hr-st h3,.hr-st p,.hr-st img', '.hr-st'], ['.hr-g .card h3,.hr-g .lines', '.card'], ['.meta b', '.meta>div'],
+    ['.hx-dp b,.hx-dp p,.hx-dp img', '.hx-dp'], ['.hx-out b,.hx-out small,.hx-pd b,.hx-pd small,.hx-ck b,.hx-ck small,.hx-tl b,.hx-tl small,.hx-pay b', 'li']])
     for (const e of main.querySelectorAll(sel)) { if (!vis(e)) continue; const box = e.closest(boxSel); if (box && !inside(e, box)) over.push(sel.split(',')[0] + ': ' + e.textContent.trim().slice(0, 30)); }
+  // nhãn năm dưới thước tháng (#hr-cb) không chồng nhau
+  const ya = [...main.querySelectorAll('.hx-ya span')].filter(vis).map((e) => e.getBoundingClientRect()).sort((a, b) => a.left - b.left);
+  for (let k = 1; k < ya.length; k++) if (ya[k].left < ya[k - 1].right + 4) over.push('.hx-ya: nhãn năm chồng nhau');
   for (const pg of main.querySelectorAll('.pg')) {
     const pb = pg.getBoundingClientRect().bottom;
     for (const c of pg.children) { const s = getComputedStyle(c); if (!vis(c) || s.position === 'absolute' || s.position === 'fixed' || c.classList.contains('deco')) continue;
       const cb = c.getBoundingClientRect().bottom; if (cb > pb + 1) bottom.push(pg.id + ' ' + (c.className || c.tagName) + ' +' + Math.round(cb - pb) + 'px'); }
   }
-  for (const grid of main.querySelectorAll('.hr-ar,.hr-fl,.hr-g')) {
+  for (const grid of main.querySelectorAll('.hr-ar,.hr-fl,.hr-g,.hx-out,.hx-ck,.hx-pay,.hx-tl ol')) {
     // gom thẻ theo hàng (đỉnh cách nhau < 30px là cùng hàng), trong 1 hàng các đỉnh phải trùng nhau
     const tops = [...grid.children].filter(vis).map((c) => c.getBoundingClientRect().top).sort((a, b) => a - b);
     let row = [];
@@ -49,8 +53,11 @@ const PROBE = `(() => {
   return { view: document.body.dataset.view, on: document.querySelector('.top-nav a.on')?.dataset.view,
     sb: !document.querySelector('.sb-nav[data-for="hr"]').hidden,
     pages: [...main.querySelectorAll('.pg')].filter(vis).length, over, bottom, rows,
-    hidden: [...main.querySelectorAll('.hr-c,.hr-st,.hr-g .card')].filter((e) => +getComputedStyle(e).opacity < 0.95).length,
-    overflowX: document.documentElement.scrollWidth - innerWidth };
+    hidden: [...main.querySelectorAll('.hr-c,.hr-st,.hr-g .card,.hx-dp,.hx-out li,.hx-pd li,.hx-ck li,.hx-tl li,.hx-pay li,.pg>.rv')].filter((e) => vis(e) && +getComputedStyle(e).opacity < 0.95).length,
+    overflowX: document.documentElement.scrollWidth - innerWidth,
+    // task o98x: chiều cao tờ (khung 794x1123 ở bề rộng desktop) + số animation đang chạy trong khối hx-*
+    tall: innerWidth >= 1000 ? [...main.querySelectorAll('.pg')].filter((p) => p.offsetHeight > 1124).map((p) => p.id + ' ' + p.offsetHeight + 'px') : [],
+    hxAnim: document.getAnimations().filter((a) => a.effect && a.effect.target && a.effect.target.parentElement && a.effect.target.parentElement.closest('.hx-hub,.hx-out,.hx-qa,.hx-ck,.hx-tl,.hx-pay,.hx-yr')).length };
 })()`;
 
 async function main() {
@@ -99,12 +106,14 @@ async function main() {
       await reveal('main[data-view="hr"] .pg');
       const r = await evaluate(PROBE); checks++;
       ok(r.view === 'hr' && r.on === 'hr' && r.sb, `${tag}: tab HR chưa bật (view ${r.view}, menu ${r.on}, sidebar ${r.sb})`);
-      ok(r.pages === 4, `${tag}: cần 4 trang HR, đang ${r.pages}`);
+      ok(r.pages === PAGES.length, `${tag}: cần ${PAGES.length} trang HR, đang ${r.pages}`);
       ok(!r.over.length, `${tag}: chữ tràn thẻ ${r.over.slice(0, 4).join(' | ')}`);
       ok(!r.bottom.length, `${tag}: khối vượt đáy tờ ${r.bottom.slice(0, 4).join(' | ')}`);
       ok(!r.rows.length, `${tag}: thẻ cùng hàng lệch mép trên ${r.rows.slice(0, 3).join(' | ')}`);
       ok(r.hidden === 0, `${tag}: reduced-motion còn ${r.hidden} khối mờ`);
       ok(r.overflowX <= 1, `${tag}: tràn ngang ${r.overflowX}px`);
+      ok(!r.tall.length, `${tag}: tờ HR cao quá 1123px ${r.tall.join(' | ')}`);
+      ok(r.hxAnim === 0, `${tag}: reduced-motion còn ${r.hxAnim} animation trong khối hx-*`);
       if (w !== 820) for (const s of PAGES) await shot(`hr-${lang}-${w}-${s}.png`, '#' + s);
     }
   }
@@ -117,6 +126,18 @@ async function main() {
   await sleep(2200);
   const m2 = await evaluate(`[...document.querySelectorAll('#hr-hire .hr-st')].filter((e) => +getComputedStyle(e).opacity > 0.99).length`); checks++;
   ok(m2 === 6, `chuyển động: sau khi chạy còn bước chưa hiện đủ (${m2}/6)`);
+  // 3) task o98x: 4 trang mới, khối vào khung thì chạy đúng hình động (tia phòng ban, vòng PDCA, mốc theo dõi, 53 vạch tháng 02/2022-06/2026)
+  const WANT = [['#hr-dept .hx-hub', { hxGrow: 4, hxRun: 4 }], ['#hr-qa .hx-qa', { hxSpin: 1, hxLit: 8 }],
+    ['#hr-care .hx-tl', { hxFill: 1, hxTrack: 1, hrPop: 6 }], ['#hr-cb .hx-yr', { hxTick: 53, hrPop: 5 }], ['#hr-cb .hx-pay', { hxWave: 5 }]];
+  for (const [sel, want] of WANT) {
+    await evaluate(`(document.querySelector('${sel}').scrollIntoView({ block: 'center', behavior: 'instant' }), new Promise((r) => setTimeout(r, 500)))`);
+    const got = await evaluate(`(() => { const b = document.querySelector('${sel}'); const c = {}; for (const a of document.getAnimations())
+      if (a.effect && a.effect.target && b.contains(a.effect.target)) c[a.animationName] = (c[a.animationName] || 0) + 1; return { inn: b.classList.contains('sr-in'), c }; })()`); checks++;
+    ok(got.inn && Object.entries(want).every(([k, v]) => (got.c[k] || 0) >= v), `chuyển động ${sel}: cần ${JSON.stringify(want)}, có ${JSON.stringify(got)}`);
+  }
+  await sleep(3200);
+  const m3 = await evaluate(`[...document.querySelectorAll('#hr-cb .hx-mo i')].filter((e) => +getComputedStyle(e).opacity > 0.99).length`); checks++;
+  ok(m3 === 53, `chuyển động: 53 vạch tháng chưa sáng đủ (${m3}/53)`);
   ok(errors.length === 0, `lỗi JS/console: ${errors.slice(0, 5).join(' | ')}`);
   ws.close();
 }
@@ -126,7 +147,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-hr-tab (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-hr-tab: ${checks} lượt (3 ngôn ngữ x 3 bề rộng + chuyển động): tab HR 4 trang, chữ không tràn thẻ, không vượt đáy tờ, thẻ cùng hàng thẳng mép, chạy khi vào khung, 0 lỗi JS`);
+    console.log(`PASS browser-hr-tab: ${checks} lượt (3 ngôn ngữ x 3 bề rộng + chuyển động): tab HR ${PAGES.length} trang, chữ không tràn thẻ, không vượt đáy tờ, thẻ cùng hàng thẳng mép, chạy khi vào khung, 0 lỗi JS`);
     process.exit(0);
   }, 300);
 });
