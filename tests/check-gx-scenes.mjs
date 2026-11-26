@@ -16,7 +16,7 @@ const ok = (c, m) => { if (!c) fails.push(m); };
 
 const TABS = {
   profile: ['profile', 'projects', 'skillmap', 'career', 'w-mycom', 'w-jil', 'w-it', 'w-early'], // task ye4s bỏ aiops, aidash, pr; task a9f4 bỏ trang cuối 語学、PC、AI
-  sales: ['sales-top', 'sales-trips', 'sales-kpi'], // sales-pr: phim từng bước .sf (tests/check-sales-pr-film.mjs); sales-reports: thẻ salaryman .srp (tests/check-sales-reports-anim.mjs)
+  sales: ['sales-top', 'sales-trips'], // sales-pr: phim từng bước .sf (tests/check-sales-pr-film.mjs); sales-reports: thẻ salaryman .srp (tests/check-sales-reports-anim.mjs)
   team: ['team-records'],
   ai: ['ai-people'],
 };
@@ -76,10 +76,10 @@ for (const [tab, ids] of Object.entries(TABS)) {
     if (kind === 'flow') ok(nSt >= 3 && nLn === nSt - 1, `${id}: cảnh flow cần >= 3 bước và số đường nối = số bước - 1 (${nSt} bước, ${nLn} nối)`);
   }
 }
-// task ye4s bỏ 3 cảnh của #aiops / #aidash / #pr: còn 17; task a9f4 bỏ cảnh trang cuối Profile: còn 16; #sales-pr đổi sang phim từng bước .sf: còn 15; #sales-reports đổi sang thẻ salaryman động .srp: còn 14; bỏ trang 08 FLOW #sales-flow: còn 13
-ok(scenes === 13, `cần 13 cảnh, có ${scenes}`);
+// task ye4s bỏ 3 cảnh của #aiops / #aidash / #pr: còn 17; task a9f4 bỏ cảnh trang cuối Profile: còn 16; #sales-pr đổi sang phim từng bước .sf: còn 15; #sales-reports đổi sang thẻ salaryman động .srp: còn 14; bỏ trang 08 FLOW #sales-flow: còn 13; task t5wm bỏ trang 07 KPI #sales-kpi: còn 12
+ok(scenes === 12, `cần 12 cảnh, có ${scenes}`);
 ok(usedIcons.size >= 20, `icon phải đa dạng (>= 20 loại), đang dùng ${usedIcons.size}`);
-ok((html.match(/<figure class="gx /g) || []).length === 13, 'có cảnh .gx nằm ngoài 13 section đã định');
+ok((html.match(/<figure class="gx /g) || []).length === 12, 'có cảnh .gx nằm ngoài 12 section đã định');
 
 // CSS
 const css = (html.match(/<style id="gx-css">([\s\S]*?)<\/style>/) || [])[1] || '';

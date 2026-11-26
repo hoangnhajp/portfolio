@@ -143,7 +143,7 @@ const ROWS = [
   { t: 'must', r: 'm3 m7', go: [['#sw-top', 'Software Products']],
     ja: 'IT、システム導入、コンサルへの関心', en: 'IT, system rollout, consulting', vi: 'Quan tâm IT, triển khai hệ thống, tư vấn',
     eja: '顧客の要望から仕様書を書き、UATを経て3つのソフトを納品しました。', een: 'I wrote specs, ran UAT and delivered 3 software products for clients.', evi: 'Tôi viết đặc tả, chạy UAT và bàn giao 3 phần mềm theo yêu cầu khách hàng.' },
-  { t: 'must', r: 'm4', go: [['#w-mycom', 'Career'], ['#sales-kpi', 'Sales']],
+  { t: 'must', r: 'm4', go: [['#w-mycom', 'Career'], ['#sales-reports', 'Sales']],
     ja: '論理的思考、課題解決', en: 'Logic and problem solving', vi: 'Tư duy logic, giải quyết vấn đề',
     eja: 'クレームや納品トラブルを工場、日本本社と連携して解決し、数字で報告しました。', een: 'I resolved complaints and delivery issues with the factory and Japan HQ, reporting in numbers.', evi: 'Tôi xử lý khiếu nại, sự cố giao hàng cùng nhà máy và trụ sở Nhật, báo cáo bằng số liệu.' },
   { t: 'must', r: 'm5', go: [['#w-mycom', 'Career'], ['#hr-top', 'HR']],

@@ -1,5 +1,5 @@
 // Tab Sales thêm 3 trang (bản đồ công tác, chu trình 7 bước, nỗi lo khách hàng) + câu dẫn trang 1 nói trọn chu trình kinh doanh.
-// Kiểm tĩnh: thứ tự 11 trang (8 MAYEKAWA + 3 JILNESTA), mục lục / số eb khớp, câu dẫn #sales-top (JA + từ điển VI / EN), bản đồ Việt Nam vẽ từ dữ liệu
+// Kiểm tĩnh: thứ tự 10 trang (7 MAYEKAWA + 3 JILNESTA), mục lục / số eb khớp, câu dẫn #sales-top (JA + từ điển VI / EN), bản đồ Việt Nam vẽ từ dữ liệu
 // ranh giới thật (đúng vị trí tương đối các điểm GPS), cung mũi tên từ TP.HCM tới Đà Nẵng và 6 tỉnh miền Tây, kho lạnh + thủy
 // hải sản ở mỗi điểm, workflow 7 bước có hình người que, trang nỗi lo khách hàng; CSS chỉ animate transform / opacity,
 // có reduced-motion, in, màn hẹp; ảnh tồn tại.
@@ -16,8 +16,8 @@ const strip = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
 const main = (html.match(/<main class="wrap" data-view="sales"[\s\S]*?<\/main>/) || [])[0] || '';
 ok(main, 'thiếu tab Sales');
-const want = ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi',
-  'sales-jil-hcm', 'sales-jil-offshore', 'sales-jil-flow']; // 3 trang JILNESTA cuối tab (tools/jil/build.mjs, tests/check-sales-jil.mjs)
+const want = ['sales-top', 'sales-map', 'sales-cycle', 'sales-after', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports', // task t5wm bỏ trang 07 KPI #sales-kpi
+  'sales-jil-hcm', 'sales-jil-offshore', 'sales-jil-flow', 'sales-jil-after']; // #sales-after, #sales-jil-after: tools/sales/after.mjs; 3 trang JILNESTA cuối tab (tools/jil/build.mjs, tests/check-sales-jil.mjs)
 const ids = [...main.matchAll(/<section class="pg"[^>]*id="([^"]+)"/g)].map((m) => m[1]);
 ok(ids.join(',') === want.join(','), `thứ tự trang Sales: ${ids.join(',')}`);
 const sec = (id) => (main.match(new RegExp(`<section class="pg"[^>]*id="${id}"[\\s\\S]*?</section>`)) || [])[0] || '';
@@ -127,9 +127,9 @@ for (const f of ['cold-storage', 'fish', 'shrimp']) ok(existsSync(join(root, 'as
 ok((main.match(/<figure class="mv (smap|scyc|spain) rv"[^>]*data-no-zoom>/g) || []).length === 3, 'hình động Sales mới phải có data-no-zoom (bấm icon không mở hộp phóng to)');
 for (const id of want.slice(1, 4)) ok(existsSync(join(root, 'assets/pg', `${id}.webp`)), `thiếu ảnh nền assets/pg/${id}.webp`);
 
-// 7) Cảnh gx: chip số trang tab Sales đếm 8 trang (đã bỏ trang 08 FLOW #sales-flow)
+// 7) Cảnh gx: chip số trang tab Sales đếm 7 trang (đã bỏ trang 08 FLOW #sales-flow và 07 KPI #sales-kpi)
 ok((sec('sales-top').match(/<span class="gx-step"><i><\/i><b>01<\/b> \/ 08<\/span>/) || []).length === 1, 'chip số trang của #sales-top phải là 01 / 08');
-ok(/<b>08<\/b> \/ 08<\/span>/.test(sec('sales-kpi')), 'chip số trang của #sales-kpi phải là 08 / 08');
+ok(/<b>06<\/b> \/ 08<\/span>/.test(sec('sales-trips')), 'chip số trang của #sales-trips phải là 06 / 08');
 
 if (fails.length) { console.error(`FAIL check-sales-2nov (${fails.length})\n- ` + fails.join('\n- ')); process.exit(1); }
-console.log('PASS check-sales-2nov: Sales 11 trang (thêm bản đồ công tác, chu trình 7 bước, nỗi lo khách hàng), câu dẫn trọn chu trình, bản đồ đúng vị trí GPS, chỉ transform/opacity');
+console.log('PASS check-sales-2nov: Sales 10 trang (thêm bản đồ công tác, chu trình 7 bước, nỗi lo khách hàng), câu dẫn trọn chu trình, bản đồ đúng vị trí GPS, chỉ transform/opacity');

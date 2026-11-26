@@ -12,7 +12,7 @@ const ok = (c, m) => { if (!c) { fail++; console.log('FAIL ' + m); } else consol
 const sec = (id) => { const a = html.indexOf(`id="${id}"`); if (a < 0) return ''; const s = html.lastIndexOf('<section', a); return html.slice(s, html.indexOf('</section>', a) + 10); };
 
 // 1) Logo MAYEKAWA nổi bật trên mọi trang Sales của MAYEKAWA, logo JILNESTA trên 3 trang mới
-const MYC = ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi'];
+const MYC = ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports']; // task t5wm bỏ trang 07 KPI #sales-kpi
 for (const id of MYC) {
   const s = sec(id);
   ok(/<p class="colg colg--co[^"]*"><img src="assets\/logos\/mayekawa\.svg" alt="MAYEKAWA \(MYCOM\)"/.test(s), `#${id} có badge logo MAYEKAWA`);
@@ -24,7 +24,7 @@ ok(/\.colg--co\{[^}]*\}/.test(html) && /\.colg--co img\{[^}]*height:3\dpx/.test(
 const JIL = [['sales-jil-hcm', '08'], ['sales-jil-offshore', '09'], ['sales-jil-flow', '10']];
 const sm0 = html.indexOf('<main class="wrap" data-view="sales"');
 const salesMain = html.slice(sm0, html.indexOf('</main>', sm0));
-let last = salesMain.indexOf('id="sales-kpi"');
+let last = salesMain.indexOf('id="sales-reports"');
 for (const [id, n] of JIL) {
   const s = sec(id), at = salesMain.indexOf(`id="${id}"`);
   ok(at > last, `#${id} nằm trong tab Sales, sau trang trước`); last = at;

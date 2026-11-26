@@ -1,5 +1,5 @@
 // 3 trang Sales mới (#sales-map bản đồ công tác, #sales-cycle chu trình 7 bước, #sales-pain nỗi lo khách hàng), đo trên Chrome headless thật (CDP).
-// 1) 3 ngôn ngữ x 3 bề rộng (reduced-motion): tab Sales 11 trang, chữ / icon không tràn thẻ, khối không vượt đáy tờ, nhãn và icon
+// 1) 3 ngôn ngữ x 3 bề rộng (reduced-motion): tab Sales 12 trang, chữ / icon không tràn thẻ, khối không vượt đáy tờ, nhãn và icon
 //    trên bản đồ không đè nhau giữa các điểm, nhãn nằm trong khung bản đồ, nét nối tiến trình 7 bước không chồng icon,
 //    reduced-motion hiện đủ và đứng yên, không tràn ngang.
 // 2) Có chuyển động (1280): 3 phim chạy khi vào khung, hình thay đổi theo thời gian, mỗi lúc tối đa 1 phụ đề, nút dừng đứng hình;
@@ -108,7 +108,7 @@ async function main() {
       await reveal('main[data-view="sales"] .pg');
       const r = await evaluate(PROBE); checks++;
       ok(r.view === 'sales', `${tag}: tab Sales chưa bật (${r.view})`);
-      ok(r.pages === 11, `${tag}: cần 11 trang Sales (8 MAYEKAWA + 3 JILNESTA), đang ${r.pages}`);
+      ok(r.pages === 12, `${tag}: cần 12 trang Sales (8 MAYEKAWA + 4 JILNESTA, có 2 trang sau khi ký hợp đồng), đang ${r.pages}`);
       ok(r.anim === 0, `${tag}: reduced-motion còn ${r.anim} chuyển động`);
       ok(!r.over.length, `${tag}: chữ / hình tràn khung ${r.over.slice(0, 4).join(' | ')}`);
       ok(!r.bottom.length, `${tag}: khối vượt đáy tờ ${r.bottom.slice(0, 4).join(' | ')}`);
@@ -176,7 +176,7 @@ main().catch((e) => fails.push('lỗi chạy: ' + e.message)).finally(() => {
   setTimeout(() => {
     try { rmSync(dir, { recursive: true, force: true }); } catch {}
     if (fails.length) { console.error(`FAIL browser-sales-2nov (${fails.length})\n- ` + fails.slice(0, 40).join('\n- ')); process.exit(1); }
-    console.log(`PASS browser-sales-2nov: ${checks} lượt (3 ngôn ngữ x 3 bề rộng + chuyển động): Sales 11 trang, bản đồ / chu trình / nỗi lo không tràn, không đè, nét nối không chồng icon, 3 phim chạy + dừng được, 0 lỗi JS`);
+    console.log(`PASS browser-sales-2nov: ${checks} lượt (3 ngôn ngữ x 3 bề rộng + chuyển động): Sales 12 trang, bản đồ / chu trình / nỗi lo không tràn, không đè, nét nối không chồng icon, 3 phim chạy + dừng được, 0 lỗi JS`);
     process.exit(0);
   }, 300);
 });

@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { figure, frames } from '../film/step-film.mjs';
 import { JIL_FILM } from './film.mjs';
+import { phase } from '../sales/phase.mjs';
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url));
 const file = process.argv[2] || here('../../index.html');
@@ -16,6 +17,10 @@ const M = JSON.parse(readFileSync(here('./map.json'), 'utf8'));
 let html = readFileSync(file, 'utf8');
 const EOL = html.includes('\r\n') ? '\r\n' : '\n';
 const fix = (t) => t.replace(/\r?\n/g, EOL);
+// Số trang JILNESTA nối tiếp các trang MAYEKAWA trong mục lục tab Sales (bỏ TOP và các trang sales-jil-*), tự dồn khi thêm / bỏ trang
+const NAV0 = (html.match(/<nav class="sb-nav" data-for="sales"[^>]*>([\s\S]*?)<\/nav>/) || [])[1] || '';
+const BASE = [...NAV0.matchAll(/data-sec="(sales-[\w-]+)"/g)].filter((m) => m[1] !== 'sales-top' && !m[1].startsWith('sales-jil-')).length;
+const NO = (k) => String(BASE + k).padStart(2, '0');
 
 const L = (ja, en, vi, tag = 'span', cls = '') => [['ja', ja], ['en', en], ['vi', vi]]
   .map(([l, t]) => `<${tag}${cls ? ` class="${cls}"` : ''} data-l="${l}">${t}</${tag}>`).join('');
@@ -28,7 +33,7 @@ const head = (kick, tt, secs) => '<figcaption class="mv-head"><span class="mv-re
   + L('一時停止', 'Pause animation', 'Tạm dừng hình động', 'span', 'mv-sr') + '</button></figcaption>';
 const chips = (ja, en, vi) => '<div class="kw1 rv" style="margin:8px 0 10px">'
   + [['ja', ja], ['en', en], ['vi', vi]].map(([l, cs]) => `<div class="chips" data-l="${l}">` + cs.map((c) => `<span class="chip">${c}</span>`).join('') + '</div>').join('') + '</div>';
-const top = (n, eb, h2, sub) => `  <span class="eb rv">${n}　<b>${eb}</b></span>\n`
+const top = (n, eb, h2, sub, ph = '') => `  <span class="eb rv">${n}　<b>${eb}</b></span>${ph}\n`
   + `  <h2 class="kw rv" style="--d:60ms">${L(...h2)}</h2>\n  <div class="kwbar rv" style="--d:120ms"><span></span></div>\n`
   + ['ja', 'en', 'vi'].map((l, i) => `  <p class="kw-sub rv" style="--d:140ms" data-l="${l}">${sub[i]}</p>\n`).join('');
 const meta = (rows) => '  <div class="meta rv" style="--d:200ms;margin-top:14px">' + rows.map(([k, ...t]) => `<div><span>${k}</span>${L(...t, 'b')}</div>`).join('') + '</div>\n';
@@ -77,7 +82,7 @@ const legend = '<div class="jl-leg">'
   + `<span><i class="jl-lgd"></i>${L('JILNESTAの拠点', 'JILNESTA office', 'Văn phòng JILNESTA')}</span></div>`;
 
 const SEC_HCM = '<section class="pg" data-chap="III" id="sales-jil-hcm">\n  ' + LOGO.jil + '\n'
-  + top('08', 'JILNESTA CLIENT MAP',
+  + top(NO(1), 'JILNESTA CLIENT MAP',
     ['ホーチミン市の拠点から、<br /><i>IT企業と店舗を訪ねる。</i>', 'From the Ho Chi Minh City office<br /><i>to IT companies and shops.</i>', 'Từ văn phòng tại TP.HCM,<br /><i>tỏa đi gặp công ty IT và cửa hàng.</i>'],
     ['JILNESTAのホーチミン市の拠点から市内のIT企業や店舗を訪ね、ソフトウェアと開発チームの需要を聞き取る。',
       'From the JILNESTA office in Ho Chi Minh City I visited IT companies and shops across the city to hear their software and dev team needs.',
@@ -116,7 +121,7 @@ const bridge = '<div class="jl-br" aria-hidden="true"><span class="jl-bi">' + im
   + '<span class="jl-line">' + Array.from({ length: 6 }, (_, i) => `<i class="jl-dot" style="--j:${i}"></i>`).join('') + '</span></div>';
 
 const SEC_OFF = '<section class="pg" data-chap="IV" id="sales-jil-offshore">\n  ' + LOGO.jil + '\n'
-  + top('09', 'OFFSHORE',
+  + top(NO(2), 'OFFSHORE',
     ['ベトナムの開発チームと、<br /><i>日本の顧客をつなぐ。</i>', 'A dev team in Vietnam,<br /><i>clients in Japan.</i>', 'Đội dev tại Việt Nam,<br /><i>khách hàng tại Nhật Bản.</i>'],
     ['ベトナムの開発チームがJILNESTAを通じてオンラインで日本の顧客とつながり、オフショアで製品を開発。',
       'Our dev team in Vietnam worked online with Japanese clients through JILNESTA, building their products offshore.',
@@ -142,11 +147,11 @@ const SEC_OFF = '<section class="pg" data-chap="IV" id="sales-jil-offshore">\n  
 const list = '  <ol class="sc-list rv" style="--d:200ms" data-no-zoom>' + JIL_FILM.steps.map((s, i) => `<li>${img(s.img, 44)}<div><em>${String(i + 1).padStart(2, '0')}</em>`
   + L(s.t.ja, s.t.en, s.t.vi, 'b') + L(s.d.ja, s.d.en, s.d.vi, 'p') + '</div></li>').join('') + '</ol>\n';
 const SEC_FLOW = '<section class="pg" data-chap="V" id="sales-jil-flow">\n  ' + LOGO.jil + '\n'
-  + top('10', 'OFFSHORE SALES FLOW',
+  + top(NO(3), 'OFFSHORE SALES FLOW',
     ['要望を聞き、仕様にして、<br /><i>顧客に合わせて作り込む。</i>', 'Hear the needs, write the spec,<br /><i>customize for each client.</i>', 'Lắng nghe, viết đặc tả,<br /><i>tùy chỉnh theo từng khách hàng.</i>'],
     ['ITオフショアの営業として、資料準備から提案、仕様書、見積と契約、開発、調整、操作マニュアルを添えた納品、請求までの8段階を担当。',
       'In IT offshore sales I handled eight steps, from calls and specs to quotes, contracts, development, handover with user guides and billing.',
-      'Kinh doanh IT offshore: tôi đi trọn 8 bước, từ tư vấn, đặc tả, báo giá, hợp đồng, giao đội dev, bàn giao kèm hướng dẫn sử dụng đến thanh toán.'])
+      'Kinh doanh IT offshore: tôi đi trọn 8 bước, từ tư vấn, đặc tả, báo giá, hợp đồng, giao đội dev, bàn giao kèm hướng dẫn sử dụng đến thanh toán.'], phase('pre'))
   + '  ' + chips(['8つの段階', '要望の聞き取り', '仕様書', '見積と契約', '開発チームへの伝達', 'カスタマイズ', '操作マニュアル'], ['eight steps', 'hearing needs', 'specs', 'quotes and contracts', 'briefing the dev team', 'customization', 'user guides'], ['8 bước', 'lắng nghe nhu cầu', 'đặc tả', 'báo giá, hợp đồng', 'giao đội dev', 'customize', 'hướng dẫn sử dụng']) + '\n'
   + '  ' + figure(JIL_FILM) + '\n' + list
   + '</section>\n';
@@ -269,28 +274,28 @@ const BLOCK = `<!-- sales-jil:start -->\n${SEC_HCM}${SEC_OFF}${SEC_FLOW}<!-- sal
 const reBlock = /<!-- sales-jil:start -->[\s\S]*?<!-- sales-jil:end -->\r?\n/;
 if (reBlock.test(html)) html = html.replace(reBlock, () => fix(BLOCK));
 else {
-  const s = html.indexOf('id="sales-kpi"'); if (s < 0) throw new Error('không thấy #sales-kpi');
+  const s = html.indexOf('id="sales-reports"'); if (s < 0) throw new Error('không thấy #sales-reports');
   const e = html.indexOf('</section>', s) + '</section>'.length;
   const ls = html.indexOf('\n', e) + 1;
   html = html.slice(0, ls) + fix(BLOCK) + html.slice(ls);
 }
 
-// Mục lục tab Sales 08-10 (trang 08 FLOW #sales-flow đã bỏ, JILNESTA nối ngay sau #sales-kpi)
-const NAV = [['sales-jil-hcm', '08', 'JILNESTA 顧客マップ', 'JILNESTA client map', 'JILNESTA bản đồ khách hàng'],
-  ['sales-jil-offshore', '09', 'オフショア開発', 'Offshore', 'Offshore Việt Nam - Nhật Bản'],
-  ['sales-jil-flow', '10', 'ITオフショア営業', 'IT offshore sales', 'Kinh doanh IT offshore']]
+// Mục lục tab Sales 07-09 (trang 08 FLOW #sales-flow và 07 KPI #sales-kpi đã bỏ, task t5wm: JILNESTA nối ngay sau #sales-reports)
+const NAV = [['sales-jil-hcm', NO(1), 'JILNESTA 顧客マップ', 'JILNESTA client map', 'JILNESTA bản đồ khách hàng'],
+  ['sales-jil-offshore', NO(2), 'オフショア開発', 'Offshore', 'Offshore Việt Nam - Nhật Bản'],
+  ['sales-jil-flow', NO(3), 'ITオフショア営業', 'IT offshore sales', 'Kinh doanh IT offshore']]
   .map(([id, n, ja, en, vi]) => `      <a href="#${id}" data-sec="${id}"><em>${n}</em>${L(ja, en, vi)}</a>\n`).join('');
-html = html.replace(/[ \t]*<a href="#sales-jil-[^\n]*\n/g, '');
-const nf = html.indexOf('<a href="#sales-kpi" data-sec="sales-kpi">'); if (nf < 0) throw new Error('không thấy mục lục sales-kpi');
+html = html.replace(/[ \t]*<a href="#sales-jil-(?:hcm|offshore|flow)"[^\n]*\n/g, ''); // giữ dòng #sales-jil-after (tools/sales/after.mjs)
+const nf = html.indexOf('<a href="#sales-reports" data-sec="sales-reports">'); if (nf < 0) throw new Error('không thấy mục lục sales-reports');
 const nl = html.indexOf('\n', nf) + 1;
 html = html.slice(0, nl) + fix(NAV) + html.slice(nl);
 
 // Ảnh nền section (khối pganh): thêm id vào mảng IDS
-if (!html.includes("'sales-jil-hcm'")) html = html.replace(/(var IDS=\[[^\]]*?)'sales-kpi',/, "$1'sales-kpi','sales-jil-hcm','sales-jil-offshore','sales-jil-flow',");
+if (!html.includes("'sales-jil-hcm'")) html = html.replace(/(var IDS=\[[^\]]*?)'sales-reports',/, "$1'sales-reports','sales-jil-hcm','sales-jil-offshore','sales-jil-flow',");
 if (!html.includes("'sales-jil-hcm'")) throw new Error('không thêm được id vào mảng IDS');
 
 // Badge logo MAYEKAWA ở đầu mỗi trang Sales của MAYEKAWA (chèn 1 dòng sau thẻ mở section, không đụng nội dung khác)
-for (const id of ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports', 'sales-kpi']) {
+for (const id of ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-trips', 'sales-pr', 'sales-reports']) {
   const a = html.indexOf(`id="${id}"`); if (a < 0) throw new Error('không thấy #' + id);
   const ls = html.indexOf('\n', a) + 1, le = html.indexOf('\n', ls);
   if (html.slice(ls, le).includes('colg--co')) continue;
@@ -300,4 +305,4 @@ for (const id of ['sales-top', 'sales-map', 'sales-cycle', 'sales-pain', 'sales-
 html = html.replace('<p class="colg colg--hero rv"><img src="assets/logos/mayekawa.svg"', '<p class="colg rv"><img src="assets/logos/mayekawa.svg"');
 
 writeFileSync(file, html);
-console.log('sales-jil: 3 trang (#sales-jil-hcm, #sales-jil-offshore, #sales-jil-flow), badge logo 8 trang Sales MAYEKAWA, logo #w-mycom lớn hơn');
+console.log('sales-jil: 3 trang (#sales-jil-hcm, #sales-jil-offshore, #sales-jil-flow), badge logo 7 trang Sales MAYEKAWA, logo #w-mycom lớn hơn');
